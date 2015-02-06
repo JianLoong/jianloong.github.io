@@ -1,0 +1,31 @@
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
+
+# Permalinks
+permalink:        pretty
+relative_permalinks: true
+
+# Setup
+title:            My Blog 
+tagline:          'Blog'
+description:      'Copy and Pasta'
+url:              http://jianloong.github.io
+baseurl:          /
+
+author:
+  name:           'Jian Liew'
+  url:            https://twitter.com/jianloong
+
+paginate:         5
+
+# Custom vars
+version:          2.1.0
+
+github:
+  repo:           https://github.com/jianloong
+
+compress_html:
+  clippings: all
+  comments: ["<!-- ", " -->"]
+  endings: all

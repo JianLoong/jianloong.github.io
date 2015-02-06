@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FIT5125 Group Research | Correlation of topic in news and
+	Twitter</title>
+<script src="https://www.google.com/jsapi"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="jquery.csv-0.71.min.js"></script>
+<script type="text/javascript">
+	// load the visualization library from Google and set a listener
+	google.load("visualization", "1", {
+		packages : [ "corechart" ]
+	});
+	google.setOnLoadCallback(ready);
+
+	function ready() {
+		var selector = $("#keyword");
+		$.get("term.csv", function(csvString) {
+			// transform the CSV string into a 2-dimensional array
+			var arrayData = $.csv.toArrays(csvString, {
+				onParseValue : $.csv.hooks.castToScalar
+			});
+			for (var i = 0; i < arrayData.length; i++) {
+				selector.append($('<option>', {
+					value : i + 1,
+					text : arrayData[i][0]
+				}));
+			}
+		});
+		selector.change(function(e) {
+			if (this.value > 0) {
+				var optionSelected = $("option:selected", this);
+				$("#result").html(
+						"Analysis of topic \"" + optionSelected.text() + "\"");
+				drawChart(this.value);
+			}
+		});
+	}
+	function drawChart(index) {
+		$.get("news_model/report2_" + index + ".csv", function(csvString) {
+			// transform the CSV string into a 2-dimensional array
+			var arrayData = $.csv.toArrays(csvString, {
+				onParseValue : $.csv.hooks.castToScalar
+			});
+
+			var data = new google.visualization.DataTable();
+			data.addColumn("date");
+			data.addColumn("number");
+			arrayData.forEach(function(item) {
+				var date = item[1];
+				var freq = item[4];
+				data.addRow([ convertDate(date), freq ]);
+			});
+			data.sort(0);
+			// this view can select a subset of the data at a time
+			var view = new google.visualization.DataView(data);
+			view.setColumns([ 0, 1 ]);
+			var options = {
+				title : "Document Frequency of Topic in News",
+				hAxis : {
+					title : "Timeline (daily)",
+					minValue : data.getColumnRange(0).min,
+					maxValue : data.getColumnRange(0).max,
+				},
+				vAxis : {
+					title : "Document Frequency",
+					minValue : data.getColumnRange(1).min,
+					maxValue : data.getColumnRange(1).max
+				},
+				legend : 'none',
+				width : 600,
+				height : 400
+			};
+			var chart = new google.visualization.ColumnChart(document
+					.getElementById('news-chart'));
+			chart.draw(view, options);
+		});
+		$.get("tweet_model/report_" + index + ".csv", function(csvString) {
+			// transform the CSV string into a 2-dimensional array
+			var arrayData = $.csv.toArrays(csvString, {
+				onParseValue : $.csv.hooks.castToScalar
+			});
+
+			var data = new google.visualization.DataTable();
+			data.addColumn("string");
+			data.addColumn("number");
+			arrayData.forEach(function(item) {
+				var date = item[1];
+				var freq = item[4];
+				data.addRow([ convertTime("" + date), freq ]);
+			});
+			data.sort(0);
+			// this view can select a subset of the data at a time
+			var view = new google.visualization.DataView(data);
+			view.setColumns([ 0, 1 ]);
+			var options = {
+				title : "Document Frequency of Topic in Twitter",
+				hAxis : {
+					title : "Timeline (hourly)",
+					minValue : data.getColumnRange(0).min,
+					maxValue : data.getColumnRange(0).max,
+				},
+				vAxis : {
+					title : "Document Frequency",
+					minValue : data.getColumnRange(1).min,
+					maxValue : data.getColumnRange(1).max
+				},
+				legend : 'none',
+				width : 600,
+				height : 400
+			};
+			var chart = new google.visualization.LineChart(document
+					.getElementById('tweet-chart'));
+			chart.draw(view, options);
+		});
+	}
+	function convertTime(str) {
+		var year = str.substring(0, 4);
+		var month = str.substring(4, 6);
+		var date = str.substring(6, 8);
+		var hour = str.substring(8, 10);
+		return date + "/" + month + "/" + year + " " + hour + "h";
+	}
+
+	function convertDate(str) {
+		var field = str.split("/");
+		var date = new Date();
+		date.setFullYear(field[2]);
+		date.setMonth(field[1] - 1);
+		date.setDate(field[0]);
+		return date;
+	}
+</script>
+<style type="text/css">
+body {
+	margin: 0px;
+	font-family: verdana;
+}
+
+div#wrapper {
+	margin: 0px auto;
+	positive: relative;
+}
+
+div#news-chart, div#tweet-chart {
+	float: left;
+}
+
+div#content, div#graph {
+	text-align: center;
+	overflow: hidden;
+}
+
+div#header {
+	background: #643579;
+	color: #fff;
+	padding: 20px 10px;
+}
+
+div#footer {
+	text-align: right;
+	margin-top: 20px;
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+}
+
+#footer span {
+	margin: 0px;
+	padding-right: 10px;
+	font-size: 75%;
+	font-style: italic;
+}
+
+#header h1 {
+	font-size: 150%;
+	margin: 0px;
+}
+</style>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="header">
+			<h1>Correlation of topic in News and Twitter</h1>
+		</div>
+		<div id="content">
+			<div id="topic">
+				<h2>Topic</h2>
+				<select id="keyword">
+					<option value="0">Select topic to analyze</option>
+				</select>
+			</div>
+			<div id="graph">
+				<h2 id="result"></h2>
+				<div id="news-chart"></div>
+				<div id="tweet-chart"></div>
+			</div>
+		</div>
+		<div id="footer">
+			<span>mqngo1, wlpan2, jllie9 @ FIT5125 - Research Method Group
+				Research</span>
+		</div>
+	</div>
+</body>
+</html>
