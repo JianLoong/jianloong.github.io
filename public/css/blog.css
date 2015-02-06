@@ -1,0 +1,5 @@
+input, textarea, select{font-family:inherit; font-size: inherit;}
+input{
+  padding: 5px 5px 5px 15px;
+  margin: 20px;    
+}​
