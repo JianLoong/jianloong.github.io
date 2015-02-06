@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
- <title>My Blog</title>
+ <title>Jian</title>
  <link href="http://jianloong.github.io/atom.xml" rel="self"/>
  <link href="http://jianloong.github.io/"/>
- <updated>2015-02-06T12:58:25+11:00</updated>
+ <updated>2015-02-06T20:24:03+11:00</updated>
  <id>http://jianloong.github.io</id>
  <author>
    <name>Jian Liew</name>
@@ -84,10 +84,6 @@
 
 &lt;p&gt;Now, we will proceed to create the files which will be used in our application which are the navbar.html, header.html, footer.html, application_config.html. Please note that meteor does not care what you name the files. However it is good to have a good naming convention.&lt;/p&gt;
 
-&lt;script src=&quot;https://gist.github.com/JianLoong/00e581a3927b2ed4be95.js&quot;&gt; &lt;/script&gt;
-
-&lt;script src=&quot;https://gist.github.com/JianLoong/3c1eda785c1de51aa115.js&quot;&gt; &lt;/script&gt;
-
 &lt;p&gt;The yield field is important.&lt;/p&gt;
 
 &lt;p&gt;Besides that I will also go ahead and use a basic navigation bar from the bootstrap website. It doesn&amp;#39;t matter which navigation you select as all of them should be properly displayed.&lt;/p&gt;
@@ -98,13 +94,9 @@
 
 &lt;p&gt;The end file should look something like this.&lt;/p&gt;
 
-&lt;script src=&quot;https://gist.github.com//JianLoong/f681012b5a3e2479bcda.js&quot;&gt; &lt;/script&gt;
-
 &lt;p&gt;What we have now is the default bootstrap look and feel. The current look is obviously very dull and so we will now improve it. Basically this can be done by changing the variables at the custom.bootstrap.import.less. However we do not want to be doing this as I am no where near an expert in the usage of colours and such. I will take an easier approach instead.&lt;/p&gt;
 
 &lt;p&gt;Head over to &lt;a href=&quot;http://www.bootswatch.com&quot;&gt;bootswatch&lt;/a&gt; and find a theme you like. Now I will copy the variables used in one of these templates for my site. Notice that the import is added on line 4 without this an error will be thrown.&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/JianLoong/7ed9f99ea1215a24d3f4.js&quot;&gt; &lt;/script&gt;
 
 &lt;p&gt;Navbar&lt;/p&gt;
 
@@ -116,20 +108,28 @@
 
 &lt;p&gt;After that, we will just add &lt;/p&gt;
 
-&lt;script src=&quot;https://gist.github.com/JianLoong/e97955fb958a30c29bd4.js&quot;&gt; &lt;/script&gt;
-
 &lt;p&gt;Comments are disabled.&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
-   <title>Tweets vs News</title>
+   <title>A Study of The Relationship Between Trends of a Topic in Traditional Media and Twitter</title>
    <link href="http://jianloong.github.io/2015/01/30/tweets-vs-news/"/>
    <updated>2015-01-30T00:00:00+11:00</updated>
    <id>http://jianloong.github.io/2015/01/30/tweets-vs-news</id>
-   <content type="html">&lt;p&gt;The objective of this research is to study the corelation of tweets versus news.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Twitter is one of most popular micro-blogging social media platform. With a growing trend of people using social media as new source, Twitter is now gradually taking up a role as a newsagent. This project aims to uncover the similarity of the trend of a topic in traditional media and the trend of that topic in social media using a proposed framework. &lt;/p&gt;
 
-&lt;p&gt;Click &lt;a href=&quot;/fit5125&quot;&gt;here&lt;/a&gt; to learn more.&lt;/p&gt;
+&lt;p&gt;For this objective, data is collected in Melbourne, Australia to construct a corpus of news articles and a corpus of Twitter tweets. TF-IDF weighting algorithm is applied for topic extraction from the constructed news corpus. We also employed cross correlation analysis with the top 200 weighted topics to investigate the degree to which the trends of a topic in newspaper and in Twitter are correlated, and the time-lag at which the maximum correlation is achieved.&lt;/p&gt;
+
+&lt;p&gt;The results find that 78.5% of news topic correlation achieves greater than 0.6 which is a significant relation. The observation is further backed by distribution of time-lag as in a significant number of cases, Twitter reports breaking news faster than newspapers.&lt;/p&gt;
+
+&lt;p&gt;Click &lt;a href=&quot;/fit5125&quot;&gt;here&lt;/a&gt; to view graphs.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Minh Quan Ngo&lt;/em&gt; &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Weng Long Pang&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Jian Loong Liew&lt;/em&gt;&lt;/p&gt;
 </content>
  </entry>
  

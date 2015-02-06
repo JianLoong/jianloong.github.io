@@ -21,7 +21,7 @@ fa-icon: <i class="fa fa-gamepad"></i>
       var zero = places - num.toString().length + 1;
       return Array(+(zero > 0 && zero)).join("0") + num;
   }
-  for ( var i = 0, l = 5; i < l; i++ ) {
+  for ( var i = 0, l = 12; i < l; i++ ) {
     $('#links').append("<a href='/public/img/Screenshots/Screenshot" + zeroPad(i,3) + ".jpg' title='Diablo 3' data-gallery><img src='/public/img/thumbs/Screenshot" + zeroPad(i,3) + "_thumb.jpg' alt='Paragon Level'>");
 }
 </script>
