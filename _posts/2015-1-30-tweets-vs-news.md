@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Tweets vs News
-comments: true
+comments: false
 tags: [ twitter ]
 ---
 

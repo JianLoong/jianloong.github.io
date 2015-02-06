@@ -1,6 +1,17 @@
 [
     
     {
+      "title"    : "Blue Imp Image Gallery With Jekyll",
+      "href"     : "/2015/02/06/customising-blueimp-image-gallery-with-jekyll/",
+      "date"     : {
+         "day"   : "06",
+         "month" : "February",
+         "year"  : "2015"
+      }
+    }
+    ,
+    
+    {
       "title"    : "Customising Bootstrap with Meteor",
       "href"     : "/2015/02/03/customising-meteor-with-bootstrap/",
       "date"     : {

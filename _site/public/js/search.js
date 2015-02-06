@@ -40,7 +40,7 @@ function printResults()
     e.html(function() {
         if (results.length == 0)
         {
-            e.append('<li style="padding-top: 3px; padding-bottom: 3px">No results found.</li>');
+            e.append('<li style="padding-top: 3px; padding-bottom: 3px; list-style-type: none;">No results found.</li>');
         }
         else
         {
