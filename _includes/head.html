@@ -18,7 +18,28 @@
     <!-- RSS -->
     <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/public/js/jquery.touchSwipe.min.js"></script>
     {% include google_analytics.html %}
+
+    <script type="text/javascript">
+          $(function() {      
+      $(".swipe").swipe( {
+        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+
+        
+          if ( direction == 'right')
+            $("#sidebar-checkbox").prop('checked', true);
+
+          if ( direction == 'left')
+            $("#sidebar-checkbox").prop('checked', false);
+          console.log('Test');
+        },
+         threshold:0
+      });
+    });
+
+    </script>
   </head>
 
 

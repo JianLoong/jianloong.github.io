@@ -7,7 +7,7 @@ layout: compress
 
   {% include head.html %}
 
-  <body class="theme-base-08">
+  <body class="theme-base-08 swipe">
 
     {% include sidebar.html %}
 
@@ -39,6 +39,7 @@ layout: compress
 
         document.addEventListener('click', function(e) {
           var target = e.target;
+          console.log(checkbox.checked);
 
           if(!checkbox.checked ||
              sidebar.contains(target) ||
