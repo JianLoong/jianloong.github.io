@@ -13,5 +13,3 @@ src='http://cdn.knightlab.com/libs/timeline/latest/embed/index.html?source=0Ag-C
 width='100%' height='650' frameborder='0'></iframe>
 </div>
 
-This timeline is powered by Timeline.js
-

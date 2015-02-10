@@ -8,10 +8,8 @@
     &nbsp;&nbsp;<p>{{ site.description }}</p>
     <p>by Jian Loong Liew</p>
   </div>
-
   <nav class="sidebar-nav">
     <a class="sidebar-nav-item{% if page.url == site.baseurl %} active{% endif %}" href="{{ site.baseurl }}"><i class="fa fa-home"></i>&nbsp;Home</a>
-
     {% comment %}
       The code below dynamically generates a sidebar nav of pages with
       `layout: page` in the front-matter. See readme for usage.
@@ -28,7 +26,6 @@
     <a class="sidebar-nav-item" href="http://www.github.com/JianLoong/"><i class="fa fa-github"></i>&nbsp;Git hub</a>
     <a class="sidebar-nav-item" href="http://www.github.com/JianLoong/feedback/issues/new"><i class="fa fa-question"></i>&nbsp;Question</a>
   </nav>
-
   <div class="sidebar-item">
     <p>
       &copy; {{ site.time | date: '%Y' }}. All rights reserved.

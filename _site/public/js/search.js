@@ -51,43 +51,43 @@ function printResults()
     });
 }
 
-    // Show the dropdown menu as long as there are characters in the text field
-    function checkTextField()
+// Show the dropdown menu as long as there are characters in the text field
+function checkTextField()
+{
+    // If the value of id search_input is not empty show id search_results otherwise hide it
+    if ($('#search_input').val() != '')
     {
-        // If the value of id search_input is not empty show id search_results otherwise hide it
-        if ($('#search_input').val() != '')
-        {
-            $('#search_results').show();
-        }
-        else
-        {
-            $('#search_results').hide();
-        }
+        $('#search_results').show();
     }
-
-    // Hide the dropdown menu if there is a left mouse click outside of it
-    $(document).mouseup(function (e)
+    else
     {
-        var container = $("#search_results");
+        $('#search_results').hide();
+    }
+}
 
-        // if the target of the click isn't the
-        // container nor a descendant of the container
-        if (!container.is(e.target) && container.has(e.target).length === 0)
-        {
-            container.hide();
-        }
+// Hide the dropdown menu if there is a left mouse click outside of it
+$(document).mouseup(function (e)
+{
+    var container = $("#search_results");
+
+    // if the target of the click isn't the
+    // container nor a descendant of the container
+    if (!container.is(e.target) && container.has(e.target).length === 0)
+    {
+        container.hide();
+    }
+});
+
+$(document).ready(function() {
+    // Create the search index on page load
+    getSearchJSON();
+
+    // Continually update search results as characters are typed
+    $("#search_input").keyup(function() {
+        // Make search inputs are case insensitive
+        var e = $(this).val().toLowerCase();
+
+        // Do the actual search
+        doSearch(e);
     });
-
-    $(document).ready(function() {
-        // Create the search index on page load
-        getSearchJSON();
-
-        // Continually update search results as characters are typed
-        $("#search_input").keyup(function() {
-            // Make search inputs are case insensitive
-            var e = $(this).val().toLowerCase();
-
-            // Do the actual search
-            doSearch(e);
-        });
-    });
+});

@@ -4,7 +4,7 @@
  <title>Jian</title>
  <link href="http://jianloong.github.io/atom.xml" rel="self"/>
  <link href="http://jianloong.github.io/"/>
- <updated>2015-02-10T00:19:41+11:00</updated>
+ <updated>2015-02-10T19:26:18+11:00</updated>
  <id>http://jianloong.github.io</id>
  <author>
    <name>Jian Liew</name>
@@ -13,23 +13,14 @@
 
  
  <entry>
-   <title>Blue Imp Image Gallery With Jekyll</title>
-   <link href="http://jianloong.github.io/2015/02/06/customising-blueimp-image-gallery-with-jekyll/"/>
-   <updated>2015-02-06T00:00:00+11:00</updated>
-   <id>http://jianloong.github.io/2015/02/06/customising-blueimp-image-gallery-with-jekyll</id>
-   <content type="html">&lt;p&gt;Under construction.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
    <title>Customising Bootstrap with Meteor</title>
    <link href="http://jianloong.github.io/2015/02/03/customising-meteor-with-bootstrap/"/>
    <updated>2015-02-03T00:00:00+11:00</updated>
    <id>http://jianloong.github.io/2015/02/03/customising-meteor-with-bootstrap</id>
-   <content type="html">&lt;style type=&quot;text/css&quot;&gt;
+   <content type="html">&lt;!--&lt;style type=&quot;text/css&quot;&gt;
   .gist-file
   .gist-data {max-height: 300px;}
-&lt;/style&gt;
+&lt;/style&gt;--&gt;
 
 &lt;p&gt;This is a self reflection post that aims to cover a step by step instruction on how to do a simple meteor web site. Other than basic html and javascript knowledge, there is nothing much more to know. This will later be extended to various other features like converting it into an android application and etc. Start off by creating a meteor project.&lt;/p&gt;
 
@@ -141,15 +132,6 @@
    <content type="html">&lt;p&gt;Under construction&lt;/p&gt;
 
 &lt;p&gt;Click &lt;a href=&quot;http://jian.meteor.com&quot;&gt;here&lt;/a&gt; to view my meteor web site.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Building A Blog With Jekyll On Git Hub Pages</title>
-   <link href="http://jianloong.github.io/2015/01/30/blogging-with-jeykll-on-git-hub/"/>
-   <updated>2015-01-30T00:00:00+11:00</updated>
-   <id>http://jianloong.github.io/2015/01/30/blogging-with-jeykll-on-git-hub</id>
-   <content type="html">&lt;p&gt;Under construction&lt;/p&gt;
 </content>
  </entry>
  

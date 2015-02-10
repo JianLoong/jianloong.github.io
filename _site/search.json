@@ -1,17 +1,6 @@
 [
     
     {
-      "title"    : "Blue Imp Image Gallery With Jekyll",
-      "href"     : "/2015/02/06/customising-blueimp-image-gallery-with-jekyll/",
-      "date"     : {
-         "day"   : "06",
-         "month" : "February",
-         "year"  : "2015"
-      }
-    }
-    ,
-    
-    {
       "title"    : "Customising Bootstrap with Meteor",
       "href"     : "/2015/02/03/customising-meteor-with-bootstrap/",
       "date"     : {
@@ -36,17 +25,6 @@
     {
       "title"    : "Building A Landing Page With Meteor",
       "href"     : "/2015/01/30/building-landing-page-with-meteor/",
-      "date"     : {
-         "day"   : "30",
-         "month" : "January",
-         "year"  : "2015"
-      }
-    }
-    ,
-    
-    {
-      "title"    : "Building A Blog With Jekyll On Git Hub Pages",
-      "href"     : "/2015/01/30/blogging-with-jeykll-on-git-hub/",
       "date"     : {
          "day"   : "30",
          "month" : "January",

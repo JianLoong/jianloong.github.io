@@ -4,11 +4,10 @@ title: Customising Bootstrap with Meteor
 comments: false
 tags: [ meteor, bootstrap ]
 ---
-<style type="text/css">
+<!--<style type="text/css">
   .gist-file
   .gist-data {max-height: 300px;}
-</style>
-
+</style>-->
 
 This is a self reflection post that aims to cover a step by step instruction on how to do a simple meteor web site. Other than basic html and javascript knowledge, there is nothing much more to know. This will later be extended to various other features like converting it into an android application and etc. Start off by creating a meteor project.
 
