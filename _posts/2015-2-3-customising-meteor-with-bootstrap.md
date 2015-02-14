@@ -4,18 +4,27 @@ title: Customising Bootstrap with Meteor
 comments: false
 tags: [ meteor, bootstrap ]
 ---
-<!--<style type="text/css">
+<style type="text/css">
   .gist-file
   .gist-data {max-height: 300px;}
-</style>-->
+</style>
 
-This is a self reflection post that aims to cover a step by step instruction on how to do a simple meteor web site. Other than basic html and javascript knowledge, there is nothing much more to know. This will later be extended to various other features like converting it into an android application and etc. Start off by creating a meteor project.
+This is a self reflection post that aims to cover a step by step instruction on 
+how to do a simple meteor web site. The Meteor version is Meteor 1.0.3.1.
+Other than basic html and javascript knowledge, there is nothing much more to know. 
+This post later be extended to various other features like converting it into an 
+android application and etc. Start off by creating a meteor project.
 
 {% highlight js %}
 > meteor create fusecam
 {% endhighlight %}
 
-This creates a basic project, with the basic components. There is actually a hidden file which is the .meteor which contains all the package information and etc. It is important to take note here that the packages are loaded in the order it is defined in the .meteor/package. For now, we will only care about the front end. In order to simplify the development of the front end several packages will be installed. They they are listed below.
+This creates a basic project, with the basic components. There is actually a 
+hidden file which is the .meteor which contains all the package information and etc. 
+It is important to take note here that the packages are loaded in the order it 
+is defined in the .meteor/package. For now, we will only care about the front end. 
+In order to simplify the development of the front end several packages will be i
+nstalled. They they are listed below.
 
 These output is obtained using  the meteor list command.
 
@@ -35,7 +44,9 @@ meteor-platform              1.2.1  Include a standard set of Meteor packages in
 nemo64:bootstrap             3.3.1_1  Highly configurable bootstrap integration.
 {% endhighlight %}
 
-Once again it is important to take note here that the order of the packages will matter and this is often the cause of complications at times and it will be time consuming to wonder what went wrong. The easiest way is to view the file.
+Once again it is important to take note here that the order of the packages will 
+matter and this is often the cause of complications at times and it will be 
+time consuming to wonder what went wrong. The easiest way is to view the file.
 
 
 {% highlight js %}
@@ -56,7 +67,13 @@ less
 ian:accounts-ui-bootstrap-3
 {% endhighlight %}
 
-Now lets try to make a basic layout for this purpose. At the moment the folder structure does not really matter but it is good to pay good attention how on to structure the meteor application. I am going to use a few packages to simpify this process. The first is the iron:router package which will handling all the routing and layout and it is far superior compared to basic engine for layout and routing purposes.
+To re-iterate, there is a difference between how packages are ordered. Doing the simple
+meteor list, will list out all the meteor packages, while viewing the meteor packages file
+will show you how the packages are loaded.
+
+Now lets try to make a basic layout for this purpose. At the moment the folder 
+structure does not really matter but it is good to pay good attention how on to 
+structure the meteor application. I am going to use a few packages to simpify this process. The first is the iron:router package which will handling all the routing and layout and it is far superior compared to basic engine for layout and routing purposes.
 
 For now, I am only interested to create a single page which is the home or index page. As per usual the page should consist of the 3 main elements, the navigation bar, the contents and the footer. For those who developed things in ASP.NET and are used to Master pages, Iron Router layout template engine handles this. Basically
 
@@ -81,7 +98,11 @@ Besides that I will also go ahead and use a basic navigation bar from the bootst
 
 Now we will proceed to configure the css files and etc. This will be done by only customising the needed components for our site and disabling and enable components as we go.
 
-Thus we will edit the custom.bootstrap.json. By default all the components are disabled, since we are only interested in the select few components for this navigation bar, only those will be enabled. In order for the site to be responsive it is important that the responsive elemnts are enabled.
+Thus we will edit the custom.bootstrap.json. By default all the components are 
+disabled, since we are only interested in the select few components for this 
+navigation bar, only those will be enabled. In order for the site to be responsive 
+it is important that the responsive elemnts are enabled. The reasoning behind this is 
+because you will never use all the components in bootstrap and it will only create clutter loading all the components.
 
 The end file should look something like this.
 
