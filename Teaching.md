@@ -10,10 +10,11 @@ For the past 2.5 years, I have been working as a Teaching Associate with Monash 
 
 In my humble opinion, one of the main problems with the education industry is that the people involve in the education itself are often times not updated due to how fast technology is changing. This is even more true for IT subjects. However, the fundamental concepts will always remain the same, where the understanding of how to solve a problem takes precendence over everything else. That is what matters.
 
+It is my personal belief that, it is more important for a student to understand the underlying concepts before approaching a problem. Understanding how to solve a problem takes precedence over making the same mistakes over and over again just to see what will work.
 
 ### Subjects taught
 
-This is the list of the subjects that I have been involved in to date.
+This is the list of the subjects that I have been involved in to date. My subjects are mainly programming related as I do enjoy the process of disecting and understanding a programming related issue.
 
 | Unit Code    | Name          | Technology Stack |
 | -------------|:-------------:| ----------------:|
@@ -30,4 +31,4 @@ This is the list of the subjects that I have been involved in to date.
 ### Nominations & Awards
 
 - Studio Mentor for FIT5120 Industry Experience Project. Worked closely with four teams of students to develop applications based on the suggestion of MYOB mentors.
-- Teaching Excellence Nominee.
+- Teaching Excellence Nominee for multiple subjects. 
