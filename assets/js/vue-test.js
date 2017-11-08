@@ -3,6 +3,8 @@ var app = new Vue({
   data: {
     message: 'Hello Vue!'
   }
+
+
 })
 
 var app4 = new Vue({
