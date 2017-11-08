@@ -35,7 +35,7 @@ plugins_dir:
 url: "https://jianliew.me"
 
 plugins:
-  [jekyll-paginate, jekyll-sitemap]
+  [jekyll-paginate, jekyll-sitemap, jekyll-feed]
  
 # Custom vars
 version:            3.4.1
