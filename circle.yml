@@ -13,5 +13,3 @@ test:
 deployment:
   prod:
     branch: master
-    commands:
-      - rsync -va --delete ./_site username@my-website:/var/html
