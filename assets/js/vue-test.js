@@ -1,21 +1,21 @@
 var app = new Vue({
   el: '#app',
   data: {
-    message: 'Hello Vue!'
+    results : [],
+    errors: [],
+    selected: ''
+  },
+
+  updated() {
+    axios.get("https://www.reddit.com/r/" + this.selected + ".json")
+      .then(response => {
+        // JSON responses are automatically parsed.
+        //this.posts = response.data
+        this.results = response.data.data.children
+        console.log(results);
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
   }
-
-
-})
-
-var app4 = new Vue({
-  el: '#app-4',
-  data: {
-    todos: [{
-      text: 'Learn JavaScript'
-    }, {
-      text: 'Learn Vue'
-    }, {
-      text: 'Build something awesome'
-    }]
-  }
-})
+});
