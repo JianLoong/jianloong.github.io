@@ -19,7 +19,7 @@ I even tried looking at React, in the end I decided that Vue would be the choice
 
 
 <div id="app" class="table">
-<select v-model="selected">
+<select v-model="selected" v-on:change="selectSubreddit">
   <option disabled value="">Please select one</option>
   <option>Programming</option>
   <option>ProgrammerHumor</option>
@@ -34,7 +34,10 @@ I even tried looking at React, in the end I decided that Vue would be the choice
   </ul>
 </div>
 
-<script rel="text/javascript" src="https://unpkg.com/vue"></script>
+<!-- Production -->
+<script rel="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.1/vue.min.js"></script>
+<!-- Dev -->
+<!-- <script rel="text/javascript" src="https://unpkg.com/vue"></script> -->
 <script rel="text/javaScript" src="https://unpkg.com/vue-resource@1.3.4/dist/vue-resource.min.js"></script>
 <script rel="text/javaScript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script rel="text/javascript" src="{{ site.baseurl }}/assets/js/vue-test.js"></script>

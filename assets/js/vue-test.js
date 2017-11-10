@@ -6,16 +6,18 @@ var app = new Vue({
     selected: ''
   },
 
-  updated() {
-    axios.get("https://www.reddit.com/r/" + this.selected + ".json")
-      .then(response => {
-        // JSON responses are automatically parsed.
-        //this.posts = response.data
-        this.results = response.data.data.children
-        console.log(results);
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
+  methods: {
+    selectSubreddit() {
+      axios.get("https://www.reddit.com/r/" + this.selected + ".json")
+        .then(response => {
+          // JSON responses are automatically parsed.
+          //this.posts = response.data
+          this.results = response.data.data.children
+          console.log(results);
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
+    }
   }
 });
