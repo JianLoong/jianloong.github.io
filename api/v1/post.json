@@ -6,7 +6,6 @@ layout: compress
 {
   "title": {{post.title | jsonify}},
   "category": {{post.category | jsonify}},
-  "content": {{post.content | strip_html | jsonify}},
   "tags": {{post.tags | jsonify}},
   "id": {{count}}
 }
