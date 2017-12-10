@@ -4,8 +4,9 @@ sidebar_link: false
 title: SETU 
 ---
 
+My Student Evaluation of Teaching and Units (SETU) reports can be found here. 
 
-My Student Evaluation of Teaching and Units (SETU) reports can be found here.
+Detailed evaluation of older units are available upon request.
 
 | Unit Code |                      Name                      |                                                                                                                        Link |
 |:---------:|------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------:|
