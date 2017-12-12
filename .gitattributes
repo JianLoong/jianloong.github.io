@@ -3,3 +3,5 @@
 * text eol=lf
 *.jpg binary
 *.png binary
+*.pdf  diff=astextplain
+*.PDF  diff=astextplain
