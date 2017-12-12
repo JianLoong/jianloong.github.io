@@ -10,8 +10,11 @@ excerpt_separator:  <!--more-->
 image: https://assets-cdn.github.com/images/modules/logos_page/Octocat.png
 ---
 
+Please note that I do know that is not the correct way of using Vue. This is just me playing around. Of course, in a real life production environment there are many things that should not be done at all. 
+
 In order to learn Vue, I made this simple demostration of how I can request the reddit API for certain subreddits.
-Here, I only included Programming and Programmer Humour in the select box at the moment. Upon selected, it will query the reddit API for results. While this could have been done with jQuery, I decided that I wanted to learn how to use Vue instead.
+
+Here, I only included Programming and Programmer Humour in the select box at the moment. Upon selected, it will query the reddit API for results. While this could have been done with jQuery, I decided that I wanted to learn how to use Vue instead. I do know that you can even do this with basic JavaScript, however the intention of this post is to understand how VueJS work with regards to the bindings and etc.
 
 Even though the implemention seems simple, it actually took a while to understand the concepts behind it.
 
