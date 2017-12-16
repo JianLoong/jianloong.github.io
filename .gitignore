@@ -47,3 +47,6 @@ Gemfile.lock
 _config.dev.yml
 .vscode
 *.gem
+
+# Ignore Setu Reports
+##/setu-reports/
