@@ -1,6 +1,3 @@
-* text=auto
-* text eol=crlf
+*.pdf text eol=crlf
 *.jpg binary
 *.png binary
-*.pdf  diff=astextplain
-*.PDF  diff=astextplain
