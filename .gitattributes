@@ -1,3 +1,4 @@
-*.pdf text eol=crlf
+* text=auto
 *.jpg binary
 *.png binary
+*.pdf binary
