@@ -27,7 +27,7 @@ A login barrier creates unnecessary burden to the user. The login use case often
 
 In a perfect world, a user will never need to login, as the login process creates another step to accomplish a goal. This step is tedious and troublesome. Why do you want to trouble a user to login, a step in which has no value added to it? In fact, if you noticed, these days, most modern system often attempts to skip the login process. 
 
-For example, most online shopping system these days allows the user to purchase an item without the need of login. Why is this so? The answer is simple. The main information required for a user to purchase an item online is the delivery address and of course how they should pay for the item. Any other information is pointless in accomplishing the use case. The is not a need for the user to login into the system.
+For example, most online shopping system these days allows the user to purchase an item without the need of login. Why is this so? The answer is simple. The main information required for a user to purchase an item online is the delivery address and of course how they should pay for the item. Any other information is pointless in accomplishing the use case. There is not a need for the user to login into the system.
 
 In short, **login is a non-functional requirement** and should not be in the system use case diagram. While, there is nothing wrong with modelling it, it would be better if it was not in the system use case diagram. These days, the process of authentication and authorization is often left to external parties for example the use of Google OAuth or even Auth0. By doing this as well, the system use case diagram will be much cleaner and effective to convey the needed information.
 
