@@ -6,7 +6,7 @@ title: Curriculum Vitae
 
 ### Summary
 
-Apassionate educator and technology lover with excellent programming and communication skiils. Organised and driven
+A passionate educator and technology lover with excellent programming and communication skiils. Organised and driven
 with the innate ability to stay on the task.
 
 #### Teaching Experience
