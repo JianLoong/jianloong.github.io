@@ -24,6 +24,8 @@ Back to static factory methods now.
 
 A static factory method is simply a static method that returns an instance of the class. Normally, the traditional way is to use a public constructor in order to obtain an instance of the class. If you ever used 3rd party libraries like Guava or ApacheCommons, you will notice that there is almost always a factory method in the API.
 
+An example of a static factory method is as follows. Notice that it returns a Boolean object.
+
 ```java
 public static Boolean valueOf(boolean b) {
 	return b ? Boolean.TRUE : Boolean.FALSE;
@@ -41,7 +43,12 @@ Limitations
 - classes without public or protected constructors cannot be subclassed
 - they are hard for programmers to find (Debatable)
 
+Well, this is just a summary it is high recommended to read the book instead. This post will be updated *soon*.
 
-Well, this is just a summary it is high recommended to read the book instead. This post will be updated *soon*
+Let's look at the first one.
 
+### Static methods have names
 
+One of the issues with code readability in Java is that there can be multiple constructors with different signatures and often times, people reading the code will have no idea what it does without reading the API. With static methods, however, you can put a more meaningful name. Thus, in a way your code will not only be cleaner it will also be more meaningful to the reader.
+
+*More updates soon*
