@@ -11,7 +11,7 @@ with the innate ability to stay on the task.
 
 #### Teaching Experience
 ##### Monash University, Melbourne (April 2015 - Current)
-Teaching Associate (Sessional)
+Sessional Lecturer & Teaching Associate (Sessional)
 
 Subjects previously taught includes:
 - FIT1010 - Introduction to Software Engineering
