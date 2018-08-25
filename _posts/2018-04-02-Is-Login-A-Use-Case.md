@@ -17,15 +17,15 @@ The question now becomes, which category does login fall into in your system? We
 
 In a normal system, do you consider putting login as a use case in your system use case diagram? For example, if you are designing the system use case diagram for a site like eBay, do you put login as a use case? While, there is nothing wrong with putting login a use case, it creates needless complications. Why is this so? Think of it this way, if you are planning to introduce login, there is a high chance that several other use cases will use the **include** and **extends** notion to relate to this use case. If that is done, it would increase the complexity use case diagram itself.
 
-However, it would be better if login is not considered as a use case. Login should be treated as a non-functional requirement. In this case, based on ISO/IEC 9126 standards, login will fall under security requirements. 
+However, it would be better if login is not considered as a use case. Login should be treated as a non-functional requirement. In this case, based on ISO/IEC 9126 standards, login will fall under security requirements.
 
-In actualy fact, this is actually true because;
+In actual fact, this is actually true because;
 
 **A user will never want to login.**
 
-A login barrier creates unnecessary burden to the user. The login use case often prevents the user from accomplishing a goal. The only reason it is present is because it is needed for security reasons. 
+A login barrier creates unnecessary burden to the user. The login use case often prevents the user from accomplishing a goal. The only reason it is present is because it is needed for security reasons.
 
-In a perfect world, a user will never need to login, as the login process creates another step to accomplish a goal. This step is tedious and troublesome. Why do you want to trouble a user to login, a step in which has no value added to it? In fact, if you noticed, these days, most modern system often attempts to skip the login process. 
+In a perfect world, a user will never need to login, as the login process creates another step to accomplish a goal. This step is tedious and troublesome. Why do you want to trouble a user to login, a step in which has no value added to it? In fact, if you noticed, these days, most modern system often attempts to skip the login process.
 
 For example, most online shopping system these days allows the user to purchase an item without the need of login. Why is this so? The answer is simple. The main information required for a user to purchase an item online is the delivery address and of course how they should pay for the item. Any other information is pointless in accomplishing the use case. There is not a need for the user to login into the system.
 
@@ -38,6 +38,3 @@ However, at the end of the day, the most important factor is message that is pre
 
 - https://en.wikipedia.org/wiki/ISO/IEC_9126
 - https://stackoverflow.com/questions/16475979/what-is-the-difference-between-functional-and-non-functional-requirement
-
-
-
