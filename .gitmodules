@@ -1,0 +1,6 @@
+[submodule "themes/hugo-PaperMod"]
+	path = themes/hugo-PaperMod
+	url = git@github.com:JianLoong/hugo-PaperMod.git
+[submodule "themes/hugo-PaperModX"]
+	path = themes/hugo-PaperModX
+	url = https://github.com/reorx/hugo-PaperModX.git
