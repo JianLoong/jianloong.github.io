@@ -4,13 +4,14 @@ date: 2022-10-17T21:30:56+11:00
 summary: "An educational approach to crawling Reddit using Python and AWS EC2 without using Reddit API"
 ShowCodeCopyButtons: true
 showToc: true
-comments: true
+comment: true
 disableShare: true
 ShowWordCount: true
 TocSide: right
 tags: ["reddit", "crawler", "aws"]
 cover:
   image: "/images/crawler.png"
+hasMermaid: true
 ---
 
 ## Objective
@@ -44,11 +45,25 @@ Based on this, information it is possible to avoid using the Reddit API and use 
 
 The architecture of this project is as follows.
 
+
+
 | GitHub                                           | Amazon EC2                                        |
 | ------------------------------------------------ | ------------------------------------------------- |
 | - Handles version control of the project         | - Handles the automation                          |
 | - GH Pages will be used to store the .json files | - Will run python scripts to crawl for data and update repository |
 |- GH Pages is the choice because, it is easy for projects to have their own pages|- Free Tier for 1 year is neat|
+
+
+
+
+{{<mermaid align="left">}}
+
+graph LR
+A-->B
+
+{{< /mermaid >}}
+
+
 
 
 ## Setting up your Python environment

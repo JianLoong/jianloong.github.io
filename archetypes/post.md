@@ -24,6 +24,7 @@ ShowPostNavLinks: true
 ShowWordCount: true
 ShowRssButtonInSectionTermList: true
 UseHugoToc: true
+hasMermaid: false
 cover:
     image: "<image path/url>" # image path/url
     alt: "<alt text>" # alt text

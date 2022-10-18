@@ -7,12 +7,14 @@ enableRobotsTXT: true
 buildDrafts: false
 buildFuture: false
 buildExpired: false
+disqusShortname: jianloonggithubio
+
 
 googleAnalytics: UA-55422968-1
 
 minify:
   disableXML: true
-  minifyOutput: true
+  minifyOutput: false
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
@@ -36,11 +38,17 @@ params:
   UseHugoToc: true
   disableSpecial1stPost: false
   disableScrollToTop: false
-  comments: false
   hidemeta: false
   hideSummary: false
   showtoc: false
   tocopen: false
+  hasMermaid: false
+
+
+  comments: true
+  commentSystems: 
+    disqus: true
+  
 
   assets:
     # disableHLJS: true # to disable highlight.js
@@ -141,11 +149,3 @@ outputs:
     - RSS
     - JSON # is necessary
 
-  commentSystems:
-    disqus:
-      shortname: jianloonggithubio
-    remark42:
-      url: https://jianliew.me
-      site: jianliew.me
-  defaultCommentSystems:
-    disqus: true
