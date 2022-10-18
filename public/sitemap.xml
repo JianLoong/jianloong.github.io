@@ -2,36 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://examplesite.com/tags/aws/</loc>
-    <lastmod>2022-10-17T21:30:56+11:00</lastmod>
-  </url><url>
-    <loc>https://examplesite.com/tags/crawler/</loc>
-    <lastmod>2022-10-17T21:30:56+11:00</lastmod>
-  </url><url>
-    <loc>https://examplesite.com/posts/redditcrawler/</loc>
-    <lastmod>2022-10-17T21:30:56+11:00</lastmod>
-  </url><url>
-    <loc>https://examplesite.com/</loc>
-    <lastmod>2022-10-17T21:30:56+11:00</lastmod>
-  </url><url>
-    <loc>https://examplesite.com/posts/</loc>
-    <lastmod>2022-10-17T21:30:56+11:00</lastmod>
-  </url><url>
-    <loc>https://examplesite.com/tags/reddit/</loc>
-    <lastmod>2022-10-17T21:30:56+11:00</lastmod>
-  </url><url>
-    <loc>https://examplesite.com/posts/pihole/</loc>
-    <lastmod>2022-10-17T21:30:56+11:00</lastmod>
-  </url><url>
-    <loc>https://examplesite.com/tags/</loc>
-    <lastmod>2022-10-17T21:30:56+11:00</lastmod>
-  </url><url>
-    <loc>https://examplesite.com/archives/</loc>
-  </url><url>
     <loc>https://examplesite.com/categories/</loc>
   </url><url>
-    <loc>https://examplesite.com/about/</loc>
+    <loc>https://examplesite.com/</loc>
   </url><url>
-    <loc>https://examplesite.com/search/</loc>
+    <loc>https://examplesite.com/tags/</loc>
   </url>
 </urlset>
