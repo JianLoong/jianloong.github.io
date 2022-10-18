@@ -1,14 +1,14 @@
 baseURL: "https://examplesite.com/"
 title: Jian
 paginate: 5
-theme: hugo-PaperMod
+theme: hugo-PaperModX
 
 enableRobotsTXT: true
 buildDrafts: false
 buildFuture: false
 buildExpired: false
 
-googleAnalytics: UA-123-45
+googleAnalytics: UA-55422968-1
 
 minify:
   disableXML: true
@@ -79,6 +79,8 @@ params:
   socialIcons:
     - name: github
       url: "https://github.com/JianLoong"
+    - name: linkedin
+      url: "https://au.linkedin.com/in/jian-loong-liew-0433ab39"
 
   analytics:
     google:
@@ -138,3 +140,12 @@ outputs:
     - HTML
     - RSS
     - JSON # is necessary
+
+  commentSystems:
+    disqus:
+      shortname: jianloonggithubio
+    remark42:
+      url: https://jianliew.me
+      site: jianliew.me
+  defaultCommentSystems:
+    disqus: true
