@@ -1,3 +1,8 @@
 ---
-title: "About"
+title: "CV"
+disableShare: true
+ShowReadingTime: false
 ---
+
+Greetings.
+
