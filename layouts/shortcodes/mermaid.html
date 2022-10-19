@@ -1,18 +1,21 @@
 
-<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js" integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        location.reload()
-    })
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+      location.reload()
+  })
 
-    if (document.body.className.includes("dark")) {
-        mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'dark' })
-    } else {
-        mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'base' })
-    }
+  if (document.body.className.includes("dark")) {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'dark' })
+  } else {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'forest' })
+  }
 
 </script>
+
+
+
 <div class="mermaid" align="{{ if .Get " align" }}{{ .Get "align" }}{{ else }}center{{ end }}" id="mermaid">
     {{ safeHTML .Inner }}
 </div>
