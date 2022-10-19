@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Voronoi on Jian</title>
+    <link>https://examplesite.com/tags/voronoi/</link>
+    <description>Recent content in Voronoi on Jian</description>
+    <image>
+      <url>https://examplesite.com/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://examplesite.com/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 27 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://examplesite.com/tags/voronoi/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>k-Nearest Neighbour on Maps</title>
+      <link>https://examplesite.com/posts/voronoi/</link>
+      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://examplesite.com/posts/voronoi/</guid>
+      <description>One of the most common query when working with maps is the nearest neighbour query. This blog post will use Voronoi Diagrams to explain more regarding the nearest neighbour query.
+Below is an example of a Voronoi diagram generated using d3.js. One of the good use case of a voronoi diagram in real life applications would be where would be finding a place to build emergency services. This place should have the most number of neighbouring regions.</description>
+    </item>
+    
+  </channel>
+</rss>
