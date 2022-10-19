@@ -1,198 +1,593 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Singleton & Observer Pattern (Java) | Jian</title><meta name=keywords content="Java,Design Pattern,Singleton,Observer"><meta name=description content="This blog post will demonstrate a simple use case where the singleton and observable design pattern becomes important.
-Let&rsquo;s imagine if you are in the arcade and there is a Lucky Dip Machine. The reason I like call it the LuckyDipMachine is because it is one of the feature assignments in the Programming Foundation Units in Monash University and it is often times made fun at. However, the solution for assignment itself can be engineered to be better."><meta name=author content="Jian"><link rel=canonical href=https://jianloong.github.io/posts/singletonobserverpattern/><meta name=google-site-verification content="XYZabc"><link crossorigin=anonymous href=/assets/css/stylesheet.3299c596a7007118365635c056dd427dace22b7b8c1341fdef6fa6c31359ba10.css integrity rel="preload stylesheet" as=style><script defer crossorigin=anonymous src=/assets/js/highlight.acb54fd32bbc1982428b8850317e45d076b95012730a5936667e6bc21777692a.js integrity onload=hljs.initHighlightingOnLoad()></script>
-<link rel=icon href=https://jianloong.github.io/images/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://jianloong.github.io/%3Clink%20/%20abs%20url%3E><link rel=icon type=image/png sizes=32x32 href=https://jianloong.github.io/%3Clink%20/%20abs%20url%3E><link rel=apple-touch-icon href=https://jianloong.github.io/images/favicon.ico><link rel=mask-icon href=https://jianloong.github.io/images/favicon.ico><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-55422968-1","auto"),ga("send","pageview"))</script><meta property="og:title" content="Singleton & Observer Pattern (Java)"><meta property="og:description" content="This blog post will demonstrate a simple use case where the singleton and observable design pattern becomes important.
-Let&rsquo;s imagine if you are in the arcade and there is a Lucky Dip Machine. The reason I like call it the LuckyDipMachine is because it is one of the feature assignments in the Programming Foundation Units in Monash University and it is often times made fun at. However, the solution for assignment itself can be engineered to be better."><meta property="og:type" content="article"><meta property="og:url" content="https://jianloong.github.io/posts/singletonobserverpattern/"><meta property="og:image" content="https://jianloong.github.io/images/luckydip.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2019-11-03T00:00:00+00:00"><meta property="article:modified_time" content="2019-11-03T00:00:00+00:00"><meta property="og:site_name" content="Jian"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://jianloong.github.io/images/luckydip.png"><meta name=twitter:title content="Singleton & Observer Pattern (Java)"><meta name=twitter:description content="This blog post will demonstrate a simple use case where the singleton and observable design pattern becomes important.
-Let&rsquo;s imagine if you are in the arcade and there is a Lucky Dip Machine. The reason I like call it the LuckyDipMachine is because it is one of the feature assignments in the Programming Foundation Units in Monash University and it is often times made fun at. However, the solution for assignment itself can be engineered to be better."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://jianloong.github.io/posts/"},{"@type":"ListItem","position":2,"name":"Singleton \u0026 Observer Pattern (Java)","item":"https://jianloong.github.io/posts/singletonobserverpattern/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Singleton \u0026 Observer Pattern (Java)","name":"Singleton \u0026 Observer Pattern (Java)","description":"This blog post will demonstrate a simple use case where the singleton and observable design pattern becomes important.\nLet\u0026rsquo;s imagine if you are in the arcade and there is a Lucky Dip Machine. The reason I like call it the LuckyDipMachine is because it is one of the feature assignments in the Programming Foundation Units in Monash University and it is often times made fun at. However, the solution for assignment itself can be engineered to be better.","keywords":["Java","Design Pattern","Singleton","Observer"],"articleBody":"This blog post will demonstrate a simple use case where the singleton and observable design pattern becomes important.\nLet’s imagine if you are in the arcade and there is a Lucky Dip Machine. The reason I like call it the LuckyDipMachine is because it is one of the feature assignments in the Programming Foundation Units in Monash University and it is often times made fun at. However, the solution for assignment itself can be engineered to be better.\nThere is only one Lucky Dip Machine in the arcade. This lucky dip machine has a limited number of items in its inventory. A singleton design pattern will be used to instantiate this class. The reason for a Singleton pattern is so that, there can only ever be one LuckyDipMachine. Multiple uses of the LuckyDipMachine will only deduct items from this instance.\nEveryone in the arcade can observe when the LuckyDipMachine is used. Whenever, a price is won, the observers would know what Prize has been won.\ngraph TD\rA(LuckyDipMachine\nSingleton)\rB(ObserverOne)\rC(ObserverTwo)\rD(User)\rB -- observes--\u003e A\rC -- observes--\u003e A\rD -- uses --\u003e A\rA --fire changes --\u003e B\rA --fire changes --\u003e C\rFig 1. Flowchart Representation of the intended design We start off by creating a really simple Prize class.\npackage me.jianliew; public class Prize { private String name; public Prize(String name) { this.name = name; } public String getName() { return name; } public void setName(String name) { this.name = name; } @Override public boolean equals(Object o) { if (this == o) return true; if (o == null || getClass() != o.getClass()) return false; Prize prize = (Prize) o; return getName().equals(prize.getName()); } @Override public int hashCode() { return getName().hashCode(); } @Override public String toString() { return \"Prize{\" + \"name='\" + name + '\\'' + '}'; } } Snippet 1. The Prize class.\nOur Prize class is just a plain old Java object.\nHowever, our LuckyDipMachine class is slightly more interesting. Here are the characteristics of it\nIt has a private constructor. It has a static instance of itself. This is done as a class variable. A PropertyChangeSupport as a field to create an observable pattern. A pull method of the LuckyDipMachine indicating whenever the lucky dip machine has been pulled or used. When this happens, it will fire a property change done via calling the firePropertyChange method. package me.jianliew; import java.beans.PropertyChangeListener; import java.beans.PropertyChangeSupport; import java.util.*; public class LuckyDipMachine { private Map\u003cPrize, Integer\u003e inventory; private static LuckyDipMachine ourInstance = new LuckyDipMachine(); // PropertyChangeSupport is introduced here private PropertyChangeSupport support; public static LuckyDipMachine getInstance() { return ourInstance; } private LuckyDipMachine() { inventory = new HashMap\u003c\u003e(); support = new PropertyChangeSupport(this); fill(); } private void fill(){ Prize p1 = new Prize(\"Potato\"); Prize p2 = new Prize(\"Tomato\"); inventory.put(p1,2); inventory.put(p2,2); } public Prize getRandomPrize(){ List\u003cPrize\u003e keysAsArray = new ArrayList\u003c\u003e(inventory.keySet()); Random r = new Random(); return keysAsArray.get(r.nextInt(keysAsArray.size())); } public void pull(){ if (inventory.isEmpty()) return; Prize p = getRandomPrize(); inventory.computeIfPresent(p, (prize, integer) -\u003e inventory.get(prize) - 1); if(inventory.get(p) == 0){ inventory.remove(p); } support.firePropertyChange(\"prize\", \"\", p); } public int getInventorySize() { int sum = 0; for (Prize p : inventory.keySet()) sum += inventory.get(p); return sum; } public void addPropertyChangeListener(PropertyChangeListener pcl) { support.addPropertyChangeListener(pcl); } public void removePropertyChangeListener(PropertyChangeListener pcl) { support.removePropertyChangeListener(pcl); } @Override public String toString() { return \"LuckyDipMachine{\" + \"inventory=\" + inventory + '}'; } } We also have the Observer. The only thing that is needed in this class is for it to implement the PropertyChangeListener. I will also need to have an implementation for the propertyChange.\npackage me.jianliew; import java.beans.PropertyChangeEvent; import java.beans.PropertyChangeListener; import java.util.ArrayList; import java.util.List; // It is needed to implement the interface PropertyChangeListener public class Observer implements PropertyChangeListener { private List\u003cPrize\u003e observedPrizes; public Observer(){ observedPrizes = new ArrayList\u003c\u003e(); } @Override public void propertyChange(PropertyChangeEvent propertyChangeEvent) { Prize p = (Prize) propertyChangeEvent.getNewValue(); this.observedPrizes.add(p); System.out.println(toString()); } @Override public String toString() { return \"Observer{\" + \"observedPrizes=\" + observedPrizes + '}'; } } We can then have a simple Test class to see how it works.\rpackage me.jianliew; public class Test { public static void main(String[] args) { Observer o = new Observer(); LuckyDipMachine ldm = LuckyDipMachine.getInstance(); ldm.addPropertyChangeListener(o); System.out.println(ldm.getInventorySize()); ldm.pull(); ldm.pull(); ldm.pull(); LuckyDipMachine ldm2= LuckyDipMachine.getInstance(); System.out.println(ldm2.getInventorySize()); ldm2.pull(); System.out.println(ldm.getInventorySize()); } } The output of it would be as follows.\n// There will be 4 items at the start 4 // On the first pull a random item is returned. The observer observes it. Observer{observedPrizes=[Prize{name='Tomato'}]} // On the second pull, the observer now sees 2 items in total. Observer{observedPrizes=[Prize{name='Tomato'}, Prize{name='Potato'}]} // There will be three items on the third pull. Observer{observedPrizes=[Prize{name='Tomato'}, Prize{name='Potato'}, Prize{name='Tomato'}]} // The second instance of the LuckyDipMachine will still only have 1 item as the LuckyDipMachine is a singleton. 1 // The pull of the second lucky dip machine, still triggers a fire to the observer as it is a singleton. There is no need to register the listener again. Observer{observedPrizes=[Prize{name='Tomato'}, Prize{name='Potato'}, Prize{name='Tomato'}, Prize{name='Potato'}]} // At the end there will be nothing left in the machine. 0 Lessons from this blog post. It is very important to override both the equals and the hashCode when using maps. The Singleton design pattern have many different approaches. The approach which I have used here is the most simplistic approach and does have certain design concerns. Design is still very subjective matter as it is debatable to put the quantity field in the Prize class itself. The runtime to get a random item from a HashMap would depend on the implementation of it. Pygments and Chroma of the Hugo static website generator are both good but Chroma seems to look nice out of the box for my use case. PropertyChangeSupport is so much easier to use compare to the Observable interface class. computeIfPresent method is pretty cool as it uses a lambda like feature. References quantities, I. and L., E. (2019). Inventory of objects with item types and quantities. [online] Code Review Stack Exchange. Available at: https://codereview.stackexchange.com/questions/148821/inventory-of-objects-with-item-types-and-quantities [Accessed 3 Nov. 2019]. Baeldung. (2019). Singletons in Java | Baeldung. [online] Available at: https://www.baeldung.com/java-singleton [Accessed 3 Nov. 2019]. Baeldung. (2019). The Observer Pattern in Java | Baeldung. [online] Available at: https://www.baeldung.com/java-observer-pattern [Accessed 3 Nov. 2019]. ","wordCount":"1013","inLanguage":"en","image":"https://jianloong.github.io/images/luckydip.png","datePublished":"2019-11-03T00:00:00Z","dateModified":"2019-11-03T00:00:00Z","author":{"@type":"Person","name":"Jian"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://jianloong.github.io/posts/singletonobserverpattern/"},"publisher":{"@type":"Organization","name":"Jian","logo":{"@type":"ImageObject","url":"https://jianloong.github.io/images/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://jianloong.github.io/ accesskey=h title="Home (Alt + H)"><img src=https://jianloong.github.io/apple-touch-icon.png alt aria-label=logo height=35>Home</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://jianloong.github.io/about/ title=about><span>about</span></a></li><li><a href=https://jianloong.github.io/search/ title=search><span>search</span></a></li><li><a href=https://jianloong.github.io/tags/ title=tags><span>tags</span></a></li><li><a href=https://jianloong.github.io/archives/ title=archives><span>archives</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://jianloong.github.io/>Home</a>&nbsp;»&nbsp;<a href=https://jianloong.github.io/posts/>Posts</a></div><h1 class=post-title>Singleton & Observer Pattern (Java)</h1><div class=post-meta><span title='2019-11-03 00:00:00 +0000 UTC'>November 3, 2019</span>&nbsp;·&nbsp;Jian</div></header><div class=post-content><p>This blog post will demonstrate a simple use case where the <strong>singleton</strong> and <strong>observable</strong> design pattern becomes important.</p><p>Let&rsquo;s imagine if you are in the arcade and there is a Lucky Dip Machine. The reason I like call it the LuckyDipMachine is because it is one of the feature assignments in the Programming Foundation Units in Monash University and it is often times made fun at. However, the solution for assignment itself <strong>can be engineered to be better.</strong></p><ul><li><p>There is <strong>only one</strong> Lucky Dip Machine in the arcade. This lucky dip machine has a limited number of items in its inventory. A <strong>singleton</strong> design pattern will be used to instantiate this class. The reason for a Singleton pattern is so that, there can only ever be one LuckyDipMachine. Multiple uses of the LuckyDipMachine will only deduct items from this instance.</p></li><li><p>Everyone in the arcade can <strong>observe</strong> when the LuckyDipMachine is used. Whenever, a price is won, the observers would know what Prize has been won.</p></li></ul><script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>document.getElementById("theme-toggle").addEventListener("click",()=>{location.reload()}),document.body.className.includes("dark")?mermaid.initialize({startOnLoad:!0,securityLevel:"loose",theme:"dark"}):mermaid.initialize({startOnLoad:!0,securityLevel:"loose",theme:"forest"})</script><div class=mermaid align=center id=mermaid>graph TD
-A(LuckyDipMachine<br>Singleton)
-B(ObserverOne)
-C(ObserverTwo)
-D(User)
-B -- observes--> A
-C -- observes--> A
-D -- uses --> A
-A --fire changes --> B
-A --fire changes --> C</div><p align=center>Fig 1. Flowchart Representation of the intended design</p><p>We start off by creating a really simple Prize class.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>package</span> <span class=nn>me.jianliew</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Prize</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>String</span> <span class=n>name</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=nf>Prize</span><span class=o>(</span><span class=n>String</span> <span class=n>name</span><span class=o>)</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>.</span><span class=na>name</span> <span class=o>=</span> <span class=n>name</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>String</span> <span class=nf>getName</span><span class=o>()</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>name</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>setName</span><span class=o>(</span><span class=n>String</span> <span class=n>name</span><span class=o>)</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>.</span><span class=na>name</span> <span class=o>=</span> <span class=n>name</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
-</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>boolean</span> <span class=nf>equals</span><span class=o>(</span><span class=n>Object</span> <span class=n>o</span><span class=o>)</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>(</span><span class=k>this</span> <span class=o>==</span> <span class=n>o</span><span class=o>)</span> <span class=k>return</span> <span class=kc>true</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>(</span><span class=n>o</span> <span class=o>==</span> <span class=kc>null</span> <span class=o>||</span> <span class=n>getClass</span><span class=o>()</span> <span class=o>!=</span> <span class=n>o</span><span class=o>.</span><span class=na>getClass</span><span class=o>())</span> <span class=k>return</span> <span class=kc>false</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=n>Prize</span> <span class=n>prize</span> <span class=o>=</span> <span class=o>(</span><span class=n>Prize</span><span class=o>)</span> <span class=n>o</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>getName</span><span class=o>().</span><span class=na>equals</span><span class=o>(</span><span class=n>prize</span><span class=o>.</span><span class=na>getName</span><span class=o>());</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
-</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>int</span> <span class=nf>hashCode</span><span class=o>()</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>getName</span><span class=o>().</span><span class=na>hashCode</span><span class=o>();</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
-</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>String</span> <span class=nf>toString</span><span class=o>()</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=s>&#34;Prize{&#34;</span> <span class=o>+</span>
-</span></span><span class=line><span class=cl>                <span class=s>&#34;name=&#39;&#34;</span> <span class=o>+</span> <span class=n>name</span> <span class=o>+</span> <span class=sc>&#39;\&#39;&#39;</span> <span class=o>+</span>
-</span></span><span class=line><span class=cl>                <span class=sc>&#39;}&#39;</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span></code></pre></div><p align=center>Snippet 1. The <strong>Prize</strong> class.</p><p>Our Prize class is just a plain old Java object.</p><p>However, our LuckyDipMachine class is slightly more interesting. Here are the characteristics of it</p><ul><li>It has a <strong>private</strong> constructor.</li><li>It has a <strong>static</strong> instance of itself. This is done as a class variable.</li><li>A <strong>PropertyChangeSupport</strong> as a field to create an observable pattern.</li><li>A <strong>pull</strong> method of the LuckyDipMachine indicating whenever the lucky dip machine has been pulled or used. When this happens, it will fire a property change done via calling the <strong>firePropertyChange</strong> method.</li></ul><div></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>package</span> <span class=nn>me.jianliew</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.beans.PropertyChangeListener</span><span class=o>;</span>
-</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.beans.PropertyChangeSupport</span><span class=o>;</span>
-</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.*</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>LuckyDipMachine</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>Map</span><span class=o>&lt;</span><span class=n>Prize</span><span class=o>,</span> <span class=n>Integer</span><span class=o>&gt;</span> <span class=n>inventory</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kd>static</span> <span class=n>LuckyDipMachine</span> <span class=n>ourInstance</span> <span class=o>=</span> <span class=k>new</span> <span class=n>LuckyDipMachine</span><span class=o>();</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=c1>// PropertyChangeSupport is introduced here
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>private</span> <span class=n>PropertyChangeSupport</span> <span class=n>support</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=n>LuckyDipMachine</span> <span class=nf>getInstance</span><span class=o>()</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>ourInstance</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=nf>LuckyDipMachine</span><span class=o>()</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>        <span class=n>inventory</span> <span class=o>=</span> <span class=k>new</span> <span class=n>HashMap</span><span class=o>&lt;&gt;();</span>
-</span></span><span class=line><span class=cl>        <span class=n>support</span> <span class=o>=</span> <span class=k>new</span> <span class=n>PropertyChangeSupport</span><span class=o>(</span><span class=k>this</span><span class=o>);</span>
-</span></span><span class=line><span class=cl>        <span class=n>fill</span><span class=o>();</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kt>void</span> <span class=nf>fill</span><span class=o>(){</span>
-</span></span><span class=line><span class=cl>        <span class=n>Prize</span> <span class=n>p1</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Prize</span><span class=o>(</span><span class=s>&#34;Potato&#34;</span><span class=o>);</span>
-</span></span><span class=line><span class=cl>        <span class=n>Prize</span> <span class=n>p2</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Prize</span><span class=o>(</span><span class=s>&#34;Tomato&#34;</span><span class=o>);</span>
-</span></span><span class=line><span class=cl>        <span class=n>inventory</span><span class=o>.</span><span class=na>put</span><span class=o>(</span><span class=n>p1</span><span class=o>,</span><span class=n>2</span><span class=o>);</span>
-</span></span><span class=line><span class=cl>        <span class=n>inventory</span><span class=o>.</span><span class=na>put</span><span class=o>(</span><span class=n>p2</span><span class=o>,</span><span class=n>2</span><span class=o>);</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>Prize</span> <span class=nf>getRandomPrize</span><span class=o>(){</span>
-</span></span><span class=line><span class=cl>        <span class=n>List</span><span class=o>&lt;</span><span class=n>Prize</span><span class=o>&gt;</span> <span class=n>keysAsArray</span> <span class=o>=</span> <span class=k>new</span> <span class=n>ArrayList</span><span class=o>&lt;&gt;(</span><span class=n>inventory</span><span class=o>.</span><span class=na>keySet</span><span class=o>());</span>
-</span></span><span class=line><span class=cl>        <span class=n>Random</span> <span class=n>r</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Random</span><span class=o>();</span>
-</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>keysAsArray</span><span class=o>.</span><span class=na>get</span><span class=o>(</span><span class=n>r</span><span class=o>.</span><span class=na>nextInt</span><span class=o>(</span><span class=n>keysAsArray</span><span class=o>.</span><span class=na>size</span><span class=o>()));</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>pull</span><span class=o>(){</span>
-</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>(</span><span class=n>inventory</span><span class=o>.</span><span class=na>isEmpty</span><span class=o>())</span>
-</span></span><span class=line><span class=cl>            <span class=k>return</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>        <span class=n>Prize</span> <span class=n>p</span> <span class=o>=</span> <span class=n>getRandomPrize</span><span class=o>();</span>
-</span></span><span class=line><span class=cl>        <span class=n>inventory</span><span class=o>.</span><span class=na>computeIfPresent</span><span class=o>(</span><span class=n>p</span><span class=o>,</span> <span class=o>(</span><span class=n>prize</span><span class=o>,</span> <span class=n>integer</span><span class=o>)</span> <span class=o>-&gt;</span> <span class=n>inventory</span><span class=o>.</span><span class=na>get</span><span class=o>(</span><span class=n>prize</span><span class=o>)</span> <span class=o>-</span>  <span class=n>1</span><span class=o>);</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=k>if</span><span class=o>(</span><span class=n>inventory</span><span class=o>.</span><span class=na>get</span><span class=o>(</span><span class=n>p</span><span class=o>)</span> <span class=o>==</span> <span class=n>0</span><span class=o>){</span>
-</span></span><span class=line><span class=cl>            <span class=n>inventory</span><span class=o>.</span><span class=na>remove</span><span class=o>(</span><span class=n>p</span><span class=o>);</span>
-</span></span><span class=line><span class=cl>        <span class=o>}</span>
-</span></span><span class=line><span class=cl>        <span class=n>support</span><span class=o>.</span><span class=na>firePropertyChange</span><span class=o>(</span><span class=s>&#34;prize&#34;</span><span class=o>,</span> <span class=s>&#34;&#34;</span><span class=o>,</span> <span class=n>p</span><span class=o>);</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>int</span> <span class=nf>getInventorySize</span><span class=o>()</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>sum</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=o>(</span><span class=n>Prize</span> <span class=n>p</span> <span class=o>:</span> <span class=n>inventory</span><span class=o>.</span><span class=na>keySet</span><span class=o>())</span> <span class=n>sum</span> <span class=o>+=</span> <span class=n>inventory</span><span class=o>.</span><span class=na>get</span><span class=o>(</span><span class=n>p</span><span class=o>);</span>
-</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>sum</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>addPropertyChangeListener</span><span class=o>(</span><span class=n>PropertyChangeListener</span> <span class=n>pcl</span><span class=o>)</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>        <span class=n>support</span><span class=o>.</span><span class=na>addPropertyChangeListener</span><span class=o>(</span><span class=n>pcl</span><span class=o>);</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>removePropertyChangeListener</span><span class=o>(</span><span class=n>PropertyChangeListener</span> <span class=n>pcl</span><span class=o>)</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>        <span class=n>support</span><span class=o>.</span><span class=na>removePropertyChangeListener</span><span class=o>(</span><span class=n>pcl</span><span class=o>);</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
-</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>String</span> <span class=nf>toString</span><span class=o>()</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=s>&#34;LuckyDipMachine{&#34;</span> <span class=o>+</span>
-</span></span><span class=line><span class=cl>                <span class=s>&#34;inventory=&#34;</span> <span class=o>+</span> <span class=n>inventory</span> <span class=o>+</span>
-</span></span><span class=line><span class=cl>                <span class=sc>&#39;}&#39;</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span></code></pre></div><div></div><p>We also have the Observer. The only thing that is needed in this class is for it to implement the <strong>PropertyChangeListener</strong>. I will also need to have an implementation for the <strong>propertyChange</strong>.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>package</span> <span class=nn>me.jianliew</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.beans.PropertyChangeEvent</span><span class=o>;</span>
-</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.beans.PropertyChangeListener</span><span class=o>;</span>
-</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.ArrayList</span><span class=o>;</span>
-</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.List</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1>// It is needed to implement the interface PropertyChangeListener
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Observer</span> <span class=kd>implements</span> <span class=n>PropertyChangeListener</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>List</span><span class=o>&lt;</span><span class=n>Prize</span><span class=o>&gt;</span> <span class=n>observedPrizes</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=nf>Observer</span><span class=o>(){</span>
-</span></span><span class=line><span class=cl>        <span class=n>observedPrizes</span> <span class=o>=</span> <span class=k>new</span> <span class=n>ArrayList</span><span class=o>&lt;&gt;();</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
-</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>propertyChange</span><span class=o>(</span><span class=n>PropertyChangeEvent</span> <span class=n>propertyChangeEvent</span><span class=o>)</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>        <span class=n>Prize</span> <span class=n>p</span> <span class=o>=</span> <span class=o>(</span><span class=n>Prize</span><span class=o>)</span> <span class=n>propertyChangeEvent</span><span class=o>.</span><span class=na>getNewValue</span><span class=o>();</span>
-</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>.</span><span class=na>observedPrizes</span><span class=o>.</span><span class=na>add</span><span class=o>(</span><span class=n>p</span><span class=o>);</span>
-</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>toString</span><span class=o>());</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl>    
-</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
-</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>String</span> <span class=nf>toString</span><span class=o>()</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=s>&#34;Observer{&#34;</span> <span class=o>+</span>
-</span></span><span class=line><span class=cl>                <span class=s>&#34;observedPrizes=&#34;</span> <span class=o>+</span> <span class=n>observedPrizes</span> <span class=o>+</span>
-</span></span><span class=line><span class=cl>                <span class=sc>&#39;}&#39;</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span></code></pre></div><div></div>We can then have a simple Test class to see how it works.<div class=highlight><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>package</span> <span class=nn>me.jianliew</span><span class=o>;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Test</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=n>Observer</span> <span class=n>o</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Observer</span><span class=o>();</span>
-</span></span><span class=line><span class=cl>        <span class=n>LuckyDipMachine</span> <span class=n>ldm</span> <span class=o>=</span> <span class=n>LuckyDipMachine</span><span class=o>.</span><span class=na>getInstance</span><span class=o>();</span>
-</span></span><span class=line><span class=cl>        <span class=n>ldm</span><span class=o>.</span><span class=na>addPropertyChangeListener</span><span class=o>(</span><span class=n>o</span><span class=o>);</span>
-</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>ldm</span><span class=o>.</span><span class=na>getInventorySize</span><span class=o>());</span>
-</span></span><span class=line><span class=cl>        <span class=n>ldm</span><span class=o>.</span><span class=na>pull</span><span class=o>();</span>
-</span></span><span class=line><span class=cl>        <span class=n>ldm</span><span class=o>.</span><span class=na>pull</span><span class=o>();</span>
-</span></span><span class=line><span class=cl>        <span class=n>ldm</span><span class=o>.</span><span class=na>pull</span><span class=o>();</span>
-</span></span><span class=line><span class=cl>        <span class=n>LuckyDipMachine</span> <span class=n>ldm2</span><span class=o>=</span> <span class=n>LuckyDipMachine</span><span class=o>.</span><span class=na>getInstance</span><span class=o>();</span>
-</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>ldm2</span><span class=o>.</span><span class=na>getInventorySize</span><span class=o>());</span>
-</span></span><span class=line><span class=cl>        <span class=n>ldm2</span><span class=o>.</span><span class=na>pull</span><span class=o>();</span>
-</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>ldm</span><span class=o>.</span><span class=na>getInventorySize</span><span class=o>());</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span></code></pre></div><p>The output of it would be as follows.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>// There will be <span class=m>4</span> items at the start
-</span></span><span class=line><span class=cl><span class=m>4</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>// On the first pull a random item is returned. The observer observes it.
-</span></span><span class=line><span class=cl>Observer<span class=o>{</span><span class=nv>observedPrizes</span><span class=o>=[</span>Prize<span class=o>{</span><span class=nv>name</span><span class=o>=</span><span class=s1>&#39;Tomato&#39;</span><span class=o>}]}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>// On the second pull, the observer now sees <span class=m>2</span> items in total.
-</span></span><span class=line><span class=cl>Observer<span class=o>{</span><span class=nv>observedPrizes</span><span class=o>=[</span>Prize<span class=o>{</span><span class=nv>name</span><span class=o>=</span><span class=s1>&#39;Tomato&#39;</span><span class=o>}</span>, Prize<span class=o>{</span><span class=nv>name</span><span class=o>=</span><span class=s1>&#39;Potato&#39;</span><span class=o>}]}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>// There will be three items on the third pull.
-</span></span><span class=line><span class=cl>Observer<span class=o>{</span><span class=nv>observedPrizes</span><span class=o>=[</span>Prize<span class=o>{</span><span class=nv>name</span><span class=o>=</span><span class=s1>&#39;Tomato&#39;</span><span class=o>}</span>, Prize<span class=o>{</span><span class=nv>name</span><span class=o>=</span><span class=s1>&#39;Potato&#39;</span><span class=o>}</span>, Prize<span class=o>{</span><span class=nv>name</span><span class=o>=</span><span class=s1>&#39;Tomato&#39;</span><span class=o>}]}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>// The second instance of the LuckyDipMachine will still only have <span class=m>1</span> item as the LuckyDipMachine is a singleton.
-</span></span><span class=line><span class=cl><span class=m>1</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>// The pull of the second lucky dip machine, still triggers a fire to the observer as it is a singleton. There is no need to register the listener again.
-</span></span><span class=line><span class=cl>Observer<span class=o>{</span><span class=nv>observedPrizes</span><span class=o>=[</span>Prize<span class=o>{</span><span class=nv>name</span><span class=o>=</span><span class=s1>&#39;Tomato&#39;</span><span class=o>}</span>, Prize<span class=o>{</span><span class=nv>name</span><span class=o>=</span><span class=s1>&#39;Potato&#39;</span><span class=o>}</span>, Prize<span class=o>{</span><span class=nv>name</span><span class=o>=</span><span class=s1>&#39;Tomato&#39;</span><span class=o>}</span>, Prize<span class=o>{</span><span class=nv>name</span><span class=o>=</span><span class=s1>&#39;Potato&#39;</span><span class=o>}]}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>// At the end there will be nothing left in the machine.
-</span></span><span class=line><span class=cl><span class=m>0</span>
-</span></span></code></pre></div><h4 id=lessons-from-this-blog-post>Lessons from this blog post.<a hidden class=anchor aria-hidden=true href=#lessons-from-this-blog-post>#</a></h4><ul><li>It is very important to override both the <strong>equals</strong> and the <strong>hashCode</strong> when using maps.</li><li>The <strong>Singleton</strong> design pattern have many different approaches. The approach which I have used here is the most simplistic approach and does have certain design concerns.</li><li>Design is still very subjective matter as it is debatable to put the <strong>quantity</strong> field in the Prize class itself.</li><li>The runtime to get a random item from a HashMap would depend on the <strong>implementation</strong> of it.</li><li><strong>Pygments</strong> and <strong>Chroma</strong> of the Hugo static website generator are both good but Chroma seems to look nice out of the box for my use case.</li><li><strong>PropertyChangeSupport</strong> is so much easier to use compare to the <strong>Observable</strong> interface class.</li><li><strong>computeIfPresent</strong> method is pretty cool as it uses a lambda like feature.</li></ul><h4 id=references>References<a hidden class=anchor aria-hidden=true href=#references>#</a></h4><ol><li>quantities, I. and L., E. (2019). Inventory of objects with item types and quantities. [online] Code Review Stack Exchange. Available at: <a href=https://codereview.stackexchange.com/questions/148821/inventory-of-objects-with-item-types-and-quantities>https://codereview.stackexchange.com/questions/148821/inventory-of-objects-with-item-types-and-quantities</a> [Accessed 3 Nov. 2019].</li><li>Baeldung. (2019). Singletons in Java | Baeldung. [online] Available at: <a href=https://www.baeldung.com/java-singleton>https://www.baeldung.com/java-singleton</a> [Accessed 3 Nov. 2019].</li><li>Baeldung. (2019). The Observer Pattern in Java | Baeldung. [online] Available at: <a href=https://www.baeldung.com/java-observer-pattern>https://www.baeldung.com/java-observer-pattern</a> [Accessed 3 Nov. 2019].</li></ol></div><footer class=post-footer><ul class=post-tags><li><a href=https://jianloong.github.io/tags/java/>Java</a></li><li><a href=https://jianloong.github.io/tags/design-pattern/>Design Pattern</a></li><li><a href=https://jianloong.github.io/tags/singleton/>Singleton</a></li><li><a href=https://jianloong.github.io/tags/observer/>Observer</a></li></ul><nav class=paginav><a class=prev href=https://jianloong.github.io/posts/quick/><span class=title>« Prev</span><br><span>Simple reddit crawler for the /r/programming subreddit</span></a>
-<a class=next href=https://jianloong.github.io/posts/voronoi/><span class=title>Next »</span><br><span>k-Nearest Neighbour on Maps</span></a></nav></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//jianloonggithubio.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></article></main><footer class=footer><span>&copy; 2022 <a href=https://jianloong.github.io/>Jian</a></span>
-<span>Powered by
-<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script></body></html>
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Singleton &amp; Observer Pattern (Java) | Jian</title>
+<meta name="keywords" content="Java, Design Pattern, Singleton, Observer">
+<meta name="description" content="This blog post will demonstrate a simple use case where the singleton and observable design pattern becomes important.
+Let&rsquo;s imagine if you are in the arcade and there is a Lucky Dip Machine. The reason I like call it the LuckyDipMachine is because it is one of the feature assignments in the Programming Foundation Units in Monash University and it is often times made fun at. However, the solution for assignment itself can be engineered to be better.">
+<meta name="author" content="Jian">
+<link rel="canonical" href="https://jianloong.github.io/posts/singletonobserverpattern/">
+<meta name="google-site-verification" content="XYZabc">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.3299c596a7007118365635c056dd427dace22b7b8c1341fdef6fa6c31359ba10.css" integrity="" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.acb54fd32bbc1982428b8850317e45d076b95012730a5936667e6bc21777692a.js" integrity=""
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://jianloong.github.io/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jianloong.github.io/%3Clink%20/%20abs%20url%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jianloong.github.io/%3Clink%20/%20abs%20url%3E">
+<link rel="apple-touch-icon" href="https://jianloong.github.io/images/favicon.ico">
+<link rel="mask-icon" href="https://jianloong.github.io/images/favicon.ico">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-55422968-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Singleton &amp; Observer Pattern (Java)" />
+<meta property="og:description" content="This blog post will demonstrate a simple use case where the singleton and observable design pattern becomes important.
+Let&rsquo;s imagine if you are in the arcade and there is a Lucky Dip Machine. The reason I like call it the LuckyDipMachine is because it is one of the feature assignments in the Programming Foundation Units in Monash University and it is often times made fun at. However, the solution for assignment itself can be engineered to be better." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jianloong.github.io/posts/singletonobserverpattern/" />
+<meta property="og:image" content="https://jianloong.github.io/images/luckydip.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-11-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-11-03T00:00:00+00:00" /><meta property="og:site_name" content="Jian" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://jianloong.github.io/images/luckydip.png" />
+<meta name="twitter:title" content="Singleton &amp; Observer Pattern (Java)"/>
+<meta name="twitter:description" content="This blog post will demonstrate a simple use case where the singleton and observable design pattern becomes important.
+Let&rsquo;s imagine if you are in the arcade and there is a Lucky Dip Machine. The reason I like call it the LuckyDipMachine is because it is one of the feature assignments in the Programming Foundation Units in Monash University and it is often times made fun at. However, the solution for assignment itself can be engineered to be better."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://jianloong.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Singleton \u0026 Observer Pattern (Java)",
+      "item": "https://jianloong.github.io/posts/singletonobserverpattern/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Singleton \u0026 Observer Pattern (Java)",
+  "name": "Singleton \u0026 Observer Pattern (Java)",
+  "description": "This blog post will demonstrate a simple use case where the singleton and observable design pattern becomes important.\nLet\u0026rsquo;s imagine if you are in the arcade and there is a Lucky Dip Machine. The reason I like call it the LuckyDipMachine is because it is one of the feature assignments in the Programming Foundation Units in Monash University and it is often times made fun at. However, the solution for assignment itself can be engineered to be better.",
+  "keywords": [
+    "Java", "Design Pattern", "Singleton", "Observer"
+  ],
+  "articleBody": "This blog post will demonstrate a simple use case where the singleton and observable design pattern becomes important.\nLet’s imagine if you are in the arcade and there is a Lucky Dip Machine. The reason I like call it the LuckyDipMachine is because it is one of the feature assignments in the Programming Foundation Units in Monash University and it is often times made fun at. However, the solution for assignment itself can be engineered to be better.\nThere is only one Lucky Dip Machine in the arcade. This lucky dip machine has a limited number of items in its inventory. A singleton design pattern will be used to instantiate this class. The reason for a Singleton pattern is so that, there can only ever be one LuckyDipMachine. Multiple uses of the LuckyDipMachine will only deduct items from this instance.\nEveryone in the arcade can observe when the LuckyDipMachine is used. Whenever, a price is won, the observers would know what Prize has been won.\ngraph TD\rA(LuckyDipMachine\nSingleton)\rB(ObserverOne)\rC(ObserverTwo)\rD(User)\rB -- observes--\u003e A\rC -- observes--\u003e A\rD -- uses --\u003e A\rA --fire changes --\u003e B\rA --fire changes --\u003e C\rFig 1. Flowchart Representation of the intended design We start off by creating a really simple Prize class.\npackage me.jianliew; public class Prize { private String name; public Prize(String name) { this.name = name; } public String getName() { return name; } public void setName(String name) { this.name = name; } @Override public boolean equals(Object o) { if (this == o) return true; if (o == null || getClass() != o.getClass()) return false; Prize prize = (Prize) o; return getName().equals(prize.getName()); } @Override public int hashCode() { return getName().hashCode(); } @Override public String toString() { return \"Prize{\" + \"name='\" + name + '\\'' + '}'; } } Snippet 1. The Prize class.\nOur Prize class is just a plain old Java object.\nHowever, our LuckyDipMachine class is slightly more interesting. Here are the characteristics of it\nIt has a private constructor. It has a static instance of itself. This is done as a class variable. A PropertyChangeSupport as a field to create an observable pattern. A pull method of the LuckyDipMachine indicating whenever the lucky dip machine has been pulled or used. When this happens, it will fire a property change done via calling the firePropertyChange method. package me.jianliew; import java.beans.PropertyChangeListener; import java.beans.PropertyChangeSupport; import java.util.*; public class LuckyDipMachine { private Map\u003cPrize, Integer\u003e inventory; private static LuckyDipMachine ourInstance = new LuckyDipMachine(); // PropertyChangeSupport is introduced here private PropertyChangeSupport support; public static LuckyDipMachine getInstance() { return ourInstance; } private LuckyDipMachine() { inventory = new HashMap\u003c\u003e(); support = new PropertyChangeSupport(this); fill(); } private void fill(){ Prize p1 = new Prize(\"Potato\"); Prize p2 = new Prize(\"Tomato\"); inventory.put(p1,2); inventory.put(p2,2); } public Prize getRandomPrize(){ List\u003cPrize\u003e keysAsArray = new ArrayList\u003c\u003e(inventory.keySet()); Random r = new Random(); return keysAsArray.get(r.nextInt(keysAsArray.size())); } public void pull(){ if (inventory.isEmpty()) return; Prize p = getRandomPrize(); inventory.computeIfPresent(p, (prize, integer) -\u003e inventory.get(prize) - 1); if(inventory.get(p) == 0){ inventory.remove(p); } support.firePropertyChange(\"prize\", \"\", p); } public int getInventorySize() { int sum = 0; for (Prize p : inventory.keySet()) sum += inventory.get(p); return sum; } public void addPropertyChangeListener(PropertyChangeListener pcl) { support.addPropertyChangeListener(pcl); } public void removePropertyChangeListener(PropertyChangeListener pcl) { support.removePropertyChangeListener(pcl); } @Override public String toString() { return \"LuckyDipMachine{\" + \"inventory=\" + inventory + '}'; } } We also have the Observer. The only thing that is needed in this class is for it to implement the PropertyChangeListener. I will also need to have an implementation for the propertyChange.\npackage me.jianliew; import java.beans.PropertyChangeEvent; import java.beans.PropertyChangeListener; import java.util.ArrayList; import java.util.List; // It is needed to implement the interface PropertyChangeListener public class Observer implements PropertyChangeListener { private List\u003cPrize\u003e observedPrizes; public Observer(){ observedPrizes = new ArrayList\u003c\u003e(); } @Override public void propertyChange(PropertyChangeEvent propertyChangeEvent) { Prize p = (Prize) propertyChangeEvent.getNewValue(); this.observedPrizes.add(p); System.out.println(toString()); } @Override public String toString() { return \"Observer{\" + \"observedPrizes=\" + observedPrizes + '}'; } } We can then have a simple Test class to see how it works.\rpackage me.jianliew; public class Test { public static void main(String[] args) { Observer o = new Observer(); LuckyDipMachine ldm = LuckyDipMachine.getInstance(); ldm.addPropertyChangeListener(o); System.out.println(ldm.getInventorySize()); ldm.pull(); ldm.pull(); ldm.pull(); LuckyDipMachine ldm2= LuckyDipMachine.getInstance(); System.out.println(ldm2.getInventorySize()); ldm2.pull(); System.out.println(ldm.getInventorySize()); } } The output of it would be as follows.\n// There will be 4 items at the start 4 // On the first pull a random item is returned. The observer observes it. Observer{observedPrizes=[Prize{name='Tomato'}]} // On the second pull, the observer now sees 2 items in total. Observer{observedPrizes=[Prize{name='Tomato'}, Prize{name='Potato'}]} // There will be three items on the third pull. Observer{observedPrizes=[Prize{name='Tomato'}, Prize{name='Potato'}, Prize{name='Tomato'}]} // The second instance of the LuckyDipMachine will still only have 1 item as the LuckyDipMachine is a singleton. 1 // The pull of the second lucky dip machine, still triggers a fire to the observer as it is a singleton. There is no need to register the listener again. Observer{observedPrizes=[Prize{name='Tomato'}, Prize{name='Potato'}, Prize{name='Tomato'}, Prize{name='Potato'}]} // At the end there will be nothing left in the machine. 0 Lessons from this blog post. It is very important to override both the equals and the hashCode when using maps. The Singleton design pattern have many different approaches. The approach which I have used here is the most simplistic approach and does have certain design concerns. Design is still very subjective matter as it is debatable to put the quantity field in the Prize class itself. The runtime to get a random item from a HashMap would depend on the implementation of it. Pygments and Chroma of the Hugo static website generator are both good but Chroma seems to look nice out of the box for my use case. PropertyChangeSupport is so much easier to use compare to the Observable interface class. computeIfPresent method is pretty cool as it uses a lambda like feature. References quantities, I. and L., E. (2019). Inventory of objects with item types and quantities. [online] Code Review Stack Exchange. Available at: https://codereview.stackexchange.com/questions/148821/inventory-of-objects-with-item-types-and-quantities [Accessed 3 Nov. 2019]. Baeldung. (2019). Singletons in Java | Baeldung. [online] Available at: https://www.baeldung.com/java-singleton [Accessed 3 Nov. 2019]. Baeldung. (2019). The Observer Pattern in Java | Baeldung. [online] Available at: https://www.baeldung.com/java-observer-pattern [Accessed 3 Nov. 2019]. ",
+  "wordCount" : "1013",
+  "inLanguage": "en",
+  "image":"https://jianloong.github.io/images/luckydip.png","datePublished": "2019-11-03T00:00:00Z",
+  "dateModified": "2019-11-03T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Jian"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jianloong.github.io/posts/singletonobserverpattern/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Jian",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jianloong.github.io/images/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://jianloong.github.io/" accesskey="h" title="Home (Alt + H)">
+                <img src="https://jianloong.github.io/apple-touch-icon.png" alt="" aria-label="logo"
+                    height="35">Home</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://jianloong.github.io/about/" title="about">
+                    <span>about</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/search/" title="search">
+                    <span>search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/tags/" title="tags">
+                    <span>tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/archives/" title="archives">
+                    <span>archives</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://jianloong.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://jianloong.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Singleton &amp; Observer Pattern (Java)
+    </h1>
+    <div class="post-meta"><span title='2019-11-03 00:00:00 +0000 UTC'>November 3, 2019</span>&nbsp;·&nbsp;Jian
+
+</div>
+  </header> 
+  <div class="post-content"><p>This blog post will demonstrate a simple use case  where the <strong>singleton</strong> and <strong>observable</strong> design pattern becomes important.</p>
+<p>Let&rsquo;s imagine if you are in the arcade and there is a Lucky Dip Machine. The reason I like call it the LuckyDipMachine is because it is one of the feature assignments in the Programming Foundation Units in Monash University and it is often times made fun at. However, the solution for assignment itself <strong>can be engineered to be better.</strong></p>
+<ul>
+<li>
+<p>There is <strong>only one</strong> Lucky Dip Machine in the arcade. This lucky dip machine has a limited number of items in its inventory. A <strong>singleton</strong> design pattern will be used to instantiate this class. The reason for a Singleton pattern is so that, there can only ever be one LuckyDipMachine. Multiple uses of the LuckyDipMachine will only deduct items from this instance.</p>
+</li>
+<li>
+<p>Everyone in the arcade can <strong>observe</strong> when the LuckyDipMachine is used. Whenever, a price is won, the observers would know what Prize has been won.</p>
+</li>
+</ul>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js" integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+      location.reload()
+  })
+
+  if (document.body.className.includes("dark")) {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'dark' })
+  } else {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'forest' })
+  }
+
+</script>
+
+
+
+<div class="mermaid" align="center" id="mermaid">
+    
+
+graph TD
+    A(LuckyDipMachine<br />Singleton)
+    B(ObserverOne)
+    C(ObserverTwo)
+    D(User)
+    B -- observes--> A
+    C -- observes--> A
+    D -- uses --> A
+    A --fire changes --> B
+    A --fire changes --> C
+
+</div>
+<p align="center">Fig 1. Flowchart Representation of the intended design </p>
+<p>We  start off by creating a really simple Prize class.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">me.jianliew</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Prize</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">Prize</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="k">this</span> <span class="o">==</span> <span class="n">o</span><span class="o">)</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">getClass</span><span class="o">()</span> <span class="o">!=</span> <span class="n">o</span><span class="o">.</span><span class="na">getClass</span><span class="o">())</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Prize</span> <span class="n">prize</span> <span class="o">=</span> <span class="o">(</span><span class="n">Prize</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">getName</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">prize</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">getName</span><span class="o">().</span><span class="na">hashCode</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34;Prize{&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                <span class="s">&#34;name=&#39;&#34;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="sc">&#39;\&#39;&#39;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                <span class="sc">&#39;}&#39;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p align="center">Snippet 1. The <strong> Prize</strong> class.</p>
+<p>Our Prize class is just a plain old Java object.</p>
+<p>However, our LuckyDipMachine class is slightly more interesting. Here are the characteristics of it</p>
+<ul>
+<li>It has a <strong>private</strong> constructor.</li>
+<li>It has a <strong>static</strong> instance of itself. This is done as a class variable.</li>
+<li>A <strong>PropertyChangeSupport</strong> as a field to create an observable pattern.</li>
+<li>A <strong>pull</strong> method of the LuckyDipMachine indicating whenever the lucky dip machine has been pulled or used. When this happens, it will fire a property change done via calling the <strong>firePropertyChange</strong> method.</li>
+</ul>
+<div></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">me.jianliew</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.beans.PropertyChangeListener</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.beans.PropertyChangeSupport</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LuckyDipMachine</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">Prize</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">inventory</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">static</span> <span class="n">LuckyDipMachine</span> <span class="n">ourInstance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LuckyDipMachine</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// PropertyChangeSupport is introduced here
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span> <span class="n">PropertyChangeSupport</span> <span class="n">support</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">LuckyDipMachine</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ourInstance</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="nf">LuckyDipMachine</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">inventory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">support</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PropertyChangeSupport</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fill</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">fill</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Prize</span> <span class="n">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Prize</span><span class="o">(</span><span class="s">&#34;Potato&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Prize</span> <span class="n">p2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Prize</span><span class="o">(</span><span class="s">&#34;Tomato&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">inventory</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">p1</span><span class="o">,</span><span class="n">2</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">inventory</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">p2</span><span class="o">,</span><span class="n">2</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Prize</span> <span class="nf">getRandomPrize</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">List</span><span class="o">&lt;</span><span class="n">Prize</span><span class="o">&gt;</span> <span class="n">keysAsArray</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">inventory</span><span class="o">.</span><span class="na">keySet</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Random</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">keysAsArray</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">r</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">keysAsArray</span><span class="o">.</span><span class="na">size</span><span class="o">()));</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">pull</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">inventory</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Prize</span> <span class="n">p</span> <span class="o">=</span> <span class="n">getRandomPrize</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">inventory</span><span class="o">.</span><span class="na">computeIfPresent</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="o">(</span><span class="n">prize</span><span class="o">,</span> <span class="n">integer</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">inventory</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">prize</span><span class="o">)</span> <span class="o">-</span>  <span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="o">(</span><span class="n">inventory</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">p</span><span class="o">)</span> <span class="o">==</span> <span class="n">0</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">inventory</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">support</span><span class="o">.</span><span class="na">firePropertyChange</span><span class="o">(</span><span class="s">&#34;prize&#34;</span><span class="o">,</span> <span class="s">&#34;&#34;</span><span class="o">,</span> <span class="n">p</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getInventorySize</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="n">Prize</span> <span class="n">p</span> <span class="o">:</span> <span class="n">inventory</span><span class="o">.</span><span class="na">keySet</span><span class="o">())</span> <span class="n">sum</span> <span class="o">+=</span> <span class="n">inventory</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sum</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addPropertyChangeListener</span><span class="o">(</span><span class="n">PropertyChangeListener</span> <span class="n">pcl</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">support</span><span class="o">.</span><span class="na">addPropertyChangeListener</span><span class="o">(</span><span class="n">pcl</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">removePropertyChangeListener</span><span class="o">(</span><span class="n">PropertyChangeListener</span> <span class="n">pcl</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">support</span><span class="o">.</span><span class="na">removePropertyChangeListener</span><span class="o">(</span><span class="n">pcl</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34;LuckyDipMachine{&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                <span class="s">&#34;inventory=&#34;</span> <span class="o">+</span> <span class="n">inventory</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                <span class="sc">&#39;}&#39;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><div></div>
+<p>We also have the Observer. The only thing that is needed in this class is for it to implement the <strong>PropertyChangeListener</strong>. I will also need to have an implementation for the <strong>propertyChange</strong>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">me.jianliew</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.beans.PropertyChangeEvent</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.beans.PropertyChangeListener</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// It is needed to implement the interface PropertyChangeListener
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Observer</span> <span class="kd">implements</span> <span class="n">PropertyChangeListener</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Prize</span><span class="o">&gt;</span> <span class="n">observedPrizes</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">Observer</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">observedPrizes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">propertyChange</span><span class="o">(</span><span class="n">PropertyChangeEvent</span> <span class="n">propertyChangeEvent</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Prize</span> <span class="n">p</span> <span class="o">=</span> <span class="o">(</span><span class="n">Prize</span><span class="o">)</span> <span class="n">propertyChangeEvent</span><span class="o">.</span><span class="na">getNewValue</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">observedPrizes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">toString</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34;Observer{&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                <span class="s">&#34;observedPrizes=&#34;</span> <span class="o">+</span> <span class="n">observedPrizes</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                <span class="sc">&#39;}&#39;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><div></div>
+We can then have a simple Test class to see how it works.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">me.jianliew</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Observer</span> <span class="n">o</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Observer</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">LuckyDipMachine</span> <span class="n">ldm</span> <span class="o">=</span> <span class="n">LuckyDipMachine</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ldm</span><span class="o">.</span><span class="na">addPropertyChangeListener</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ldm</span><span class="o">.</span><span class="na">getInventorySize</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ldm</span><span class="o">.</span><span class="na">pull</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ldm</span><span class="o">.</span><span class="na">pull</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ldm</span><span class="o">.</span><span class="na">pull</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">LuckyDipMachine</span> <span class="n">ldm2</span><span class="o">=</span> <span class="n">LuckyDipMachine</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ldm2</span><span class="o">.</span><span class="na">getInventorySize</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ldm2</span><span class="o">.</span><span class="na">pull</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ldm</span><span class="o">.</span><span class="na">getInventorySize</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>The output of it would be as follows.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">// There will be <span class="m">4</span> items at the start
+</span></span><span class="line"><span class="cl"><span class="m">4</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// On the first pull a random item is returned. The observer observes it.
+</span></span><span class="line"><span class="cl">Observer<span class="o">{</span><span class="nv">observedPrizes</span><span class="o">=[</span>Prize<span class="o">{</span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;Tomato&#39;</span><span class="o">}]}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// On the second pull, the observer now sees <span class="m">2</span> items in total.
+</span></span><span class="line"><span class="cl">Observer<span class="o">{</span><span class="nv">observedPrizes</span><span class="o">=[</span>Prize<span class="o">{</span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;Tomato&#39;</span><span class="o">}</span>, Prize<span class="o">{</span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;Potato&#39;</span><span class="o">}]}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// There will be three items on the third pull.
+</span></span><span class="line"><span class="cl">Observer<span class="o">{</span><span class="nv">observedPrizes</span><span class="o">=[</span>Prize<span class="o">{</span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;Tomato&#39;</span><span class="o">}</span>, Prize<span class="o">{</span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;Potato&#39;</span><span class="o">}</span>, Prize<span class="o">{</span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;Tomato&#39;</span><span class="o">}]}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// The second instance of the LuckyDipMachine will still only have <span class="m">1</span> item as the LuckyDipMachine is a singleton.
+</span></span><span class="line"><span class="cl"><span class="m">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// The pull of the second lucky dip machine, still triggers a fire to the observer as it is a singleton. There is no need to register the listener again.
+</span></span><span class="line"><span class="cl">Observer<span class="o">{</span><span class="nv">observedPrizes</span><span class="o">=[</span>Prize<span class="o">{</span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;Tomato&#39;</span><span class="o">}</span>, Prize<span class="o">{</span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;Potato&#39;</span><span class="o">}</span>, Prize<span class="o">{</span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;Tomato&#39;</span><span class="o">}</span>, Prize<span class="o">{</span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;Potato&#39;</span><span class="o">}]}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// At the end there will be nothing left in the machine.
+</span></span><span class="line"><span class="cl"><span class="m">0</span>
+</span></span></code></pre></div><h4 id="lessons-from-this-blog-post">Lessons from this blog post.<a hidden class="anchor" aria-hidden="true" href="#lessons-from-this-blog-post">#</a></h4>
+<ul>
+<li>It is very important to override both the <strong>equals</strong> and  the <strong>hashCode</strong> when using maps.</li>
+<li>The <strong>Singleton</strong> design pattern have many different approaches. The approach which I have used here is the most simplistic approach and does have certain design concerns.</li>
+<li>Design is still very subjective matter as it is debatable to put the <strong>quantity</strong> field in the Prize class itself.</li>
+<li>The runtime to get a random item from a HashMap would depend on the <strong>implementation</strong> of it.</li>
+<li><strong>Pygments</strong> and <strong>Chroma</strong> of the Hugo static website generator are both good but Chroma seems to look nice out of the box for my use case.</li>
+<li><strong>PropertyChangeSupport</strong> is so much easier to use compare to the <strong>Observable</strong> interface class.</li>
+<li><strong>computeIfPresent</strong> method is pretty cool as it uses a lambda like feature.</li>
+</ul>
+<h4 id="references">References<a hidden class="anchor" aria-hidden="true" href="#references">#</a></h4>
+<ol>
+<li>quantities, I. and L., E. (2019). Inventory of objects with item types and quantities. [online] Code Review Stack Exchange. Available at: <a href="https://codereview.stackexchange.com/questions/148821/inventory-of-objects-with-item-types-and-quantities">https://codereview.stackexchange.com/questions/148821/inventory-of-objects-with-item-types-and-quantities</a> [Accessed 3 Nov. 2019].</li>
+<li>Baeldung. (2019). Singletons in Java | Baeldung. [online] Available at: <a href="https://www.baeldung.com/java-singleton">https://www.baeldung.com/java-singleton</a> [Accessed 3 Nov. 2019].</li>
+<li>Baeldung. (2019). The Observer Pattern in Java | Baeldung. [online] Available at: <a href="https://www.baeldung.com/java-observer-pattern">https://www.baeldung.com/java-observer-pattern</a> [Accessed 3 Nov. 2019].</li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://jianloong.github.io/tags/java/">Java</a></li>
+      <li><a href="https://jianloong.github.io/tags/design-pattern/">Design Pattern</a></li>
+      <li><a href="https://jianloong.github.io/tags/singleton/">Singleton</a></li>
+      <li><a href="https://jianloong.github.io/tags/observer/">Observer</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://jianloong.github.io/posts/quick/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Simple reddit crawler for the /r/programming subreddit</span>
+  </a>
+  <a class="next" href="https://jianloong.github.io/posts/voronoi/">
+    <span class="title">Next »</span>
+    <br>
+    <span>k-Nearest Neighbour on Maps</span>
+  </a>
+</nav>
+
+  </footer><div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jianloonggithubio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://jianloong.github.io/">Jian</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
