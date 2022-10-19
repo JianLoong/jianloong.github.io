@@ -14,7 +14,7 @@ googleAnalytics: UA-55422968-1
 
 minify:
   disableXML: true
-  minifyOutput: true
+  minifyOutput: false
 
 # homeInfoParams:
 #   Title: "PaperModX"
