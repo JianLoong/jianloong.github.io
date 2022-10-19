@@ -1,7 +1,7 @@
 baseURL: "https://examplesite.com/"
 title: Jian
 paginate: 5
-theme: hugo-PaperModX
+theme: hugo-PaperMod
 
 enableRobotsTXT: true
 buildDrafts: false
@@ -15,6 +15,15 @@ googleAnalytics: UA-55422968-1
 minify:
   disableXML: true
   minifyOutput: false
+
+# homeInfoParams:
+#   Title: "PaperModX"
+#   Content: |
+#     Welcome to demo of hugo's theme PaperModX.
+#     - **PaperModX** is a simple but fast and responsive theme with useful feature-set that enhances UX.
+#     - PaperModX is based on theme [PaperMod](https://github.com/adityatelange/hugo-PaperMod).
+#     To get started, please head to the [Docs](docs).
+#     To see examples of different contents, head to [examples tag](tags/example).
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
@@ -68,8 +77,8 @@ params:
   profileMode:
     enabled: false # needs to be explicitly set
     title: Jian
-    subtitle: "This is subtitle"
-    imageUrl: "<img location>"
+    subtitle: ""
+    imageUrl: "/images/profile.jpg"
     imageWidth: 120
     imageHeight: 120
     imageTitle: my image
@@ -88,7 +97,7 @@ params:
     - name: github
       url: "https://github.com/JianLoong"
     - name: linkedin
-      url: "https://au.linkedin.com/in/jian-loong-liew-0433ab39"
+      url: "https://www.linkedin.com/in/jian-liew-0433ab39/"
 
   analytics:
     google:
@@ -148,4 +157,8 @@ outputs:
     - HTML
     - RSS
     - JSON # is necessary
-
+    
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
