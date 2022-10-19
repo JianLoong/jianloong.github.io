@@ -57,6 +57,9 @@ This post is heavily inspired based on this [website](https://github.com/subprot
     </div>
 </div>
 
+
+<p></p>
+
 ## Lessons from this post
 
 - The web worker is often times cached for a longer period in production/live environments. Users would have a better experience if it is not required for them to do a hard refresh on the browsers. One easy way is to use the best practice to load the web worker in the head. Others suggested to versioning web-workers.
@@ -69,7 +72,9 @@ This post is heavily inspired based on this [website](https://github.com/subprot
 
 - Designing an encoding is very important. For example, in a knapsack problem there are only two choices. So, each item can either be true or false.
 
-#### References
+<p></p>
+
+## References
 
 1. [Python Easy GA](https://pypi.org/project/pyeasyga/)
 

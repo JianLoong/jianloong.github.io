@@ -14,7 +14,7 @@ googleAnalytics: UA-55422968-1
 
 minify:
   disableXML: true
-  minifyOutput: false
+  minifyOutput: true
 
 # homeInfoParams:
 #   Title: "PaperModX"
@@ -65,8 +65,8 @@ params:
     favicon: "/images/favicon.ico"
     favicon16x16: "<link / abs url>"
     favicon32x32: "<link / abs url>"
-    apple_touch_icon: "<link / abs url>"
-    safari_pinned_tab: "<link / abs url>"
+    apple_touch_icon: "/images/favicon.ico"
+    safari_pinned_tab: "/images/favicon.ico"
 
   label:
     text: "Home"
