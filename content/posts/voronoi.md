@@ -11,9 +11,7 @@ cover:
 <script src="https://unpkg.com/d3@5.12.0/dist/d3.min.js"></script>
 <script src="/posts/d3-delaunday.min.js"></script>
 
-
 One of the most common query when working with maps is the nearest neighbour query. This blog post will use Voronoi Diagrams to explain more regarding the nearest neighbour query.
-
 
 Below is an example of a Voronoi diagram generated using d3.js. One of the good use case of a voronoi diagram in real life applications would be where would be **finding a place to build emergency services.** This place should have the most number of neighbouring regions. For example, if you `click` on the region in the voronoi diagram below, you can see how many regions in which it would consider this region to be its neighbour. The diagram is randomly generated based on a number of points and thus every refresh of this page will show a different voronoi diagram.
 
@@ -29,16 +27,13 @@ The codes to create this diagram are as follows :-
 const createVoronoi = () => {
   const width = 600;
   const height = 600;
-  const vertices = d3.range(30).map(function(d) {
+  const vertices = d3.range(30).map(function (d) {
     return [Math.random() * width, Math.random() * height];
   });
 
   const delaunay = d3.Delaunay.from(vertices);
   const voronoi = delaunay.voronoi([0, 0, width, height]);
-  let svg = d3
-    .select("#canvas")
-    .append("svg")
-    .attr("viewBox", `0 0 600 600`);
+  let svg = d3.select("#canvas").append("svg").attr("viewBox", `0 0 600 600`);
 
   const mesh = svg
     .append("path")
@@ -84,17 +79,17 @@ const queryExample = () => {
     [39, 104],
     [32, 96],
     [47, 122],
-    [42, 71]
+    [42, 71],
   ];
 
   // Function to transform the points so that it would work on the grid
-  const transform = point => {
+  const transform = (point) => {
     return [(point[0] / 90) * 500, (point[1] / 180) * 500];
   };
 
   let transformed = [];
 
-  points.forEach(element => {
+  points.forEach((element) => {
     transformed.push(transform(element));
   });
 
@@ -111,10 +106,7 @@ const drawVoronoi = (id, vertices, color) => {
 
   const delaunay = d3.Delaunay.from(vertices);
   const voronoi = delaunay.voronoi([0, 0, width, height]);
-  let svg = d3
-    .select(id)
-    .append("svg")
-    .attr("viewBox", `0 0 500 500`);
+  let svg = d3.select(id).append("svg").attr("viewBox", `0 0 500 500`);
 
   const mesh = svg
     .append("path")
@@ -165,7 +157,13 @@ const renderCell = (svg, voronoi, index, color) => {
 
 <!-- https://bl.ocks.org/aaizemberg/raw/8063f8c2d1adb7c7ee68/ -->
 <!-- https://observablehq.com/@d3/circle-dragging-iii?collection=@d3/d3-delaunay -->
+
 <script>
+
+document.getElementById("theme-toggle").addEventListener("click", () => {
+    location.reload()
+})
+
 
 const queryExample = () => {
     
@@ -338,12 +336,20 @@ const drawVoronoiWithPoints = (id, noOfPoints) => {
 
     svg.on("click", function() {
         var coords = d3.mouse(this);
+        var color = "white"
+        if (document.body.className.includes("dark")) {
+          color = "dark"
+        } else {
+          color = "white"
+        }
         //mesh();
         if (selected != undefined){
-            renderCell(svg, voronoi, selected, "white"); 
+            // Determine theme colour
+
+            renderCell(svg, voronoi, selected, color); 
             
             for (const iterator of delaunay.neighbors(selected)) 
-                renderCell(svg, voronoi, iterator, "white");
+                renderCell(svg, voronoi, iterator, color);
             selected = undefined;
         }
 

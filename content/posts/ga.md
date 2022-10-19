@@ -1,5 +1,5 @@
 ---
-title: "Genetic Algorithm"
+title: "Genetic Algorithm using Web Workers"
 date: 2019-10-19
 tags: ["Genetic Algorithm", "Selection", "Cross Over", "Phrase Solver"]
 ShowReadingTime: true
@@ -12,7 +12,7 @@ UseHugoToc: true
 
 This post is a simple implementation of <strong>Genetic Algorithm GA.</strong> Here, you would start with a random string and end up with the target string.
 
-This post is heavily inspired based on this [website](https://github.com/subprotocol/genetic-js). However, I created the codes with a very different methodology to also include newer JavaScript methods like using classes and etc.
+This post is heavily inspired based on this [website](https://github.com/subprotocol/genetic-js). However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it run behind the scenes.
 
 <div>
 <label for="crossOver">Cross Over Method</label> 
@@ -168,3 +168,5 @@ h4#lessons-from-this-post{
 .table-wrapper-scroll-y.my-custom-scrollbar{
   height: 35rem;
 }
+
+</style>
