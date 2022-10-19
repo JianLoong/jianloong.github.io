@@ -91,7 +91,8 @@ The distance matrix here is obtained by calculating the distance between each po
         <option value="rouletteWheel">Roulette Wheel</option>
       </select>
     </div>
-    <strong>Please click run to see the results based on different cross over and selection methods.</strong>
+    <p></p>
+    <strong>Please click run to see the results based on different cross over and selection methods. You can repeat this for different methodologies</strong>
     <p></p>
     <button type="button" id="run" class="hvr-sweep-to-right">Run</button>
     <br />

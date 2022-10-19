@@ -1,7 +1,10 @@
 ---
-title: "Promise All"
+title: "JavaScript Promise All - Parsing Hackernews Stories using Promise.all"
 date: 2019-10-25
 tags: ["JavaScript", "Promise", "API"]
+cover:
+  image: "/images/network.png"
+
 ---
 
 
@@ -10,9 +13,62 @@ This post is a an entry to describe a use case when the Promise.all JavaScript m
 
 Before we start, there is a need to understand how certain RESTful services are structured. For example, the Hacker News API has the end point called **topstories**. This end point however, does not contain any other information besides a list of item IDs. So, if you would like to obtain the top 10 post including their **title**, there would be a need to do several GET request to fetch them all.
 
-```javascript
+The output of 
+
+```shell
 curl https://hacker-news.firebaseio.com/v0/topstories.json"
 ```
+
+is
+
+```json
+[
+    33256378,
+    33259379,
+    33256446,
+    33257197,
+    33249215,
+    33254791,
+    33251954,
+    33257300,
+    33244819,
+    33228387,
+    33247681,
+    . . . 
+```
+
+These list of IDs will then be used to obtain more information from a different end point.
+
+```shell
+curl https://hacker-news.firebaseio.com/v0/item/33257197.json
+```
+
+which would yield
+
+```json
+{
+    "by": "walterbell",
+    "descendants": 52,
+    "id": 33257197,
+    "kids": [
+        33257610,
+        33257643,
+        33259365,
+        33257485,
+        33258257,
+        33258605,
+        33257772,
+        33257557
+    ],
+    "score": 110,
+    "time": 1666149822,
+    "title": "IDA cybersecurity software provider Hex-Rays acquired",
+    "type": "story",
+    "url": "https://smartfinvc.com/news/smartfin-acquires-leading-cybersecurity-software-provider-hex-rays-together-with-sfpim-and-sriw/"
+}
+
+```
+
 
 ### Flowchart Representation
 
@@ -76,8 +132,22 @@ const topStories = () => getTopStoriesId().then((result) => {
 });
 
 ```
-
 <p align="center">Code Example of the <strong>Promise.all</strong> </p>
+
+
+In order to see it in action, you can copy and paste it on the browser console to see how it works.
+
+
+
+
+{{< figure src="/images/console.png" title="" >}}
+
+{{< figure src="/images/network.png" title="" >}}
+
+{{< figure src="/images/pending.png" title="" >}}
+
+
+
 
 
 
@@ -100,28 +170,28 @@ const topStories = () => getTopStoriesId().then((result) => {
 
 
 <script>
-const getTopStoriesId = () => {
-  let endPoint = "https://hacker-news.firebaseio.com/v0/topstories.json";
-  return fetch(endPoint, {
-    mode: "cors"
-  }).then((response) => response.json());
-};
+// const getTopStoriesId = () => {
+//   let endPoint = "https://hacker-news.firebaseio.com/v0/topstories.json";
+//   return fetch(endPoint, {
+//     mode: "cors"
+//   }).then((response) => response.json());
+// };
 
-const getItem = (itemNumber) => {
-  let endPoint = "//hacker-news.firebaseio.com/v0/item/" + itemNumber + ".json";
-  return fetch(endPoint, {
-    mode: "cors"
-  }).then((response) => response.json());
-}
+// const getItem = (itemNumber) => {
+//   let endPoint = "//hacker-news.firebaseio.com/v0/item/" + itemNumber + ".json";
+//   return fetch(endPoint, {
+//     mode: "cors"
+//   }).then((response) => response.json());
+// }
 
-const topStories = () => getTopStoriesId().then((result) => {
-    let promiseArray = [];
-    result.forEach((element) => {
-      promiseArray.push(getItem(element));
-    });
+// const topStories = () => getTopStoriesId().then((result) => {
+//     let promiseArray = [];
+//     result.forEach((element) => {
+//       promiseArray.push(getItem(element));
+//     });
 
-    return Promise.all(promiseArray);
-});
+//     return Promise.all(promiseArray);
+// });
 
 // const stories = topStories().then((result) => {
 //   let titleStrings = "";
