@@ -2,110 +2,128 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://examplesite.com/tags/aws/</loc>
+    <loc>https://jianloong.github.io/tags/aws/</loc>
     <lastmod>2022-10-18T21:30:56+11:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/crawler/</loc>
+    <loc>https://jianloong.github.io/tags/crawler/</loc>
     <lastmod>2022-10-18T21:30:56+11:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/</loc>
+    <loc>https://jianloong.github.io/</loc>
     <lastmod>2022-10-18T21:30:56+11:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/posts/</loc>
+    <loc>https://jianloong.github.io/posts/</loc>
     <lastmod>2022-10-18T21:30:56+11:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/reddit/</loc>
+    <loc>https://jianloong.github.io/tags/reddit/</loc>
     <lastmod>2022-10-18T21:30:56+11:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/posts/quick/</loc>
+    <loc>https://jianloong.github.io/posts/quick/</loc>
     <lastmod>2022-10-18T21:30:56+11:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/</loc>
+    <loc>https://jianloong.github.io/tags/</loc>
     <lastmod>2022-10-18T21:30:56+11:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/design-pattern/</loc>
+    <loc>https://jianloong.github.io/tags/extensions/</loc>
+    <lastmod>2022-10-18T14:22:00+11:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/tags/productivity/</loc>
+    <lastmod>2022-10-18T14:22:00+11:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/posts/vscodeaddons/</loc>
+    <lastmod>2022-10-18T14:22:00+11:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/tags/vscode/</loc>
+    <lastmod>2022-10-18T14:22:00+11:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/posts/redditcrawler/</loc>
+    <lastmod>2022-10-17T21:30:56+11:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/posts/pihole/</loc>
+    <lastmod>2022-10-17T21:30:56+11:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/tags/design-pattern/</loc>
     <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/java/</loc>
+    <loc>https://jianloong.github.io/tags/java/</loc>
     <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/observer/</loc>
+    <loc>https://jianloong.github.io/tags/observer/</loc>
     <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/singleton/</loc>
+    <loc>https://jianloong.github.io/tags/singleton/</loc>
     <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/posts/singletonobserverpattern/</loc>
+    <loc>https://jianloong.github.io/posts/singletonobserverpattern/</loc>
     <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/posts/voronoi/</loc>
+    <loc>https://jianloong.github.io/posts/voronoi/</loc>
     <lastmod>2019-10-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/maps/</loc>
+    <loc>https://jianloong.github.io/tags/maps/</loc>
     <lastmod>2019-10-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/nearest-neighbour/</loc>
+    <loc>https://jianloong.github.io/tags/nearest-neighbour/</loc>
     <lastmod>2019-10-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/voronoi/</loc>
+    <loc>https://jianloong.github.io/tags/voronoi/</loc>
     <lastmod>2019-10-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/api/</loc>
+    <loc>https://jianloong.github.io/tags/api/</loc>
     <lastmod>2019-10-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/javascript/</loc>
+    <loc>https://jianloong.github.io/tags/javascript/</loc>
     <lastmod>2019-10-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/posts/promiseall/</loc>
+    <loc>https://jianloong.github.io/posts/promiseall/</loc>
     <lastmod>2019-10-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/promise/</loc>
+    <loc>https://jianloong.github.io/tags/promise/</loc>
     <lastmod>2019-10-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/cross-over/</loc>
+    <loc>https://jianloong.github.io/tags/cross-over/</loc>
     <lastmod>2019-10-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/genetic-algorithm/</loc>
+    <loc>https://jianloong.github.io/tags/genetic-algorithm/</loc>
     <lastmod>2019-10-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/selection/</loc>
+    <loc>https://jianloong.github.io/tags/selection/</loc>
     <lastmod>2019-10-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/posts/tsp/</loc>
+    <loc>https://jianloong.github.io/posts/tsp/</loc>
     <lastmod>2019-10-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/tsp/</loc>
+    <loc>https://jianloong.github.io/tags/tsp/</loc>
     <lastmod>2019-10-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/posts/ga/</loc>
+    <loc>https://jianloong.github.io/posts/ga/</loc>
     <lastmod>2019-10-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/phrase-solver/</loc>
+    <loc>https://jianloong.github.io/tags/phrase-solver/</loc>
     <lastmod>2019-10-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/chart/</loc>
+    <loc>https://jianloong.github.io/tags/chart/</loc>
     <lastmod>2019-10-13T20:56:02+11:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/hong-kong/</loc>
+    <loc>https://jianloong.github.io/tags/hong-kong/</loc>
     <lastmod>2019-10-13T20:56:02+11:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/percentage/</loc>
+    <loc>https://jianloong.github.io/tags/percentage/</loc>
     <lastmod>2019-10-13T20:56:02+11:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/posts/hk/</loc>
+    <loc>https://jianloong.github.io/posts/hk/</loc>
     <lastmod>2019-10-13T20:56:02+11:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/tags/visualisation/</loc>
+    <loc>https://jianloong.github.io/tags/visualisation/</loc>
     <lastmod>2019-10-13T20:56:02+11:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/posts/programmming/</loc>
+    <loc>https://jianloong.github.io/posts/programmming/</loc>
     <lastmod>2019-10-12T20:56:02+11:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/posts/amitheasshole/</loc>
+    <loc>https://jianloong.github.io/posts/amitheasshole/</loc>
     <lastmod>2019-10-09T20:56:02+11:00</lastmod>
   </url><url>
-    <loc>https://examplesite.com/about/</loc>
+    <loc>https://jianloong.github.io/about/</loc>
   </url><url>
-    <loc>https://examplesite.com/categories/</loc>
+    <loc>https://jianloong.github.io/categories/</loc>
   </url>
 </urlset>

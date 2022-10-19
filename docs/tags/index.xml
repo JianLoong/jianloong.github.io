@@ -2,209 +2,236 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on Jian</title>
-    <link>https://examplesite.com/tags/</link>
+    <link>https://jianloong.github.io/tags/</link>
     <description>Recent content in Tags on Jian</description>
     <image>
-      <url>https://examplesite.com/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://examplesite.com/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://jianloong.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://jianloong.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 18 Oct 2022 21:30:56 +1100</lastBuildDate><atom:link href="https://examplesite.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 Oct 2022 21:30:56 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>aws</title>
-      <link>https://examplesite.com/tags/aws/</link>
+      <link>https://jianloong.github.io/tags/aws/</link>
       <pubDate>Tue, 18 Oct 2022 21:30:56 +1100</pubDate>
       
-      <guid>https://examplesite.com/tags/aws/</guid>
+      <guid>https://jianloong.github.io/tags/aws/</guid>
       <description></description>
     </item>
     
     <item>
       <title>crawler</title>
-      <link>https://examplesite.com/tags/crawler/</link>
+      <link>https://jianloong.github.io/tags/crawler/</link>
       <pubDate>Tue, 18 Oct 2022 21:30:56 +1100</pubDate>
       
-      <guid>https://examplesite.com/tags/crawler/</guid>
+      <guid>https://jianloong.github.io/tags/crawler/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Reddit</title>
-      <link>https://examplesite.com/tags/reddit/</link>
+      <link>https://jianloong.github.io/tags/reddit/</link>
       <pubDate>Tue, 18 Oct 2022 21:30:56 +1100</pubDate>
       
-      <guid>https://examplesite.com/tags/reddit/</guid>
+      <guid>https://jianloong.github.io/tags/reddit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>extensions</title>
+      <link>https://jianloong.github.io/tags/extensions/</link>
+      <pubDate>Tue, 18 Oct 2022 14:22:00 +1100</pubDate>
+      
+      <guid>https://jianloong.github.io/tags/extensions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>productivity</title>
+      <link>https://jianloong.github.io/tags/productivity/</link>
+      <pubDate>Tue, 18 Oct 2022 14:22:00 +1100</pubDate>
+      
+      <guid>https://jianloong.github.io/tags/productivity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vscode</title>
+      <link>https://jianloong.github.io/tags/vscode/</link>
+      <pubDate>Tue, 18 Oct 2022 14:22:00 +1100</pubDate>
+      
+      <guid>https://jianloong.github.io/tags/vscode/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Design Pattern</title>
-      <link>https://examplesite.com/tags/design-pattern/</link>
+      <link>https://jianloong.github.io/tags/design-pattern/</link>
       <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://examplesite.com/tags/design-pattern/</guid>
+      <guid>https://jianloong.github.io/tags/design-pattern/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Java</title>
-      <link>https://examplesite.com/tags/java/</link>
+      <link>https://jianloong.github.io/tags/java/</link>
       <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://examplesite.com/tags/java/</guid>
+      <guid>https://jianloong.github.io/tags/java/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Observer</title>
-      <link>https://examplesite.com/tags/observer/</link>
+      <link>https://jianloong.github.io/tags/observer/</link>
       <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://examplesite.com/tags/observer/</guid>
+      <guid>https://jianloong.github.io/tags/observer/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Singleton</title>
-      <link>https://examplesite.com/tags/singleton/</link>
+      <link>https://jianloong.github.io/tags/singleton/</link>
       <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://examplesite.com/tags/singleton/</guid>
+      <guid>https://jianloong.github.io/tags/singleton/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Maps</title>
-      <link>https://examplesite.com/tags/maps/</link>
+      <link>https://jianloong.github.io/tags/maps/</link>
       <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://examplesite.com/tags/maps/</guid>
+      <guid>https://jianloong.github.io/tags/maps/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Nearest Neighbour</title>
-      <link>https://examplesite.com/tags/nearest-neighbour/</link>
+      <link>https://jianloong.github.io/tags/nearest-neighbour/</link>
       <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://examplesite.com/tags/nearest-neighbour/</guid>
+      <guid>https://jianloong.github.io/tags/nearest-neighbour/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Voronoi</title>
-      <link>https://examplesite.com/tags/voronoi/</link>
+      <link>https://jianloong.github.io/tags/voronoi/</link>
       <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://examplesite.com/tags/voronoi/</guid>
+      <guid>https://jianloong.github.io/tags/voronoi/</guid>
       <description></description>
     </item>
     
     <item>
       <title>API</title>
-      <link>https://examplesite.com/tags/api/</link>
+      <link>https://jianloong.github.io/tags/api/</link>
       <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://examplesite.com/tags/api/</guid>
+      <guid>https://jianloong.github.io/tags/api/</guid>
       <description></description>
     </item>
     
     <item>
       <title>JavaScript</title>
-      <link>https://examplesite.com/tags/javascript/</link>
+      <link>https://jianloong.github.io/tags/javascript/</link>
       <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://examplesite.com/tags/javascript/</guid>
+      <guid>https://jianloong.github.io/tags/javascript/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Promise</title>
-      <link>https://examplesite.com/tags/promise/</link>
+      <link>https://jianloong.github.io/tags/promise/</link>
       <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://examplesite.com/tags/promise/</guid>
+      <guid>https://jianloong.github.io/tags/promise/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Cross Over</title>
-      <link>https://examplesite.com/tags/cross-over/</link>
+      <link>https://jianloong.github.io/tags/cross-over/</link>
       <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://examplesite.com/tags/cross-over/</guid>
+      <guid>https://jianloong.github.io/tags/cross-over/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Genetic Algorithm</title>
-      <link>https://examplesite.com/tags/genetic-algorithm/</link>
+      <link>https://jianloong.github.io/tags/genetic-algorithm/</link>
       <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://examplesite.com/tags/genetic-algorithm/</guid>
+      <guid>https://jianloong.github.io/tags/genetic-algorithm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Selection</title>
-      <link>https://examplesite.com/tags/selection/</link>
+      <link>https://jianloong.github.io/tags/selection/</link>
       <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://examplesite.com/tags/selection/</guid>
+      <guid>https://jianloong.github.io/tags/selection/</guid>
       <description></description>
     </item>
     
     <item>
       <title>TSP</title>
-      <link>https://examplesite.com/tags/tsp/</link>
+      <link>https://jianloong.github.io/tags/tsp/</link>
       <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://examplesite.com/tags/tsp/</guid>
+      <guid>https://jianloong.github.io/tags/tsp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Phrase Solver</title>
-      <link>https://examplesite.com/tags/phrase-solver/</link>
+      <link>https://jianloong.github.io/tags/phrase-solver/</link>
       <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://examplesite.com/tags/phrase-solver/</guid>
+      <guid>https://jianloong.github.io/tags/phrase-solver/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Chart</title>
-      <link>https://examplesite.com/tags/chart/</link>
+      <link>https://jianloong.github.io/tags/chart/</link>
       <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://examplesite.com/tags/chart/</guid>
+      <guid>https://jianloong.github.io/tags/chart/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hong Kong</title>
-      <link>https://examplesite.com/tags/hong-kong/</link>
+      <link>https://jianloong.github.io/tags/hong-kong/</link>
       <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://examplesite.com/tags/hong-kong/</guid>
+      <guid>https://jianloong.github.io/tags/hong-kong/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Percentage</title>
-      <link>https://examplesite.com/tags/percentage/</link>
+      <link>https://jianloong.github.io/tags/percentage/</link>
       <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://examplesite.com/tags/percentage/</guid>
+      <guid>https://jianloong.github.io/tags/percentage/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Visualisation</title>
-      <link>https://examplesite.com/tags/visualisation/</link>
+      <link>https://jianloong.github.io/tags/visualisation/</link>
       <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://examplesite.com/tags/visualisation/</guid>
+      <guid>https://jianloong.github.io/tags/visualisation/</guid>
       <description></description>
     </item>
     

@@ -2,20 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>aws on Jian</title>
-    <link>https://examplesite.com/tags/aws/</link>
+    <link>https://jianloong.github.io/tags/aws/</link>
     <description>Recent content in aws on Jian</description>
     <image>
-      <url>https://examplesite.com/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://examplesite.com/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://jianloong.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://jianloong.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 18 Oct 2022 21:30:56 +1100</lastBuildDate><atom:link href="https://examplesite.com/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 Oct 2022 21:30:56 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Simple reddit crawler for the /r/programming subreddit</title>
-      <link>https://examplesite.com/posts/quick/</link>
+      <link>https://jianloong.github.io/posts/quick/</link>
       <pubDate>Tue, 18 Oct 2022 21:30:56 +1100</pubDate>
       
-      <guid>https://examplesite.com/posts/quick/</guid>
+      <guid>https://jianloong.github.io/posts/quick/</guid>
+      <description>An educational approach to crawling Reddit using Python and AWS EC2 without using Reddit API</description>
+    </item>
+    
+    <item>
+      <title>Crawling Reddit using Python and AWS EC2 - Part 1</title>
+      <link>https://jianloong.github.io/posts/redditcrawler/</link>
+      <pubDate>Mon, 17 Oct 2022 21:30:56 +1100</pubDate>
+      
+      <guid>https://jianloong.github.io/posts/redditcrawler/</guid>
+      <description>An educational approach to crawling Reddit using Python and AWS EC2 without using Reddit API</description>
+    </item>
+    
+    <item>
+      <title>Setting up PiHole as an ad blocker</title>
+      <link>https://jianloong.github.io/posts/pihole/</link>
+      <pubDate>Mon, 17 Oct 2022 21:30:56 +1100</pubDate>
+      
+      <guid>https://jianloong.github.io/posts/pihole/</guid>
       <description>An educational approach to crawling Reddit using Python and AWS EC2 without using Reddit API</description>
     </item>
     
