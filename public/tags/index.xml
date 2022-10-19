@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tags on Jian</title>
+    <link>https://examplesite.com/tags/</link>
+    <description>Recent content in Tags on Jian</description>
+    <image>
+      <url>https://examplesite.com/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://examplesite.com/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 18 Oct 2022 21:30:56 +1100</lastBuildDate><atom:link href="https://examplesite.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>aws</title>
+      <link>https://examplesite.com/tags/aws/</link>
+      <pubDate>Tue, 18 Oct 2022 21:30:56 +1100</pubDate>
+      
+      <guid>https://examplesite.com/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>crawler</title>
+      <link>https://examplesite.com/tags/crawler/</link>
+      <pubDate>Tue, 18 Oct 2022 21:30:56 +1100</pubDate>
+      
+      <guid>https://examplesite.com/tags/crawler/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reddit</title>
+      <link>https://examplesite.com/tags/reddit/</link>
+      <pubDate>Tue, 18 Oct 2022 21:30:56 +1100</pubDate>
+      
+      <guid>https://examplesite.com/tags/reddit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Design Pattern</title>
+      <link>https://examplesite.com/tags/design-pattern/</link>
+      <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://examplesite.com/tags/design-pattern/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>https://examplesite.com/tags/java/</link>
+      <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://examplesite.com/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Observer</title>
+      <link>https://examplesite.com/tags/observer/</link>
+      <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://examplesite.com/tags/observer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Singleton</title>
+      <link>https://examplesite.com/tags/singleton/</link>
+      <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://examplesite.com/tags/singleton/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Maps</title>
+      <link>https://examplesite.com/tags/maps/</link>
+      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://examplesite.com/tags/maps/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nearest Neighbour</title>
+      <link>https://examplesite.com/tags/nearest-neighbour/</link>
+      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://examplesite.com/tags/nearest-neighbour/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Voronoi</title>
+      <link>https://examplesite.com/tags/voronoi/</link>
+      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://examplesite.com/tags/voronoi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>API</title>
+      <link>https://examplesite.com/tags/api/</link>
+      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://examplesite.com/tags/api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JavaScript</title>
+      <link>https://examplesite.com/tags/javascript/</link>
+      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://examplesite.com/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Promise</title>
+      <link>https://examplesite.com/tags/promise/</link>
+      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://examplesite.com/tags/promise/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cross Over</title>
+      <link>https://examplesite.com/tags/cross-over/</link>
+      <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://examplesite.com/tags/cross-over/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Genetic Algorithm</title>
+      <link>https://examplesite.com/tags/genetic-algorithm/</link>
+      <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://examplesite.com/tags/genetic-algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Selection</title>
+      <link>https://examplesite.com/tags/selection/</link>
+      <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://examplesite.com/tags/selection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>TSP</title>
+      <link>https://examplesite.com/tags/tsp/</link>
+      <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://examplesite.com/tags/tsp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Phrase Solver</title>
+      <link>https://examplesite.com/tags/phrase-solver/</link>
+      <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://examplesite.com/tags/phrase-solver/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Chart</title>
+      <link>https://examplesite.com/tags/chart/</link>
+      <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
+      
+      <guid>https://examplesite.com/tags/chart/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hong Kong</title>
+      <link>https://examplesite.com/tags/hong-kong/</link>
+      <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
+      
+      <guid>https://examplesite.com/tags/hong-kong/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Percentage</title>
+      <link>https://examplesite.com/tags/percentage/</link>
+      <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
+      
+      <guid>https://examplesite.com/tags/percentage/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Visualisation</title>
+      <link>https://examplesite.com/tags/visualisation/</link>
+      <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
+      
+      <guid>https://examplesite.com/tags/visualisation/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

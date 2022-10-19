@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Java on Jian</title>
+    <link>https://examplesite.com/tags/java/</link>
+    <description>Recent content in Java on Jian</description>
+    <image>
+      <url>https://examplesite.com/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://examplesite.com/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 03 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://examplesite.com/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Singleton &amp; Observer Pattern (Java)</title>
+      <link>https://examplesite.com/posts/singletonobserverpattern/</link>
+      <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://examplesite.com/posts/singletonobserverpattern/</guid>
+      <description>This blog post will demonstrate a simple use case where the singleton and observable design pattern becomes important.
+Let&amp;rsquo;s imagine if you are in the arcade and there is a Lucky Dip Machine. The reason I like call it the LuckyDipMachine is because it is one of the feature assignments in the Programming Foundation Units in Monash University and it is often times made fun at. However, the solution for assignment itself can be engineered to be better.</description>
+    </item>
+    
+  </channel>
+</rss>
