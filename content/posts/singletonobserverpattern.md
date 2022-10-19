@@ -2,6 +2,8 @@
 title: "Singleton & Observer Pattern (Java)"
 date: 2019-11-03
 tags: ["Java", "Design Pattern", "Singleton", "Observer"]
+cover:
+  image: "/images/luckydip.png"
 ---
 
 
@@ -19,7 +21,7 @@ Let's imagine if you are in the arcade and there is a Lucky Dip Machine. The rea
 graph TD
     A(LuckyDipMachine<br />Singleton)
     B(ObserverOne)
-    C(ObserverTWo)
+    C(ObserverTwo)
     D(User)
     B -- observes--> A
     C -- observes--> A

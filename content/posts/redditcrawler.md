@@ -12,6 +12,7 @@ tags: ["reddit", "crawler", "aws"]
 cover:
   image: "/images/crawler.png"
 hasMermaid: true
+draft: true
 ---
 
 ## Objective
