@@ -20,24 +20,6 @@
     </item>
     
     <item>
-      <title>Crawling Reddit using Python and AWS EC2 - Part 1</title>
-      <link>https://jianloong.github.io/posts/redditcrawler/</link>
-      <pubDate>Mon, 17 Oct 2022 21:30:56 +1100</pubDate>
-      
-      <guid>https://jianloong.github.io/posts/redditcrawler/</guid>
-      <description>An educational approach to crawling Reddit using Python and AWS EC2 without using Reddit API</description>
-    </item>
-    
-    <item>
-      <title>Setting up PiHole as an ad blocker</title>
-      <link>https://jianloong.github.io/posts/pihole/</link>
-      <pubDate>Mon, 17 Oct 2022 21:30:56 +1100</pubDate>
-      
-      <guid>https://jianloong.github.io/posts/pihole/</guid>
-      <description>An educational approach to crawling Reddit using Python and AWS EC2 without using Reddit API</description>
-    </item>
-    
-    <item>
       <title>Sentiment analysis for the subreddit Hong Kong</title>
       <link>https://jianloong.github.io/posts/hk/</link>
       <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>

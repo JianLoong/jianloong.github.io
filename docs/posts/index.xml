@@ -20,35 +20,6 @@
     </item>
     
     <item>
-      <title>Visual Studio Code extensions</title>
-      <link>https://jianloong.github.io/posts/vscodeaddons/</link>
-      <pubDate>Tue, 18 Oct 2022 14:22:00 +1100</pubDate>
-      
-      <guid>https://jianloong.github.io/posts/vscodeaddons/</guid>
-      <description>Here are some of the extensions I use on my Vscode.
-Peacock This might be a weird extension for some but over time, for me, it increases productivity.
-Remote - SSH</description>
-    </item>
-    
-    <item>
-      <title>Crawling Reddit using Python and AWS EC2 - Part 1</title>
-      <link>https://jianloong.github.io/posts/redditcrawler/</link>
-      <pubDate>Mon, 17 Oct 2022 21:30:56 +1100</pubDate>
-      
-      <guid>https://jianloong.github.io/posts/redditcrawler/</guid>
-      <description>An educational approach to crawling Reddit using Python and AWS EC2 without using Reddit API</description>
-    </item>
-    
-    <item>
-      <title>Setting up PiHole as an ad blocker</title>
-      <link>https://jianloong.github.io/posts/pihole/</link>
-      <pubDate>Mon, 17 Oct 2022 21:30:56 +1100</pubDate>
-      
-      <guid>https://jianloong.github.io/posts/pihole/</guid>
-      <description>An educational approach to crawling Reddit using Python and AWS EC2 without using Reddit API</description>
-    </item>
-    
-    <item>
       <title>Singleton &amp; Observer Pattern (Java)</title>
       <link>https://jianloong.github.io/posts/singletonobserverpattern/</link>
       <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
