@@ -119,8 +119,8 @@ A catharsis for the frustrated moral philosopher in all of us, and a place to fi
   "keywords": [
     "Reddit", "Chart", "Visualisation"
   ],
-  "articleBody": "\rThe charts here are visualisation of the Am I the Asshole? subreddit which can be found here\nBasically the subreddit describes itself as…\nA catharsis for the frustrated moral philosopher in all of us, and a place to finally find out if you were wrong in an argument that’s been bothering you. Tell us about any non-violent conflict you have experienced; give us both sides of the story, and find out if you’re right, or you’re the asshole. See our Best Of “Most Controversial” at /r/AITAFiltered!\nPlease note that the posts here are generated based on the Reddit website by doing GET requests. So, it is based on their current entries. So, these are live data obtained from the site and not static data hardcoded in the website.\nAbbreviation Meaning YTA You’re the A-hole NTA Not the A-hole ESH Everyone sucks here NAH No A-holes here INFO Not Enough Info Posts let summary = []; let parseResult = (link) =\u003e { const endPoint = \"https://reddit.com\" + link + \".json?limit=80\u0026jsonp=?\"; let replies = \"\"; $.getJSON(endPoint, function(data){ let title = (data[0].data.children[0].data[\"title\"]); replies = data[1][\"data\"].children; let url = \"https://reddit.com\" + link; let noOfReplies = replies.length; let countNTAAppearance = 0; let nta = \"NTA\"; let countYTAAppearance = 0; let countESHAppearance = 0; let countNAHAppearance = 0; let countINFOAppearance = 0; for (let i = 0; i \u003c noOfReplies; i++) { let reply = replies[i][\"data\"].body; if (reply == undefined) return; countNTAAppearance += (reply.match(/NTA/g) || []).length; countYTAAppearance += (reply.match(/YTA/g) || []).length; countESHAppearance += (reply.match(/ESH/g) || []).length; countNAHAppearance += (reply.match(/NAH/g) || []).length; countINFOAppearance += (reply.match(/INFO/g) || []).length; } let jsonResult = { \"id\" : data[0].data.children[0].data[\"id\"], \"url\": url, \"title\": title, \"countNTAAppearance\": countNTAAppearance, \"countYTAAppearance\": countYTAAppearance, \"countESHAppearance\" : countESHAppearance, \"countNAHAppearance\" : countNAHAppearance, \"countINFOAppearance\" : countINFOAppearance, } summary.push(jsonResult); showResult(jsonResult); }); } let showResult = (jsonResult) =\u003e { let output = \"\" + jsonResult[\"title\"] + \"\"; let out = output + \"",
-  "wordCount" : "431",
+  "articleBody": "\rThe charts here are visualisation of the Am I the Asshole? subreddit which can be found here\nBasically the subreddit describes itself as…\nA catharsis for the frustrated moral philosopher in all of us, and a place to finally find out if you were wrong in an argument that’s been bothering you. Tell us about any non-violent conflict you have experienced; give us both sides of the story, and find out if you’re right, or you’re the asshole. See our Best Of “Most Controversial” at /r/AITAFiltered!\nPlease note that the posts here are generated based on the Reddit website by doing GET requests. So, it is based on their current entries. So, these are live data obtained from the site and not static data hardcoded in the website.\nAbbreviation Meaning YTA You’re the A-hole NTA Not the A-hole ESH Everyone sucks here NAH No A-holes here INFO Not Enough Info Fig 1. Abbreviation Table for the Subreddit Posts let summary = []; let parseResult = (link) =\u003e { const endPoint = \"https://reddit.com\" + link + \".json?limit=80\u0026jsonp=?\"; let replies = \"\"; $.getJSON(endPoint, function(data){ let title = (data[0].data.children[0].data[\"title\"]); replies = data[1][\"data\"].children; let url = \"https://reddit.com\" + link; let noOfReplies = replies.length; let countNTAAppearance = 0; let nta = \"NTA\"; let countYTAAppearance = 0; let countESHAppearance = 0; let countNAHAppearance = 0; let countINFOAppearance = 0; for (let i = 0; i \u003c noOfReplies; i++) { let reply = replies[i][\"data\"].body; if (reply == undefined) return; countNTAAppearance += (reply.match(/NTA/g) || []).length; countYTAAppearance += (reply.match(/YTA/g) || []).length; countESHAppearance += (reply.match(/ESH/g) || []).length; countNAHAppearance += (reply.match(/NAH/g) || []).length; countINFOAppearance += (reply.match(/INFO/g) || []).length; } let jsonResult = { \"id\" : data[0].data.children[0].data[\"id\"], \"url\": url, \"title\": title, \"countNTAAppearance\": countNTAAppearance, \"countYTAAppearance\": countYTAAppearance, \"countESHAppearance\" : countESHAppearance, \"countNAHAppearance\" : countNAHAppearance, \"countINFOAppearance\" : countINFOAppearance, } summary.push(jsonResult); showResult(jsonResult); }); } let showResult = (jsonResult) =\u003e { let output = \"\" + jsonResult[\"title\"] + \"\"; let out = output + \"",
+  "wordCount" : "438",
   "inLanguage": "en",
   "image":"https://jianloong.github.io/images/amitheasshole.png","datePublished": "2019-10-09T20:56:02+11:00",
   "dateModified": "2019-10-09T20:56:02+11:00",
@@ -206,6 +206,11 @@ A catharsis for the frustrated moral philosopher in all of us, and a place to fi
                     <span>archives</span>
                 </a>
             </li>
+            <li>
+                <a href="https://jianloong.github.io/contact/" title="contact">
+                    <span>contact</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -257,6 +262,7 @@ A catharsis for the frustrated moral philosopher in all of us, and a place to fi
 </tr>
 </tbody>
 </table>
+<p align="center">Fig 1. Abbreviation Table for the Subreddit </p>
 <h3 id="posts">Posts<a hidden class="anchor" aria-hidden="true" href="#posts">#</a></h3>
 <div class="result">
 </div>
@@ -465,10 +471,15 @@ getPost();
       <li><a href="https://jianloong.github.io/tags/visualisation/">Visualisation</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://jianloong.github.io/posts/programmming/">
+  <a class="prev" href="https://jianloong.github.io/posts/2019/reddit_word_cloud/">
     <span class="title">« Prev</span>
     <br>
     <span>Reddit Word Cloud for the subreddit programming</span>
+  </a>
+  <a class="next" href="https://jianloong.github.io/posts/yagni/">
+    <span class="title">Next »</span>
+    <br>
+    <span></span>
   </a>
 </nav>
 

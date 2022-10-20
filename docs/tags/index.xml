@@ -9,34 +9,7 @@
       <link>https://jianloong.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 18 Oct 2022 21:30:56 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>aws</title>
-      <link>https://jianloong.github.io/tags/aws/</link>
-      <pubDate>Tue, 18 Oct 2022 21:30:56 +1100</pubDate>
-      
-      <guid>https://jianloong.github.io/tags/aws/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>crawler</title>
-      <link>https://jianloong.github.io/tags/crawler/</link>
-      <pubDate>Tue, 18 Oct 2022 21:30:56 +1100</pubDate>
-      
-      <guid>https://jianloong.github.io/tags/crawler/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Reddit</title>
-      <link>https://jianloong.github.io/tags/reddit/</link>
-      <pubDate>Tue, 18 Oct 2022 21:30:56 +1100</pubDate>
-      
-      <guid>https://jianloong.github.io/tags/reddit/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Sun, 03 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://jianloong.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Design Pattern</title>
       <link>https://jianloong.github.io/tags/design-pattern/</link>
@@ -175,9 +148,27 @@
     <item>
       <title>Chart</title>
       <link>https://jianloong.github.io/tags/chart/</link>
-      <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
+      <pubDate>Mon, 14 Oct 2019 20:56:02 +1100</pubDate>
       
       <guid>https://jianloong.github.io/tags/chart/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hacker News</title>
+      <link>https://jianloong.github.io/tags/hacker-news/</link>
+      <pubDate>Mon, 14 Oct 2019 20:56:02 +1100</pubDate>
+      
+      <guid>https://jianloong.github.io/tags/hacker-news/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Visualisation</title>
+      <link>https://jianloong.github.io/tags/visualisation/</link>
+      <pubDate>Mon, 14 Oct 2019 20:56:02 +1100</pubDate>
+      
+      <guid>https://jianloong.github.io/tags/visualisation/</guid>
       <description></description>
     </item>
     
@@ -200,11 +191,11 @@
     </item>
     
     <item>
-      <title>Visualisation</title>
-      <link>https://jianloong.github.io/tags/visualisation/</link>
+      <title>Reddit</title>
+      <link>https://jianloong.github.io/tags/reddit/</link>
       <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/tags/visualisation/</guid>
+      <guid>https://jianloong.github.io/tags/reddit/</guid>
       <description></description>
     </item>
     
