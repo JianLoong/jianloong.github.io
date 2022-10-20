@@ -14,7 +14,7 @@ googleAnalytics: UA-55422968-1
 
 minify:
   disableXML: true
-  minifyOutput: false
+  minifyOutput: true
 
 # homeInfoParams:
 #   Title: "PaperModX"
@@ -32,7 +32,7 @@ params:
   keywords: [Blog, Portfolio, PaperMod]
   author: Jian
   # author: ["Me", "You"] # multiple authors
-  images: ["<link or path of image for opengraph, twitter-cards>"]
+  images: [""]
   DateFormat: "January 2, 2006"
   defaultTheme: auto # dark, light
   disableThemeToggle: false
@@ -63,8 +63,8 @@ params:
     # disableHLJS: true # to disable highlight.js
     # disableFingerprinting: true
     favicon: "/images/favicon.ico"
-    favicon16x16: "<link / abs url>"
-    favicon32x32: "<link / abs url>"
+    favicon16x16: "/images/favicon.ico"
+    favicon32x32: "/images/favicon.ico"
     apple_touch_icon: "/images/favicon.ico"
     safari_pinned_tab: "/images/favicon.ico"
 
