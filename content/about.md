@@ -5,9 +5,17 @@ ShowReadingTime: false
 comments: false
 ---
 
-A passionate educator and technology lover with excellent programming and communication skills. Organized and driven
-with the innate ability to stay on the task.
+Greetings and welcome to my blog.
 
+This blog is just mainly for me to focus my thoughts and it is a personal space for my projects.
+
+I am currently open to job opportunities.
+
+Email - {{< encoded_email "jianloongliew@gmail.com" >}}
+
+----
+
+<!-- 
 ### Teaching Experience
 
 #### Monash University, Melbourne (April 2015 - Dec 2019)
@@ -49,4 +57,4 @@ Subjects previously taught includes:
 #### Bachelor of Computer Science & Software Engineering - Swinburne University
 
 - Graduated with First Class Honors
-- Swinburne University of Technology Merit Scholarship
+- Swinburne University of Technology Merit Scholarship -->
