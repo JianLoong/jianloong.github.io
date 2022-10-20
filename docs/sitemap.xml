@@ -2,28 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://jianloong.github.io/tags/javascript/</loc>
+    <lastmod>2022-10-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/</loc>
+    <lastmod>2022-10-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/posts/</loc>
+    <lastmod>2022-10-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/tags/sentiment-analysis/</loc>
+    <lastmod>2022-10-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/posts/vader/</loc>
+    <lastmod>2022-10-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/tags/</loc>
+    <lastmod>2022-10-20T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://jianloong.github.io/tags/design-pattern/</loc>
     <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/java/</loc>
     <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/</loc>
-    <lastmod>2019-11-03T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://jianloong.github.io/tags/observer/</loc>
-    <lastmod>2019-11-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://jianloong.github.io/posts/</loc>
     <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/singleton/</loc>
     <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/posts/singletonobserverpattern/</loc>
-    <lastmod>2019-11-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://jianloong.github.io/tags/</loc>
     <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/posts/voronoi/</loc>
@@ -39,9 +48,6 @@
     <lastmod>2019-10-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/api/</loc>
-    <lastmod>2019-10-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://jianloong.github.io/tags/javascript/</loc>
     <lastmod>2019-10-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/posts/promiseall/</loc>
@@ -65,7 +71,7 @@
     <loc>https://jianloong.github.io/tags/tsp/</loc>
     <lastmod>2019-10-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/posts/ga/</loc>
+    <loc>https://jianloong.github.io/posts/simplegeneticalgo/</loc>
     <lastmod>2019-10-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/phrase-solver/</loc>

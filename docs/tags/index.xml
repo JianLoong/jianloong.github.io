@@ -9,7 +9,25 @@
       <link>https://jianloong.github.io/</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 03 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://jianloong.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jianloong.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JavaScript</title>
+      <link>https://jianloong.github.io/tags/javascript/</link>
+      <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://jianloong.github.io/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sentiment Analysis</title>
+      <link>https://jianloong.github.io/tags/sentiment-analysis/</link>
+      <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://jianloong.github.io/tags/sentiment-analysis/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Design Pattern</title>
       <link>https://jianloong.github.io/tags/design-pattern/</link>
@@ -79,15 +97,6 @@
       <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://jianloong.github.io/tags/api/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>JavaScript</title>
-      <link>https://jianloong.github.io/tags/javascript/</link>
-      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://jianloong.github.io/tags/javascript/</guid>
       <description></description>
     </item>
     

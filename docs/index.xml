@@ -9,7 +9,17 @@
       <link>https://jianloong.github.io/</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 03 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://jianloong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jianloong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sentiment Analysis using VADER in JavaScript</title>
+      <link>https://jianloong.github.io/posts/vader/</link>
+      <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://jianloong.github.io/posts/vader/</guid>
+      <description>Enter text to be analysed: Sentiment analysis studies the subjective information in an expression, that is, the opinions, appraisals, emotions, or attitudes towards a topic, person or entity. Expressions can be classified as positive, negative, or neutral. For example: I really like the new design of your website!Run
+Results NegativePositiveCompoundReferences Cjhutto CJHUTTO/Vadersentiment: Vader sentiment analysis. vader (valence aware dictionary and sentiment reasoner) is a lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media, and works well on texts from other domains.</description>
+    </item>
+    
     <item>
       <title>Singleton &amp; Observer Pattern (Java)</title>
       <link>https://jianloong.github.io/posts/singletonobserverpattern/</link>
@@ -53,13 +63,13 @@ Traveling Salesman Problem using Genetic Algorithm This blog post is regarding u
     
     <item>
       <title>Genetic Algorithm using Web Workers</title>
-      <link>https://jianloong.github.io/posts/ga/</link>
+      <link>https://jianloong.github.io/posts/simplegeneticalgo/</link>
       <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/posts/ga/</guid>
+      <guid>https://jianloong.github.io/posts/simplegeneticalgo/</guid>
       <description>This post is a simple implementation of Genetic Algorithm GA. Here, you would start with a random string and end up with the target string.
 This post is heavily inspired based on this website. However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it run behind the scenes.
-Cross Over Method One PointTwo PointUniformPMXSelection Method TournamentRandomRankRoulette WheelTarget String: Run</description>
+The implementation of it can be seen here</description>
     </item>
     
     <item>
@@ -114,10 +124,10 @@ A catharsis for the frustrated moral philosopher in all of us, and a place to fi
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://jianloong.github.io/about/</guid>
-      <description>A passionate educator and technology lover with excellent programming and communication skills. Organized and driven with the innate ability to stay on the task.
-Teaching Experience Monash University, Melbourne (April 2015 - Dec 2019) Sessional Lecturer &amp;amp; Teaching Associate (Sessional)
-Subjects previously taught includes:
-Unit Code Name FIT1010 Introduction to Software Engineering FIT5032 Internet Applications Development FIT5042 Enterprise Web Applications FIT5120 Industry Experience Project FIT5136 Software Engineering FIT9131 Programming Foundations in Java FIT9134 Computer Architecture and Operating Systems FIT9135 Data Communications Key responsibilities Confidently assist students to become independent and collaborative learners during each studio session by encouraging participation as well as the motivation to learn from each other.</description>
+      <description>Greetings and welcome to my blog.
+This blog is just mainly for me to focus my thoughts and it is a personal space for my projects.
+I am currently open to job opportunities.
+Email - &amp;#32;&amp;#32;</description>
     </item>
     
     
