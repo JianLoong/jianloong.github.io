@@ -28,6 +28,9 @@ Please note that the posts here are generated based on the Reddit website by doi
 | NAH          | No A-holes here     |
 | INFO         | Not Enough Info     |
 
+<p align="center">Fig 1. Abbreviation Table for the Subreddit </p>
+
+
 ### Posts
 
 <div class="result">

@@ -9,16 +9,7 @@
       <link>https://jianloong.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 18 Oct 2022 21:30:56 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Simple reddit crawler for the /r/programming subreddit</title>
-      <link>https://jianloong.github.io/posts/quick/</link>
-      <pubDate>Tue, 18 Oct 2022 21:30:56 +1100</pubDate>
-      
-      <guid>https://jianloong.github.io/posts/quick/</guid>
-      <description>An educational approach to crawling Reddit using Python and AWS EC2 without using Reddit API</description>
-    </item>
-    
+    <lastBuildDate>Sun, 03 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://jianloong.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Singleton &amp; Observer Pattern (Java)</title>
       <link>https://jianloong.github.io/posts/singletonobserverpattern/</link>
@@ -72,6 +63,18 @@ Cross Over Method One PointTwo PointUniformPMXSelection Method TournamentRa
     </item>
     
     <item>
+      <title>Hacker News Word Cloud </title>
+      <link>https://jianloong.github.io/posts/hackernews_word_cloud/</link>
+      <pubDate>Mon, 14 Oct 2019 20:56:02 +1100</pubDate>
+      
+      <guid>https://jianloong.github.io/posts/hackernews_word_cloud/</guid>
+      <description>The word cloud generated here is based on the website hacker news.
+The reason this post is made, is so that it would easier to see the word that appeared the most for the day.
+Even though the use of a word cloud is not exactly a good representation of occurrence, it still looks nice.
+Please note that the posts here are generated based on the Hacker News API by doing GET requests.</description>
+    </item>
+    
+    <item>
       <title>Sentiment analysis for the subreddit Hong Kong</title>
       <link>https://jianloong.github.io/posts/hk/</link>
       <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
@@ -84,10 +87,10 @@ Please note that the posts here are generated based on the Reddit website by doi
     
     <item>
       <title>Reddit Word Cloud for the subreddit programming</title>
-      <link>https://jianloong.github.io/posts/programmming/</link>
+      <link>https://jianloong.github.io/posts/2019/reddit_word_cloud/</link>
       <pubDate>Sat, 12 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/posts/programmming/</guid>
+      <guid>https://jianloong.github.io/posts/2019/reddit_word_cloud/</guid>
       <description>The word cloud generated here is based on the /r/programming subreddit for reddit.com
 The reason this post is made, is so that it would easier to see the word that appeared the most for the day.
 Even though the use of a word cloud is not exactly a good representation of occurrence, it still looks nice.
@@ -106,6 +109,15 @@ A catharsis for the frustrated moral philosopher in all of us, and a place to fi
     </item>
     
     <item>
+      <title></title>
+      <link>https://jianloong.github.io/posts/yagni/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://jianloong.github.io/posts/yagni/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>About</title>
       <link>https://jianloong.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -117,6 +129,15 @@ Subjects previously taught includes:
 Unit Code Name FIT1010 Introduction to Software Engineering FIT5032 Internet Applications Development FIT5042 Enterprise Web Applications FIT5120 Industry Experience Project FIT5136 Software Engineering FIT9131 Programming Foundations in Java FIT9134 Computer Architecture and Operating Systems FIT9135 Data Communications Key responsibilities Confidently assist students to become independent and collaborative learners during each studio session by encouraging participation as well as the motivation to learn from each other.</description>
     </item>
     
+    
+    <item>
+      <title>Contact me</title>
+      <link>https://jianloong.github.io/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://jianloong.github.io/contact/</guid>
+      <description>Email - &amp;#32;&amp;#32;</description>
+    </item>
     
     
   </channel>

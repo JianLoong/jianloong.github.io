@@ -13,6 +13,7 @@ UseHugoToc: true
 
 
 <div id="cloud">
+</div>
 
 The word cloud generated here is based on the <strong>/r/programming</strong> subreddit for reddit.com
 
