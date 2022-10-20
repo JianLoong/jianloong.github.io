@@ -410,4 +410,8 @@ if (window.Worker) {
   font-size: 16px;
 }
 
+.ct-perfect-fourth{
+  background:white;
+}
+
 </style>
