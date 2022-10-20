@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tags on Jian</title>
+    <link>docs/tags/</link>
+    <description>Recent content in Tags on Jian</description>
+    <image>
+      <url>docs</url>
+      <link>docs</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 20 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="docs/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JavaScript</title>
+      <link>docs/tags/javascript/</link>
+      <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>docs/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sentiment Analysis</title>
+      <link>docs/tags/sentiment-analysis/</link>
+      <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>docs/tags/sentiment-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Design Pattern</title>
+      <link>docs/tags/design-pattern/</link>
+      <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>docs/tags/design-pattern/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>docs/tags/java/</link>
+      <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>docs/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Observer</title>
+      <link>docs/tags/observer/</link>
+      <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>docs/tags/observer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Singleton</title>
+      <link>docs/tags/singleton/</link>
+      <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>docs/tags/singleton/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Maps</title>
+      <link>docs/tags/maps/</link>
+      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>docs/tags/maps/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nearest Neighbour</title>
+      <link>docs/tags/nearest-neighbour/</link>
+      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>docs/tags/nearest-neighbour/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Voronoi</title>
+      <link>docs/tags/voronoi/</link>
+      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>docs/tags/voronoi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>API</title>
+      <link>docs/tags/api/</link>
+      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>docs/tags/api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Promise</title>
+      <link>docs/tags/promise/</link>
+      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>docs/tags/promise/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cross Over</title>
+      <link>docs/tags/cross-over/</link>
+      <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>docs/tags/cross-over/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Genetic Algorithm</title>
+      <link>docs/tags/genetic-algorithm/</link>
+      <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>docs/tags/genetic-algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Selection</title>
+      <link>docs/tags/selection/</link>
+      <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>docs/tags/selection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>TSP</title>
+      <link>docs/tags/tsp/</link>
+      <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>docs/tags/tsp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Phrase Solver</title>
+      <link>docs/tags/phrase-solver/</link>
+      <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>docs/tags/phrase-solver/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Chart</title>
+      <link>docs/tags/chart/</link>
+      <pubDate>Mon, 14 Oct 2019 20:56:02 +1100</pubDate>
+      
+      <guid>docs/tags/chart/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hacker News</title>
+      <link>docs/tags/hacker-news/</link>
+      <pubDate>Mon, 14 Oct 2019 20:56:02 +1100</pubDate>
+      
+      <guid>docs/tags/hacker-news/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Visualisation</title>
+      <link>docs/tags/visualisation/</link>
+      <pubDate>Mon, 14 Oct 2019 20:56:02 +1100</pubDate>
+      
+      <guid>docs/tags/visualisation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hong Kong</title>
+      <link>docs/tags/hong-kong/</link>
+      <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
+      
+      <guid>docs/tags/hong-kong/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Percentage</title>
+      <link>docs/tags/percentage/</link>
+      <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
+      
+      <guid>docs/tags/percentage/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reddit</title>
+      <link>docs/tags/reddit/</link>
+      <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
+      
+      <guid>docs/tags/reddit/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

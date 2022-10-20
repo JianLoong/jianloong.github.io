@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Hacker News on Jian</title>
+    <link>docs/tags/hacker-news/</link>
+    <description>Recent content in Hacker News on Jian</description>
+    <image>
+      <url>docs</url>
+      <link>docs</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 14 Oct 2019 20:56:02 +1100</lastBuildDate><atom:link href="docs/tags/hacker-news/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hacker News Word Cloud </title>
+      <link>docs/posts/hackernews_word_cloud/</link>
+      <pubDate>Mon, 14 Oct 2019 20:56:02 +1100</pubDate>
+      
+      <guid>docs/posts/hackernews_word_cloud/</guid>
+      <description>The word cloud generated here is based on the website hacker news.
+The reason this post is made, is so that it would easier to see the word that appeared the most for the day.
+Even though the use of a word cloud is not exactly a good representation of occurrence, it still looks nice.
+Please note that the posts here are generated based on the Hacker News API by doing GET requests.</description>
+    </item>
+    
+  </channel>
+</rss>

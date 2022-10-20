@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Reddit on Jian</title>
+    <link>docs/tags/reddit/</link>
+    <description>Recent content in Reddit on Jian</description>
+    <image>
+      <url>docs</url>
+      <link>docs</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 13 Oct 2019 20:56:02 +1100</lastBuildDate><atom:link href="docs/tags/reddit/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sentiment analysis for the subreddit Hong Kong</title>
+      <link>docs/posts/hk/</link>
+      <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
+      
+      <guid>docs/posts/hk/</guid>
+      <description>Sentiment Analysis for the Sub-Reddit &amp;ldquo;HongKong&amp;rdquo; This post will perform sentiment analysis using AFINN. AFINN is a list of words rated for valence rated with an integer between minus five(negative) and plus five (positive). This implementation uses AFINN-en-165. 1
+This approach however is a very naive approach as it does not build any models to determine the context of the usage of the word itself.
+Please note that the posts here are generated based on the Reddit website by doing GET requests.</description>
+    </item>
+    
+    <item>
+      <title>Reddit Word Cloud for the subreddit programming</title>
+      <link>docs/posts/2019/reddit_word_cloud/</link>
+      <pubDate>Sat, 12 Oct 2019 20:56:02 +1100</pubDate>
+      
+      <guid>docs/posts/2019/reddit_word_cloud/</guid>
+      <description>The word cloud generated here is based on the /r/programming subreddit for reddit.com
+The reason this post is made, is so that it would easier to see the word that appeared the most for the day.
+Even though the use of a word cloud is not exactly a good representation of occurrence, it still looks nice.
+Please note that the posts here are generated based on the Reddit website by doing GET requests.</description>
+    </item>
+    
+    <item>
+      <title>Percentage Charts for the subreddit Am I the Asshole?</title>
+      <link>docs/posts/amitheasshole/</link>
+      <pubDate>Wed, 09 Oct 2019 20:56:02 +1100</pubDate>
+      
+      <guid>docs/posts/amitheasshole/</guid>
+      <description>The charts here are visualisation of the Am I the Asshole? subreddit which can be found here
+Basically the subreddit describes itself as&amp;hellip;
+A catharsis for the frustrated moral philosopher in all of us, and a place to finally find out if you were wrong in an argument that&amp;rsquo;s been bothering you. Tell us about any non-violent conflict you have experienced; give us both sides of the story, and find out if you&amp;rsquo;re right, or you&amp;rsquo;re the asshole.</description>
+    </item>
+    
+  </channel>
+</rss>
