@@ -16,8 +16,9 @@
       <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>
       
       <guid>https://jianloong.github.io/posts/vader/</guid>
-      <description>Enter text to be analysed: Sentiment analysis studies the subjective information in an expression, that is, the opinions, appraisals, emotions, or attitudes towards a topic, person or entity. Expressions can be classified as positive, negative, or neutral. For example: I really like the new design of your website!Run
-Results NegativePositiveCompoundReferences Cjhutto CJHUTTO/Vadersentiment: Vader sentiment analysis. vader (valence aware dictionary and sentiment reasoner) is a lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media, and works well on texts from other domains.</description>
+      <description>This post is a simple implementation of how to use the VADER sentiment analysis on a paragraph.
+Enter text to be analysed: Sentiment analysis studies the subjective information in an expression, that is, the opinions, appraisals, emotions, or attitudes towards a topic, person or entity. Expressions can be classified as positive, negative, or neutral. For example: I really like the new design of your website!Run
+Results NegativePositiveCompoundReferences Cjhutto CJHUTTO/Vadersentiment: Vader sentiment analysis.</description>
     </item>
     
   </channel>
