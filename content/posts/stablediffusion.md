@@ -8,9 +8,9 @@ cover:
 UseHugoToc: true
 ---
 
-Recently, generating images with AI has gotten a lot of buzzes, so I decided to play around with it.
+Recently, generating images with AI has gotten a lot of traction, so I decided to play around with it.
 
-It  is easy to get it working as there is a web user interface fork of it on GitHub at located [here](https://github.com/AUTOMATIC1111/stable-diffusion-webui). Basically, it is working out of the box with minimal configuration needed.
+It is easy to get it working as there is a web user interface fork of it on GitHub located [here](https://github.com/AUTOMATIC1111/stable-diffusion-webui). Basically, it is working out of the box with minimal configuration needed.
 
 Instead of using the suggested model, I used the "Waifu Diffusion" model instead located [here](https://huggingface.co/hakurei/waifu-diffusion). 
 **Waifu diffusion is "a latent text-to-image diffusion model that has been conditioned on high-quality anime images through fine-tuning"**. So basically, in a way, it is a diffusion model that is better at the generation of anime images.

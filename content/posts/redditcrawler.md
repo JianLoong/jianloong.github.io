@@ -17,7 +17,7 @@ draft: true
 
 ## Objective
 
-A demo results of the project can be seem here. This updates every 12 hours.
+Demo results of the project can be seen here. This updates every 12 hours.
 
 The objective of this post is to complete a web crawler while trying to learn as much as possible while trying to utilise software engineering knowledge and attempt to use good practices. So, this post would be rather long and it would explain the rationale behind each design decision made. If you are after a "just get it done" method, this post is not suitable for that purpose.
 
@@ -61,7 +61,7 @@ Based on this, information it is possible to avoid using the Reddit API and use 
 
 ## Project Architecture
 
-The tools of this project is as follows.
+The tools of this project are as follows.
 
 | GitHub                                                                            | Amazon EC2                                                        |
 | --------------------------------------------------------------------------------- | ----------------------------------------------------------------- |

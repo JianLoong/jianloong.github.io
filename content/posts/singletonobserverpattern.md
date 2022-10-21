@@ -261,13 +261,13 @@ Observer{observedPrizes=[Prize{name='Tomato'}, Prize{name='Potato'}, Prize{name=
 
 #### Lessons from this blog post.
 
-- It is very important to override both the **equals** and  the **hashCode** when using maps. 
-- The **Singleton** design pattern have many different approaches. The approach which I have used here is the most simplistic approach and does have certain design concerns.
-- Design is still very subjective matter as it is debatable to put the **quantity** field in the Prize class itself.
+- It is very important to override both the **equals** and the **hashCode** when using maps. 
+- The **Singleton** design pattern has many different approaches. The approach which I have used here is the most simplistic approach and does have certain design concerns.
+- Design is still a subjective matter as it is debatable to put the **quantity** field in the Prize class itself.
 - The runtime to get a random item from a HashMap would depend on the **implementation** of it.
 - **Pygments** and **Chroma** of the Hugo static website generator are both good but Chroma seems to look nice out of the box for my use case.
-- **PropertyChangeSupport** is so much easier to use compare to the **Observable** interface class.
-- **computeIfPresent** method is pretty cool as it uses a lambda like feature.
+- **PropertyChangeSupport** is so much easier to use compared to the **Observable** interface class.
+- **computeIfPresent** method is pretty cool as it uses a lambda-like feature.
 
 
 #### References
