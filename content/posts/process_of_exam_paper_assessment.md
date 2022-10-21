@@ -6,6 +6,7 @@ ShowReadingTime: true
 summary: This post explains the examination marking process so that it is consistency and fair to the students. This is before the age of *e-exams*
 cover:
   image: "/images/exampaper.png"
+hasMermaid: true
 ---
 
 ### Introduction
@@ -117,6 +118,42 @@ The remark will be done in a different coloured pen to indicate the paper has be
 
 It is **very** common for a remarked paper to not get any grade change because of the entire process and the way the marking is done. There have been multiple cases where it is impossible to give a student even 1 mark for a student to pass and there is nothing the teaching team could do about it. Because by giving a single mark, it would mean, all students have been marked unfairly. So it cannot **just happen**.
 
+### Flowchart
+
+The entire process of it can be summarized into a single flowchart.
+
+{{<mermaid align="left">}}
+
+  graph TD
+      S(Teaching team receives bundles of exam papers)
+      A(Each question is allocated to a single marker)
+      B(Accepted answers will be <br> discussed amongst the teaching team)
+      B1(Marking will happen and completed)
+      C(Marks on the question itself will be transferred to the front page)
+      D(A different marker checks if the marks on the<br> front is the same with the one on the question)
+      E(These marks on the front will be transferred to Google Sheets)
+      F(Marks on the front of the exam paper will be check <br> so that it is consistent with the marks in the Google Sheets)
+      G(The performance of each question will be analysed <br> by the teaching team)
+      H(Questions that are out of performing badly are evaluated)
+      I(Remarks will be done for all papers that fall within the 45 to 49 range)
+      I1(Remarks will also happen if there is an inconsistency is found)
+      J(Examiner report will be prepared by the person in charge<br> explaining the reason for either spectacular performance or <br>under-performance by the students)
+      K(Final marks will be submitted to the faculty using the sheets provided)
+      S-->A
+      A-->B
+      B-->B1
+      B1-->C
+      C-->D
+      D-->E
+      E-->F
+      F-->G
+      G-->H
+      H-->I
+      I-->I1
+      I1-->J
+      J-->K
+{{< /mermaid >}}
+
 
 ### Summary
 
@@ -125,3 +162,5 @@ I think the marking processes used is very fair and consistent. With such a mark
 Also, because of how the marking it done, a student with near pass marks often times will not experience a grade change because of how everything is structured as finding even 1 mark out of sympathy and not using the marking rubric would mean **All answers to that question would need to be remarked** to ensure fairness for all students. So, it is a very rare occurrence it would happen. 
 
 Conclusion is, exam marking is treated very seriously and with utmost respect. However, it would finally depend if the teaching team follows the laid out procedures set in place. 
+
+And also in case you were also asking **Does the good looking person always perform better?**, the answer is strictly no, because if proper procedures were followed, the examination marking process is very fair and consistent.
