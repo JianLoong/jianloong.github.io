@@ -66,22 +66,19 @@ Another way without knowing the IP addressing would be to use the hostname. The 
 
 4. Then you will need to provide the username and password you have setup earlier. If you managed to login it, you should see something like the image below.
 
-{{< figure src="/images/puttypihole.png" title="" align="center">}}
+  {{< figure src="/images/puttypihole.png" title="" align="center">}}
 
+5. Now, we can begin installing Pi Hole itself. The instructions to install it can be found [here](https://github.com/pi-hole/pi-hole/#one-step-automated-install). Since the installation process is pretty much automated from this step, it should be pretty straight forward. The only hurdle that you can encounter is where it asked you to set up a static IP address.
 
+6. If so, you can set up a static IP address by following the instructions at this [site](https://www.makeuseof.com/raspberry-pi-set-static-ip/)
 
-1. Now, we can begin installing Pi Hole itself. The instructions to install it can be found [here](https://github.com/pi-hole/pi-hole/#one-step-automated-install). Since the installation process is pretty much automated from this step, it should be pretty straight forward. The only hurdle that you can encounter is where it asked you to set up a static IP address.
+7. After you have completed the installation of Pi Hole, all that is needed to be done is to either set your devices to use PiHole as the DNS server or change the setting on the router itself. I decided to only change the settings on my devices locally as setting it on the router would invade the privacy of my housemates.
 
-2. If so, you can set up a static IP address by following the instructions at this [site](https://www.makeuseof.com/raspberry-pi-set-static-ip/)
-
-3. After you have completed the installation of Pi Hole, all that is needed to be done is to either set your devices to use PiHole as the DNS server or change the setting on the router itself. I decided to only change the settings on my devices locally as setting it on the router would invade the privacy of my housemates.
-
-{{< figure src="/images/runningpihole.jpg" title="" align="center">}}
-
+  {{< figure src="/images/runningpihole.jpg" title="" align="center">}}
 
 8. It is also possible to access the web interface of PiHole. This is how mine looks after running it for a day.
 
-{{< figure src="/images/piholeweb.png" title="" align="center">}}
+  {{< figure src="/images/piholeweb.png" title="" align="center">}}
 
 9. I have also added more adlist for PiHole to filter out as well. This includes. 
 
