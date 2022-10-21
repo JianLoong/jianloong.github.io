@@ -414,4 +414,8 @@ if (window.Worker) {
   background:white;
 }
 
+table {
+  display: table;
+}
+
 </style>

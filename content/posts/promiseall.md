@@ -137,21 +137,11 @@ const topStories = () => getTopStoriesId().then((result) => {
 
 In order to see it in action, you can copy and paste it on the browser console to see how it works.
 
-
-
-
 {{< figure src="/images/console.png" title="" >}}
 
 {{< figure src="/images/network.png" title="" >}}
 
 {{< figure src="/images/pending.png" title="" >}}
-
-
-
-
-
-
-
 
 #### Lessons from this blog post.
 
