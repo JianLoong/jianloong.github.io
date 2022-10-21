@@ -13,10 +13,6 @@ I am currently open to job opportunities.
 
 Email - {{< encoded_email "jianloongliew@gmail.com" >}}
 
-----
-
-#### About my voice
-
 <!-- 
 ### Teaching Experience
 
