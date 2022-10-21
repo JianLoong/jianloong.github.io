@@ -89,6 +89,8 @@ However, our LuckyDipMachine class is slightly more interesting. Here are the ch
 - A **PropertyChangeSupport** as a field to create an observable pattern.
 - A **pull** method of the LuckyDipMachine indicating whenever the lucky dip machine has been pulled or used. When this happens, it will fire a property change done via calling the **firePropertyChange** method.
 
+The reason it has a ``private`` constructor is quite simple, as you do not want people to use the constructor method but the ``getInstance()`` method. This is so that the LuckyDipMachine will only ever have an instance of itself.
+
 <div></div>
 
 ```java
