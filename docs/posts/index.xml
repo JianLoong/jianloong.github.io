@@ -22,6 +22,15 @@ Instead of using the suggested model, I used the &amp;ldquo;Waifu Diffusion&amp;
     </item>
     
     <item>
+      <title>Process of Exam Papers Assessment</title>
+      <link>https://jianloong.github.io/posts/education/</link>
+      <pubDate>Thu, 20 Oct 2022 21:30:56 +1100</pubDate>
+      
+      <guid>https://jianloong.github.io/posts/education/</guid>
+      <description>This post explains the examination marking process so that it is consistency and fair to the students. This is before the age of &lt;em&gt;e-exams&lt;/em&gt;</description>
+    </item>
+    
+    <item>
       <title>Setting up PiHole as an ad blocker</title>
       <link>https://jianloong.github.io/posts/pihole/</link>
       <pubDate>Thu, 20 Oct 2022 21:30:56 +1100</pubDate>
@@ -94,10 +103,10 @@ The implementation of it can be seen here</description>
     
     <item>
       <title>Hacker News Word Cloud </title>
-      <link>https://jianloong.github.io/posts/hackernews_word_cloud/</link>
+      <link>https://jianloong.github.io/posts/20191014_hackernews_word_cloud/</link>
       <pubDate>Mon, 14 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/posts/hackernews_word_cloud/</guid>
+      <guid>https://jianloong.github.io/posts/20191014_hackernews_word_cloud/</guid>
       <description>The word cloud generated here is based on the website hacker news.
 The reason this post is made, is so that it would easier to see the word that appeared the most for the day.
 Even though the use of a word cloud is not exactly a good representation of occurrence, it still looks nice.

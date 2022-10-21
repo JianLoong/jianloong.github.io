@@ -52,23 +52,32 @@ This step is important so that when your RaspberryPi starts, you can ``ssh`` int
 
 {{< figure src="/images/advanceoptions.png" title="" align="center">}}
 
-2. After that step is done, when you start the RaspberryPi, you can connect to it via ``ssh``. To do this, you will need to find out the RaspberryPi IP address for the initial time. There are a few ways you can do this, one way is to use the ``arp -a`` on the command line but you can also use app that is able to scan your WiFi network for devices. The Network Scanner app on the Google PlayStore is an example of an app you can use. The RaspberryPi device will have network hostname or vendor name as "Raspberry Pi"
+2. After that step is done, when you start the RaspberryPi, you can connect to it via ``ssh``. To do this, one way is to find out the RaspberryPi IP address for the initial time. There are a few ways you can do this, one way is to use the ``arp -a`` on the command line but you can also use app that is able to scan your WiFi network for devices. The Network Scanner app on the Google PlayStore is an example of an app you can use. The RaspberryPi device will have network hostname or vendor name as "Raspberry Pi"
 
 {{< figure src="/images/netscan.jpg" title="" align="center">}}
 
-3. Using ``putty`` we will connect to the RaspberryPi. 
+Another way without knowing the IP addressing would be to use the hostname. The hostname for the RaspberryPI is ``pi.hole`` as the host name if you cannot get IP address of the RaspberryPi. So, either way would allow you to ``ssh`` into the device.
+
+3. Using ``putty`` we will connect to the RaspberryPi. You can either use the IP address you found earlier, or use the hostname.
 
 {{< figure src="/images/putty.png" title="" align="center">}}
+
+{{< figure src="/images/putty2.png" title="" align="center">}}
 
 4. Then you will need to provide the username and password you have setup earlier. If you managed to login it, you should see something like the image below.
 
 {{< figure src="/images/puttypihole.png" title="" align="center">}}
 
-5. Now, we can begin installing Pi Hole itself. The instructions to install it can be found [here](https://github.com/pi-hole/pi-hole/#one-step-automated-install). Since the installation process is pretty much automated from this step, it should be pretty straight forward. The only hurdle that you can encounter is where it asked you to set up a static IP address.
 
-6. If so, you can set up a static IP address by following the instructions at this [site](https://www.makeuseof.com/raspberry-pi-set-static-ip/)
 
-7. After you have completed the installation of Pi Hole, all that is needed to be done is to either set your devices to use PiHole as the DNS server or change the setting on the router itself. I decided to only change the settings on my devices locally as setting it on the router would invade the privacy of my housemates.
+1. Now, we can begin installing Pi Hole itself. The instructions to install it can be found [here](https://github.com/pi-hole/pi-hole/#one-step-automated-install). Since the installation process is pretty much automated from this step, it should be pretty straight forward. The only hurdle that you can encounter is where it asked you to set up a static IP address.
+
+2. If so, you can set up a static IP address by following the instructions at this [site](https://www.makeuseof.com/raspberry-pi-set-static-ip/)
+
+3. After you have completed the installation of Pi Hole, all that is needed to be done is to either set your devices to use PiHole as the DNS server or change the setting on the router itself. I decided to only change the settings on my devices locally as setting it on the router would invade the privacy of my housemates.
+
+{{< figure src="/images/runningpihole.jpg" title="" align="center">}}
+
 
 8. It is also possible to access the web interface of PiHole. This is how mine looks after running it for a day.
 
@@ -79,7 +88,7 @@ This step is important so that when your RaspberryPi starts, you can ``ssh`` int
 - https://raw.githubusercontent.com/kboghdady/youTube_ads_4_pi-hole/master/youtubelist.txt (For Youtube ads)
 - https://blocklistproject.github.io/Lists/tracking.txt (For tracking list)
 
-**Please also remember to go to ``Tools`` -> ``Update Gravity`` so the list is refreshed.**
+**Please also remember to go to ``Tools`` &rarr; ``Update Gravity`` so the list is refreshed.**
 
 ### Conclusion
 
