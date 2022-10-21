@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>PiHole on Jian</title>
+    <link>https://jianloong.github.io/tags/pihole/</link>
+    <description>Recent content in PiHole on Jian</description>
+    <image>
+      <url>https://jianloong.github.io/</url>
+      <link>https://jianloong.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 20 Oct 2022 21:30:56 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/tags/pihole/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Setting up PiHole as an ad blocker</title>
+      <link>https://jianloong.github.io/posts/pihole/</link>
+      <pubDate>Thu, 20 Oct 2022 21:30:56 +1100</pubDate>
+      
+      <guid>https://jianloong.github.io/posts/pihole/</guid>
+      <description>An educational approach to crawling Reddit using Python and AWS EC2 without using Reddit API</description>
+    </item>
+    
+  </channel>
+</rss>
