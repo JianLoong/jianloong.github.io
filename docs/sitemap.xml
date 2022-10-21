@@ -2,22 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://jianloong.github.io/tags/javascript/</loc>
-    <lastmod>2022-10-20T00:00:00+00:00</lastmod>
+    <loc>https://jianloong.github.io/tags/ai/</loc>
+    <lastmod>2022-10-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/tags/anime/</loc>
+    <lastmod>2022-10-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/tags/art/</loc>
+    <lastmod>2022-10-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/posts/stablediffusion/</loc>
+    <lastmod>2022-10-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/</loc>
-    <lastmod>2022-10-20T00:00:00+00:00</lastmod>
+    <lastmod>2022-10-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/posts/</loc>
+    <lastmod>2022-10-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/tags/stable-diffusion/</loc>
+    <lastmod>2022-10-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/tags/</loc>
+    <lastmod>2022-10-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/tags/javascript/</loc>
     <lastmod>2022-10-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/sentiment-analysis/</loc>
     <lastmod>2022-10-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/posts/vader/</loc>
-    <lastmod>2022-10-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://jianloong.github.io/tags/</loc>
     <lastmod>2022-10-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/design-pattern/</loc>

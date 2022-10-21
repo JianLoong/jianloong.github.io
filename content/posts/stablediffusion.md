@@ -1,0 +1,49 @@
+---
+title: 'Generating Anime "Art" with Stable Diffusion using the "Waifu Diffusion" Model'
+date: 2022-10-21
+tags: ["AI", "Art", "Stable Diffusion", "Anime"]
+ShowReadingTime: true
+cover:
+  image: "/images/stablediffusion.png"
+UseHugoToc: true
+---
+
+Recently, generating images with AI has gotten a lot of buzzes, so I decided to play around with it.
+
+It  is easy to get it working as there is a web user interface fork of it on GitHub at located [here](https://github.com/AUTOMATIC1111/stable-diffusion-webui). Basically, it is working out of the box with minimal configuration needed.
+
+Instead of using the suggested model, I used the "Waifu Diffusion" model instead located [here](https://huggingface.co/hakurei/waifu-diffusion). 
+Waifu diffusion is "a latent text-to-image diffusion model that has been conditioned on high-quality anime images through fine-tuning". So basically, it is a diffusion model that is better at the generation of anime images.
+
+Here are some of the images I generated and their prompts. Some of the prompts here are obtained from simple Google searches and modifications to them.
+
+> 1girl, brown eyes, beanie cap, black hair, closed mouth, earrings, hat, hoop earrings, jewelry, looking at viewer, shirt, short hair, simple background, solo, upper body, blue shirt
+
+{{< figure src="/images/ai-art1.png" title="" align="center">}}
+
+
+> 1girl, brown eyes, beanie cap, black hair, closed mouth, earrings, hat, hoop earrings, jewelry, looking at viewer, shirt, short hair, simple background, solo, upper body, yellow shirt
+
+
+{{< figure src="/images/ai-art2.png" title="" align="center">}}
+
+>  1 girl, sitting on a chair, wearing school uniform, beanie cap, blue jacket in a classroom wearing glasses, black hair, brown eyes, head shot, high resolution, hyper detailed, portrait, soft lips
+
+{{< figure src="/images/ai-art3.png" title="" align="center">}}
+
+
+> gorgeous young Japanese girl sitting by window with headphones on, wearing blue jacket, soft lips, beach blonde hair, octane render, unreal engine, photograph, realistic skin texture, photorealistic, hyper realism, highly detailed, 85mm portrait photography, award winning, hard rim lighting photography
+
+
+{{< figure src="/images/ai-art4.png" title="" align="center">}}
+
+
+It is actually pretty amazing that it could generate such beautiful images.
+
+## References
+
+1. https://github.com/AUTOMATIC1111/stable-diffusion-webui
+
+2. https://mpost.io/best-100-stable-diffusion-prompts-the-most-beautiful-ai-text-to-image-prompts/
+
+3. https://huggingface.co/hakurei/waifu-diffusion
