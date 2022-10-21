@@ -8,10 +8,10 @@ cover:
 ---
 
 
-This post is a an entry to describe a use case when the Promise.all JavaScript method is needed. The official reference can be found [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all). This assumes that the reader has a basic understanding of how promises work.
+This post is an entry to describe a use case when the Promise.all JavaScript method is needed. The official reference can be found [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all). This assumes that the reader has a basic understanding of how promises work.
 
 
-Before we start, there is a need to understand how certain RESTful services are structured. For example, the Hacker News API has the end point called **topstories**. This end point however, does not contain any other information besides a list of item IDs. So, if you would like to obtain the top 10 post including their **title**, there would be a need to do several GET request to fetch them all.
+Before we start, there is a need to understand how certain RESTful services are structured. For example, the Hacker News API has an end-point called **topstories**. This end-point however, does not contain any other information besides a list of item IDs. So, if you would like to obtain the top 10 posts including their **title**, there would be a need to do several GET requests to fetch them all.
 
 The output of 
 
@@ -37,7 +37,7 @@ is
     . . . 
 ```
 
-These list of IDs will then be used to obtain more information from a different end point.
+These IDs will then be used to obtain more information from a different end point.
 
 ```shell
 curl https://hacker-news.firebaseio.com/v0/item/33257197.json
@@ -146,11 +146,11 @@ In order to see it in action, you can copy and paste it on the browser console t
 #### Lessons from this blog post.
 
 - The **then** function returns a promise as well. 
-- Fetch is **significantly easier** to use in comparison to its jQuery counterparts. However, considerations needs to be taken into account when using it in static sites that does not have Babel or modernizr.
-- There are a lot of reasons a lot of users decided to create their own wrappers around the Hacker News API. Perhaps, it is deemed that their top stories and end up which does summary could be done in a different way. But HN itself is a very opinionated community.
+- Fetch is **significantly easier** to use in comparison to its jQuery counterparts. However, considerations need to be taken into account when using it in static sites that do not have Babel or modernizr.
+- There are a lot of reasons a lot of users decided to create their wrappers around the Hacker News API. Perhaps, it is deemed that their top stories and ending up which does summary could be done differently. But HN itself is a very opinionated community.
 - Mermaid diagrams are useful and break tags can be introduced in them.
 - CORS and JSONP exist. Cors is more modern and easier to use compared to using JSONP.
-- Using jQuery can make the codes very unreadable and creating call back hell easier.
+- Using jQuery can make the codes very unreadable and creating callback hell easier.
 
 
 ### References

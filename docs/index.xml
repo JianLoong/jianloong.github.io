@@ -16,8 +16,8 @@
       <pubDate>Fri, 21 Oct 2022 00:00:00 +0000</pubDate>
       
       <guid>https://jianloong.github.io/posts/stablediffusion/</guid>
-      <description>Recently, generating images with AI has gotten a lot of buzzes, so I decided to play around with it.
-It is easy to get it working as there is a web user interface fork of it on GitHub at located here. Basically, it is working out of the box with minimal configuration needed.
+      <description>Recently, generating images with AI has gotten a lot of traction, so I decided to play around with it.
+It is easy to get it working as there is a web user interface fork of it on GitHub located here. Basically, it is working out of the box with minimal configuration needed.
 Instead of using the suggested model, I used the &amp;ldquo;Waifu Diffusion&amp;rdquo; model instead located here. Waifu diffusion is &amp;ldquo;a latent text-to-image diffusion model that has been conditioned on high-quality anime images through fine-tuning&amp;rdquo;.</description>
     </item>
     
@@ -27,7 +27,7 @@ Instead of using the suggested model, I used the &amp;ldquo;Waifu Diffusion&amp;
       <pubDate>Thu, 20 Oct 2022 21:30:56 +1100</pubDate>
       
       <guid>https://jianloong.github.io/posts/process_of_exam_paper_assessment/</guid>
-      <description>This post explains the examination marking process so that it is consistency and fair to the students. This is before the age of &lt;em&gt;e-exams&lt;/em&gt;</description>
+      <description>This post explains the examination marking process so that it is consistent and fair to the students. This is before the age of &lt;em&gt;e-exams&lt;/em&gt;</description>
     </item>
     
     <item>
@@ -45,7 +45,7 @@ Instead of using the suggested model, I used the &amp;ldquo;Waifu Diffusion&amp;
       <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>
       
       <guid>https://jianloong.github.io/posts/vader/</guid>
-      <description>This post is a simple implementation of how to use the VADER sentiment analysis on a paragraph. VADER (Valence Aware Dictionary and sEntiment Reasoner) is a &amp;ldquo;lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media.&amp;rdquo;
+      <description>This post is a simple implementation of how to use the VADER sentiment analysis in a paragraph. VADER (Valence Aware Dictionary and sEntiment Reasoner) is a &amp;ldquo;lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media.&amp;rdquo;
 Enter text to be analysed: Sentiment analysis studies the subjective information in an expression, that is, the opinions, appraisals, emotions, or attitudes towards a topic, person or entity.</description>
     </item>
     
@@ -65,8 +65,8 @@ Let&amp;rsquo;s imagine if you are in the arcade and there is a Lucky Dip Machin
       <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://jianloong.github.io/posts/voronoi/</guid>
-      <description>One of the most common query when working with maps is the nearest neighbour query. This blog post will use Voronoi Diagrams to explain more regarding the nearest neighbour query.
-Below is an example of a Voronoi diagram generated using d3.js. One of the good use case of a voronoi diagram in real life applications would be where would be finding a place to build emergency services. This place should have the most number of neighbouring regions.</description>
+      <description>One of the most common queries when working with maps is the nearest neighbour query. This blog post will use Voronoi Diagrams to explain more regarding the nearest neighbour query.
+Below is an example of a Voronoi diagram generated using d3.js. One of the good use cases of a voronoi diagram in real-life applications would be where would be finding a place to build emergency services. This place should have the most number of neighbouring regions.</description>
     </item>
     
     <item>
@@ -75,8 +75,8 @@ Below is an example of a Voronoi diagram generated using d3.js. One of the good 
       <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://jianloong.github.io/posts/promiseall/</guid>
-      <description>This post is a an entry to describe a use case when the Promise.all JavaScript method is needed. The official reference can be found here. This assumes that the reader has a basic understanding of how promises work.
-Before we start, there is a need to understand how certain RESTful services are structured. For example, the Hacker News API has the end point called topstories. This end point however, does not contain any other information besides a list of item IDs.</description>
+      <description>This post is an entry to describe a use case when the Promise.all JavaScript method is needed. The official reference can be found here. This assumes that the reader has a basic understanding of how promises work.
+Before we start, there is a need to understand how certain RESTful services are structured. For example, the Hacker News API has an end-point called topstories. This end-point however, does not contain any other information besides a list of item IDs.</description>
     </item>
     
     <item>
@@ -86,8 +86,8 @@ Before we start, there is a need to understand how certain RESTful services are 
       
       <guid>https://jianloong.github.io/posts/tsp/</guid>
       <description>This post is best viewed using the light theme.
-This post uses GA to generate a high quality solution of the Traveling Salesman Problem.
-Traveling Salesman Problem using Genetic Algorithm This blog post is regarding using genetic algorithm to solve the Traveling Salesman Problem. In a one liner the TSP asks the following question: Given a list of cities and the distances between each pair of the cities, what is the shortest possible route that visits each city and returns to the origin city?</description>
+This post uses GA to generate a high-quality solution to the Traveling Salesman Problem.
+Traveling Salesman Problem using Genetic Algorithm This blog post is regarding using a genetic algorithm to solve the Traveling Salesman Problem. In a one-liner, the TSP asks the following question: Given a list of cities and the distances between each pair of the cities, what is the shortest possible route that visits each city and returns to the origin city?</description>
     </item>
     
     <item>
@@ -97,7 +97,7 @@ Traveling Salesman Problem using Genetic Algorithm This blog post is regarding u
       
       <guid>https://jianloong.github.io/posts/simplegeneticalgo/</guid>
       <description>This post is a simple implementation of Genetic Algorithm GA. Here, you would start with a random string and end up with the target string.
-This post is heavily inspired based on this website. However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it run behind the scenes.
+This post is heavily inspired based on this website. However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it runs behind the scenes.
 The implementation of it can be seen here</description>
     </item>
     
@@ -108,7 +108,7 @@ The implementation of it can be seen here</description>
       
       <guid>https://jianloong.github.io/posts/20191014_hackernews_word_cloud/</guid>
       <description>The word cloud generated here is based on the website hacker news.
-The reason this post is made, is so that it would easier to see the word that appeared the most for the day.
+The reason this post is; is so that it would easier to see the word that appeared the most for the day.
 Even though the use of a word cloud is not exactly a good representation of occurrence, it still looks nice.
 Please note that the posts here are generated based on the Hacker News API by doing GET requests.</description>
     </item>
@@ -120,7 +120,7 @@ Please note that the posts here are generated based on the Hacker News API by do
       
       <guid>https://jianloong.github.io/posts/hk/</guid>
       <description>Sentiment Analysis for the Sub-Reddit &amp;ldquo;HongKong&amp;rdquo; This post will perform sentiment analysis using AFINN. AFINN is a list of words rated for valence rated with an integer between minus five(negative) and plus five (positive). This implementation uses AFINN-en-165. 1
-This approach however is a very naive approach as it does not build any models to determine the context of the usage of the word itself.
+This approach however is very naive as it does not build any models to determine the context of the usage of the word itself.
 Please note that the posts here are generated based on the Reddit website by doing GET requests.</description>
     </item>
     
@@ -131,7 +131,7 @@ Please note that the posts here are generated based on the Reddit website by doi
       
       <guid>https://jianloong.github.io/posts/2019/reddit_word_cloud/</guid>
       <description>The word cloud generated here is based on the /r/programming subreddit for reddit.com
-The reason this post is made, is so that it would easier to see the word that appeared the most for the day.
+The reason this post is made; is so that it would easier to see the word that appeared the most for the day.
 Even though the use of a word cloud is not exactly a good representation of occurrence, it still looks nice.
 Please note that the posts here are generated based on the Reddit website by doing GET requests.</description>
     </item>
@@ -143,7 +143,7 @@ Please note that the posts here are generated based on the Reddit website by doi
       
       <guid>https://jianloong.github.io/posts/amitheasshole/</guid>
       <description>The charts here are visualisation of the Am I the Asshole? subreddit which can be found here
-Basically the subreddit describes itself as&amp;hellip;
+The subreddit describes itself as&amp;hellip;
 A catharsis for the frustrated moral philosopher in all of us, and a place to finally find out if you were wrong in an argument that&amp;rsquo;s been bothering you. Tell us about any non-violent conflict you have experienced; give us both sides of the story, and find out if you&amp;rsquo;re right, or you&amp;rsquo;re the asshole.</description>
     </item>
     

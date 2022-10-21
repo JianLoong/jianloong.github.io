@@ -11,9 +11,9 @@ cover:
 <script src="https://unpkg.com/d3@5.12.0/dist/d3.min.js"></script>
 <script src="/posts/d3-delaunday.min.js"></script>
 
-One of the most common query when working with maps is the nearest neighbour query. This blog post will use Voronoi Diagrams to explain more regarding the nearest neighbour query.
+One of the most common queries when working with maps is the nearest neighbour query. This blog post will use Voronoi Diagrams to explain more regarding the nearest neighbour query.
 
-Below is an example of a Voronoi diagram generated using d3.js. One of the good use case of a voronoi diagram in real life applications would be where would be **finding a place to build emergency services.** This place should have the most number of neighbouring regions. For example, if you `click` on the region in the voronoi diagram below, you can see how many regions in which it would consider this region to be its neighbour. The diagram is randomly generated based on a number of points and thus every refresh of this page will show a different voronoi diagram.
+Below is an example of a Voronoi diagram generated using d3.js. One of the good use cases of a voronoi diagram in real-life applications would be where would be **finding a place to build emergency services.** This place should have the most number of neighbouring regions. For example, if you `click` on the region in the Voronoi diagram below, you can see how many regions in which it would consider this region to be its neighbour. The diagram is randomly generated based on a number of points and thus every refresh of this page will show a different Voronoi diagram.
 
 <div id="canvas" style="text-align:center;max-width:30em;margin:auto;"></div>
 
@@ -151,8 +151,8 @@ const renderCell = (svg, voronoi, index, color) => {
 #### Lessons from this blog post.
 
 - The learning curve for d3.js is **pretty insane.**
-- Voronois are pretty easy using d3.
-- Generators can be iterated using the for...of construct. [MDN link](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators)
+- Voronoi are pretty easy using d3.
+- Generators can be iterated using the ``for...of`` construct. [MDN link](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators)
 - There is a way to make SVG responsive. Refer [this](https://medium.com/@louisemoxy/a-simple-way-to-make-d3-js-charts-svgs-responsive-7afb04bc2e4b) post.
 
 <!-- https://bl.ocks.org/aaizemberg/raw/8063f8c2d1adb7c7ee68/ -->

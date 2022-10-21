@@ -14,7 +14,7 @@ cover:
 
 This post will perform **sentiment analysis** using AFINN. AFINN is a list of words rated for valence rated with an integer between minus five(negative) and plus five (positive). This implementation uses ***AFINN-en-165***. <sup>[1](#1)</sup>
 
-This approach however is a very naive approach as it does not build any models to determine the context of the usage of the word itself.
+This approach however is very naive as it does not build any models to determine the context of the usage of the word itself.
 
 Please note that the posts here are generated based on the Reddit website by doing `GET` requests. So, it is based on their current entries. So, it will be **refreshed** when the page is reloaded.
 

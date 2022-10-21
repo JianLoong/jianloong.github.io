@@ -16,7 +16,7 @@
       <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>
       
       <guid>https://jianloong.github.io/posts/vader/</guid>
-      <description>This post is a simple implementation of how to use the VADER sentiment analysis on a paragraph. VADER (Valence Aware Dictionary and sEntiment Reasoner) is a &amp;ldquo;lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media.&amp;rdquo;
+      <description>This post is a simple implementation of how to use the VADER sentiment analysis in a paragraph. VADER (Valence Aware Dictionary and sEntiment Reasoner) is a &amp;ldquo;lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media.&amp;rdquo;
 Enter text to be analysed: Sentiment analysis studies the subjective information in an expression, that is, the opinions, appraisals, emotions, or attitudes towards a topic, person or entity.</description>
     </item>
     

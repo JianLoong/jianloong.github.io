@@ -14,7 +14,7 @@ ShowShareButtons: true
 
 The charts here are visualisation of the ``Am I the Asshole?`` subreddit which can be found [here](https://www.reddit.com/r/AmItheAsshole/)
 
-Basically the subreddit describes itself as...
+The subreddit describes itself as...
 
 *A catharsis for the frustrated moral philosopher in all of us, and a place to finally find out if you were wrong in an argument that's been bothering you. Tell us about any non-violent conflict you have experienced; give us both sides of the story, and find out if you're right, or you're the asshole. See our ~~*Best Of*~~ "Most Controversial" at /r/AITAFiltered!*
 

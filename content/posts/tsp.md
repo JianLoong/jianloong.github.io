@@ -15,7 +15,7 @@ This post is best viewed using the light theme.
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist-plugin-legend/0.6.2/chartist-plugin-legend.min.js"></script>
 
 
-This post uses GA to generate a high quality solution of the Traveling Salesman Problem. 
+This post uses GA to generate a high-quality solution to the Traveling Salesman Problem. 
 
 
 <div id="cities" class="ct-perfect-fourth"></div>
@@ -23,11 +23,11 @@ This post uses GA to generate a high quality solution of the Traveling Salesman 
 ### Traveling Salesman Problem using Genetic Algorithm
 
 
-This blog post is regarding using genetic algorithm to solve the Traveling Salesman Problem. In a one liner the TSP asks the following question: **_Given a list of cities and the distances between each pair of the cities, what is the shortest possible route that visits each city and returns to the origin city?"_**
+This blog post is regarding using a genetic algorithm to solve the Traveling Salesman Problem. In a one-liner, the TSP asks the following question: **_Given a list of cities and the distances between each pair of the cities, what is the shortest possible route that visits each city and returns to the origin city?"_**
 
-The conditions in this scenario are that **no point can be visited twice and it must return to the starting point.** The selected starting point here is New York. (The starting point does not really matter in this scenario.). There are times however, that a point maybe the revisited more than once in order to achieve a better solution. The number of cities in this scenario is 13. In this specific implementation, it will never visit the same city twice.
+The conditions in this scenario are that **no point can be visited twice and it must return to the starting point.** The selected starting point here is New York. (The starting point does not matter in this scenario.). There are times, that a point maybe the revisited more than once to achieve a better solution. The number of cities in this scenario is 13. In this specific implementation, it will never visit the same city twice.
 
-The inspiration for this post is based on the google OR-Tools found [here](https://developers.google.com/optimization/routing/tsp). This blog post, however uses Genetic Algorithm to obtain the answer. It is implemented with a **web worker** which runs in the browser based on **JavaScript**.
+The inspiration for this post is based on the google OR-Tools found [here](https://developers.google.com/optimization/routing/tsp). This blog post; uses Genetic Algorithm to obtain the answer. It is implemented with a **web worker** which runs in the browser based on **JavaScript**.
 
 I will also reuse the genetic algorithm implementation written for another blog post however with different fitness functions and different cross-over methodologies.
 
@@ -49,7 +49,7 @@ I will also reuse the genetic algorithm implementation written for another blog 
 
 **Total number of cities - 13.**
 
-In order to the Genetic Algorithm to work, a distance matrix needs to be given to it. This distance matrix is based on the "Euclidean Distance" and not Road Network distance. The distance matrix is obtained from [here](https://developers.google.com/optimization/routing/tsp) which has 13 cities in the United States.
+For the Genetic Algorithm to work, a distance matrix needs to be given to it. This distance matrix is based on the "Euclidean Distance" and not the road network distance. The distance matrix is obtained from [here](https://developers.google.com/optimization/routing/tsp) which has 13 cities in the United States.
 
 <!-- ### The Distance Matrix
 
@@ -129,15 +129,15 @@ The distance matrix here is obtained by calculating the distance between each po
 
 #### Lessons from this post
 
-- The earth is not flat! Mapping putting coordinates using latitude and longitude on a chart, it would work in a different way so it displays beautifully. Latitude and longitude needs to be swapped.
+- The earth is not flat! Mapping putting coordinates using latitude and longitude on a chart; would work in a different way so it displays beautifully. Latitude and longitude need to be swapped.
 
-- Most chart API do not let you specify both the ***x-axis*** and ***y-axis*** at the same time. This is especially true if the chart is able to generate SVG diagrams. SVG diagrams are always nicer and would generally be of more responsive nature at the end of the day.
+- Most chart APIs do not let you specify both the ***x-axis*** and ***y-axis*** at the same time. This is especially true if the chart is able to generate SVG diagrams. SVG diagrams are always nicer and would generally be more responsive at the end of the day.
 
-- You can use a series graph to draw lines from a point to point in the chartist API. However, chartist API does not like the situation where there are two values on the same axis. (So it is not able to draw a straight line on the x-axis because of the nature of a series chart. An example of this is where there is a point on 30,55 and 30,65.
+- You can use a series graph to draw lines from point to point in the chartist API. However, chartist API does not like the situation where there are two values on the same axis. (So it is not able to draw a straight line on the x-axis because of the nature of a series chart. An example of this is where there is a point on 30,55 and 30,65.
 
 - There are specific data sets in which people benchmark their TSP solutions.
 
-- The GA will downgrade into a random search if the mutation rate is too high. However, the mutation rate can always be change to tailor to the specific use case.
+- The GA will downgrade into a random search if the mutation rate is too high. However, the mutation rate can always be changed to tailor to the specific use case.
 
 <script>
 

@@ -17,8 +17,8 @@
       
       <guid>https://jianloong.github.io/posts/tsp/</guid>
       <description>This post is best viewed using the light theme.
-This post uses GA to generate a high quality solution of the Traveling Salesman Problem.
-Traveling Salesman Problem using Genetic Algorithm This blog post is regarding using genetic algorithm to solve the Traveling Salesman Problem. In a one liner the TSP asks the following question: Given a list of cities and the distances between each pair of the cities, what is the shortest possible route that visits each city and returns to the origin city?</description>
+This post uses GA to generate a high-quality solution to the Traveling Salesman Problem.
+Traveling Salesman Problem using Genetic Algorithm This blog post is regarding using a genetic algorithm to solve the Traveling Salesman Problem. In a one-liner, the TSP asks the following question: Given a list of cities and the distances between each pair of the cities, what is the shortest possible route that visits each city and returns to the origin city?</description>
     </item>
     
   </channel>

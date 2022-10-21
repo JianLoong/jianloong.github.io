@@ -16,8 +16,8 @@
       <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://jianloong.github.io/posts/voronoi/</guid>
-      <description>One of the most common query when working with maps is the nearest neighbour query. This blog post will use Voronoi Diagrams to explain more regarding the nearest neighbour query.
-Below is an example of a Voronoi diagram generated using d3.js. One of the good use case of a voronoi diagram in real life applications would be where would be finding a place to build emergency services. This place should have the most number of neighbouring regions.</description>
+      <description>One of the most common queries when working with maps is the nearest neighbour query. This blog post will use Voronoi Diagrams to explain more regarding the nearest neighbour query.
+Below is an example of a Voronoi diagram generated using d3.js. One of the good use cases of a voronoi diagram in real-life applications would be where would be finding a place to build emergency services. This place should have the most number of neighbouring regions.</description>
     </item>
     
   </channel>
