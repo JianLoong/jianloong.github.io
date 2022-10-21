@@ -22,14 +22,22 @@ Instead of using the suggested model, I used the &amp;ldquo;Waifu Diffusion&amp;
     </item>
     
     <item>
+      <title>Setting up PiHole as an ad blocker</title>
+      <link>https://jianloong.github.io/posts/pihole/</link>
+      <pubDate>Thu, 20 Oct 2022 21:30:56 +1100</pubDate>
+      
+      <guid>https://jianloong.github.io/posts/pihole/</guid>
+      <description>An educational approach to crawling Reddit using Python and AWS EC2 without using Reddit API</description>
+    </item>
+    
+    <item>
       <title>Sentiment Analysis using VADER in JavaScript</title>
       <link>https://jianloong.github.io/posts/vader/</link>
       <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>
       
       <guid>https://jianloong.github.io/posts/vader/</guid>
-      <description>This post is a simple implementation of how to use the VADER sentiment analysis on a paragraph.
-Enter text to be analysed: Sentiment analysis studies the subjective information in an expression, that is, the opinions, appraisals, emotions, or attitudes towards a topic, person or entity. Expressions can be classified as positive, negative, or neutral. For example: I really like the new design of your website!Run
-Results NegativePositiveCompoundReferences Cjhutto CJHUTTO/Vadersentiment: Vader sentiment analysis.</description>
+      <description>This post is a simple implementation of how to use the VADER sentiment analysis on a paragraph. VADER (Valence Aware Dictionary and sEntiment Reasoner) is a &amp;ldquo;lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media.&amp;rdquo;
+Enter text to be analysed: Sentiment analysis studies the subjective information in an expression, that is, the opinions, appraisals, emotions, or attitudes towards a topic, person or entity.</description>
     </item>
     
     <item>
