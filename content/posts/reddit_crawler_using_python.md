@@ -14,7 +14,11 @@ hasMermaid: true
 draft: true
 ---
 
+### Introduction
 
+As of March 2022, Reddit ranks as the 9th-most-visited website in the world and 6th most-visited website in the US according to Wikipedia.
+
+What is interesting about Reddit is that it has ``subreddits`` for people with different interest.
 
 ```python
 
