@@ -2,6 +2,7 @@ baseURL: "https://jianloong.github.io/"
 title: Jian
 paginate: 5
 theme: hugo-PaperMod
+publishDir: docs
 
 enableRobotsTXT: true
 buildDrafts: false
@@ -101,7 +102,7 @@ params:
 
   analytics:
     google:
-      SiteVerificationTag: "XYZabc"
+      SiteVerificationTag: "UA-55422968-1"
 
   cover:
     hidden: false # hide everywhere but not in structured data
