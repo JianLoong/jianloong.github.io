@@ -17,7 +17,7 @@
       
       <guid>https://jianloong.github.io/posts/simplegeneticalgo/</guid>
       <description>This post is a simple implementation of Genetic Algorithm GA. Here, you would start with a random string and end up with the target string.
-This post is heavily inspired based on this website. However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it run behind the scenes.
+This post is heavily inspired based on this website. However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it runs behind the scenes.
 The implementation of it can be seen here</description>
     </item>
     

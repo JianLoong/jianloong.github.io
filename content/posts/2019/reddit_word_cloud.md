@@ -17,7 +17,7 @@ UseHugoToc: true
 
 The word cloud generated here is based on the <strong>/r/programming</strong> subreddit for reddit.com
 
-The reason this post is made, is so that it would easier to see the word that appeared the most for the day.
+The reason this post is made; is so that it would easier to see the word that appeared the most for the day.
 
 Even though the use of a word cloud is not exactly a good representation of occurrence, it still looks nice.
 

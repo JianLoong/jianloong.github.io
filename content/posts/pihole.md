@@ -21,9 +21,9 @@ This post will explain how I set up my home computing devices to use PiHole. The
 
 
 
-### Things needed
+### Things Needed
 
-I made all my puchases from [Core Electronics](https://core-electronics.com.au/) and so far, for me their service and delivery times are top notch. It also came with some stickers.
+I made all my purchases from [Core Electronics](https://core-electronics.com.au/) and so far, for me their service and delivery times are top-notch. It also came with some stickers.
 
 - Raspberry Pi 4 Model B 1GB 
 - MicroSD card 
@@ -37,42 +37,42 @@ Besides that I also purchased
 
 ### Steps
 
-1. The SD card I puchased came with NOOBs so I flashed it Raspbian. Using the RaspberryPi imager makes this step relatively simple.
+1. The SD card I purchased came with NOOBs so I flashed it Raspbian. Using the RaspberryPi imager makes this step relatively simple.
 
 {{< figure src="/images/raspberrypiimager.png" title="" align="center">}}
 
-Remember to also configure the advance options
+Remember to also configure the ``advance options``
 
 - Enable SSH 
 - Set username and password
 - Configure wireless LAN
 - Set locale settings
 
-This step is important so that when your RaspberryPi starts, you can ``ssh`` into it instead of using a connecting a monitor and keyboard to it.
+This step is important so that when your RaspberryPi starts, you can ``ssh`` into it instead of using a connecting monitor and keyboard to it.
 
 {{< figure src="/images/advanceoptions.png" title="" align="center">}}
 
-2. After that step is done, when you start the RaspberryPi, you can connect to it via ``ssh``. To do this, one way is to find out the RaspberryPi IP address for the initial time. There are a few ways you can do this, one way is to use the ``arp -a`` on the command line but you can also use app that is able to scan your WiFi network for devices. The Network Scanner app on the Google PlayStore is an example of an app you can use. The RaspberryPi device will have network hostname or vendor name as "Raspberry Pi"
+2. After that step is done, when you start the RaspberryPi, you can connect to it via ``ssh``. To do this, one way is to find out the RaspberryPi IP address for the initial time. There are a few ways you can do this, one way is to use the ``arp -a`` on the command line but you can also use an app that is able to scan your WiFi network for devices. The Network Scanner app on the Google PlayStore is an example of an app you can use. The RaspberryPi device will have a network hostname or vendor name as "Raspberry Pi"
 
 {{< figure src="/images/netscan.jpg" title="" align="center">}}
 
-Another way without knowing the IP addressing would be to use the hostname. The hostname for the RaspberryPI is ``pi.hole`` as the host name if you cannot get IP address of the RaspberryPi. So, either way would allow you to ``ssh`` into the device.
+Another way without knowing the IP address would be to use the hostname. The hostname for the RaspberryPI is ``pi.hole`` as the hostname if you cannot obtain the IP address of the RaspberryPi. So, either way; it would allow you to ``ssh`` into the device.
 
-3. Using ``putty`` we will connect to the RaspberryPi. You can either use the IP address you found earlier, or use the hostname.
+1. Using ``putty`` we will connect to the RaspberryPi. You can either use the IP address you found earlier, or use the hostname.
 
 {{< figure src="/images/putty.png" title="" align="center">}}
 
 {{< figure src="/images/putty2.png" title="" align="center">}}
 
-4. Then you will need to provide the username and password you have setup earlier. If you managed to login it, you should see something like the image below.
+4. Then you will need to provide the username and password you have setup earlier. If you managed to log in it, you should see something like the image below.
 
   {{< figure src="/images/puttypihole.png" title="" align="center">}}
 
-5. Now, we can begin installing Pi Hole itself. The instructions to install it can be found [here](https://github.com/pi-hole/pi-hole/#one-step-automated-install). Since the installation process is pretty much automated from this step, it should be pretty straight forward. The only hurdle that you can encounter is where it asked you to set up a static IP address.
+5. Now, we can begin installing PiHole itself. The instructions to install it can be found [here](https://github.com/pi-hole/pi-hole/#one-step-automated-install). Since the installation process is pretty much automated from this step, it should be pretty straightforward. The only hurdle that you can encounter is when it asked you to set up a static IP address.
 
 6. If so, you can set up a static IP address by following the instructions at this [site](https://www.makeuseof.com/raspberry-pi-set-static-ip/)
 
-7. After you have completed the installation of Pi Hole, all that is needed to be done is to either set your devices to use PiHole as the DNS server or change the setting on the router itself. I decided to only change the settings on my devices locally as setting it on the router would invade the privacy of my housemates.
+7. After you have completed the installation of PiHole, all that is needed to be done is to either set your devices to use PiHole as the DNS server or change the setting on the router itself. I decided to only change the settings on my devices locally as setting it on the router would invade the privacy of my housemates.
 
   {{< figure src="/images/runningpihole.jpg" title="" align="center">}}
 
@@ -89,7 +89,7 @@ Another way without knowing the IP addressing would be to use the hostname. The 
 
 ### Conclusion
 
-It has become very easy to use RaspberryPi because of the availability of online resources and also the better tools we now have. Previously, it was slightly more complicated to enable ``ssh` and on the RaspberryPi as often times, you would need to connect it to a mouse, keyboard as well as monitor for the initial setup but now it is made simple with the imaging tool.
+It has become very easy to use RaspberryPi because of the availability of online resources and also the better tools we now have. Previously, it was slightly more complicated to enable ``ssh` and on the RaspberryPi as oftentimes, you would need to connect it to a mouse, keyboard as well as monitor for the initial setup but now it is made simple with the imaging tool.
 
 The overall time taken to set it up is less than 30 minutes. Also please remember that even though having a PiHole setup is nice, it will also be useful to still run extensions that block ads if you wish to not see ads.
 
