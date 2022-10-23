@@ -33,9 +33,9 @@ Hopefully, that since I am no longer working in Monash, the unit is still being 
 
 ### GeneticJS
 
-This project was an extension inspired by the post made [here](http://localhost:8080/posts/tsp/) 
+This project was an extension inspired by the post made [here](https://jianliew.me/posts/tsp/) 
 
-However during that, time, I was not able to dedicate enough of my time to complete the project. However the baseline of still exist and working, potentially
+However during that, time, I was not able to dedicate enough of my time to complete the project. However, the baseline still exist and working, potentially
 including it in future projects.
 
 {{< figure src="/images/genetic.png" title="" align="center" link="https://github.com/JianLoong/genetic-js">}}

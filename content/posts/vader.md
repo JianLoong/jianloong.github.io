@@ -10,6 +10,7 @@ cover:
 
 This post is a simple implementation of how to use the VADER sentiment analysis in a paragraph. VADER (Valence Aware Dictionary and sEntiment Reasoner) is a "lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media."
 
+For the project page, please go [here](https://jianliew.me/sentimentanalysis)
 
 <div>
     <hr>
@@ -43,26 +44,21 @@ if (window.Worker) {
 
   let isResultTableShown = false;
 
-
   button.onclick = function() {
     if (entry.value == "")
         return;
-    console.log("Test")
     myWorker.postMessage(entry.value);
   }
 
 
-  myWorker.onmessage = function(e) {
-  console.log("finished")
-  console.log(e)
-      
-  let text = result.innerHTML;
-  result.innerHTML = "<tr><td>" + e.data.neg + "</td><td>" + e.data.pos + "</td><td>" + e.data.compound+"</td</tr>";
+  myWorker.onmessage = function(e) {      
+    let text = result.innerHTML;
+    result.innerHTML = "<tr><td>" + e.data.neg + "</td><td>" + e.data.pos + "</td><td>" + e.data.compound+"</td></tr>";
 
-  if (isResultTableShown == false){
-    isResultTableShown = true;
-    $(".result-table").show();
-  }
+    if (isResultTableShown == false){
+      isResultTableShown = true;
+      $(".result-table").show();
+    }
   }
 }
 
