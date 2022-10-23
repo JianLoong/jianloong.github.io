@@ -63,16 +63,16 @@ params:
   assets:
     # disableHLJS: true # to disable highlight.js
     # disableFingerprinting: true
-    favicon: "/images/favicon.ico"
-    favicon16x16: "/images/favicon-16x16.png"
-    favicon32x32: "/images/favicon-32x32.png"
-    apple_touch_icon: "/images/apple-touch-icon.png"
-    safari_pinned_tab: "/images/apple-touch-icon-180x180.png"
+    favicon: "https://jianliew.me/images/favicon.ico"
+    favicon16x16: "https://jianliew.me/images/favicon-16x16.png"
+    favicon32x32: "https://jianliew.me/images/favicon-32x32.png"
+    apple_touch_icon: "https://jianliew.me/images/apple-touch-icon.png"
+    safari_pinned_tab: "https://jianliew.me/images/apple-touch-icon-180x180.png"
 
-  label:
-    text: "Home"
-    icon: /images/apple-touch-icon.png
-    iconHeight: 35
+  # label:
+  #   text: "Home"
+  #   icon: https://jianliew.me/images/apple-touch-icon.png
+  #   iconHeight: 35
 
   # profile-mode
   profileMode:
@@ -130,6 +130,10 @@ menu:
       name: about
       url: /about/
       weight: 5
+    - identifier: projects
+      name: projects
+      url: /projects/
+      weight: 8
     - identifier: search
       name: search
       url: /search/
