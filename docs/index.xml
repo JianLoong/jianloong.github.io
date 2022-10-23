@@ -169,6 +169,18 @@ Email - &amp;#32;&amp;#32;</description>
       <description>Email - &amp;#32;&amp;#32;</description>
     </item>
     
+    <item>
+      <title>Projects</title>
+      <link>https://jianloong.github.io/projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://jianloong.github.io/projects/</guid>
+      <description>Sentiment Analysis This project is a collection of several lexicons used for sentiment analysis. Project is done purely using JavaScript with no node dependencies.
+It features several well known lexicons for sentiment analysis and also real time evaluation of the text.
+It can be found here. It is also on GitHub here
+FIT5032 - Internet Applications Development This project was done in the year 2018. I made major changes to both the readings and tutorial materials.</description>
+    </item>
+    
     
   </channel>
 </rss>
