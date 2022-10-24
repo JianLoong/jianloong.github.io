@@ -51,6 +51,15 @@ Enter text to be analysed: Sentiment analysis studies the subjective information
     </item>
     
     <item>
+      <title>Min and Max value of an Array (Java)</title>
+      <link>https://jianloong.github.io/posts/minmax/</link>
+      <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://jianloong.github.io/posts/minmax/</guid>
+      <description>Getting the min and value of an array in Java</description>
+    </item>
+    
+    <item>
       <title>Singleton &amp; Observer Pattern (Java)</title>
       <link>https://jianloong.github.io/posts/singletonobserverpattern/</link>
       <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
