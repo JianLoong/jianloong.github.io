@@ -19,6 +19,20 @@ It can be found [here](https://jianliew.me/sentimentanalysis). It is also on Git
 
 ---
 
+### Reddit Crawler and Visualisation 
+
+This project is a Reddit data-crawler that does not depend on the Reddit API. It is mean to run on a remote machine to run crawlers are predetermined time as 
+well as building a simple dashboard based on on particular subreddit.
+
+This project is inspired by the post [here](https//jianliew.me/posts/amitheasshole/))
+
+{{< figure src="/images/redditvisual.png" title="" align="center" link="https://jianliew.me/reddit-data">}}
+
+It can be found [here](https://jianliew.me/redditvisual). It is also on GitHub [here](https://github.com/JianLoong/reddit-data)
+
+---
+
+
 ### FIT5032 - Internet Applications Development
 
 This project was done in the year 2018. I made major changes to both the readings and tutorial materials. 
