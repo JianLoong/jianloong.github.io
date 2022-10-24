@@ -51,6 +51,15 @@ Enter text to be analysed: Sentiment analysis studies the subjective information
     </item>
     
     <item>
+      <title>UML Statecharts</title>
+      <link>https://jianloong.github.io/posts/statechart/</link>
+      <pubDate>Sun, 24 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jianloong.github.io/posts/statechart/</guid>
+      <description>This post attempts to explain UML Statecharts as simple as possible.</description>
+    </item>
+    
+    <item>
       <title>Min and Max value of an Array (Java)</title>
       <link>https://jianloong.github.io/posts/minmax/</link>
       <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
