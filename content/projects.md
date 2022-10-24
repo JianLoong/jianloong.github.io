@@ -21,8 +21,8 @@ It can be found [here](https://jianliew.me/sentimentanalysis). It is also on Git
 
 ### Reddit Crawler and Visualisation 
 
-This project is a Reddit data-crawler that does not depend on the Reddit API. It is mean to run on a remote machine to run crawlers are predetermined time as 
-well as building a simple dashboard based on on particular subreddit.
+This project is a Reddit data-crawler that does not depend on the Reddit API. It is meant to be ran on a remote machine so crawlers can be ran predetermined time. 
+It also builds a simple dashboard based on on particular subreddit for demo purpose.
 
 This project is inspired by the post [here](https//jianliew.me/posts/amitheasshole/))
 
