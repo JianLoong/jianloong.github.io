@@ -10,20 +10,26 @@ hasMermaid: true
 draft: false
 ---
 
-Often times, students and even professional developers do not see a need for UML diagrams.
+UML Diagrams are important. Statecharts are probably one of the more interesting diagrams.
 
-This post attempts to explain the train of thought while trying to make a statechart and why it is useful.
+This post attempts to explain my train of thought while trying to make a statechart and why it is useful.
 
 ### What are statecharts?
 
+Statecharts are just states, but more interestingly, it attempts to model a **single** object. It might seem simple at first but there is more to it. Most of the times, and even online resources confuse statechart and activity diagrams. 
+
+Here is my take on attempting to draw a statechart.
+
 Let's just take a very simple example of an ``Order`` object in an e-Commerce system. Something we all know quite well.
+
+If you are not interested in the thought process of drawing the statechart, just scroll down for the finished product.
 
 Asking the client who wants the system is a very important part of the process. We can start off by asking thing like
 
 - When a customer places an order what happens? - ``Placed``
 - What happens if there is nothing in stock? - ``Pending``
 
-All these are just basic questions that can be asked, and we now we have the very first few states. It might be incorrect for now, but is the beauty of the modern iterative process.
+All these are just basic questions that can be asked, and we now we have the very first few states. It might be incorrect for now, but is the beauty of the modern iterative process. It is completely fine to attempt to do the statechart multiple times to gain a better understanding of the object in the system.
 
 {{<mermaid align="center">}}
 
@@ -75,7 +81,6 @@ stateDiagram-v2
 
 {{< /mermaid >}}
 
-<p align="center"><strong>Step 3</strong> - More and more questions to understand the requirements</p>
 
 Now we are at a stage, where we need to ask the clients more questions because, why would the ``placed`` state be needed in the first place? It seems to serve no purpose.
 Why not, the first state is ``pending``? And the only way for an order to be in the ``pending`` state is when all the requirements are satisfied.
@@ -121,7 +126,7 @@ stateDiagram-v2
 
 {{< /mermaid >}}
 
-Now we continue braining storm of the events.
+Now we continue brain storming of the events.
 
 Whenever we have two or more states, what we are interested in is **what events that could cause one state to become the other**?
 
@@ -173,12 +178,64 @@ Notice, that by going through the step by step process, we can now ask the clien
 - If the system does it after he pays, there **might be times when other users, might be able to place an order but he cannot pay for it**, do you want that to happen?
 - If the system does it the minute after the place the order, **how long do you want the system to hold it before the stock is returned?**, what if the customer does not pay?
  Will this not be bad for business?
-- Also, remember how the customer paid for the items but now we do not have it in stock?
+- Does it make sense for it to go from ``paid`` to ``pending``?
 
 We are not done yet, though...............
 
 What about the ``cancelled`` state?
 
+We need to continue asking questions to the client, because they know the system the best, and if you make too many assumptions things could go wrong.
+
+Let's put it in and try to complete the diagram.
+
+{{<mermaid align="center">}}
+stateDiagram-v2
+    [*] --> Pending : Customer places an order
+    Pending-->Paid: Customer pays for the order
+    Paid --> Cancelled: [Guards] 
+    Pending --> Cancelled: [Guards] 
+    
+    Pending --> [*]
+    Paid --> [*]
+    Cancelled --> [*]
+
+    note right of Paid
+            - Payment must be successful
+            - Items must still be in stock
+            - Items are now deducted
+    end note
+         note left of Pending
+            - Items must be in stock
+            - Items purchased must not exceed inventory
+            - Items purchased must not be deducted yet
+            - Items purchased must not be above limit set
+        end note
+
+         note left of Cancelled
+            - Items no longer in stock
+            - Payment not made within a certain number of days
+            - Cancelled as per customer request
+        end note
+{{< /mermaid >}}
+
+
+With that we can see it a bit more clearly what is happening and the limitations of our system.
+
+### Explained
+
+In plain English.
+
+- It is possible for a customer to have an Order in the ``pending`` state. This happens when the customer places an order but does not pay for it. 
+- However, the system will automatically change the ``pending`` state to the ``cancelled`` state if the items are no longer in stock or a payment has not been made after a set duration.
+- The ``pending`` state can be the final state of the Order.
+- The stock numbers are only reduced after a customer has paid. This means that there is a potential for another customer to have an item at ``pending`` state but the item will not be in stock. This customer might not be able to make a payment due to the nature of the system.
+
+
+We are obviously far from done, as if we pry into the requirements more, we would discover more and more requirements and perhaps more so states, hence it is possible to have sub-states in UML State Chart diagrams but, I shall call the current statechart the first iteration.
+
+
+### Conclusion
+
 The idea here is that, statecharts will allow us to understand the requirements better and what to do. We can also now use **enums** better in our system as we now understand how each of them would happen. For the ``Order`` object, it is pretty clear to us, but most of the time we would be dealing with requirements and systems which are foreign to us.
 
-I hope this blog post is useful.
+I hope this blog post is useful. I do personally find that with the aid of statecharts, I could understand the system more, after all, it is part of the software engineering process.
