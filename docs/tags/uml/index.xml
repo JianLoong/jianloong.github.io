@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>UML on Jian</title>
+    <link>https://jianloong.github.io/tags/uml/</link>
+    <description>Recent content in UML on Jian</description>
+    <image>
+      <url>https://jianloong.github.io/</url>
+      <link>https://jianloong.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 24 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://jianloong.github.io/tags/uml/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UML Statecharts</title>
+      <link>https://jianloong.github.io/posts/statechart/</link>
+      <pubDate>Sun, 24 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jianloong.github.io/posts/statechart/</guid>
+      <description>This post attempts to explain UML Statecharts as simple as possible.</description>
+    </item>
+    
+  </channel>
+</rss>
