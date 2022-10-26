@@ -194,10 +194,10 @@ Email - &amp;#32;&amp;#32;</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://jianloong.github.io/projects/</guid>
-      <description>Sentiment Analysis This project is a collection of several lexicons used for sentiment analysis. Project is done purely using JavaScript with no node dependencies.
-It features several well known lexicons for sentiment analysis and also real time evaluation of the text.
+      <description>Word Cloud Generator This project is a Word Cloud Generator using d3.js, to enable the word clouds to be generated and configured easily.
+It also features several data pre-processing methods to make the word cloud more informative.
 It can be found here. It is also on GitHub here
-Reddit Crawler and Visualisation This project is a Reddit data-crawler that does not depend on the Reddit API. It is meant to be ran on a remote machine so crawlers can be ran predetermined time.</description>
+Sentiment Analysis This project is a collection of several lexicons used for sentiment analysis. Project is done purely using JavaScript with no node dependencies.</description>
     </item>
     
     

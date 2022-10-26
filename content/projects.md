@@ -7,6 +7,17 @@ author: ""
 ---
 
 
+### Word Cloud Generator
+
+This project is a Word Cloud Generator using d3.js, to enable the word clouds to be generated and configured easily.
+
+It also features several data pre-processing methods to make the word cloud more informative. 
+
+{{< figure src="/images/wordcloud.png" title="" align="center" link="https://jianliew.me/word-cloud-generator">}}
+
+It can be found [here](https://jianliew.me/word-cloud-generator). It is also on GitHub [here](https://github.com/JianLoong/word-cloud-generator)
+
+
 ### Sentiment Analysis 
 
 This project is a collection of several lexicons used for sentiment analysis. Project is done purely using JavaScript with no node dependencies.
@@ -24,7 +35,7 @@ It can be found [here](https://jianliew.me/sentimentanalysis). It is also on Git
 This project is a Reddit data-crawler that does not depend on the Reddit API. It is meant to be ran on a remote machine so crawlers can be ran predetermined time. 
 It also builds a simple dashboard based on on particular subreddit for demo purpose.
 
-This project is inspired by the post [here](https//jianliew.me/posts/amitheasshole/))
+This project is inspired by the post [here](https//jianliew.me/posts/amitheasshole/)
 
 {{< figure src="/images/redditvisual.png" title="" align="center" link="https://jianliew.me/reddit-data">}}
 
