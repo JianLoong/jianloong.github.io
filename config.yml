@@ -62,7 +62,7 @@ params:
 
   assets:
     # disableHLJS: true # to disable highlight.js
-    # disableFingerprinting: true
+    disableFingerprinting: true
     favicon: "https://jianliew.me/images/favicon.ico"
     favicon16x16: "https://jianliew.me/images/favicon-16x16.png"
     favicon32x32: "https://jianliew.me/images/favicon-32x32.png"
@@ -166,8 +166,3 @@ outputs:
     - HTML
     - RSS
     - JSON # is necessary
-    
-markup:
-  goldmark:
-    renderer:
-      unsafe: true

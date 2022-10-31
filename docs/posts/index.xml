@@ -47,7 +47,8 @@ Instead of using the suggested model, I used the &amp;ldquo;Waifu Diffusion&amp;
       <guid>https://jianloong.github.io/posts/vader/</guid>
       <description>This post is a simple implementation of how to use the VADER sentiment analysis in a paragraph. VADER (Valence Aware Dictionary and sEntiment Reasoner) is a &amp;ldquo;lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media.&amp;rdquo;
 For the project page, please go here
-Enter text to be analysed: Sentiment analysis studies the subjective information in an expression, that is, the opinions, appraisals, emotions, or attitudes towards a topic, person or entity.</description>
+Run
+Results References Cjhutto CJHUTTO/Vadersentiment: Vader sentiment analysis. vader (valence aware dictionary and sentiment reasoner) is a lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media, and works well on texts from other domains.</description>
     </item>
     
     <item>
