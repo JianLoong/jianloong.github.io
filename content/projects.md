@@ -37,9 +37,9 @@ It also builds a simple dashboard based on on particular subreddit for demo purp
 
 This project is inspired by the post [here](https//jianliew.me/posts/amitheasshole/)
 
-{{< figure src="/images/redditvisual.png" title="" align="center" link="https://jianliew.me/reddit-data">}}
+{{< figure src="/images/redditvisual.png" title="" align="center" link="https://jianliew.me/reddit-store">}}
 
-It can be found [here](https://jianliew.me/redditvisual). It is also on GitHub [here](https://github.com/JianLoong/reddit-data)
+It can be found [here](https://jianliew.me/reddit-store). It is also on GitHub [here](https://github.com/JianLoong/reddit-store)
 
 ---
 
