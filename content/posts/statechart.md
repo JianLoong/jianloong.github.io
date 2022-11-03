@@ -242,11 +242,15 @@ Notice that by going through this process, we not only discover and understand m
 
 We are far from done, as if we pry into the requirements more, we would discover more and more requirements and perhaps more so states, hence it is possible to have sub-states in UML State Chart diagrams but, I shall call the current state chart the first iteration. Will it ever be complete? It is never complete in a way, as requirements may change and we need to adapt to it.
 
+**The state chart** above is no way complete but just something to start everything off.
+
 
 ### Conclusion
 
-The idea here is that, statecharts will allow us to understand the requirements better and what to do. Would we have to figure out these without the statechart? It is very possible indeed, but by going through the process of making a statechart, we now understand how the system works better.
+State charts will allow us to understand the requirements better. Would we have to figure out these without the state chart? It is very possible indeed, but by going through the process of making a state chart, we now understand how the system works better.
 
 From a programming and technical standpoint, we can also now use **enums** better in our system as we now understand how each of them would happen. For the ``Order`` object, it is pretty clear to us, but most of the time we would be dealing with requirements and systems which are foreign to us.
 
-I hope this blog post is useful. I do personally find that with the aid of statecharts, I could understand the system more, after all, it is part of the software engineering process.
+The main lesson here is, **State Charts allows us to ask more questions regarding the requirements** and by doing so, we understand the system better.
+
+I hope this blog post is useful. I do personally find that with the aid of state charts, I could understand the system more, after all, it is part of the software engineering process.

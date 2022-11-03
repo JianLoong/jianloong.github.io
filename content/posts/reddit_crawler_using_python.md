@@ -1,13 +1,13 @@
 ---
-title: "Simple Reddit crawler for the /r/programming subreddit"
+title: "Using Python to obtain data from Reddit"
 date: 2022-10-18T21:30:56+11:00
-summary: "An simple approach to crawling Reddit using Python without using Reddit API"
+summary: ""
 ShowCodeCopyButtons: true
 comment: true
 disableShare: true
 ShowWordCount: true
 TocSide: right
-tags: ["reddit", "crawler", "aws"]
+tags: ["reddit", "crawler", "praw"]
 cover:
   image: "/images/simplecrawler.png"
 hasMermaid: true
@@ -18,7 +18,9 @@ draft: true
 
 As of March 2022, Reddit ranks as the 9th-most-visited website in the world and 6th most-visited website in the US according to Wikipedia.
 
-What is interesting about Reddit is that it has ``subreddits`` for people with different interests.
+What is interesting about Reddit is that it has ``subreddits`` for people with different interests. 
+
+
 
 ```python
 
@@ -36,43 +38,3 @@ header = {
     "Accept-Encoding": "gzip, deflate, br",
     "Accept-Language": "en-US,en;q=0.9"
 }
-
-r = requests.Session()
-r.headers = header
-try:
-    response = r.get(REDDIT_URL)
-except:
-    exit(1)
-
-    posts = response.json()['data']['children']
-    index = 1
-
-    urls = []
-
-    for post in posts:
-        print(str(index) + " out of " + str(len(posts)))
-        index = index + 1
-
-        if "title" and "permalink" and "name" and "created_utc" and "selftext" not in post['data']:
-            print("post does not have enough information")
-            continue
-
-        title = post['data']['title']
-        permalink = post['data']['permalink']
-        name = post['data']['name']
-        created = post['data']['created_utc']
-        selftext = post['data']['selftext']
-
-        urls.append("https://www.reddit.com" + permalink + ".json")
-
-    with FuturesSession(max_workers=10) as session:
-
-        session.headers = header
-        futures = [session.get(url) for url in urls]
-        for future in as_completed(futures):
-            replies_response = future.result()
-
-            replies = replies_response.json()[1]
-
-            
-```
