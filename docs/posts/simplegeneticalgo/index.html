@@ -1,12 +1,502 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Genetic Algorithm using Web Workers | Jian</title><meta name=keywords content="Genetic Algorithm,Selection,Cross Over,Phrase Solver"><meta name=description content="This post is a simple implementation of Genetic Algorithm GA. Here, you would start with a random string and end up with the target string.
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Genetic Algorithm using Web Workers | Jian</title>
+<meta name="keywords" content="Genetic Algorithm, Selection, Cross Over, Phrase Solver">
+<meta name="description" content="This post is a simple implementation of Genetic Algorithm GA. Here, you would start with a random string and end up with the target string.
 This post is heavily inspired based on this website. However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it runs behind the scenes.
-The implementation of it can be seen here"><meta name=author content="Jian"><link rel=canonical href=https://jianloong.github.io/posts/simplegeneticalgo/><meta name=google-site-verification content="UA-55422968-1"><link href=http://fonts.cdnfonts.com/css/atkinson-hyperlegible rel=stylesheet><link crossorigin=anonymous href=/assets/css/stylesheet.css rel="preload stylesheet" as=style><script defer crossorigin=anonymous src=/assets/js/highlight.js onload=hljs.initHighlightingOnLoad()></script>
-<link rel=icon href=https://jianliew.me/images/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://jianliew.me/images/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://jianliew.me/images/favicon-32x32.png><link rel=apple-touch-icon href=https://jianliew.me/images/apple-touch-icon.png><link rel=mask-icon href=https://jianliew.me/images/apple-touch-icon-180x180.png><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-55422968-1","auto"),ga("send","pageview"))</script><meta property="og:title" content="Genetic Algorithm using Web Workers"><meta property="og:description" content="This post is a simple implementation of Genetic Algorithm GA. Here, you would start with a random string and end up with the target string.
+The implementation of it can be seen here">
+<meta name="author" content="Jian">
+<link rel="canonical" href="https://jianloong.github.io/posts/simplegeneticalgo/">
+<meta name="google-site-verification" content="UA-55422968-1">
+<link href="http://fonts.cdnfonts.com/css/atkinson-hyperlegible" rel="stylesheet">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://jianliew.me/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jianliew.me/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jianliew.me/images/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://jianliew.me/images/apple-touch-icon.png">
+<link rel="mask-icon" href="https://jianliew.me/images/apple-touch-icon-180x180.png">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-55422968-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Genetic Algorithm using Web Workers" />
+<meta property="og:description" content="This post is a simple implementation of Genetic Algorithm GA. Here, you would start with a random string and end up with the target string.
 This post is heavily inspired based on this website. However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it runs behind the scenes.
-The implementation of it can be seen here"><meta property="og:type" content="article"><meta property="og:url" content="https://jianloong.github.io/posts/simplegeneticalgo/"><meta property="og:image" content="https://jianloong.github.io/images/ga.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2019-10-19T00:00:00+00:00"><meta property="article:modified_time" content="2019-10-19T00:00:00+00:00"><meta property="og:site_name" content="Jian"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://jianloong.github.io/images/ga.png"><meta name=twitter:title content="Genetic Algorithm using Web Workers"><meta name=twitter:description content="This post is a simple implementation of Genetic Algorithm GA. Here, you would start with a random string and end up with the target string.
+The implementation of it can be seen here" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jianloong.github.io/posts/simplegeneticalgo/" />
+<meta property="og:image" content="https://jianloong.github.io/images/ga.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-10-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-10-19T00:00:00+00:00" /><meta property="og:site_name" content="Jian" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://jianloong.github.io/images/ga.png" />
+<meta name="twitter:title" content="Genetic Algorithm using Web Workers"/>
+<meta name="twitter:description" content="This post is a simple implementation of Genetic Algorithm GA. Here, you would start with a random string and end up with the target string.
 This post is heavily inspired based on this website. However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it runs behind the scenes.
-The implementation of it can be seen here"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://jianloong.github.io/posts/"},{"@type":"ListItem","position":2,"name":"Genetic Algorithm using Web Workers","item":"https://jianloong.github.io/posts/simplegeneticalgo/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Genetic Algorithm using Web Workers","name":"Genetic Algorithm using Web Workers","description":"This post is a simple implementation of Genetic Algorithm GA. Here, you would start with a random string and end up with the target string.\nThis post is heavily inspired based on this website. However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it runs behind the scenes.\nThe implementation of it can be seen here","keywords":["Genetic Algorithm","Selection","Cross Over","Phrase Solver"],"articleBody":" This post is a simple implementation of Genetic Algorithm GA. Here, you would start with a random string and end up with the target string.\nThis post is heavily inspired based on this website. However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it runs behind the scenes.\nThe implementation of it can be seen here\nRun\nObservations Using the methodology random crossover at times will not yield results. The reason for this is simple is because if it is random there might not improvement of the child chromosomes. Using a short “target” string will yield the result faster, as the problem statement would be significantly easier to solve. Lessons from this post The web worker is often cached for a longer period in production/live environments. Users would have a better experience if it is not required for them to do a hard refresh on the browsers. One easy way is to use the best practice to load the web worker in the head. Others suggested to versioning web-workers. The web worker at times; does not like while loops. It would be better if for loops are used instead. The cross-over methodology for GA needs to be implemented with complexity in mind. Using jQuery might not be the best idea as the hide() and show() which manipulates the display either changing to none or block does not work well on mobile browsers. Perhaps not using jQuery would be better. Designing an encoding is very important. For example, in a knapsack problem there are only two choices. So, each item can either be true or false. References Python Easy GA ","wordCount":"283","inLanguage":"en","image":"https://jianloong.github.io/images/ga.png","datePublished":"2019-10-19T00:00:00Z","dateModified":"2019-10-19T00:00:00Z","author":{"@type":"Person","name":"Jian"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://jianloong.github.io/posts/simplegeneticalgo/"},"publisher":{"@type":"Organization","name":"Jian","logo":{"@type":"ImageObject","url":"https://jianliew.me/images/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://jianloong.github.io/ accesskey=h title="Jian (Alt + H)">Jian</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://jianloong.github.io/about/ title=about><span>about</span></a></li><li><a href=https://jianloong.github.io/projects/ title=projects><span>projects</span></a></li><li><a href=https://jianloong.github.io/search/ title="search (Alt + /)" accesskey=/><span>search</span></a></li><li><a href=https://jianloong.github.io/tags/ title=tags><span>tags</span></a></li><li><a href=https://jianloong.github.io/archives/ title=archives><span>archives</span></a></li><li><a href=https://jianloong.github.io/contact/ title=contact><span>contact</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://jianloong.github.io/>Home</a>&nbsp;»&nbsp;<a href=https://jianloong.github.io/posts/>Posts</a></div><h1 class=post-title>Genetic Algorithm using Web Workers</h1><div class=post-meta><span title='2019-10-19 00:00:00 +0000 UTC'>October 19, 2019</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Jian</div></header><div class=post-content><p>This post is a simple implementation of Genetic Algorithm GA. Here, you would start with a random string and end up with the target string.</p><p>This post is heavily inspired based on this <a href=https://github.com/subprotocol/genetic-js>website</a>. However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it runs behind the scenes.</p><p>The implementation of it can be seen <a href=https://github.com/JianLoong/jianloong.github.io/blob/master/content/posts/ga-worker.js>here</a></p><p>Run</p><h2 id=observations>Observations<a hidden class=anchor aria-hidden=true href=#observations>#</a></h2><ul><li>Using the methodology <code>random</code> crossover at times will not yield results. The reason for this is simple is because if it is random there might not improvement of the child chromosomes.</li><li>Using a short &ldquo;target&rdquo; string will yield the result faster, as the problem statement would be significantly easier to solve.</li></ul><h2 id=lessons-from-this-post>Lessons from this post<a hidden class=anchor aria-hidden=true href=#lessons-from-this-post>#</a></h2><ul><li>The web worker is often cached for a longer period in production/live environments. Users would have a better experience if it is not required for them to do a hard refresh on the browsers. One easy way is to use the best practice to load the web worker in the head. Others suggested to versioning web-workers.</li><li>The web worker at times; does not like while loops. It would be better if for loops are used instead.</li><li>The cross-over methodology for GA needs to be implemented with complexity in mind.</li><li>Using jQuery might not be the best idea as the <strong>hide()</strong> and <strong>show()</strong> which manipulates the display either changing to none or block does not work well on mobile browsers. Perhaps not using jQuery would be better.</li><li>Designing an encoding is very important. For example, in a knapsack problem there are only two choices. So, each item can either be true or false.</li></ul><h2 id=references>References<a hidden class=anchor aria-hidden=true href=#references>#</a></h2><ol><li><a href=https://pypi.org/project/pyeasyga/>Python Easy GA</a></li></ol><blockquote></blockquote></div><footer class=post-footer><ul class=post-tags><li><a href=https://jianloong.github.io/tags/genetic-algorithm/>Genetic Algorithm</a></li><li><a href=https://jianloong.github.io/tags/selection/>Selection</a></li><li><a href=https://jianloong.github.io/tags/cross-over/>Cross Over</a></li><li><a href=https://jianloong.github.io/tags/phrase-solver/>Phrase Solver</a></li></ul><nav class=paginav><a class=prev href=https://jianloong.github.io/posts/tsp/><span class=title>« Prev</span><br><span>Traveling Sales Person using Genetic Algorithms</span></a>
-<a class=next href=https://jianloong.github.io/posts/20191014_hackernews_word_cloud/><span class=title>Next »</span><br><span>Hacker News Word Cloud</span></a></nav></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//jianloonggithubio.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></article></main><footer class=footer><span>&copy; 2022 <a href=https://jianloong.github.io/>Jian</a></span>
-<span>Powered by
-<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script></body></html>
+The implementation of it can be seen here"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://jianloong.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Genetic Algorithm using Web Workers",
+      "item": "https://jianloong.github.io/posts/simplegeneticalgo/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Genetic Algorithm using Web Workers",
+  "name": "Genetic Algorithm using Web Workers",
+  "description": "This post is a simple implementation of Genetic Algorithm GA. Here, you would start with a random string and end up with the target string.\nThis post is heavily inspired based on this website. However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it runs behind the scenes.\nThe implementation of it can be seen here",
+  "keywords": [
+    "Genetic Algorithm", "Selection", "Cross Over", "Phrase Solver"
+  ],
+  "articleBody": "\rThis post is a simple implementation of Genetic Algorithm GA. Here, you would start with a random string and end up with the target string.\nThis post is heavily inspired based on this website. However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it runs behind the scenes.\nThe implementation of it can be seen here\nCross Over Method One Point\rTwo Point\rUniform\rPMX\rSelection Method Tournament\rRandom\rRank\rRoulette Wheel\rTarget String: Run\nGenerationFitnessString\rObservations Using the methodology random crossover at times will not yield results. The reason for this is simple is because if it is random there might not improvement of the child chromosomes. Using a short “target” string will yield the result faster, as the problem statement would be significantly easier to solve. Lessons from this post The web worker is often cached for a longer period in production/live environments. Users would have a better experience if it is not required for them to do a hard refresh on the browsers. One easy way is to use the best practice to load the web worker in the head. Others suggested to versioning web-workers. The web worker at times; does not like while loops. It would be better if for loops are used instead. The cross-over methodology for GA needs to be implemented with complexity in mind. Using jQuery might not be the best idea as the hide() and show() which manipulates the display either changing to none or block does not work well on mobile browsers. Perhaps not using jQuery would be better. Designing an encoding is very important. For example, in a knapsack problem there are only two choices. So, each item can either be true or false. References Python Easy GA ",
+  "wordCount" : "302",
+  "inLanguage": "en",
+  "image":"https://jianloong.github.io/images/ga.png","datePublished": "2019-10-19T00:00:00Z",
+  "dateModified": "2019-10-19T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Jian"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jianloong.github.io/posts/simplegeneticalgo/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Jian",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jianliew.me/images/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://jianloong.github.io/" accesskey="h" title="Jian (Alt + H)">Jian</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://jianloong.github.io/about/" title="about">
+                    <span>about</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/projects/" title="projects">
+                    <span>projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/search/" title="search (Alt &#43; /)" accesskey=/>
+                    <span>search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/tags/" title="tags">
+                    <span>tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/archives/" title="archives">
+                    <span>archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/contact/" title="contact">
+                    <span>contact</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://jianloong.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://jianloong.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Genetic Algorithm using Web Workers
+    </h1>
+    <div class="post-meta"><span title='2019-10-19 00:00:00 +0000 UTC'>October 19, 2019</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Jian
+
+</div>
+  </header> 
+  <div class="post-content"><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<p>This post is a simple implementation of <strong>Genetic Algorithm GA.</strong> Here, you would start with a random string and end up with the target string.</p>
+<p>This post is heavily inspired based on this <a href="https://github.com/subprotocol/genetic-js">website</a>. However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it runs behind the scenes.</p>
+<p>The implementation of it can be seen <a href="https://github.com/JianLoong/jianloong.github.io/blob/master/content/posts/ga-worker.js">here</a></p>
+<div>
+<label for="crossOver">Cross Over Method</label> 
+<br>
+<select id="crossOverMethod"  class="select-css">
+  <option value="onePoint">One Point</option>
+  <option value="twoPoint">Two Point</option>
+  <option value="uniform">Uniform</option>
+  <option value="pmx">PMX</option>
+</select>
+</div>
+<div>
+<label for="selection">Selection Method</label> 
+<br>
+<select id="selectionMethod"  class="select-css">
+  <option value="tournament">Tournament</option>
+  <option value="random">Random</option>
+  <option value="rank">Rank</option>
+  <option value="rouletteWheel">Roulette Wheel</option>
+</select>
+</div>
+<div>
+    <hr>
+    <label for="targetString">Target String:  </label> 
+    <input type="text" id="targetString" autocomplete="off" placeholder="" value="GA will obtain this string">
+    <hr>
+</div>
+<p><button type="button" id="run" class="button">Run</button></p>
+<p></p>
+<br />
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+    <table style="font-family: monospace;" class="result-table table table-bordered table-striped mb-0">
+        <tr><th>Generation</th><th>Fitness</th><th>String</th>
+        <tbody class="result"></tbody>
+    </table>
+</div>
+<h2 id="observations">Observations<a hidden class="anchor" aria-hidden="true" href="#observations">#</a></h2>
+<ul>
+<li>Using the methodology <code>random</code> crossover at times will not yield results. The reason for this is simple is because if it is random there might not improvement of the child chromosomes.</li>
+<li>Using a short &ldquo;target&rdquo; string will yield the result faster, as the problem statement would be significantly easier to solve.</li>
+</ul>
+<h2 id="lessons-from-this-post">Lessons from this post<a hidden class="anchor" aria-hidden="true" href="#lessons-from-this-post">#</a></h2>
+<ul>
+<li>The web worker is often cached for a longer period in production/live environments. Users would have a better experience if it is not required for them to do a hard refresh on the browsers. One easy way is to use the best practice to load the web worker in the head. Others suggested to versioning web-workers.</li>
+<li>The web worker at times; does not like while loops. It would be better if for loops are used instead.</li>
+<li>The cross-over methodology for GA needs to be implemented with complexity in mind.</li>
+<li>Using jQuery might not be the best idea as the <strong>hide()</strong> and <strong>show()</strong> which manipulates the display either changing to none or block does not work well on mobile browsers. Perhaps not using jQuery would be better.</li>
+<li>Designing an encoding is very important. For example, in a knapsack problem there are only two choices. So, each item can either be true or false.</li>
+</ul>
+<p></p>
+<h2 id="references">References<a hidden class="anchor" aria-hidden="true" href="#references">#</a></h2>
+<ol>
+<li><a href="https://pypi.org/project/pyeasyga/">Python Easy GA</a></li>
+</ol>
+<style>
+.my-custom-scrollbar {
+position: relative;
+height: 35rem;
+overflow: auto;
+}
+/* .table-wrapper-scroll-y {
+display: block;
+} */
+</style>
+<script>
+
+const entry = document.querySelector("#targetString");
+const result = document.querySelector(".result");
+const cm = document.getElementById("crossOverMethod");
+const sm = document.getElementById("selectionMethod");
+const button = document.getElementById("run");
+
+$(".result-table").hide();
+
+
+if (window.Worker) {
+  const myWorker = new Worker("/posts/ga-worker.js");
+  let isResultTableShown = false;
+
+  cm.onchange = function() {
+    result.innerHTML = "";
+    if (entry.value.length >= 100 || entry.value.length == 0)
+        return;   
+  };
+
+  button.onclick = function() {
+    if (entry.value == "")
+        return;
+    $(".result-table").show();
+    result.innerHTML = "";
+    let crossOverMethod = cm.options[cm.selectedIndex].value;
+    let selectionMethod = sm.options[sm.selectedIndex].value;
+    myWorker.postMessage([crossOverMethod, selectionMethod, entry.value]);
+  }
+
+  entry.onchange = function() {
+
+    result.innerHTML = "";
+    if (entry.value.length >= 100 || entry.value.length == 0)
+        return;
+  };
+
+  myWorker.onmessage = function(e) {
+      
+    let text = result.innerHTML;
+    result.innerHTML = "<tr><td>" + e.data[0] + "</td><td>" + e.data[1] + "</td><td>" + e.data[2]+"</td</tr>" + text;
+
+    if (isResultTableShown == false){
+        isResultTableShown = true;
+        $(".result-table").show();
+    }
+
+  };
+} else {
+  console.log("Your browser doesn't support web workers.");
+}
+
+</script>
+<style>
+  
+  .run {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+#targetString {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid black;
+  color: green
+}
+
+h4#lessons-from-this-post{
+  margin-top:10rem;
+}
+
+.table-wrapper-scroll-y.my-custom-scrollbar{
+  height: 35rem;
+}
+
+</style><blockquote>
+</blockquote>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://jianloong.github.io/tags/genetic-algorithm/">Genetic Algorithm</a></li>
+      <li><a href="https://jianloong.github.io/tags/selection/">Selection</a></li>
+      <li><a href="https://jianloong.github.io/tags/cross-over/">Cross Over</a></li>
+      <li><a href="https://jianloong.github.io/tags/phrase-solver/">Phrase Solver</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://jianloong.github.io/posts/tsp/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Traveling Sales Person using Genetic Algorithms</span>
+  </a>
+  <a class="next" href="https://jianloong.github.io/posts/20191014_hackernews_word_cloud/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Hacker News Word Cloud </span>
+  </a>
+</nav>
+
+  </footer><div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jianloonggithubio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://jianloong.github.io/">Jian</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

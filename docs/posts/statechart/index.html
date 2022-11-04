@@ -1,82 +1,692 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>UML Statecharts | Jian</title><meta name=keywords content="UML"><meta name=description content="This post attempts to explain UML Statecharts as simple as possible."><meta name=author content="Jian"><link rel=canonical href=https://jianloong.github.io/posts/statechart/><meta name=google-site-verification content="UA-55422968-1"><link href=http://fonts.cdnfonts.com/css/atkinson-hyperlegible rel=stylesheet><link crossorigin=anonymous href=/assets/css/stylesheet.css rel="preload stylesheet" as=style><script defer crossorigin=anonymous src=/assets/js/highlight.js onload=hljs.initHighlightingOnLoad()></script>
-<link rel=icon href=https://jianliew.me/images/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://jianliew.me/images/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://jianliew.me/images/favicon-32x32.png><link rel=apple-touch-icon href=https://jianliew.me/images/apple-touch-icon.png><link rel=mask-icon href=https://jianliew.me/images/apple-touch-icon-180x180.png><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-55422968-1","auto"),ga("send","pageview"))</script><meta property="og:title" content="UML Statecharts"><meta property="og:description" content="This post attempts to explain UML Statecharts as simple as possible."><meta property="og:type" content="article"><meta property="og:url" content="https://jianloong.github.io/posts/statechart/"><meta property="og:image" content="https://jianloong.github.io/images/statechart.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-10-24T00:00:00+00:00"><meta property="article:modified_time" content="2021-10-24T00:00:00+00:00"><meta property="og:site_name" content="Jian"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://jianloong.github.io/images/statechart.png"><meta name=twitter:title content="UML Statecharts"><meta name=twitter:description content="This post attempts to explain UML Statecharts as simple as possible."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://jianloong.github.io/posts/"},{"@type":"ListItem","position":2,"name":"UML Statecharts","item":"https://jianloong.github.io/posts/statechart/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"UML Statecharts","name":"UML Statecharts","description":"This post attempts to explain UML Statecharts as simple as possible.","keywords":["UML"],"articleBody":"UML Diagrams are important. State charts are probably one of the more interesting diagrams.\nThis post attempts to explain my train of thought while trying to make a state chart and why it is useful.\nWhat are state charts? Statecharts are just states, but more interestingly, it attempts to model a single object. It might seem simple at first but there is more to it. Most of the times, and even online resources confuse statechart and activity diagrams.\nHere is my take on attempting to draw a state chart.\nLet’s just take a very simple example of an Order object in an e-Commerce system. Something we all know quite well.\nIf you are not interested in the thought process of drawing the state chart, just scroll down for the finished product.\nAsking the client who wants the system is a very important part of the process. We can start by asking things like\nWhen a customer places an order what happens? - Placed What happens if there is nothing in stock? - Pending All these are just basic questions that can be asked, and we now have the very first few states.\nPlease note that this post consists of multiple diagrams that are intentionally drawn in such a way as to showcase the train of thought during its construction.\nSo, it might be incorrect but is the beauty of the modern iterative process. It is completely fine to attempt to do the state chart multiple times to gain a better understanding of the object in the system.\nstateDiagram-v2\r[*] --\u003e Placed\rPlaced --\u003e Pending\rPending --\u003e [*]\rWhat we are interested in now, is how the object moves from one state to another, so we will continue to ask the client\nWhat moves the order from the placed state to the pending state? So essentially, how does placed –\u003e pending?\nWhen does the order move from placed to pending? Is this automated? Where the system checks availability? Or does someone manually checks it?\nDoes the customer need to pay before it moves to pending?\nAll these are just some questions we need to ask, so we can slowly understand the requirements\nstateDiagram-v2\r[*] --\u003e Placed\rPlaced --\u003e Pending: Payment is made\rPending --\u003e [*]\rNow we know one possible transition, but wait, we are not done. We need to continue asking the client questions, for example,\nWhat happens if the payment is not made? Can an order stay placed forever? If there is inventory management, what if the customer doesn’t pay? Are the products still held? So when does the deduction in the inventory happen? So, are you saying that the deduction in the inventory happens after the client makes a payment? What happens if the payment fails? Can a customer buy more than the items in stock? Things like that are known to us because we are used to using such a system, so now we can go back to the state chart based on what we learnt from the client.\nstateDiagram-v2\r[*] --\u003e Placed: Customer places an order, the item must be in stock, item not deducted in inventory yet, no of items must not exceed inventory.\rPlaced --\u003e Pending\rPending --\u003e [*]\rNow we are at a stage, where we need to ask the clients more questions because, why would the placed state be needed in the first place? It seems to serve no purpose. Why not, the first state is pending? And the only way for an order to be the pending state is when all the requirements are satisfied.\nSo, we just chuck away the placed state as it does nothing.\nstateDiagram-v2\r[*] --\u003e Pending: Customer places an order\rnote left of Pending\r- Item must be in stock\r- Item purchased must not exceed inventory\r- Item purchased must NOT be deducted yet\rend note\rPending --\u003e [*]\rWe can now move on and ask more and more questions to the client.\nSo let’s try some by looking at our statechart,\nDo you want to allow the customers to purchase a huge number of items? Or is there a limit? What happens after pending? Do you want to call it paid? Or is there a different term? stateDiagram-v2\r[*] --\u003e Pending: Customer places an order\rnote left of Pending\r- Items must be in stock\r- Items purchased must not exceed inventory\r- Items purchased must not be deducted yet\r- Items purchased must not be above the limit set\rend note\rPending--\u003ePaid: Customer pays for the order\rnote right of Paid\r- Payment must be successful\r- Items must still be in stock\r- Items are now deducted\rend note\rPaid --\u003e [*]\rNow we continue brainstorming of the events.\nWhenever we have two or more states, what we are interested in is what events that could cause one state to become the other?\nSo for this situation, how does Paid –\u003e Pending. So back to the client we go…\nWhat happens if the customer is unhappy after they have paid? What happens if the item in the stock house is incorrect and it is not in stock? Remember how we did not deduct the item at the pending state? Oh wow, it might cause issues. Should we have a cancelled state? stateDiagram-v2\r[*] --\u003e Pending: Customer places an order\rnote left of Pending\r- Items must be in stock\r- Items purchased must not exceed inventory\r- Items purchased must not be deducted yet\r- Items purchased must not be above the limit set\rend note\rPending--\u003ePaid: Customer pays for the order\rnote right of Paid\r- Payment must be successful\r- Items must still be in stock\r- Items are now deducted\rend note\rPaid --\u003e Pending: Item no longer in stock, customer preference change.\rPaid --\u003e [*]\rThe more questions we ask, the more requirements and understanding of the system we will have. We know from this a few very important things\nFor an order to move from start to pending\nitems must be in stock items must not exceed the limit set (1000 PlayStation5?) items must not exceed stock The system will not deduct the item stock at this stage For the order to be moved from pending to paid\npayment must be made and successful stock must be still in the system the system will only now deduct the items Notice, that by going through the step-by-step process, we can now ask the client more questions for example\nWhen does the system deduct the item ordered by the user? Does it do it before he pays or after he pays? If the system does it after he pays, there might be times when other users, might be able to place an order but he cannot pay for it, do you want that to happen? If the system does it the minute after they place the order, how long do you want the system to hold it before the stock is returned?, what if the customer does not pay? Will this not be bad for business? Does it make sense for it to go from paid to pending? We are not done yet, though……………\nWhat about the cancelled state?\nWe need to continue asking questions to the client because they know the system the best, and if you make too many assumptions things could go wrong.\nLet’s put it in and try to complete the diagram.\nstateDiagram-v2\r[*] --\u003e Pending : Customer places an order\rPending--\u003ePaid: Customer pays for the order\rPaid --\u003e Cancelled: [Guards] Pending --\u003e Cancelled: [Guards] Pending --\u003e [*]\rPaid --\u003e [*]\rCancelled --\u003e [*]\rnote right of Paid\r- Payment must be successful\r- Items must still be in stock\r- Items are now deducted\rend note\rnote left of Pending\r- Items must be in stock\r- Items purchased must not exceed inventory\r- Items purchased must not be deducted yet\r- Items purchased must not be above the limit set\rend note\rnote left of Cancelled\r- Payment not made within a certain number of days\r- Cancelled as per customer request\rend note\rWith that, we can see a bit more clearly what is happening and the limitations of our system.\nExplained In plain English. A customer can have an Order in the pending state. This happens when the customer places an order but does not pay for it.\nHowever, the system will automatically change the pending state to the cancelled state if the items are no longer in stock or a payment has not been made after a set duration. The pending state can be the final state of the Order. The stock numbers are only reduced after a customer has paid. This means that there is a potential for another customer to have an item at a pending state but the item will not be in stock. This customer might not be able to make a payment due to the nature of the system. So this customer’s order would potentially be left in the pending state. A pending will be moved to the cancelled state if payment has not been made after a set period or it is cancelled as per customer request. But wait we still need to ask the client the question more questions\nWhat if a product is no longer available to be purchased? Meaning the product is no longer offered? Do you want to automatically cancel the order? Or do you want to leave it in the pending state? Notice that by going through this process, we not only discover and understand more about the system. We are left with more questions than perhaps answers.\nWe are far from done, as if we pry into the requirements more, we would discover more and more requirements and perhaps more so states, hence it is possible to have sub-states in UML State Chart diagrams but, I shall call the current state chart the first iteration. Will it ever be complete? It is never complete in a way, as requirements may change and we need to adapt to it.\nThe state chart above is no way complete but just something to start everything off.\nConclusion State charts will allow us to understand the requirements better. Would we have to figure out these without the state chart? It is very possible indeed, but by going through the process of making a state chart, we now understand how the system works better.\nFrom a programming and technical standpoint, we can also now use enums better in our system as we now understand how each of them would happen. For the Order object, it is pretty clear to us, but most of the time we would be dealing with requirements and systems which are foreign to us.\nThe main lesson here is, State Charts allows us to ask more questions regarding the requirements and by doing so, we understand the system better.\nI hope this blog post is useful. I do personally find that with the aid of state charts, I could understand the system more, after all, it is part of the software engineering process.\n","wordCount":"1854","inLanguage":"en","image":"https://jianloong.github.io/images/statechart.png","datePublished":"2021-10-24T00:00:00Z","dateModified":"2021-10-24T00:00:00Z","author":{"@type":"Person","name":"Jian"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://jianloong.github.io/posts/statechart/"},"publisher":{"@type":"Organization","name":"Jian","logo":{"@type":"ImageObject","url":"https://jianliew.me/images/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://jianloong.github.io/ accesskey=h title="Jian (Alt + H)">Jian</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://jianloong.github.io/about/ title=about><span>about</span></a></li><li><a href=https://jianloong.github.io/projects/ title=projects><span>projects</span></a></li><li><a href=https://jianloong.github.io/search/ title="search (Alt + /)" accesskey=/><span>search</span></a></li><li><a href=https://jianloong.github.io/tags/ title=tags><span>tags</span></a></li><li><a href=https://jianloong.github.io/archives/ title=archives><span>archives</span></a></li><li><a href=https://jianloong.github.io/contact/ title=contact><span>contact</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://jianloong.github.io/>Home</a>&nbsp;»&nbsp;<a href=https://jianloong.github.io/posts/>Posts</a></div><h1 class=post-title>UML Statecharts</h1><div class=post-meta><span title='2021-10-24 00:00:00 +0000 UTC'>October 24, 2021</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;Jian</div></header><div class=post-content><p>UML Diagrams are important. State charts are probably one of the more interesting diagrams.</p><p>This post attempts to explain my train of thought while trying to make a state chart and why it is useful.</p><h3 id=what-are-state-charts>What are state charts?<a hidden class=anchor aria-hidden=true href=#what-are-state-charts>#</a></h3><p>Statecharts are just states, but more interestingly, it attempts to model a <strong>single</strong> object. It might seem simple at first but there is more to it. Most of the times, and even online resources confuse statechart and activity diagrams.</p><p>Here is my take on attempting to draw a state chart.</p><p>Let&rsquo;s just take a very simple example of an <code>Order</code> object in an e-Commerce system. Something we all know quite well.</p><p>If you are not interested in the thought process of drawing the state chart, just scroll down for the finished product.</p><p>Asking the client who wants the system is a very important part of the process. We can start by asking things like</p><ul><li>When a customer places an order what happens? - <code>Placed</code></li><li>What happens if there is nothing in stock? - <code>Pending</code></li></ul><p>All these are just basic questions that can be asked, and we now have the very first few states.</p><p>Please note that this post consists of multiple diagrams that are intentionally drawn in such a way as to showcase the train of thought during its construction.</p><p><strong>So, it might be incorrect but is the beauty of the modern iterative process</strong>. It is completely fine to attempt to do the state chart multiple times to gain a better understanding of the object in the system.</p><script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>document.getElementById("theme-toggle").addEventListener("click",()=>{location.reload()}),document.body.className.includes("dark")?mermaid.initialize({startOnLoad:!0,securityLevel:"loose",theme:"dark"}):mermaid.initialize({startOnLoad:!0,securityLevel:"loose",theme:"forest"})</script><div class=mermaid align=center id=mermaid>stateDiagram-v2
-[*] --> Placed
-Placed --> Pending
-Pending --> [*]</div><p>What we are interested in now, is how the object moves from one state to another, so we will continue to ask the client</p><ul><li><p>What moves the order from the placed state to the pending state? So essentially, how does <code>placed</code> &ndash;> <code>pending</code>?</p></li><li><p>When does the order move from <code>placed</code> to <code>pending</code>? Is this automated? Where the system checks availability? Or does someone manually checks it?</p></li><li><p>Does the customer need to pay before it moves to <code>pending</code>?</p></li><li><p>All these are just some questions we need to ask, so we can slowly understand the requirements</p><script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>document.getElementById("theme-toggle").addEventListener("click",()=>{location.reload()}),document.body.className.includes("dark")?mermaid.initialize({startOnLoad:!0,securityLevel:"loose",theme:"dark"}):mermaid.initialize({startOnLoad:!0,securityLevel:"loose",theme:"forest"})</script><div class=mermaid align=center id=mermaid>stateDiagram-v2
-[*] --> Placed
-Placed --> Pending: Payment is made
-Pending --> [*]</div></li></ul><p>Now we know one possible transition, but <strong>wait</strong>, we are not done. We need to continue asking the client questions, for example,</p><ul><li>What happens if the payment is not made?</li><li>Can an <code>order</code> stay placed forever?</li><li>If there is inventory management, what if the customer doesn&rsquo;t pay? Are the products still held?</li><li>So when does the deduction in the inventory happen?</li><li>So, are you saying that the deduction in the inventory happens after the client makes a payment?</li><li>What happens if the payment fails?</li><li>Can a customer buy more than the items in stock?</li></ul><p>Things like that are known to us because we are used to using such a system, so now we can go back to the state chart based on what we learnt from the client.</p><script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>document.getElementById("theme-toggle").addEventListener("click",()=>{location.reload()}),document.body.className.includes("dark")?mermaid.initialize({startOnLoad:!0,securityLevel:"loose",theme:"dark"}):mermaid.initialize({startOnLoad:!0,securityLevel:"loose",theme:"forest"})</script><div class=mermaid align=center id=mermaid>stateDiagram-v2
-[*] --> Placed: Customer places an order, the item must be in stock, item not deducted in inventory yet, no of items must not exceed inventory.
-Placed --> Pending
-Pending --> [*]</div><p>Now we are at a stage, where we need to ask the clients more questions because, why would the <code>placed</code> state be needed in the first place? It seems to serve no purpose.
-Why not, the first state is <code>pending</code>? And the only way for an order to be the <code>pending</code> state is when all the requirements are satisfied.</p><p>So, we just chuck away the <code>placed</code> state as it does nothing.</p><script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>document.getElementById("theme-toggle").addEventListener("click",()=>{location.reload()}),document.body.className.includes("dark")?mermaid.initialize({startOnLoad:!0,securityLevel:"loose",theme:"dark"}):mermaid.initialize({startOnLoad:!0,securityLevel:"loose",theme:"forest"})</script><div class=mermaid align=center id=mermaid>stateDiagram-v2
-[*] --> Pending: Customer places an order
-note left of Pending
-- Item must be in stock
-- Item purchased must not exceed inventory
-- Item purchased must NOT be deducted yet
-end note
-Pending --> [*]</div><p>We can now move on and ask more and more questions to the client.</p><p>So let&rsquo;s try some by looking at our statechart,</p><ul><li>Do you want to allow the customers to purchase a huge number of items? Or is there a limit?</li><li>What happens after <code>pending</code>? Do you want to call it <code>paid</code>? Or is there a different term?</li></ul><script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>document.getElementById("theme-toggle").addEventListener("click",()=>{location.reload()}),document.body.className.includes("dark")?mermaid.initialize({startOnLoad:!0,securityLevel:"loose",theme:"dark"}):mermaid.initialize({startOnLoad:!0,securityLevel:"loose",theme:"forest"})</script><div class=mermaid align=center id=mermaid>stateDiagram-v2
-[*] --> Pending: Customer places an order
-note left of Pending
-- Items must be in stock
-- Items purchased must not exceed inventory
-- Items purchased must not be deducted yet
-- Items purchased must not be above the limit set
-end note
-Pending-->Paid: Customer pays for the order
-note right of Paid
-- Payment must be successful
-- Items must still be in stock
-- Items are now deducted
-end note
-Paid --> [*]</div><p>Now we continue brainstorming of the events.</p><p>Whenever we have two or more states, what we are interested in is <strong>what events that could cause one state to become the other</strong>?</p><p>So for this situation, how does <code>Paid</code> &ndash;> <code>Pending</code>. So back to the client we go&mldr;</p><ul><li>What happens if the customer is unhappy after they have paid?</li><li>What happens if the item in the stock house is incorrect and it is not in stock?</li><li>Remember how we did not deduct the item at the <code>pending</code> state? <strong>Oh wow, it might cause issues.</strong></li><li>Should we have a cancelled state?</li></ul><script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>document.getElementById("theme-toggle").addEventListener("click",()=>{location.reload()}),document.body.className.includes("dark")?mermaid.initialize({startOnLoad:!0,securityLevel:"loose",theme:"dark"}):mermaid.initialize({startOnLoad:!0,securityLevel:"loose",theme:"forest"})</script><div class=mermaid align=center id=mermaid>stateDiagram-v2
-[*] --> Pending: Customer places an order
-note left of Pending
-- Items must be in stock
-- Items purchased must not exceed inventory
-- Items purchased must not be deducted yet
-- Items purchased must not be above the limit set
-end note
-Pending-->Paid: Customer pays for the order
-note right of Paid
-- Payment must be successful
-- Items must still be in stock
-- Items are now deducted
-end note
-Paid --> Pending: Item no longer in stock, customer preference change.
-Paid --> [*]</div><p>The more questions we ask, the more requirements and understanding of the system we will have. We know from this a few very important things</p><p>For an order to move from <code>start</code> to <code>pending</code></p><ul><li>items must be in stock</li><li>items must not exceed the limit set (1000 PlayStation5?)</li><li>items must not exceed stock</li><li>The <strong>system will not deduct the item stock at this stage</strong></li></ul><p>For the order to be moved from <code>pending</code> to <code>paid</code></p><ul><li>payment must be made and successful</li><li>stock must be still in the system</li><li>the system will only now deduct the items</li></ul><p>Notice, that by going through the step-by-step process, we can now ask the client more questions for example</p><ul><li>When does the system deduct the item ordered by the user? <strong>Does it do it before he pays or after he pays?</strong></li><li>If the system does it after he pays, there <strong>might be times when other users, might be able to place an order but he cannot pay for it</strong>, do you want that to happen?</li><li>If the system does it the minute after they place the order, <strong>how long do you want the system to hold it before the stock is returned?</strong>, what if the customer does not pay?
-Will this not be bad for business?</li><li>Does it make sense for it to go from <code>paid</code> to <code>pending</code>?</li></ul><p>We are not done yet, though&mldr;&mldr;&mldr;&mldr;&mldr;</p><p>What about the <code>cancelled</code> state?</p><p>We need to continue asking questions to the client because they know the system the best, and if you make too many assumptions things could go wrong.</p><p>Let&rsquo;s put it in and try to complete the diagram.</p><script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>document.getElementById("theme-toggle").addEventListener("click",()=>{location.reload()}),document.body.className.includes("dark")?mermaid.initialize({startOnLoad:!0,securityLevel:"loose",theme:"dark"}):mermaid.initialize({startOnLoad:!0,securityLevel:"loose",theme:"forest"})</script><div class=mermaid align=center id=mermaid>stateDiagram-v2
-[*] --> Pending : Customer places an order
-Pending-->Paid: Customer pays for the order
-Paid --> Cancelled: [Guards]
-Pending --> Cancelled: [Guards]
-Pending --> [*]
-Paid --> [*]
-Cancelled --> [*]
-note right of Paid
-- Payment must be successful
-- Items must still be in stock
-- Items are now deducted
-end note
-note left of Pending
-- Items must be in stock
-- Items purchased must not exceed inventory
-- Items purchased must not be deducted yet
-- Items purchased must not be above the limit set
-end note
-note left of Cancelled
-- Payment not made within a certain number of days
-- Cancelled as per customer request
-end note</div><p>With that, we can see a bit more clearly what is happening and the limitations of our system.</p><h3 id=explained>Explained<a hidden class=anchor aria-hidden=true href=#explained>#</a></h3><p>In plain English. A customer can have an Order in the <code>pending</code> state. This happens when the customer places an order but does not pay for it.</p><ul><li>However, the system will automatically change the <code>pending</code> state to the <code>cancelled</code> state if the items are no longer in stock or a payment has not been made after a set duration.</li><li>The <code>pending</code> state can be the final state of the Order.</li><li>The stock numbers are only reduced after a customer has paid. This means that there is a potential for another customer to have an item at a <code>pending</code> state but the item will not be in stock. This customer might not be able to make a payment due to the nature of the system.</li><li>So this customer&rsquo;s order would potentially be left in the <code>pending</code> state.</li><li>A <code>pending</code> will be moved to the <code>cancelled</code> state if payment has not been made after a set period or it is cancelled as per customer request.</li></ul><p>But wait we still need to ask the client the question more questions</p><ul><li>What if a product is no longer available to be purchased? Meaning the product is no longer offered? Do you want to automatically cancel the order? Or do you want to leave it in the <code>pending</code> state?</li></ul><p>Notice that by going through this process, we not only discover and understand more about the system. We are left with more questions than perhaps answers.</p><p>We are far from done, as if we pry into the requirements more, we would discover more and more requirements and perhaps more so states, hence it is possible to have sub-states in UML State Chart diagrams but, I shall call the current state chart the first iteration. Will it ever be complete? It is never complete in a way, as requirements may change and we need to adapt to it.</p><p><strong>The state chart</strong> above is no way complete but just something to start everything off.</p><h3 id=conclusion>Conclusion<a hidden class=anchor aria-hidden=true href=#conclusion>#</a></h3><p>State charts will allow us to understand the requirements better. Would we have to figure out these without the state chart? It is very possible indeed, but by going through the process of making a state chart, we now understand how the system works better.</p><p>From a programming and technical standpoint, we can also now use <strong>enums</strong> better in our system as we now understand how each of them would happen. For the <code>Order</code> object, it is pretty clear to us, but most of the time we would be dealing with requirements and systems which are foreign to us.</p><p>The main lesson here is, <strong>State Charts allows us to ask more questions regarding the requirements</strong> and by doing so, we understand the system better.</p><p>I hope this blog post is useful. I do personally find that with the aid of state charts, I could understand the system more, after all, it is part of the software engineering process.</p></div><footer class=post-footer><ul class=post-tags><li><a href=https://jianloong.github.io/tags/uml/>UML</a></li></ul><nav class=paginav><a class=prev href=https://jianloong.github.io/posts/vader/><span class=title>« Prev</span><br><span>Sentiment Analysis using VADER in JavaScript</span></a>
-<a class=next href=https://jianloong.github.io/posts/minmax/><span class=title>Next »</span><br><span>Min and Max value of an Array (Java)</span></a></nav></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//jianloonggithubio.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></article></main><footer class=footer><span>&copy; 2022 <a href=https://jianloong.github.io/>Jian</a></span>
-<span>Powered by
-<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script></body></html>
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>UML Statecharts | Jian</title>
+<meta name="keywords" content="UML">
+<meta name="description" content="This post attempts to explain UML Statecharts as simple as possible.">
+<meta name="author" content="Jian">
+<link rel="canonical" href="https://jianloong.github.io/posts/statechart/">
+<meta name="google-site-verification" content="UA-55422968-1">
+<link href="http://fonts.cdnfonts.com/css/atkinson-hyperlegible" rel="stylesheet">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://jianliew.me/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jianliew.me/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jianliew.me/images/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://jianliew.me/images/apple-touch-icon.png">
+<link rel="mask-icon" href="https://jianliew.me/images/apple-touch-icon-180x180.png">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-55422968-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="UML Statecharts" />
+<meta property="og:description" content="This post attempts to explain UML Statecharts as simple as possible." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jianloong.github.io/posts/statechart/" />
+<meta property="og:image" content="https://jianloong.github.io/images/statechart.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-10-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-10-24T00:00:00+00:00" /><meta property="og:site_name" content="Jian" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://jianloong.github.io/images/statechart.png" />
+<meta name="twitter:title" content="UML Statecharts"/>
+<meta name="twitter:description" content="This post attempts to explain UML Statecharts as simple as possible."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://jianloong.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "UML Statecharts",
+      "item": "https://jianloong.github.io/posts/statechart/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "UML Statecharts",
+  "name": "UML Statecharts",
+  "description": "This post attempts to explain UML Statecharts as simple as possible.",
+  "keywords": [
+    "UML"
+  ],
+  "articleBody": "UML Diagrams are important. State charts are probably one of the more interesting diagrams.\nThis post attempts to explain my train of thought while trying to make a state chart and why it is useful.\nWhat are state charts? Statecharts are just states, but more interestingly, it attempts to model a single object. It might seem simple at first but there is more to it. Most of the times, and even online resources confuse statechart and activity diagrams.\nHere is my take on attempting to draw a state chart.\nLet’s just take a very simple example of an Order object in an e-Commerce system. Something we all know quite well.\nIf you are not interested in the thought process of drawing the state chart, just scroll down for the finished product.\nAsking the client who wants the system is a very important part of the process. We can start by asking things like\nWhen a customer places an order what happens? - Placed What happens if there is nothing in stock? - Pending All these are just basic questions that can be asked, and we now have the very first few states.\nPlease note that this post consists of multiple diagrams that are intentionally drawn in such a way as to showcase the train of thought during its construction.\nSo, it might be incorrect but is the beauty of the modern iterative process. It is completely fine to attempt to do the state chart multiple times to gain a better understanding of the object in the system.\nstateDiagram-v2\r[*] --\u003e Placed\rPlaced --\u003e Pending\rPending --\u003e [*]\rWhat we are interested in now, is how the object moves from one state to another, so we will continue to ask the client\nWhat moves the order from the placed state to the pending state? So essentially, how does placed –\u003e pending?\nWhen does the order move from placed to pending? Is this automated? Where the system checks availability? Or does someone manually checks it?\nDoes the customer need to pay before it moves to pending?\nAll these are just some questions we need to ask, so we can slowly understand the requirements\nstateDiagram-v2\r[*] --\u003e Placed\rPlaced --\u003e Pending: Payment is made\rPending --\u003e [*]\rNow we know one possible transition, but wait, we are not done. We need to continue asking the client questions, for example,\nWhat happens if the payment is not made? Can an order stay placed forever? If there is inventory management, what if the customer doesn’t pay? Are the products still held? So when does the deduction in the inventory happen? So, are you saying that the deduction in the inventory happens after the client makes a payment? What happens if the payment fails? Can a customer buy more than the items in stock? Things like that are known to us because we are used to using such a system, so now we can go back to the state chart based on what we learnt from the client.\nstateDiagram-v2\r[*] --\u003e Placed: Customer places an order, the item must be in stock, item not deducted in inventory yet, no of items must not exceed inventory.\rPlaced --\u003e Pending\rPending --\u003e [*]\rNow we are at a stage, where we need to ask the clients more questions because, why would the placed state be needed in the first place? It seems to serve no purpose. Why not, the first state is pending? And the only way for an order to be the pending state is when all the requirements are satisfied.\nSo, we just chuck away the placed state as it does nothing.\nstateDiagram-v2\r[*] --\u003e Pending: Customer places an order\rnote left of Pending\r- Item must be in stock\r- Item purchased must not exceed inventory\r- Item purchased must NOT be deducted yet\rend note\rPending --\u003e [*]\rWe can now move on and ask more and more questions to the client.\nSo let’s try some by looking at our statechart,\nDo you want to allow the customers to purchase a huge number of items? Or is there a limit? What happens after pending? Do you want to call it paid? Or is there a different term? stateDiagram-v2\r[*] --\u003e Pending: Customer places an order\rnote left of Pending\r- Items must be in stock\r- Items purchased must not exceed inventory\r- Items purchased must not be deducted yet\r- Items purchased must not be above the limit set\rend note\rPending--\u003ePaid: Customer pays for the order\rnote right of Paid\r- Payment must be successful\r- Items must still be in stock\r- Items are now deducted\rend note\rPaid --\u003e [*]\rNow we continue brainstorming of the events.\nWhenever we have two or more states, what we are interested in is what events that could cause one state to become the other?\nSo for this situation, how does Paid –\u003e Pending. So back to the client we go…\nWhat happens if the customer is unhappy after they have paid? What happens if the item in the stock house is incorrect and it is not in stock? Remember how we did not deduct the item at the pending state? Oh wow, it might cause issues. Should we have a cancelled state? stateDiagram-v2\r[*] --\u003e Pending: Customer places an order\rnote left of Pending\r- Items must be in stock\r- Items purchased must not exceed inventory\r- Items purchased must not be deducted yet\r- Items purchased must not be above the limit set\rend note\rPending--\u003ePaid: Customer pays for the order\rnote right of Paid\r- Payment must be successful\r- Items must still be in stock\r- Items are now deducted\rend note\rPaid --\u003e Pending: Item no longer in stock, customer preference change.\rPaid --\u003e [*]\rThe more questions we ask, the more requirements and understanding of the system we will have. We know from this a few very important things\nFor an order to move from start to pending\nitems must be in stock items must not exceed the limit set (1000 PlayStation5?) items must not exceed stock The system will not deduct the item stock at this stage For the order to be moved from pending to paid\npayment must be made and successful stock must be still in the system the system will only now deduct the items Notice, that by going through the step-by-step process, we can now ask the client more questions for example\nWhen does the system deduct the item ordered by the user? Does it do it before he pays or after he pays? If the system does it after he pays, there might be times when other users, might be able to place an order but he cannot pay for it, do you want that to happen? If the system does it the minute after they place the order, how long do you want the system to hold it before the stock is returned?, what if the customer does not pay? Will this not be bad for business? Does it make sense for it to go from paid to pending? We are not done yet, though……………\nWhat about the cancelled state?\nWe need to continue asking questions to the client because they know the system the best, and if you make too many assumptions things could go wrong.\nLet’s put it in and try to complete the diagram.\nstateDiagram-v2\r[*] --\u003e Pending : Customer places an order\rPending--\u003ePaid: Customer pays for the order\rPaid --\u003e Cancelled: [Guards] Pending --\u003e Cancelled: [Guards] Pending --\u003e [*]\rPaid --\u003e [*]\rCancelled --\u003e [*]\rnote right of Paid\r- Payment must be successful\r- Items must still be in stock\r- Items are now deducted\rend note\rnote left of Pending\r- Items must be in stock\r- Items purchased must not exceed inventory\r- Items purchased must not be deducted yet\r- Items purchased must not be above the limit set\rend note\rnote left of Cancelled\r- Payment not made within a certain number of days\r- Cancelled as per customer request\rend note\rWith that, we can see a bit more clearly what is happening and the limitations of our system.\nExplained In plain English. A customer can have an Order in the pending state. This happens when the customer places an order but does not pay for it.\nHowever, the system will automatically change the pending state to the cancelled state if the items are no longer in stock or a payment has not been made after a set duration. The pending state can be the final state of the Order. The stock numbers are only reduced after a customer has paid. This means that there is a potential for another customer to have an item at a pending state but the item will not be in stock. This customer might not be able to make a payment due to the nature of the system. So this customer’s order would potentially be left in the pending state. A pending will be moved to the cancelled state if payment has not been made after a set period or it is cancelled as per customer request. But wait we still need to ask the client the question more questions\nWhat if a product is no longer available to be purchased? Meaning the product is no longer offered? Do you want to automatically cancel the order? Or do you want to leave it in the pending state? Notice that by going through this process, we not only discover and understand more about the system. We are left with more questions than perhaps answers.\nWe are far from done, as if we pry into the requirements more, we would discover more and more requirements and perhaps more so states, hence it is possible to have sub-states in UML State Chart diagrams but, I shall call the current state chart the first iteration. Will it ever be complete? It is never complete in a way, as requirements may change and we need to adapt to it.\nThe state chart above is no way complete but just something to start everything off.\nConclusion State charts will allow us to understand the requirements better. Would we have to figure out these without the state chart? It is very possible indeed, but by going through the process of making a state chart, we now understand how the system works better.\nFrom a programming and technical standpoint, we can also now use enums better in our system as we now understand how each of them would happen. For the Order object, it is pretty clear to us, but most of the time we would be dealing with requirements and systems which are foreign to us.\nThe main lesson here is, State Charts allows us to ask more questions regarding the requirements and by doing so, we understand the system better.\nI hope this blog post is useful. I do personally find that with the aid of state charts, I could understand the system more, after all, it is part of the software engineering process.\n",
+  "wordCount" : "1854",
+  "inLanguage": "en",
+  "image":"https://jianloong.github.io/images/statechart.png","datePublished": "2021-10-24T00:00:00Z",
+  "dateModified": "2021-10-24T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Jian"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jianloong.github.io/posts/statechart/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Jian",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jianliew.me/images/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://jianloong.github.io/" accesskey="h" title="Jian (Alt + H)">Jian</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://jianloong.github.io/about/" title="about">
+                    <span>about</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/projects/" title="projects">
+                    <span>projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/search/" title="search (Alt &#43; /)" accesskey=/>
+                    <span>search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/tags/" title="tags">
+                    <span>tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/archives/" title="archives">
+                    <span>archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/contact/" title="contact">
+                    <span>contact</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://jianloong.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://jianloong.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      UML Statecharts
+    </h1>
+    <div class="post-meta"><span title='2021-10-24 00:00:00 +0000 UTC'>October 24, 2021</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;Jian
+
+</div>
+  </header> 
+  <div class="post-content"><p>UML Diagrams are important. State charts are probably one of the more interesting diagrams.</p>
+<p>This post attempts to explain my train of thought while trying to make a state chart and why it is useful.</p>
+<h3 id="what-are-state-charts">What are state charts?<a hidden class="anchor" aria-hidden="true" href="#what-are-state-charts">#</a></h3>
+<p>Statecharts are just states, but more interestingly, it attempts to model a <strong>single</strong> object. It might seem simple at first but there is more to it. Most of the times, and even online resources confuse statechart and activity diagrams.</p>
+<p>Here is my take on attempting to draw a state chart.</p>
+<p>Let&rsquo;s just take a very simple example of an <code>Order</code> object in an e-Commerce system. Something we all know quite well.</p>
+<p>If you are not interested in the thought process of drawing the state chart, just scroll down for the finished product.</p>
+<p>Asking the client who wants the system is a very important part of the process. We can start by asking things like</p>
+<ul>
+<li>When a customer places an order what happens? - <code>Placed</code></li>
+<li>What happens if there is nothing in stock? - <code>Pending</code></li>
+</ul>
+<p>All these are just basic questions that can be asked, and we now have the very first few states.</p>
+<p>Please note that this post consists of multiple diagrams that are intentionally drawn in such a way as to showcase the train of thought during its construction.</p>
+<p><strong>So, it might be incorrect but is the beauty of the modern iterative process</strong>. It is completely fine to attempt to do the state chart multiple times to gain a better understanding of the object in the system.</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js" integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+      location.reload()
+  })
+
+  if (document.body.className.includes("dark")) {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'dark' })
+  } else {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'forest' })
+  }
+
+</script>
+
+
+
+<div class="mermaid" align="center" id="mermaid">
+    
+
+stateDiagram-v2
+
+    [*] --> Placed
+    Placed --> Pending
+    Pending --> [*]
+
+
+</div>
+<p>What we are interested in now, is <strong>how</strong> the object moves from one state to another, so we will continue to ask the client</p>
+<ul>
+<li>
+<p>What moves the order from the placed state to the pending state? So essentially, how does <code>placed</code> &ndash;&gt; <code>pending</code>?</p>
+</li>
+<li>
+<p>When does the order move from <code>placed</code> to <code>pending</code>? Is this automated? Where the system checks availability? Or does someone manually checks it?</p>
+</li>
+<li>
+<p>Does the customer need to pay before it moves to <code>pending</code>?</p>
+</li>
+<li>
+<p>All these are just some questions we need to ask, so we can slowly understand the requirements</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js" integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+      location.reload()
+  })
+
+  if (document.body.className.includes("dark")) {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'dark' })
+  } else {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'forest' })
+  }
+
+</script>
+
+
+
+<div class="mermaid" align="center" id="mermaid">
+    
+
+stateDiagram-v2
+
+    [*] --> Placed
+    Placed --> Pending: Payment is made
+    Pending --> [*]
+
+
+</div>
+</li>
+</ul>
+<p>Now we know one possible transition, but <strong>wait</strong>, we are not done. We need to continue asking the client questions, for example,</p>
+<ul>
+<li>What happens if the payment is not made?</li>
+<li>Can an <code>order</code> stay placed forever?</li>
+<li>If there is inventory management, what if the customer doesn&rsquo;t pay? Are the products still held?</li>
+<li>So when does the deduction in the inventory happen?</li>
+<li>So, are you saying that the deduction in the inventory happens after the client makes a payment?</li>
+<li>What happens if the payment fails?</li>
+<li>Can a customer buy more than the items in stock?</li>
+</ul>
+<p>Things like that are known to us because we are used to using such a system, so now we can go back to the state chart based on what we learnt from the client.</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js" integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+      location.reload()
+  })
+
+  if (document.body.className.includes("dark")) {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'dark' })
+  } else {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'forest' })
+  }
+
+</script>
+
+
+
+<div class="mermaid" align="center" id="mermaid">
+    
+stateDiagram-v2
+
+    [*] --> Placed: Customer places an order, the item must be in stock, item not deducted in inventory yet, no of items must not exceed inventory.
+    Placed --> Pending
+    Pending --> [*]
+
+
+</div>
+<p>Now we are at a stage, where we need to ask the clients more questions because, why would the <code>placed</code> state be needed in the first place? It seems to serve no purpose.
+Why not, the first state is <code>pending</code>? And the only way for an order to be the <code>pending</code> state is when all the requirements are satisfied.</p>
+<p>So, we just chuck away the <code>placed</code> state as it does nothing.</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js" integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+      location.reload()
+  })
+
+  if (document.body.className.includes("dark")) {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'dark' })
+  } else {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'forest' })
+  }
+
+</script>
+
+
+
+<div class="mermaid" align="center" id="mermaid">
+    
+stateDiagram-v2
+
+    [*] --> Pending: Customer places an order
+        note left of Pending
+            - Item must be in stock
+            - Item purchased must not exceed inventory
+            - Item purchased must NOT be deducted yet
+        end note
+    Pending --> [*]
+
+
+</div>
+<p>We can now move on and ask more and more questions to the client.</p>
+<p>So let&rsquo;s try some by looking at our statechart,</p>
+<ul>
+<li>Do you want to allow the customers to purchase a huge number of items? Or is there a limit?</li>
+<li>What happens after <code>pending</code>? Do you want to call it <code>paid</code>? Or is there a different term?</li>
+</ul>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js" integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+      location.reload()
+  })
+
+  if (document.body.className.includes("dark")) {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'dark' })
+  } else {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'forest' })
+  }
+
+</script>
+
+
+
+<div class="mermaid" align="center" id="mermaid">
+    
+stateDiagram-v2
+
+    [*] --> Pending: Customer places an order
+        note left of Pending
+            - Items must be in stock
+            - Items purchased must not exceed inventory
+            - Items purchased must not be deducted yet
+            - Items purchased must not be above the limit set
+        end note
+    Pending-->Paid: Customer pays for the order
+            note right of Paid
+            - Payment must be successful
+            - Items must still be in stock
+            - Items are now deducted
+        end note
+    Paid --> [*]
+
+
+</div>
+<p>Now we continue brainstorming of the events.</p>
+<p>Whenever we have two or more states, what we are interested in is <strong>what events that could cause one state to become the other</strong>?</p>
+<p>So for this situation, how does <code>Paid</code> &ndash;&gt; <code>Pending</code>. So back to the client we go&hellip;</p>
+<ul>
+<li>What happens if the customer is unhappy after they have paid?</li>
+<li>What happens if the item in the stock house is incorrect and it is not in stock?</li>
+<li>Remember how we did not deduct the item at the <code>pending</code> state? <strong>Oh wow, it might cause issues.</strong></li>
+<li>Should we have a cancelled state?</li>
+</ul>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js" integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+      location.reload()
+  })
+
+  if (document.body.className.includes("dark")) {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'dark' })
+  } else {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'forest' })
+  }
+
+</script>
+
+
+
+<div class="mermaid" align="center" id="mermaid">
+    
+stateDiagram-v2
+
+    [*] --> Pending: Customer places an order
+        note left of Pending
+            - Items must be in stock
+            - Items purchased must not exceed inventory
+            - Items purchased must not be deducted yet
+            - Items purchased must not be above the limit set
+        end note
+    Pending-->Paid: Customer pays for the order
+            note right of Paid
+            - Payment must be successful
+            - Items must still be in stock
+            - Items are now deducted
+        end note
+    Paid --> Pending: Item no longer in stock, customer preference change.
+    Paid --> [*]
+
+
+</div>
+<p>The more questions we ask, the more requirements and understanding of the system we will have. We know from this a few very important things</p>
+<p>For an order to move from <code>start</code> to <code>pending</code></p>
+<ul>
+<li>items must be in stock</li>
+<li>items must not exceed the limit set (1000 PlayStation5?)</li>
+<li>items must not exceed stock</li>
+<li>The <strong>system will not deduct the item stock at this stage</strong></li>
+</ul>
+<p>For the order to be moved from <code>pending</code> to <code>paid</code></p>
+<ul>
+<li>payment must be made and successful</li>
+<li>stock must be still in the system</li>
+<li>the system will only now deduct the items</li>
+</ul>
+<p>Notice, that by going through the step-by-step process, we can now ask the client more questions for example</p>
+<ul>
+<li>When does the system deduct the item ordered by the user? <strong>Does it do it before he pays or after he pays?</strong></li>
+<li>If the system does it after he pays, there <strong>might be times when other users, might be able to place an order but he cannot pay for it</strong>, do you want that to happen?</li>
+<li>If the system does it the minute after they place the order, <strong>how long do you want the system to hold it before the stock is returned?</strong>, what if the customer does not pay?
+Will this not be bad for business?</li>
+<li>Does it make sense for it to go from <code>paid</code> to <code>pending</code>?</li>
+</ul>
+<p>We are not done yet, though&hellip;&hellip;&hellip;&hellip;&hellip;</p>
+<p>What about the <code>cancelled</code> state?</p>
+<p>We need to continue asking questions to the client because they know the system the best, and if you make too many assumptions things could go wrong.</p>
+<p>Let&rsquo;s put it in and try to complete the diagram.</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js" integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+      location.reload()
+  })
+
+  if (document.body.className.includes("dark")) {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'dark' })
+  } else {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'forest' })
+  }
+
+</script>
+
+
+
+<div class="mermaid" align="center" id="mermaid">
+    
+stateDiagram-v2
+    [*] --> Pending : Customer places an order
+    Pending-->Paid: Customer pays for the order
+    Paid --> Cancelled: [Guards] 
+    Pending --> Cancelled: [Guards] 
+    
+    Pending --> [*]
+    Paid --> [*]
+    Cancelled --> [*]
+
+    note right of Paid
+            - Payment must be successful
+            - Items must still be in stock
+            - Items are now deducted
+    end note
+         note left of Pending
+            - Items must be in stock
+            - Items purchased must not exceed inventory
+            - Items purchased must not be deducted yet
+            - Items purchased must not be above the limit set
+        end note
+
+         note left of Cancelled
+            - Payment not made within a certain number of days
+            - Cancelled as per customer request
+        end note
+
+</div>
+<p>With that, we can see a bit more clearly what is happening and the limitations of our system.</p>
+<h3 id="explained">Explained<a hidden class="anchor" aria-hidden="true" href="#explained">#</a></h3>
+<p>In plain English. A customer can have an Order in the <code>pending</code> state. This happens when the customer places an order but does not pay for it.</p>
+<ul>
+<li>However, the system will automatically change the <code>pending</code> state to the <code>cancelled</code> state if the items are no longer in stock or a payment has not been made after a set duration.</li>
+<li>The <code>pending</code> state can be the final state of the Order.</li>
+<li>The stock numbers are only reduced after a customer has paid. This means that there is a potential for another customer to have an item at a <code>pending</code> state but the item will not be in stock. This customer might not be able to make a payment due to the nature of the system.</li>
+<li>So this customer&rsquo;s order would potentially be left in the <code>pending</code> state.</li>
+<li>A <code>pending</code> will be moved to the <code>cancelled</code> state if payment has not been made after a set period or it is cancelled as per customer request.</li>
+</ul>
+<p>But wait we still need to ask the client the question more questions</p>
+<ul>
+<li>What if a product is no longer available to be purchased? Meaning the product is no longer offered? Do you want to automatically cancel the order? Or do you want to leave it in the <code>pending</code> state?</li>
+</ul>
+<p>Notice that by going through this process, we not only discover and understand more about the system. We are left with more questions than perhaps answers.</p>
+<p>We are far from done, as if we pry into the requirements more, we would discover more and more requirements and perhaps more so states, hence it is possible to have sub-states in UML State Chart diagrams but, I shall call the current state chart the first iteration. Will it ever be complete? It is never complete in a way, as requirements may change and we need to adapt to it.</p>
+<p><strong>The state chart</strong> above is no way complete but just something to start everything off.</p>
+<h3 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h3>
+<p>State charts will allow us to understand the requirements better. Would we have to figure out these without the state chart? It is very possible indeed, but by going through the process of making a state chart, we now understand how the system works better.</p>
+<p>From a programming and technical standpoint, we can also now use <strong>enums</strong> better in our system as we now understand how each of them would happen. For the <code>Order</code> object, it is pretty clear to us, but most of the time we would be dealing with requirements and systems which are foreign to us.</p>
+<p>The main lesson here is, <strong>State Charts allows us to ask more questions regarding the requirements</strong> and by doing so, we understand the system better.</p>
+<p>I hope this blog post is useful. I do personally find that with the aid of state charts, I could understand the system more, after all, it is part of the software engineering process.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://jianloong.github.io/tags/uml/">UML</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://jianloong.github.io/posts/vader/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Sentiment Analysis using VADER in JavaScript</span>
+  </a>
+  <a class="next" href="https://jianloong.github.io/posts/minmax/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Min and Max value of an Array (Java)</span>
+  </a>
+</nav>
+
+  </footer><div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jianloonggithubio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://jianloong.github.io/">Jian</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

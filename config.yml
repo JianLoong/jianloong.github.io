@@ -15,7 +15,7 @@ googleAnalytics: UA-55422968-1
 
 minify:
   disableXML: true
-  minifyOutput: true
+  minifyOutput: false
 
 # homeInfoParams:
 #   Title: "PaperModX"
@@ -166,3 +166,9 @@ outputs:
     - HTML
     - RSS
     - JSON # is necessary
+  
+# Do not remove. This is so raw html can be ran on certain pages.
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
