@@ -6,7 +6,7 @@ ShowReadingTime: true
 cover:
   image: "/images/jplagout.png"
 draft: false
-summary: Using simple shell scripts to automate certain task for input to JPlag
+summary: Automating the processing of extracting and cleaning files for JPlag input
 ---
 
 ### Background
@@ -26,7 +26,7 @@ The teaching team decided to use JPlag as
 
 - Open-source software and available at their website [here](https://github.com/jplag/JPlag)
 
-- JPlag was also to produce timely results for over 450 students and generate reports as well. 
+- JPlag was also able to produce timely results for over 450 students and generate reports as well. 
 
 - It is also periodically updated. 
 
@@ -157,7 +157,7 @@ Last and finally we can just feed the entire directory to JPlag and it would gen
 java -jar ../jplag.jar -l java17 -vl -r results -s -m 50 zipped
 ```
 
-You can tweak JPlag settings to produce various outputs.
+You can also tweak JPlag settings to produce various outputs. You can look at the various flags or options using their documentation.
 
 Here is a screenshot of the results.
 
@@ -175,3 +175,5 @@ Reading the results of JPlag is pretty straight forward. However, please note th
 My feelings with students paying for external help from 3rd parties is neutral, because in a way, these people act like personal tutors for the students. 
 
 As long as what they teach is in line with what is taught by the teaching team, I have no issues with it. However, I do feel sad that the teaching team is seen as not approachable by the students, as we should be the go-to point for them. 
+
+JPlag here is normally just used as a tool to assist the teaching team.
