@@ -11,12 +11,12 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sat, 05 Nov 2022 20:56:02 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/tags/university/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Using JPlag for measure code similarity for Intro to Programming</title>
+      <title>Using JPlag for measuring code similarity for Intro to Programming</title>
       <link>https://jianloong.github.io/posts/jplag/</link>
       <pubDate>Sat, 05 Nov 2022 20:56:02 +1100</pubDate>
       
       <guid>https://jianloong.github.io/posts/jplag/</guid>
-      <description>Plagiarism and collusion in programming assessments</description>
+      <description>Using simple shell scripts to automate certain task for input to JPlag</description>
     </item>
     
   </channel>

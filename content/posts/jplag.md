@@ -1,12 +1,12 @@
 ---
-title: "Using JPlag for measure code similarity for Intro to Programming"
+title: "Using JPlag for measuring code similarity for Intro to Programming"
 date: 2022-11-05T20:56:02+11:00
 tags: ["JPlag", "Plagiarism", "University"]
 ShowReadingTime: true
 cover:
-  image: "/images/toilet.png"
+  image: "/images/jplagout.png"
 draft: false
-summary: Plagiarism and collusion in programming assessments
+summary: Using simple shell scripts to automate certain task for input to JPlag
 ---
 
 ### Background
