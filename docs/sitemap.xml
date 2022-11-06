@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://jianloong.github.io/</loc>
+    <lastmod>2022-11-05T20:56:02+11:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/tags/jplag/</loc>
+    <lastmod>2022-11-05T20:56:02+11:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/tags/plagiarism/</loc>
+    <lastmod>2022-11-05T20:56:02+11:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/posts/</loc>
+    <lastmod>2022-11-05T20:56:02+11:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/tags/</loc>
+    <lastmod>2022-11-05T20:56:02+11:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/tags/university/</loc>
+    <lastmod>2022-11-05T20:56:02+11:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/posts/jplag/</loc>
+    <lastmod>2022-11-05T20:56:02+11:00</lastmod>
+  </url><url>
     <loc>https://jianloong.github.io/tags/ai/</loc>
     <lastmod>2022-10-21T00:00:00+00:00</lastmod>
   </url><url>
@@ -14,16 +35,7 @@
     <loc>https://jianloong.github.io/posts/stablediffusion/</loc>
     <lastmod>2022-10-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/</loc>
-    <lastmod>2022-10-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://jianloong.github.io/posts/</loc>
-    <lastmod>2022-10-21T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://jianloong.github.io/tags/stable-diffusion/</loc>
-    <lastmod>2022-10-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://jianloong.github.io/tags/</loc>
     <lastmod>2022-10-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/education/</loc>

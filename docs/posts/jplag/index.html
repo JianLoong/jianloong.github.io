@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Using JPlag for measure code similarity for Intro to Programming | Jian</title>
+<meta name="keywords" content="JPlag, Plagiarism, University">
+<meta name="description" content="Plagiarism and collusion in programming assessments">
+<meta name="author" content="Jian">
+<link rel="canonical" href="https://jianloong.github.io/posts/jplag/">
+<meta name="google-site-verification" content="UA-55422968-1">
+<link href="http://fonts.cdnfonts.com/css/atkinson-hyperlegible" rel="stylesheet">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://jianliew.me/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jianliew.me/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jianliew.me/images/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://jianliew.me/images/apple-touch-icon.png">
+<link rel="mask-icon" href="https://jianliew.me/images/apple-touch-icon-180x180.png">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-55422968-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Using JPlag for measure code similarity for Intro to Programming" />
+<meta property="og:description" content="Plagiarism and collusion in programming assessments" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jianloong.github.io/posts/jplag/" />
+<meta property="og:image" content="https://jianloong.github.io/images/toilet.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-11-05T20:56:02+11:00" />
+<meta property="article:modified_time" content="2022-11-05T20:56:02+11:00" /><meta property="og:site_name" content="Jian" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://jianloong.github.io/images/toilet.png" />
+<meta name="twitter:title" content="Using JPlag for measure code similarity for Intro to Programming"/>
+<meta name="twitter:description" content="Plagiarism and collusion in programming assessments"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://jianloong.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Using JPlag for measure code similarity for Intro to Programming",
+      "item": "https://jianloong.github.io/posts/jplag/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Using JPlag for measure code similarity for Intro to Programming",
+  "name": "Using JPlag for measure code similarity for Intro to Programming",
+  "description": "Plagiarism and collusion in programming assessments",
+  "keywords": [
+    "JPlag", "Plagiarism", "University"
+  ],
+  "articleBody": "Background Intro to Programming or FIT9131 was a unit taught at the Masters level for the Masters of Information Technology course at Monash University. It was widely known as a challenging unit by the students. I was involved in the teaching of this up to 2019.\nHere is an advertisement I once saw while at the toilet at the University a while back. Basically, it was advertising it could help the students out for those units.\nReasons to use JPlag The teaching team decided to use JPlag as\nit was faster and more accurate for our use case.\nOpen-source software and available at their website here\nJPlag was also to produce timely results for over 450 students and generate reports as well.\nIt is also periodically updated.\nRequirements to use JPlag JPlag accepts can accept a directory which contains student assignments as an input and produces the output in the form of HTML reports by default. The main challenge here was feeding JPlag clean data and file names so that the reports generated would be accurate.\nHere are some issues that have to do with the student’s submission\ndifferent types of compressed files used by the students, ranging from zip files, RAR files and also 7zip files Unicode in the source files breaking JPlag hidden directories and corrupted submissions students renaming a .rar file to a zip file students submitting a shortcut file instead of a zip file I will use a few unzip programs to do it. I could have used 7zip for everything, but RAR files were causing issues, so I needed to use the unrar program instead. So basically detox to detox file names, unzip, 7zip and unrar to extract the files.\nDetox tool is explained here\nThis simple shell script below will check if you have all the required programs installed.\n#!/bin/bash # Check for dependencies if [ $# -ne 0 ]; then echo \"Error: No command line arguments needed\" exit 1 fi command -v detox exit_status=$? if [ $exit_status -eq 1 ]; then echo \"Error: Detox does not exist. Please do sudo apt install detox\" exit 1 fi command -v 7zip exit_status=$? if [ $exit_status -eq 1 ]; then echo \"Error: 7zip does not exist. Please install 7zip\" exit 1 fi command -v unrar exit_status=$? if [ $exit_status -eq 1 ]; then echo \"Error: unrar does not exist. Please install unrar\" exit 1 fi The next part is where the files needed to be unzipped. But the idea is simple, using the file command to obtain the mime-type of the file instead of trusting the extension given by the student.\nSo, for each file, it will check the mine type and then use the correct program to unzip the file. If the file could not be unzipped and there is an error, it will be logged. Remember to also use the right version of unrar as using other programs might cause the rar filed to not be extracted.\n# Program to unzip all files in a directory with the correct program for file in ./*; do if file --mime-type \"$file\" | grep -q zip$; then echo \"Unzip $file\" unzip -d \"${file%*.zip}\" \"$file\" # Check exit status if it is 0, then it is ok if [ $? -eq 0 ]; then rm -rf \"$file\" else mv \"$file\" ../ echo \"$file\" \u003e\u003e../log.txt fi fi if file --mime-type \"$file\" | grep -q rar$; then echo \"Unrar $file\" unrar x -ad \"$file\" if [ $? -eq 0 ]; then rm -rf \"$file\" else mv \"$file\" ../ echo \"$file\" \u003e\u003e../log.txt fi fi if file --mime-type \"$file\" | grep -q 7z-compressed$; then echo \"7z $file\" 7z x \"$file\" -o\"${file%*.7z}\" if [ $? -eq 0 ]; then rm -rf \"$file\" else mv \"$file\" ../ echo \"$file\" \u003e\u003e../log.txt fi fi done With that we now have all of the files unzipped but we are not done yet. Because the files submitted still needs to be cleaned for use in JPlag.\nHere is a list of potential issues\nthe __MACOSX files which are hidden by default for Mac users and serves no purpose for this use case both the *.class and .ctxt files. (The class files is because it is a Java assignment and the ctxt files were generated from the IDE which was used bu the students. Hidden files are removed. We also detox the file names for the directories so that it does not break JPlag Finally we remove Unicode # Remove unneeded files rm -rf ./*/__MACOSX # Remove unneeded class files find . -type f -name '*.class' -delete find . -type f -name '*.ctxt' -delete # Delete hidden files find . -name ._\\* -print0 | xargs -0 rm -f # Detox the file to prevent bad naming convention from students. detox -r ./* # Remove all unicode. find . -type f -iname '*.java' -print | while read f; do echo \"Removing unicode from $f\" LANG=C sed -i 's/[\\d128-\\d255]//g' \"$f\" done Last and finally we can just feed the entire directory to JPlag and it would generate the reports for us.\njava -jar ../jplag.jar -l java17 -vl -r results -s -m 50 zipped You can tweak JPlag settings to produce various outputs.\nHere is a screenshot of the results.\nReading the results Reading the results of JPlag is pretty straight forward. However, please note that it should only be used as a guide and students with high similarity should be interviewed to see if it is a case of collusion of plagiarism.\nFinal words My feelings with students paying for external help from 3rd parties is neutral, because in a way, these people act like personal tutors for the students.\nAs long as what they teach is in line with what is taught by the teaching team, I have no issues with it. However, I do feel sad that the teaching team is seen as not approachable by the students, as we should be the go-to point for them.\n",
+  "wordCount" : "988",
+  "inLanguage": "en",
+  "image":"https://jianloong.github.io/images/toilet.png","datePublished": "2022-11-05T20:56:02+11:00",
+  "dateModified": "2022-11-05T20:56:02+11:00",
+  "author":{
+    "@type": "Person",
+    "name": "Jian"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jianloong.github.io/posts/jplag/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Jian",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jianliew.me/images/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://jianloong.github.io/" accesskey="h" title="Jian (Alt + H)">Jian</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://jianloong.github.io/about/" title="about">
+                    <span>about</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/projects/" title="projects">
+                    <span>projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/search/" title="search (Alt &#43; /)" accesskey=/>
+                    <span>search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/tags/" title="tags">
+                    <span>tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/archives/" title="archives">
+                    <span>archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/contact/" title="contact">
+                    <span>contact</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://jianloong.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://jianloong.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Using JPlag for measure code similarity for Intro to Programming
+    </h1>
+    <div class="post-meta"><span title='2022-11-05 20:56:02 +1100 AEDT'>November 5, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Jian
+
+</div>
+  </header> 
+  <div class="post-content"><h3 id="background">Background<a hidden class="anchor" aria-hidden="true" href="#background">#</a></h3>
+<p>Intro to Programming or FIT9131 was a unit taught at the Masters level for the Masters of Information Technology course at Monash University. It was widely known as a challenging unit by the students. I was involved in the teaching of this up to 2019.</p>
+<p>Here is an advertisement I once saw while at the toilet at the University a while back. Basically, it was advertising it could help the students out for those units.</p>
+<figure class="align-center ">
+    <img loading="lazy" src="/images/toilet.png#center"/> 
+</figure>
+
+<h3 id="reasons-to-use-jplag">Reasons to use JPlag<a hidden class="anchor" aria-hidden="true" href="#reasons-to-use-jplag">#</a></h3>
+<p>The teaching team decided to use JPlag as</p>
+<ul>
+<li>
+<p>it was faster and more accurate for our use case.</p>
+</li>
+<li>
+<p>Open-source software and available at their website <a href="https://github.com/jplag/JPlag">here</a></p>
+</li>
+<li>
+<p>JPlag was also to produce timely results for over 450 students and generate reports as well.</p>
+</li>
+<li>
+<p>It is also periodically updated.</p>
+</li>
+</ul>
+<h3 id="requirements-to-use-jplag">Requirements to use JPlag<a hidden class="anchor" aria-hidden="true" href="#requirements-to-use-jplag">#</a></h3>
+<p>JPlag accepts can accept a directory which contains student assignments as an input and produces the output in the form of HTML reports by default. The main challenge here was feeding JPlag clean data and file names so that the reports generated would be accurate.</p>
+<p>Here are some issues that have to do with the student&rsquo;s submission</p>
+<ul>
+<li>different types of compressed files used by the students, ranging from zip files, RAR files and also 7zip files</li>
+<li>Unicode in the source files breaking JPlag</li>
+<li>hidden directories and corrupted submissions</li>
+<li>students renaming a .rar file to a zip file</li>
+<li>students submitting a shortcut file instead of a zip file</li>
+</ul>
+<p>I will use a few unzip programs to do it. I could have used 7zip for everything, but RAR files were causing issues, so I needed to use the <code>unrar</code> program instead. So basically <code>detox</code> to detox file names, <code>unzip</code>, <code>7zip</code> and <code>unrar</code> to extract the files.</p>
+<p>Detox tool is explained <a href="https://manpages.ubuntu.com/manpages/trusty/man1/detox.1.html">here</a></p>
+<p>This simple shell script below will check if you have all the required programs installed.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1"># Check for dependencies</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;Error: No command line arguments needed&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">exit</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">command</span> -v detox
+</span></span><span class="line"><span class="cl"><span class="nv">exit_status</span><span class="o">=</span><span class="nv">$?</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="nv">$exit_status</span> -eq <span class="m">1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;Error: Detox does not exist. Please do sudo apt install detox&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">exit</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">command</span> -v 7zip
+</span></span><span class="line"><span class="cl"><span class="nv">exit_status</span><span class="o">=</span><span class="nv">$?</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="nv">$exit_status</span> -eq <span class="m">1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;Error: 7zip does not exist. Please install 7zip&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">exit</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">command</span> -v unrar
+</span></span><span class="line"><span class="cl"><span class="nv">exit_status</span><span class="o">=</span><span class="nv">$?</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="nv">$exit_status</span> -eq <span class="m">1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;Error: unrar does not exist. Please install unrar&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">exit</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span></code></pre></div><p>The next part is where the files needed to be unzipped. But the idea is simple, using the <code>file</code> command to obtain the <code>mime-type</code> of  the file instead of trusting the extension given by the student.</p>
+<p>So, for each file, it will check the mine type and then use the correct program to unzip the file. If the file could not be unzipped and there is an error, it will be logged. Remember to also use the right version of <code>unrar</code> as using other programs might cause the <code>rar</code> filed to not be extracted.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># Program to unzip all files in a directory with the correct program</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> file in ./*<span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> file --mime-type <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span> <span class="p">|</span> grep -q zip$<span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;Unzip </span><span class="nv">$file</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        unzip -d <span class="s2">&#34;</span><span class="si">${</span><span class="nv">file</span><span class="p">%*.zip</span><span class="si">}</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Check exit status if it is 0, then it is ok</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">            rm -rf <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span>
+</span></span><span class="line"><span class="cl">            mv <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span> ../
+</span></span><span class="line"><span class="cl">            <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span> &gt;&gt;../log.txt
+</span></span><span class="line"><span class="cl">        <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> file --mime-type <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span> <span class="p">|</span> grep -q rar$<span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;Unrar </span><span class="nv">$file</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        unrar x -ad <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">            rm -rf <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span>
+</span></span><span class="line"><span class="cl">            mv <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span> ../
+</span></span><span class="line"><span class="cl">            <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span> &gt;&gt;../log.txt
+</span></span><span class="line"><span class="cl">        <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> file --mime-type <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span> <span class="p">|</span> grep -q 7z-compressed$<span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;7z </span><span class="nv">$file</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        7z x <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span> -o<span class="s2">&#34;</span><span class="si">${</span><span class="nv">file</span><span class="p">%*.7z</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">            rm -rf <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span>
+</span></span><span class="line"><span class="cl">            mv <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span> ../
+</span></span><span class="line"><span class="cl">            <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span> &gt;&gt;../log.txt
+</span></span><span class="line"><span class="cl">        <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></div><p>With that we now have all of the files unzipped but we are not done yet. Because the files submitted still needs to be cleaned for use in JPlag.</p>
+<p>Here is a list of potential issues</p>
+<ul>
+<li>the __MACOSX files which are hidden by default for Mac users and serves no purpose for this use case</li>
+<li>both the <code>*.class</code> and <code>.ctxt</code> files. (The class files is because it is a Java assignment and the ctxt files were generated from the IDE which was used bu the students.</li>
+<li>Hidden files are removed.</li>
+<li>We also detox the file names for the directories so that it does not break JPlag</li>
+<li>Finally we remove Unicode</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># Remove unneeded files</span>
+</span></span><span class="line"><span class="cl">rm -rf ./*/__MACOSX
+</span></span><span class="line"><span class="cl"><span class="c1"># Remove unneeded class files</span>
+</span></span><span class="line"><span class="cl">find . -type f -name <span class="s1">&#39;*.class&#39;</span> -delete
+</span></span><span class="line"><span class="cl">find . -type f -name <span class="s1">&#39;*.ctxt&#39;</span> -delete
+</span></span><span class="line"><span class="cl"><span class="c1"># Delete hidden files</span>
+</span></span><span class="line"><span class="cl">find . -name ._<span class="se">\*</span> -print0 <span class="p">|</span> xargs -0 rm -f
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Detox the file to prevent bad naming convention from students.</span>
+</span></span><span class="line"><span class="cl">detox -r ./*
+</span></span><span class="line"><span class="cl"><span class="c1"># Remove all unicode.</span>
+</span></span><span class="line"><span class="cl">find . -type f -iname <span class="s1">&#39;*.java&#39;</span> -print <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> f<span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;Removing unicode from </span><span class="nv">$f</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">LANG</span><span class="o">=</span>C sed -i <span class="s1">&#39;s/[\d128-\d255]//g&#39;</span> <span class="s2">&#34;</span><span class="nv">$f</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></div><p>Last and finally we can just feed the entire directory to JPlag and it would generate the reports for us.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">java -jar ../jplag.jar -l java17 -vl -r results -s -m <span class="m">50</span> zipped
+</span></span></code></pre></div><p>You can tweak JPlag settings to produce various outputs.</p>
+<p>Here is a screenshot of the results.</p>
+<figure class="align-center ">
+    <img loading="lazy" src="/images/jplagout.png#center"/> 
+</figure>
+
+<h3 id="reading-the-results">Reading the results<a hidden class="anchor" aria-hidden="true" href="#reading-the-results">#</a></h3>
+<p>Reading the results of JPlag is pretty straight forward. However, please note that it should only be used as a guide and students with high similarity should be interviewed to see if it is a case of collusion of plagiarism.</p>
+<h3 id="final-words">Final words<a hidden class="anchor" aria-hidden="true" href="#final-words">#</a></h3>
+<p>My feelings with students paying for external help from 3rd parties is neutral, because in a way, these people act like personal tutors for the students.</p>
+<p>As long as what they teach is in line with what is taught by the teaching team, I have no issues with it. However, I do feel sad that the teaching team is seen as not approachable by the students, as we should be the go-to point for them.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://jianloong.github.io/tags/jplag/">JPlag</a></li>
+      <li><a href="https://jianloong.github.io/tags/plagiarism/">Plagiarism</a></li>
+      <li><a href="https://jianloong.github.io/tags/university/">University</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://jianloong.github.io/posts/stablediffusion/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Generating Anime &#34;Art&#34; with Stable Diffusion using the &#34;Waifu Diffusion&#34; Model</span>
+  </a>
+</nav>
+
+  </footer><div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jianloonggithubio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://jianloong.github.io/">Jian</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

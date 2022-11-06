@@ -9,7 +9,16 @@
       <link>https://jianloong.github.io/</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 21 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jianloong.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 05 Nov 2022 20:56:02 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using JPlag for measure code similarity for Intro to Programming</title>
+      <link>https://jianloong.github.io/posts/jplag/</link>
+      <pubDate>Sat, 05 Nov 2022 20:56:02 +1100</pubDate>
+      
+      <guid>https://jianloong.github.io/posts/jplag/</guid>
+      <description>Plagiarism and collusion in programming assessments</description>
+    </item>
+    
     <item>
       <title>Generating Anime &#34;Art&#34; with Stable Diffusion using the &#34;Waifu Diffusion&#34; Model</title>
       <link>https://jianloong.github.io/posts/stablediffusion/</link>

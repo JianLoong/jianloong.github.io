@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>JPlag on Jian</title>
+    <link>https://jianloong.github.io/tags/jplag/</link>
+    <description>Recent content in JPlag on Jian</description>
+    <image>
+      <url>https://jianloong.github.io/</url>
+      <link>https://jianloong.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 05 Nov 2022 20:56:02 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/tags/jplag/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using JPlag for measure code similarity for Intro to Programming</title>
+      <link>https://jianloong.github.io/posts/jplag/</link>
+      <pubDate>Sat, 05 Nov 2022 20:56:02 +1100</pubDate>
+      
+      <guid>https://jianloong.github.io/posts/jplag/</guid>
+      <description>Plagiarism and collusion in programming assessments</description>
+    </item>
+    
+  </channel>
+</rss>
