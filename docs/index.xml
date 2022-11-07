@@ -9,22 +9,33 @@
       <link>https://jianloong.github.io/</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 05 Nov 2022 20:56:02 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Nov 2022 20:56:02 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using Python to obtain data from Reddit</title>
+      <link>https://jianloong.github.io/posts/2022/reddit_crawler_using_python/</link>
+      <pubDate>Mon, 07 Nov 2022 20:56:02 +1100</pubDate>
+      
+      <guid>https://jianloong.github.io/posts/2022/reddit_crawler_using_python/</guid>
+      <description>Introduction As of March 2022, Reddit ranks as the 9th-most-visited website in the world and 6th most-visited website in the US according to Wikipedia.
+What is interesting about Reddit is that it has subreddits for people with different interests. For example, there are subreddits on prorgramming, technology or even about funny things at funny.
+There are a few approaches one can take to obtain data from Reddit. Here is one way to do it.</description>
+    </item>
+    
     <item>
       <title>Using JPlag for measuring code similarity for Intro to Programming</title>
-      <link>https://jianloong.github.io/posts/jplag/</link>
+      <link>https://jianloong.github.io/posts/2022/jplag/</link>
       <pubDate>Sat, 05 Nov 2022 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/posts/jplag/</guid>
+      <guid>https://jianloong.github.io/posts/2022/jplag/</guid>
       <description>Automating the processing of extracting and cleaning files for JPlag input</description>
     </item>
     
     <item>
       <title>Generating Anime &#34;Art&#34; with Stable Diffusion using the &#34;Waifu Diffusion&#34; Model</title>
-      <link>https://jianloong.github.io/posts/stablediffusion/</link>
+      <link>https://jianloong.github.io/posts/2022/stablediffusion/</link>
       <pubDate>Fri, 21 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/posts/stablediffusion/</guid>
+      <guid>https://jianloong.github.io/posts/2022/stablediffusion/</guid>
       <description>Recently, generating images with AI has gotten a lot of traction, so I decided to play around with it.
 It is easy to get it working as there is a web user interface fork of it on GitHub located here. Basically, it is working out of the box with minimal configuration needed.
 Instead of using the suggested model, I used the &amp;ldquo;Waifu Diffusion&amp;rdquo; model instead located here. Waifu diffusion is &amp;ldquo;a latent text-to-image diffusion model that has been conditioned on high-quality anime images through fine-tuning&amp;rdquo;.</description>
@@ -32,28 +43,28 @@ Instead of using the suggested model, I used the &amp;ldquo;Waifu Diffusion&amp;
     
     <item>
       <title>Process of Exam Papers Assessment</title>
-      <link>https://jianloong.github.io/posts/process_of_exam_paper_assessment/</link>
+      <link>https://jianloong.github.io/posts/2022/process_of_exam_paper_assessment/</link>
       <pubDate>Thu, 20 Oct 2022 21:30:56 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/posts/process_of_exam_paper_assessment/</guid>
+      <guid>https://jianloong.github.io/posts/2022/process_of_exam_paper_assessment/</guid>
       <description>This post explains the examination marking process so that it is consistent and fair to the students. This is before the age of &lt;em&gt;e-exams&lt;/em&gt;</description>
     </item>
     
     <item>
       <title>Setting up PiHole as an ad blocker</title>
-      <link>https://jianloong.github.io/posts/pihole/</link>
+      <link>https://jianloong.github.io/posts/2022/pihole/</link>
       <pubDate>Thu, 20 Oct 2022 21:30:56 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/posts/pihole/</guid>
+      <guid>https://jianloong.github.io/posts/2022/pihole/</guid>
       <description>An educational approach to crawling Reddit using Python and AWS EC2 without using Reddit API</description>
     </item>
     
     <item>
       <title>Sentiment Analysis using VADER in JavaScript</title>
-      <link>https://jianloong.github.io/posts/vader/</link>
+      <link>https://jianloong.github.io/posts/2022/vader/</link>
       <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/posts/vader/</guid>
+      <guid>https://jianloong.github.io/posts/2022/vader/</guid>
       <description>This post is a simple implementation of how to use the VADER sentiment analysis in a paragraph. VADER (Valence Aware Dictionary and sEntiment Reasoner) is a &amp;ldquo;lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media.&amp;rdquo;
 For the project page, please go here
 Enter text to be analysed: Sentiment analysis studies the subjective information in an expression, that is, the opinions, appraisals, emotions, or attitudes towards a topic, person or entity.</description>
@@ -61,58 +72,58 @@ Enter text to be analysed: Sentiment analysis studies the subjective information
     
     <item>
       <title>UML Statecharts</title>
-      <link>https://jianloong.github.io/posts/statechart/</link>
+      <link>https://jianloong.github.io/posts/2022/statechart/</link>
       <pubDate>Sun, 24 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/posts/statechart/</guid>
+      <guid>https://jianloong.github.io/posts/2022/statechart/</guid>
       <description>This post attempts to explain UML Statecharts as simple as possible.</description>
     </item>
     
     <item>
       <title>Min and Max value of an Array (Java)</title>
-      <link>https://jianloong.github.io/posts/minmax/</link>
+      <link>https://jianloong.github.io/posts/2019/minmax/</link>
       <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/posts/minmax/</guid>
+      <guid>https://jianloong.github.io/posts/2019/minmax/</guid>
       <description>Getting the min and value of an array in Java</description>
     </item>
     
     <item>
       <title>Singleton &amp; Observer Pattern (Java)</title>
-      <link>https://jianloong.github.io/posts/singletonobserverpattern/</link>
+      <link>https://jianloong.github.io/posts/2019/singletonobserverpattern/</link>
       <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/posts/singletonobserverpattern/</guid>
+      <guid>https://jianloong.github.io/posts/2019/singletonobserverpattern/</guid>
       <description>This blog post will demonstrate a simple use case where the singleton and observable design pattern becomes important.
 Let&amp;rsquo;s imagine if you are in the arcade and there is a Lucky Dip Machine. The reason I like call it the LuckyDipMachine is because it is one of the feature assignments in the Programming Foundation Units in Monash University and it is often times made fun at. However, the solution for assignment itself can be engineered to be better.</description>
     </item>
     
     <item>
       <title>k-Nearest Neighbour on Maps</title>
-      <link>https://jianloong.github.io/posts/voronoi/</link>
+      <link>https://jianloong.github.io/posts/2019/voronoi/</link>
       <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/posts/voronoi/</guid>
+      <guid>https://jianloong.github.io/posts/2019/voronoi/</guid>
       <description>One of the most common queries when working with maps is the nearest neighbour query. This blog post will use Voronoi Diagrams to explain more regarding the nearest neighbour query.
 Below is an example of a Voronoi diagram generated using d3.js. One of the good use cases of a voronoi diagram in real-life applications would be where would be finding a place to build emergency services. This place should have the most number of neighbouring regions.</description>
     </item>
     
     <item>
       <title>JavaScript Promise All - Parsing Hackernews Stories using Promise.all</title>
-      <link>https://jianloong.github.io/posts/promiseall/</link>
+      <link>https://jianloong.github.io/posts/2019/promiseall/</link>
       <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/posts/promiseall/</guid>
+      <guid>https://jianloong.github.io/posts/2019/promiseall/</guid>
       <description>This post is an entry to describe a use case when the Promise.all JavaScript method is needed. The official reference can be found here. This assumes that the reader has a basic understanding of how promises work.
 Before we start, there is a need to understand how certain RESTful services are structured. For example, the Hacker News API has an end-point called topstories. This end-point however, does not contain any other information besides a list of item IDs.</description>
     </item>
     
     <item>
       <title>Traveling Sales Person using Genetic Algorithms</title>
-      <link>https://jianloong.github.io/posts/tsp/</link>
+      <link>https://jianloong.github.io/posts/2019/tsp/</link>
       <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/posts/tsp/</guid>
+      <guid>https://jianloong.github.io/posts/2019/tsp/</guid>
       <description>This post is best viewed using the light theme.
 This post uses GA to generate a high-quality solution to the Traveling Salesman Problem.
 Traveling Salesman Problem using Genetic Algorithm This blog post is regarding using a genetic algorithm to solve the Traveling Salesman Problem. In a one-liner, the TSP asks the following question: Given a list of cities and the distances between each pair of the cities, what is the shortest possible route that visits each city and returns to the origin city?</description>
@@ -120,10 +131,10 @@ Traveling Salesman Problem using Genetic Algorithm This blog post is regarding u
     
     <item>
       <title>Genetic Algorithm using Web Workers</title>
-      <link>https://jianloong.github.io/posts/simplegeneticalgo/</link>
+      <link>https://jianloong.github.io/posts/2019/simplegeneticalgo/</link>
       <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/posts/simplegeneticalgo/</guid>
+      <guid>https://jianloong.github.io/posts/2019/simplegeneticalgo/</guid>
       <description>This post is a simple implementation of Genetic Algorithm GA. Here, you would start with a random string and end up with the target string.
 This post is heavily inspired based on this website. However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it runs behind the scenes.
 The implementation of it can be seen here</description>
@@ -131,10 +142,10 @@ The implementation of it can be seen here</description>
     
     <item>
       <title>Hacker News Word Cloud </title>
-      <link>https://jianloong.github.io/posts/20191014_hackernews_word_cloud/</link>
+      <link>https://jianloong.github.io/posts/2019/hackernews_word_cloud/</link>
       <pubDate>Mon, 14 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/posts/20191014_hackernews_word_cloud/</guid>
+      <guid>https://jianloong.github.io/posts/2019/hackernews_word_cloud/</guid>
       <description>The word cloud generated here is based on the website hacker news.
 The reason this post is; is so that it would easier to see the word that appeared the most for the day.
 Even though the use of a word cloud is not exactly a good representation of occurrence, it still looks nice.
@@ -143,10 +154,10 @@ Please note that the posts here are generated based on the Hacker News API by do
     
     <item>
       <title>Sentiment analysis for the subreddit Hong Kong</title>
-      <link>https://jianloong.github.io/posts/hk/</link>
+      <link>https://jianloong.github.io/posts/2019/hk/</link>
       <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/posts/hk/</guid>
+      <guid>https://jianloong.github.io/posts/2019/hk/</guid>
       <description>Sentiment Analysis for the Sub-Reddit &amp;ldquo;HongKong&amp;rdquo; This post will perform sentiment analysis using AFINN. AFINN is a list of words rated for valence rated with an integer between minus five(negative) and plus five (positive). This implementation uses AFINN-en-165. 1
 This approach however is very naive as it does not build any models to determine the context of the usage of the word itself.
 Please note that the posts here are generated based on the Reddit website by doing GET requests.</description>
@@ -166,10 +177,10 @@ Please note that the posts here are generated based on the Reddit website by doi
     
     <item>
       <title>Percentage Charts for the subreddit Am I the Asshole?</title>
-      <link>https://jianloong.github.io/posts/amitheasshole/</link>
+      <link>https://jianloong.github.io/posts/2019/amitheasshole/</link>
       <pubDate>Wed, 09 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/posts/amitheasshole/</guid>
+      <guid>https://jianloong.github.io/posts/2019/amitheasshole/</guid>
       <description>The charts here are visualisation of the Am I the Asshole? subreddit which can be found here
 The subreddit describes itself as&amp;hellip;
 A catharsis for the frustrated moral philosopher in all of us, and a place to finally find out if you were wrong in an argument that&amp;rsquo;s been bothering you. Tell us about any non-violent conflict you have experienced; give us both sides of the story, and find out if you&amp;rsquo;re right, or you&amp;rsquo;re the asshole.</description>

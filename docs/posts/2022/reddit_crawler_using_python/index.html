@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Using Python to obtain data from Reddit | Jian</title>
+<meta name="keywords" content="reddit, crawler, python">
+<meta name="description" content="Introduction As of March 2022, Reddit ranks as the 9th-most-visited website in the world and 6th most-visited website in the US according to Wikipedia.
+What is interesting about Reddit is that it has subreddits for people with different interests. For example, there are subreddits on prorgramming, technology or even about funny things at funny.
+There are a few approaches one can take to obtain data from Reddit. Here is one way to do it.">
+<meta name="author" content="Jian">
+<link rel="canonical" href="https://jianloong.github.io/posts/2022/reddit_crawler_using_python/">
+<meta name="google-site-verification" content="UA-55422968-1">
+<link href="http://fonts.cdnfonts.com/css/atkinson-hyperlegible" rel="stylesheet">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://jianliew.me/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jianliew.me/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jianliew.me/images/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://jianliew.me/images/apple-touch-icon.png">
+<link rel="mask-icon" href="https://jianliew.me/images/apple-touch-icon-180x180.png">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-55422968-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Using Python to obtain data from Reddit" />
+<meta property="og:description" content="Introduction As of March 2022, Reddit ranks as the 9th-most-visited website in the world and 6th most-visited website in the US according to Wikipedia.
+What is interesting about Reddit is that it has subreddits for people with different interests. For example, there are subreddits on prorgramming, technology or even about funny things at funny.
+There are a few approaches one can take to obtain data from Reddit. Here is one way to do it." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jianloong.github.io/posts/2022/reddit_crawler_using_python/" />
+<meta property="og:image" content="https://jianloong.github.io/images/simplecrawler.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-11-07T20:56:02+11:00" />
+<meta property="article:modified_time" content="2022-11-07T20:56:02+11:00" /><meta property="og:site_name" content="Jian" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://jianloong.github.io/images/simplecrawler.png" />
+<meta name="twitter:title" content="Using Python to obtain data from Reddit"/>
+<meta name="twitter:description" content="Introduction As of March 2022, Reddit ranks as the 9th-most-visited website in the world and 6th most-visited website in the US according to Wikipedia.
+What is interesting about Reddit is that it has subreddits for people with different interests. For example, there are subreddits on prorgramming, technology or even about funny things at funny.
+There are a few approaches one can take to obtain data from Reddit. Here is one way to do it."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://jianloong.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Using Python to obtain data from Reddit",
+      "item": "https://jianloong.github.io/posts/2022/reddit_crawler_using_python/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Using Python to obtain data from Reddit",
+  "name": "Using Python to obtain data from Reddit",
+  "description": "Introduction As of March 2022, Reddit ranks as the 9th-most-visited website in the world and 6th most-visited website in the US according to Wikipedia.\nWhat is interesting about Reddit is that it has subreddits for people with different interests. For example, there are subreddits on prorgramming, technology or even about funny things at funny.\nThere are a few approaches one can take to obtain data from Reddit. Here is one way to do it.",
+  "keywords": [
+    "reddit", "crawler", "python"
+  ],
+  "articleBody": "Introduction As of March 2022, Reddit ranks as the 9th-most-visited website in the world and 6th most-visited website in the US according to Wikipedia.\nWhat is interesting about Reddit is that it has subreddits for people with different interests. For example, there are subreddits on prorgramming, technology or even about funny things at funny.\nThere are a few approaches one can take to obtain data from Reddit. Here is one way to do it.\nBasic method The easiest way to get information would just to be to issue a request to the exact same page but now with the .json extension. For example if you are after information from https://www.reddit.com/r/programming you can issue a request to https://www.reddit.com/r/programming.json for information to be retrieved in JSON format.\nThis method is nice because it requires minimal setup and does not need an API key, however there might be limitations where you can potentially get rate limited.\nThe output of that would be as follows -\nFig 1. Output JSON from a simple request using the .json extension With that knowledge we can write a simple python script to do it. It doesn’t really matter what language we use for this scenario, but python would be one of the fastest, of course you could also write a simple fetch on JavaScript.\nThe python codes below will showcase how it is done.\nimport json import requests REDDIT_URL: str = \"https://www.reddit.com/r/programming.json?limit=100\" def process(): # Create header to spoof browser header = { \"Connection\": \"keep-alive\", \"Upgrade-Insecure-Requests\": \"1\", \"User-Agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36\", \"Accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\", \"Sec-Fetch-Site\": \"same-origin\", \"Sec-Fetch-Mode\": \"navigate\", \"Sec-Fetch-User\": \"?1\", \"Sec-Fetch-Dest\": \"document\", \"Referer\": \"https://www.google.com/\", \"Accept-Encoding\": \"gzip, deflate, br\", \"Accept-Language\": \"en-US,en;q=0.9\" } r = requests.Session() r.headers = header try: response = r.get(REDDIT_URL) except: exit(1) # Get the results of the request - posts is a array of JSON. # Notice here we are accessing the data -\u003e children posts = response.json()['data']['children'] results = [] # We will use this urls later to get the comments. urls = [] index = 1 for post in posts: print(str(index) + \" out of \" + str(len(posts))) index = index + 1 title = post['data']['title'] permalink = post['data']['permalink'] name = post['data']['name'] created = post['data']['created_utc'] selftext = post['data']['selftext'] result = { \"title\": title, \"permalink\": permalink, \"name\": name, \"created\": created, \"selftext\": selftext } urls.append(\"https://www.reddit.com\" + permalink + \".json\") results.append(result) print(json.dumps(results, indent=4)) if __name__ == \"__main__\": process() exit(0) If you run it, you would be able to get a list of post from that subreddit, however often times we are interested in the content of the post themselves, so we can actually issue more request for it.\nFor example, if you limit the post to 1 below would be an example output of it. You can also determine how much information you would like from it.\n[ { \"title\": \"NVIDIA Security Team: \\\"What if we just stopped using C?\\\" (This is not about Rust)\", \"permalink\": \"/r/programming/comments/yoisjn/nvidia_security_team_what_if_we_just_stopped/\", \"name\": \"t3_yoisjn\", \"created\": 1667817127.0, \"selftext\": \"\" } ] Besides that, the main listing would also return hyperlinks to the post in which you can query to obtain results from them as well. These fields are indicated with the permalink entries for the post. So you can build up a list of them a perform more request for it.\nThe following are the extension of the above codes. It is much faster for this to be done in an async manner, since we have multiple URLs. So, using a FutureSession would be much better for this implementation.\nwith FuturesSession(max_workers=30) as session: session.headers = header futures = [session.get(url) for url in urls] for future in as_completed(futures): replies_response = future.result() temp = replies_response.json()[0][\"data\"][\"children\"][0][\"data\"][\"title\"] print(temp) _replies_arr = replies_response.json()[1] replies = [] for reply in _replies_arr['data']['children']: _body = reply['data']['body'] replies.append(_body) submission = { \"title\": temp, \"reply\": replies } submissions.append(submission) print(json.dumps(submissions, indent=4)) The output would be\n[ { \"title\": \"NVIDIA Security Team: \\\"What if we just stopped using C?\\\" (This is not about Rust)\", \"reply\": [ \"That's pretty cool.\\n\\nThough I find it fascinating they didn't go for the low-hanging fruit of the way they do UI\u0026lt;-\u0026gt;driver interactions and how many layers of vulnerabilities come from that, nevermind how \\\"heavyweight\\\" it all is.\\n\\nBut as far as the backend goes, that's a damn cool change, especially that it was accepted so well.\", \"\u0026gt; What if we just stopped using C?\\n\\n\u0026gt; #504 Gateway Time-out\\n\\nis this some elaborate shitpost that is flying over my head?\", \"\u0026gt; I encourage everyone to read the full case study\\n\\nOk, I will!\\n\\n\u0026gt; **Sign up to Access Now**\\n\\nOk, bye!\", \"I think reddit hugged it to death.\", \"For those mentioning Rust. Nvidia do know about Rust, just in case you thought that they hadn't heard all about it. Some considerations like lacking integer overflow protection is talked about here.\\n\\nhttps://youtu.be/TcIaZ9LW1WE\\n\\nOn a personal note. I love Adas readability. Some see readbility as meaning brevity. I do not.\", \"tf is spark\", \"\u0026gt; (This is not about Rust)\\n\\nWell, no. It's really about Ada; actually a formally verifiable subset of it, which is a language programmers eschewed a long time ago because... reasons? It has nearly (or all?) of the same advantages of Rust, but somehow Rust became more popular. I don't understand why we needed Rust when Ada was there all along. \\n\\nSo, I went looking for an example. And here it is:\\n\\nhttps://blog.adacore.com/i-cant-believe-that-i-can-prove-that-it-can-sort\\n\\nBasically, this is just a SPARK example to write a verifiable sorting algorithm in Ada SPARK. FWIW - That sorting algorithm is very cool too and dead simple by itself. Like it makes falling out of bed look complicated; that kind of simple.\\n\\nAnyway, now I know why we haven't been using this stuff so far: It's far too complicated for most of us to use in daily practice. Most of us aren't going to be writing core SDKs or drivers used by millions of users though either, so that's fair. But, if must write software that MUST be provable correct, then this is your go-to. Or maybe Rust if you must write software that's probably correct because at least it avoids most of the sins of C, then use that. You decide.\\n\\nOh... and here's the Spark sub-reddit: https://www.reddit.com/r/spark/\", \"I actually prefer reading and writing Ada to Go. Which is saying something for a language with low level memory control.\", \"I like how cautious the title is lol\\n\\nPretty sad you have to preface stuff like this to avoid assholes raiding the comments though.\", \"I worked for a company doing safety related code and the crusty old tech lead told me once \\\"We should be doing this in ADA but we can't find enough developers\\\".\", \"I just wish Spark Pro wasn't privately priced. I bet its in the hundreds of thousands of dollars per license.\", \"Interestingly, this is an Ada-based system. See [https://en.wikipedia.org/wiki/SPARK\\\\_(programming\\\\_language)](https://en.wikipedia.org/wiki/SPARK_(programming_language)) \\n\\nIf you Google \\\"SPARK\\\" it's easy to get tangled up in Apache Spark, which this is not.\\n\\nI would have described Ada as a quaint, long-abandoned attempt at a programming language by DoD. Interesting that it's still around at all, much less possibly gaining usage.\", \"I only care about C because of x86-based tools like Valgrind, VTune, IDA Pro and basic portability between GPU and CPU.\", \"I am really tired after work today and at the same time I thought it sounded very interesting. I just can't focus. Did they just use Spark and it was as fast as C?\", \"It would be \\\"NVIDIA Se urity team\\\", then.\", \"I briefly worked with Ada, GNAT Pro, and Code Peer in the rail industry. It was a fantastic experience, but it was all green field.\\n\\nI won't comment about Rust negativity, but I will just say that Ada deserves much more attention and respect from safety-minded developers than it receives today.\", \"The only comment on the blog post is another Rust-troll.\", \"Stop trying to make Ada happen\", \"https://i.redd.it/9oez8zkg1qc01.png\", \"WHAT DO YOU MEAN IT'S NOT ABOUT RUST, RUST IS BETTER C AND C++!!!1!! SWITCH TO RUST OR I WILL SEGFAULT YOUR ENTIRE COMPANY \\ud83e\\udd2c\\ud83d\\udc79\", \"\u0026gt; \\u201cTesting security is pretty much impossible. It\\u2019s hard to know if you\\u2019re ever done,\\u201d said Daniel Rohrer, VP of Software Security at NVIDIA.\\n\\nA) no, it's not.\\n\\nB) you're never done.\\n\\nThis is coming from the VP of Software Security? Who made him VP? A dozen monkeys with typewriters?\", \"However, Ada is very large and takes a long time to study even in its features.\\n\\nFurthermore a lot of the things we do by convention in C programs have specific Ada features just for that, so rather than applying the corresponding language primitives (which is generally painful) one hits the annotated language reference a dozen times until the knowledge sticks. On top of all that there's conventions particular to Ada, which are mysterious and powerful.\", \"Long story short they are using spark (never heard about it before) language. It\\u2019s already deployed for them, and did nit really see any difference in terms of performance, aka a pretty big reason to use C/C++ on new shit today.\", \"What about Pascal ? Nothing is more readable?\", \"Amazing that industry finally starts using formal theorem provers.\", \"They used fucking ADA?!?! These guys are built different\", \"[removed]\" ] } ] Conclusion The gist of the code can be found here\nIf you are planning on saving the data, there are better ways to engineer the solution by inserting the information into a database and also preventing duplicated entries and updating them as well, but this method is sufficient enough for basic needs.\nThis is probably the easiest way to obtain data from reddit. You can obviously tailor the codes to the output or information you would like. The main advantage of using this method is that you do not need an API key however, there is a high chance you will get rated-limited if you are issuing too many request. Please be warned.\n",
+  "wordCount" : "1626",
+  "inLanguage": "en",
+  "image":"https://jianloong.github.io/images/simplecrawler.png","datePublished": "2022-11-07T20:56:02+11:00",
+  "dateModified": "2022-11-07T20:56:02+11:00",
+  "author":{
+    "@type": "Person",
+    "name": "Jian"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jianloong.github.io/posts/2022/reddit_crawler_using_python/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Jian",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jianliew.me/images/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://jianloong.github.io/" accesskey="h" title="Jian (Alt + H)">Jian</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://jianloong.github.io/about/" title="about">
+                    <span>about</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/projects/" title="projects">
+                    <span>projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/search/" title="search (Alt &#43; /)" accesskey=/>
+                    <span>search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/tags/" title="tags">
+                    <span>tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/archives/" title="archives">
+                    <span>archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/contact/" title="contact">
+                    <span>contact</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://jianloong.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://jianloong.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Using Python to obtain data from Reddit
+    </h1>
+    <div class="post-meta"><span title='2022-11-07 20:56:02 +1100 AEDT'>November 7, 2022</span>&nbsp;·&nbsp;1626 words&nbsp;·&nbsp;Jian
+
+</div>
+  </header> 
+  <div class="post-content"><h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h2>
+<p>As of March 2022, Reddit ranks as the 9th-most-visited website in the world and 6th most-visited website in the US according to Wikipedia.</p>
+<p>What is interesting about Reddit is that it has <code>subreddits</code> for people with different interests. For example, there are subreddits on <code>prorgramming</code>, <code>technology</code> or even about funny things at <code>funny</code>.</p>
+<p>There are a few approaches one can take to obtain data from Reddit. Here is one way to do it.</p>
+<h3 id="basic-method">Basic method<a hidden class="anchor" aria-hidden="true" href="#basic-method">#</a></h3>
+<p>The easiest way to get information would just to be to issue a request to the exact same page but now with the <code>.json</code> extension. For example if you are after information from <em><a href="https://www.reddit.com/r/programming">https://www.reddit.com/r/programming</a></em> you can issue a request to <em><a href="https://www.reddit.com/r/programming.json">https://www.reddit.com/r/programming.json</a></em> for information to be retrieved in JSON format.</p>
+<p>This method is nice because it requires minimal setup and does not need an API key, however there might be limitations where you can potentially get rate limited.</p>
+<p>The output of that would be as follows -</p>
+<figure class="align-center ">
+    <img loading="lazy" src="/images/reddit.png#center"/> 
+</figure>
+
+<p align="center">Fig 1. Output JSON from a simple request using the <strong>.json</strong> extension </p>
+<p>With that knowledge we can write a simple <code>python</code> script to do it. It doesn&rsquo;t really matter what language we use for this scenario, but <code>python</code> would be one of the fastest, of course you could also write a simple fetch on JavaScript.</p>
+<p>The <code>python</code> codes below will showcase how it is done.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">REDDIT_URL</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;https://www.reddit.com/r/programming.json?limit=100&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">process</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Create header to spoof browser</span>
+</span></span><span class="line"><span class="cl">    <span class="n">header</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Connection&#34;</span><span class="p">:</span> <span class="s2">&#34;keep-alive&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Upgrade-Insecure-Requests&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;User-Agent&#34;</span><span class="p">:</span> <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Accept&#34;</span><span class="p">:</span> <span class="s2">&#34;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Sec-Fetch-Site&#34;</span><span class="p">:</span> <span class="s2">&#34;same-origin&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Sec-Fetch-Mode&#34;</span><span class="p">:</span> <span class="s2">&#34;navigate&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Sec-Fetch-User&#34;</span><span class="p">:</span> <span class="s2">&#34;?1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Sec-Fetch-Dest&#34;</span><span class="p">:</span> <span class="s2">&#34;document&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Referer&#34;</span><span class="p">:</span> <span class="s2">&#34;https://www.google.com/&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Accept-Encoding&#34;</span><span class="p">:</span> <span class="s2">&#34;gzip, deflate, br&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Accept-Language&#34;</span><span class="p">:</span> <span class="s2">&#34;en-US,en;q=0.9&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="n">header</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">REDDIT_URL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Get the results of the request - posts is a array of JSON.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Notice here we are accessing the data -&gt; children</span>
+</span></span><span class="line"><span class="cl">    <span class="n">posts</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;children&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># We will use this urls later to get the comments.</span>
+</span></span><span class="line"><span class="cl">    <span class="n">urls</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">posts</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34; out of &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">posts</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="n">title</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">permalink</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;permalink&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">name</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">created</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;created_utc&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">selftext</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;selftext&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="s2">&#34;title&#34;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="s2">&#34;permalink&#34;</span><span class="p">:</span> <span class="n">permalink</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="s2">&#34;created&#34;</span><span class="p">:</span> <span class="n">created</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="s2">&#34;selftext&#34;</span><span class="p">:</span> <span class="n">selftext</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;https://www.reddit.com&#34;</span> <span class="o">+</span> <span class="n">permalink</span> <span class="o">+</span> <span class="s2">&#34;.json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">process</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span></code></pre></div><p>If you run it, you would be able to get a list of post from that subreddit, however often times we are interested in the content of the post themselves, so we can actually issue more request for it.</p>
+<p>For example, if you limit the post to 1 below would be an example output of it. You can also determine how much information you would like from it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;title&#34;</span><span class="p">:</span> <span class="s2">&#34;NVIDIA Security Team: \&#34;What if we just stopped using C?\&#34; (This is not about Rust)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;permalink&#34;</span><span class="p">:</span> <span class="s2">&#34;/r/programming/comments/yoisjn/nvidia_security_team_what_if_we_just_stopped/&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;t3_yoisjn&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;created&#34;</span><span class="p">:</span> <span class="mf">1667817127.0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;selftext&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span></code></pre></div><p>Besides that, the main listing would also return hyperlinks to the post in which you can query to obtain results from them as well. These fields are indicated with the <code>permalink</code> entries for the post. So you can build up a list of them a perform more request for it.</p>
+<p>The following are the extension of the above codes. It is much faster for this to be done in an async manner, since we have multiple URLs. So, using a FutureSession would be much better for this implementation.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="k">with</span> <span class="n">FuturesSession</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">session</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="n">header</span>
+</span></span><span class="line"><span class="cl">        <span class="n">futures</span> <span class="o">=</span> <span class="p">[</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">as_completed</span><span class="p">(</span><span class="n">futures</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">replies_response</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">temp</span> <span class="o">=</span> <span class="n">replies_response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&#34;data&#34;</span><span class="p">][</span><span class="s2">&#34;children&#34;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&#34;data&#34;</span><span class="p">][</span><span class="s2">&#34;title&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">_replies_arr</span> <span class="o">=</span> <span class="n">replies_response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">replies</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">reply</span> <span class="ow">in</span> <span class="n">_replies_arr</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;children&#39;</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">_body</span> <span class="o">=</span> <span class="n">reply</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;body&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="n">replies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_body</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">            <span class="n">submission</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;title&#34;</span><span class="p">:</span> <span class="n">temp</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;reply&#34;</span><span class="p">:</span> <span class="n">replies</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">submissions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">submission</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">submissions</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+</span></span></code></pre></div><p>The output would be</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;title&#34;</span><span class="p">:</span> <span class="s2">&#34;NVIDIA Security Team: \&#34;What if we just stopped using C?\&#34; (This is not about Rust)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;reply&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;That&#39;s pretty cool.\n\nThough I find it fascinating they didn&#39;t go for the low-hanging fruit of the way they do UI&amp;lt;-&amp;gt;driver interactions and how many layers of vulnerabilities come from that, nevermind how \&#34;heavyweight\&#34; it all is.\n\nBut as far as the backend goes, that&#39;s a damn cool change, especially that it was accepted so well.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;&amp;gt; What if we just stopped using C?\n\n&amp;gt; #504 Gateway Time-out\n\nis this some elaborate shitpost that is flying over my head?&#34;</span><span class="p">,</span>            <span class="s2">&#34;&amp;gt; I encourage everyone to read the full case study\n\nOk, I will!\n\n&amp;gt; **Sign up to Access Now**\n\nOk, bye!&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;I think reddit hugged it to death.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;For those mentioning Rust. Nvidia do know about Rust, just in case you thought that they hadn&#39;t heard all about it. Some considerations like lacking integer overflow protection is talked about here.\n\nhttps://youtu.be/TcIaZ9LW1WE\n\nOn a personal note. I love Adas readability. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">Some see readbility as meaning brevity. I do not.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;tf is spark&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;&amp;gt; (This is not about Rust)\n\nWell, no.  It&#39;s really about Ada; actually a formally verifiable subset of it, which is a language programmers eschewed a long time ago because... reasons?  It has nearly (or all?) of the same advantages of Rust, but somehow Rust became more popular.  I don&#39;t understand why we needed Rust when Ada was there all along.   \n\nSo, I went looking for an example.  And here it is:\n\nhttps://blog.adacore.com/i-cant-believe-that-i-can-prove-that-it-can-sort\n\nBasically, this is just a SPARK example to write a verifiable sorting algorithm 
+</span></span></span><span class="line"><span class="cl"><span class="s2">in Ada SPARK.  FWIW - That sorting algorithm is very cool too and dead simple by itself.  Like it makes falling out of bed look complicated; that 
+</span></span></span><span class="line"><span class="cl"><span class="s2">kind of simple.\n\nAnyway, now I know why we haven&#39;t been using this stuff so far:  It&#39;s far too complicated for most of us to use in daily practice.  Most of us aren&#39;t going to be writing core SDKs or drivers used by millions of users though either, so that&#39;s fair.  But, if must write software that MUST be provable correct, then this is your go-to.  Or maybe Rust if you must write software that&#39;s probably correct because at least it 
+</span></span></span><span class="line"><span class="cl"><span class="s2">avoids most of the sins of C, then use that.  You decide.\n\nOh... and here&#39;s the Spark sub-reddit:  https://www.reddit.com/r/spark/&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;I actually prefer reading and writing Ada to Go. Which is saying something for a language with low level memory control.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;I like how cautious the title is lol\n\nPretty sad you have to preface stuff like this to avoid assholes raiding the comments though.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;I worked for a company doing safety related code and the crusty old tech lead told me once \&#34;We should be doing this in ADA but we can&#39;t find enough developers\&#34;.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;I just wish Spark Pro wasn&#39;t privately priced. I bet its in the hundreds of thousands of dollars per license.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Interestingly, this is an Ada-based system. See [https://en.wikipedia.org/wiki/SPARK\\_(programming\\_language)](https://en.wikipedia.org/wiki/SPARK_(programming_language)) \n\nIf you Google \&#34;SPARK\&#34; it&#39;s easy to get tangled up in Apache Spark, which this is not.\n\nI would have described Ada as a quaint, long-abandoned attempt at a programming language by DoD. Interesting that it&#39;s still around at all, much less possibly gaining usage.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;I only care about C because of x86-based tools like Valgrind, VTune, IDA Pro and basic portability between GPU and CPU.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;I am really tired after work today and at the same time I thought it sounded very interesting. I just can&#39;t focus. Did they just use 
+</span></span></span><span class="line"><span class="cl"><span class="s2">Spark and it was as fast as C?&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;It would be \&#34;NVIDIA Se urity team\&#34;, then.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;I briefly worked with Ada, GNAT Pro, and Code Peer in the rail industry. It was a fantastic experience, but it was all green field.\n\nI won&#39;t comment about Rust negativity, but I will just say that Ada deserves much more attention and respect from safety-minded developers than 
+</span></span></span><span class="line"><span class="cl"><span class="s2">it receives today.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;The only comment on the blog post is another Rust-troll.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Stop trying to make Ada happen&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;https://i.redd.it/9oez8zkg1qc01.png&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;WHAT DO YOU MEAN IT&#39;S NOT ABOUT RUST, RUST IS BETTER C AND C++!!!1!! SWITCH TO RUST OR I WILL SEGFAULT YOUR ENTIRE COMPANY \ud83e\udd2c\ud83d\udc79&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;&amp;gt; \u201cTesting security is pretty much impossible. It\u2019s hard to know if you\u2019re ever done,\u201d said Daniel Rohrer, VP 
+</span></span></span><span class="line"><span class="cl"><span class="s2">of Software Security at NVIDIA.\n\nA) no, it&#39;s not.\n\nB) you&#39;re never done.\n\nThis is coming from the VP of Software Security? Who made him VP? 
+</span></span></span><span class="line"><span class="cl"><span class="s2">A dozen monkeys with typewriters?&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;However, Ada is very large and takes a long time to study even in its features.\n\nFurthermore a lot of the things we do by convention in C programs have specific Ada features just for that, so rather than applying the corresponding language primitives (which is generally painful) one hits the annotated language reference a dozen times until the knowledge sticks. On top of all that there&#39;s conventions particular to Ada, which are mysterious and powerful.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Long story short they are using spark (never heard about it before) language. It\u2019s already deployed for them, and did nit really see any difference in terms of performance, aka a pretty big reason to use C/C++ on new shit today.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;What about Pascal ? Nothing is more readable?&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Amazing that industry finally starts using formal theorem provers.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;They used fucking ADA?!?! These guys are built different&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;[removed]&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span></code></pre></div><h3 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h3>
+<p>The gist of the code can be found <a href="https://gist.github.com/JianLoong/e8a92c7352e3b3276e17a060231e4432">here</a></p>
+<p>If you are planning on saving the data, there are better ways to engineer the solution by inserting the information into a database and also preventing duplicated entries and updating them as well, but this method is sufficient enough for basic needs.</p>
+<p>This is probably the easiest way to obtain data from reddit. You can obviously tailor the codes to the output or information you would like. The main advantage of using this method is that you do not need an API key however, there is a high chance you will get rated-limited if you are issuing too many request. Please be warned.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://jianloong.github.io/tags/reddit/">Reddit</a></li>
+      <li><a href="https://jianloong.github.io/tags/crawler/">crawler</a></li>
+      <li><a href="https://jianloong.github.io/tags/python/">python</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://jianloong.github.io/posts/2022/jplag/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Using JPlag for measuring code similarity for Intro to Programming</span>
+  </a>
+</nav>
+
+  </footer><div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jianloonggithubio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://jianloong.github.io/">Jian</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

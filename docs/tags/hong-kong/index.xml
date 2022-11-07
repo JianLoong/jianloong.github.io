@@ -12,10 +12,10 @@
     <lastBuildDate>Sun, 13 Oct 2019 20:56:02 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/tags/hong-kong/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Sentiment analysis for the subreddit Hong Kong</title>
-      <link>https://jianloong.github.io/posts/hk/</link>
+      <link>https://jianloong.github.io/posts/2019/hk/</link>
       <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/posts/hk/</guid>
+      <guid>https://jianloong.github.io/posts/2019/hk/</guid>
       <description>Sentiment Analysis for the Sub-Reddit &amp;ldquo;HongKong&amp;rdquo; This post will perform sentiment analysis using AFINN. AFINN is a list of words rated for valence rated with an integer between minus five(negative) and plus five (positive). This implementation uses AFINN-en-165. 1
 This approach however is very naive as it does not build any models to determine the context of the usage of the word itself.
 Please note that the posts here are generated based on the Reddit website by doing GET requests.</description>

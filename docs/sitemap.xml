@@ -2,8 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://jianloong.github.io/tags/crawler/</loc>
+    <lastmod>2022-11-07T20:56:02+11:00</lastmod>
+  </url><url>
     <loc>https://jianloong.github.io/</loc>
-    <lastmod>2022-11-05T20:56:02+11:00</lastmod>
+    <lastmod>2022-11-07T20:56:02+11:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/posts/</loc>
+    <lastmod>2022-11-07T20:56:02+11:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/tags/python/</loc>
+    <lastmod>2022-11-07T20:56:02+11:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/tags/reddit/</loc>
+    <lastmod>2022-11-07T20:56:02+11:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/tags/</loc>
+    <lastmod>2022-11-07T20:56:02+11:00</lastmod>
+  </url><url>
+    <loc>https://jianloong.github.io/posts/2022/reddit_crawler_using_python/</loc>
+    <lastmod>2022-11-07T20:56:02+11:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/jplag/</loc>
     <lastmod>2022-11-05T20:56:02+11:00</lastmod>
@@ -11,16 +29,10 @@
     <loc>https://jianloong.github.io/tags/plagiarism/</loc>
     <lastmod>2022-11-05T20:56:02+11:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/posts/</loc>
-    <lastmod>2022-11-05T20:56:02+11:00</lastmod>
-  </url><url>
-    <loc>https://jianloong.github.io/tags/</loc>
-    <lastmod>2022-11-05T20:56:02+11:00</lastmod>
-  </url><url>
     <loc>https://jianloong.github.io/tags/university/</loc>
     <lastmod>2022-11-05T20:56:02+11:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/posts/jplag/</loc>
+    <loc>https://jianloong.github.io/posts/2022/jplag/</loc>
     <lastmod>2022-11-05T20:56:02+11:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/ai/</loc>
@@ -32,7 +44,7 @@
     <loc>https://jianloong.github.io/tags/art/</loc>
     <lastmod>2022-10-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/posts/stablediffusion/</loc>
+    <loc>https://jianloong.github.io/posts/2022/stablediffusion/</loc>
     <lastmod>2022-10-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/stable-diffusion/</loc>
@@ -47,13 +59,13 @@
     <loc>https://jianloong.github.io/tags/pihole/</loc>
     <lastmod>2022-10-20T21:30:56+11:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/posts/process_of_exam_paper_assessment/</loc>
+    <loc>https://jianloong.github.io/posts/2022/process_of_exam_paper_assessment/</loc>
     <lastmod>2022-10-20T21:30:56+11:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/raspberrypi/</loc>
     <lastmod>2022-10-20T21:30:56+11:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/posts/pihole/</loc>
+    <loc>https://jianloong.github.io/posts/2022/pihole/</loc>
     <lastmod>2022-10-20T21:30:56+11:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/javascript/</loc>
@@ -62,19 +74,19 @@
     <loc>https://jianloong.github.io/tags/sentiment-analysis/</loc>
     <lastmod>2022-10-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/posts/vader/</loc>
+    <loc>https://jianloong.github.io/posts/2022/vader/</loc>
     <lastmod>2022-10-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/uml/</loc>
     <lastmod>2021-10-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/posts/statechart/</loc>
+    <loc>https://jianloong.github.io/posts/2022/statechart/</loc>
     <lastmod>2021-10-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/java/</loc>
     <lastmod>2019-11-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/posts/minmax/</loc>
+    <loc>https://jianloong.github.io/posts/2019/minmax/</loc>
     <lastmod>2019-11-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/sort/</loc>
@@ -92,10 +104,10 @@
     <loc>https://jianloong.github.io/tags/singleton/</loc>
     <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/posts/singletonobserverpattern/</loc>
+    <loc>https://jianloong.github.io/posts/2019/singletonobserverpattern/</loc>
     <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/posts/voronoi/</loc>
+    <loc>https://jianloong.github.io/posts/2019/voronoi/</loc>
     <lastmod>2019-10-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/maps/</loc>
@@ -110,7 +122,7 @@
     <loc>https://jianloong.github.io/tags/api/</loc>
     <lastmod>2019-10-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/posts/promiseall/</loc>
+    <loc>https://jianloong.github.io/posts/2019/promiseall/</loc>
     <lastmod>2019-10-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/promise/</loc>
@@ -125,13 +137,13 @@
     <loc>https://jianloong.github.io/tags/selection/</loc>
     <lastmod>2019-10-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/posts/tsp/</loc>
+    <loc>https://jianloong.github.io/posts/2019/tsp/</loc>
     <lastmod>2019-10-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/tsp/</loc>
     <lastmod>2019-10-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/posts/simplegeneticalgo/</loc>
+    <loc>https://jianloong.github.io/posts/2019/simplegeneticalgo/</loc>
     <lastmod>2019-10-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/phrase-solver/</loc>
@@ -143,7 +155,7 @@
     <loc>https://jianloong.github.io/tags/hacker-news/</loc>
     <lastmod>2019-10-14T20:56:02+11:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/posts/20191014_hackernews_word_cloud/</loc>
+    <loc>https://jianloong.github.io/posts/2019/hackernews_word_cloud/</loc>
     <lastmod>2019-10-14T20:56:02+11:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/tags/visualisation/</loc>
@@ -155,16 +167,13 @@
     <loc>https://jianloong.github.io/tags/percentage/</loc>
     <lastmod>2019-10-13T20:56:02+11:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/tags/reddit/</loc>
-    <lastmod>2019-10-13T20:56:02+11:00</lastmod>
-  </url><url>
-    <loc>https://jianloong.github.io/posts/hk/</loc>
+    <loc>https://jianloong.github.io/posts/2019/hk/</loc>
     <lastmod>2019-10-13T20:56:02+11:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/posts/2019/reddit_word_cloud/</loc>
     <lastmod>2019-10-12T20:56:02+11:00</lastmod>
   </url><url>
-    <loc>https://jianloong.github.io/posts/amitheasshole/</loc>
+    <loc>https://jianloong.github.io/posts/2019/amitheasshole/</loc>
     <lastmod>2019-10-09T20:56:02+11:00</lastmod>
   </url><url>
     <loc>https://jianloong.github.io/about/</loc>

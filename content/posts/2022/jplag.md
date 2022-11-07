@@ -3,6 +3,7 @@ title: "Using JPlag for measuring code similarity for Intro to Programming"
 date: 2022-11-05T20:56:02+11:00
 tags: ["JPlag", "Plagiarism", "University"]
 ShowReadingTime: true
+ShowCodeCopyButtons: true
 cover:
   image: "/images/jplagout.png"
 draft: false

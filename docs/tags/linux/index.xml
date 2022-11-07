@@ -12,10 +12,10 @@
     <lastBuildDate>Thu, 20 Oct 2022 21:30:56 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Setting up PiHole as an ad blocker</title>
-      <link>https://jianloong.github.io/posts/pihole/</link>
+      <link>https://jianloong.github.io/posts/2022/pihole/</link>
       <pubDate>Thu, 20 Oct 2022 21:30:56 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/posts/pihole/</guid>
+      <guid>https://jianloong.github.io/posts/2022/pihole/</guid>
       <description>An educational approach to crawling Reddit using Python and AWS EC2 without using Reddit API</description>
     </item>
     

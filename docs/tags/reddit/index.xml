@@ -9,13 +9,24 @@
       <link>https://jianloong.github.io/</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 13 Oct 2019 20:56:02 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/tags/reddit/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Nov 2022 20:56:02 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/tags/reddit/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using Python to obtain data from Reddit</title>
+      <link>https://jianloong.github.io/posts/2022/reddit_crawler_using_python/</link>
+      <pubDate>Mon, 07 Nov 2022 20:56:02 +1100</pubDate>
+      
+      <guid>https://jianloong.github.io/posts/2022/reddit_crawler_using_python/</guid>
+      <description>Introduction As of March 2022, Reddit ranks as the 9th-most-visited website in the world and 6th most-visited website in the US according to Wikipedia.
+What is interesting about Reddit is that it has subreddits for people with different interests. For example, there are subreddits on prorgramming, technology or even about funny things at funny.
+There are a few approaches one can take to obtain data from Reddit. Here is one way to do it.</description>
+    </item>
+    
     <item>
       <title>Sentiment analysis for the subreddit Hong Kong</title>
-      <link>https://jianloong.github.io/posts/hk/</link>
+      <link>https://jianloong.github.io/posts/2019/hk/</link>
       <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/posts/hk/</guid>
+      <guid>https://jianloong.github.io/posts/2019/hk/</guid>
       <description>Sentiment Analysis for the Sub-Reddit &amp;ldquo;HongKong&amp;rdquo; This post will perform sentiment analysis using AFINN. AFINN is a list of words rated for valence rated with an integer between minus five(negative) and plus five (positive). This implementation uses AFINN-en-165. 1
 This approach however is very naive as it does not build any models to determine the context of the usage of the word itself.
 Please note that the posts here are generated based on the Reddit website by doing GET requests.</description>
@@ -35,10 +46,10 @@ Please note that the posts here are generated based on the Reddit website by doi
     
     <item>
       <title>Percentage Charts for the subreddit Am I the Asshole?</title>
-      <link>https://jianloong.github.io/posts/amitheasshole/</link>
+      <link>https://jianloong.github.io/posts/2019/amitheasshole/</link>
       <pubDate>Wed, 09 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/posts/amitheasshole/</guid>
+      <guid>https://jianloong.github.io/posts/2019/amitheasshole/</guid>
       <description>The charts here are visualisation of the Am I the Asshole? subreddit which can be found here
 The subreddit describes itself as&amp;hellip;
 A catharsis for the frustrated moral philosopher in all of us, and a place to finally find out if you were wrong in an argument that&amp;rsquo;s been bothering you. Tell us about any non-violent conflict you have experienced; give us both sides of the story, and find out if you&amp;rsquo;re right, or you&amp;rsquo;re the asshole.</description>

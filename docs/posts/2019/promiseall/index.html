@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>JavaScript Promise All - Parsing Hackernews Stories using Promise.all | Jian</title>
+<meta name="keywords" content="JavaScript, Promise, API">
+<meta name="description" content="This post is an entry to describe a use case when the Promise.all JavaScript method is needed. The official reference can be found here. This assumes that the reader has a basic understanding of how promises work.
+Before we start, there is a need to understand how certain RESTful services are structured. For example, the Hacker News API has an end-point called topstories. This end-point however, does not contain any other information besides a list of item IDs.">
+<meta name="author" content="Jian">
+<link rel="canonical" href="https://jianloong.github.io/posts/2019/promiseall/">
+<meta name="google-site-verification" content="UA-55422968-1">
+<link href="http://fonts.cdnfonts.com/css/atkinson-hyperlegible" rel="stylesheet">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://jianliew.me/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jianliew.me/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jianliew.me/images/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://jianliew.me/images/apple-touch-icon.png">
+<link rel="mask-icon" href="https://jianliew.me/images/apple-touch-icon-180x180.png">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-55422968-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="JavaScript Promise All - Parsing Hackernews Stories using Promise.all" />
+<meta property="og:description" content="This post is an entry to describe a use case when the Promise.all JavaScript method is needed. The official reference can be found here. This assumes that the reader has a basic understanding of how promises work.
+Before we start, there is a need to understand how certain RESTful services are structured. For example, the Hacker News API has an end-point called topstories. This end-point however, does not contain any other information besides a list of item IDs." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jianloong.github.io/posts/2019/promiseall/" />
+<meta property="og:image" content="https://jianloong.github.io/images/network.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-10-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-10-25T00:00:00+00:00" /><meta property="og:site_name" content="Jian" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://jianloong.github.io/images/network.png" />
+<meta name="twitter:title" content="JavaScript Promise All - Parsing Hackernews Stories using Promise.all"/>
+<meta name="twitter:description" content="This post is an entry to describe a use case when the Promise.all JavaScript method is needed. The official reference can be found here. This assumes that the reader has a basic understanding of how promises work.
+Before we start, there is a need to understand how certain RESTful services are structured. For example, the Hacker News API has an end-point called topstories. This end-point however, does not contain any other information besides a list of item IDs."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://jianloong.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "JavaScript Promise All - Parsing Hackernews Stories using Promise.all",
+      "item": "https://jianloong.github.io/posts/2019/promiseall/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "JavaScript Promise All - Parsing Hackernews Stories using Promise.all",
+  "name": "JavaScript Promise All - Parsing Hackernews Stories using Promise.all",
+  "description": "This post is an entry to describe a use case when the Promise.all JavaScript method is needed. The official reference can be found here. This assumes that the reader has a basic understanding of how promises work.\nBefore we start, there is a need to understand how certain RESTful services are structured. For example, the Hacker News API has an end-point called topstories. This end-point however, does not contain any other information besides a list of item IDs.",
+  "keywords": [
+    "JavaScript", "Promise", "API"
+  ],
+  "articleBody": "This post is an entry to describe a use case when the Promise.all JavaScript method is needed. The official reference can be found here. This assumes that the reader has a basic understanding of how promises work.\nBefore we start, there is a need to understand how certain RESTful services are structured. For example, the Hacker News API has an end-point called topstories. This end-point however, does not contain any other information besides a list of item IDs. So, if you would like to obtain the top 10 posts including their title, there would be a need to do several GET requests to fetch them all.\nThe output of\ncurl https://hacker-news.firebaseio.com/v0/topstories.json\" is\n[ 33256378, 33259379, 33256446, 33257197, 33249215, 33254791, 33251954, 33257300, 33244819, 33228387, 33247681, . . . These IDs will then be used to obtain more information from a different end point.\ncurl https://hacker-news.firebaseio.com/v0/item/33257197.json which would yield\n{ \"by\": \"walterbell\", \"descendants\": 52, \"id\": 33257197, \"kids\": [ 33257610, 33257643, 33259365, 33257485, 33258257, 33258605, 33257772, 33257557 ], \"score\": 110, \"time\": 1666149822, \"title\": \"IDA cybersecurity software provider Hex-Rays acquired\", \"type\": \"story\", \"url\": \"https://smartfinvc.com/news/smartfin-acquires-leading-cybersecurity-software-provider-hex-rays-together-with-sfpim-and-sriw/\" } Flowchart Representation graph TD\rS(Start)\rA(Fetch from /topstories)\rB{Valid?}\rC(Parse all IDs from /topstories)\rD(Create multiple Promises with Fetch using the /items/id end point based on the IDs obtained)\rE(Create the Promise.all)\rF{Valid?}\rG(Results)\rY(Report Error)\rZ(End)\rS--\u003eA\rA--\u003eB\rB-- Valid Response --\u003eC\rB-- Invalid Response --\u003eY\rC--\u003eD\rD--\u003eE\rE--\u003eF\rF-- Invalid Response --\u003eY\rF-- Valid Response --\u003eG\rY--\u003eZ\rG--\u003eZ\rFig 1. Flow Chart of the Promise.all The code example below would demonstrate a situation where the Promise.all becomes useful.\n// First use the top stories end point to retrieve a list of the top stories const getTopStoriesId = () =\u003e { let endPoint = \"https://hacker-news.firebaseio.com/v0/topstories.json\"; return fetch(endPoint, { mode: \"cors\" }).then((response) =\u003e response.json()); }; const getItem = (itemNumber) =\u003e { let endPoint = \"//hacker-news.firebaseio.com/v0/item/\" + itemNumber + \".json\"; return fetch(endPoint, { mode: \"cors\" }).then((response) =\u003e response.json()); } const topStories = () =\u003e getTopStoriesId().then((result) =\u003e { let promiseArray = []; result.forEach((element) =\u003e { promiseArray.push(getItem(element)); }); return Promise.all(promiseArray); }); Code Example of the Promise.all In order to see it in action, you can copy and paste it on the browser console to see how it works.\nLessons from this blog post. The then function returns a promise as well. Fetch is significantly easier to use in comparison to its jQuery counterparts. However, considerations need to be taken into account when using it in static sites that do not have Babel or modernizr. There are a lot of reasons a lot of users decided to create their wrappers around the Hacker News API. Perhaps, it is deemed that their top stories and ending up which does summary could be done differently. But HN itself is a very opinionated community. Mermaid diagrams are useful and break tags can be introduced in them. CORS and JSONP exist. Cors is more modern and easier to use compared to using JSONP. Using jQuery can make the codes very unreadable and creating callback hell easier. References https://stackoverflow.com/questions/38180080/when-to-use-promise-all ",
+  "wordCount" : "501",
+  "inLanguage": "en",
+  "image":"https://jianloong.github.io/images/network.png","datePublished": "2019-10-25T00:00:00Z",
+  "dateModified": "2019-10-25T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Jian"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jianloong.github.io/posts/2019/promiseall/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Jian",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jianliew.me/images/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://jianloong.github.io/" accesskey="h" title="Jian (Alt + H)">Jian</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://jianloong.github.io/about/" title="about">
+                    <span>about</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/projects/" title="projects">
+                    <span>projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/search/" title="search (Alt &#43; /)" accesskey=/>
+                    <span>search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/tags/" title="tags">
+                    <span>tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/archives/" title="archives">
+                    <span>archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/contact/" title="contact">
+                    <span>contact</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://jianloong.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://jianloong.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      JavaScript Promise All - Parsing Hackernews Stories using Promise.all
+    </h1>
+    <div class="post-meta"><span title='2019-10-25 00:00:00 +0000 UTC'>October 25, 2019</span>&nbsp;·&nbsp;Jian
+
+</div>
+  </header> 
+  <div class="post-content"><p>This post is an entry to describe a use case when the Promise.all JavaScript method is needed. The official reference can be found <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all">here</a>. This assumes that the reader has a basic understanding of how promises work.</p>
+<p>Before we start, there is a need to understand how certain RESTful services are structured. For example, the Hacker News API has an end-point called <strong>topstories</strong>. This end-point however, does not contain any other information besides a list of item IDs. So, if you would like to obtain the top 10 posts including their <strong>title</strong>, there would be a need to do several GET requests to fetch them all.</p>
+<p>The output of</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">curl https://hacker-news.firebaseio.com/v0/topstories.json<span class="s2">&#34;
+</span></span></span></code></pre></div><p>is</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="mi">33256378</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="mi">33259379</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="mi">33256446</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="mi">33257197</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="mi">33249215</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="mi">33254791</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="mi">33251954</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="mi">33257300</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="mi">33244819</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="mi">33228387</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="mi">33247681</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="err">.</span> <span class="err">.</span> <span class="err">.</span> 
+</span></span></code></pre></div><p>These IDs will then be used to obtain more information from a different end point.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">curl https://hacker-news.firebaseio.com/v0/item/33257197.json
+</span></span></code></pre></div><p>which would yield</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;by&#34;</span><span class="p">:</span> <span class="s2">&#34;walterbell&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;descendants&#34;</span><span class="p">:</span> <span class="mi">52</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">33257197</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;kids&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">33257610</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">33257643</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">33259365</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">33257485</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">33258257</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">33258605</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">33257772</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">33257557</span>
+</span></span><span class="line"><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;score&#34;</span><span class="p">:</span> <span class="mi">110</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;time&#34;</span><span class="p">:</span> <span class="mi">1666149822</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;title&#34;</span><span class="p">:</span> <span class="s2">&#34;IDA cybersecurity software provider Hex-Rays acquired&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;story&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://smartfinvc.com/news/smartfin-acquires-leading-cybersecurity-software-provider-hex-rays-together-with-sfpim-and-sriw/&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="flowchart-representation">Flowchart Representation<a hidden class="anchor" aria-hidden="true" href="#flowchart-representation">#</a></h3>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js" integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+      location.reload()
+  })
+
+  if (document.body.className.includes("dark")) {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'dark' })
+  } else {
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'forest' })
+  }
+
+</script>
+
+
+
+<div class="mermaid" align="center" id="mermaid">
+    
+
+  graph TD
+      S(Start)
+      A(Fetch from /topstories)
+      B{Valid?}
+      C(Parse all IDs from <br />/topstories)
+      D(Create multiple <br />Promises with Fetch <br />using the <br />/items/id end point <br />based on the IDs obtained)
+      E(Create the Promise.all)
+      F{Valid?}
+      G(Results)
+      Y(Report Error)
+      Z(End)
+      S-->A
+      A-->B
+      B-- Valid Response -->C
+      B-- Invalid Response -->Y
+      C-->D
+      D-->E
+      E-->F
+      F-- Invalid Response -->Y
+      F-- Valid Response -->G
+      Y-->Z
+      G-->Z
+
+
+</div>
+<p align="center">Fig 1. Flow Chart of the <strong>Promise.all</strong> </p>
+<p>The code example below would demonstrate a situation where the <strong>Promise.all</strong> becomes useful.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// First use the top stories end point to retrieve a list of the top stories
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">getTopStoriesId</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">endPoint</span> <span class="o">=</span> <span class="s2">&#34;https://hacker-news.firebaseio.com/v0/topstories.json&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">endPoint</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">mode</span><span class="o">:</span> <span class="s2">&#34;cors&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">getItem</span> <span class="o">=</span> <span class="p">(</span><span class="nx">itemNumber</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">endPoint</span> <span class="o">=</span> <span class="s2">&#34;//hacker-news.firebaseio.com/v0/item/&#34;</span> <span class="o">+</span> <span class="nx">itemNumber</span> <span class="o">+</span> <span class="s2">&#34;.json&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">endPoint</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">mode</span><span class="o">:</span> <span class="s2">&#34;cors&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">topStories</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">getTopStoriesId</span><span class="p">().</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">promiseArray</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">result</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">element</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">promiseArray</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">element</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">promiseArray</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p align="center">Code Example of the <strong>Promise.all</strong> </p>
+<p>In order to see it in action, you can copy and paste it on the browser console to see how it works.</p>
+<figure>
+    <img loading="lazy" src="/images/console.png"/> 
+</figure>
+
+<figure>
+    <img loading="lazy" src="/images/network.png"/> 
+</figure>
+
+<figure>
+    <img loading="lazy" src="/images/pending.png"/> 
+</figure>
+
+<h4 id="lessons-from-this-blog-post">Lessons from this blog post.<a hidden class="anchor" aria-hidden="true" href="#lessons-from-this-blog-post">#</a></h4>
+<ul>
+<li>The <strong>then</strong> function returns a promise as well.</li>
+<li>Fetch is <strong>significantly easier</strong> to use in comparison to its jQuery counterparts. However, considerations need to be taken into account when using it in static sites that do not have Babel or modernizr.</li>
+<li>There are a lot of reasons a lot of users decided to create their wrappers around the Hacker News API. Perhaps, it is deemed that their top stories and ending up which does summary could be done differently. But HN itself is a very opinionated community.</li>
+<li>Mermaid diagrams are useful and break tags can be introduced in them.</li>
+<li>CORS and JSONP exist. Cors is more modern and easier to use compared to using JSONP.</li>
+<li>Using jQuery can make the codes very unreadable and creating callback hell easier.</li>
+</ul>
+<h3 id="references">References<a hidden class="anchor" aria-hidden="true" href="#references">#</a></h3>
+<ol>
+<li><a href="https://stackoverflow.com/questions/38180080/when-to-use-promise-all">https://stackoverflow.com/questions/38180080/when-to-use-promise-all</a></li>
+</ol>
+<script>
+// const getTopStoriesId = () => {
+//   let endPoint = "https://hacker-news.firebaseio.com/v0/topstories.json";
+//   return fetch(endPoint, {
+//     mode: "cors"
+//   }).then((response) => response.json());
+// };
+
+// const getItem = (itemNumber) => {
+//   let endPoint = "//hacker-news.firebaseio.com/v0/item/" + itemNumber + ".json";
+//   return fetch(endPoint, {
+//     mode: "cors"
+//   }).then((response) => response.json());
+// }
+
+// const topStories = () => getTopStoriesId().then((result) => {
+//     let promiseArray = [];
+//     result.forEach((element) => {
+//       promiseArray.push(getItem(element));
+//     });
+
+//     return Promise.all(promiseArray);
+// });
+
+// const stories = topStories().then((result) => {
+//   let titleStrings = "";
+//   result.forEach((element) => {titleStrings += element["title"].toLocaleUpperCase()});
+//   console.log(titleStrings);
+// });
+
+</script><blockquote>
+</blockquote>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://jianloong.github.io/tags/javascript/">JavaScript</a></li>
+      <li><a href="https://jianloong.github.io/tags/promise/">Promise</a></li>
+      <li><a href="https://jianloong.github.io/tags/api/">API</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://jianloong.github.io/posts/2019/voronoi/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>k-Nearest Neighbour on Maps</span>
+  </a>
+  <a class="next" href="https://jianloong.github.io/posts/2019/tsp/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Traveling Sales Person using Genetic Algorithms</span>
+  </a>
+</nav>
+
+  </footer><div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jianloonggithubio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://jianloong.github.io/">Jian</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

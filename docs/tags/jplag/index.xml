@@ -12,10 +12,10 @@
     <lastBuildDate>Sat, 05 Nov 2022 20:56:02 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/tags/jplag/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Using JPlag for measuring code similarity for Intro to Programming</title>
-      <link>https://jianloong.github.io/posts/jplag/</link>
+      <link>https://jianloong.github.io/posts/2022/jplag/</link>
       <pubDate>Sat, 05 Nov 2022 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/posts/jplag/</guid>
+      <guid>https://jianloong.github.io/posts/2022/jplag/</guid>
       <description>Automating the processing of extracting and cleaning files for JPlag input</description>
     </item>
     
