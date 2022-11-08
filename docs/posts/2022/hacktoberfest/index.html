@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Hacktoberfest 2022 | Jian</title>
+<meta name="keywords" content="JPlag, Plagiarism, University">
+<meta name="description" content="Hacktoberfest 2022 Mini Project to encourage open-source contributions and remembering JavaScript">
+<meta name="author" content="Jian">
+<link rel="canonical" href="https://jianloong.github.io/posts/2022/hacktoberfest/">
+<meta name="google-site-verification" content="UA-55422968-1">
+<link href="http://fonts.cdnfonts.com/css/atkinson-hyperlegible" rel="stylesheet">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://jianliew.me/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jianliew.me/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jianliew.me/images/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://jianliew.me/images/apple-touch-icon.png">
+<link rel="mask-icon" href="https://jianliew.me/images/apple-touch-icon-180x180.png">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-55422968-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Hacktoberfest 2022" />
+<meta property="og:description" content="Hacktoberfest 2022 Mini Project to encourage open-source contributions and remembering JavaScript" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jianloong.github.io/posts/2022/hacktoberfest/" />
+<meta property="og:image" content="https://jianloong.github.io/images/hacktoberfest.jpg" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-11-07T20:56:02+11:00" />
+<meta property="article:modified_time" content="2022-11-07T20:56:02+11:00" /><meta property="og:site_name" content="Jian" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://jianloong.github.io/images/hacktoberfest.jpg" />
+<meta name="twitter:title" content="Hacktoberfest 2022"/>
+<meta name="twitter:description" content="Hacktoberfest 2022 Mini Project to encourage open-source contributions and remembering JavaScript"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://jianloong.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Hacktoberfest 2022",
+      "item": "https://jianloong.github.io/posts/2022/hacktoberfest/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Hacktoberfest 2022",
+  "name": "Hacktoberfest 2022",
+  "description": "Hacktoberfest 2022 Mini Project to encourage open-source contributions and remembering JavaScript",
+  "keywords": [
+    "JPlag", "Plagiarism", "University"
+  ],
+  "articleBody": "Hacktoberfest Hacktoberfest is a month-long celebration of open-source projects, their maintainers, and the entire community of contributors.\nOver the years, I have contributed to several open source repositories on GitHub. (Starting from 2017)\nCollection of t-Shirts rewarded from Hacktoberfest for open source contributions\nFor this year, I decided to do something a bit different. After not feeling well for the past years, and only recently feeling better, I decided to make a simple open source project. The project can be found here\nOn the outside, it is just a word cloud generator, but actually there are more things happening behind the scenes instead of just making a word cloud. I will also note down the various things that I have learn to make this simple project.\nA generated word cloud based on a sample article from Wikipedia.\nBreakdown of tools and concepts used\ngh-pages will be used to deploy the project d3 and d3-cloud will be used to draw the word cloud Bootstrap 5 is used to achieve a simple responsive web design. (Instead of needing make my own flex-boxes) Web-workers will be used to do text-processing behind the scenes so that it will not make the page unresponsive Natural language processing libraries will also be used to ease the task of tokenization and lemmatizations Overall, here are some notable lessons I learnt from doing this project\nBootstrap 5 is still very nice to use and since they have removed jQuery as dependency the library is so much lighter now. The d3-cloud library needs to be modified slightly if you are planning to make multiple diagrams because of the a warning that may appear. A better library to use would probably the ChartJS word-cloud library. Web-workers are very important to offload processes that may take a long time The HTML select element does not allow child nodes, and if you like to display imagines inside it, you need ways to get around that. After, I completed the base of the project, I opened up several issues and mark them up for the community to help and contribute it. Even thought admittedly, the project was done in a hurry and lots of things could have been done better, I treated it as a learning approach where I continue to improve upon it.\nEnding words… I personally feel that, after you have been working in education for a long time and soon after falling sick, you are behind in a lot of things since the field of IT is always improving and changing at a pace that is astounding. This blog entry not only works as a simple challenge for myself but also to remember that learning is part of life, and when we stop learning, we stop improving.\nThat being said though, being of good health plays a major factor towards learning as well as the morale that is needed for self improvement and learning.\nPlease also do checkout my word cloud generator here.\nAs always, I am always open to discussions and ways to improve upon it.\n",
+  "wordCount" : "507",
+  "inLanguage": "en",
+  "image":"https://jianloong.github.io/images/hacktoberfest.jpg","datePublished": "2022-11-07T20:56:02+11:00",
+  "dateModified": "2022-11-07T20:56:02+11:00",
+  "author":{
+    "@type": "Person",
+    "name": "Jian"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jianloong.github.io/posts/2022/hacktoberfest/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Jian",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jianliew.me/images/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://jianloong.github.io/" accesskey="h" title="Jian (Alt + H)">Jian</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://jianloong.github.io/about/" title="about">
+                    <span>about</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/projects/" title="projects">
+                    <span>projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/search/" title="search (Alt &#43; /)" accesskey=/>
+                    <span>search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/tags/" title="tags">
+                    <span>tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/archives/" title="archives">
+                    <span>archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jianloong.github.io/contact/" title="contact">
+                    <span>contact</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://jianloong.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://jianloong.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Hacktoberfest 2022
+    </h1>
+    <div class="post-meta"><span title='2022-11-07 20:56:02 +1100 AEDT'>November 7, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Jian
+
+</div>
+  </header> 
+  <div class="post-content"><h3 id="hacktoberfest">Hacktoberfest<a hidden class="anchor" aria-hidden="true" href="#hacktoberfest">#</a></h3>
+<p>Hacktoberfest is a month-long celebration of open-source projects, their maintainers, and the entire community of contributors.</p>
+<p>Over the years, I have contributed to several open source repositories on GitHub. (Starting from 2017)</p>
+<figure class="align-center ">
+    <img loading="lazy" src="/images/hacktoberfest.jpg#center"/> 
+</figure>
+
+<p align="center"><strong>Collection of t-Shirts rewarded from Hacktoberfest for open source contributions</strong></p>
+<p>For this year, I decided to do something a bit different. After not feeling well for the past years, and only recently feeling better, I decided to make a simple open source project. The project can be found <a href="https://github.com/JianLoong/word-cloud-generator">here</a></p>
+<p>On the outside, it is just a word cloud generator, but actually there are more things happening behind the scenes instead of just making a word cloud. I will also note down the various things that I have learn to make this simple project.</p>
+<figure class="align-center ">
+    <img loading="lazy" src="/images/wcg.png#center"/> 
+</figure>
+
+<p align="center"><strong>A generated word cloud based on a sample article from Wikipedia.</strong></p>
+<p>Breakdown of tools and concepts used</p>
+<ul>
+<li><code>gh-pages</code> will be used to deploy the project</li>
+<li><code>d3</code> and <code>d3-cloud</code> will be used to draw the word cloud</li>
+<li>Bootstrap 5 is used to achieve a simple responsive web design. (Instead of needing make my own flex-boxes)</li>
+<li>Web-workers will be used to do text-processing behind the scenes so that it will not make the page unresponsive</li>
+<li>Natural language processing libraries will also be used to ease the task of tokenization and lemmatizations</li>
+</ul>
+<p>Overall, here are some notable lessons I learnt from doing this project</p>
+<ul>
+<li>Bootstrap 5 is still very nice to use and since they have removed jQuery as dependency the library is so much lighter now.</li>
+<li>The <code>d3-cloud</code> library needs to be modified slightly if you are planning to make multiple diagrams because of the a warning that may appear. A better library to use would probably the <code>ChartJS</code> word-cloud library.</li>
+<li>Web-workers are very important to offload processes that may take a long time</li>
+<li>The HTML select element does not allow child nodes, and if you like to display imagines inside it, you need ways to get around that.</li>
+</ul>
+<p>After, I completed the base of the project, I opened up several issues and mark them up for the community to help and contribute it. Even thought admittedly, the project was done in a hurry and lots of things could have been done better, I treated it as a learning approach where I continue to improve upon it.</p>
+<h3 id="ending-words">Ending words&hellip;<a hidden class="anchor" aria-hidden="true" href="#ending-words">#</a></h3>
+<p>I personally feel that, after you have been working in education for a long time and soon after falling sick, you are behind in a lot of things since the field of IT is always improving and changing at a pace that is astounding. This blog entry not only works as a simple challenge for myself but also to remember that learning is part of life, and when we stop learning, we stop improving.</p>
+<p>That being said though, being of good health plays a major factor towards learning as well as the morale that is needed for self improvement and learning.</p>
+<p>Please also do checkout my word cloud generator <a href="https://jianliew.me/word-cloud-generator/">here</a>.</p>
+<p>As always, I am always open to discussions and ways to improve upon it.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://jianloong.github.io/tags/jplag/">JPlag</a></li>
+      <li><a href="https://jianloong.github.io/tags/plagiarism/">Plagiarism</a></li>
+      <li><a href="https://jianloong.github.io/tags/university/">University</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://jianloong.github.io/posts/2022/reddit_crawler_using_python/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Using Python to obtain data from Reddit</span>
+  </a>
+</nav>
+
+  </footer><div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jianloonggithubio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://jianloong.github.io/">Jian</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
