@@ -6,7 +6,7 @@ ShowReadingTime: true
 ShowCodeCopyButtons: true
 cover:
   image: "/images/hacktoberfest.jpg"
-draft: false
+draft: true
 summary: Hacktoberfest 2022 Mini Project to encourage open-source contributions and remembering JavaScript
 ---
 
