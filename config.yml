@@ -98,7 +98,7 @@ params:
     - name: github
       url: "https://github.com/JianLoong"
     - name: linkedin
-      url: "https://www.linkedin.com/in/jian-liew-0433ab39/"
+      url: "https://www.linkedin.com/in/jianloong-liew/"
 
   analytics:
     google:
