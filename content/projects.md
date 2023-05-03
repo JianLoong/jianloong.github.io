@@ -11,8 +11,6 @@ author: ""
 This project is a Reddit data crawler that does not depend on the Reddit API. It is meant to be run on a remote machine so cron jobs can be set up.
 It also builds a simple dashboard based on a subreddit for demo purposes.
 
-This project is inspired by the post [here](https//jianliew.me/posts/amitheasshole/)
-
 {{< figure src="/images/redditvisual.png" title="" align="center" link="https://jianliew.me/reddit-store">}}
 
 It can be found [here](https://jianliew.me/reddit-store). It is also on GitHub [here](https://github.com/JianLoong/reddit-store)

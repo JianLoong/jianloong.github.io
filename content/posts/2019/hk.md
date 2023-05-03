@@ -95,11 +95,11 @@ let showResult = (jsonResult) => {
     let output = "<strong>" + jsonResult["title"] + "</strong>";    
     let out = output + "<p><a id=" + jsonResult["id"] + "_link> Click here</a> to view post in context.</p>";
 
-    $(".result").append("<div class = 'shadow'>" + out +"<div class='' id=" + jsonResult["id"] + "></div></div>");
+    $(".result").append("<div class = 'shadow'>" + out +"<div id=" + jsonResult["id"] + "></div></div>");
     $("#" + jsonResult["id"] + "_link").prop("href", jsonResult["url"]);
     $(".result").append("<p></p>");
 
-    let id = "#" + jsonResult["id"];
+    let id = "" + jsonResult["id"];
     const data = {
                 labels: ["Positive","Negative","Neutral"],
                 datasets: [
@@ -116,7 +116,9 @@ let showResult = (jsonResult) => {
                 ]
             }
 
-    const chart = new frappe.Chart(id, {
+
+    const pos = document.getElementById(id);
+    const chart = new frappe.Chart(pos, {
         data: data,
         type: 'percentage',
         colors: ['#33691e', '#b71c1c','#e8eaf6']

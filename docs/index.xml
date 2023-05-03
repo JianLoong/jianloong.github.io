@@ -5,6 +5,7 @@
     <link>https://jianloong.github.io/</link>
     <description>Recent content on Jian</description>
     <image>
+      <title>Jian</title>
       <url>https://jianloong.github.io/</url>
       <link>https://jianloong.github.io/</link>
     </image>
@@ -215,7 +216,6 @@ Email - &amp;#32;&amp;#32;</description>
       
       <guid>https://jianloong.github.io/projects/</guid>
       <description>Reddit Crawler and Visualisation This project is a Reddit data crawler that does not depend on the Reddit API. It is meant to be run on a remote machine so cron jobs can be set up. It also builds a simple dashboard based on a subreddit for demo purposes.
-This project is inspired by the post here
 It can be found here. It is also on GitHub here
 Word Cloud Generator This project is a Word Cloud Generator using d3.</description>
     </item>

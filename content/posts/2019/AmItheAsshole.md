@@ -90,7 +90,7 @@ let showResult = (jsonResult) => {
     $("#" + jsonResult["id"] + "_link").prop("href", jsonResult["url"]);
     $(".result").append("<p></p>");
 
-    let id = "#" + jsonResult["id"];
+    let id = "" + jsonResult["id"];
     const data = {
                 labels: ["NTA","YTA","ESH","NAH","INFO"],
                 datasets: [
@@ -108,7 +108,9 @@ let showResult = (jsonResult) => {
                 ]
             }
 
-    const chart = new frappe.Chart(id, {
+    const pos = document.getElementById(id);
+
+    const chart = new frappe.Chart(pos, {
         data: data,
         type: 'percentage',
         colors: ['#33691e', '#b71c1c', '#f47e17','#1a237e','#e8eaf6']
