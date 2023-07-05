@@ -8,7 +8,7 @@ enableRobotsTXT: true
 buildDrafts: false
 buildFuture: false
 buildExpired: false
-disqusShortname: jianloonggithubio
+# disqusShortname: jianloonggithubio
 
 
 googleAnalytics: UA-55422968-1

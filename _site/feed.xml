@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-10-16T00:22:46+11:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jian</title><subtitle>A Programming Blog</subtitle><author><name>Jian Loong Liew</name></author><entry><title type="html">Static Factory Methods in Java</title><link href="http://localhost:4000/java/2018/04/08/Effective-Java-Static-Factory-Methods/" rel="alternate" type="text/html" title="Static Factory Methods in Java" /><published>2018-04-08T00:00:00+10:00</published><updated>2018-04-08T00:00:00+10:00</updated><id>http://localhost:4000/java/2018/04/08/Effective-Java-Static-Factory-Methods</id><content type="html" xml:base="http://localhost:4000/java/2018/04/08/Effective-Java-Static-Factory-Methods/">&lt;p&gt;One of the must read books for Java programmers is Effective Java by Joshua Bloch. The 3rd edition has just been released couple months ago. I know quite a number of people have been eagerly waiting for its release.&lt;/p&gt;
+
+&lt;p&gt;I have been programming Java for a fairly long time. I still remember learning it via self taught from a website called Java with Passion back in 2009. The person who runs it at that time was Sang Shin. He currently works at Pivotal There was even a Google Group created for discussion purposes. Back then, programming was still new to me and for me, it was mainly because I was interested in computers and how programs work in general.&lt;/p&gt;
+
+&lt;p&gt;Anyways, back to the main topic, in this day and age, everyone claims to know Java. I mean of course, they do. But the main issue here is, how does a person determine the difference between a new Java programmer and someone who has been doing it for a long time. Cough, of course I know there are certifications like OCA and OJP out there. The main issue here is that for these certifications, one can “study” for it and most of the times it doesn’t become something ingrained within them.&lt;/p&gt;
+
+&lt;p&gt;But Java itself is a huge, and there are many ways to tackle a problem. In my opinion, one thing that every programmer should always know is regarding good practices. The problem with good practices, its that it is hard to teach good practices, as this is something that can only be gained over time.&lt;/p&gt;
+
+&lt;p&gt;For now, enough of the &lt;em&gt;rant&lt;/em&gt;. let’s see some examples from the book.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;One of the major problems when you work in education is that over time, your programming skills go down. This is quite evident as most of the time, it is not required as it is more important to be a good researcher in comparison to being a good programmer.&lt;/p&gt;
+
+&lt;p&gt;Back to static factory methods now.&lt;/p&gt;
+
+&lt;p&gt;A static factory method is simply a static method that returns an instance of the class. Normally, the traditional way is to use a public constructor in order to obtain an instance of the class. If you ever used 3rd party libraries like Guava or ApacheCommons, you will notice that there is almost always a factory method in the API.&lt;/p&gt;
+
+&lt;p&gt;An example of a static factory method is as follows. Notice that it returns a Boolean object.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;TRUE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Advantages of static factory methods are as follows&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;unlike constructors, static method have &lt;strong&gt;names&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;unlike constructors, they are not required to create a new object each time they are invoked. Notice that in the example, the &lt;strong&gt;new&lt;/strong&gt; keyword was not used.&lt;/li&gt;
+  &lt;li&gt;unlike constructors, they can return an object of any subtype of their return type.&lt;/li&gt;
+  &lt;li&gt;the class of the returned object can vary from call to call as a function of the input parameters.&lt;/li&gt;
+  &lt;li&gt;the class of the returned object need not exist when the class containing the method is written&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Limitations&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;classes without public or protected constructors cannot be subclassed&lt;/li&gt;
+  &lt;li&gt;they are hard for programmers to find (Debatable)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Well, this is just a summary it is high recommended to read the book instead. This post will be updated &lt;em&gt;soon&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let’s look at the first one.&lt;/p&gt;
+
+&lt;h3 id=&quot;static-methods-have-names&quot;&gt;Static methods have names&lt;/h3&gt;
+
+&lt;p&gt;One of the issues with code readability in Java is that there can be multiple constructors with different signatures and often times, people reading the code will have no idea what it does without reading the API. With static methods, however, you can put a more meaningful name. Thus, in a way your code will not only be cleaner it will also be more meaningful to the reader.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;More updates soon&lt;/em&gt;&lt;/p&gt;</content><author><name>Jian Loong Liew</name></author><category term="Java" /><summary type="html">One of the must read books for Java programmers is Effective Java by Joshua Bloch. The 3rd edition has just been released couple months ago. I know quite a number of people have been eagerly waiting for its release. I have been programming Java for a fairly long time. I still remember learning it via self taught from a website called Java with Passion back in 2009. The person who runs it at that time was Sang Shin. He currently works at Pivotal There was even a Google Group created for discussion purposes. Back then, programming was still new to me and for me, it was mainly because I was interested in computers and how programs work in general. Anyways, back to the main topic, in this day and age, everyone claims to know Java. I mean of course, they do. But the main issue here is, how does a person determine the difference between a new Java programmer and someone who has been doing it for a long time. Cough, of course I know there are certifications like OCA and OJP out there. The main issue here is that for these certifications, one can “study” for it and most of the times it doesn’t become something ingrained within them. But Java itself is a huge, and there are many ways to tackle a problem. In my opinion, one thing that every programmer should always know is regarding good practices. The problem with good practices, its that it is hard to teach good practices, as this is something that can only be gained over time. For now, enough of the rant. let’s see some examples from the book.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png" /></entry><entry><title type="html">Thinking in React</title><link href="http://localhost:4000/react/2018/04/04/Thinking-in-React/" rel="alternate" type="text/html" title="Thinking in React" /><published>2018-04-04T00:00:00+10:00</published><updated>2018-04-04T00:00:00+10:00</updated><id>http://localhost:4000/react/2018/04/04/Thinking-in-React</id><content type="html" xml:base="http://localhost:4000/react/2018/04/04/Thinking-in-React/">&lt;p&gt;I still remember during my undergraduate days, I took an elective called Web Development. In it, I was taught how to use HTML, JS as well as PHP. I still remember my lecturer for that unit as he was one of the best lecturers I have ever had.&lt;/p&gt;
+
+&lt;p&gt;One thing that I remember is that I was told that we should always try to separate the JavaScript from the HTML. My teammate and I spend very long time just to figure out how to validate a simple form with JavaScript. Of course, the JavaScript was not inline :). Mind you, these were the days Mr Stack Overflow and Mr Google did not readily provide everything for you.&lt;/p&gt;
+
+&lt;p&gt;Since then, I always followed the concept where there should never be inline scripts within HTML. However, it is now evident that, this might the old style of thinking. React uses something called &lt;a href=&quot;https://reactjs.org/docs/introducing-jsx.html&quot;&gt;JSX&lt;/a&gt;, and it is the most mind boggling thing I have seen. Well, it is mind boggling to me. JSX mixes both HTML and JS together. At first glance, it looks like something out of the 80s horror movies.&lt;/p&gt;
+
+&lt;p&gt;Why on earth would someone do that? Is there a reasoning behind this insanity? According to the React documentation it is stated that;&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;React is, in our opinion, the premier way to build big, fast Web apps with JavaScript. It has scaled very well for us at Facebook and Instagram&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;One key point that React states is that instead of separating &lt;strong&gt;technologies&lt;/strong&gt; by putting the markup and logic in separate files, React separates &lt;strong&gt;concerns&lt;/strong&gt; with loosely coupled units called components.&lt;/p&gt;
+
+&lt;p&gt;This is a very interesting notion. All this while, most developers considered the separation of the markup and logic to be good practise. However, since I am an old school (developer) according to my friend, he said that it will take some time for me to be comfortable doing things the &lt;strong&gt;React&lt;/strong&gt; way. In actual fact, I would say React actually redefined, on how we develop modern applications. The video below explains why.&lt;/p&gt;
+
+&lt;style&gt;.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }&lt;/style&gt;
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/x7cQ3mrcKaY&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;The video itself was back 2013, and since then it seems a huge number of companies have adopted React.&lt;/p&gt;
+
+&lt;p&gt;Besides that, I also stumbled upon a good &lt;a href=&quot;https://www.codementor.io/radubrehar/thinking-in-react-8duata34n&quot;&gt;article&lt;/a&gt; regarding React. In it, it is stated that, what React did really well was it brought immutable UIs to the masses, in which you never mutate the UI you always re-render it. React in a sense changed the way, we think about building UIs.&lt;/p&gt;
+
+&lt;p&gt;That being said, however I do not have enough experience in development of React apps to actually really understand the benefits or drawbacks.&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;https://reactjs.org/docs/introducing-jsx.html&lt;/li&gt;
+  &lt;li&gt;https://www.codementor.io/radubrehar/thinking-in-react-8duata34n&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Jian Loong Liew</name></author><category term="React" /><summary type="html">I still remember during my undergraduate days, I took an elective called Web Development. In it, I was taught how to use HTML, JS as well as PHP. I still remember my lecturer for that unit as he was one of the best lecturers I have ever had. One thing that I remember is that I was told that we should always try to separate the JavaScript from the HTML. My teammate and I spend very long time just to figure out how to validate a simple form with JavaScript. Of course, the JavaScript was not inline :). Mind you, these were the days Mr Stack Overflow and Mr Google did not readily provide everything for you. Since then, I always followed the concept where there should never be inline scripts within HTML. However, it is now evident that, this might the old style of thinking. React uses something called JSX, and it is the most mind boggling thing I have seen. Well, it is mind boggling to me. JSX mixes both HTML and JS together. At first glance, it looks like something out of the 80s horror movies. Why on earth would someone do that? Is there a reasoning behind this insanity? According to the React documentation it is stated that;</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png" /></entry><entry><title type="html">Is Login A Use Case?</title><link href="http://localhost:4000/use%20case/2018/04/02/Is-Login-A-Use-Case/" rel="alternate" type="text/html" title="Is Login A Use Case?" /><published>2018-04-02T00:00:00+10:00</published><updated>2018-04-02T00:00:00+10:00</updated><id>http://localhost:4000/use%20case/2018/04/02/Is-Login-A-Use-Case</id><content type="html" xml:base="http://localhost:4000/use%20case/2018/04/02/Is-Login-A-Use-Case/">&lt;p&gt;When dealing with system use case diagrams, a question that often pops up is the notion whether login is a use case? There are various train of thoughts regarding this matter.&lt;/p&gt;
+
+&lt;p&gt;In my opinion, the answer to this question is in fact, really simple. Of course, login is a use case. However, the main question that comes into play now, is whether login is a &lt;strong&gt;functional&lt;/strong&gt; or &lt;strong&gt;non-functional&lt;/strong&gt; requirement. A functional requirement describes what a software system should do while a non-functional requirement place constraint on how the system will do so.&lt;/p&gt;
+
+&lt;p&gt;The question now becomes, which category does login fall into in your system? Well, this answer depends on what system you are designing a use case diagram for. If you are designing an authentication and authorization system, of course login is a use case, but what happens if you are not?&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;In a normal system, do you consider putting login as a use case in your system use case diagram? For example, if you are designing the system use case diagram for a site like eBay, do you put login as a use case? While, there is nothing wrong with putting login a use case, it creates needless complications. Why is this so? Think of it this way, if you are planning to introduce login, there is a high chance that several other use cases will use the &lt;strong&gt;include&lt;/strong&gt; and &lt;strong&gt;extends&lt;/strong&gt; notion to relate to this use case. If that is done, it would increase the complexity use case diagram itself.&lt;/p&gt;
+
+&lt;p&gt;However, it would be better if login is not considered as a use case. Login should be treated as a non-functional requirement. In this case, based on ISO/IEC 9126 standards, login will fall under security requirements.&lt;/p&gt;
+
+&lt;p&gt;In actual fact, this is actually true because;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;A user will never want to login.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;A login barrier creates unnecessary burden to the user. The login use case often prevents the user from accomplishing a goal. The only reason it is present is because it is needed for security reasons.&lt;/p&gt;
+
+&lt;p&gt;In a perfect world, a user will never need to login, as the login process creates another step to accomplish a goal. This step is tedious and troublesome. Why do you want to trouble a user to login, a step in which has no value added to it? In fact, if you noticed, these days, most modern system often attempts to skip the login process.&lt;/p&gt;
+
+&lt;p&gt;For example, most online shopping system these days allows the user to purchase an item without the need of login. Why is this so? The answer is simple. The main information required for a user to purchase an item online is the delivery address and of course how they should pay for the item. Any other information is pointless in accomplishing the use case. There is not a need for the user to login into the system.&lt;/p&gt;
+
+&lt;p&gt;In short, &lt;strong&gt;login is a non-functional requirement&lt;/strong&gt; and should not be in the system use case diagram. While, there is nothing wrong with modelling it, it would be better if it was not in the system use case diagram. These days, the process of authentication and authorization is often left to external parties for example the use of Google OAuth or even Auth0. By doing this as well, the system use case diagram will be much cleaner and effective to convey the needed information.&lt;/p&gt;
+
+&lt;p&gt;However, at the end of the day, the most important factor is message that is present in the model. If a reader would be able to understand the diagram without difficulties, the goal of the use case diagram has been accomplished.&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;https://en.wikipedia.org/wiki/ISO/IEC_9126&lt;/li&gt;
+  &lt;li&gt;https://stackoverflow.com/questions/16475979/what-is-the-difference-between-functional-and-non-functional-requirement&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Jian Loong Liew</name></author><category term="Use Case" /><summary type="html">When dealing with system use case diagrams, a question that often pops up is the notion whether login is a use case? There are various train of thoughts regarding this matter. In my opinion, the answer to this question is in fact, really simple. Of course, login is a use case. However, the main question that comes into play now, is whether login is a functional or non-functional requirement. A functional requirement describes what a software system should do while a non-functional requirement place constraint on how the system will do so. The question now becomes, which category does login fall into in your system? Well, this answer depends on what system you are designing a use case diagram for. If you are designing an authentication and authorization system, of course login is a use case, but what happens if you are not?</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png" /></entry><entry><title type="html">Learning Vue</title><link href="http://localhost:4000/javascript/2017/11/08/Learning-Vue/" rel="alternate" type="text/html" title="Learning Vue" /><published>2017-11-08T00:00:00+11:00</published><updated>2017-11-08T00:00:00+11:00</updated><id>http://localhost:4000/javascript/2017/11/08/Learning-Vue</id><content type="html" xml:base="http://localhost:4000/javascript/2017/11/08/Learning-Vue/">&lt;p&gt;Please note that I do know that is not the correct way of using Vue. This is just me playing around. Of course, in a real life production environment there are many things that should not be done at all.&lt;/p&gt;
+
+&lt;p&gt;In order to learn Vue, I made this simple demonstration of how I can request the reddit API for certain subreddits.&lt;/p&gt;
+
+&lt;p&gt;Here, I only included Programming and Programmer Humour in the select box at the moment. Upon selected, it will query the reddit API for results. While this could have been done with jQuery, I decided that I wanted to learn how to use Vue instead. I do know that you can even do this with basic JavaScript, however the intention of this post is to understand how VueJS work with regards to the bindings and etc.&lt;/p&gt;
+
+&lt;p&gt;Even though the implementation seems simple, it actually took a while to understand the concepts behind it.&lt;/p&gt;
+
+&lt;p&gt;I even tried looking at React, in the end I decided that Vue would be the choice for me for several reasons. To me, React seems very messy, and it is hard for the to think in the “React” way.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;div id=&quot;app&quot;&gt;
+&lt;select v-model=&quot;selected&quot; v-on:change=&quot;selectSubreddit&quot;&gt;
+  &lt;option disabled=&quot;&quot; value=&quot;&quot;&gt;Please select one&lt;/option&gt;
+  &lt;option&gt;Programming&lt;/option&gt;
+  &lt;option&gt;ProgrammerHumor&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;ul&gt;
+  &lt;li v-for=&quot;result of results&quot;&gt;
+      
+        &lt;a v-bind:href=&quot;result.data.url&quot;&gt; {{ result.data.title }}&lt;/a&gt;
+      
+  &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The JavaScript file itself is below. Here, I am using the axios library to perform the get request.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'#app'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;results&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;errors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;selected&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+
+  &lt;span class=&quot;na&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;selectSubreddit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;axios&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://www.reddit.com/r/&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;selected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;.json&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;c1&quot;&gt;// JSON responses are automatically parsed.&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;results&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;children&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;errors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;For the HTML front end, since I am actually using Jekyll to generate static elements for this blog, I needed to introduce {% raw and endraw %} tags. I am also loading the required libraries with CDN for now.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;app&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;select&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-model=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;selected&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-on:change=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;selectSubreddit&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;option&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;disabled&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Please select one&lt;span class=&quot;nt&quot;&gt;&amp;lt;/option&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;option&amp;gt;&lt;/span&gt;Programming&lt;span class=&quot;nt&quot;&gt;&amp;lt;/option&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;option&amp;gt;&lt;/span&gt;ProgrammerHumor&lt;span class=&quot;nt&quot;&gt;&amp;lt;/option&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/select&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;ul&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-for=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;result of results&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-bind:href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;result.data.url&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt; {{ result.data.title }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+      
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Production --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.1/vue.min.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Dev --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- &amp;lt;script rel=&quot;text/javascript&quot; src=&quot;https://unpkg.com/vue&quot;&amp;gt;&amp;lt;/script&amp;gt; --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javaScript&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://unpkg.com/vue-resource@1.3.4/dist/vue-resource.min.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javaScript&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://unpkg.com/axios/dist/axios.min.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/assets/js/vue-test.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;!-- Production --&gt;
+&lt;script rel=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.1/vue.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;!-- Dev --&gt;
+&lt;!-- &lt;script rel=&quot;text/javascript&quot; src=&quot;https://unpkg.com/vue&quot;&gt;&lt;/script&gt; --&gt;
+&lt;script rel=&quot;text/javaScript&quot; src=&quot;https://unpkg.com/vue-resource@1.3.4/dist/vue-resource.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;script rel=&quot;text/javaScript&quot; src=&quot;https://unpkg.com/axios/dist/axios.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;script rel=&quot;text/javascript&quot; src=&quot;/assets/js/vue-test.js&quot;&gt;&lt;/script&gt;</content><author><name>Jian Loong Liew</name></author><category term="JavaScript" /><category term="Programming" /><category term="Vue" /><category term="Reddit" /><summary type="html">Please note that I do know that is not the correct way of using Vue. This is just me playing around. Of course, in a real life production environment there are many things that should not be done at all. In order to learn Vue, I made this simple demonstration of how I can request the reddit API for certain subreddits. Here, I only included Programming and Programmer Humour in the select box at the moment. Upon selected, it will query the reddit API for results. While this could have been done with jQuery, I decided that I wanted to learn how to use Vue instead. I do know that you can even do this with basic JavaScript, however the intention of this post is to understand how VueJS work with regards to the bindings and etc. Even though the implementation seems simple, it actually took a while to understand the concepts behind it. I even tried looking at React, in the end I decided that Vue would be the choice for me for several reasons. To me, React seems very messy, and it is hard for the to think in the “React” way.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png" /></entry><entry><title type="html">Backup Files From Slack</title><link href="http://localhost:4000/shell%20scripts/2017/11/03/Backup-files-from-slack/" rel="alternate" type="text/html" title="Backup Files From Slack" /><published>2017-11-03T00:00:00+11:00</published><updated>2017-11-03T00:00:00+11:00</updated><id>http://localhost:4000/shell%20scripts/2017/11/03/Backup-files-from-slack</id><content type="html" xml:base="http://localhost:4000/shell%20scripts/2017/11/03/Backup-files-from-slack/">&lt;p&gt;This was a simple shell script I wrote to allow the download of files that users send on public channels on Slack. The reason this was done was because…&lt;/p&gt;
+
+&lt;h5 id=&quot;flashback-last-year&quot;&gt;Flashback last year…&lt;/h5&gt;
+&lt;p&gt;Person A - Hey, are you busy?&lt;/p&gt;
+
+&lt;p&gt;Me - Nah, wassup?&lt;/p&gt;
+
+&lt;p&gt;Person A - Well, our Slack has been telling us to pay them……Could you like backup the files?&lt;/p&gt;
+
+&lt;p&gt;Me - Sure, OK.&lt;/p&gt;
+
+&lt;p&gt;Hours later…..&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/running.png&quot; alt=&quot;Alt text&quot; class=&quot;img-smaller&quot; /&gt;&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Requirements for the script are as follows.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Requires&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;jq&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Command Line JSON parser&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;cURL&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Tool  to transfer data from the server&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;If you do not have these or know about them, I highly suggest to go about learning what these are first before even attempting this.&lt;/p&gt;
+
+&lt;p&gt;So, I came to the conclusion that the easiest way I could do it is just to write a simple shell script to do it. What can an easier way be? Spend 5 hours reading their API? Writing a Java / Python or C# program? Nope.&lt;/p&gt;
+
+&lt;p&gt;My idea was pretty simple, I am going to check out some of the REST API end points and then look at the files that can be downloaded, then I am going to use cURL or WGET to ninja all of it at one go.&lt;/p&gt;
+
+&lt;p&gt;The shell script is provided at my repository. The script itself can be improved in many ways but it was meant to be something simple to begin with.&lt;/p&gt;
+
+&lt;p&gt;The first step itself is pretty simple. You will need to obtain a XOXP token. You obviously need some rights to obtain this token. Mind you this was 1 year ago. So, you can say that this post is delayed for 1 year. Woohoo.&lt;/p&gt;
+
+&lt;p&gt;My plan was just to use a cron to run the script everyday so that backup happens. Easy mode.&lt;/p&gt;
+
+&lt;p&gt;Obtaining the XOXP token is a simple step. You will need to generate a “legacy” token. Because, hey anything older than a year is legacy these days! On a more serious note, there is obviously a reason for it being called legacy.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://api.slack.com/custom-integrations/legacy-tokens&quot; class=&quot;img-smaller&quot;&gt;Token found here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/legacy_token_generator.png&quot; alt=&quot;Legacy Token Generator&quot; class=&quot;img-smaller&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You will need to select your work space and generate a XOXP token for it.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/JianLoong/3221f6e6acf46ed2ea0a249d04b67d51.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;After that comes the fun part!&lt;/p&gt;
+
+&lt;p&gt;Because I decided going through the entire API to find the actual way to download the file to be rather cumbersome and Mr. Google and Mr. Stackoverflow showed no promising way to do it, I decided to spoof my browser headers to download the image.&lt;/p&gt;
+
+&lt;p&gt;The idea itself is quite simple.&lt;/p&gt;
+
+&lt;p&gt;I am going to go to the URL on my browser then look at the inspect tool to see the headers.&lt;/p&gt;
+
+&lt;p&gt;What I noticed is that the files in Slack follow a very simple URL pattern.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+https://files.slack.com/files-pri/SOMETHING/FILE_NAME.png
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;So what I just need to do is first get all these URL and then do a curl for them.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/JianLoong/18135bb51bfea3093f95133468d278a6.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;What you will notice is that, if you run the script now, the value temp will actually tell you all the URLs of the files. So, the idea of it now is that you can look at the URL from your browser. Of course you will need to be logged on to Slack on your browser to view it. Once you open the inspect tool, you would be able to copy and paste the headers just like the screen shot below. This is under the network tab.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/url-header-slack.png&quot; alt=&quot;Alt text&quot; class=&quot;img-smaller&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After that, you will need to put that line in the correct place with the correct url.&lt;/p&gt;
+
+&lt;p&gt;In order to run the script, you will need to give it execute permission. Then, it should download all of the files into that directory.&lt;/p&gt;</content><author><name>Jian Loong Liew</name></author><category term="[&quot;Shell Scripts&quot;]" /><category term="Slack" /><category term="Shell Script" /><category term="jq" /><category term="curl" /><summary type="html">This was a simple shell script I wrote to allow the download of files that users send on public channels on Slack. The reason this was done was because… Flashback last year… Person A - Hey, are you busy? Me - Nah, wassup? Person A - Well, our Slack has been telling us to pay them……Could you like backup the files? Me - Sure, OK. Hours later…..</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png" /></entry><entry><title type="html">Revival of Blog.</title><link href="http://localhost:4000/blog/2017/10/30/More-updates-soon/" rel="alternate" type="text/html" title="Revival of Blog." /><published>2017-10-30T00:00:00+11:00</published><updated>2017-10-30T00:00:00+11:00</updated><id>http://localhost:4000/blog/2017/10/30/More-updates-soon</id><content type="html" xml:base="http://localhost:4000/blog/2017/10/30/More-updates-soon/">&lt;p&gt;After being abandoned for 3 years, I have decided to actually revive this blog.&lt;/p&gt;
+
+&lt;p&gt;It would be a good idea to put some thoughts into words as well as sharing my programming experience to others.&lt;/p&gt;
+
+&lt;p&gt;It seems that just in the time of 3 years, JavaScript has taken over the world. I can still remember back then when everyone considers JavaScript to be the worst language of them all. My old professor said to me that, JavaScript component should always be loaded last and you should never use innerHTML inside your scripts. Apparently, that is all not true these days…….&lt;/p&gt;
+
+&lt;p&gt;Oh well, more post to come.&lt;/p&gt;
+
+&lt;!--more--&gt;</content><author><name>Jian Loong Liew</name></author><category term="Blog" /><category term="jekyll" /><category term="programming" /><category term="blog" /><summary type="html">After being abandoned for 3 years, I have decided to actually revive this blog. It would be a good idea to put some thoughts into words as well as sharing my programming experience to others. It seems that just in the time of 3 years, JavaScript has taken over the world. I can still remember back then when everyone considers JavaScript to be the worst language of them all. My old professor said to me that, JavaScript component should always be loaded last and you should never use innerHTML inside your scripts. Apparently, that is all not true these days……. Oh well, more post to come.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png" /></entry></feed>
