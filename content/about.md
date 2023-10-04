@@ -9,9 +9,40 @@ Greetings and welcome to my blog.
 
 This blog is just mainly for me to focus my thoughts and it is a personal space for my projects.
 
-I am currently open to job opportunities.
-
 Email - {{< encoded_email "jianloongliew@gmail.com" >}}
+
+
+## Professional Experience
+
+These are some of the subjects I have previously taught during my time working in education.
+
+| Unit Code | Name                                        |
+| --------- | ------------------------------------------- |
+| FIT1010   | Introduction to Software Engineering        |
+| FIT5032   | Internet Applications Development           |
+| FIT5042   | Enterprise Web Applications                 |
+| FIT5120   | Industry Experience Project                 |
+| FIT5136   | Software Engineering                        |
+| FIT5140   | Advance Mobile Systems                      |
+| FIT9131   | Programming Foundations in Java             |
+| FIT9134   | Computer Architecture and Operating Systems |
+| FIT9135   | Data Communications                         |
+
+
+
+### Education
+
+#### Master of Information Technology (Professional) - Monash University
+
+- Completed a thesis titled "Category R-tree" under the supervision of Assoc. Prof. David Taniar
+- Faculty of Information Technology Merit Scholarship
+
+#### Bachelor of Computer Science & Software Engineering - Swinburne University
+
+- Graduated with First Class Honors
+- Swinburne University of Technology Merit Scholarship -->
+
+
 
 <!-- 
 ### Teaching Experience
@@ -56,3 +87,4 @@ Subjects previously taught includes:
 
 - Graduated with First Class Honors
 - Swinburne University of Technology Merit Scholarship -->
+
