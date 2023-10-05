@@ -52,6 +52,6 @@ I personally feel that, after you have been working in education for a long time
 
 That being said though, being of good health plays a major factor towards learning as well as the morale that is needed for self improvement and learning.
 
-Please also do checkout my word cloud generator [here](https://jianliew.me/word-cloud-generator/).
+Please also do checkout my word cloud generator [here](https://jian.sh/word-cloud-generator/).
 
 As always, I am always open to discussions and ways to improve upon it.

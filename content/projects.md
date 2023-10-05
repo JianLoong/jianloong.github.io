@@ -11,9 +11,9 @@ author: ""
 This project is a Reddit data crawler that does not depend on the Reddit API. It is meant to be run on a remote machine so cron jobs can be set up.
 It also builds a simple dashboard based on a subreddit for demo purposes.
 
-{{< figure src="/images/redditvisual.png" title="" align="center" link="https://jianliew.me/aita">}}
+{{< figure src="/images/redditvisual.png" title="" align="center" link="https://jian.sh/aita">}}
 
-It can be found [here](https://jianliew.me/aita). It is also on GitHub [here](https://github.com/JianLoong/aita)
+It can be found [here](https://jian.sh/aita). It is also on GitHub [here](https://github.com/JianLoong/aita)
 
 ---
 
@@ -23,9 +23,9 @@ This project is a Word Cloud Generator using d3.js, to enable the word clouds to
 
 It also features several data pre-processing methods to make the word cloud more informative. 
 
-{{< figure src="/images/wordcloud.png" title="" align="center" link="https://jianliew.me/word-cloud-generator">}}
+{{< figure src="/images/wordcloud.png" title="" align="center" link="https://jian.sh/word-cloud-generator">}}
 
-It can be found [here](https://jianliew.me/word-cloud-generator). It is also on GitHub [here](https://github.com/JianLoong/word-cloud-generator)
+It can be found [here](https://jian.sh/word-cloud-generator). It is also on GitHub [here](https://github.com/JianLoong/word-cloud-generator)
 
 
 ### Sentiment Analysis 
@@ -34,9 +34,9 @@ This project is a collection of several lexicons used for sentiment analysis. Th
 
 It features several well-known lexicons for sentiment analysis and also real-time evaluation of the text.
 
-{{< figure src="/images/sentiment.png" title="" align="center" link="https://jianliew.me/sentimentanalysis">}}
+{{< figure src="/images/sentiment.png" title="" align="center" link="https://jian.sh/sentimentanalysis">}}
 
-It can be found [here](https://jianliew.me/sentimentanalysis). It is also on GitHub [here](https://github.com/JianLoong/sentimentanalysis)
+It can be found [here](https://jian.sh/sentimentanalysis). It is also on GitHub [here](https://github.com/JianLoong/sentimentanalysis)
 
 ---
 
@@ -54,7 +54,7 @@ Hopefully, since I am no longer working in Monash, the unit is still being updat
 
 ### GeneticJS
 
-This project was an extension inspired by the post made [here](https://jianliew.me/posts/tsp/) 
+This project was an extension inspired by the post made [here](https://jian.sh/posts/tsp/) 
 
 However during that, time, I was not able to dedicate enough of my time to complete the project. However, the baseline still exists and working, potentially
 including it in future projects.
