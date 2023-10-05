@@ -2,8 +2,6 @@
 title: "Reddit Word Cloud for the subreddit programming"
 date: 2019-10-12T20:56:02+11:00
 tags: ["Reddit", "Chart", "Visualisation"]
-cover:
-  image: "/images/redditwordcloud.png"
 UseHugoToc: true
 ---
 

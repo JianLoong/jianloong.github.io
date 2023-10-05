@@ -3,8 +3,6 @@ title: "Traveling Sales Person using Genetic Algorithms"
 date: 2019-10-23
 tags: ["Genetic Algorithm", "Selection", "Cross Over", "TSP"]
 ShowReadingTime: true
-cover:
-  image: "/images/tsp.png"
 ---
 
 This post is best viewed using the light theme.

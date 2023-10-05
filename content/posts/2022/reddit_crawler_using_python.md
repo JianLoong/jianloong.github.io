@@ -1,15 +1,13 @@
 ---
 title: "Using Python to obtain data from Reddit"
 date: 2022-11-07T20:56:02+11:00
-summary: ""
+summary: "Using Python & RedditAPI to make a simple crawler."
 ShowCodeCopyButtons: true
 comment: true
 disableShare: true
 ShowWordCount: true
 TocSide: right
 tags: ["reddit", "crawler", "python"]
-cover:
-  image: "/images/simplecrawler.png"
 hasMermaid: false
 draft: false
 ---

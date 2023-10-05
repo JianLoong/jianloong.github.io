@@ -5,8 +5,6 @@ tags: ["Sort", "Java", "Streams"]
 ShowCodeCopyButtons: true
 comment: true
 summary: Getting the min and value of an array in Java
-cover:
-  image: "/images/minmax.png"
 ---
 
 There are many ways to obtain the min and maximum value of items inside of an Array. This blog post will show case its many ways.

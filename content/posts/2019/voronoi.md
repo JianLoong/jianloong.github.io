@@ -4,8 +4,6 @@ date: 2019-10-27
 draft: false
 tags: ["Nearest Neighbour", "Maps", "Voronoi"]
 ShowReadingTime: true
-cover:
-  image: "/images/voronoi.png"
 ---
 
 <script src="https://unpkg.com/d3@5.12.0/dist/d3.min.js"></script>

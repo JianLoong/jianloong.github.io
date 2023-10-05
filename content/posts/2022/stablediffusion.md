@@ -3,9 +3,8 @@ title: 'Generating Anime "Art" with Stable Diffusion using the "Waifu Diffusion"
 date: 2022-10-21
 tags: ["AI", "Art", "Stable Diffusion", "Anime"]
 ShowReadingTime: true
-cover:
-  image: "/images/stablediffusion.png"
 UseHugoToc: true
+summary: Generating Anime art.
 ---
 
 Recently, generating images with AI has gotten a lot of traction, so I decided to play around with it.

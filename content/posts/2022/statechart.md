@@ -4,8 +4,6 @@ date: 2021-10-24
 tags: ["UML"]
 ShowReadingTime: true
 summary: This post attempts to explain UML Statecharts as simple as possible.
-cover:
-  image: "/images/statechart.png"
 hasMermaid: true
 draft: false
 ---

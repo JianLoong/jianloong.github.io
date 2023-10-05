@@ -3,8 +3,6 @@ title: "Sentiment analysis for the subreddit Hong Kong"
 date: 2019-10-13T20:56:02+11:00
 tags: ["Reddit", "Chart", "Visualisation", "Hong Kong", "Percentage"]
 ShowReadingTime: true
-cover:
-  image: "/images/sentimentanalysis.png"
 ---
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

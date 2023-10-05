@@ -4,8 +4,6 @@ date: 2022-10-20T21:30:56+11:00
 tags: ["Education"]
 ShowReadingTime: true
 summary: This post explains the examination marking process so that it is consistent and fair to the students. This is before the age of *e-exams*
-cover:
-  image: "/images/exampaper.png"
 hasMermaid: true
 ---
 

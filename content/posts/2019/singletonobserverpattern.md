@@ -2,8 +2,6 @@
 title: "Singleton & Observer Pattern (Java)"
 date: 2019-11-03
 tags: ["Java", "Design Pattern", "Singleton", "Observer"]
-cover:
-  image: "/images/luckydip.png"
 ---
 
 

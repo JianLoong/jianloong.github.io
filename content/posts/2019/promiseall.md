@@ -2,9 +2,6 @@
 title: "JavaScript Promise All - Parsing Hackernews Stories using Promise.all"
 date: 2019-10-25
 tags: ["JavaScript", "Promise", "API"]
-cover:
-  image: "/images/network.png"
-
 ---
 
 

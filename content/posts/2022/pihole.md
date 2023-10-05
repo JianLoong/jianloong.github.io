@@ -5,8 +5,6 @@ summary: "An educational approach to crawling Reddit using Python and AWS EC2 wi
 ShowCodeCopyButtons: true
 comments: true
 tags: ["PiHole" ,"RaspberryPi", "Linux"]
-cover:
-  image: "/images/pihole.png"
 ShowWordCount: true
 ShowReadingTime: true
 ---

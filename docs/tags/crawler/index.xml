@@ -16,9 +16,7 @@
       <pubDate>Mon, 07 Nov 2022 20:56:02 +1100</pubDate>
       
       <guid>https://jian.sh/posts/2022/reddit_crawler_using_python/</guid>
-      <description>Introduction As of March 2022, Reddit ranks as the 9th-most-visited website in the world and 6th most-visited website in the US according to Wikipedia.
-What is interesting about Reddit is that it has subreddits for people with different interests. For example, there are subreddits on prorgramming, technology or even about funny things at funny.
-There are a few approaches one can take to obtain data from Reddit. Here is one way to do it.</description>
+      <description>Using Python &amp;amp; RedditAPI to make a simple crawler.</description>
     </item>
     
   </channel>

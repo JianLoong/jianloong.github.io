@@ -16,9 +16,7 @@
       <pubDate>Mon, 07 Nov 2022 20:56:02 +1100</pubDate>
       
       <guid>https://jian.sh/posts/2022/reddit_crawler_using_python/</guid>
-      <description>Introduction As of March 2022, Reddit ranks as the 9th-most-visited website in the world and 6th most-visited website in the US according to Wikipedia.
-What is interesting about Reddit is that it has subreddits for people with different interests. For example, there are subreddits on prorgramming, technology or even about funny things at funny.
-There are a few approaches one can take to obtain data from Reddit. Here is one way to do it.</description>
+      <description>Using Python &amp;amp; RedditAPI to make a simple crawler.</description>
     </item>
     
     <item>
@@ -27,7 +25,7 @@ There are a few approaches one can take to obtain data from Reddit. Here is one 
       <pubDate>Sat, 05 Nov 2022 20:56:02 +1100</pubDate>
       
       <guid>https://jian.sh/posts/2022/jplag/</guid>
-      <description>Automating the processing of extracting and cleaning files for JPlag input</description>
+      <description>Automating the processing of extracting and cleaning files for JPlag.</description>
     </item>
     
     <item>
@@ -36,9 +34,7 @@ There are a few approaches one can take to obtain data from Reddit. Here is one 
       <pubDate>Fri, 21 Oct 2022 00:00:00 +0000</pubDate>
       
       <guid>https://jian.sh/posts/2022/stablediffusion/</guid>
-      <description>Recently, generating images with AI has gotten a lot of traction, so I decided to play around with it.
-It is easy to get it working as there is a web user interface fork of it on GitHub located here. Basically, it is working out of the box with minimal configuration needed.
-Instead of using the suggested model, I used the &amp;ldquo;Waifu Diffusion&amp;rdquo; model instead located here. Waifu diffusion is &amp;ldquo;a latent text-to-image diffusion model that has been conditioned on high-quality anime images through fine-tuning&amp;rdquo;.</description>
+      <description>Generating Anime art.</description>
     </item>
     
     <item>

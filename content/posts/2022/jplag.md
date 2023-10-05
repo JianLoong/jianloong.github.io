@@ -4,10 +4,8 @@ date: 2022-11-05T20:56:02+11:00
 tags: ["JPlag", "Plagiarism", "University"]
 ShowReadingTime: true
 ShowCodeCopyButtons: true
-cover:
-  image: "/images/jplagout.png"
 draft: false
-summary: Automating the processing of extracting and cleaning files for JPlag input
+summary: Automating the processing of extracting and cleaning files for JPlag.
 ---
 
 ### Background

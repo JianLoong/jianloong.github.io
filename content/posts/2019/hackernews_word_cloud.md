@@ -3,8 +3,6 @@ title: "Hacker News Word Cloud "
 date: 2019-10-14T20:56:02+11:00
 draft: false
 tags: ["Hacker News", "Chart", "Visualisation"]
-cover:
-  image: "/images/hackernews.png"
 ShowReadingTime: true
 ---
 

@@ -3,8 +3,6 @@ title: "Genetic Algorithm using Web Workers"
 date: 2019-10-19
 tags: ["Genetic Algorithm", "Selection", "Cross Over", "Phrase Solver"]
 ShowReadingTime: true
-cover:
-  image: "/images/ga.png"
 UseHugoToc: true
 ---
 
