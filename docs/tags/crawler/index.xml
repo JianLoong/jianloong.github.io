@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>crawler on Jian</title>
-    <link>https://jianloong.github.io/tags/crawler/</link>
+    <link>https://jian.sh/tags/crawler/</link>
     <description>Recent content in crawler on Jian</description>
     <image>
-      <url>https://jianloong.github.io/</url>
-      <link>https://jianloong.github.io/</link>
+      <url>https://jian.sh/</url>
+      <link>https://jian.sh/</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 07 Nov 2022 20:56:02 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/tags/crawler/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Nov 2022 20:56:02 +1100</lastBuildDate><atom:link href="https://jian.sh/tags/crawler/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Using Python to obtain data from Reddit</title>
-      <link>https://jianloong.github.io/posts/2022/reddit_crawler_using_python/</link>
+      <link>https://jian.sh/posts/2022/reddit_crawler_using_python/</link>
       <pubDate>Mon, 07 Nov 2022 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/posts/2022/reddit_crawler_using_python/</guid>
+      <guid>https://jian.sh/posts/2022/reddit_crawler_using_python/</guid>
       <description>Introduction As of March 2022, Reddit ranks as the 9th-most-visited website in the world and 6th most-visited website in the US according to Wikipedia.
 What is interesting about Reddit is that it has subreddits for people with different interests. For example, there are subreddits on prorgramming, technology or even about funny things at funny.
 There are a few approaches one can take to obtain data from Reddit. Here is one way to do it.</description>

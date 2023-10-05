@@ -10,7 +10,7 @@
 <meta name="description" content="One of the most common queries when working with maps is the nearest neighbour query. This blog post will use Voronoi Diagrams to explain more regarding the nearest neighbour query.
 Below is an example of a Voronoi diagram generated using d3.js. One of the good use cases of a voronoi diagram in real-life applications would be where would be finding a place to build emergency services. This place should have the most number of neighbouring regions.">
 <meta name="author" content="Jian">
-<link rel="canonical" href="https://jianloong.github.io/posts/2019/voronoi/">
+<link rel="canonical" href="https://jian.sh/posts/2019/voronoi/">
 <meta name="google-site-verification" content="UA-55422968-1">
 <link href="http://fonts.cdnfonts.com/css/atkinson-hyperlegible" rel="stylesheet">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
@@ -74,13 +74,13 @@ if (!doNotTrack) {
 <meta property="og:description" content="One of the most common queries when working with maps is the nearest neighbour query. This blog post will use Voronoi Diagrams to explain more regarding the nearest neighbour query.
 Below is an example of a Voronoi diagram generated using d3.js. One of the good use cases of a voronoi diagram in real-life applications would be where would be finding a place to build emergency services. This place should have the most number of neighbouring regions." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jianloong.github.io/posts/2019/voronoi/" />
-<meta property="og:image" content="https://jianloong.github.io/images/voronoi.png" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://jian.sh/posts/2019/voronoi/" />
+<meta property="og:image" content="https://jian.sh/images/voronoi.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-10-27T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-10-27T00:00:00+00:00" /><meta property="og:site_name" content="Jian" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://jianloong.github.io/images/voronoi.png" />
+<meta name="twitter:image" content="https://jian.sh/images/voronoi.png" />
 <meta name="twitter:title" content="k-Nearest Neighbour on Maps"/>
 <meta name="twitter:description" content="One of the most common queries when working with maps is the nearest neighbour query. This blog post will use Voronoi Diagrams to explain more regarding the nearest neighbour query.
 Below is an example of a Voronoi diagram generated using d3.js. One of the good use cases of a voronoi diagram in real-life applications would be where would be finding a place to build emergency services. This place should have the most number of neighbouring regions."/>
@@ -95,13 +95,13 @@ Below is an example of a Voronoi diagram generated using d3.js. One of the good 
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "https://jianloong.github.io/posts/"
+      "item": "https://jian.sh/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "k-Nearest Neighbour on Maps",
-      "item": "https://jianloong.github.io/posts/2019/voronoi/"
+      "item": "https://jian.sh/posts/2019/voronoi/"
     }
   ]
 }
@@ -119,7 +119,7 @@ Below is an example of a Voronoi diagram generated using d3.js. One of the good 
   "articleBody": "\rOne of the most common queries when working with maps is the nearest neighbour query. This blog post will use Voronoi Diagrams to explain more regarding the nearest neighbour query.\nBelow is an example of a Voronoi diagram generated using d3.js. One of the good use cases of a voronoi diagram in real-life applications would be where would be finding a place to build emergency services. This place should have the most number of neighbouring regions. For example, if you click on the region in the Voronoi diagram below, you can see how many regions in which it would consider this region to be its neighbour. The diagram is randomly generated based on a number of points and thus every refresh of this page will show a different Voronoi diagram.\nFig 1. Voronoi Diagram generated with 30 random points\nThe codes to create this diagram are as follows :-\nconst createVoronoi = () =\u003e { const width = 600; const height = 600; const vertices = d3.range(30).map(function (d) { return [Math.random() * width, Math.random() * height]; }); const delaunay = d3.Delaunay.from(vertices); const voronoi = delaunay.voronoi([0, 0, width, height]); let svg = d3.select(\"#canvas\").append(\"svg\").attr(\"viewBox\", `0 0 600 600`); const mesh = svg .append(\"path\") .attr(\"fill\", \"none\") .attr(\"stroke\", \"#ccc\") .attr(\"stroke-width\", 1) .attr(\"d\", voronoi.render()); const bounds = svg .append(\"path\") .attr(\"fill\", \"none\") .attr(\"stroke\", \"#ccc\") .attr(\"stroke-width\", 1) .attr(\"d\", voronoi.renderBounds()); const points = svg .append(\"path\") .attr(\"fill\", \"black\") .attr(\"stroke\", \"#ccc\") .attr(\"stroke-width\", 1) .attr(\"d\", delaunay.renderPoints()); }; Example of a query I will now re-use my data set of point from an earlier blog entry and I will generate the voronoi diagram. Basically, I would use a query point as well to find out the nearest neighbour and the surrounding neighbours. The figure below shows that the d3-delaunay provides a simple functions that allows you to find the point in which is the closest to the query point. This is done by using delaunay.find(). So if you are inside the blue region, your closest point would be the point inside the blue region.\nIt’s surrounding neighbours could then be easily obtained once you have this point by using delaunay.neighbor() and passing the result of the first find function. So, the regions which are in teal would be the neighbours of the region in blue. All the other regions would be coloured in green. This simple data structure would allow you to easily obtain the nearest neighbour. However, of course, there is also the importance of the build time, insertion time and removal time as well.\nFig 2. Voronoi Diagram for a NN query.\nThe codes to create this diagram are as follows const queryExample = () =\u003e { let points = [ [40, 74], [34, 118], [41, 87], [44, 93], [39, 104], [32, 96], [47, 122], [42, 71], ]; // Function to transform the points so that it would work on the grid const transform = (point) =\u003e { return [(point[0] / 90) * 500, (point[1] / 180) * 500]; }; let transformed = []; points.forEach((element) =\u003e { transformed.push(transform(element)); }); const delaunay = d3.Delaunay.from(points); const voronoi = delaunay.voronoi([0, 0, 500, 500]); // Call the draw Voronoi function. drawVoronoi(\"#exampleQuery\", transformed); }; const drawVoronoi = (id, vertices, color) =\u003e { const width = 500, height = 500; const delaunay = d3.Delaunay.from(vertices); const voronoi = delaunay.voronoi([0, 0, width, height]); let svg = d3.select(id).append(\"svg\").attr(\"viewBox\", `0 0 500 500`); const mesh = svg .append(\"path\") .attr(\"fill\", \"none\") .attr(\"stroke\", \"#ccc\") .attr(\"stroke-width\", 1) .attr(\"d\", voronoi.render()); const bounds = svg .append(\"path\") .attr(\"fill\", \"none\") .attr(\"stroke\", \"#ccc\") .attr(\"stroke-width\", 1) .attr(\"d\", voronoi.renderBounds()); // Find the closest point to this coordinate. const ans = delaunay.find(40, 73); const neighbours = delaunay.neighbors(ans); for (const iterator of neighbours) { renderCell(svg, voronoi, iterator, d3.schemeTableau10[3]); } renderCell(svg, voronoi, ans, d3.schemeTableau10[0]); const points = svg .append(\"path\") .attr(\"fill\", \"black\") .attr(\"stroke\", \"#ccc\") .attr(\"stroke-width\", 1) .attr(\"d\", delaunay.renderPoints()); }; const renderCell = (svg, voronoi, index, color) =\u003e { svg .append(\"path\") .attr(\"fill\", color) .attr(\"stroke\", \"#ccc\") .attr(\"stroke-width\", 1) .attr(\"d\", voronoi.renderCell(index)); }; Lessons from this blog post. The learning curve for d3.js is pretty insane. Voronoi are pretty easy using d3. Generators can be iterated using the for...of construct. MDN link There is a way to make SVG responsive. Refer this post. ",
   "wordCount" : "685",
   "inLanguage": "en",
-  "image":"https://jianloong.github.io/images/voronoi.png","datePublished": "2019-10-27T00:00:00Z",
+  "image":"https://jian.sh/images/voronoi.png","datePublished": "2019-10-27T00:00:00Z",
   "dateModified": "2019-10-27T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -127,7 +127,7 @@ Below is an example of a Voronoi diagram generated using d3.js. One of the good 
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://jianloong.github.io/posts/2019/voronoi/"
+    "@id": "https://jian.sh/posts/2019/voronoi/"
   },
   "publisher": {
     "@type": "Organization",
@@ -156,7 +156,7 @@ Below is an example of a Voronoi diagram generated using d3.js. One of the good 
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://jianloong.github.io/" accesskey="h" title="Jian (Alt + H)">Jian</a>
+            <a href="https://jian.sh/" accesskey="h" title="Jian (Alt + H)">Jian</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -182,32 +182,32 @@ Below is an example of a Voronoi diagram generated using d3.js. One of the good 
         </div>
         <ul id="menu">
             <li>
-                <a href="https://jianloong.github.io/about/" title="about">
+                <a href="https://jian.sh/about/" title="about">
                     <span>about</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/projects/" title="projects">
+                <a href="https://jian.sh/projects/" title="projects">
                     <span>projects</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/search/" title="search (Alt &#43; /)" accesskey=/>
+                <a href="https://jian.sh/search/" title="search (Alt &#43; /)" accesskey=/>
                     <span>search</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/tags/" title="tags">
+                <a href="https://jian.sh/tags/" title="tags">
                     <span>tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/archives/" title="archives">
+                <a href="https://jian.sh/archives/" title="archives">
                     <span>archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/contact/" title="contact">
+                <a href="https://jian.sh/contact/" title="contact">
                     <span>contact</span>
                 </a>
             </li>
@@ -218,7 +218,7 @@ Below is an example of a Voronoi diagram generated using d3.js. One of the good 
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://jianloong.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://jianloong.github.io/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://jian.sh/">Home</a>&nbsp;»&nbsp;<a href="https://jian.sh/posts/">Posts</a></div>
     <h1 class="post-title">
       k-Nearest Neighbour on Maps
     </h1>
@@ -577,17 +577,17 @@ drawVoronoiWithPoints("#canvas",30);
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://jianloong.github.io/tags/nearest-neighbour/">Nearest Neighbour</a></li>
-      <li><a href="https://jianloong.github.io/tags/maps/">Maps</a></li>
-      <li><a href="https://jianloong.github.io/tags/voronoi/">Voronoi</a></li>
+      <li><a href="https://jian.sh/tags/nearest-neighbour/">Nearest Neighbour</a></li>
+      <li><a href="https://jian.sh/tags/maps/">Maps</a></li>
+      <li><a href="https://jian.sh/tags/voronoi/">Voronoi</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://jianloong.github.io/posts/2019/singletonobserverpattern/">
+  <a class="prev" href="https://jian.sh/posts/2019/singletonobserverpattern/">
     <span class="title">« Prev</span>
     <br>
     <span>Singleton &amp; Observer Pattern (Java)</span>
   </a>
-  <a class="next" href="https://jianloong.github.io/posts/2019/promiseall/">
+  <a class="next" href="https://jian.sh/posts/2019/promiseall/">
     <span class="title">Next »</span>
     <br>
     <span>JavaScript Promise All - Parsing Hackernews Stories using Promise.all</span>
@@ -599,7 +599,7 @@ drawVoronoiWithPoints("#canvas",30);
     </main>
     
 <footer class="footer">
-    <span>&copy; 2023 <a href="https://jianloong.github.io/">Jian</a></span>
+    <span>&copy; 2023 <a href="https://jian.sh/">Jian</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

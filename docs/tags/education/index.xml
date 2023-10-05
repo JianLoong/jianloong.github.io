@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Education on Jian</title>
-    <link>https://jianloong.github.io/tags/education/</link>
+    <link>https://jian.sh/tags/education/</link>
     <description>Recent content in Education on Jian</description>
     <image>
-      <url>https://jianloong.github.io/</url>
-      <link>https://jianloong.github.io/</link>
+      <url>https://jian.sh/</url>
+      <link>https://jian.sh/</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 20 Oct 2022 21:30:56 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/tags/education/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Oct 2022 21:30:56 +1100</lastBuildDate><atom:link href="https://jian.sh/tags/education/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Process of Exam Papers Assessment</title>
-      <link>https://jianloong.github.io/posts/2022/process_of_exam_paper_assessment/</link>
+      <link>https://jian.sh/posts/2022/process_of_exam_paper_assessment/</link>
       <pubDate>Thu, 20 Oct 2022 21:30:56 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/posts/2022/process_of_exam_paper_assessment/</guid>
+      <guid>https://jian.sh/posts/2022/process_of_exam_paper_assessment/</guid>
       <description>This post explains the examination marking process so that it is consistent and fair to the students. This is before the age of &lt;em&gt;e-exams&lt;/em&gt;</description>
     </item>
     

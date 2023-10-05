@@ -9,7 +9,7 @@
 <meta name="keywords" content="Sort, Java, Streams">
 <meta name="description" content="Getting the min and value of an array in Java">
 <meta name="author" content="Jian">
-<link rel="canonical" href="https://jianloong.github.io/posts/2019/minmax/">
+<link rel="canonical" href="https://jian.sh/posts/2019/minmax/">
 <meta name="google-site-verification" content="UA-55422968-1">
 <link href="http://fonts.cdnfonts.com/css/atkinson-hyperlegible" rel="stylesheet">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
@@ -72,13 +72,13 @@ if (!doNotTrack) {
 </script><meta property="og:title" content="Min and Max value of an Array (Java)" />
 <meta property="og:description" content="Getting the min and value of an array in Java" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jianloong.github.io/posts/2019/minmax/" />
-<meta property="og:image" content="https://jianloong.github.io/images/minmax.png" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://jian.sh/posts/2019/minmax/" />
+<meta property="og:image" content="https://jian.sh/images/minmax.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-11-06T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-11-06T00:00:00+00:00" /><meta property="og:site_name" content="Jian" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://jianloong.github.io/images/minmax.png" />
+<meta name="twitter:image" content="https://jian.sh/images/minmax.png" />
 <meta name="twitter:title" content="Min and Max value of an Array (Java)"/>
 <meta name="twitter:description" content="Getting the min and value of an array in Java"/>
 
@@ -92,13 +92,13 @@ if (!doNotTrack) {
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "https://jianloong.github.io/posts/"
+      "item": "https://jian.sh/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "Min and Max value of an Array (Java)",
-      "item": "https://jianloong.github.io/posts/2019/minmax/"
+      "item": "https://jian.sh/posts/2019/minmax/"
     }
   ]
 }
@@ -116,7 +116,7 @@ if (!doNotTrack) {
   "articleBody": "There are many ways to obtain the min and maximum value of items inside of an Array. This blog post will show case its many ways.\nThe most basic way to do this is to loop through the entire array manually. The benefit of doing it this way, is that it just relies on the standard library and can be easily rewritten to an even simpler form. This way uses the Math.max and Math.min method. It will also, store the min value as the Integer.MAX_VALUE as the initial value and vice versa. One other way to do it would be to keep the first index as the minimum and maximum value. So, instead of using Integer.MAX_VALUE and Integer.MIN_VALUE, the values for min and max would be numbers[0] instead.\npublic void usingManual(int[] numbers){ if (numbers.length == 0) throw new IllegalArgumentException(\"Invalid array\"); int min = Integer.MAX_VALUE; int max = Integer.MIN_VALUE; for(int value : numbers){ if (value \u003e max) max = Math.max(max, value); if (value \u003c min) min = Math.min(min, value); } System.out.println(\"Min is \" + min); System.out.println(\"Max is \" + max); } Method 1. Using the manual method. Another way would be to sort the array. The first index would be the least and the last index would be the maximum. This is easily done using the Array.sort method. The issue with this way is that it would sort the array in place and it also rely on the inbuilt sort method. It is generally a bad idea to use a sort in a method you want to obtain the minimum and maximum because users of this method would not expect this method to be sorting the array itself. Thus, it is better to create a clone of it or a copy of the numbers array itself so that you do not sort the elements in place but sort the cloned array instead. It is also interesting to take note that the default implementation of the sorting algorithm uses a Dual-Pivot Quicksort.\nIt is a good idea to do a clone on the array and save it into another variable. The reason for this is because, users of the method does not expect it for you to sort their array when the method is used. A method at the end of the day should only do a single thing.\npublic void usingSort(int[] numbers){ if (numbers.length == 0) throw new IllegalArgumentException(\"Invalid array\"); int[] clonedArray = numbers.clone(); Arrays.sort(clonedArray); System.out.println(\"Min is \" + clonedArray[0]); System.out.println(\"Max is \" + clonedArray[clonedArray.length - 1]); } Method 2. Using the in-built Arrays.sort. You can also use a stream as well. However, it is only available in later versions of Java. The IntStream is only available since Java 1.8 and considerations need to be taken into account when using it. Here, there are is a need to decide if a parallel stream should be used as well.\npublic void usingIntStream(int[] numbers){ if (numbers.length == 0) throw new IllegalArgumentException(\"Invalid array\"); IntStream intStream = Arrays.stream(numbers); System.out.println(\"Min is \" + intStream.min()); System.out.println(\"Max is \" + intStream.max()); } Method 3. Using streams Another way to do it is using the summaryStatistics of the int stream class. This is basically a state object for collecting statistics such as count, min max, sum and average. This would potentially be one of the better ways. This reason it is probably one of the better ways is because the IntSummaryStatistics is able to store other information as well besides the min and max, thus increasing its re-usability. So, there is no need for the iteration of the array itself again.\npublic void usingSummaryStats(int[] numbers){ if (numbers.length == 0) throw new IllegalArgumentException(\"Invalid array\"); IntSummaryStatistics stats = Arrays.stream(numbers).summaryStatistics(); System.out.println(\"Min is \" + stats.getMin()); System.out.println(\"Max is \" + stats.getMax()); } Method 4. Using the IntSummaryStatistics Using the IntSummaryStatistics way is probably the preferred way if you are running Java 8 and above.\nFinally, you can also use a Collections class to do it. However, in order to do so, you must box the primitive values into their class equivalent. It is important to know that this method iterates over the entire collection, hence it requires time proportional to the size of the collection.\npublic void usingCollections(int[] numbers){ if (numbers.length == 0) throw new IllegalArgumentException(\"Invalid array\"); List\u003cInteger\u003e integerList = new ArrayList\u003c\u003e(); Arrays.stream(numbers).forEach(value -\u003e integerList.add(value)); System.out.println(Collections.min(integerList)); System.out.println(Collections.max(integerList)); } Method 5. Using the Collections class.\nBefore we end, one last finally you can also use the Guava library to do it. You can look up what the Guava library is.\nSummary There are many ways to obtain the min and max of an array in Java. My personal preference is that, if you are using Java 8 or higher, it would better to use the IntSummaryStatistics method, otherwise the classical way where a loop is written would be preferred. Besides that, it is also not a very good idea for your method to do two things, thus it would be better to introduce two methods instead, but if you are using the IntSummaryStatistics method, you can avoid these needless complexities.\n",
   "wordCount" : "836",
   "inLanguage": "en",
-  "image":"https://jianloong.github.io/images/minmax.png","datePublished": "2019-11-06T00:00:00Z",
+  "image":"https://jian.sh/images/minmax.png","datePublished": "2019-11-06T00:00:00Z",
   "dateModified": "2019-11-06T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -124,7 +124,7 @@ if (!doNotTrack) {
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://jianloong.github.io/posts/2019/minmax/"
+    "@id": "https://jian.sh/posts/2019/minmax/"
   },
   "publisher": {
     "@type": "Organization",
@@ -153,7 +153,7 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://jianloong.github.io/" accesskey="h" title="Jian (Alt + H)">Jian</a>
+            <a href="https://jian.sh/" accesskey="h" title="Jian (Alt + H)">Jian</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -179,32 +179,32 @@ if (!doNotTrack) {
         </div>
         <ul id="menu">
             <li>
-                <a href="https://jianloong.github.io/about/" title="about">
+                <a href="https://jian.sh/about/" title="about">
                     <span>about</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/projects/" title="projects">
+                <a href="https://jian.sh/projects/" title="projects">
                     <span>projects</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/search/" title="search (Alt &#43; /)" accesskey=/>
+                <a href="https://jian.sh/search/" title="search (Alt &#43; /)" accesskey=/>
                     <span>search</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/tags/" title="tags">
+                <a href="https://jian.sh/tags/" title="tags">
                     <span>tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/archives/" title="archives">
+                <a href="https://jian.sh/archives/" title="archives">
                     <span>archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/contact/" title="contact">
+                <a href="https://jian.sh/contact/" title="contact">
                     <span>contact</span>
                 </a>
             </li>
@@ -215,7 +215,7 @@ if (!doNotTrack) {
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://jianloong.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://jianloong.github.io/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://jian.sh/">Home</a>&nbsp;»&nbsp;<a href="https://jian.sh/posts/">Posts</a></div>
     <h1 class="post-title">
       Min and Max value of an Array (Java)
     </h1>
@@ -292,17 +292,17 @@ if (!doNotTrack) {
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://jianloong.github.io/tags/sort/">Sort</a></li>
-      <li><a href="https://jianloong.github.io/tags/java/">Java</a></li>
-      <li><a href="https://jianloong.github.io/tags/streams/">Streams</a></li>
+      <li><a href="https://jian.sh/tags/sort/">Sort</a></li>
+      <li><a href="https://jian.sh/tags/java/">Java</a></li>
+      <li><a href="https://jian.sh/tags/streams/">Streams</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://jianloong.github.io/posts/2022/statechart/">
+  <a class="prev" href="https://jian.sh/posts/2022/statechart/">
     <span class="title">« Prev</span>
     <br>
     <span>UML Statecharts</span>
   </a>
-  <a class="next" href="https://jianloong.github.io/posts/2019/singletonobserverpattern/">
+  <a class="next" href="https://jian.sh/posts/2019/singletonobserverpattern/">
     <span class="title">Next »</span>
     <br>
     <span>Singleton &amp; Observer Pattern (Java)</span>
@@ -314,7 +314,7 @@ if (!doNotTrack) {
     </main>
     
 <footer class="footer">
-    <span>&copy; 2023 <a href="https://jianloong.github.io/">Jian</a></span>
+    <span>&copy; 2023 <a href="https://jian.sh/">Jian</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

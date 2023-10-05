@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Cross Over on Jian</title>
-    <link>https://jianloong.github.io/tags/cross-over/</link>
+    <link>https://jian.sh/tags/cross-over/</link>
     <description>Recent content in Cross Over on Jian</description>
     <image>
-      <url>https://jianloong.github.io/</url>
-      <link>https://jianloong.github.io/</link>
+      <url>https://jian.sh/</url>
+      <link>https://jian.sh/</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 23 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://jianloong.github.io/tags/cross-over/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://jian.sh/tags/cross-over/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Traveling Sales Person using Genetic Algorithms</title>
-      <link>https://jianloong.github.io/posts/2019/tsp/</link>
+      <link>https://jian.sh/posts/2019/tsp/</link>
       <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/posts/2019/tsp/</guid>
+      <guid>https://jian.sh/posts/2019/tsp/</guid>
       <description>This post is best viewed using the light theme.
 This post uses GA to generate a high-quality solution to the Traveling Salesman Problem.
 Traveling Salesman Problem using Genetic Algorithm This blog post is regarding using a genetic algorithm to solve the Traveling Salesman Problem. In a one-liner, the TSP asks the following question: Given a list of cities and the distances between each pair of the cities, what is the shortest possible route that visits each city and returns to the origin city?</description>
@@ -23,10 +23,10 @@ Traveling Salesman Problem using Genetic Algorithm This blog post is regarding u
     
     <item>
       <title>Genetic Algorithm using Web Workers</title>
-      <link>https://jianloong.github.io/posts/2019/simplegeneticalgo/</link>
+      <link>https://jian.sh/posts/2019/simplegeneticalgo/</link>
       <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/posts/2019/simplegeneticalgo/</guid>
+      <guid>https://jian.sh/posts/2019/simplegeneticalgo/</guid>
       <description>This post is a simple implementation of Genetic Algorithm GA. Here, you would start with a random string and end up with the target string.
 This post is heavily inspired based on this website. However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it runs behind the scenes.
 The implementation of it can be seen here</description>

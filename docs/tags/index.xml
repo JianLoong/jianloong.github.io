@@ -2,353 +2,353 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on Jian</title>
-    <link>https://jianloong.github.io/tags/</link>
+    <link>https://jian.sh/tags/</link>
     <description>Recent content in Tags on Jian</description>
     <image>
-      <url>https://jianloong.github.io/</url>
-      <link>https://jianloong.github.io/</link>
+      <url>https://jian.sh/</url>
+      <link>https://jian.sh/</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 07 Nov 2022 20:56:02 +1100</lastBuildDate><atom:link href="https://jianloong.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Nov 2022 20:56:02 +1100</lastBuildDate><atom:link href="https://jian.sh/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>crawler</title>
-      <link>https://jianloong.github.io/tags/crawler/</link>
+      <link>https://jian.sh/tags/crawler/</link>
       <pubDate>Mon, 07 Nov 2022 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/tags/crawler/</guid>
+      <guid>https://jian.sh/tags/crawler/</guid>
       <description></description>
     </item>
     
     <item>
       <title>python</title>
-      <link>https://jianloong.github.io/tags/python/</link>
+      <link>https://jian.sh/tags/python/</link>
       <pubDate>Mon, 07 Nov 2022 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/tags/python/</guid>
+      <guid>https://jian.sh/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Reddit</title>
-      <link>https://jianloong.github.io/tags/reddit/</link>
+      <link>https://jian.sh/tags/reddit/</link>
       <pubDate>Mon, 07 Nov 2022 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/tags/reddit/</guid>
+      <guid>https://jian.sh/tags/reddit/</guid>
       <description></description>
     </item>
     
     <item>
       <title>JPlag</title>
-      <link>https://jianloong.github.io/tags/jplag/</link>
+      <link>https://jian.sh/tags/jplag/</link>
       <pubDate>Sat, 05 Nov 2022 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/tags/jplag/</guid>
+      <guid>https://jian.sh/tags/jplag/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Plagiarism</title>
-      <link>https://jianloong.github.io/tags/plagiarism/</link>
+      <link>https://jian.sh/tags/plagiarism/</link>
       <pubDate>Sat, 05 Nov 2022 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/tags/plagiarism/</guid>
+      <guid>https://jian.sh/tags/plagiarism/</guid>
       <description></description>
     </item>
     
     <item>
       <title>University</title>
-      <link>https://jianloong.github.io/tags/university/</link>
+      <link>https://jian.sh/tags/university/</link>
       <pubDate>Sat, 05 Nov 2022 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/tags/university/</guid>
+      <guid>https://jian.sh/tags/university/</guid>
       <description></description>
     </item>
     
     <item>
       <title>AI</title>
-      <link>https://jianloong.github.io/tags/ai/</link>
+      <link>https://jian.sh/tags/ai/</link>
       <pubDate>Fri, 21 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/ai/</guid>
+      <guid>https://jian.sh/tags/ai/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Anime</title>
-      <link>https://jianloong.github.io/tags/anime/</link>
+      <link>https://jian.sh/tags/anime/</link>
       <pubDate>Fri, 21 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/anime/</guid>
+      <guid>https://jian.sh/tags/anime/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Art</title>
-      <link>https://jianloong.github.io/tags/art/</link>
+      <link>https://jian.sh/tags/art/</link>
       <pubDate>Fri, 21 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/art/</guid>
+      <guid>https://jian.sh/tags/art/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Stable Diffusion</title>
-      <link>https://jianloong.github.io/tags/stable-diffusion/</link>
+      <link>https://jian.sh/tags/stable-diffusion/</link>
       <pubDate>Fri, 21 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/stable-diffusion/</guid>
+      <guid>https://jian.sh/tags/stable-diffusion/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Education</title>
-      <link>https://jianloong.github.io/tags/education/</link>
+      <link>https://jian.sh/tags/education/</link>
       <pubDate>Thu, 20 Oct 2022 21:30:56 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/tags/education/</guid>
+      <guid>https://jian.sh/tags/education/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Linux</title>
-      <link>https://jianloong.github.io/tags/linux/</link>
+      <link>https://jian.sh/tags/linux/</link>
       <pubDate>Thu, 20 Oct 2022 21:30:56 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/tags/linux/</guid>
+      <guid>https://jian.sh/tags/linux/</guid>
       <description></description>
     </item>
     
     <item>
       <title>PiHole</title>
-      <link>https://jianloong.github.io/tags/pihole/</link>
+      <link>https://jian.sh/tags/pihole/</link>
       <pubDate>Thu, 20 Oct 2022 21:30:56 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/tags/pihole/</guid>
+      <guid>https://jian.sh/tags/pihole/</guid>
       <description></description>
     </item>
     
     <item>
       <title>RaspberryPi</title>
-      <link>https://jianloong.github.io/tags/raspberrypi/</link>
+      <link>https://jian.sh/tags/raspberrypi/</link>
       <pubDate>Thu, 20 Oct 2022 21:30:56 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/tags/raspberrypi/</guid>
+      <guid>https://jian.sh/tags/raspberrypi/</guid>
       <description></description>
     </item>
     
     <item>
       <title>JavaScript</title>
-      <link>https://jianloong.github.io/tags/javascript/</link>
+      <link>https://jian.sh/tags/javascript/</link>
       <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/javascript/</guid>
+      <guid>https://jian.sh/tags/javascript/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sentiment Analysis</title>
-      <link>https://jianloong.github.io/tags/sentiment-analysis/</link>
+      <link>https://jian.sh/tags/sentiment-analysis/</link>
       <pubDate>Thu, 20 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/sentiment-analysis/</guid>
+      <guid>https://jian.sh/tags/sentiment-analysis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>UML</title>
-      <link>https://jianloong.github.io/tags/uml/</link>
+      <link>https://jian.sh/tags/uml/</link>
       <pubDate>Sun, 24 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/uml/</guid>
+      <guid>https://jian.sh/tags/uml/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Java</title>
-      <link>https://jianloong.github.io/tags/java/</link>
+      <link>https://jian.sh/tags/java/</link>
       <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/java/</guid>
+      <guid>https://jian.sh/tags/java/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sort</title>
-      <link>https://jianloong.github.io/tags/sort/</link>
+      <link>https://jian.sh/tags/sort/</link>
       <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/sort/</guid>
+      <guid>https://jian.sh/tags/sort/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Streams</title>
-      <link>https://jianloong.github.io/tags/streams/</link>
+      <link>https://jian.sh/tags/streams/</link>
       <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/streams/</guid>
+      <guid>https://jian.sh/tags/streams/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Design Pattern</title>
-      <link>https://jianloong.github.io/tags/design-pattern/</link>
+      <link>https://jian.sh/tags/design-pattern/</link>
       <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/design-pattern/</guid>
+      <guid>https://jian.sh/tags/design-pattern/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Observer</title>
-      <link>https://jianloong.github.io/tags/observer/</link>
+      <link>https://jian.sh/tags/observer/</link>
       <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/observer/</guid>
+      <guid>https://jian.sh/tags/observer/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Singleton</title>
-      <link>https://jianloong.github.io/tags/singleton/</link>
+      <link>https://jian.sh/tags/singleton/</link>
       <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/singleton/</guid>
+      <guid>https://jian.sh/tags/singleton/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Maps</title>
-      <link>https://jianloong.github.io/tags/maps/</link>
+      <link>https://jian.sh/tags/maps/</link>
       <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/maps/</guid>
+      <guid>https://jian.sh/tags/maps/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Nearest Neighbour</title>
-      <link>https://jianloong.github.io/tags/nearest-neighbour/</link>
+      <link>https://jian.sh/tags/nearest-neighbour/</link>
       <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/nearest-neighbour/</guid>
+      <guid>https://jian.sh/tags/nearest-neighbour/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Voronoi</title>
-      <link>https://jianloong.github.io/tags/voronoi/</link>
+      <link>https://jian.sh/tags/voronoi/</link>
       <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/voronoi/</guid>
+      <guid>https://jian.sh/tags/voronoi/</guid>
       <description></description>
     </item>
     
     <item>
       <title>API</title>
-      <link>https://jianloong.github.io/tags/api/</link>
+      <link>https://jian.sh/tags/api/</link>
       <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/api/</guid>
+      <guid>https://jian.sh/tags/api/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Promise</title>
-      <link>https://jianloong.github.io/tags/promise/</link>
+      <link>https://jian.sh/tags/promise/</link>
       <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/promise/</guid>
+      <guid>https://jian.sh/tags/promise/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Cross Over</title>
-      <link>https://jianloong.github.io/tags/cross-over/</link>
+      <link>https://jian.sh/tags/cross-over/</link>
       <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/cross-over/</guid>
+      <guid>https://jian.sh/tags/cross-over/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Genetic Algorithm</title>
-      <link>https://jianloong.github.io/tags/genetic-algorithm/</link>
+      <link>https://jian.sh/tags/genetic-algorithm/</link>
       <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/genetic-algorithm/</guid>
+      <guid>https://jian.sh/tags/genetic-algorithm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Selection</title>
-      <link>https://jianloong.github.io/tags/selection/</link>
+      <link>https://jian.sh/tags/selection/</link>
       <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/selection/</guid>
+      <guid>https://jian.sh/tags/selection/</guid>
       <description></description>
     </item>
     
     <item>
       <title>TSP</title>
-      <link>https://jianloong.github.io/tags/tsp/</link>
+      <link>https://jian.sh/tags/tsp/</link>
       <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/tsp/</guid>
+      <guid>https://jian.sh/tags/tsp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Phrase Solver</title>
-      <link>https://jianloong.github.io/tags/phrase-solver/</link>
+      <link>https://jian.sh/tags/phrase-solver/</link>
       <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/tags/phrase-solver/</guid>
+      <guid>https://jian.sh/tags/phrase-solver/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Chart</title>
-      <link>https://jianloong.github.io/tags/chart/</link>
+      <link>https://jian.sh/tags/chart/</link>
       <pubDate>Mon, 14 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/tags/chart/</guid>
+      <guid>https://jian.sh/tags/chart/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hacker News</title>
-      <link>https://jianloong.github.io/tags/hacker-news/</link>
+      <link>https://jian.sh/tags/hacker-news/</link>
       <pubDate>Mon, 14 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/tags/hacker-news/</guid>
+      <guid>https://jian.sh/tags/hacker-news/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Visualisation</title>
-      <link>https://jianloong.github.io/tags/visualisation/</link>
+      <link>https://jian.sh/tags/visualisation/</link>
       <pubDate>Mon, 14 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/tags/visualisation/</guid>
+      <guid>https://jian.sh/tags/visualisation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hong Kong</title>
-      <link>https://jianloong.github.io/tags/hong-kong/</link>
+      <link>https://jian.sh/tags/hong-kong/</link>
       <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/tags/hong-kong/</guid>
+      <guid>https://jian.sh/tags/hong-kong/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Percentage</title>
-      <link>https://jianloong.github.io/tags/percentage/</link>
+      <link>https://jian.sh/tags/percentage/</link>
       <pubDate>Sun, 13 Oct 2019 20:56:02 +1100</pubDate>
       
-      <guid>https://jianloong.github.io/tags/percentage/</guid>
+      <guid>https://jian.sh/tags/percentage/</guid>
       <description></description>
     </item>
     

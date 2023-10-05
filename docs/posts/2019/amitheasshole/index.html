@@ -11,7 +11,7 @@
 The subreddit describes itself as&hellip;
 A catharsis for the frustrated moral philosopher in all of us, and a place to finally find out if you were wrong in an argument that&rsquo;s been bothering you. Tell us about any non-violent conflict you have experienced; give us both sides of the story, and find out if you&rsquo;re right, or you&rsquo;re the asshole.">
 <meta name="author" content="Jian">
-<link rel="canonical" href="https://jianloong.github.io/posts/2019/amitheasshole/">
+<link rel="canonical" href="https://jian.sh/posts/2019/amitheasshole/">
 <meta name="google-site-verification" content="UA-55422968-1">
 <link href="http://fonts.cdnfonts.com/css/atkinson-hyperlegible" rel="stylesheet">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
@@ -76,13 +76,13 @@ if (!doNotTrack) {
 The subreddit describes itself as&hellip;
 A catharsis for the frustrated moral philosopher in all of us, and a place to finally find out if you were wrong in an argument that&rsquo;s been bothering you. Tell us about any non-violent conflict you have experienced; give us both sides of the story, and find out if you&rsquo;re right, or you&rsquo;re the asshole." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jianloong.github.io/posts/2019/amitheasshole/" />
-<meta property="og:image" content="https://jianloong.github.io/images/amitheasshole.png" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://jian.sh/posts/2019/amitheasshole/" />
+<meta property="og:image" content="https://jian.sh/images/amitheasshole.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-10-09T20:56:02+11:00" />
 <meta property="article:modified_time" content="2019-10-09T20:56:02+11:00" /><meta property="og:site_name" content="Jian" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://jianloong.github.io/images/amitheasshole.png" />
+<meta name="twitter:image" content="https://jian.sh/images/amitheasshole.png" />
 <meta name="twitter:title" content="Percentage Charts for the subreddit Am I the Asshole?"/>
 <meta name="twitter:description" content="The charts here are visualisation of the Am I the Asshole? subreddit which can be found here
 The subreddit describes itself as&hellip;
@@ -98,13 +98,13 @@ A catharsis for the frustrated moral philosopher in all of us, and a place to fi
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "https://jianloong.github.io/posts/"
+      "item": "https://jian.sh/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "Percentage Charts for the subreddit Am I the Asshole?",
-      "item": "https://jianloong.github.io/posts/2019/amitheasshole/"
+      "item": "https://jian.sh/posts/2019/amitheasshole/"
     }
   ]
 }
@@ -122,7 +122,7 @@ A catharsis for the frustrated moral philosopher in all of us, and a place to fi
   "articleBody": "\rThe charts here are visualisation of the Am I the Asshole? subreddit which can be found here\nThe subreddit describes itself as…\nA catharsis for the frustrated moral philosopher in all of us, and a place to finally find out if you were wrong in an argument that’s been bothering you. Tell us about any non-violent conflict you have experienced; give us both sides of the story, and find out if you’re right, or you’re the asshole. See our Best Of “Most Controversial” at /r/AITAFiltered!\nPlease note that the posts here are generated based on the Reddit website by doing GET requests. So, it is based on their current entries. So, these are live data obtained from the site and not static data hardcoded in the website.\nAbbreviation Meaning YTA You’re the A-hole NTA Not the A-hole ESH Everyone sucks here NAH No A-holes here INFO Not Enough Info Fig 1. Abbreviation Table for the Subreddit Posts let summary = []; let parseResult = (link) =\u003e { const endPoint = \"https://reddit.com\" + link + \".json?limit=80\u0026jsonp=?\"; let replies = \"\"; $.getJSON(endPoint, function(data){ let title = (data[0].data.children[0].data[\"title\"]); replies = data[1][\"data\"].children; let url = \"https://reddit.com\" + link; let noOfReplies = replies.length; let countNTAAppearance = 0; let nta = \"NTA\"; let countYTAAppearance = 0; let countESHAppearance = 0; let countNAHAppearance = 0; let countINFOAppearance = 0; for (let i = 0; i \u003c noOfReplies; i++) { let reply = replies[i][\"data\"].body; if (reply == undefined) return; countNTAAppearance += (reply.match(/NTA/g) || []).length; countYTAAppearance += (reply.match(/YTA/g) || []).length; countESHAppearance += (reply.match(/ESH/g) || []).length; countNAHAppearance += (reply.match(/NAH/g) || []).length; countINFOAppearance += (reply.match(/INFO/g) || []).length; } let jsonResult = { \"id\" : data[0].data.children[0].data[\"id\"], \"url\": url, \"title\": title, \"countNTAAppearance\": countNTAAppearance, \"countYTAAppearance\": countYTAAppearance, \"countESHAppearance\" : countESHAppearance, \"countNAHAppearance\" : countNAHAppearance, \"countINFOAppearance\" : countINFOAppearance, } summary.push(jsonResult); showResult(jsonResult); }); } let showResult = (jsonResult) =\u003e { let output = \"\" + jsonResult[\"title\"] + \"\"; let out = output + \"",
   "wordCount" : "437",
   "inLanguage": "en",
-  "image":"https://jianloong.github.io/images/amitheasshole.png","datePublished": "2019-10-09T20:56:02+11:00",
+  "image":"https://jian.sh/images/amitheasshole.png","datePublished": "2019-10-09T20:56:02+11:00",
   "dateModified": "2019-10-09T20:56:02+11:00",
   "author":{
     "@type": "Person",
@@ -130,7 +130,7 @@ A catharsis for the frustrated moral philosopher in all of us, and a place to fi
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://jianloong.github.io/posts/2019/amitheasshole/"
+    "@id": "https://jian.sh/posts/2019/amitheasshole/"
   },
   "publisher": {
     "@type": "Organization",
@@ -159,7 +159,7 @@ A catharsis for the frustrated moral philosopher in all of us, and a place to fi
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://jianloong.github.io/" accesskey="h" title="Jian (Alt + H)">Jian</a>
+            <a href="https://jian.sh/" accesskey="h" title="Jian (Alt + H)">Jian</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -185,32 +185,32 @@ A catharsis for the frustrated moral philosopher in all of us, and a place to fi
         </div>
         <ul id="menu">
             <li>
-                <a href="https://jianloong.github.io/about/" title="about">
+                <a href="https://jian.sh/about/" title="about">
                     <span>about</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/projects/" title="projects">
+                <a href="https://jian.sh/projects/" title="projects">
                     <span>projects</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/search/" title="search (Alt &#43; /)" accesskey=/>
+                <a href="https://jian.sh/search/" title="search (Alt &#43; /)" accesskey=/>
                     <span>search</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/tags/" title="tags">
+                <a href="https://jian.sh/tags/" title="tags">
                     <span>tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/archives/" title="archives">
+                <a href="https://jian.sh/archives/" title="archives">
                     <span>archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/contact/" title="contact">
+                <a href="https://jian.sh/contact/" title="contact">
                     <span>contact</span>
                 </a>
             </li>
@@ -221,7 +221,7 @@ A catharsis for the frustrated moral philosopher in all of us, and a place to fi
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://jianloong.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://jianloong.github.io/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://jian.sh/">Home</a>&nbsp;»&nbsp;<a href="https://jian.sh/posts/">Posts</a></div>
     <h1 class="post-title">
       Percentage Charts for the subreddit Am I the Asshole?
     </h1>
@@ -471,12 +471,12 @@ getPost();
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://jianloong.github.io/tags/reddit/">Reddit</a></li>
-      <li><a href="https://jianloong.github.io/tags/chart/">Chart</a></li>
-      <li><a href="https://jianloong.github.io/tags/visualisation/">Visualisation</a></li>
+      <li><a href="https://jian.sh/tags/reddit/">Reddit</a></li>
+      <li><a href="https://jian.sh/tags/chart/">Chart</a></li>
+      <li><a href="https://jian.sh/tags/visualisation/">Visualisation</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://jianloong.github.io/posts/2019/reddit_word_cloud/">
+  <a class="prev" href="https://jian.sh/posts/2019/reddit_word_cloud/">
     <span class="title">« Prev</span>
     <br>
     <span>Reddit Word Cloud for the subreddit programming</span>
@@ -488,7 +488,7 @@ getPost();
     </main>
     
 <footer class="footer">
-    <span>&copy; 2023 <a href="https://jianloong.github.io/">Jian</a></span>
+    <span>&copy; 2023 <a href="https://jian.sh/">Jian</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

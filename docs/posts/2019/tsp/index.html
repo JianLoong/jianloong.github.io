@@ -11,7 +11,7 @@
 This post uses GA to generate a high-quality solution to the Traveling Salesman Problem.
 Traveling Salesman Problem using Genetic Algorithm This blog post is regarding using a genetic algorithm to solve the Traveling Salesman Problem. In a one-liner, the TSP asks the following question: Given a list of cities and the distances between each pair of the cities, what is the shortest possible route that visits each city and returns to the origin city?">
 <meta name="author" content="Jian">
-<link rel="canonical" href="https://jianloong.github.io/posts/2019/tsp/">
+<link rel="canonical" href="https://jian.sh/posts/2019/tsp/">
 <meta name="google-site-verification" content="UA-55422968-1">
 <link href="http://fonts.cdnfonts.com/css/atkinson-hyperlegible" rel="stylesheet">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
@@ -76,13 +76,13 @@ if (!doNotTrack) {
 This post uses GA to generate a high-quality solution to the Traveling Salesman Problem.
 Traveling Salesman Problem using Genetic Algorithm This blog post is regarding using a genetic algorithm to solve the Traveling Salesman Problem. In a one-liner, the TSP asks the following question: Given a list of cities and the distances between each pair of the cities, what is the shortest possible route that visits each city and returns to the origin city?" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jianloong.github.io/posts/2019/tsp/" />
-<meta property="og:image" content="https://jianloong.github.io/images/tsp.png" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://jian.sh/posts/2019/tsp/" />
+<meta property="og:image" content="https://jian.sh/images/tsp.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-10-23T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-10-23T00:00:00+00:00" /><meta property="og:site_name" content="Jian" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://jianloong.github.io/images/tsp.png" />
+<meta name="twitter:image" content="https://jian.sh/images/tsp.png" />
 <meta name="twitter:title" content="Traveling Sales Person using Genetic Algorithms"/>
 <meta name="twitter:description" content="This post is best viewed using the light theme.
 This post uses GA to generate a high-quality solution to the Traveling Salesman Problem.
@@ -98,13 +98,13 @@ Traveling Salesman Problem using Genetic Algorithm This blog post is regarding u
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "https://jianloong.github.io/posts/"
+      "item": "https://jian.sh/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "Traveling Sales Person using Genetic Algorithms",
-      "item": "https://jianloong.github.io/posts/2019/tsp/"
+      "item": "https://jian.sh/posts/2019/tsp/"
     }
   ]
 }
@@ -122,7 +122,7 @@ Traveling Salesman Problem using Genetic Algorithm This blog post is regarding u
   "articleBody": "This post is best viewed using the light theme.\nThis post uses GA to generate a high-quality solution to the Traveling Salesman Problem.\nTraveling Salesman Problem using Genetic Algorithm This blog post is regarding using a genetic algorithm to solve the Traveling Salesman Problem. In a one-liner, the TSP asks the following question: Given a list of cities and the distances between each pair of the cities, what is the shortest possible route that visits each city and returns to the origin city?\"\nThe conditions in this scenario are that no point can be visited twice and it must return to the starting point. The selected starting point here is New York. (The starting point does not matter in this scenario.). There are times, that a point maybe the revisited more than once to achieve a better solution. The number of cities in this scenario is 13. In this specific implementation, it will never visit the same city twice.\nThe inspiration for this post is based on the google OR-Tools found here. This blog post; uses Genetic Algorithm to obtain the answer. It is implemented with a web worker which runs in the browser based on JavaScript.\nI will also reuse the genetic algorithm implementation written for another blog post however with different fitness functions and different cross-over methodologies.\nLocation Coordinates Shorthand New York 40, -74 A Los Angeles 34, -118 B Chicago 41, -87 C Minneapolis 44, -93 D Denver 39, -104 E Dallas 32,-96 F Seattle 47,-122 G Boston 42,-71 H San Francisco 37,-122 I St. Louis 38,-90 J Houston 29,-95 K Phoenix 33,-111 L Salt Lake City 40,-111 M Total number of cities - 13.\nFor the Genetic Algorithm to work, a distance matrix needs to be given to it. This distance matrix is based on the “Euclidean Distance” and not the road network distance. The distance matrix is obtained from here which has 13 cities in the United States.\nThe Genetic Algorithm Solution Cross Over Method Ordered\rPMX\rSelection Method Tournament\rRandom\rRank\rRoulette Wheel\rPlease click run to see the results based on different cross over and selection methods. You can repeat this for different methodologies\rRun\rIt can be observed that the selection method random tends to not give a good result as it would defeat the purpose of the GA algorithm. The current mutation rate of the GA is set to 0.2 for this purpose. The starting population size is set to 20.\rDue to the nature of GA, each run under the given settings will give a different solution as I have defaulted the number of generations to 500. This includes running with the same cross over methodology and selection methodology.\nThe fitness in general would depend on the cross over methodology. For example, if the roulette wheel methodology is used, it can be observed that the average fitness tends to spike more.\rThe suggested answer based on the Google OR tools is New York -\u003e Boston -\u003e Chicago -\u003e Minneapolis -\u003e Denver -\u003e Salt Lake City -\u003e Seattle -\u003e San Francisco -\u003e Los Angeles -\u003e Phoenix -\u003e Houston -\u003e Dallas -\u003e St Louis -\u003e New York which gives the total distance of 7293 miles which is also the minimal tour length.\nThe GA however does not obtain this solution. It does however, generate a high quality solution really quick.\nLessons from this post The earth is not flat! Mapping putting coordinates using latitude and longitude on a chart; would work in a different way so it displays beautifully. Latitude and longitude need to be swapped.\nMost chart APIs do not let you specify both the x-axis and y-axis at the same time. This is especially true if the chart is able to generate SVG diagrams. SVG diagrams are always nicer and would generally be more responsive at the end of the day.\nYou can use a series graph to draw lines from point to point in the chartist API. However, chartist API does not like the situation where there are two values on the same axis. (So it is not able to draw a straight line on the x-axis because of the nature of a series chart. An example of this is where there is a point on 30,55 and 30,65.\nThere are specific data sets in which people benchmark their TSP solutions.\nThe GA will downgrade into a random search if the mutation rate is too high. However, the mutation rate can always be changed to tailor to the specific use case.\n",
   "wordCount" : "752",
   "inLanguage": "en",
-  "image":"https://jianloong.github.io/images/tsp.png","datePublished": "2019-10-23T00:00:00Z",
+  "image":"https://jian.sh/images/tsp.png","datePublished": "2019-10-23T00:00:00Z",
   "dateModified": "2019-10-23T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -130,7 +130,7 @@ Traveling Salesman Problem using Genetic Algorithm This blog post is regarding u
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://jianloong.github.io/posts/2019/tsp/"
+    "@id": "https://jian.sh/posts/2019/tsp/"
   },
   "publisher": {
     "@type": "Organization",
@@ -159,7 +159,7 @@ Traveling Salesman Problem using Genetic Algorithm This blog post is regarding u
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://jianloong.github.io/" accesskey="h" title="Jian (Alt + H)">Jian</a>
+            <a href="https://jian.sh/" accesskey="h" title="Jian (Alt + H)">Jian</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -185,32 +185,32 @@ Traveling Salesman Problem using Genetic Algorithm This blog post is regarding u
         </div>
         <ul id="menu">
             <li>
-                <a href="https://jianloong.github.io/about/" title="about">
+                <a href="https://jian.sh/about/" title="about">
                     <span>about</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/projects/" title="projects">
+                <a href="https://jian.sh/projects/" title="projects">
                     <span>projects</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/search/" title="search (Alt &#43; /)" accesskey=/>
+                <a href="https://jian.sh/search/" title="search (Alt &#43; /)" accesskey=/>
                     <span>search</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/tags/" title="tags">
+                <a href="https://jian.sh/tags/" title="tags">
                     <span>tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/archives/" title="archives">
+                <a href="https://jian.sh/archives/" title="archives">
                     <span>archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://jianloong.github.io/contact/" title="contact">
+                <a href="https://jian.sh/contact/" title="contact">
                     <span>contact</span>
                 </a>
             </li>
@@ -221,7 +221,7 @@ Traveling Salesman Problem using Genetic Algorithm This blog post is regarding u
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://jianloong.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://jianloong.github.io/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://jian.sh/">Home</a>&nbsp;»&nbsp;<a href="https://jian.sh/posts/">Posts</a></div>
     <h1 class="post-title">
       Traveling Sales Person using Genetic Algorithms
     </h1>
@@ -694,18 +694,18 @@ table {
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://jianloong.github.io/tags/genetic-algorithm/">Genetic Algorithm</a></li>
-      <li><a href="https://jianloong.github.io/tags/selection/">Selection</a></li>
-      <li><a href="https://jianloong.github.io/tags/cross-over/">Cross Over</a></li>
-      <li><a href="https://jianloong.github.io/tags/tsp/">TSP</a></li>
+      <li><a href="https://jian.sh/tags/genetic-algorithm/">Genetic Algorithm</a></li>
+      <li><a href="https://jian.sh/tags/selection/">Selection</a></li>
+      <li><a href="https://jian.sh/tags/cross-over/">Cross Over</a></li>
+      <li><a href="https://jian.sh/tags/tsp/">TSP</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://jianloong.github.io/posts/2019/promiseall/">
+  <a class="prev" href="https://jian.sh/posts/2019/promiseall/">
     <span class="title">« Prev</span>
     <br>
     <span>JavaScript Promise All - Parsing Hackernews Stories using Promise.all</span>
   </a>
-  <a class="next" href="https://jianloong.github.io/posts/2019/simplegeneticalgo/">
+  <a class="next" href="https://jian.sh/posts/2019/simplegeneticalgo/">
     <span class="title">Next »</span>
     <br>
     <span>Genetic Algorithm using Web Workers</span>
@@ -717,7 +717,7 @@ table {
     </main>
     
 <footer class="footer">
-    <span>&copy; 2023 <a href="https://jianloong.github.io/">Jian</a></span>
+    <span>&copy; 2023 <a href="https://jian.sh/">Jian</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

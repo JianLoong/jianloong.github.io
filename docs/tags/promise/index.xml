@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Promise on Jian</title>
-    <link>https://jianloong.github.io/tags/promise/</link>
+    <link>https://jian.sh/tags/promise/</link>
     <description>Recent content in Promise on Jian</description>
     <image>
-      <url>https://jianloong.github.io/</url>
-      <link>https://jianloong.github.io/</link>
+      <url>https://jian.sh/</url>
+      <link>https://jian.sh/</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 25 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://jianloong.github.io/tags/promise/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 25 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://jian.sh/tags/promise/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>JavaScript Promise All - Parsing Hackernews Stories using Promise.all</title>
-      <link>https://jianloong.github.io/posts/2019/promiseall/</link>
+      <link>https://jian.sh/posts/2019/promiseall/</link>
       <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/posts/2019/promiseall/</guid>
+      <guid>https://jian.sh/posts/2019/promiseall/</guid>
       <description>This post is an entry to describe a use case when the Promise.all JavaScript method is needed. The official reference can be found here. This assumes that the reader has a basic understanding of how promises work.
 Before we start, there is a need to understand how certain RESTful services are structured. For example, the Hacker News API has an end-point called topstories. This end-point however, does not contain any other information besides a list of item IDs.</description>
     </item>

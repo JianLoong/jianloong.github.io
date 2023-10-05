@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Stable Diffusion on Jian</title>
-    <link>https://jianloong.github.io/tags/stable-diffusion/</link>
+    <link>https://jian.sh/tags/stable-diffusion/</link>
     <description>Recent content in Stable Diffusion on Jian</description>
     <image>
-      <url>https://jianloong.github.io/</url>
-      <link>https://jianloong.github.io/</link>
+      <url>https://jian.sh/</url>
+      <link>https://jian.sh/</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 21 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jianloong.github.io/tags/stable-diffusion/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 21 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jian.sh/tags/stable-diffusion/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Generating Anime &#34;Art&#34; with Stable Diffusion using the &#34;Waifu Diffusion&#34; Model</title>
-      <link>https://jianloong.github.io/posts/2022/stablediffusion/</link>
+      <link>https://jian.sh/posts/2022/stablediffusion/</link>
       <pubDate>Fri, 21 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jianloong.github.io/posts/2022/stablediffusion/</guid>
+      <guid>https://jian.sh/posts/2022/stablediffusion/</guid>
       <description>Recently, generating images with AI has gotten a lot of traction, so I decided to play around with it.
 It is easy to get it working as there is a web user interface fork of it on GitHub located here. Basically, it is working out of the box with minimal configuration needed.
 Instead of using the suggested model, I used the &amp;ldquo;Waifu Diffusion&amp;rdquo; model instead located here. Waifu diffusion is &amp;ldquo;a latent text-to-image diffusion model that has been conditioned on high-quality anime images through fine-tuning&amp;rdquo;.</description>
