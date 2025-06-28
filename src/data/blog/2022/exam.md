@@ -8,11 +8,7 @@ draft: false
 readingTime: 8
 tags:
   - education
-  - assessment
-  - marking
-  - university
-  - academic integrity
-  - quality assurance
+  - opinion
 description: "An in-depth look at university exam marking processes, ensuring fairness and consistency across large student cohorts through systematic quality control measures."
 
 ---

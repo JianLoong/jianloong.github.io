@@ -1,17 +1,13 @@
 ---
-title: "Finding Min and Max Values in Java Arrays: A Comprehensive Guide"
+title: "Finding Min and Max in Java Arrays: Five Approaches Compared"
 author: Jian Liew
-pubDatetime: 2019-11-06T00:00:00+11:00
-slug: java-array-min-max-comprehensive-guide
+pubDatetime: 2019-10-14T20:56:02+11:00
+slug: java-min-max-arrays
 featured: false
 draft: false
 readingTime: 5
 tags:
-  - java
-  - algorithms
-  - streams
-  - arrays
-  - performance
+  - tutorial
   - programming
 description: "Explore multiple approaches to find minimum and maximum values in Java arrays, from manual loops to modern stream operations and IntSummaryStatistics."
 

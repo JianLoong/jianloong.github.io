@@ -1,17 +1,14 @@
 ---
-title: "Web Scraping Reddit with Python: A Simple Approach"
+title: "Reddit Data Scraping with Python: A Simple Approach"
 author: Jian Liew
-pubDatetime: 2022-11-07T20:56:02+11:00
-slug: using-python-obtain-data-reddit
+pubDatetime: 2022-11-15T00:00:00+11:00
+slug: reddit-scraping
 featured: false
 draft: false
 readingTime: 5
 tags:
-  - reddit
-  - crawler
-  - python
-  - web scraping
-  - api
+  - tutorial
+  - tools
 description: "Learn how to scrape Reddit data using Python without API keys. This tutorial shows you how to fetch Reddit posts and comments using JSON endpoints."
 
 ---

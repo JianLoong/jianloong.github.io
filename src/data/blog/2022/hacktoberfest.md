@@ -6,13 +6,10 @@ slug: hacktoberfest-2022
 featured: false
 draft: false
 readingTime: 4
+projectImage: "wordcloud.png"
 tags:
-  - hacktoberfest
-  - open source
-  - javascript
-  - d3.js
-  - web development
-  - word cloud
+  - project
+  - data visualization
 description: "My Hacktoberfest 2022 project: building a word cloud generator to encourage open-source contributions and refresh my JavaScript skills."
 
 ---

@@ -1,18 +1,14 @@
 ---
-title: "Automating JPlag: Streamlining Code Similarity Detection for University Assignments"
+title: "Using JPlag for Automated Plagiarism Detection in Programming Assignments"
 author: Jian Liew
-pubDatetime: 2022-11-05T20:56:02+11:00
-slug: automating-jplag-code-similarity
+pubDatetime: 2022-09-15T00:00:00+11:00
+slug: using-jplag-plagiarism-detection
 featured: false
 draft: false
 readingTime: 6
 tags:
-  - jplag
-  - plagiarism detection
-  - automation
-  - shell scripting
   - education
-  - java
+  - tools
 description: "A comprehensive guide to automating JPlag processing for university programming assignments, including file extraction, cleaning, and similarity detection."
 
 ---

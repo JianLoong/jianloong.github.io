@@ -1,5 +1,5 @@
 export const SITE = {
-  website: "https://astro-paper.pages.dev/", // replace this with your deployed domain
+  website: "https://jian.sh/", // replace this with your deployed domain
   author: "Jian Loong Liew",
   profile: "https://jian.sh/",
   desc: "Personal blog of Jian Loong Liew - Software Engineer and Data Visualization enthusiast.",
@@ -14,7 +14,7 @@ export const SITE = {
   editPost: {
     enabled: false,
     text: "Edit page",
-    url: "https://github.com/satnaing/astro-paper/edit/main/",
+    url: "https://github.com/jianloong/jianloong.github.io/edit/main/",
   },
   dynamicOgImage: true,
   dir: "ltr", // "rtl" | "auto"

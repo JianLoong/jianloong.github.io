@@ -7,12 +7,8 @@ featured: false
 draft: false
 readingTime: 5
 tags:
-  - pihole
-  - raspberry pi
-  - linux
-  - networking
-  - ad blocking
-  - dns
+  - tutorial
+  - tools
 description: "A complete guide to setting up Pi-hole for network-level ad blocking using Raspberry Pi, including hardware setup, installation, and configuration."
 
 ---

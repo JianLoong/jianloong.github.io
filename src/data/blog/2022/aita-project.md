@@ -10,10 +10,6 @@ projectImage: "aitasite.png"
 tags:
   - project
   - data visualization
-  - d3.js
-  - javascript
-  - reddit
-  - api
 description: "Interactive data visualization exploring Reddit's 'Am I The Asshole' community patterns and trends using D3.js and the Reddit API."
 
 ---

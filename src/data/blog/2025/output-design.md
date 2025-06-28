@@ -7,12 +7,8 @@ featured: true
 draft: false
 readingTime: 8
 tags:
+  - software engineering
   - design patterns
-  - software architecture
-  - microservices
-  - integration
-  - external dependencies
-  - ai generated
 description: "Explore the Outpost Design Pattern - a powerful architectural approach for managing external dependencies, APIs, and third-party integrations in modern software systems"
 
 ---

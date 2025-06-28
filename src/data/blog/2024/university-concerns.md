@@ -8,10 +8,7 @@ draft: false
 readingTime: 8
 tags:
   - education
-  - university
-  - software engineering
-  - teaching
-  - academia
+  - opinion
 description: "A critical examination of modern university education, exploring issues with outdated materials, irresponsible staff, and the disconnect between academic theory and practical skills."
 
 ---

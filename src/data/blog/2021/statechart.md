@@ -7,11 +7,8 @@ featured: true
 draft: false
 readingTime: 8
 tags:
-  - UML
-  - statecharts
   - software engineering
-  - design
-  - modeling
+  - tutorial
 description: "A practical guide to UML Statecharts, walking through the iterative process of creating state diagrams for an e-commerce order system with real-world examples."
 
 ---

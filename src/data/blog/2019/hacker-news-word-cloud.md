@@ -7,11 +7,8 @@ featured: true
 draft: false
 readingTime: 8
 tags:
-  - hacker news
-  - visualization
-  - d3.js
-  - javascript
-  - api
+  - data visualization
+  - tutorial
 description: "See what's buzzing on Hacker News with a live word cloud, and learn how to build your own with D3.js and JavaScript."
 
 ---
