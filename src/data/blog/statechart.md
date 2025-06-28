@@ -1,5 +1,5 @@
 ---
-title: "UML Statecharts"
+title: "UML Statecharts: A Practical Guide to State Modeling"
 author: Jian Liew
 pubDatetime: 2021-10-24T00:00:00+11:00
 slug: uml-statecharts
@@ -12,35 +12,28 @@ tags:
   - software engineering
   - design
   - modeling
-description: "This post attempts to explain UML Statecharts as simple as possible, walking through the thought process of creating state diagrams for an e-commerce order system."
+description: "A practical guide to UML Statecharts, walking through the iterative process of creating state diagrams for an e-commerce order system with real-world examples."
 
 ---
 
-UML Diagrams are important. State charts are probably one of the more interesting diagrams.
+UML diagrams are essential tools in software engineering, and statecharts are among the most powerful for modeling system behavior. This post demonstrates my thought process while creating a state chart and explains why this modeling technique is invaluable.
 
-This post attempts to explain my train of thought while trying to make a state chart and why it is useful.
+## What Are Statecharts?
 
-### What are state charts?
+Statecharts model the behavior of a **single object** through its various states and transitions. While this might seem simple at first, statecharts reveal complex interactions that are often overlooked. Many resources confuse statecharts with activity diagrams, but they serve different purposes.
 
-Statecharts are just states, but more interestingly, it attempts to model a **single** object. It might seem simple at first but there is more to it. Most of the times, and even online resources confuse statechart and activity diagrams. 
+Let me walk you through creating a state chart using a familiar example: an `Order` object in an e-commerce system.
 
-Here is my take on attempting to draw a state chart.
+> **Note**: This post contains multiple diagrams that intentionally showcase the iterative thought process during construction. The early versions may be incomplete or incorrect—this demonstrates the beauty of modern iterative development. It's perfectly acceptable to create multiple iterations of a state chart to gain better understanding.
 
-Let's just take a very simple example of an ``Order`` object in an e-Commerce system. Something we all know quite well.
+## Starting Simple: Basic States
 
-If you are not interested in the thought process of drawing the state chart, just scroll down for the finished product.
+We begin by asking fundamental questions about the system:
 
-Asking the client who wants the system is a very important part of the process. We can start by asking things like
+- When a customer places an order, what happens? → `Placed` state
+- What happens if items are out of stock? → `Pending` state
 
-- When a customer places an order what happens? - ``Placed``
-- What happens if there is nothing in stock? - ``Pending``
-
-All these are just basic questions that can be asked, and we now have the very first few states. 
-
-
-Please note that this post consists of multiple diagrams that are intentionally drawn in such a way as to showcase the train of thought during its construction. 
-
-**So, it might be incorrect but is the beauty of the modern iterative process**. It is completely fine to attempt to do the state chart multiple times to gain a better understanding of the object in the system.
+These basic questions give us our initial states:
 
 <div class="mermaid" align="center" id="mermaid">
 stateDiagram-v2
@@ -49,14 +42,16 @@ stateDiagram-v2
     Pending --> [*]
 </div>
 
+## Understanding Transitions
 
-What we are interested in now, is <strong>how</strong> the object moves from one state to another, so we will continue to ask the client
+Now we focus on **how** the object moves between states. We continue asking the client questions:
 
-- What moves the order from the placed state to the pending state? So essentially, how does ``placed`` --> ``pending``?
-- When does the order move from ``placed`` to ``pending``? Is this automated? Where the system checks availability? Or does someone manually checks it?
-- Does the customer need to pay before it moves to ``pending``? 
-- All these are just some questions we need to ask, so we can slowly understand the requirements
-  
+- What triggers the transition from `Placed` to `Pending`?
+- Is this transition automated or manual?
+- Does payment need to occur before moving to `Pending`?
+
+These questions help us understand the requirements better:
+
 <div class="mermaid" align="center" id="mermaid">
 stateDiagram-v2
     [*] --> Placed
@@ -64,18 +59,17 @@ stateDiagram-v2
     Pending --> [*]
 </div>
 
+## Refining the Model
 
-Now we know one possible transition, but **wait**, we are not done. We need to continue asking the client questions, for example,
+But wait—we're not done yet. We need to consider edge cases and business rules:
 
-- What happens if the payment is not made?
-- Can an `order` stay placed forever?
-- If there is inventory management, what if the customer doesn't pay? Are the products still held?
-- So when does the deduction in the inventory happen? 
-- So, are you saying that the deduction in the inventory happens after the client makes a payment?
-- What happens if the payment fails?
-- Can a customer buy more than the items in stock?
+- What happens if payment fails?
+- Can an order remain in `Placed` state indefinitely?
+- How does inventory management work?
+- When does inventory deduction occur?
+- Can customers order more than available stock?
 
-Things like that are known to us because we are used to using such a system, so now we can go back to the state chart based on what we learnt from the client.
+Based on these considerations, we refine our model:
 
 <div class="mermaid" align="center" id="mermaid">
 stateDiagram-v2
@@ -84,11 +78,11 @@ stateDiagram-v2
     Pending --> [*]
 </div>
 
+## Questioning Assumptions
 
-Now we are at a stage, where we need to ask the clients more questions because, why would the ``placed`` state be needed in the first place? It seems to serve no purpose.
-Why not, the first state is ``pending``? And the only way for an order to be the ``pending`` state is when all the requirements are satisfied.
+At this stage, we should question our initial assumptions. Why do we need a `Placed` state at all? It seems to serve no clear purpose. Why not start directly with `Pending` when all requirements are satisfied?
 
-So, we just chuck away the ``placed`` state as it does nothing.
+Let's eliminate the unnecessary `Placed` state:
 
 <div class="mermaid" align="center" id="mermaid">
 stateDiagram-v2
@@ -101,11 +95,12 @@ stateDiagram-v2
     Pending --> [*]
 </div>
 
-We can now move on and ask more and more questions to the client.
+## Adding Business Rules
 
-So let's try some by looking at our statechart, 
-- Do you want to allow the customers to purchase a huge number of items? Or is there a limit?
-- What happens after ``pending``? Do you want to call it ``paid``? Or is there a different term?
+We continue refining by adding more business requirements:
+
+- Should there be purchase limits?
+- What happens after `Pending`? Do we call it `Paid`?
 
 <div class="mermaid" align="center" id="mermaid">
 stateDiagram-v2
@@ -125,16 +120,13 @@ stateDiagram-v2
     Paid --> [*]
 </div>
 
-Now we continue brainstorming of the events.
+## Considering Reverse Transitions
 
-Whenever we have two or more states, what we are interested in is **what events that could cause one state to become the other**?
+When we have multiple states, we must consider **what events could cause reverse transitions**:
 
-So for this situation, how does ``Paid`` --> ``Pending``. So back to the client we go...
-
-- What happens if the customer is unhappy after they have paid?
-- What happens if the item in the stock house is incorrect and it is not in stock?
-- Remember how we did not deduct the item at the ``pending`` state? **Oh wow, it might cause issues.**
-- Should we have a cancelled state? 
+- What happens if a customer is unhappy after payment?
+- What if inventory was incorrectly reported?
+- Should we allow transitions from `Paid` back to `Pending`?
 
 <div class="mermaid" align="center" id="mermaid">
 stateDiagram-v2
@@ -155,35 +147,28 @@ stateDiagram-v2
     Paid --> [*]
 </div>
 
-The more questions we ask, the more requirements and understanding of the system we will have. We know from this a few very important things
+## Key Insights from the Process
 
-For an order to move from ``start`` to ``pending``
-- items must be in stock
-- items must not exceed the limit set (1000 PlayStation5?)
-- items must not exceed stock
-- The **system will not deduct the item stock at this stage**
+Through this iterative questioning, we've discovered critical business rules:
 
-For the order to be moved from ``pending`` to ``paid``
-- payment must be made and successful
-- stock must be still in the system
-- the system will only now deduct the items
+**For transitions from `[*]` to `Pending`:**
+- Items must be in stock
+- Items must not exceed purchase limits
+- Items must not exceed available inventory
+- **System does NOT deduct inventory at this stage**
 
+**For transitions from `Pending` to `Paid`:**
+- Payment must be successful
+- Stock must still be available
+- **System deducts items only at this stage**
 
-Notice, that by going through the step-by-step process, we can now ask the client more questions for example
+## Adding the Cancelled State
 
-- When does the system deduct the item ordered by the user? **Does it do it before he pays or after he pays?**
-- If the system does it after he pays, there **might be times when other users, might be able to place an order but he cannot pay for it**, do you want that to happen?
-- If the system does it the minute after they place the order, **how long do you want the system to hold it before the stock is returned?**, what if the customer does not pay?
- Will this not be bad for business?
-- Does it make sense for it to go from ``paid`` to ``pending``?
+We continue asking questions to identify missing states:
 
-We are not done yet, though...............
-
-What about the ``cancelled`` state?
-
-We need to continue asking questions to the client because they know the system the best, and if you make too many assumptions things could go wrong.
-
-Let's put it in and try to complete the diagram.
+- What about order cancellation?
+- How long should orders remain pending?
+- What happens if products are discontinued?
 
 <div class="mermaid" align="center" id="mermaid">
 stateDiagram-v2
@@ -211,36 +196,48 @@ stateDiagram-v2
     end note
 </div>
 
-With that, we can see a bit more clearly what is happening and the limitations of our system.
+## System Behavior Explained
 
-### Explained
+In plain English, here's how our system works:
 
-In plain English. A customer can have an Order in the ``pending`` state. This happens when the customer places an order but does not pay for it. 
-- However, the system will automatically change the ``pending`` state to the ``cancelled`` state if the items are no longer in stock or a payment has not been made after a set duration.
-- The ``pending`` state can be the final state of the Order.
-- The stock numbers are only reduced after a customer has paid. This means that there is a potential for another customer to have an item at a ``pending`` state but the item will not be in stock. This customer might not be able to make a payment due to the nature of the system.
-- So this customer's order would potentially be left in the ``pending`` state.
-- A ``pending`` will be moved to the ``cancelled`` state if payment has not been made after a set period or it is cancelled as per customer request.
+- A customer can place an order, creating a `Pending` state
+- The system automatically transitions `Pending` to `Cancelled` if items become unavailable or payment isn't made within a time limit
+- `Pending` can be a final state
+- Inventory is only reduced after successful payment, which creates a potential race condition where customers might not be able to pay due to insufficient stock
+- Orders move to `Cancelled` if payment isn't made within the specified period or upon customer request
 
-But wait we still need to ask the client the question more questions
+## Unanswered Questions
 
-- What if a product is no longer available to be purchased? Meaning the product is no longer offered? Do you want to automatically cancel the order? Or do you want to leave it in the ``pending`` state?
-  
-Notice that by going through this process, we not only discover and understand more about the system. We are left with more questions than perhaps answers.
+This process reveals more questions than answers:
 
-We are far from done, as if we pry into the requirements more, we would discover more and more requirements and perhaps more so states, hence it is possible to have sub-states in UML State Chart diagrams but, I shall call the current state chart the first iteration. Will it ever be complete? It is never complete in a way, as requirements may change and we need to adapt to it.
+- What happens if a product is discontinued while an order is pending?
+- Should we automatically cancel such orders or leave them pending?
 
-**The state chart** above is no way complete but just something to start everything off.
+Notice how this iterative process not only helps us understand the system better but also uncovers requirements we hadn't considered initially.
 
+## The Iterative Nature
 
-### Conclusion
+We're far from complete. As we dig deeper into requirements, we might discover:
+- Sub-states within existing states
+- More complex transition conditions
+- Additional business rules
 
-State charts will allow us to understand the requirements better. Would we have to figure out these without the state chart? It is very possible indeed, but by going through the process of making a state chart, we now understand how the system works better.
+This is why state charts are never truly "complete"—requirements evolve, and our models must adapt.
 
-From a programming and technical standpoint, we can also now use **enums** better in our system as we now understand how each of them would happen. For the ``Order`` object, it is pretty clear to us, but most of the time we would be dealing with requirements and systems which are foreign to us.
+**The state chart above is not complete but serves as a solid foundation for further refinement.**
 
-The main lesson here is, **State Charts allows us to ask more questions regarding the requirements** and by doing so, we understand the system better.
+## Conclusion
 
-I hope this blog post is useful. I do personally find that with the aid of state charts, I could understand the system more, after all, it is part of the software engineering process.
+State charts enable us to understand requirements more deeply. While we could figure out these requirements without state charts, the modeling process forces us to ask critical questions and understand system behavior better.
+
+From a technical perspective, this understanding helps us:
+- Design better enums and state machines
+- Implement proper validation logic
+- Handle edge cases more effectively
+- Communicate system behavior to stakeholders
+
+The key lesson is that **state charts help us ask better questions about requirements**, leading to deeper system understanding and more robust implementations.
+
+State charts are an essential part of the software engineering process, helping us model complex behaviors in a clear, visual way that reveals hidden requirements and potential issues.
 
 

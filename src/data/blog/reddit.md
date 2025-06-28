@@ -1,9 +1,9 @@
 ---
-title: "Using Python to obtain data from Reddit"
+title: "Web Scraping Reddit with Python: A Simple Approach"
 author: Jian Liew
 pubDatetime: 2022-11-07T20:56:02+11:00
 slug: using-python-obtain-data-reddit
-featured: true
+featured: false
 draft: false
 readingTime: 5
 tags:
@@ -12,35 +12,40 @@ tags:
   - python
   - web scraping
   - api
-description: "Using Python & RedditAPI to make a simple crawler. Learn how to fetch Reddit data using JSON endpoints without requiring API keys."
+description: "Learn how to scrape Reddit data using Python without API keys. This tutorial shows you how to fetch Reddit posts and comments using JSON endpoints."
 
 ---
 
 ## Introduction
 
-As of March 2022, Reddit ranks as the 9th-most-visited website in the world and 6th most-visited website in the US according to Wikipedia.
+As of March 2022, Reddit ranks as the 9th-most-visited website globally and 6th most-visited in the US according to Wikipedia.
 
-What is interesting about Reddit is that it has ``subreddits`` for people with different interests. For example, there are subreddits on ``prorgramming``, ``technology`` or even about funny things at ``funny``.
+What makes Reddit particularly interesting is its community-driven structure with `subreddits` catering to diverse interests—from `programming` and `technology` to `funny` and countless other topics.
 
-There are a few approaches one can take to obtain data from Reddit. Here is one way to do it.
+There are several approaches to obtain data from Reddit. This post demonstrates one of the simplest methods that doesn't require API keys.
 
-### Basic method
+## The Basic Method: JSON Endpoints
 
-The easiest way to get information would just to be to issue a request to the exact same page but now with the ``.json`` extension. For example if you are after information from *https://www.reddit.com/r/programming* you can issue a request to *https://www.reddit.com/r/programming.json* for information to be retrieved in JSON format.
+The easiest way to extract Reddit data is to append `.json` to any Reddit URL. For example, instead of visiting `https://www.reddit.com/r/programming`, you can request `https://www.reddit.com/r/programming.json` to get the data in JSON format.
 
-This method is nice because it requires minimal setup and does not need an API key, however there might be limitations where you can potentially get rate limited.
+This approach has several advantages:
+- **No API key required**
+- **Minimal setup**
+- **Direct access to Reddit's data structure**
 
-The output of that would be as follows -
+However, be aware that you may encounter rate limiting with excessive requests.
+
+Here's what the JSON response looks like:
 
 <img src="/assets/reddit.png" alt="Output of crawler" style="height: 300px; width: auto; display: block; margin: 0 auto;">
 
-<p align="center">Fig 1. Output JSON from a simple request using the <strong>.json</strong> extension </p>
+<p align="center">Figure 1: JSON output from a simple request using the <strong>.json</strong> extension</p>
 
+## Building a Python Scraper
 
-With that knowledge we can write a simple ``python`` script to do it. It doesn't really matter what language we use for this scenario, but ``python`` would be one of the fastest, of course you could also write a simple fetch on JavaScript.
+With this knowledge, we can create a Python script to automate the data extraction. While you could use any language, Python is particularly well-suited for this task due to its excellent HTTP libraries and JSON handling.
 
-The ``python`` codes below will showcase how it is done.
-
+Here's a complete implementation:
 
 ```python
 import json
@@ -49,9 +54,8 @@ import requests
 REDDIT_URL: str = "https://www.reddit.com/r/programming.json?limit=100"
 
 def process():
-
-    # Create header to spoof browser
-    header = {
+    # Create headers to mimic a real browser
+    headers = {
         "Connection": "keep-alive",
         "Upgrade-Insecure-Requests": "1",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36",
@@ -65,54 +69,52 @@ def process():
         "Accept-Language": "en-US,en;q=0.9"
     }
 
-    r = requests.Session()
-    r.headers = header
+    # Create a session with our headers
+    session = requests.Session()
+    session.headers = headers
+    
     try:
-        response = r.get(REDDIT_URL)
-    except:
-        exit(1)
+        response = session.get(REDDIT_URL)
+        response.raise_for_status()  # Raise an exception for bad status codes
+    except requests.RequestException as e:
+        print(f"Error fetching data: {e}")
+        return
 
-    # Get the results of the request - posts is a array of JSON.
-    # Notice here we are accessing the data -> children
+    # Extract posts from the JSON response
+    # The structure is: response.json()['data']['children']
     posts = response.json()['data']['children']
     results = []
+    urls = []  # We'll use these later to fetch comments
 
-    # We will use this urls later to get the comments.
-    urls = []
-
-    index = 1
-    for post in posts:
-        print(str(index) + " out of " + str(len(posts)))
-        index = index + 1
-        title = post['data']['title']
-        permalink = post['data']['permalink']
-        name = post['data']['name']
-        created = post['data']['created_utc']
-        selftext = post['data']['selftext']
-
-        result = {
-          "title": title,
-          "permalink": permalink,
-          "name": name,
-          "created": created,
-          "selftext": selftext
-        }
-
-        urls.append("https://www.reddit.com" + permalink + ".json")
+    print(f"Processing {len(posts)} posts...")
+    
+    for index, post in enumerate(posts, 1):
+        print(f"Processing post {index} of {len(posts)}")
         
+        post_data = post['data']
+        result = {
+            "title": post_data['title'],
+            "permalink": post_data['permalink'],
+            "name": post_data['name'],
+            "created": post_data['created_utc'],
+            "selftext": post_data['selftext']
+        }
+        
+        # Build URL for fetching comments later
+        comment_url = f"https://www.reddit.com{post_data['permalink']}.json"
+        urls.append(comment_url)
         results.append(result)
 
     print(json.dumps(results, indent=4))
+    return results, urls
 
 if __name__ == "__main__":
     process()
-    exit(0)
 ```
 
+## Sample Output
 
-If you run it, you would be able to get a list of post from that subreddit, however often times we are interested in the content of the post themselves, so we can actually issue more request for it.
-
-For example, if you limit the post to 1 below would be an example output of it. You can also determine how much information you would like from it.
+When you run this script, you'll get output like this:
 
 ```json
 [
@@ -126,84 +128,97 @@ For example, if you limit the post to 1 below would be an example output of it. 
 ]
 ```
 
-Besides that, the main listing would also return hyperlinks to the post in which you can query to obtain results from them as well. These fields are indicated with the ``permalink`` entries for the post. So you can build up a list of them a perform more request for it. 
+## Fetching Comments
 
-The following are the extension of the above codes. It is much faster for this to be done in an async manner, since we have multiple URLs. So, using a FutureSession would be much better for this implementation.
+The main listing provides permalinks to individual posts. You can use these to fetch comments by making additional requests. Here's how to extend the script to fetch comments asynchronously:
 
 ```python
-    with FuturesSession(max_workers=30) as session:
-        session.headers = header
-        futures = [session.get(url) for url in urls]
-        for future in as_completed(futures):
-            replies_response = future.result()
-            temp = replies_response.json()[0]["data"]["children"][0]["data"]["title"]
-            print(temp)
-            _replies_arr = replies_response.json()[1]
-            replies = []
-            for reply in _replies_arr['data']['children']:
-                _body = reply['data']['body']
-                replies.append(_body)
-                
-            submission = {
-                "title": temp,
-                "reply": replies
-            }
-            submissions.append(submission)
-            
-    print(json.dumps(submissions, indent=4))
+from requests_futures.sessions import FuturesSession
+from concurrent.futures import as_completed
 
+def fetch_comments(urls, headers):
+    submissions = []
+    
+    with FuturesSession(max_workers=30) as session:
+        session.headers = headers
+        futures = [session.get(url) for url in urls]
+        
+        for future in as_completed(futures):
+            try:
+                response = future.result()
+                response.raise_for_status()
+                
+                # Extract post title
+                post_data = response.json()[0]["data"]["children"][0]["data"]
+                title = post_data["title"]
+                
+                # Extract comments
+                comments_data = response.json()[1]["data"]["children"]
+                replies = []
+                
+                for comment in comments_data:
+                    if comment["kind"] == "t1":  # Regular comment
+                        body = comment["data"]["body"]
+                        replies.append(body)
+                
+                submission = {
+                    "title": title,
+                    "replies": replies
+                }
+                submissions.append(submission)
+                
+            except Exception as e:
+                print(f"Error processing comment: {e}")
+                continue
+    
+    return submissions
 ```
 
-The output would be
+## Sample Comment Output
+
+Here's what the comment data looks like:
 
 ```json
 [
     {
         "title": "NVIDIA Security Team: \"What if we just stopped using C?\" (This is not about Rust)",
-        "reply": [
-            "That's pretty cool.\n\nThough I find it fascinating they didn't go for the low-hanging fruit of the way they do UI&lt;-&gt;driver interactions and how many layers of vulnerabilities come from that, nevermind how \"heavyweight\" it all is.\n\nBut as far as the backend goes, that's a damn cool change, especially that it was accepted so well.",
-            "&gt; What if we just stopped using C?\n\n&gt; #504 Gateway Time-out\n\nis this some elaborate shitpost that is flying over my head?",            "&gt; I encourage everyone to read the full case study\n\nOk, I will!\n\n&gt; **Sign up to Access Now**\n\nOk, bye!",
+        "replies": [
+            "That's pretty cool.\n\nThough I find it fascinating they didn't go for the low-hanging fruit of the way they do UI<->driver interactions and how many layers of vulnerabilities come from that, nevermind how \"heavyweight\" it all is.\n\nBut as far as the backend goes, that's a damn cool change, especially that it was accepted so well.",
+            "> What if we just stopped using C?\n\n> #504 Gateway Time-out\n\nis this some elaborate shitpost that is flying over my head?",
             "I think reddit hugged it to death.",
-            "For those mentioning Rust. Nvidia do know about Rust, just in case you thought that they hadn't heard all about it. Some considerations like lacking integer overflow protection is talked about here.\n\nhttps://youtu.be/TcIaZ9LW1WE\n\nOn a personal note. I love Adas readability. 
-Some see readbility as meaning brevity. I do not.",
-            "tf is spark",
-            "&gt; (This is not about Rust)\n\nWell, no.  It's really about Ada; actually a formally verifiable subset of it, which is a language programmers eschewed a long time ago because... reasons?  It has nearly (or all?) of the same advantages of Rust, but somehow Rust became more popular.  I don't understand why we needed Rust when Ada was there all along.   \n\nSo, I went looking for an example.  And here it is:\n\nhttps://blog.adacore.com/i-cant-believe-that-i-can-prove-that-it-can-sort\n\nBasically, this is just a SPARK example to write a verifiable sorting algorithm 
-in Ada SPARK.  FWIW - That sorting algorithm is very cool too and dead simple by itself.  Like it makes falling out of bed look complicated; that 
-kind of simple.\n\nAnyway, now I know why we haven't been using this stuff so far:  It's far too complicated for most of us to use in daily practice.  Most of us aren't going to be writing core SDKs or drivers used by millions of users though either, so that's fair.  But, if must write software that MUST be provable correct, then this is your go-to.  Or maybe Rust if you must write software that's probably correct because at least it 
-avoids most of the sins of C, then use that.  You decide.\n\nOh... and here's the Spark sub-reddit:  https://www.reddit.com/r/spark/",
-            "I actually prefer reading and writing Ada to Go. Which is saying something for a language with low level memory control.",
-            "I like how cautious the title is lol\n\nPretty sad you have to preface stuff like this to avoid assholes raiding the comments though.",
-            "I worked for a company doing safety related code and the crusty old tech lead told me once \"We should be doing this in ADA but we can't find enough developers\".",
-            "I just wish Spark Pro wasn't privately priced. I bet its in the hundreds of thousands of dollars per license.",
-            "Interestingly, this is an Ada-based system. See [https://en.wikipedia.org/wiki/SPARK\\_(programming\\_language)](https://en.wikipedia.org/wiki/SPARK_(programming_language)) \n\nIf you Google \"SPARK\" it's easy to get tangled up in Apache Spark, which this is not.\n\nI would have described Ada as a quaint, long-abandoned attempt at a programming language by DoD. Interesting that it's still around at all, much less possibly gaining usage.",
-            "I only care about C because of x86-based tools like Valgrind, VTune, IDA Pro and basic portability between GPU and CPU.",
-            "I am really tired after work today and at the same time I thought it sounded very interesting. I just can't focus. Did they just use 
-Spark and it was as fast as C?",
-            "It would be \"NVIDIA Se urity team\", then.",
-            "I briefly worked with Ada, GNAT Pro, and Code Peer in the rail industry. It was a fantastic experience, but it was all green field.\n\nI won't comment about Rust negativity, but I will just say that Ada deserves much more attention and respect from safety-minded developers than 
-it receives today.",
-            "The only comment on the blog post is another Rust-troll.",
-            "Stop trying to make Ada happen",
-            "https://i.redd.it/9oez8zkg1qc01.png",
-            "WHAT DO YOU MEAN IT'S NOT ABOUT RUST, RUST IS BETTER C AND C++!!!1!! SWITCH TO RUST OR I WILL SEGFAULT YOUR ENTIRE COMPANY \ud83e\udd2c\ud83d\udc79",
-            "&gt; \u201cTesting security is pretty much impossible. It\u2019s hard to know if you\u2019re ever done,\u201d said Daniel Rohrer, VP 
-of Software Security at NVIDIA.\n\nA) no, it's not.\n\nB) you're never done.\n\nThis is coming from the VP of Software Security? Who made him VP? 
-A dozen monkeys with typewriters?",
-            "However, Ada is very large and takes a long time to study even in its features.\n\nFurthermore a lot of the things we do by convention in C programs have specific Ada features just for that, so rather than applying the corresponding language primitives (which is generally painful) one hits the annotated language reference a dozen times until the knowledge sticks. On top of all that there's conventions particular to Ada, which are mysterious and powerful.",
-            "Long story short they are using spark (never heard about it before) language. It\u2019s already deployed for them, and did nit really see any difference in terms of performance, aka a pretty big reason to use C/C++ on new shit today.",
-            "What about Pascal ? Nothing is more readable?",
-            "Amazing that industry finally starts using formal theorem provers.",
-            "They used fucking ADA?!?! These guys are built different",
-            "[removed]"
+            "For those mentioning Rust. Nvidia do know about Rust, just in case you thought that they hadn't heard all about it. Some considerations like lacking integer overflow protection is talked about here.\n\nhttps://youtu.be/TcIaZ9LW1WE\n\nOn a personal note. I love Ada's readability. Some see readability as meaning brevity. I do not."
         ]
     }
 ]
 ```
 
-### Conclusion
+## Important Considerations
 
-The gist of the code can be found [here](https://gist.github.com/JianLoong/e8a92c7352e3b3276e17a060231e4432)
+### Rate Limiting
+This method doesn't require an API key, but Reddit may rate-limit you if you make too many requests too quickly. Consider:
+- Adding delays between requests
+- Using fewer concurrent workers
+- Respecting Reddit's robots.txt
 
-If you are planning on saving the data, there are better ways to engineer the solution by inserting the information into a database and also preventing duplicated entries and updating them as well, but this method is sufficient enough for basic needs.
+### Data Storage
+For production use, consider:
+- Storing data in a database
+- Implementing duplicate detection
+- Adding data validation
+- Creating update mechanisms
 
-This is probably the easiest way to obtain data from reddit. You can obviously tailor the codes to the output or information you would like. The main advantage of using this method is that you do not need an API key however, there is a high chance you will get rated-limited if you are issuing too many request. Please be warned.
+### Legal and Ethical Considerations
+- Always respect Reddit's Terms of Service
+- Don't overload their servers
+- Consider the privacy implications of scraping
+- Use the data responsibly
+
+## Complete Implementation
+
+You can find the complete, production-ready implementation in this [GitHub Gist](https://gist.github.com/JianLoong/e8a92c7352e3b3276e17a060231e4432).
+
+## Conclusion
+
+This method provides the simplest way to extract Reddit data without requiring API keys. While suitable for basic needs and learning purposes, consider using Reddit's official API for production applications that require reliability and higher rate limits.
+
+Remember to be respectful of Reddit's resources and always follow their terms of service when scraping data.
