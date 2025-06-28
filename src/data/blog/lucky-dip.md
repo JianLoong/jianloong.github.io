@@ -1,0 +1,285 @@
+---
+title: "Lucky Dip Machine: Singleton and Observer Patterns in Action"
+author: Jian Liew
+pubDatetime: 2019-11-03T20:56:02+11:00
+slug: lucky-dip-machine
+featured: true
+draft: false
+readingTime: 6
+tags:
+  - design patterns
+  - singleton
+  - observer
+  - java
+  - programming
+description: "Learn how to implement Singleton and Observer design patterns through a practical Lucky Dip Machine example in Java."
+
+---
+
+This blog post demonstrates a practical use case where the **Singleton** and **Observer** design patterns become important in real-world applications.
+
+## The Problem: Arcade Lucky Dip Machine
+
+Imagine you're in an arcade with a Lucky Dip Machine. This machine has a limited inventory of prizes, and multiple people can use it throughout the day. Here are the key requirements:
+
+- There can be **only one** Lucky Dip Machine in the entire arcade (Singleton pattern)
+- Everyone in the arcade can **observe** when the machine is used and what prizes are won (Observer pattern)
+- The machine tracks inventory and prevents overuse
+
+## Design Overview
+
+```
+┌────────────────────────────────────────────────────────┐
+│              LUCKY DIP MACHINE SYSTEM                  │
+├────────────────────────────────────────────────────────┤
+│                                                        │
+│  ┌─────────────┐    ┌─────────────────────────────┐    │
+│  │   User      │──> │    LuckyDipMachine          │    │
+│  │   (Client)  │    │    (Singleton)              │    │
+│  └─────────────┘    │  • Private constructor      │    │
+│                     │  • Static instance          │    │
+│                     │  • Inventory management     │    │
+│                     └─────────────────────────────┘    │
+│                              │                         │
+│                              ▼                         │
+│                     ┌─────────────┐                    │
+│                     │  Observers  │                    │
+│                     │  • Track    │                    │
+│                     │  • Notify   │                    │
+│                     └─────────────┘                    │
+│                                                        │
+└────────────────────────────────────────────────────────┘
+```
+
+## Implementation
+
+### 1. The Prize Class
+
+First, let's create a simple Prize class to represent the items in our machine:
+
+```java
+package me.jianliew;
+
+public class Prize {
+    private String name;
+
+    public Prize(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Prize prize = (Prize) o;
+        return getName().equals(prize.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return getName().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "Prize{name='" + name + "'}";
+    }
+}
+```
+
+### 2. The LuckyDipMachine (Singleton + Observable)
+
+This is where the magic happens. Our LuckyDipMachine implements both patterns:
+
+```java
+package me.jianliew;
+
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.util.*;
+
+public class LuckyDipMachine {
+    // Singleton: Static instance
+    private static LuckyDipMachine ourInstance = new LuckyDipMachine();
+    
+    // Observer: PropertyChangeSupport for notifications
+    private PropertyChangeSupport support;
+    
+    // Inventory management
+    private Map<Prize, Integer> inventory;
+
+    // Singleton: Private constructor
+    private LuckyDipMachine() {
+        inventory = new HashMap<>();
+        support = new PropertyChangeSupport(this);
+        fill();
+    }
+
+    // Singleton: Public access method
+    public static LuckyDipMachine getInstance() {
+        return ourInstance;
+    }
+
+    private void fill() {
+        Prize p1 = new Prize("Potato");
+        Prize p2 = new Prize("Tomato");
+        inventory.put(p1, 2);
+        inventory.put(p2, 2);
+    }
+
+    public Prize getRandomPrize() {
+        List<Prize> keysAsArray = new ArrayList<>(inventory.keySet());
+        Random r = new Random();
+        return keysAsArray.get(r.nextInt(keysAsArray.size()));
+    }
+
+    public void pull() {
+        if (inventory.isEmpty()) return;
+        
+        Prize p = getRandomPrize();
+        inventory.computeIfPresent(p, (prize, integer) -> inventory.get(prize) - 1);
+
+        if (inventory.get(p) == 0) {
+            inventory.remove(p);
+        }
+        
+        // Observer: Notify all listeners
+        support.firePropertyChange("prize", "", p);
+    }
+
+    public int getInventorySize() {
+        return inventory.values().stream().mapToInt(Integer::intValue).sum();
+    }
+
+    // Observer: Add/remove listeners
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        support.addPropertyChangeListener(pcl);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+        support.removePropertyChangeListener(pcl);
+    }
+
+    @Override
+    public String toString() {
+        return "LuckyDipMachine{inventory=" + inventory + "}";
+    }
+}
+```
+
+### 3. The Observer
+
+Our Observer implements PropertyChangeListener to receive notifications:
+
+```java
+package me.jianliew;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Observer implements PropertyChangeListener {
+    private List<Prize> observedPrizes;
+
+    public Observer() {
+        observedPrizes = new ArrayList<>();
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+        Prize p = (Prize) propertyChangeEvent.getNewValue();
+        this.observedPrizes.add(p);
+        System.out.println(toString());
+    }
+    
+    @Override
+    public String toString() {
+        return "Observer{observedPrizes=" + observedPrizes + "}";
+    }
+}
+```
+
+### 4. Testing the System
+
+Here's how to test our implementation:
+
+```java
+package me.jianliew;
+
+public class Test {
+    public static void main(String[] args) {
+        Observer o = new Observer();
+        LuckyDipMachine ldm = LuckyDipMachine.getInstance();
+        ldm.addPropertyChangeListener(o);
+        
+        System.out.println("Initial inventory: " + ldm.getInventorySize());
+        
+        ldm.pull();
+        ldm.pull();
+        ldm.pull();
+        
+        // Prove it's a singleton
+        LuckyDipMachine ldm2 = LuckyDipMachine.getInstance();
+        System.out.println("After 3 pulls: " + ldm2.getInventorySize());
+        
+        ldm2.pull();
+        System.out.println("Final inventory: " + ldm.getInventorySize());
+    }
+}
+```
+
+## Expected Output
+
+```
+Initial inventory: 4
+
+Observer{observedPrizes=[Prize{name='Tomato'}]}
+Observer{observedPrizes=[Prize{name='Tomato'}, Prize{name='Potato'}]}
+Observer{observedPrizes=[Prize{name='Tomato'}, Prize{name='Potato'}, Prize{name='Tomato'}]}
+
+After 3 pulls: 1
+
+Observer{observedPrizes=[Prize{name='Tomato'}, Prize{name='Potato'}, Prize{name='Tomato'}, Prize{name='Potato'}]}
+
+Final inventory: 0
+```
+
+## Key Design Pattern Benefits
+
+### Singleton Pattern
+- **Guarantees single instance**: No matter how many times you call `getInstance()`, you get the same machine
+- **Global access point**: Easy to access from anywhere in the application
+- **Controlled instantiation**: The constructor is private, preventing external instantiation
+
+### Observer Pattern
+- **Loose coupling**: The machine doesn't need to know about specific observers
+- **Dynamic subscription**: Observers can be added/removed at runtime
+- **Automatic notifications**: All registered observers are automatically notified of changes
+
+## Lessons Learned
+
+1. **Always override equals() and hashCode()** when using objects in collections like HashMap
+2. **PropertyChangeSupport** is much easier to use than the Observable interface
+3. **computeIfPresent()** provides elegant lambda-based map updates
+4. **Singleton pattern** has multiple implementation approaches - this is the simplest but not thread-safe
+5. **Design is subjective** - you could debate whether quantity belongs in the Prize class itself
+
+## When to Use These Patterns
+
+- **Singleton**: When you need exactly one instance of a class (database connections, configuration managers, logging systems)
+- **Observer**: When you need to notify multiple objects about state changes (event systems, model-view architectures, notification systems)
+
+This Lucky Dip Machine example shows how these patterns work together to create a robust, maintainable system that's easy to understand and extend.
+
+---
+
+*The Singleton pattern ensures there's only one machine, while the Observer pattern lets everyone know when someone wins a prize. Together, they create a system that's both controlled and informative.*

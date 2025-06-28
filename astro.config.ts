@@ -13,14 +13,16 @@ import { SITE } from "./src/config";
 
 
 
+import expressiveCode from "astro-expressive-code";
+
+
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
-  integrations: [
-    sitemap({
-      filter: page => SITE.showArchives || !page.endsWith("/archives"),
-    }),
-  ],
+  integrations: [sitemap({
+    filter: page => SITE.showArchives || !page.endsWith("/archives"),
+  }), expressiveCode()],
   markdown: {
     remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
     shikiConfig: {
