@@ -3,7 +3,7 @@ title: "Automating JPlag: Streamlining Code Similarity Detection for University 
 author: Jian Liew
 pubDatetime: 2022-11-05T20:56:02+11:00
 slug: automating-jplag-code-similarity
-featured: true
+featured: false
 draft: false
 readingTime: 6
 tags:
@@ -19,7 +19,7 @@ description: "A comprehensive guide to automating JPlag processing for universit
 
 ## Background: Teaching Programming at University Level
 
-FIT9131 (Introduction to Programming) was a challenging unit taught at the Masters level for the Master of Information Technology course at Monash University. As a teaching team member until 2019, I witnessed firsthand the struggles students faced with this demanding course.
+FIT9131 (Introduction to Programming) was a challenging unit taught at the Masters level for the Master of Information Technology course at Monash University. As a teaching team member until 2019, I witnessed firsthand the struggles students faced with this demanding course. This was done for multiple semesters over several years.
 
 The unit's reputation for difficulty was so well-known that external services began targeting students. Here's an advertisement I once found in a university bathroom:
 

@@ -1,0 +1,95 @@
+---
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Layout from "@/layouts/Layout.astro";
+import { SITE } from "@/config";
+import { getCollection } from "astro:content";
+import getProjectPosts from "@/utils/getProjectPosts";
+import { getPath } from "@/utils/getPath";
+import { slugifyStr } from "@/utils/slugify";
+
+// Get all blog posts and filter for projects
+const posts = await getCollection("blog");
+const projectPosts = getProjectPosts(posts);
+
+// Debug: Log all posts and project posts
+console.log("Total posts found:", posts.length);
+console.log("Project posts found:", projectPosts.length);
+
+// Log all posts with their tags to see which ones have "project" tag
+posts.forEach(post => {
+  if (post.data.tags.includes("project")) {
+    console.log("Found project post:", post.data.title, "projectImage:", post.data.projectImage, "draft:", post.data.draft);
+  }
+});
+---
+
+<Layout title={`Projects | ${SITE.title}`}>
+  <Header />
+  <Breadcrumb />
+  <main
+    id="main-content"
+    class="mx-auto w-full max-w-app px-4 pb-12"
+  >
+    <h1 class="inline-block text-2xl font-bold text-accent sm:text-3xl">
+      Projects
+    </h1>
+    <p class="text-lg mt-4">
+      A collection of my technical projects, experiments, and contributions to the developer community.
+    </p>
+
+    <div class="mt-8">
+      {projectPosts.length > 0 ? (
+        <div class="space-y-8">
+          {projectPosts.map((post) => {
+            // Use projectImage field for project images
+            const imageSrc = post.data.projectImage 
+              ? `/assets/${post.data.projectImage}`
+              : '/assets/image.jpg'; // Default fallback
+            
+            return (
+              <article class="group border border-border rounded-lg overflow-hidden hover:border-accent transition-colors">
+                <div class="aspect-video bg-muted overflow-hidden">
+                  <img 
+                    src={imageSrc}
+                    alt={`${post.data.title} project screenshot`}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    onerror="this.src='/assets/image.jpg'"
+                  />
+                </div>
+                <div class="p-6">
+                  <a
+                    href={getPath(post.id, post.filePath)}
+                    class="inline-block text-lg font-medium text-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
+                    style={{ viewTransitionName: slugifyStr(post.data.title) }}
+                  >
+                    <h2 class="text-lg font-medium decoration-dashed hover:underline">
+                      {post.data.title}
+                    </h2>
+                  </a>
+                  <p class="mt-3">{post.data.description}</p>
+                  <div class="mt-4 flex flex-wrap gap-2">
+                    {post.data.tags
+                      .filter(tag => tag !== "project")
+                      .map(tag => (
+                        <span class="px-2 py-1 bg-accent/10 text-accent text-sm rounded">
+                          {tag}
+                        </span>
+                      ))}
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      ) : (
+        <div class="text-center py-12">
+          <p class="text-lg">No projects found. Check back soon for new projects!</p>
+        </div>
+      )}
+    </div>
+  </main>
+  <Footer />
+</Layout> 

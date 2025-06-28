@@ -3,7 +3,7 @@ title: "Hacker News Word Cloud: Visualizing What's Trending"
 author: Jian Liew
 pubDatetime: 2019-10-14T20:56:02+11:00
 slug: hacker-news-word-cloud
-featured: false
+featured: true
 draft: false
 readingTime: 8
 tags:

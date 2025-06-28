@@ -3,7 +3,7 @@ title: "Design Patterns in Practice: Singleton and Observer with a Lucky Dip Mac
 author: Jian Liew
 pubDatetime: 2019-11-03T20:56:02+11:00
 slug: lucky-dip-machine
-featured: true
+featured: false
 draft: false
 readingTime: 6
 tags:
