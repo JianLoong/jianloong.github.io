@@ -5,6 +5,7 @@ pubDatetime: 2025-06-28T20:56:02+11:00
 slug: outpost
 featured: true
 draft: false
+readingTime: 8
 tags:
   - design patterns
   - software architecture

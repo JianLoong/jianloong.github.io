@@ -5,7 +5,7 @@ title: "About"
 
 # Jian Loong Liew
 
-Hello! I'm Jian Loong Liew, a Senior Software Engineer at Xero with over 8 years of experience in software development. I specialize in building scalable web applications and have a passion for data visualization and modern web technologies.
+Hello! I'm Jian Loong Liew.
 
 ## About Me
 
@@ -51,4 +51,3 @@ I'm always interested in connecting with fellow developers and technology enthus
 
 *This blog is built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/), featuring a clean, minimal design that focuses on content and readability.*
 
-*Last updated: January 2024*

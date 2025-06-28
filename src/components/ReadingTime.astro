@@ -1,0 +1,45 @@
+---
+import { calculateReadingTime, formatReadingTime } from "@/utils/readingTime";
+
+export interface Props {
+  content: string;
+  class?: string;
+  size?: "sm" | "lg";
+  readingTime?: number; // Manual reading time in minutes
+}
+
+const { content, size = "sm", class: className = "", readingTime } = Astro.props;
+
+// Use manual reading time if provided, otherwise calculate automatically
+const readingTimeMinutes = readingTime || calculateReadingTime(content);
+const readingTimeText = formatReadingTime(readingTimeMinutes);
+---
+
+<span class:list={[
+  "flex items-center gap-x-1 opacity-80",
+  className
+]}>
+  <svg
+    class:list={[
+      "inline-block size-4 min-w-[1rem]",
+      { "scale-90": size === "sm" }
+    ]}
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+    />
+  </svg>
+  <span class:list={[
+    "text-sm",
+    { "sm:text-base": size === "lg" }
+  ]}>
+    {readingTimeText}
+  </span>
+</span> 
