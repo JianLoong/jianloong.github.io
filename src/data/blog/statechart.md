@@ -16,15 +16,17 @@ description: "A practical guide to UML Statecharts, walking through the iterativ
 
 ---
 
-UML diagrams are essential tools in software engineering, and statecharts are among the most powerful for modeling system behavior. This post demonstrates my thought process while creating a state chart and explains why this modeling technique is invaluable.
+UML diagrams are essential tools in software engineering, and statecharts are among the most powerful for modeling system behavior. This post demonstrates my thought process while creating a statechart and explains why this modeling technique is invaluable.
+
+I posted this here because I completely disagree with how statecharts are taught in FIT5136 - Software Engineering at Monash University. The main justification is that the teaching team does not understand the difference between the usage of statecharts versus activity diagrams.
 
 ## What Are Statecharts?
 
 Statecharts model the behavior of a **single object** through its various states and transitions. While this might seem simple at first, statecharts reveal complex interactions that are often overlooked. Many resources confuse statecharts with activity diagrams, but they serve different purposes.
 
-Let me walk you through creating a state chart using a familiar example: an `Order` object in an e-commerce system.
+Let me walk you through creating a statechart using a familiar example: an `Order` object in an e-commerce system.
 
-> **Note**: This post contains multiple diagrams that intentionally showcase the iterative thought process during construction. The early versions may be incomplete or incorrect—this demonstrates the beauty of modern iterative development. It's perfectly acceptable to create multiple iterations of a state chart to gain better understanding.
+> **Note**: This post contains multiple diagrams that intentionally showcase the iterative thought process during construction. The early versions may be incomplete or incorrect—this demonstrates the beauty of modern iterative development. It's perfectly acceptable to create multiple iterations of a statechart to gain better understanding.
 
 ## Starting Simple: Basic States
 
@@ -222,13 +224,13 @@ We're far from complete. As we dig deeper into requirements, we might discover:
 - More complex transition conditions
 - Additional business rules
 
-This is why state charts are never truly "complete"—requirements evolve, and our models must adapt.
+This is why statecharts are never truly "complete"—requirements evolve, and our models must adapt.
 
-**The state chart above is not complete but serves as a solid foundation for further refinement.**
+**The statechart above is not complete but serves as a solid foundation for further refinement.**
 
 ## Conclusion
 
-State charts enable us to understand requirements more deeply. While we could figure out these requirements without state charts, the modeling process forces us to ask critical questions and understand system behavior better.
+Statecharts enable us to understand requirements more deeply. While we could figure out these requirements without statecharts, the modeling process forces us to ask critical questions and understand system behavior better.
 
 From a technical perspective, this understanding helps us:
 - Design better enums and state machines
@@ -236,8 +238,8 @@ From a technical perspective, this understanding helps us:
 - Handle edge cases more effectively
 - Communicate system behavior to stakeholders
 
-The key lesson is that **state charts help us ask better questions about requirements**, leading to deeper system understanding and more robust implementations.
+The key lesson is that **statecharts help us ask better questions about requirements**, leading to deeper system understanding and more robust implementations.
 
-State charts are an essential part of the software engineering process, helping us model complex behaviors in a clear, visual way that reveals hidden requirements and potential issues.
+Statecharts are an essential part of the software engineering process, helping us model complex behaviors in a clear, visual way that reveals hidden requirements and potential issues.
 
 
