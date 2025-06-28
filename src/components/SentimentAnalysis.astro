@@ -1,0 +1,306 @@
+---
+// SentimentAnalysis.astro - AFINN Sentiment Analysis Component
+---
+
+<div class="result">
+  <div id="loading">Loading sentiment analysis...</div>
+</div>
+
+<style>
+.shadow {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding-right: 1em;
+    padding-left: 1em;
+    padding-top: 1em;
+}
+</style>
+
+<script>
+	// AFINN Sentiment Analysis Component
+	function initSentimentAnalysis() {
+		// Prevent multiple executions
+		if (window.afinnInitialized) {
+			return;
+		}
+
+		// Set flag immediately
+		window.afinnInitialized = true;
+
+		// Utility function to load scripts
+		function loadScript(src) {
+			return new Promise((resolve, reject) => {
+				if (document.querySelector(`script[src="${src}"]`)) {
+					resolve();
+					return;
+				}
+
+				const script = document.createElement('script');
+				script.src = src;
+				script.onload = () => {
+					resolve();
+				};
+				script.onerror = (error) => {
+					reject(new Error(`Failed to load ${src}`));
+				};
+				document.head.appendChild(script);
+			});
+		}
+
+		// Stop words for filtering
+		var stopWords = [
+			'about', 'after', 'all', 'also', 'am', 'an', 'and', 'another', 'any', 'are', 'as', 'at', 'be',
+			'because', 'been', 'before', 'being', 'between', 'both', 'but', 'by', 'came', 'can',
+			'come', 'could', 'did', 'do', 'each', 'for', 'from', 'get', 'got', 'has', 'had',
+			'he', 'have', 'her', 'here', 'him', 'himself', 'his', 'how', 'if', 'in', 'into',
+			'is', 'it', 'like', 'make', 'many', 'me', 'might', 'more', 'most', 'much', 'must',
+			'my', 'never', 'now', 'of', 'on', 'only', 'or', 'other', 'our', 'out', 'over',
+			'said', 'same', 'see', 'should', 'since', 'some', 'still', 'such', 'take', 'than',
+			'that', 'the', 'their', 'them', 'then', 'there', 'these', 'they', 'this', 'those',
+			'through', 'to', 'too', 'under', 'up', 'very', 'was', 'way', 'we', 'well', 'were',
+			'what', 'where', 'which', 'while', 'who', 'with', 'would', 'you', 'your', 'a', 'i', 'its', 'why'
+		];
+
+		function buildFreq(repliesText) {
+			if (repliesText === undefined)
+				return 0;
+			let convert = repliesText.replace(/[^\w\s]/gi, '').toLowerCase().split(" ");
+			let totalScore = 0;
+			for(let i = 0; i < convert.length; i++) {
+				let currentWord = convert[i];
+				totalScore += afinn[currentWord] || 0;
+			}
+			return totalScore;
+		}
+
+		function showResult(jsonResult) {
+			let output = "<strong>" + jsonResult["title"] + "</strong>";    
+			let out = output + "<p><a id=" + jsonResult["id"] + "_link> Click here</a> to view post in context.</p>";
+
+			// Replace jQuery with vanilla JS
+			const resultDiv = document.querySelector(".result");
+			if (resultDiv) {
+				const newDiv = document.createElement('div');
+				newDiv.className = 'shadow';
+				newDiv.innerHTML = out + "<div id='" + jsonResult["id"] + "'></div>";
+				resultDiv.appendChild(newDiv);
+				
+				// Add link functionality
+				const linkElement = document.getElementById(jsonResult["id"] + "_link");
+				if (linkElement) {
+					linkElement.href = jsonResult["url"];
+				}
+				
+				// Add spacing
+				const spacingP = document.createElement('p');
+				resultDiv.appendChild(spacingP);
+			}
+
+			let id = jsonResult["id"];
+			
+			const data = {
+				labels: ["Positive","Negative","Neutral"],
+				datasets: [{
+					name: "data",
+					charType: "percentage",
+					values: [
+						jsonResult["positive"],
+						jsonResult["negative"],
+						jsonResult["neutral"]
+					]
+				}]
+			};
+
+			try {
+				const pos = document.getElementById(id);
+				
+				if (pos && typeof frappe !== 'undefined') {
+					const chart = new frappe.Chart(pos, {
+						data: data,
+						type: 'percentage',
+						colors: ['#33691e', '#b71c1c','#e8eaf6']
+					});
+				}
+			} catch (error) {
+				console.error('Error creating chart:', error);
+			}
+		}
+
+		function parseResult(link) {
+			const endPoint = "https://reddit.com" + link + ".json?limit=100&jsonp=?";
+			let replies = "";
+			let noOfReplies = 0;
+
+			$.getJSON(endPoint, function(data){
+				let title = (data[0].data.children[0].data["title"]);
+				replies = data[1]["data"].children;
+				let url = "https://reddit.com" + link;
+				noOfReplies = replies.length;
+				let repliesText = "";
+
+				let result = {
+					"id" : data[0].data.children[0].data["id"],
+					"url": url,
+					"title": title,
+					"negative": 0,
+					"neutral": 0,
+					"positive": 0
+				}
+
+				for (let i = 0; i < noOfReplies; i++) {
+					let reply = replies[i]["data"].body;
+					let score = buildFreq(reply);
+					
+					switch (true){
+						case score == 0:
+							result["neutral"] = result["neutral"] + 1;
+							break;
+						case score > 0:
+							result["positive"] = result["positive"] + 1;
+							break;
+						case score < 0:    
+							result["negative"] = result["negative"] + 1;
+							break;                    
+					}
+				}
+
+				if (result["negative"] == 0 && result["positive"] == 0 && result["neutral"] == 0)
+					return;
+				showResult(result);
+			});
+		}
+
+		function getPost() {
+			let result = "";
+			let entries = [];
+			let endPoint = "https://reddit.com/r/hongkong.json?limit=3&jsonp=?"
+			$.getJSON(endPoint, function(data){
+				result = data;
+				entries = result["data"].children;
+				
+				// Check if we got any posts
+				if (!entries || entries.length === 0) {
+					const loadingDiv = document.getElementById('loading');
+					if (loadingDiv) {
+						loadingDiv.innerHTML = '<p><strong>No data available</strong><br>Unable to fetch posts from r/HongKong at this time. The subreddit may be private or temporarily unavailable.</p>';
+					}
+					return;
+				}
+				
+				for(let i = 0; i < entries.length; i++){
+					let link = (entries[i]["data"]["permalink"]);
+					parseResult(link)
+				}
+				
+				// Clear loading message after processing all posts
+				setTimeout(() => {
+					const loadingDiv = document.getElementById('loading');
+					if (loadingDiv) {
+						loadingDiv.innerHTML = '<p><em>Sentiment analysis complete! Charts show real data from r/HongKong.</em></p>';
+					}
+				}, 2000); // Give some time for all charts to render
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+				// Handle API errors - show mock data for testing
+				const loadingDiv = document.getElementById('loading');
+				if (loadingDiv) {
+					loadingDiv.innerHTML = '<p><strong>Demo Mode</strong><br>Using sample data for demonstration. Real Reddit data unavailable due to browser security settings.</p>';
+				}
+				
+				// Mock data for testing
+				const mockPosts = [
+					{
+						id: "mock1",
+						url: "https://reddit.com/r/hongkong/comments/mock1",
+						title: "Hong Kong Weather Discussion - Beautiful sunny day today!",
+						positive: 18,
+						negative: 3,
+						neutral: 12
+					},
+					{
+						id: "mock2",
+						url: "https://reddit.com/r/hongkong/comments/mock2", 
+						title: "Local Food Recommendations - Best dim sum places?",
+						positive: 25,
+						negative: 2,
+						neutral: 8
+					},
+					{
+						id: "mock3",
+						url: "https://reddit.com/r/hongkong/comments/mock3",
+						title: "Transportation Issues - MTR delays this morning",
+						positive: 5,
+						negative: 15,
+						neutral: 10
+					}
+				];
+				
+				// Process mock data
+				mockPosts.forEach(post => {
+					showResult(post);
+				});
+				
+				// Update completion message
+				setTimeout(() => {
+					if (loadingDiv) {
+						loadingDiv.innerHTML = '<p><em>Demo complete! Charts show sample sentiment analysis data.</em></p>';
+					}
+				}, 2000);
+			});
+		}
+
+		// Main initialization function
+		async function initialize() {
+			try {
+				// Load jQuery (needed for $.getJSON)
+				await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js');
+				
+				// Load Frappe Charts
+				await loadScript('https://unpkg.com/frappe-charts@1.1.0/dist/frappe-charts.min.iife.js');
+				
+				// Load AFINN lexicon
+				await loadScript('/assets/scripts/afinn-111.js');
+
+				// Wait a bit for everything to settle
+				setTimeout(() => {
+					const loadingDiv = document.getElementById('loading');
+					if (loadingDiv) {
+						loadingDiv.innerHTML = '<p><em>Loading real Reddit data from r/HongKong...</em></p>';
+					}
+					getPost();
+				}, 500);
+				
+			} catch (error) {
+				console.error('Failed to initialize:', error);
+				const loadingDiv = document.getElementById('loading');
+				if (loadingDiv) {
+					loadingDiv.innerHTML = 'Error: Failed to load required libraries - ' + error.message;
+				}
+			}
+		}
+
+		// Start initialization
+		initialize();
+	}
+
+	// Run on page load
+	document.addEventListener('DOMContentLoaded', initSentimentAnalysis);
+
+	// Run on navigation (for Astro's view transitions)
+	document.addEventListener('astro:page-load', initSentimentAnalysis);
+
+	// Also run on navigation end (fallback)
+	document.addEventListener('astro:after-swap', initSentimentAnalysis);
+
+	// Additional fallback for navigation
+	let currentPath = window.location.pathname;
+	const checkNavigation = () => {
+		if (window.location.pathname !== currentPath) {
+			currentPath = window.location.pathname;
+			// Reset the flag to allow re-initialization
+			window.afinnInitialized = false;
+			setTimeout(initSentimentAnalysis, 100);
+		}
+	};
+
+	// Check for navigation every 100ms
+	setInterval(checkNavigation, 100);
+</script> 

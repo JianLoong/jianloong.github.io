@@ -20,11 +20,11 @@ html[data-theme="light"] {
   --border: #ab4b08;
 } */
 html[data-theme="dark"] {
-  --background: #212737;
+  --background: #000123;
+  --accent: #617bff;
   --foreground: #eaedf3;
-  --accent: #eb3fd3;
-  --muted: #7d4f7c;
-  --border: #642451;
+  --muted: #0c0e4f;
+  --border: #303f8a;
 }
 
 @theme inline {

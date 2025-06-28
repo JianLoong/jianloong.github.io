@@ -1,15 +1,15 @@
 ---
-title: "The State of University Education: A Critical Reflection"
+title: "The State of University Education: An Opinionated View"
 author: Jian Liew
 pubDatetime: 2024-01-15T00:00:00+11:00
-slug: university-education-critical-reflection
+slug: university-education-opinionated-view
 featured: true
 draft: false
 readingTime: 8
 tags:
   - education
   - opinion
-description: "A critical examination of modern university education, exploring issues with outdated materials, irresponsible staff, and the disconnect between academic theory and practical skills."
+description: "An opinionated view of modern university education, exploring issues with outdated materials, irresponsible staff, and the disconnect between academic theory and practical skills."
 
 ---
 <img src="/assets/uni.jpg" alt="University education concept - students in a lecture hall with modern technology" style="height: 300px; width: auto; display: block; margin: 0 auto;">

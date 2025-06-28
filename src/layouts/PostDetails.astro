@@ -11,6 +11,7 @@ import ShareLinks from "@/components/ShareLinks.astro";
 import BackButton from "@/components/BackButton.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
 import Mermaid from "@/components/Mermaid.astro";
+import SentimentAnalysis from "@/components/SentimentAnalysis.astro";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
@@ -39,6 +40,9 @@ const {
 } = post.data;
 
 const { Content } = await render(post);
+
+// Check if this is the AFINN sentiment analysis post
+const isAfinnPost = post.id.includes('sentiment-analysis-hongkong-afinn');
 
 let ogImageUrl: string | undefined;
 
@@ -114,7 +118,9 @@ const nextPost =
       id="article"
       class="app-prose mx-auto mt-8 max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"
     >
+      {isAfinnPost && <SentimentAnalysis />}
       <Content />
+      
     </article>
 
     <hr class="my-8 border-dashed" />
@@ -276,4 +282,38 @@ const nextPost =
   document.addEventListener("astro:after-swap", () =>
     window.scrollTo({ left: 0, top: 0, behavior: "instant" })
   );
+
+  // Theme switcher
+  const theme = (() => {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme');
+    }
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  })();
+
+  if (theme === 'light') {
+    document.documentElement.classList.remove('dark');
+  } else {
+    document.documentElement.classList.add('dark');
+  }
+
+  window.localStorage.setItem('theme', theme);
+
+  const handleToggleClick = () => {
+    const element = document.documentElement;
+    element.classList.toggle('dark');
+
+    const isDark = element.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleButton = document.querySelector('#theme-toggle');
+    if (toggleButton) {
+      toggleButton.addEventListener('click', handleToggleClick);
+    }
+  });
 </script>
