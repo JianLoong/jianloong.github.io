@@ -15,7 +15,7 @@ dependencies:
     specifier: ^2.6.2
     version: 2.6.2
   '@tailwindcss/vite':
-    specifier: ^4.1.10
+    specifier: ^4.1.11
     version: 4.1.11(vite@7.0.0)
   astro:
     specifier: ^5.10.0
@@ -39,7 +39,7 @@ dependencies:
     specifier: ^0.34.2
     version: 0.34.2
   tailwindcss:
-    specifier: ^4.1.10
+    specifier: ^4.1.11
     version: 4.1.11
 
 devDependencies:

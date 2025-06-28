@@ -3,35 +3,50 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-AstroPaper is a minimal, accessible and SEO-friendly blog theme built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
+# Jian Loong Liew
 
-![Astro Paper](public/astropaper-og.jpg)
+Hello! I'm Jian Loong Liew, a Senior Software Engineer at Xero with over 8 years of experience in software development. I specialize in building scalable web applications and have a passion for data visualization and modern web technologies.
 
-AstroPaper provides a solid foundation for blogs, or even portfolios\_ with full markdown support, built-in dark mode, and a clean layout that works out-of-the-box.
+## About Me
 
-The blog posts in this theme also serve as guides, docs or example articles\_ making AstroPaper a flexible starting point for your next content-driven site.
+I'm based in Melbourne, Australia, and currently work as a Site Reliability Engineer at ANZ, where I focus on automation and GCP.
 
-## Features
 
-AstroPaper comes with a set of useful features that make content publishing easy and effective:
+## Skills & Technologies
 
-- SEO-friendly
-- Fast performance
-- Light & dark mode
-- Highly customizable
-- Organizable blog posts
-- Responsive & accessible
-- Static search with [PageFind](https://pagefind.app/)
-- Automatic social image generation
+- **Frontend Development**: JavaScript, TypeScript, React, HTML5, CSS3
+- **Backend Development**: Node.js, Python, Java, .NET, RESTful APIs, GraphQL
+- **Data Visualization**: D3.js, Chart.js
+- **Databases**: SQL Server, PostgreSQL, MongoDB, Redis
+- **Cloud & DevOps**: Docker, Kubernetes, CI/CD
+- **Tools & Platforms**: Git, VS Code, Jira, Confluence
+- **Methodologies**: Agile, Scrum, Test-Driven Development
 
-and so much more.
+## Blog Focus
 
-## Show your support
+This blog serves as a platform for me to share my experiences with:
+- Software engineering best practices and patterns
+- Data visualization projects and techniques
+- Web development tutorials and insights
+- Technical explorations and experiments
+- Industry observations and learnings
 
-If you like [AstroPaper](https://github.com/satnaing/astro-paper), consider giving it a star ⭐️.
+## Featured Projects
 
-Found a bug 🐛 or have an improvement ✨ in mind? Feel free to open an [issue](https://github.com/satnaing/astro-paper/issues), submit a [pull request](https://github.com/satnaing/astro-paper/pulls) or start a [discussion](https://github.com/satnaing/astro-paper/discussions).
+Some of my recent work includes:
+- **Reddit AITA Visualisation**: [jian.sh/aita](https://jian.sh/aita)
+- **Hacker News Word Cloud**: Interactive visualization using D3.js and the Hacker News API
 
-If you find this theme helpful, you can also [sponsor me on GitHub](https://github.com/sponsors/satnaing) or [buy me a coffee](https://buymeacoffee.com/satnaing) to show your support — every penny counts.
 
-Kyay zuu! 🙏🏼
+## Get in Touch
+
+I'm always interested in connecting with fellow developers and technology enthusiasts. Feel free to reach out if you'd like to collaborate on projects, discuss technology trends, or share insights about software development.
+
+- **Website**: [jian.sh](https://jian.sh/)
+- **GitHub**: [github.com/jianloong](https://github.com/jianloong)
+- **LinkedIn**: [linkedin.com/in/jianloong-liew](https://linkedin.com/in/jianloong-liew)
+- **Email**: [jianloongliew@gmail.com](mailto:jianloongliew@gmail.com)
+
+---
+
+*This blog is built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/), featuring a clean, minimal design that focuses on content and readability.*
