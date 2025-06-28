@@ -1,7 +1,7 @@
 ---
 title: "Outpost Design Pattern: Managing External Dependencies with Grace"
 author: Jian Liew
-pubDatetime: 2025-06-28T20:56:02+11:00
+pubDatetime: 2025-06-27T20:56:02+11:00
 slug: outpost
 featured: true
 draft: false
