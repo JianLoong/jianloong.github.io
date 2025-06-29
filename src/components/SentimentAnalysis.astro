@@ -2,305 +2,261 @@
 // SentimentAnalysis.astro - AFINN Sentiment Analysis Component
 ---
 
-<div class="result">
-  <div id="loading">Loading sentiment analysis...</div>
+<div id="sentiment-analysis">
+  <div id="loading">Loading real Reddit data from r/HongKong...</div>
+  <div id="results"></div>
 </div>
 
-<style>
-.shadow {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    padding-right: 1em;
-    padding-left: 1em;
-    padding-top: 1em;
-}
-</style>
-
 <script>
-	// AFINN Sentiment Analysis Component
-	function initSentimentAnalysis() {
-		// Prevent multiple executions
-		if (window.afinnInitialized) {
-			return;
-		}
+  interface SentimentData {
+    id: string;
+    url: string;
+    title: string;
+    positive: number;
+    negative: number;
+    neutral: number;
+  }
 
-		// Set flag immediately
-		window.afinnInitialized = true;
+  let loading = true;
+  let error: string | null = null;
+  let results: SentimentData[] = [];
 
-		// Utility function to load scripts
-		function loadScript(src) {
-			return new Promise((resolve, reject) => {
-				if (document.querySelector(`script[src="${src}"]`)) {
-					resolve();
-					return;
-				}
+  // Utility function to load scripts
+  function loadScript(src: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      if (document.querySelector(`script[src="${src}"]`)) {
+        resolve();
+        return;
+      }
 
-				const script = document.createElement('script');
-				script.src = src;
-				script.onload = () => {
-					resolve();
-				};
-				script.onerror = (error) => {
-					reject(new Error(`Failed to load ${src}`));
-				};
-				document.head.appendChild(script);
-			});
-		}
+      const script = document.createElement('script');
+      script.src = src;
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error(`Failed to load ${src}`));
+      document.head.appendChild(script);
+    });
+  }
 
-		// Stop words for filtering
-		var stopWords = [
-			'about', 'after', 'all', 'also', 'am', 'an', 'and', 'another', 'any', 'are', 'as', 'at', 'be',
-			'because', 'been', 'before', 'being', 'between', 'both', 'but', 'by', 'came', 'can',
-			'come', 'could', 'did', 'do', 'each', 'for', 'from', 'get', 'got', 'has', 'had',
-			'he', 'have', 'her', 'here', 'him', 'himself', 'his', 'how', 'if', 'in', 'into',
-			'is', 'it', 'like', 'make', 'many', 'me', 'might', 'more', 'most', 'much', 'must',
-			'my', 'never', 'now', 'of', 'on', 'only', 'or', 'other', 'our', 'out', 'over',
-			'said', 'same', 'see', 'should', 'since', 'some', 'still', 'such', 'take', 'than',
-			'that', 'the', 'their', 'them', 'then', 'there', 'these', 'they', 'this', 'those',
-			'through', 'to', 'too', 'under', 'up', 'very', 'was', 'way', 'we', 'well', 'were',
-			'what', 'where', 'which', 'while', 'who', 'with', 'would', 'you', 'your', 'a', 'i', 'its', 'why'
-		];
+  // Stop words for filtering
+  const stopWords = [
+    'about', 'after', 'all', 'also', 'am', 'an', 'and', 'another', 'any', 'are', 'as', 'at', 'be',
+    'because', 'been', 'before', 'being', 'between', 'both', 'but', 'by', 'came', 'can',
+    'come', 'could', 'did', 'do', 'each', 'for', 'from', 'get', 'got', 'has', 'had',
+    'he', 'have', 'her', 'here', 'him', 'himself', 'his', 'how', 'if', 'in', 'into',
+    'is', 'it', 'like', 'make', 'many', 'me', 'might', 'more', 'most', 'much', 'must',
+    'my', 'never', 'now', 'of', 'on', 'only', 'or', 'other', 'our', 'out', 'over',
+    'said', 'same', 'see', 'should', 'since', 'some', 'still', 'such', 'take', 'than',
+    'that', 'the', 'their', 'them', 'then', 'there', 'these', 'they', 'this', 'those',
+    'through', 'to', 'too', 'under', 'up', 'very', 'was', 'way', 'we', 'well', 'were',
+    'what', 'where', 'which', 'while', 'who', 'with', 'would', 'you', 'your', 'a', 'i', 'its', 'why'
+  ];
 
-		function buildFreq(repliesText) {
-			if (repliesText === undefined)
-				return 0;
-			let convert = repliesText.replace(/[^\w\s]/gi, '').toLowerCase().split(" ");
-			let totalScore = 0;
-			for(let i = 0; i < convert.length; i++) {
-				let currentWord = convert[i];
-				totalScore += afinn[currentWord] || 0;
-			}
-			return totalScore;
-		}
+  function buildFreq(repliesText: string): number {
+    if (!repliesText) return 0;
+    const convert = repliesText.replace(/[^\w\s]/gi, '').toLowerCase().split(" ");
+    let totalScore = 0;
+    for (let i = 0; i < convert.length; i++) {
+      const currentWord = convert[i];
+      totalScore += (window as any).afinn?.[currentWord] || 0;
+    }
+    return totalScore;
+  }
 
-		function showResult(jsonResult) {
-			let output = "<strong>" + jsonResult["title"] + "</strong>";    
-			let out = output + "<p><a id=" + jsonResult["id"] + "_link> Click here</a> to view post in context.</p>";
+  function showResult(jsonResult: SentimentData) {
+    results.push(jsonResult);
+    renderResults();
+  }
 
-			// Replace jQuery with vanilla JS
-			const resultDiv = document.querySelector(".result");
-			if (resultDiv) {
-				const newDiv = document.createElement('div');
-				newDiv.className = 'shadow';
-				newDiv.innerHTML = out + "<div id='" + jsonResult["id"] + "'></div>";
-				resultDiv.appendChild(newDiv);
-				
-				// Add link functionality
-				const linkElement = document.getElementById(jsonResult["id"] + "_link");
-				if (linkElement) {
-					linkElement.href = jsonResult["url"];
-				}
-				
-				// Add spacing
-				const spacingP = document.createElement('p');
-				resultDiv.appendChild(spacingP);
-			}
+  function renderResults() {
+    const resultsDiv = document.getElementById('results');
+    if (!resultsDiv) return;
 
-			let id = jsonResult["id"];
-			
-			const data = {
-				labels: ["Positive","Negative","Neutral"],
-				datasets: [{
-					name: "data",
-					charType: "percentage",
-					values: [
-						jsonResult["positive"],
-						jsonResult["negative"],
-						jsonResult["neutral"]
-					]
-				}]
-			};
+    resultsDiv.innerHTML = '';
+    
+    if (results.length > 0) {
+      const loadingDiv = document.getElementById('loading');
+      if (loadingDiv) {
+        loadingDiv.innerHTML = '<p><em>Sentiment analysis complete! Results show real data from r/HongKong.</em></p>';
+      }
+    }
 
-			try {
-				const pos = document.getElementById(id);
-				
-				if (pos && typeof frappe !== 'undefined') {
-					const chart = new frappe.Chart(pos, {
-						data: data,
-						type: 'percentage',
-						colors: ['#33691e', '#b71c1c','#e8eaf6']
-					});
-				}
-			} catch (error) {
-				console.error('Error creating chart:', error);
-			}
-		}
+    results.forEach((result) => {
+      const total = result.positive + result.negative + result.neutral;
+      const positivePct = total > 0 ? Math.round((result.positive / total) * 100) : 0;
+      const negativePct = total > 0 ? Math.round((result.negative / total) * 100) : 0;
+      const neutralPct = total > 0 ? Math.round((result.neutral / total) * 100) : 0;
+      
+      const resultDiv = document.createElement('div');
+      resultDiv.innerHTML = `
+        <strong>${result.title}</strong>
+        <p>
+          <a href="${result.url}" target="_blank" rel="noopener noreferrer">
+            View post on Reddit
+          </a>
+        </p>
+        
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Sentiment</th>
+                <th>Count</th>
+                <th>Percentage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Positive</td>
+                <td>${result.positive}</td>
+                <td>${positivePct}%</td>
+              </tr>
+              <tr>
+                <td>Negative</td>
+                <td>${result.negative}</td>
+                <td>${negativePct}%</td>
+              </tr>
+              <tr>
+                <td>Neutral</td>
+                <td>${result.neutral}</td>
+                <td>${neutralPct}%</td>
+              </tr>
+              <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>${total}</strong></td>
+                <td><strong>100%</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      `;
+      resultsDiv.appendChild(resultDiv);
+    });
+  }
 
-		function parseResult(link) {
-			const endPoint = "https://reddit.com" + link + ".json?limit=100&jsonp=?";
-			let replies = "";
-			let noOfReplies = 0;
+  async function parseResult(link: string) {
+    const endPoint = "https://reddit.com" + link + ".json?limit=100";
+    
+    try {
+      const response = await fetch(endPoint);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      const title = data[0].data.children[0].data["title"];
+      const replies = data[1]["data"].children;
+      const url = "https://reddit.com" + link;
+      const noOfReplies = replies.length;
 
-			$.getJSON(endPoint, function(data){
-				let title = (data[0].data.children[0].data["title"]);
-				replies = data[1]["data"].children;
-				let url = "https://reddit.com" + link;
-				noOfReplies = replies.length;
-				let repliesText = "";
+      const result: SentimentData = {
+        id: data[0].data.children[0].data["id"],
+        url: url,
+        title: title,
+        negative: 0,
+        neutral: 0,
+        positive: 0
+      };
 
-				let result = {
-					"id" : data[0].data.children[0].data["id"],
-					"url": url,
-					"title": title,
-					"negative": 0,
-					"neutral": 0,
-					"positive": 0
-				}
+      for (let i = 0; i < noOfReplies; i++) {
+        const reply = replies[i]["data"].body;
+        const score = buildFreq(reply);
+        
+        switch (true) {
+          case score === 0:
+            result.neutral += 1;
+            break;
+          case score > 0:
+            result.positive += 1;
+            break;
+          case score < 0:
+            result.negative += 1;
+            break;
+        }
+      }
 
-				for (let i = 0; i < noOfReplies; i++) {
-					let reply = replies[i]["data"].body;
-					let score = buildFreq(reply);
-					
-					switch (true){
-						case score == 0:
-							result["neutral"] = result["neutral"] + 1;
-							break;
-						case score > 0:
-							result["positive"] = result["positive"] + 1;
-							break;
-						case score < 0:    
-							result["negative"] = result["negative"] + 1;
-							break;                    
-					}
-				}
+      if (result.negative === 0 && result.positive === 0 && result.neutral === 0) {
+        return;
+      }
+      showResult(result);
+    } catch (error) {
+      console.error('Error fetching post data:', error);
+    }
+  }
 
-				if (result["negative"] == 0 && result["positive"] == 0 && result["neutral"] == 0)
-					return;
-				showResult(result);
-			});
-		}
+  async function getPost() {
+    const endPoint = "https://reddit.com/r/hongkong.json?limit=3";
+    
+    try {
+      console.log('Fetching from:', endPoint);
+      const response = await fetch(endPoint);
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
+      
+      if (!response.ok) {
+        console.log('Response not ok, status:', response.status);
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log('Response data:', data);
+      const entries = data["data"].children;
+      
+      if (!entries || entries.length === 0) {
+        error = "No posts found from r/HongKong at this time. The subreddit may be private or temporarily unavailable.";
+        loading = false;
+        renderError();
+        return;
+      }
+      
+      // Process posts sequentially to avoid overwhelming the API
+      for (let i = 0; i < entries.length; i++) {
+        const link = entries[i]["data"]["permalink"];
+        await parseResult(link);
+      }
+      
+      setTimeout(() => {
+        loading = false;
+      }, 1000);
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+      // Show error message when API fails
+      const loadingDiv = document.getElementById('loading');
+      if (loadingDiv) {
+        loadingDiv.innerHTML = '<p><strong>Unable to fetch Reddit data</strong><br />The Reddit API may be temporarily unavailable or the subreddit may be private. Please try again later.</p>';
+      }
+    }
+  }
 
-		function getPost() {
-			let result = "";
-			let entries = [];
-			let endPoint = "https://reddit.com/r/hongkong.json?limit=3&jsonp=?"
-			$.getJSON(endPoint, function(data){
-				result = data;
-				entries = result["data"].children;
-				
-				// Check if we got any posts
-				if (!entries || entries.length === 0) {
-					const loadingDiv = document.getElementById('loading');
-					if (loadingDiv) {
-						loadingDiv.innerHTML = '<p><strong>No data available</strong><br>Unable to fetch posts from r/HongKong at this time. The subreddit may be private or temporarily unavailable.</p>';
-					}
-					return;
-				}
-				
-				for(let i = 0; i < entries.length; i++){
-					let link = (entries[i]["data"]["permalink"]);
-					parseResult(link)
-				}
-				
-				// Clear loading message after processing all posts
-				setTimeout(() => {
-					const loadingDiv = document.getElementById('loading');
-					if (loadingDiv) {
-						loadingDiv.innerHTML = '<p><em>Sentiment analysis complete! Charts show real data from r/HongKong.</em></p>';
-					}
-				}, 2000); // Give some time for all charts to render
-			}).fail(function(jqXHR, textStatus, errorThrown) {
-				// Handle API errors - show mock data for testing
-				const loadingDiv = document.getElementById('loading');
-				if (loadingDiv) {
-					loadingDiv.innerHTML = '<p><strong>Demo Mode</strong><br>Using sample data for demonstration. Real Reddit data unavailable due to browser security settings.</p>';
-				}
-				
-				// Mock data for testing
-				const mockPosts = [
-					{
-						id: "mock1",
-						url: "https://reddit.com/r/hongkong/comments/mock1",
-						title: "Hong Kong Weather Discussion - Beautiful sunny day today!",
-						positive: 18,
-						negative: 3,
-						neutral: 12
-					},
-					{
-						id: "mock2",
-						url: "https://reddit.com/r/hongkong/comments/mock2", 
-						title: "Local Food Recommendations - Best dim sum places?",
-						positive: 25,
-						negative: 2,
-						neutral: 8
-					},
-					{
-						id: "mock3",
-						url: "https://reddit.com/r/hongkong/comments/mock3",
-						title: "Transportation Issues - MTR delays this morning",
-						positive: 5,
-						negative: 15,
-						neutral: 10
-					}
-				];
-				
-				// Process mock data
-				mockPosts.forEach(post => {
-					showResult(post);
-				});
-				
-				// Update completion message
-				setTimeout(() => {
-					if (loadingDiv) {
-						loadingDiv.innerHTML = '<p><em>Demo complete! Charts show sample sentiment analysis data.</em></p>';
-					}
-				}, 2000);
-			});
-		}
+  function renderError() {
+    const loadingDiv = document.getElementById('loading');
+    if (loadingDiv && error) {
+      loadingDiv.innerHTML = `<p><strong>No data available</strong><br />${error}</p>`;
+    }
+  }
 
-		// Main initialization function
-		async function initialize() {
-			try {
-				// Load jQuery (needed for $.getJSON)
-				await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js');
-				
-				// Load Frappe Charts
-				await loadScript('https://unpkg.com/frappe-charts@1.1.0/dist/frappe-charts.min.iife.js');
-				
-				// Load AFINN lexicon
-				await loadScript('/assets/scripts/afinn-111.js');
+  async function initialize() {
+    try {
+      // Load AFINN lexicon only
+      await loadScript('/assets/scripts/afinn-111.js');
 
-				// Wait a bit for everything to settle
-				setTimeout(() => {
-					const loadingDiv = document.getElementById('loading');
-					if (loadingDiv) {
-						loadingDiv.innerHTML = '<p><em>Loading real Reddit data from r/HongKong...</em></p>';
-					}
-					getPost();
-				}, 500);
-				
-			} catch (error) {
-				console.error('Failed to initialize:', error);
-				const loadingDiv = document.getElementById('loading');
-				if (loadingDiv) {
-					loadingDiv.innerHTML = 'Error: Failed to load required libraries - ' + error.message;
-				}
-			}
-		}
+      // Wait a bit for everything to settle
+      setTimeout(() => {
+        getPost();
+      }, 500);
+      
+    } catch (error) {
+      console.error('Failed to initialize:', error);
+      const loadingDiv = document.getElementById('loading');
+      if (loadingDiv) {
+        loadingDiv.innerHTML = 'Failed to load required libraries. Please refresh the page.';
+      }
+    }
+  }
 
-		// Start initialization
-		initialize();
-	}
-
-	// Run on page load
-	document.addEventListener('DOMContentLoaded', initSentimentAnalysis);
-
-	// Run on navigation (for Astro's view transitions)
-	document.addEventListener('astro:page-load', initSentimentAnalysis);
-
-	// Also run on navigation end (fallback)
-	document.addEventListener('astro:after-swap', initSentimentAnalysis);
-
-	// Additional fallback for navigation
-	let currentPath = window.location.pathname;
-	const checkNavigation = () => {
-		if (window.location.pathname !== currentPath) {
-			currentPath = window.location.pathname;
-			// Reset the flag to allow re-initialization
-			window.afinnInitialized = false;
-			setTimeout(initSentimentAnalysis, 100);
-		}
-	};
-
-	// Check for navigation every 100ms
-	setInterval(checkNavigation, 100);
-</script> 
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialize);
+  } else {
+    initialize();
+  }
+</script>
