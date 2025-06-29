@@ -23,8 +23,11 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build job
-  build:
+  # Build and Deploy job
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository using git
@@ -109,37 +112,6 @@ jobs:
           echo ""
           echo "=== Directory structure (first level) ==="
           ls -la dist/
-      
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: github-pages
-          path: dist/
-          retention-days: 30
-          if-no-files-found: error
-
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: github-pages
-          path: dist/
-      
-      - name: Verify artifacts
-        run: |
-          echo "=== Verifying downloaded artifacts ==="
-          ls -la dist/
-          echo "=== Checking for any remaining symlinks ==="
-          find dist/ -type l -ls || echo "No symlinks found"
-          echo "=== Final size check ==="
-          du -sh dist/
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
