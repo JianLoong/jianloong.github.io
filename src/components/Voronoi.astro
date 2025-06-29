@@ -18,33 +18,35 @@ const {
 
 <div class="voronoi-container">
   <div id="canvas" style="text-align:center;max-width:30em;margin:auto;"></div>
-  <div id="exampleQuery" style="text-align:center;max-width:30em;margin:auto;"></div>
+  <!-- <div id="exampleQuery" style="text-align:center;max-width:30em;margin:auto;"></div> -->
 </div>
 
 <script src="https://unpkg.com/d3@5.12.0/dist/d3.min.js"></script>
+<script src="https://unpkg.com/d3-delaunay@5.3.0/dist/d3-delaunay.min.js"></script>
 
 <script define:vars={{ width, height, points, interactive }}>
+  let isInitialized = false;
+
   function initializeVoronoi() {
-    // Initialize both diagrams
-    queryExample();
-    drawVoronoiWithPoints("#canvas", 30);
-  }
-
-  const queryExample = () => {
-    let points = [[40,74],[34,118],[41,87],[44,93],[39,104],[32,96],[47,122],[42,71]];
-
-    const transform = point => {
-      return [point[0]/90 * 500, point[1]/180*500];
+    // Prevent multiple initializations
+    if (isInitialized) return;
+    
+    // Check if D3 is loaded
+    if (typeof d3 === 'undefined') {
+      console.error('D3.js is not loaded. Please check the script tag.');
+      return;
     }
 
-    let transformed = [];
-    points.forEach(element => {
-      transformed.push(transform(element));
-    });
+    // Clear any existing content
+    const canvas = document.getElementById('canvas');
+    if (canvas) {
+      canvas.innerHTML = '';
+    }
+
+    // Initialize the interactive diagram
+    drawVoronoiWithPoints("#canvas", 30);
     
-    const delaunay = d3.Delaunay.from(points);
-    const voronoi = delaunay.voronoi([0, 0, 500, 500]);
-    drawVoronoi("#exampleQuery", transformed);
+    isInitialized = true;
   }
 
   const renderCell = (svg, voronoi, index, color) => {
@@ -55,48 +57,12 @@ const {
       .attr("d", voronoi.renderCell(index));   
   }
 
-  const drawVoronoi = (id, vertices, color) => {
-    const width = 500, height = 500;
-    const delaunay = d3.Delaunay.from(vertices);
-    const voronoi = delaunay.voronoi([0, 0, 500, 500]);
-    let svg = d3.select(id)
-      .append("svg")
-      .attr("viewBox", `0 0 500 500`);
-    
-    const mesh = svg.append("path")
-      .attr("fill", "none")
-      .attr("stroke", "#ccc")
-      .attr("stroke-width", 1)
-      .attr("d", voronoi.render());
-
-    const bounds = svg.append("path")
-      .attr("fill", "none")
-      .attr("stroke","#ccc")
-      .attr("stroke-width", 1)
-      .attr("d", voronoi.renderBounds());
-
-    const ans = delaunay.find(40,73);
-
-    for (let index = 0; index < vertices.length; index++) {
-      const element = vertices[index];
-      renderCell(svg, voronoi, index, d3.schemeTableau10[4]);
-    }
-
-    const neighbours = delaunay.neighbors(ans);
-    for (const iterator of neighbours) {
-      renderCell(svg, voronoi, iterator, d3.schemeTableau10[3]);
-    };
-     
-    renderCell(svg, voronoi, ans, d3.schemeTableau10[0]);
-    const points = svg.append("path")
-      .attr("fill", "black")
-      .attr("stroke","#ccc")
-      .attr("stroke-width", 1)
-      .attr("d", delaunay.renderPoints());
-  };
-
   const drawVoronoiWithPoints = (id, noOfPoints) => {
+    // Check if D3 is available
+    if (typeof d3 === 'undefined') return;
+    
     let selected = undefined;
+    let cellElements = []; // Track all cell elements for proper color management
     
     const width = 1000, height = 1000;  
     const circles = d3.range(30).map(function(d) {
@@ -110,61 +76,106 @@ const {
       .append("svg")
       .attr("viewBox", `0 0 1000 1000`);
      
+    // Get theme-aware colors
+    const isDark = document.body.className.includes("dark");
+    const strokeColor = isDark ? "#444" : "#ccc";
+    const pointColor = isDark ? "#fff" : "#000";
+    const backgroundColor = isDark ? "#1a1a1a" : "#fff";
+    
     const mesh = svg.append("path")
       .attr("fill", "none")
-      .attr("stroke", "#ccc")
+      .attr("stroke", strokeColor)
       .attr("stroke-width", 5)
       .attr("d", voronoi.render());
 
     const bounds = svg.append("path")
       .attr("fill", "none")
-      .attr("stroke","#ccc")
+      .attr("stroke", strokeColor)
       .attr("stroke-width", 5)
       .attr("d", voronoi.renderBounds());
 
     const points = () => svg.append("path")
-      .attr("fill", "black")
-      .attr("stroke","#ccc")
+      .attr("fill", pointColor)
+      .attr("stroke", strokeColor)
       .attr("stroke-width", 2)
       .attr("d", delaunay.renderPoints());
 
     points();
 
+    // Function to set cell color
+    const setCellColor = (index, color) => {
+      // Remove existing cell element if it exists
+      svg.selectAll(`.cell-${index}`).remove();
+      
+      // Create new cell element with the specified color
+      svg.append("path")
+        .attr("class", `cell-${index}`)
+        .attr("fill", color)
+        .attr("stroke", strokeColor)
+        .attr("stroke-width", 1)
+        .attr("d", voronoi.renderCell(index));
+    };
+
+    // Function to clear all selections
+    const clearAllSelections = () => {
+      // Remove all cell elements
+      svg.selectAll("[class^='cell-']").remove();
+    };
+
     svg.on("click", function() {
       var coords = d3.mouse(this);
-      var color = "white"
-      if (document.body.className.includes("dark")) {
-        color = "dark"
-      } else {
-        color = "white"
-      }
       
-      if (selected != undefined){
-        renderCell(svg, voronoi, selected, color); 
-        
-        for (const iterator of delaunay.neighbors(selected)) 
-          renderCell(svg, voronoi, iterator, color);
-        selected = undefined;
-      }
-
+      // Clear all previous selections first
+      clearAllSelections();
+      
       const ans = (delaunay.find(coords[0],coords[1]));
       selected = ans;
-      renderCell(svg, voronoi, ans, d3.schemeTableau10[0]);
+      
+      // Highlight the selected cell
+      setCellColor(ans, isDark ? "#f56565" : "#e53e3e");
    
+      // Redraw points on top
       points();
       
+      // Highlight neighbors
       const neighbours = delaunay.neighbors(ans);
       for (const iterator of neighbours) {
-        renderCell(svg, voronoi, iterator, d3.schemeTableau10[3]);
+        setCellColor(iterator, isDark ? "#4299e1" : "#3182ce");
       };  
     });
   };
 
+  // Wait for D3 to load before initializing
+  function waitForD3() {
+    if (typeof d3 !== 'undefined') {
+      initializeVoronoi();
+    } else {
+      setTimeout(waitForD3, 100);
+    }
+  }
+
   // Initialize on DOMContentLoaded (for initial page load)
-  document.addEventListener('DOMContentLoaded', initializeVoronoi);
+  document.addEventListener('DOMContentLoaded', waitForD3);
 
   // Initialize on astro:after-swap (for client-side navigation)
-  document.addEventListener('astro:after-swap', initializeVoronoi);
+  document.addEventListener('astro:after-swap', () => {
+    // Check if we're on the Voronoi page
+    const voronoiContainer = document.querySelector('.voronoi-container');
+    if (voronoiContainer) {
+      // Reset initialization flag
+      isInitialized = false;
+      // Re-initialize after a short delay to ensure DOM is ready
+      setTimeout(waitForD3, 50);
+    }
+  });
+
+  // Also listen for astro:page-load for additional navigation events
+  document.addEventListener('astro:page-load', () => {
+    const voronoiContainer = document.querySelector('.voronoi-container');
+    if (voronoiContainer && !isInitialized) {
+      setTimeout(waitForD3, 50);
+    }
+  });
 </script>
 
 <style>

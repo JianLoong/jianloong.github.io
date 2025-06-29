@@ -7,11 +7,11 @@ featured: false
 draft: false
 readingTime: 8
 tags:
-  - nearest-neighbour
-  - maps
-  - voronoi
-  - d3
+  - tutorial
   - algorithms
+  - nearest-neighbour
+  - d3
+  - data-visualization
 description: "Explore k-Nearest Neighbour queries using Voronoi diagrams with interactive D3.js visualizations. Learn how to find the closest points and neighboring regions on maps."
 ---
 
