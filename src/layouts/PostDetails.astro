@@ -13,6 +13,7 @@ import BackToTopButton from "@/components/BackToTopButton.astro";
 import Mermaid from "@/components/Mermaid.astro";
 import SentimentAnalysis from "@/components/SentimentAnalysis.astro";
 import GeneticAlgorithmDemo from "@/components/GeneticAlgorithmDemo.astro";
+import Voronoi from "@/components/Voronoi.astro";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
@@ -47,6 +48,9 @@ const isAfinnPost = post.id.includes('sentiment-analysis-hongkong-afinn');
 
 // Check if this is the genetic algorithm post
 const isGeneticAlgorithmPost = post.id.includes('genetic-algorithm-web-workers');
+
+// Check if this is the Voronoi post
+const isVoronoiPost = post.id.includes('voronoi');
 
 let ogImageUrl: string | undefined;
 
@@ -124,6 +128,7 @@ const nextPost =
     >
       {isAfinnPost && <SentimentAnalysis />}
       {isGeneticAlgorithmPost && <GeneticAlgorithmDemo />}
+      {isVoronoiPost && <Voronoi />}
       <Content />
       
     </article>
