@@ -1,0 +1,319 @@
+---
+// VADER Sentiment Analysis Component
+---
+
+<div class="vader-sentiment-demo">
+  <div class="input-section">
+    <label for="inputString">Enter text to be analyzed:</label>
+    <div class="textwrapper">
+      <textarea 
+        rows="10" 
+        id="inputString" 
+        autocomplete="off" 
+        placeholder="Enter your text here..."
+      >Sentiment analysis studies the subjective information in an expression, that is, the opinions, appraisals, emotions, or attitudes towards a topic, person or entity. Expressions can be classified as positive, negative, or neutral. For example: I really like the new design of your website!</textarea>
+    </div>
+  </div>
+
+  <button type="button" id="run" class="button">Run Analysis</button>
+
+  <div class="results-section">
+    <h4>Results</h4>
+    <table class="result-table">
+      <thead>
+        <tr>
+          <th>Negative</th>
+          <th>Positive</th>
+          <th>Neutral</th>
+          <th>Compound</th>
+        </tr>
+      </thead>
+      <tbody class="result"></tbody>
+    </table>
+    
+    <div class="results-explanation">
+      <h5>Understanding VADER Scores</h5>
+      <div class="score-explanations">
+        <div class="score-item">
+          <strong>Negative/Positive/Neutral:</strong> These scores represent the proportion of each sentiment type in the text (0-1 scale). They always sum to 1.0.
+        </div>
+        <div class="score-item">
+          <strong>Compound:</strong> The overall sentiment score ranging from -1 (very negative) to +1 (very positive). This is the most useful score for determining overall sentiment.
+        </div>
+        <div class="compound-scale">
+          <strong>Compound Score Scale:</strong>
+          <ul>
+            <li><strong>0.05 to 1.0:</strong> Positive sentiment</li>
+            <li><strong>-0.05 to 0.05:</strong> Neutral sentiment</li>
+            <li><strong>-1.0 to -0.05:</strong> Negative sentiment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // VADER Sentiment Analysis Implementation using Web Worker
+  interface VaderResult {
+    neg: number;
+    pos: number;
+    neu: number;
+    compound: number;
+  }
+
+  // Initialize the component
+  function initVaderDemo() {
+    const button = document.getElementById('run') as HTMLButtonElement;
+    const result = document.querySelector('.result') as HTMLElement;
+    const entry = document.getElementById('inputString') as HTMLTextAreaElement;
+    const resultTable = document.querySelector('.result-table') as HTMLTableElement;
+
+    if (!button || !result || !entry || !resultTable) {
+      console.error('Required elements not found');
+      return;
+    }
+
+    let isResultTableShown = false;
+    let myWorker: Worker | null = null;
+
+    // Remove any existing event listeners to prevent duplicates
+    button.removeEventListener('click', handleButtonClick);
+    
+    function handleButtonClick() {
+      if (entry.value.trim() === '') {
+        alert('Please enter some text to analyze');
+        return;
+      }
+
+      // Create worker if it doesn't exist
+      if (!myWorker) {
+        try {
+          myWorker = new Worker("/assets/scripts/vader-worker.js");
+          
+          myWorker.onmessage = function(e) {
+            const analysis: VaderResult = e.data;
+            
+            result.innerHTML = `
+              <tr>
+                <td>${analysis.neg.toFixed(3)}</td>
+                <td>${analysis.pos.toFixed(3)}</td>
+                <td>${analysis.neu.toFixed(3)}</td>
+                <td>${analysis.compound.toFixed(3)}</td>
+              </tr>
+            `;
+
+            if (!isResultTableShown) {
+              isResultTableShown = true;
+              resultTable.style.display = 'table';
+            }
+          };
+
+          myWorker.onerror = function(e) {
+            console.error('Worker error:', e);
+            alert('Error analyzing sentiment. Please try again.');
+          };
+        } catch (error) {
+          console.error('Failed to create worker:', error);
+          alert('Failed to initialize sentiment analysis. Please refresh the page.');
+          return;
+        }
+      }
+
+      // Send text to worker for analysis
+      myWorker.postMessage(entry.value);
+    }
+
+    button.addEventListener('click', handleButtonClick);
+  }
+
+  // Initialize when DOM is ready
+  function initializeComponent() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initVaderDemo);
+    } else {
+      initVaderDemo();
+    }
+  }
+
+  // Initialize on first load
+  initializeComponent();
+
+  // Re-initialize on Astro view transitions
+  document.addEventListener('astro:page-load', initVaderDemo);
+</script>
+
+<style>
+  .vader-sentiment-demo {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background-color: var(--color-muted);
+  }
+
+  .input-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .input-section label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--color-foreground);
+  }
+
+  .textwrapper {
+    border: 2px solid var(--color-border);
+    margin: 10px 0;
+    padding: 8px;
+    border-radius: 6px;
+    background-color: var(--color-muted);
+  }
+
+  #inputString {
+    width: 100%;
+    min-height: 120px;
+    border: 2px solid var(--color-border);
+    padding: 12px;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: inherit;
+    border-radius: 4px;
+    transition: border-color 0.2s ease;
+    resize: vertical;
+  }
+
+  #inputString:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px var(--color-accent);
+  }
+
+  .button {
+    background-color: var(--color-accent);
+    border: none;
+    color: var(--color-background);
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    margin: 15px 0;
+  }
+
+  .button:hover {
+    opacity: 0.8;
+  }
+
+  .results-section {
+    margin-top: 2rem;
+  }
+
+  .results-section h4 {
+    color: var(--color-foreground);
+    margin: 20px 0 10px 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .result-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    display: none;
+  }
+
+  .result-table th {
+    background-color: var(--color-accent);
+    color: var(--color-background);
+    padding: 12px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .result-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .result-table tr:nth-child(even) {
+    background-color: var(--color-muted);
+  }
+
+  .result-table tr:hover {
+    background-color: rgba(97, 123, 255, 0.1);
+  }
+
+  .results-explanation {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+  }
+
+  .results-explanation h5 {
+    color: var(--color-foreground);
+    margin: 0 0 1rem 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .score-explanations {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .score-item {
+    color: var(--color-foreground);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .compound-scale {
+    color: var(--color-foreground);
+    font-size: 14px;
+  }
+
+  .compound-scale ul {
+    margin: 0.5rem 0 0 0;
+    padding-left: 1.5rem;
+  }
+
+  .compound-scale li {
+    margin-bottom: 0.25rem;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    #inputString {
+      font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .button {
+      width: 100%;
+      padding: 15px 24px;
+    }
+    
+    .result-table {
+      font-size: 12px;
+    }
+    
+    .result-table th,
+    .result-table td {
+      padding: 8px 4px;
+    }
+  }
+</style> 

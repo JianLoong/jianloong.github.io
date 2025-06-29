@@ -14,6 +14,7 @@ import Mermaid from "@/components/Mermaid.astro";
 import SentimentAnalysis from "@/components/SentimentAnalysis.astro";
 import GeneticAlgorithmDemo from "@/components/GeneticAlgorithmDemo.astro";
 import Voronoi from "@/components/Voronoi.astro";
+import VaderSentimentAnalysis from "@/components/VaderSentimentAnalysis.astro";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
@@ -51,6 +52,9 @@ const isGeneticAlgorithmPost = post.id.includes('genetic-algorithm-web-workers')
 
 // Check if this is the Voronoi post
 const isVoronoiPost = post.id.includes('voronoi');
+
+// Check if this is the VADER sentiment analysis post
+const isVaderPost = post.id.includes('sentiment-analysis-vader-javascript');
 
 let ogImageUrl: string | undefined;
 
@@ -129,6 +133,7 @@ const nextPost =
       {isAfinnPost && <SentimentAnalysis />}
       {isGeneticAlgorithmPost && <GeneticAlgorithmDemo />}
       {isVoronoiPost && <Voronoi />}
+      {isVaderPost && <VaderSentimentAnalysis />}
       <Content />
       
     </article>
