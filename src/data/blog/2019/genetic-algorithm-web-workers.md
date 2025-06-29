@@ -1,5 +1,5 @@
 ---
-title: "Genetic Algorithm using Web Workers"
+title: "Interactive Genetic Algorithm Demo: From Random Strings to Target Solutions"
 author: Jian Liew
 pubDatetime: 2019-10-19T00:00:00+11:00
 slug: genetic-algorithm-web-workers
@@ -8,35 +8,94 @@ draft: false
 readingTime: 8
 tags:
   - tutorial
-  - genetic-algorithm
-  - web-workers
+  - tools
+  - algorithms
   - javascript
-description: "A simple implementation of Genetic Algorithm using Web Workers. Start with a random string and evolve it to match a target string using different crossover and selection methods."
+description: "An interactive demonstration of genetic algorithms using JavaScript. Learn how evolutionary computation can solve complex problems by evolving random strings into target solutions."
 ---
 
-This post is a simple implementation of **Genetic Algorithm (GA).** Here, you would start with a random string and end up with the target string.
+## What are Genetic Algorithms?
 
-This post is heavily inspired based on this [website](https://github.com/subprotocol/genetic-js). However, I created the codes with a very different methodology to also include newer JavaScript methods using classes and also web worker so it runs behind the scenes.
+So, what exactly are Genetic Algorithms (GAs)? Think of them as a way to solve problems by mimicking how nature evolves things. It's like having a bunch of random solutions and then "breeding" the best ones together to get even better solutions.
 
-The implementation of it can be seen [here](https://github.com/JianLoong/jianloong.github.io/blob/master/content/posts/ga-worker.js)
+Here's how it works in simple terms:
+
+1. **Population**: Start with a bunch of random solutions
+2. **Fitness**: Figure out which ones are the best
+3. **Selection**: Pick the best ones to "breed"
+4. **Crossover**: Mix parts of the good solutions together
+5. **Mutation**: Randomly change some things
+6. **Repeat**: Keep doing this until you get what you want
+
+This post is heavily inspired by this [website](https://github.com/subprotocol/genetic-js). However, I created the code with a very different methodology to include newer JavaScript methods using classes and also web workers so it runs behind the scenes.
+
+## The String Matching Problem
+
+For this demo, we're going to solve a pretty cool problem: **string matching**. We start with random strings and evolve them until they match a target string. It's like teaching a computer to spell!
+
+Here's an example. Let's say we want to get "HELLO WORLD":
+- Generation 1: "XKJQP MNSRT" (completely random gibberish)
+- Generation 10: "HELLO WQRLD" (hey, it's getting closer!)
+- Generation 50: "HELLO WORLD" (perfect! we did it!)
 
 ## Interactive Genetic Algorithm Demo
 
-<GeneticAlgorithmDemo />
+Check out the interactive demo above! You can play around with different settings and see how the algorithm evolves solutions in real-time:
 
-## Observations
+## How the Algorithm Works
 
-- Using the methodology ``random`` crossover at times will not yield results. The reason for this is simple is because if it is random there might not improvement of the child chromosomes.
-- Using a short "target" string will yield the result faster, as the problem statement would be significantly easier to solve.
+### Selection Methods
 
-## Lessons from this post
+| Method | Description | Effectiveness |
+|--------|-------------|---------------|
+| **Tournament Selection** | Randomly grab a few individuals and pick the best one from that small group | High |
+| **Random Selection** | Just pick someone completely at random | Low |
+| **Rank Selection** | Line everyone up from best to worst and pick based on their ranking | Medium |
+| **Roulette Wheel Selection** | Like a weighted lottery - the better your fitness, the bigger your chance | Medium-High |
 
-- The web worker is often cached for a longer period in production/live environments. Users would have a better experience if it is not required for them to do a hard refresh on the browsers. One easy way is to use the best practice to load the web worker in the head. Others suggested to versioning web-workers.
-- The web worker at times; does not like while loops. It would be better if for loops are used instead.
-- The cross-over methodology for GA needs to be implemented with complexity in mind.
-- Using jQuery might not be the best idea as the **hide()** and **show()** which manipulates the display either changing to none or block does not work well on mobile browsers. Perhaps not using jQuery would be better.
-- Designing an encoding is very important. For example, in a knapsack problem there are only two choices. So, each item can either be true or false.
+### Crossover Methods
+
+| Method | Description | Best For |
+|--------|-------------|----------|
+| **One Point Crossover** | Cut both parents at a random spot and swap the pieces | String matching |
+| **Two Point Crossover** | Cut at two spots and swap the middle part | Balanced problems |
+| **Uniform Crossover** | For each character, randomly pick from either parent | High diversity needed |
+
+**Example of One Point Crossover:**
+```
+Parent 1: "HELLO WORLD"
+Parent 2: "GOODBYE NOW"
+Child:    "HELLO NOW"
+```
+
+## Key Findings
+
+| Finding | Impact | Recommendation |
+|---------|--------|----------------|
+| **One Point Crossover** works best for string matching | High success rate | Use for text-based problems |
+| **Tournament selection** performs better than random | Faster convergence | Default choice for most problems |
+| **Shorter strings** (5-10 chars) are much easier to solve | Quick results | Start with simple examples |
+| **Longer strings** (20+ chars) take more time and may not converge | Slower, less reliable | Use smaller targets for demos |
+
+## Lessons Learned
+
+- **Web workers get cached aggressively** - users often need hard refresh in production
+- **jQuery's `hide()`/`show()` don't work well on mobile** - CSS transitions are better
+- **Fitness function is critical** - must accurately measure solution quality
+- **Clear termination criteria** prevent infinite loops
+
+## Wrapping Up
+
+Genetic algorithms are pretty awesome for solving complex problems. This interactive demo shows how you can take random solutions and evolve them into something useful through selection, crossover, and mutation.
+
+The key takeaways:
+- **Selection method matters** - Tournament selection works well for most problems
+- **Crossover strategy affects convergence** - One-point crossover is reliable for string problems
+- **Problem encoding is crucial** - How you represent the problem really matters
+
+Try playing around with different parameters in the demo above! It's pretty cool to see how quickly random strings can evolve into meaningful solutions.
 
 ## References
 
-1. [Python Easy GA](https://pypi.org/project/pyeasyga/) 
+1. [Genetic Algorithm Fundamentals](https://en.wikipedia.org/wiki/Genetic_algorithm) - Wikipedia overview
+2. [JavaScript Genetic Algorithm Library](https://github.com/subprotocol/genetic-js) - Original inspiration 

@@ -12,6 +12,7 @@ import BackButton from "@/components/BackButton.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
 import Mermaid from "@/components/Mermaid.astro";
 import SentimentAnalysis from "@/components/SentimentAnalysis.astro";
+import GeneticAlgorithmDemo from "@/components/GeneticAlgorithmDemo.astro";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
@@ -43,6 +44,9 @@ const { Content } = await render(post);
 
 // Check if this is the AFINN sentiment analysis post
 const isAfinnPost = post.id.includes('sentiment-analysis-hongkong-afinn');
+
+// Check if this is the genetic algorithm post
+const isGeneticAlgorithmPost = post.id.includes('genetic-algorithm-web-workers');
 
 let ogImageUrl: string | undefined;
 
@@ -119,6 +123,7 @@ const nextPost =
       class="app-prose mx-auto mt-8 max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"
     >
       {isAfinnPost && <SentimentAnalysis />}
+      {isGeneticAlgorithmPost && <GeneticAlgorithmDemo />}
       <Content />
       
     </article>

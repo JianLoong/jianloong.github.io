@@ -51,6 +51,10 @@
 <style>
   .genetic-algorithm-demo {
     margin: 2rem 0;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--muted);
   }
 
   .controls {
@@ -58,78 +62,128 @@
   }
 
   .control-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .control-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--foreground);
   }
 
   .select-css {
     width: 100%;
     max-width: 300px;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: var(--theme-bg);
-    color: var(--theme-text);
+    padding: 10px 12px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+
+  .select-css:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(97, 123, 255, 0.1);
   }
 
   #targetString {
     width: 100%;
     max-width: 400px;
-    padding: 12px 20px;
+    padding: 12px 16px;
     margin: 8px 0;
     box-sizing: border-box;
-    border: 1px solid var(--theme-border);
-    border-radius: 4px;
-    background-color: var(--theme-bg);
-    color: var(--theme-text);
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+
+  #targetString:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(97, 123, 255, 0.1);
   }
 
   .button {
-    background-color: #4CAF50;
+    background-color: var(--accent);
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 12px 24px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    border-radius: 4px;
+    font-weight: 600;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .button:hover {
-    background-color: #45a049;
+    background-color: #4a5fd1;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .my-custom-scrollbar {
     position: relative;
     height: 35rem;
     overflow: auto;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--background);
   }
 
   .result-table {
     width: 100%;
     border-collapse: collapse;
+    margin: 0;
   }
 
   .result-table th,
   .result-table td {
-    padding: 8px 12px;
+    padding: 12px 16px;
     text-align: left;
-    border: 1px solid var(--theme-border);
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
   }
 
   .result-table th {
-    background-color: var(--theme-bg-secondary);
-    font-weight: bold;
+    background-color: var(--muted);
+    font-weight: 700;
+    color: var(--foreground);
+    position: sticky;
+    top: 0;
+    z-index: 10;
   }
 
   .result-table tbody tr:nth-child(even) {
-    background-color: var(--theme-bg-secondary);
+    background-color: var(--muted);
   }
 
   .result-table tbody tr:hover {
-    background-color: var(--theme-bg-tertiary);
+    background-color: rgba(97, 123, 255, 0.1);
+  }
+
+  .result-table tbody tr td:first-child {
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .result-table tbody tr td:nth-child(2) {
+    font-weight: 600;
   }
 
   /* Hide table initially */
@@ -140,11 +194,48 @@
   .result-table.show {
     display: table;
   }
+
+  /* Scrollbar styling */
+  .my-custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .my-custom-scrollbar::-webkit-scrollbar-track {
+    background: var(--muted);
+    border-radius: 4px;
+  }
+
+  .my-custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+  }
+
+  .my-custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .genetic-algorithm-demo {
+      padding: 1rem;
+    }
+    
+    .select-css,
+    #targetString {
+      max-width: 100%;
+    }
+    
+    .result-table th,
+    .result-table td {
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+  }
 </style>
 
 <script>
   // Genetic Algorithm Demo Script
-  document.addEventListener('DOMContentLoaded', function() {
+  function initializeGeneticAlgorithm() {
     const entry = document.querySelector("#targetString") as HTMLInputElement;
     const result = document.querySelector(".result") as HTMLElement;
     const cm = document.getElementById("crossOverMethod") as HTMLSelectElement;
@@ -406,5 +497,11 @@
         return;
       }
     });
-  });
+  }
+
+  // Initialize on DOMContentLoaded (for initial page load)
+  document.addEventListener('DOMContentLoaded', initializeGeneticAlgorithm);
+  
+  // Initialize on astro:after-swap (for client-side navigation)
+  document.addEventListener('astro:after-swap', initializeGeneticAlgorithm);
 </script> 
