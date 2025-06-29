@@ -8,6 +8,30 @@
 </div>
 
 <script>
+  // Declare jQuery types
+  declare global {
+    interface Window {
+      jQuery: any;
+      $: any;
+    }
+  }
+
+  // Load jQuery first
+  function loadjQuery() {
+    return new Promise((resolve, reject) => {
+      if (window.jQuery) {
+        resolve(window.jQuery);
+        return;
+      }
+      
+      const script = document.createElement('script');
+      script.src = 'https://code.jquery.com/jquery-3.7.1.min.js';
+      script.onload = () => resolve(window.jQuery);
+      script.onerror = () => reject(new Error('Failed to load jQuery'));
+      document.head.appendChild(script);
+    });
+  }
+
   interface SentimentData {
     id: string;
     url: string;
@@ -134,96 +158,122 @@
   }
 
   async function parseResult(link: string) {
-    const endPoint = "https://reddit.com" + link + ".json?limit=100";
+    const endPoint = "https://reddit.com" + link + ".json?limit=100&jsonp=?";
     
     try {
-      const response = await fetch(endPoint);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (window.jQuery) {
+        return new Promise((resolve, reject) => {
+          (window as any).jQuery.getJSON(endPoint)
+            .done((data: any) => {
+              console.log('Parse result success for:', link);
+              processPostData(data, link);
+              resolve(data);
+            })
+            .fail((jqXHR: any, textStatus: string, errorThrown: string) => {
+              console.log('Parse result failed for:', link, textStatus, errorThrown);
+            });
+        });
+      } else {
+        console.log('jQuery not available for parseResult');
       }
-      
-      const data = await response.json();
-      const title = data[0].data.children[0].data["title"];
-      const replies = data[1]["data"].children;
-      const url = "https://reddit.com" + link;
-      const noOfReplies = replies.length;
-
-      const result: SentimentData = {
-        id: data[0].data.children[0].data["id"],
-        url: url,
-        title: title,
-        negative: 0,
-        neutral: 0,
-        positive: 0
-      };
-
-      for (let i = 0; i < noOfReplies; i++) {
-        const reply = replies[i]["data"].body;
-        const score = buildFreq(reply);
-        
-        switch (true) {
-          case score === 0:
-            result.neutral += 1;
-            break;
-          case score > 0:
-            result.positive += 1;
-            break;
-          case score < 0:
-            result.negative += 1;
-            break;
-        }
-      }
-
-      if (result.negative === 0 && result.positive === 0 && result.neutral === 0) {
-        return;
-      }
-      showResult(result);
     } catch (error) {
-      console.error('Error fetching post data:', error);
+      console.error('Error in parseResult:', error);
     }
   }
 
+  function processPostData(data: any, link: string) {
+    const title = data[0].data.children[0].data["title"];
+    const replies = data[1]["data"].children;
+    const url = "https://reddit.com" + link;
+    const noOfReplies = replies.length;
+
+    const result: SentimentData = {
+      id: data[0].data.children[0].data["id"],
+      url: url,
+      title: title,
+      negative: 0,
+      neutral: 0,
+      positive: 0
+    };
+
+    for (let i = 0; i < noOfReplies; i++) {
+      const reply = replies[i]["data"].body;
+      const score = buildFreq(reply);
+      
+      switch (true) {
+        case score === 0:
+          result.neutral += 1;
+          break;
+        case score > 0:
+          result.positive += 1;
+          break;
+        case score < 0:
+          result.negative += 1;
+          break;
+      }
+    }
+
+    if (result.negative === 0 && result.positive === 0 && result.neutral === 0) {
+      return;
+    }
+    showResult(result);
+  }
+
   async function getPost() {
-    const endPoint = "https://reddit.com/r/hongkong.json?limit=3";
+    const endPoint = "https://reddit.com/r/hongkong.json?limit=3&jsonp=?";
     
     try {
       console.log('Fetching from:', endPoint);
-      const response = await fetch(endPoint);
-      console.log('Response status:', response.status);
-      console.log('Response headers:', response.headers);
       
-      if (!response.ok) {
-        console.log('Response not ok, status:', response.status);
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (window.jQuery) {
+        console.log('Using jQuery $.getJSON with JSONP');
+        return new Promise((resolve, reject) => {
+          (window as any).jQuery.getJSON(endPoint)
+            .done((data: any) => {
+              console.log('jQuery JSONP success:', data);
+              processRedditData(data);
+              resolve(data);
+            })
+            .fail((jqXHR: any, textStatus: string, errorThrown: string) => {
+              console.log('jQuery JSONP failed:', textStatus, errorThrown);
+              showError();
+            });
+        });
+      } else {
+        console.log('jQuery not available');
+        showError();
       }
-      
-      const data = await response.json();
-      console.log('Response data:', data);
-      const entries = data["data"].children;
-      
-      if (!entries || entries.length === 0) {
-        error = "No posts found from r/HongKong at this time. The subreddit may be private or temporarily unavailable.";
-        loading = false;
-        renderError();
-        return;
-      }
-      
-      // Process posts sequentially to avoid overwhelming the API
-      for (let i = 0; i < entries.length; i++) {
-        const link = entries[i]["data"]["permalink"];
-        await parseResult(link);
-      }
-      
-      setTimeout(() => {
-        loading = false;
-      }, 1000);
     } catch (error) {
-      console.error('Error fetching posts:', error);
-      // Show error message when API fails
-      const loadingDiv = document.getElementById('loading');
-      if (loadingDiv) {
-        loadingDiv.innerHTML = '<p><strong>Unable to fetch Reddit data</strong><br />The Reddit API may be temporarily unavailable or the subreddit may be private. Please try again later.</p>';
-      }
+      console.error('Error in getPost:', error);
+      showError();
+    }
+  }
+
+  function processRedditData(data: any) {
+    const entries = data["data"].children;
+    
+    if (!entries || entries.length === 0) {
+      error = "No posts found from r/HongKong at this time. The subreddit may be private or temporarily unavailable.";
+      loading = false;
+      renderError();
+      return;
+    }
+    
+    // Process posts sequentially to avoid overwhelming the API
+    for (let i = 0; i < entries.length; i++) {
+      const link = entries[i]["data"]["permalink"];
+      parseResult(link);
+    }
+    
+    setTimeout(() => {
+      loading = false;
+    }, 1000);
+  }
+
+  function showError() {
+    const loadingDiv = document.getElementById('loading');
+    if (loadingDiv) {
+      loadingDiv.innerHTML = '<p><strong>Unable to fetch Reddit data</strong><br />The Reddit API may be temporarily unavailable or the subreddit may be private. Please try again later.</p>';
     }
   }
 
@@ -236,7 +286,10 @@
 
   async function initialize() {
     try {
-      // Load AFINN lexicon only
+      // Load jQuery first
+      await loadjQuery();
+      
+      // Load AFINN lexicon
       await loadScript('/assets/scripts/afinn-111.js');
 
       // Wait a bit for everything to settle
