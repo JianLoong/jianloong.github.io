@@ -1,5 +1,5 @@
 export const SITE = {
-  website: "https://jian.sh/", // replace this with your deployed domain
+  website: "https://jian.sh/", // Your actual domain
   author: "Jian Loong Liew",
   profile: "https://jian.sh/",
   desc: "Personal blog of Jian Loong Liew - Software Engineer and Data Visualization enthusiast.",

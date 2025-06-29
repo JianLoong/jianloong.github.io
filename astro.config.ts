@@ -24,6 +24,8 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
+  base: "/", // This will be your GitHub Pages base path
+  output: "static", // Required for GitHub Pages
   integrations: [sitemap({
     filter: page => SITE.showArchives || !page.endsWith("/archives"),
   }), expressiveCode(), react()],
@@ -43,7 +45,6 @@ export default defineConfig({
     },
   },
   vite: {
-    plugins: [...tailwindcss()],
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
     },
