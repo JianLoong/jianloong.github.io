@@ -3,7 +3,7 @@ title: "AI-Generated Anime Art: Exploring Stable Diffusion with Waifu Diffusion"
 author: Jian Liew
 pubDatetime: 2022-10-21T00:00:00+11:00
 slug: ai-generated-anime-art-stable-diffusion
-featured: true
+featured: false
 draft: false
 readingTime: 4
 tags:

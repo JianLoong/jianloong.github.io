@@ -1,17 +1,19 @@
 ---
-title: "Traveling Salesman Problem using Genetic Algorithms"
+title: "TSP Algorithm: Solving the Traveling Salesman Problem with Genetic Algorithms"
 author: Jian Liew
-pubDatetime: 2019-10-23T00:00:00+11:00
-slug: tsp
-featured: true
+pubDatetime: 2019-12-15T00:00:00+11:00
+slug: tsp-algorithm-genetic-algorithms
+featured: false
 draft: false
-readingTime: 10
+readingTime: 6
 tags:
-  - tutorial
   - algorithms
-  - genetic-algorithm
+  - genetic algorithms
+  - tsp
+  - optimization
   - javascript
-description: "An interactive demonstration of solving the Traveling Salesman Problem using genetic algorithms. Explore different crossover and selection methods to find optimal routes between cities."
+  - web workers
+description: "Implementing a genetic algorithm solution for the Traveling Salesman Problem using JavaScript and Web Workers for parallel processing."
 ---
 
 This post is best viewed using the light theme.

@@ -3,7 +3,7 @@ title: "Sentiment Analysis using VADER in JavaScript"
 author: Jian Liew
 pubDatetime: 2022-10-20T00:00:00+11:00
 slug: sentiment-analysis-vader-javascript
-featured: false
+featured: true
 draft: false
 readingTime: 3
 tags:

@@ -3,7 +3,7 @@ title: "The State of University Education: An Opinionated View"
 author: Jian Liew
 pubDatetime: 2024-01-15T00:00:00+11:00
 slug: university-education-opinionated-view
-featured: false
+featured: true
 draft: false
 readingTime: 8
 tags:
