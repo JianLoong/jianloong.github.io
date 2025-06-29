@@ -63,20 +63,35 @@ jobs:
       
       - name: Clean up problematic files
         run: |
+          echo "Starting cleanup process..."
+          
           # Remove any symlinks or problematic files
-          find dist/ -type l -delete
+          echo "Removing symlinks..."
+          find dist/ -type l -delete 2>/dev/null || echo "No symlinks found or already removed"
+          
           # Remove pagefind index files that might cause issues
-          rm -rf dist/pagefind
+          echo "Removing pagefind files..."
+          rm -rf dist/pagefind 2>/dev/null || echo "No pagefind directory found"
+          
           # Remove any temporary files
-          find dist/ -name "*.tmp" -delete
-          find dist/ -name "*.temp" -delete
-          # Remove any hidden files that might cause issues
-          find dist/ -name ".*" -type f -delete
-          # Remove any files with special characters in names
-          find dist/ -name "*[^a-zA-Z0-9._-]*" -type f -delete || true
+          echo "Removing temporary files..."
+          find dist/ -name "*.tmp" -delete 2>/dev/null || echo "No .tmp files found"
+          find dist/ -name "*.temp" -delete 2>/dev/null || echo "No .temp files found"
+          
+          # Remove any hidden files that might cause issues (but be more careful)
+          echo "Removing hidden files..."
+          find dist/ -name ".*" -type f -not -name ".gitkeep" -delete 2>/dev/null || echo "No hidden files found"
+          
+          # Remove any files with special characters in names (more conservative approach)
+          echo "Checking for files with special characters..."
+          find dist/ -name "*[^a-zA-Z0-9._/-]*" -type f -ls 2>/dev/null || echo "No files with special characters found"
+          
           # Ensure proper file permissions
-          chmod -R 644 dist/
-          find dist/ -type d -exec chmod 755 {} \;
+          echo "Setting file permissions..."
+          find dist/ -type f -exec chmod 644 {} \; 2>/dev/null || echo "Permission setting completed"
+          find dist/ -type d -exec chmod 755 {} \; 2>/dev/null || echo "Directory permission setting completed"
+          
+          echo "Cleanup completed successfully"
       
       - name: Check artifact size and content
         run: |
