@@ -26,6 +26,10 @@ export default defineConfig({
   site: SITE.website,
   base: "/", // This will be your GitHub Pages base path
   output: "static", // Required for GitHub Pages
+  build: {
+    assets: "assets",
+    inlineStylesheets: "auto",
+  },
   integrations: [sitemap({
     filter: page => SITE.showArchives || !page.endsWith("/archives"),
   }), expressiveCode(), react()],
@@ -48,6 +52,13 @@ export default defineConfig({
     plugins: [tailwindcss() as any],
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: undefined,
+        },
+      },
     },
   },
   image: {

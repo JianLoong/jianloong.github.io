@@ -44,6 +44,37 @@ jobs:
       - name: Build the project
         run: pnpm run build
       
+      - name: Clean up problematic files
+        run: |
+          # Remove any symlinks or problematic files
+          find dist/ -type l -delete
+          # Remove pagefind index files that might cause issues
+          rm -rf dist/pagefind
+          # Remove any temporary files
+          find dist/ -name "*.tmp" -delete
+          find dist/ -name "*.temp" -delete
+          # Remove any hidden files that might cause issues
+          find dist/ -name ".*" -type f -delete
+          # Remove any files with special characters in names
+          find dist/ -name "*[^a-zA-Z0-9._-]*" -type f -delete || true
+      
+      - name: Check artifact size and content
+        run: |
+          echo "=== Checking artifact size ==="
+          du -sh dist/
+          echo ""
+          echo "=== Checking for symlinks ==="
+          find dist/ -type l -ls || echo "No symlinks found"
+          echo ""
+          echo "=== Checking for large files (>10MB) ==="
+          find dist/ -type f -size +10M -exec ls -lh {} \; || echo "No files larger than 10MB found"
+          echo ""
+          echo "=== Total file count ==="
+          find dist/ -type f | wc -l
+          echo ""
+          echo "=== Directory structure (first level) ==="
+          ls -la dist/
+      
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
