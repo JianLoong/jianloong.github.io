@@ -15,6 +15,9 @@ if (!SITE.showArchives) {
 
 const posts = await getCollection("blog", ({ data }) => !data.draft);
 
+// Filter out project posts from archives
+const nonProjectPosts = posts.filter(post => !post.data.tags.includes("project"));
+
 const months = [
   "January",
   "February",
@@ -36,7 +39,7 @@ const months = [
   <Main pageTitle="Archives" pageDesc="All the articles I've archived.">
     {
       Object.entries(
-        getPostsByGroupCondition(posts, post =>
+        getPostsByGroupCondition(nonProjectPosts, post =>
           post.data.pubDatetime.getFullYear()
         )
       )
