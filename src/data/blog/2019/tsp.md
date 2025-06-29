@@ -3,7 +3,7 @@ title: "Traveling Salesman Problem using Genetic Algorithms"
 author: Jian Liew
 pubDatetime: 2019-10-23T00:00:00+11:00
 slug: tsp
-featured: false
+featured: true
 draft: false
 readingTime: 10
 tags:

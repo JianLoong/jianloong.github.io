@@ -1,15 +1,16 @@
 ---
-title: "UML Statecharts: A Practical Guide to State Modeling"
+title: "Statechart Diagrams: Visualizing Complex System Behavior"
 author: Jian Liew
-pubDatetime: 2021-10-24T00:00:00+11:00
-slug: uml-statecharts
-featured: true
+pubDatetime: 2021-10-15T00:00:00+11:00
+slug: statechart-diagrams
+featured: false
 draft: false
-readingTime: 8
+readingTime: 6
 tags:
   - software engineering
-  - tutorial
-description: "A practical guide to UML Statecharts, walking through the iterative process of creating state diagrams for an e-commerce order system with real-world examples."
+  - diagrams
+  - statecharts
+description: "Learn how to create and interpret statechart diagrams to model complex system behavior and state transitions in software engineering."
 
 ---
 

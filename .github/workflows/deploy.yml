@@ -62,7 +62,7 @@ jobs:
         run: pnpm install --frozen-lockfile
       
       - name: Build the project
-        run: pnpm run build
+        run: pnpm run build:with-search
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
