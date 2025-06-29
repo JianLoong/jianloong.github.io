@@ -1,0 +1,410 @@
+---
+// Genetic Algorithm Demo Component
+---
+
+<div class="genetic-algorithm-demo">
+  <div class="controls">
+    <div class="control-group">
+      <label for="crossOver">Cross Over Method</label> 
+      <br>
+      <select id="crossOverMethod" class="select-css">
+        <option value="onePoint">One Point</option>
+        <option value="twoPoint">Two Point</option>
+        <option value="uniform">Uniform</option>
+        <option value="pmx">PMX</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label for="selection">Selection Method</label> 
+      <br>
+      <select id="selectionMethod" class="select-css">
+        <option value="tournament">Tournament</option>
+        <option value="random">Random</option>
+        <option value="rank">Rank</option>
+        <option value="rouletteWheel">Roulette Wheel</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <hr>
+      <label for="targetString">Target String: </label> 
+      <input type="text" id="targetString" autocomplete="off" placeholder="" value="GA will obtain this string">
+      <hr>
+    </div>
+
+    <button type="button" id="run" class="button">Run</button>
+  </div>
+
+  <div class="results">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+      <table style="font-family: monospace;" class="result-table table table-bordered table-striped mb-0">
+        <thead>
+          <tr><th>Generation</th><th>Fitness</th><th>String</th></tr>
+        </thead>
+        <tbody class="result"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<style>
+  .genetic-algorithm-demo {
+    margin: 2rem 0;
+  }
+
+  .controls {
+    margin-bottom: 2rem;
+  }
+
+  .control-group {
+    margin-bottom: 1rem;
+  }
+
+  .select-css {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: var(--theme-bg);
+    color: var(--theme-text);
+  }
+
+  #targetString {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid var(--theme-border);
+    border-radius: 4px;
+    background-color: var(--theme-bg);
+    color: var(--theme-text);
+  }
+
+  .button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .button:hover {
+    background-color: #45a049;
+  }
+
+  .my-custom-scrollbar {
+    position: relative;
+    height: 35rem;
+    overflow: auto;
+  }
+
+  .result-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .result-table th,
+  .result-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid var(--theme-border);
+  }
+
+  .result-table th {
+    background-color: var(--theme-bg-secondary);
+    font-weight: bold;
+  }
+
+  .result-table tbody tr:nth-child(even) {
+    background-color: var(--theme-bg-secondary);
+  }
+
+  .result-table tbody tr:hover {
+    background-color: var(--theme-bg-tertiary);
+  }
+
+  /* Hide table initially */
+  .result-table {
+    display: none;
+  }
+
+  .result-table.show {
+    display: table;
+  }
+</style>
+
+<script>
+  // Genetic Algorithm Demo Script
+  document.addEventListener('DOMContentLoaded', function() {
+    const entry = document.querySelector("#targetString") as HTMLInputElement;
+    const result = document.querySelector(".result") as HTMLElement;
+    const cm = document.getElementById("crossOverMethod") as HTMLSelectElement;
+    const sm = document.getElementById("selectionMethod") as HTMLSelectElement;
+    const button = document.getElementById("run") as HTMLButtonElement;
+    const resultTable = document.querySelector(".result-table") as HTMLTableElement;
+
+    if (!entry || !result || !cm || !sm || !button || !resultTable) {
+      console.error('Required DOM elements not found');
+      return;
+    }
+
+    let isResultTableShown = false;
+
+    // Genetic Algorithm implementation
+    class GeneticAlgorithm {
+      public generation: number;
+      
+      constructor(target: string, populationSize = 100, mutationRate = 0.01) {
+        this.target = target;
+        this.populationSize = populationSize;
+        this.mutationRate = mutationRate;
+        this.population = this.initializePopulation();
+        this.generation = 0;
+      }
+
+      private target: string;
+      private populationSize: number;
+      private mutationRate: number;
+      private population: string[];
+
+      initializePopulation(): string[] {
+        const population: string[] = [];
+        for (let i = 0; i < this.populationSize; i++) {
+          population.push(this.generateRandomString());
+        }
+        return population;
+      }
+
+      generateRandomString(): string {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ';
+        let result = '';
+        for (let i = 0; i < this.target.length; i++) {
+          result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+      }
+
+      fitness(individual: string): number {
+        let score = 0;
+        for (let i = 0; i < individual.length; i++) {
+          if (individual[i] === this.target[i]) {
+            score++;
+          }
+        }
+        return score / this.target.length;
+      }
+
+      select(population: string[], method: string): string {
+        switch (method) {
+          case 'tournament':
+            return this.tournamentSelection(population);
+          case 'random':
+            return this.randomSelection(population);
+          case 'rank':
+            return this.rankSelection(population);
+          case 'rouletteWheel':
+            return this.rouletteWheelSelection(population);
+          default:
+            return this.tournamentSelection(population);
+        }
+      }
+
+      tournamentSelection(population: string[]): string {
+        const tournamentSize = 3;
+        let best: string | null = null;
+        for (let i = 0; i < tournamentSize; i++) {
+          const randomIndex = Math.floor(Math.random() * population.length);
+          const individual = population[randomIndex];
+          if (best === null || this.fitness(individual) > this.fitness(best)) {
+            best = individual;
+          }
+        }
+        return best!;
+      }
+
+      randomSelection(population: string[]): string {
+        return population[Math.floor(Math.random() * population.length)];
+      }
+
+      rankSelection(population: string[]): string {
+        const sorted = [...population].sort((a, b) => this.fitness(b) - this.fitness(a));
+        const rank = Math.floor(Math.random() * sorted.length);
+        return sorted[rank];
+      }
+
+      rouletteWheelSelection(population: string[]): string {
+        const fitnesses = population.map(ind => this.fitness(ind));
+        const totalFitness = fitnesses.reduce((sum, fitness) => sum + fitness, 0);
+        let random = Math.random() * totalFitness;
+        
+        for (let i = 0; i < population.length; i++) {
+          random -= fitnesses[i];
+          if (random <= 0) {
+            return population[i];
+          }
+        }
+        return population[0];
+      }
+
+      crossover(parent1: string, parent2: string, method: string): [string, string] {
+        switch (method) {
+          case 'onePoint':
+            return this.onePointCrossover(parent1, parent2);
+          case 'twoPoint':
+            return this.twoPointCrossover(parent1, parent2);
+          case 'uniform':
+            return this.uniformCrossover(parent1, parent2);
+          case 'pmx':
+            return this.pmxCrossover(parent1, parent2);
+          default:
+            return this.onePointCrossover(parent1, parent2);
+        }
+      }
+
+      onePointCrossover(parent1: string, parent2: string): [string, string] {
+        const point = Math.floor(Math.random() * parent1.length);
+        const child1 = parent1.substring(0, point) + parent2.substring(point);
+        const child2 = parent2.substring(0, point) + parent1.substring(point);
+        return [child1, child2];
+      }
+
+      twoPointCrossover(parent1: string, parent2: string): [string, string] {
+        const point1 = Math.floor(Math.random() * parent1.length);
+        const point2 = Math.floor(Math.random() * parent1.length);
+        const start = Math.min(point1, point2);
+        const end = Math.max(point1, point2);
+        
+        const child1 = parent1.substring(0, start) + parent2.substring(start, end) + parent1.substring(end);
+        const child2 = parent2.substring(0, start) + parent1.substring(start, end) + parent2.substring(end);
+        return [child1, child2];
+      }
+
+      uniformCrossover(parent1: string, parent2: string): [string, string] {
+        let child1 = '';
+        let child2 = '';
+        
+        for (let i = 0; i < parent1.length; i++) {
+          if (Math.random() < 0.5) {
+            child1 += parent1[i];
+            child2 += parent2[i];
+          } else {
+            child1 += parent2[i];
+            child2 += parent1[i];
+          }
+        }
+        
+        return [child1, child2];
+      }
+
+      pmxCrossover(parent1: string, parent2: string): [string, string] {
+        // Simplified PMX - for string matching, we'll use one-point crossover
+        return this.onePointCrossover(parent1, parent2);
+      }
+
+      mutate(individual: string): string {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ';
+        let mutated = individual.split('');
+        
+        for (let i = 0; i < mutated.length; i++) {
+          if (Math.random() < this.mutationRate) {
+            mutated[i] = chars.charAt(Math.floor(Math.random() * chars.length));
+          }
+        }
+        
+        return mutated.join('');
+      }
+
+      evolve(selectionMethod: string, crossoverMethod: string, callback?: (generation: number, fitness: number, individual: string) => void): number {
+        const newPopulation: string[] = [];
+        
+        while (newPopulation.length < this.populationSize) {
+          const parent1 = this.select(this.population, selectionMethod);
+          const parent2 = this.select(this.population, selectionMethod);
+          
+          const [child1, child2] = this.crossover(parent1, parent2, crossoverMethod);
+          
+          newPopulation.push(this.mutate(child1));
+          if (newPopulation.length < this.populationSize) {
+            newPopulation.push(this.mutate(child2));
+          }
+        }
+        
+        this.population = newPopulation;
+        this.generation++;
+        
+        // Find best individual
+        const bestIndividual = this.population.reduce((best, current) => 
+          this.fitness(current) > this.fitness(best) ? current : best
+        );
+        
+        const bestFitness = this.fitness(bestIndividual);
+        
+        // Call callback with results
+        if (callback) {
+          callback(this.generation, bestFitness, bestIndividual);
+        }
+        
+        return bestFitness;
+      }
+    }
+
+    // Event handlers
+    cm.addEventListener('change', function() {
+      result.innerHTML = "";
+      if (entry.value.length >= 100 || entry.value.length == 0) {
+        return;   
+      }
+    });
+
+    button.addEventListener('click', function() {
+      if (entry.value == "") {
+        return;
+      }
+      
+      resultTable.classList.add('show');
+      result.innerHTML = "";
+      
+      const crossOverMethod = cm.options[cm.selectedIndex].value;
+      const selectionMethod = sm.options[sm.selectedIndex].value;
+      const targetString = entry.value;
+      
+      // Create and run genetic algorithm
+      const ga = new GeneticAlgorithm(targetString);
+      
+      const runGeneration = () => {
+        const fitness = ga.evolve(selectionMethod, crossOverMethod, (generation, fitness, individual) => {
+          let text = result.innerHTML;
+          result.innerHTML = `<tr><td>${generation}</td><td>${fitness.toFixed(4)}</td><td>${individual}</td></tr>` + text;
+          
+          if (!isResultTableShown) {
+            isResultTableShown = true;
+            resultTable.classList.add('show');
+          }
+        });
+        
+        // Continue until we find the target or reach max generations
+        if (fitness < 1.0 && ga.generation < 1000) {
+          setTimeout(runGeneration, 50); // Small delay to prevent blocking
+        }
+      };
+      
+      runGeneration();
+    });
+
+    entry.addEventListener('change', function() {
+      result.innerHTML = "";
+      if (entry.value.length >= 100 || entry.value.length == 0) {
+        return;
+      }
+    });
+  });
+</script> 
