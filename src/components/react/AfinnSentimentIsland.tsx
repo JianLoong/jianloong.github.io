@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import fetchJsonp from 'fetch-jsonp';
 
 interface SentimentData {
   id: string;
@@ -13,32 +14,14 @@ interface AfinnLexicon {
   [key: string]: number;
 }
 
+const BAR_WIDTH = 120; // px
+
 export default function AfinnSentimentIsland() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [results, setResults] = useState<SentimentData[]>([]);
   const [afinnLexicon, setAfinnLexicon] = useState<AfinnLexicon | null>(null);
-  const jqueryLoaded = useRef(false);
-
-  // Load jQuery
-  const loadjQuery = (): Promise<void> => {
-    return new Promise((resolve, reject) => {
-      if ((window as any).jQuery) {
-        jqueryLoaded.current = true;
-        resolve();
-        return;
-      }
-      
-      const script = document.createElement('script');
-      script.src = 'https://code.jquery.com/jquery-3.7.1.min.js';
-      script.onload = () => {
-        jqueryLoaded.current = true;
-        resolve();
-      };
-      script.onerror = () => reject(new Error('Failed to load jQuery'));
-      document.head.appendChild(script);
-    });
-  };
+  const subreddit = 'hongkong';
 
   // Load AFINN lexicon
   const loadAfinnLexicon = (): Promise<void> => {
@@ -125,24 +108,12 @@ export default function AfinnSentimentIsland() {
 
   // Parse individual post
   const parseResult = async (link: string) => {
-    const endPoint = "https://reddit.com" + link + ".json?limit=100&jsonp=?";
-    
+    const endPoint = "https://reddit.com" + link + ".json?limit=100";
     try {
-      if (jqueryLoaded.current) {
-        return new Promise((resolve, reject) => {
-          (window as any).jQuery.getJSON(endPoint)
-            .done((data: any) => {
-              console.log('Parse result jQuery success for:', link);
-              processPostData(data, link);
-              resolve(data);
-            })
-            .fail((jqXHR: any, textStatus: string, errorThrown: string) => {
-              console.log('Parse result jQuery failed for:', link, textStatus, errorThrown);
-            });
-        });
-      } else {
-        console.log('jQuery not available for parseResult');
-      }
+      const response = await fetchJsonp(endPoint, { jsonpCallback: 'jsonp', timeout: 10000 });
+      const data = await response.json();
+      processPostData(data, link);
+      return data;
     } catch (error) {
       console.error('Error in parseResult:', error);
     }
@@ -171,31 +142,12 @@ export default function AfinnSentimentIsland() {
 
   // Get posts from Reddit
   const getPost = async () => {
-    const endPoint = "https://reddit.com/r/hongkong.json?limit=3&jsonp=?";
-    
+    const endPoint = `https://reddit.com/r/${subreddit}.json?limit=3`;
     try {
       console.log('Fetching from:', endPoint);
-      
-      if (jqueryLoaded.current) {
-        console.log('Using jQuery $.getJSON with JSONP');
-        return new Promise((resolve, reject) => {
-          (window as any).jQuery.getJSON(endPoint)
-            .done((data: any) => {
-              console.log('jQuery JSONP success:', data);
-              processRedditData(data);
-              resolve(data);
-            })
-            .fail((jqXHR: any, textStatus: string, errorThrown: string) => {
-              console.log('jQuery JSONP failed:', textStatus, errorThrown);
-              setError('Unable to fetch Reddit data. The Reddit API may be temporarily unavailable or the subreddit may be private. Please try again later.');
-              setLoading(false);
-            });
-        });
-      } else {
-        console.log('jQuery not available');
-        setError('Unable to fetch Reddit data. The Reddit API may be temporarily unavailable or the subreddit may be private. Please try again later.');
-        setLoading(false);
-      }
+      const response = await fetchJsonp(endPoint, { jsonpCallback: 'jsonp', timeout: 10000 });
+      const data = await response.json();
+      processRedditData(data);
     } catch (error) {
       console.error('Error in getPost:', error);
       setError('Unable to fetch Reddit data. The Reddit API may be temporarily unavailable or the subreddit may be private. Please try again later.');
@@ -206,13 +158,10 @@ export default function AfinnSentimentIsland() {
   // Initialize component
   const initialize = async () => {
     try {
-      await loadjQuery();
       await loadAfinnLexicon();
-      
       setTimeout(() => {
         getPost();
       }, 500);
-      
     } catch (error) {
       console.error('Failed to initialize:', error);
       setError('Failed to load required libraries. Please refresh the page.');
@@ -225,27 +174,35 @@ export default function AfinnSentimentIsland() {
   }, []);
 
   return (
-    <div className="afinn-sentiment-island">
+    <div className="vader-sentiment-island">
+      <div className="input-section">
+        <label style={{ fontWeight: 600, fontSize: 16, color: 'var(--color-foreground)', marginBottom: 6 }}>
+          Analyzing subreddit:
+        </label>
+        <div className="island-info">
+          <strong>r/hongkong</strong>
+        </div>
+      </div>
       <div className="sentiment-analysis">
-        {loading && (
-          <div className="loading">
-            <p>Loading real Reddit data from r/HongKong...</p>
-          </div>
-        )}
-        
-        {error && (
-          <div className="error">
-            <p><strong>Error</strong><br />{error}</p>
-          </div>
-        )}
-        
-        {!loading && !error && results.length > 0 && (
-          <div className="loading">
-            <p><em>Sentiment analysis complete! Results show real data from r/HongKong.</em></p>
-          </div>
-        )}
-        
         <div className="results">
+          {loading && (
+            <div className="loading">
+              <p>Loading real Reddit data from r/HongKong...</p>
+            </div>
+          )}
+          
+          {error && (
+            <div className="error">
+              <p><strong>Error</strong><br />{error}</p>
+            </div>
+          )}
+          
+          {!loading && !error && results.length > 0 && (
+            <div className="loading">
+              <p><em>Sentiment analysis complete! Results show real data from r/HongKong.</em></p>
+            </div>
+          )}
+          
           {results.map((result, index) => {
             const total = result.positive + result.negative + result.neutral;
             const positivePct = total > 0 ? Math.round((result.positive / total) * 100) : 0;
@@ -272,17 +229,17 @@ export default function AfinnSentimentIsland() {
                     </thead>
                     <tbody>
                       <tr>
-                        <td>Positive</td>
+                        <td style={{ color: '#43a047', fontWeight: 600 }}>😊 Positive</td>
                         <td>{result.positive}</td>
                         <td>{positivePct}%</td>
                       </tr>
                       <tr>
-                        <td>Negative</td>
+                        <td style={{ color: '#e53935', fontWeight: 600 }}>😠 Negative</td>
                         <td>{result.negative}</td>
                         <td>{negativePct}%</td>
                       </tr>
                       <tr>
-                        <td>Neutral</td>
+                        <td style={{ color: '#757575', fontWeight: 600 }}>😐 Neutral</td>
                         <td>{result.neutral}</td>
                         <td>{neutralPct}%</td>
                       </tr>
