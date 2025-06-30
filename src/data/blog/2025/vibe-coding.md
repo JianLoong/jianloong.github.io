@@ -1,7 +1,7 @@
 ---
 title: "Vibe Coding: The Art of Programming with Flow and Intuition"
 author: Jian
-pubDatetime: 2025-03-14T08:00:00Z
+pubDatetime: 2025-06-29T08:00:00Z
 postSlug: vibe-coding
 featured: true
 draft: false
