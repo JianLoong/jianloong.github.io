@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import * as d3 from 'd3';
+import cloud from 'd3-cloud';
+import type { Word } from 'd3-cloud';
 
 interface Story {
   id: number;
@@ -56,37 +59,6 @@ export default function HackerNewsWordCloud() {
   const [wordData, setWordData] = useState<WordData[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
-  const d3Loaded = useRef(false);
-
-  // Load D3 libraries
-  const loadD3Libraries = async (): Promise<void> => {
-    if (d3Loaded.current) return;
-
-    const loadScript = (src: string): Promise<void> => {
-      return new Promise((resolve, reject) => {
-        if (document.querySelector(`script[src="${src}"]`)) {
-          resolve();
-          return;
-        }
-
-        const script = document.createElement('script');
-        script.src = src;
-        script.onload = () => resolve();
-        script.onerror = () => reject(new Error(`Failed to load ${src}`));
-        document.head.appendChild(script);
-      });
-    };
-
-    try {
-      await Promise.all([
-        loadScript('https://d3js.org/d3.v3.min.js'),
-        loadScript('https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js')
-      ]);
-      d3Loaded.current = true;
-    } catch (error) {
-      throw new Error('Failed to load D3 libraries');
-    }
-  };
 
   // Process text for word cloud
   const processText = (text: string): string[] => {
@@ -150,10 +122,7 @@ export default function HackerNewsWordCloud() {
 
   // Render word cloud using D3
   const renderWordCloud = (words: WordData[]) => {
-    if (!svgRef.current || typeof (window as any).d3 === 'undefined') return;
-
-    const d3 = (window as any).d3;
-    const fill = d3.scale.category20();
+    if (!svgRef.current) return;
 
     // Clear existing content
     d3.select(svgRef.current).selectAll('*').remove();
@@ -162,14 +131,14 @@ export default function HackerNewsWordCloud() {
       .append('g')
       .attr('transform', `translate(${CONFIG.svgSize / 2}, ${CONFIG.svgSize / 2})`);
 
-    const layout = d3.layout.cloud()
+    cloud()
       .size([CONFIG.svgSize, CONFIG.svgSize])
-      .words(words)
+      .words(words as Word[])
       .padding(5)
       .rotate(() => ~~(Math.random() * 2) * 90)
       .font('Impact')
-      .fontSize((d: WordData) => d.size)
-      .on('end', (words: WordData[]) => {
+      .fontSize((d: Word) => d.size as number)
+      .on('end', (words: Word[]) => {
         if (words.length === 0) {
           // Fallback: simple circular layout
           const colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd'];
@@ -183,68 +152,27 @@ export default function HackerNewsWordCloud() {
               .style('font-family', 'Impact')
               .style('fill', colors[index % colors.length])
               .attr('text-anchor', 'middle')
-              .attr('font-size', word.size)
+              .attr('font-size', word.size as number)
               .attr('x', x)
               .attr('y', y)
-              .text(word.text);
+              .text(word.text ?? '');
           });
           return;
         }
 
-        const cloud = svg.selectAll('g text')
-          .data(words, (d: WordData) => d.text);
-
-        // Enter new words
-        cloud.enter()
+        const fill = d3.scaleOrdinal(d3.schemeCategory10);
+        svg.selectAll('text')
+          .data(words)
+          .enter()
           .append('text')
           .style('font-family', 'Impact')
-          .style('fill', (d: WordData, i: number) => fill(i))
+          .style('fill', (_d: Word, i: number) => fill(String(i)))
           .attr('text-anchor', 'middle')
-          .attr('font-size', 1)
-          .text((d: WordData) => d.text);
-
-        // Update existing words
-        cloud
-          .transition()
-          .duration(600)
-          .style('font-size', (d: WordData) => `${d.size}px`)
-          .attr('transform', (d: WordData) => `translate(${d.x}, ${d.y})rotate(${d.rotate})`)
-          .style('fill-opacity', 1);
-
-        // Exit old words
-        cloud.exit()
-          .transition()
-          .duration(200)
-          .style('fill-opacity', 1e-6)
-          .attr('font-size', 1)
-          .remove();
-      });
-
-    // Start the layout
-    layout.start();
-    
-    // Simple timeout fallback
-    setTimeout(() => {
-      if (svg.selectAll('text').empty()) {
-        console.log('D3 cloud layout failed, using simple fallback');
-        const colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd'];
-        words.forEach((word, index) => {
-          const angle = (index / words.length) * 2 * Math.PI;
-          const radius = 200;
-          const x = Math.cos(angle) * radius;
-          const y = Math.sin(angle) * radius;
-          
-          svg.append('text')
-            .style('font-family', 'Impact')
-            .style('fill', colors[index % colors.length])
-            .attr('text-anchor', 'middle')
-            .attr('font-size', word.size)
-            .attr('x', x)
-            .attr('y', y)
-            .text(word.text);
-        });
-      }
-    }, 5000); // 5 second timeout
+          .attr('font-size', (d: Word) => d.size as number)
+          .attr('transform', (d: Word) => `translate(${d.x},${d.y})rotate(${d.rotate})`)
+          .text((d: Word) => d.text ?? '');
+      })
+      .start();
   };
 
   // Create word cloud
@@ -252,9 +180,6 @@ export default function HackerNewsWordCloud() {
     try {
       setLoading(true);
       setError(null);
-
-      // Load D3 libraries
-      await loadD3Libraries();
 
       // Fetch and process data
       const stories = await api.fetchStories();
