@@ -51,6 +51,7 @@ export default defineConfig({
     plugins: [tailwindcss() as any],
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
+      include: ["fetch-jsonp"]
     },
     build: {
       rollupOptions: {
