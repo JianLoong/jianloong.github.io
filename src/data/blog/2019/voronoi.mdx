@@ -17,7 +17,7 @@ tags:
 description: "Explore k-Nearest Neighbour queries using Voronoi diagrams with interactive D3.js visualizations. Learn how to find the closest points and neighboring regions on maps."
 ---
 
-import Voronoi from '../../../components/Voronoi.astro';
+import VoronoiIsland from '../../../components/react/VoronoiIsland.tsx';
 
 One of the most common queries when working with maps is the nearest neighbour query. This blog post will use Voronoi Diagrams to explain more regarding the nearest neighbour query.
 
@@ -25,7 +25,7 @@ Below is an example of a Voronoi diagram generated using d3.js. One of the good 
 
 <p align="center"><strong>Fig 1. Voronoi Diagram generated with 30 random points</strong></p>
 
-<Voronoi />
+<VoronoiIsland client:load />
 
 The codes to create this diagram are as follows :-
 
