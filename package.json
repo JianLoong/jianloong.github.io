@@ -28,6 +28,7 @@
     "d3-cloud": "^1.2.7",
     "dayjs": "^1.11.13",
     "eccentric-eclipse": "link:",
+    "fetch-jsonp": "^1.3.0",
     "lodash.kebabcase": "^4.1.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
