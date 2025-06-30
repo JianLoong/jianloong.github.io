@@ -162,7 +162,7 @@ export default function HackerNewsWordCloud() {
       .append('g')
       .attr('transform', `translate(${CONFIG.svgSize / 2}, ${CONFIG.svgSize / 2})`);
 
-    d3.layout.cloud()
+    const layout = d3.layout.cloud()
       .size([CONFIG.svgSize, CONFIG.svgSize])
       .words(words)
       .padding(5)
@@ -170,6 +170,27 @@ export default function HackerNewsWordCloud() {
       .font('Impact')
       .fontSize((d: WordData) => d.size)
       .on('end', (words: WordData[]) => {
+        if (words.length === 0) {
+          // Fallback: simple circular layout
+          const colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd'];
+          words.forEach((word, index) => {
+            const angle = (index / words.length) * 2 * Math.PI;
+            const radius = 200;
+            const x = Math.cos(angle) * radius;
+            const y = Math.sin(angle) * radius;
+            
+            svg.append('text')
+              .style('font-family', 'Impact')
+              .style('fill', colors[index % colors.length])
+              .attr('text-anchor', 'middle')
+              .attr('font-size', word.size)
+              .attr('x', x)
+              .attr('y', y)
+              .text(word.text);
+          });
+          return;
+        }
+
         const cloud = svg.selectAll('g text')
           .data(words, (d: WordData) => d.text);
 
@@ -197,8 +218,33 @@ export default function HackerNewsWordCloud() {
           .style('fill-opacity', 1e-6)
           .attr('font-size', 1)
           .remove();
-      })
-      .start();
+      });
+
+    // Start the layout
+    layout.start();
+    
+    // Simple timeout fallback
+    setTimeout(() => {
+      if (svg.selectAll('text').empty()) {
+        console.log('D3 cloud layout failed, using simple fallback');
+        const colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd'];
+        words.forEach((word, index) => {
+          const angle = (index / words.length) * 2 * Math.PI;
+          const radius = 200;
+          const x = Math.cos(angle) * radius;
+          const y = Math.sin(angle) * radius;
+          
+          svg.append('text')
+            .style('font-family', 'Impact')
+            .style('fill', colors[index % colors.length])
+            .attr('text-anchor', 'middle')
+            .attr('font-size', word.size)
+            .attr('x', x)
+            .attr('y', y)
+            .text(word.text);
+        });
+      }
+    }, 5000); // 5 second timeout
   };
 
   // Create word cloud
