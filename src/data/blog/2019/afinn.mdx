@@ -1,0 +1,59 @@
+---
+title: "Sentiment Analysis of r/HongKong Using AFINN Lexicon"
+author: Jian Liew
+pubDatetime: 2019-10-13T20:56:02+11:00
+slug: sentiment-analysis-hongkong-afinn
+featured: false
+draft: false
+readingTime: 5
+tags:
+  - sentiment analysis
+  - reddit
+  - data visualization
+  - javascript
+  - api
+  - mdx
+  - react
+description: "A real-time sentiment analysis of Reddit's Hong Kong subreddit using the AFINN lexicon to categorize comments as positive, negative, or neutral with interactive charts."
+---
+
+import AfinnSentimentIsland from '../../../components/react/AfinnSentimentIsland.tsx';
+
+## Sentiment Analysis for the Sub-Reddit "HongKong"
+
+This post will perform **sentiment analysis** using AFINN. AFINN is a list of words rated for valence rated with an integer between minus five(negative) and plus five (positive). This implementation uses ***AFINN-en-165***. <sup>[1](#1)</sup>
+
+This approach however is very naive as it does not build any models to determine the context of the usage of the word itself.
+
+## Interactive AFINN Sentiment Analysis
+
+Below is a real-time sentiment analysis of Reddit's r/HongKong subreddit using the AFINN lexicon. This React component demonstrates how AFINN categorizes comments as positive, negative, or neutral:
+
+<AfinnSentimentIsland client:load />
+
+**Note**: Due to CORS restrictions, the live Reddit data may not load in modern browsers. The charts above show sample data to demonstrate the sentiment analysis functionality.
+
+## How AFINN Works
+
+AFINN (Finn Årup Nielsen's Dictionary) is a lexicon-based approach to sentiment analysis that:
+
+1. **Assigns scores** to words (-5 to +5 scale)
+2. **Sums scores** for all words in a text
+3. **Categorizes** based on total score:
+   - Positive score → Positive sentiment
+   - Negative score → Negative sentiment  
+   - Zero score → Neutral sentiment
+
+## Benefits of Using MDX
+
+This post demonstrates the power of MDX (Markdown + JSX) for blog posts:
+
+1. **Direct Component Import**: React components can be imported and used directly in the content
+2. **Interactive Content**: Rich, interactive demos embedded seamlessly in text
+3. **Better Developer Experience**: TypeScript support, better tooling, and cleaner code
+4. **Performance**: Astro islands ensure only necessary JavaScript is loaded
+5. **Flexibility**: Mix static content with dynamic components as needed
+
+## References
+
+<a name="1">1</a>. [AFINN Sentiment Analysis](https://darenr.github.io/afinn/) 

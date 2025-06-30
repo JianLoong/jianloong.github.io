@@ -11,15 +11,9 @@ import {
 import { transformerFileName } from "./src/utils/transformers/fileName";
 import { SITE } from "./src/config";
 
-
-
 import expressiveCode from "astro-expressive-code";
-
-
-
 import react from "@astrojs/react";
-
-
+import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
@@ -30,9 +24,14 @@ export default defineConfig({
     assets: "assets",
     inlineStylesheets: "auto",
   },
-  integrations: [sitemap({
-    filter: page => SITE.showArchives || !page.endsWith("/archives"),
-  }), expressiveCode(), react()],
+  integrations: [
+    sitemap({
+      filter: page => SITE.showArchives || !page.endsWith("/archives"),
+    }), 
+    expressiveCode(), 
+    react(),
+    mdx()
+  ],
   markdown: {
     remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
     shikiConfig: {

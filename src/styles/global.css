@@ -74,3 +74,269 @@ html[data-theme="dark"] {
 :target {
   scroll-margin-block: 1rem;
 }
+
+/* Astro Islands Styles */
+.vader-sentiment-island {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: var(--color-muted);
+}
+
+.vader-sentiment-island .input-section {
+  margin-bottom: 1.5rem;
+}
+
+.vader-sentiment-island .input-section label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--color-foreground);
+}
+
+.vader-sentiment-island .textwrapper {
+  border: 2px solid var(--color-border);
+  margin: 10px 0;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: var(--color-muted);
+}
+
+.vader-sentiment-island .input-textarea {
+  width: 100%;
+  min-height: 120px;
+  border: 2px solid var(--color-border);
+  padding: 12px;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: inherit;
+  border-radius: 4px;
+  transition: border-color 0.2s ease;
+  resize: vertical;
+}
+
+.vader-sentiment-island .input-textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+.vader-sentiment-island .analyze-button {
+  background-color: var(--color-accent);
+  border: none;
+  color: var(--color-background);
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  margin: 15px 0;
+}
+
+.vader-sentiment-island .analyze-button:hover:not(:disabled) {
+  opacity: 0.8;
+}
+
+.vader-sentiment-island .analyze-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.vader-sentiment-island .results-section {
+  margin-top: 2rem;
+}
+
+.vader-sentiment-island .results-section h4 {
+  color: var(--color-foreground);
+  margin: 20px 0 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.vader-sentiment-island .sentiment-summary {
+  margin: 15px 0;
+  text-align: center;
+}
+
+.vader-sentiment-island .sentiment-label {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: var(--color-muted);
+}
+
+.vader-sentiment-island .result-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+}
+
+.vader-sentiment-island .result-table th {
+  background-color: var(--color-accent);
+  color: var(--color-background);
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.vader-sentiment-island .result-table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.vader-sentiment-island .result-table tr:nth-child(even) {
+  background-color: var(--color-muted);
+}
+
+.vader-sentiment-island .result-table tr:hover {
+  background-color: rgba(97, 123, 255, 0.1);
+}
+
+.vader-sentiment-island .results-explanation {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+}
+
+.vader-sentiment-island .results-explanation h5 {
+  color: var(--color-foreground);
+  margin: 0 0 1rem 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.vader-sentiment-island .score-explanations {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.vader-sentiment-island .score-item {
+  color: var(--color-foreground);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.vader-sentiment-island .compound-scale {
+  color: var(--color-foreground);
+  font-size: 14px;
+}
+
+.vader-sentiment-island .compound-scale ul {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.5rem;
+}
+
+.vader-sentiment-island .compound-scale li {
+  margin-bottom: 0.25rem;
+}
+
+.vader-sentiment-island .island-info {
+  margin-top: 1rem;
+  text-align: center;
+  font-style: italic;
+  color: var(--color-foreground);
+  opacity: 0.7;
+}
+
+/* Interactive Demo Island Styles */
+.interactive-demo-island {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: var(--color-muted);
+}
+
+.interactive-demo-island h3 {
+  color: var(--color-foreground);
+  margin: 0 0 1rem 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.interactive-demo-island p {
+  color: var(--color-foreground);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.interactive-demo-island .demo-button {
+  background-color: var(--color-accent);
+  border: none;
+  color: var(--color-background);
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 15px 0;
+}
+
+.interactive-demo-island .demo-button:hover:not(:disabled) {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+.interactive-demo-island .demo-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.interactive-demo-island .demo-result {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-foreground);
+}
+
+.interactive-demo-island .demo-info {
+  margin-top: 1rem;
+  text-align: center;
+  font-style: italic;
+  color: var(--color-foreground);
+  opacity: 0.7;
+}
+
+/* Responsive design for islands */
+@media (max-width: 768px) {
+  .vader-sentiment-island .input-textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  .vader-sentiment-island .analyze-button,
+  .interactive-demo-island .demo-button {
+    width: 100%;
+    padding: 15px 24px;
+  }
+  
+  .vader-sentiment-island .result-table {
+    font-size: 12px;
+  }
+  
+  .vader-sentiment-island .result-table th,
+  .vader-sentiment-island .result-table td {
+    padding: 8px 4px;
+  }
+}

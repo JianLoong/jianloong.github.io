@@ -9,12 +9,22 @@ readingTime: 3
 tags:
   - tutorial
   - javascript
+  - mdx
+  - react
 description: "A simple implementation of VADER sentiment analysis in JavaScript with an interactive demo. Learn how to analyze text sentiment using the VADER lexicon and rule-based approach."
 ---
+
+import VaderSentimentIsland from '../../../components/react/VaderSentimentIsland.tsx';
 
 This post is a simple implementation of how to use the VADER sentiment analysis in a paragraph. VADER (Valence Aware Dictionary and sEntiment Reasoner) is a "lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media."
 
 VADER is particularly effective for social media analysis because it's designed to handle the informal nature of online communication. It recognizes text emoticons like `:)` and `:(`, interprets ALL CAPS as emphasis, and accounts for the intensity of exclamation marks and question marks. While traditional sentiment analysis tools often struggle with casual, unstructured text, VADER was specifically trained on social media content and informal language patterns.
+
+## Interactive VADER Demo
+
+Try the interactive demo below! This React component demonstrates VADER sentiment analysis in action:
+
+<VaderSentimentIsland client:load />
 
 ## How VADER Works
 
@@ -34,8 +44,6 @@ The negative, positive, and neutral scores always sum to 1.0, representing the d
 | 0.05 to 1.0 | Positive | Generally positive sentiment |
 | -0.05 to 0.05 | Neutral | Mixed or neutral sentiment |
 | -1.0 to -0.05 | Negative | Generally negative sentiment |
-
-For the project page, please go [here](https://jian.sh/sentimentanalysis)
 
 ## Examples
 
@@ -78,6 +86,16 @@ Here's how VADER analyzes content from blogs in this website:
 
 Notice how VADER correctly identifies the enthusiastic tone of the AI art post (high positive score) versus the neutral, factual tone of the Pi-hole tutorial (neutral score). This demonstrates VADER's ability to distinguish between different types of technical content.
 
+## Benefits of Using MDX
+
+This post demonstrates the power of MDX (Markdown + JSX) for blog posts:
+
+1. **Direct Component Import**: React components can be imported and used directly in the content
+2. **Interactive Content**: Rich, interactive demos embedded seamlessly in text
+3. **Better Developer Experience**: TypeScript support, better tooling, and cleaner code
+4. **Performance**: Astro islands ensure only necessary JavaScript is loaded
+5. **Flexibility**: Mix static content with dynamic components as needed
+
 ## Conclusion
 
 VADER sentiment analysis provides a powerful and accessible way to analyze text sentiment, particularly for social media and informal content. Its lexicon-based approach with rule-based modifications makes it both fast and effective for real-time applications.
@@ -90,8 +108,10 @@ Key takeaways:
 
 Whether you're building a social media monitoring tool, analyzing customer feedback, or exploring sentiment analysis concepts, VADER offers a solid foundation that balances simplicity with effectiveness. The interactive demo above shows how easy it is to integrate VADER into web applications for real-time sentiment analysis.
 
+For the project page, please go [here](https://jian.sh/sentimentanalysis)
+
 ## References
 
 Cjhutto CJHUTTO/Vadersentiment: Vader sentiment analysis. vader (valence aware dictionary and sentiment reasoner) is a lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media, and works well on texts from other domains., GitHub. Available at: https://github.com/cjhutto/vaderSentiment (Accessed: October 20, 2022). 
 
-Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text. Eighth International Conference on Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014.
+Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text. Eighth International Conference on Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014. 

@@ -1,0 +1,189 @@
+---
+title: "Hacker News Word Cloud: Visualizing What's Trending"
+author: Jian Liew
+pubDatetime: 2019-10-14T20:56:02+11:00
+slug: hacker-news-word-cloud
+featured: true
+draft: false
+readingTime: 8
+tags:
+  - data visualization
+  - tutorial
+description: "See what's buzzing on Hacker News with a live word cloud, and learn how to build your own with D3.js and JavaScript."
+---
+
+import HackerNewsWordCloud from '../../../components/react/HackerNewsWordCloud';
+
+Ever wondered what topics are catching everyone's attention on Hacker News right now? Instead of scrolling through endless headlines, wouldn't it be cool to see the most common words pop out visually? That's exactly what this project does—a live word cloud that updates with the latest top stories from Hacker News.
+
+## Why a Word Cloud?
+
+Word clouds are a fun way to get a quick sense of what's trending. They aren't perfect for deep analysis (context matters!), but they're great for spotting patterns and getting a "vibe check" of the day's tech news.
+
+## How It Works (Live Demo Below!)
+
+Every time you load this page, the app fetches the latest top 20 stories from Hacker News, extracts the titles, and builds a word cloud. The more often a word appears, the bigger it gets. Common words like "the" or "and" are filtered out, so you only see what's unique to today's headlines.
+
+### Live Word Cloud
+
+<HackerNewsWordCloud client:load />
+
+## How the Word Cloud is Generated
+
+Here's a quick look at the process:
+
+```
+┌────────────────────────────────────────────────────────┐
+│              WORD CLOUD GENERATION                     │
+├────────────────────────────────────────────────────────┤
+│                                                        │
+│  ┌─────────────┐    ┌─────────────────────────────┐    │
+│  │   Fetch     │──> │        Process Words        │    │
+│  │   Data      │    │  • Clean text               │    │
+│  └─────────────┘    │  • Remove stop words        │    │
+│                     │  • Count frequency          │    │
+│                     └─────────────────────────────┘    │
+│                              │                         │
+│                              ▼                         │
+│                     ┌─────────────┐                    │
+│                     │   Display   │                    │
+│                     │   Cloud     │                    │
+│                     └─────────────┘                    │
+│                                                        │
+└────────────────────────────────────────────────────────┘
+```
+
+### Step-by-Step
+
+1. **Fetch Data:** Get the top 20 story titles from the Hacker News API.
+2. **Process Words:** Clean up the text, remove common "stop words" (like "the", "is", "and"), and count how often each word appears.
+3. **Display Cloud:** Show the words in a cloud, with size based on frequency.
+
+---
+
+## Want to Build Your Own? Here's How!
+
+Below is the core code you need to create your own live word cloud from any news source or API.
+
+### 1. HTML Structure
+
+```html
+<div class="column" id="cloud">
+  <div id="loading">Loading word cloud...</div>
+</div>
+```
+
+### 2. Configuration
+
+```javascript
+const CONFIG = {
+  containerId: 'cloud',
+  loadingId: 'loading',
+  apiEndpoint: 'https://hacker-news.firebaseio.com/v0/topstories.json',
+  storyCount: 20,
+  maxWords: 50,
+  svgSize: 800,
+  minFontSize: 50,
+  maxFontSize: 110
+};
+```
+
+### 3. Stop Words Filter
+
+```javascript
+const STOP_WORDS = new Set([
+  'about', 'after', 'all', 'also', 'am', 'an', 'and', 'another', 'any', 'are', 'as', 'at', 'be',
+  'because', 'been', 'before', 'being', 'between', 'both', 'but', 'by', 'came', 'can',
+  'come', 'could', 'did', 'do', 'each', 'for', 'from', 'get', 'got', 'has', 'had',
+  'he', 'have', 'her', 'here', 'him', 'himself', 'his', 'how', 'if', 'in', 'into',
+  'is', 'it', 'like', 'make', 'many', 'me', 'might', 'more', 'most', 'much', 'must',
+  'my', 'never', 'now', 'of', 'on', 'only', 'or', 'other', 'our', 'out', 'over',
+  'said', 'same', 'see', 'should', 'since', 'some', 'still', 'such', 'take', 'than',
+  'that', 'the', 'their', 'them', 'then', 'there', 'these', 'they', 'this', 'those',
+  'through', 'to', 'too', 'under', 'up', 'very', 'was', 'way', 'we', 'well', 'were',
+  'what', 'where', 'which', 'while', 'who', 'with', 'would', 'you', 'your', 'a', 'i', 'its', 'why', '', 'ask','hn','s'
+]);
+```
+
+### 4. Text Processing
+
+```javascript
+function processText(text) {
+  return text
+    .replace(/[^\w\s]/gi, '')  // Remove punctuation
+    .replace(/\d/g, '')        // Remove numbers
+    .toLowerCase()             // Lowercase
+    .split(/\s+/)              // Split into words
+    .filter(word => word && !STOP_WORDS.has(word));
+}
+```
+
+### 5. Fetching and Counting
+
+```javascript
+async function fetchStories() {
+  // Fetch top story IDs
+  const response = await fetch(CONFIG.apiEndpoint);
+  const storyIds = await response.json();
+  // Fetch story details
+  const stories = await Promise.all(
+    storyIds.slice(0, CONFIG.storyCount).map(id =>
+      fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(r => r.json())
+    )
+  );
+  return stories.filter(story => story && story.title);
+}
+
+function calculateFrequencies(words) {
+  const frequencies = new Map();
+  words.forEach(word => {
+    frequencies.set(word, (frequencies.get(word) || 0) + 1);
+  });
+  return frequencies;
+}
+```
+
+### 6. Rendering the Word Cloud
+
+You'll need D3.js and the d3-cloud layout library. Add these to your HTML:
+
+```html
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
+```
+
+Then, use the following to render:
+
+```javascript
+function renderWordCloud(wordData) {
+  // ... see full code in the post for scaling and rendering
+}
+```
+
+### 7. Putting It All Together
+
+```javascript
+async function createWordCloud() {
+  const stories = await fetchStories();
+  const allText = stories.map(story => story.title).join(' ');
+  const words = processText(allText);
+  const frequencies = calculateFrequencies(words);
+  // ... scale and render as shown above
+}
+```
+
+---
+
+## What Can You Do With This?
+
+- **Track Trends:** See what's hot on Hacker News at a glance.
+- **Customize:** Use any API or text source—just change the endpoint!
+- **Learn:** Great for learning about APIs, D3.js, and data visualization.
+
+## Final Thoughts
+
+Word clouds are a playful way to visualize what's happening in the tech world. While they don't tell the whole story, they're a great starting point for exploration and fun. If you want to dig deeper, try tweaking the code to include story content, comments, or even other news sources!
+
+---
+
+*Happy hacking! If you build something cool with this, let me know—I'd love to see it.* 

@@ -12,14 +12,20 @@ tags:
   - nearest-neighbour
   - d3
   - data-visualization
+  - mdx
+  - react
 description: "Explore k-Nearest Neighbour queries using Voronoi diagrams with interactive D3.js visualizations. Learn how to find the closest points and neighboring regions on maps."
 ---
+
+import Voronoi from '../../../components/Voronoi.astro';
 
 One of the most common queries when working with maps is the nearest neighbour query. This blog post will use Voronoi Diagrams to explain more regarding the nearest neighbour query.
 
 Below is an example of a Voronoi diagram generated using d3.js. One of the good use cases of a voronoi diagram in real-life applications would be where would be **finding a place to build emergency services.** This place should have the most number of neighbouring regions. For example, if you `click` on the region in the Voronoi diagram below, you can see how many regions in which it would consider this region to be its neighbour. The diagram is randomly generated based on a number of points and thus every refresh of this page will show a different Voronoi diagram.
 
 <p align="center"><strong>Fig 1. Voronoi Diagram generated with 30 random points</strong></p>
+
+<Voronoi />
 
 The codes to create this diagram are as follows :-
 
@@ -147,6 +153,16 @@ const renderCell = (svg, voronoi, index, color) => {
 };
 ```
 
+## Benefits of Using MDX
+
+This post demonstrates the power of MDX (Markdown + JSX) for blog posts:
+
+1. **Direct Component Import**: Astro components can be imported and used directly in the content
+2. **Interactive Content**: Rich, interactive demos embedded seamlessly in text
+3. **Better Developer Experience**: TypeScript support, better tooling, and cleaner code
+4. **Performance**: Astro islands ensure only necessary JavaScript is loaded
+5. **Flexibility**: Mix static content with dynamic components as needed
+
 #### Lessons from this blog post.
 
 - The learning curve for d3.js is **pretty insane.**
@@ -154,5 +170,5 @@ const renderCell = (svg, voronoi, index, color) => {
 - Generators can be iterated using the ``for...of`` construct. [MDN link](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators)
 - There is a way to make SVG responsive. Refer [this](https://medium.com/@louisemoxy/a-simple-way-to-make-d3-js-charts-svgs-responsive-7afb04bc2e4b) post.
 
-<!-- https://bl.ocks.org/aaizemberg/raw/8063f8c2d1adb7c7ee68/ -->
-<!-- https://observablehq.com/@d3/circle-dragging-iii?collection=@d3/d3-delaunay -->
+{/* https://bl.ocks.org/aaizemberg/raw/8063f8c2d1adb7c7ee68/ */}
+{/* https://observablehq.com/@d3/circle-dragging-iii?collection=@d3/d3-delaunay */} 
