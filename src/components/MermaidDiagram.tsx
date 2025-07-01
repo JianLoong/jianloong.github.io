@@ -49,6 +49,9 @@ export default function MermaidDiagram({
                 securityLevel: 'loose',
                 htmlLabels: true,
                 fontSize: 16,
+                themeVariables: {
+                    fontSize: '16px'
+                },
                 flowchart: {
                     useMaxWidth: true,
                     htmlLabels: true,

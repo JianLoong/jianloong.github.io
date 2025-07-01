@@ -340,3 +340,7 @@ html[data-theme="dark"] {
     padding: 8px 4px;
   }
 }
+
+.mermaid text {
+  font-size: 16px !important;
+}
