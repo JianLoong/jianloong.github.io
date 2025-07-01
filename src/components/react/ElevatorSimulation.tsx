@@ -297,6 +297,49 @@ const ElevatorSimulation: React.FC = () => {
                 marginRight: '2rem'
             }}
         >
+            {/* Direction indicator above the elevator car, centered and not blocking the floor */}
+            <div
+                style={{
+                    position: 'absolute',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    bottom: `${elevator.currentFloor * 50 + 44}px`, // 4px above the car
+                    zIndex: 3,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 40,
+                    height: 18
+                }}
+            >
+                {elevator.direction === 'up' && (
+                    <div style={{
+                        width: 0,
+                        height: 0,
+                        borderLeft: '10px solid transparent',
+                        borderRight: '10px solid transparent',
+                        borderBottom: '16px solid #2196F3',
+                    }} title="Up" />
+                )}
+                {elevator.direction === 'down' && (
+                    <div style={{
+                        width: 0,
+                        height: 0,
+                        borderLeft: '10px solid transparent',
+                        borderRight: '10px solid transparent',
+                        borderTop: '16px solid #2196F3',
+                    }} title="Down" />
+                )}
+                {elevator.direction === 'idle' && (
+                    <div style={{
+                        width: 18,
+                        height: 5,
+                        background: '#bbb',
+                        borderRadius: 2,
+                    }} title="Idle" />
+                )}
+            </div>
+            {/* Restore floor rendering */}
             {Array.from({ length: NUM_FLOORS }, (_, i) => {
                 const requests = getFloorRequests(system.pendingRequests, i);
                 return (
@@ -321,8 +364,6 @@ const ElevatorSimulation: React.FC = () => {
                     </div>
                 );
             })}
-
-            {/* Elevator car */}
             <div
                 className={`absolute flex items-center justify-center text-sm transition-all duration-500 border-2 border-gray-700 dark:border-gray-300 rounded ${elevator.passengers.length > 0
                     ? 'bg-green-500 dark:bg-green-600 text-white'
@@ -332,10 +373,13 @@ const ElevatorSimulation: React.FC = () => {
                     left: '40px',
                     bottom: `${elevator.currentFloor * 50}px`,
                     width: '40px',
-                    height: '40px'
+                    height: '40px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                 }}
             >
-                {elevator.passengers.length}
+                <span>{elevator.passengers.length}</span>
             </div>
         </div>
     );

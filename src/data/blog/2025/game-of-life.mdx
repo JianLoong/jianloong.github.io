@@ -7,16 +7,23 @@ featured: false
 draft: false
 readingTime: 5
 tags:
-  - software-engineering
-  - data-visualization
-  - tutorial
-description: "An interactive React implementation of Conway's Game of Life. Explore cellular automata through this classic simulation with customizable patterns and controls."
-summary: "Explore cellular automata with an interactive Game of Life simulation."
+  - computer-science
+description: "An interactive React implementation of Conway's Game of Life. Experiment with patterns and see how they evolve!"
+summary: "Explore Conway's Game of Life with an interactive React demo."
 ---
 
-# Interactive Game of Life
+Conway's Game of Life is a cellular automaton devised by mathematician John Conway. It consists of a grid of cells that evolve through generations according to a set of simple rules. This interactive demo lets you experiment with the Game of Life directly in your browser!
 
-Conway's Game of Life is a fascinating cellular automaton devised by mathematician John Conway in 1970. It demonstrates how complex behaviors can emerge from simple rules. This interactive demo lets you experiment with various patterns and see how they evolve over time!
+## How to use
+- Click cells to toggle them alive or dead.
+- Press **Start** to run the simulation.
+- Press **Stop** to pause.
+- Use **Clear** to reset the grid.
+- Use **Randomize** to fill the grid with a random pattern.
+
+import GameOfLife from "@/components/react/GameOfLife"
+
+<GameOfLife client:load />
 
 ## Features
 
@@ -72,10 +79,6 @@ Explore classic Game of Life patterns that demonstrate different behaviors:
 - Press **Stop** to pause
 - Use **Clear** to reset the grid
 - Use **Randomize** to fill the grid with a random pattern
-
-import GameOfLife from "@/components/react/GameOfLife"
-
-<GameOfLife client:load />
 
 ## Rules and Emergence
 
