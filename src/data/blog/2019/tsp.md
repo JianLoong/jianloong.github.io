@@ -7,12 +7,8 @@ featured: false
 draft: false
 readingTime: 6
 tags:
-  - algorithms
-  - genetic algorithms
-  - tsp
-  - optimization
-  - javascript
-  - web workers
+  - software-engineering
+  - project
 description: "Implementing a genetic algorithm solution for the Traveling Salesman Problem using JavaScript and Web Workers for parallel processing."
 ---
 

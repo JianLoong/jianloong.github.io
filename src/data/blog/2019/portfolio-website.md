@@ -10,8 +10,6 @@ projectImage: "fit5032.png"
 tags:
   - project
   - education
-  - asp-net-mvc
-  - curriculum-development
 description: "Restructured and revamped FIT5032"
 ---
 

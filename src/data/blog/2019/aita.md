@@ -7,12 +7,8 @@ featured: false
 draft: false
 readingTime: 6
 tags:
-  - reddit
-  - data visualization
-  - javascript
-  - api
-  - web scraping
-  - community analysis
+  - data-visualization
+  - tools
 description: "A real-time data visualization project analyzing community judgments from the r/AmItheAsshole subreddit using Reddit's JSON API and interactive charts."
 
 ---

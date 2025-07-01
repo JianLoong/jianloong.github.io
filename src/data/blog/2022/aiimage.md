@@ -8,11 +8,7 @@ draft: false
 readingTime: 4
 tags:
   - ai
-  - art
-  - stable diffusion
-  - anime
-  - machine learning
-  - image generation
+  - tutorial
 description: "Exploring AI-generated anime art using Stable Diffusion and the Waifu Diffusion model, with examples and prompt engineering techniques."
 
 ---

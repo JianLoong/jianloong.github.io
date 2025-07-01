@@ -8,10 +8,7 @@ draft: true
 readingTime: 5
 tags:
   - project
-  - real-time
-  - websockets
-  - node.js
-  - react
+  - software-engineering
 description: "A real-time chat application built with Node.js, WebSockets, and React. Features include instant messaging, user authentication, and message persistence."
 
 ---

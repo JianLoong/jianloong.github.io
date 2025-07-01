@@ -6,10 +6,8 @@ postSlug: vibe-coding
 featured: true
 draft: false
 tags:
-  - programming
-  - productivity
-  - workflow
-  - development
+  - software-engineering
+  - tools
 description: Exploring the concept of "vibe coding" - a state of flow where intuition and technical expertise merge to create elegant solutions.
 --- 
 
