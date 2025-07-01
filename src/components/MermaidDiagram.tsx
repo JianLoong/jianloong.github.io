@@ -7,44 +7,48 @@ interface MermaidDiagramProps {
     chart: string;
     title?: string;
     className?: string;
+    align?: 'left' | 'center' | 'right';
 }
 
-function useMermaidInit() {
-    React.useEffect(() => {
-        mermaid.initialize({
-            startOnLoad: true,
-            theme: document?.documentElement?.getAttribute('data-theme') === 'light' ? 'forest' : 'dark',
-            fontFamily: '"Fira Code", monospace',
-            securityLevel: 'loose'
-        });
-    }, []);
-}
+const getId = () => `mermaid-${Math.random().toString(36).substr(2, 9)}`;
 
-export default function MermaidDiagram({ chart, title, className = '' }: MermaidDiagramProps) {
-    const containerRef = React.useRef<HTMLDivElement>(null);
-    useMermaidInit();
+export default function MermaidDiagram({ chart, title, className = '', align = 'center' }: MermaidDiagramProps) {
+    const elementRef = React.useRef<HTMLDivElement>(null);
+    const [id] = React.useState(getId);
 
-    React.useEffect(() => {
-        if (!containerRef.current) return;
+    const renderDiagram = React.useCallback(async () => {
+        if (!elementRef.current) return;
 
-        const renderDiagram = async () => {
-            try {
-                await mermaid.run();
-            } catch (err) {
-                console.error('Error rendering Mermaid diagram:', err);
-                if (containerRef.current) {
-                    containerRef.current.innerHTML = 'Error rendering diagram';
-                }
+        try {
+            // Get current theme
+            const theme = document?.documentElement?.getAttribute('data-theme') === 'light' ? 'forest' : 'dark';
+
+            // Initialize with current theme
+            await mermaid.initialize({
+                startOnLoad: false,
+                theme: theme as 'forest' | 'dark',
+                fontFamily: '"Fira Code", monospace',
+                securityLevel: 'loose'
+            });
+
+            // Render to SVG
+            const { svg } = await mermaid.render(id, chart);
+            if (elementRef.current) {
+                elementRef.current.innerHTML = svg;
             }
-        };
+        } catch (error) {
+            console.error('Error rendering diagram:', error);
+            if (elementRef.current) {
+                elementRef.current.innerHTML = 'Error rendering diagram';
+            }
+        }
+    }, [chart, id]);
 
+    // Initial render and theme changes
+    React.useEffect(() => {
         renderDiagram();
 
-        // Watch for theme changes
         const observer = new MutationObserver(() => {
-            mermaid.initialize({
-                theme: document?.documentElement?.getAttribute('data-theme') === 'light' ? 'forest' : 'dark'
-            });
             renderDiagram();
         });
 
@@ -54,13 +58,13 @@ export default function MermaidDiagram({ chart, title, className = '' }: Mermaid
         });
 
         return () => observer.disconnect();
-    }, [chart]);
+    }, [renderDiagram]);
 
     return (
-        <div className={`mermaid-wrapper ${className}`}>
-            {title && <h4 className="diagram-title">{title}</h4>}
-            <div ref={containerRef} className="mermaid">
-                {chart}
+        <div className={`mermaid-wrapper text-${align} ${className}`}>
+            {title && <h4 className={`diagram-title text-${align} mb-4`}>{title}</h4>}
+            <div className="mermaid-container inline-block">
+                <div ref={elementRef} className="mermaid" />
             </div>
         </div>
     );
