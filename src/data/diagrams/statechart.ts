@@ -1,87 +1,13 @@
-export const basicStates = `stateDiagram-v2
-    [*] --> Placed
-    Placed --> Pending
-    Pending --> [*]
-`;
+export const basicStates = `stateDiagram-v2\n    [*] --> Placed: • Start<br>• Initial state\n    Placed --> Pending: • Condition met<br>• Payment required\n    Pending --> [*]: • End<br>• Final state\n`;
 
-export const transitions = `stateDiagram-v2
-    [*] --> Placed
-    Placed --> Pending: Payment is made
-    Pending --> [*]
-`;
+export const transitions = `stateDiagram-v2\n    [*] --> Placed: • Start<br>• Initial state\n    Placed --> Pending: • Payment is made<br>• Transition occurs\n    Pending --> [*]: • End<br>• Final state\n`;
 
-export const refinedModel = `stateDiagram-v2
-    [*] --> Placed: Customer places an order, the item must be in stock, item not deducted in inventory yet, no of items must not exceed inventory.
-    Placed --> Pending
-    Pending --> [*]
-`;
+export const refinedModel = `stateDiagram-v2\n    [*] --> Placed: Customer places an order<br>• Item must be in stock<br>• Item not deducted in inventory yet<br>• No of items must not exceed inventory\n    Placed --> Pending: • Inventory checked<br>• Requirements met\n    Pending --> [*]: • Order complete<br>• Exit\n`;
 
-export const noPlacedState = `stateDiagram-v2
-    [*] --> Pending: Customer places an order
-        note left of Pending
-            • Item must be in stock
-            • Item purchased must not exceed inventory
-            • Item purchased must NOT be deducted yet
-        end note
-    Pending --> [*]
-`;
+export const noPlacedState = `stateDiagram-v2\n    [*] --> Pending: Customer places an order<br>• Item must be in stock<br>• Item purchased must not exceed inventory<br>• Item purchased must NOT be deducted yet\n    Pending --> [*]: • Order complete<br>• Exit\n`;
 
-export const businessRules = `stateDiagram-v2
-    [*] --> Pending: Customer places an order
-        note left of Pending
-            • Items must be in stock
-            • Items purchased must not exceed inventory
-            • Items purchased must not be deducted yet
-            • Items purchased must not be above the limit set
-        end note
-    Pending-->Paid: Customer pays for the order
-            note right of Paid
-            • Payment must be successful
-            • Items must still be in stock
-            • Items are now deducted
-        end note
-    Paid --> [*]
-`;
+export const businessRules = `stateDiagram-v2\n    [*] --> Pending: Customer places an order<br>• Items must be in stock<br>• Items purchased must not exceed inventory<br>• Items purchased must not be deducted yet<br>• Items purchased must not be above the limit set\n    Pending-->Paid: Customer pays for the order<br>• Payment must be successful<br>• Items must still be in stock<br>• Items are now deducted\n    Paid --> [*]: • Order fulfilled<br>• Exit\n`;
 
-export const reverseTransitions = `stateDiagram-v2
-    [*] --> Pending: Customer places an order
-        note left of Pending
-            • Items must be in stock
-            • Items purchased must not exceed inventory
-            • Items purchased must not be deducted yet
-            • Items purchased must not be above the limit set
-        end note
-    Pending-->Paid: Customer pays for the order
-            note right of Paid
-            • Payment must be successful
-            • Items must still be in stock
-            • Items are now deducted
-        end note
-    Paid --> Pending: Item no longer in stock, customer preference change.
-    Paid --> [*]
-`;
+export const reverseTransitions = `stateDiagram-v2\n    [*] --> Pending: Customer places an order<br>• Items must be in stock<br>• Items purchased must not exceed inventory<br>• Items purchased must not be deducted yet<br>• Items purchased must not be above the limit set\n    Pending-->Paid: Customer pays for the order<br>• Payment must be successful<br>• Items must still be in stock<br>• Items are now deducted\n    Paid --> Pending: • Item no longer in stock<br>• Customer preference change\n    Paid --> [*]: • Order complete<br>• Exit\n`;
 
-export const cancelledState = `stateDiagram-v2
-    [*] --> Pending : Customer places an order
-    Pending-->Paid: Customer pays for the order
-    Paid --> Cancelled: [Guards] 
-    Pending --> Cancelled: [Guards] 
-    Pending --> [*]
-    Paid --> [*]
-    Cancelled --> [*]
-    note right of Paid
-            • Payment must be successful
-            • Items must still be in stock
-            • Items are now deducted
-    end note
-    note left of Pending
-        • Items must be in stock
-        • Items purchased must not exceed inventory
-        • Items purchased must not be deducted yet
-        • Items purchased must not be above the limit set
-    end note
-    note left of Cancelled
-        • Payment not made within a certain number of days
-        • Cancelled as per customer request
-    end note
-`; 
+export const cancelledState = `stateDiagram-v2\n    [*] --> Pending : Customer places an order<br>• Items must be in stock<br>• Items purchased must not exceed inventory<br>• Items purchased must not be deducted yet<br>• Items purchased must not be above the limit set\n    Pending-->Paid: Customer pays for the order<br>• Payment must be successful<br>• Items must still be in stock<br>• Items are now deducted\n    Paid --> Cancelled: [Guards]<br>• Payment not made<br>• Customer request\n    Pending --> Cancelled: [Guards]<br>• Payment not made<br>• Customer request\n    Pending --> [*]: • Order cancelled<br>• Exit\n    Paid --> [*]: • Order fulfilled<br>• Exit\n    Cancelled --> [*]: • Cancelled state<br>• Exit\n    note right of Paid\n            Payment must be successful\n            Items must still be in stock\n            Items are now deducted\n    end note\n    note left of Pending\n        Items must be in stock\n        Items purchased must not exceed inventory\n        Items purchased must not be deducted yet\n        Items purchased must not be above the limit set\n    end note\n    note left of Cancelled\n        Payment not made within a certain number of days\n        Cancelled as per customer request\n    end note\n`; 
