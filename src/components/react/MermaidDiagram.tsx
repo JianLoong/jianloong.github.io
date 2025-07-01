@@ -14,12 +14,12 @@ interface MermaidDiagramProps {
 }
 
 const sizeMap: Record<DiagramSize, string> = {
-    xs: 'max-w-xs',    // 320px
-    sm: 'max-w-sm',    // 384px
-    md: 'max-w-md',    // 448px
-    lg: 'max-w-lg',    // 512px
-    xl: 'max-w-xl',    // 576px
-    full: 'max-w-full' // 100%
+    xs: 'w-full max-w-xs',    // 320px
+    sm: 'w-full max-w-sm',    // 384px
+    md: 'w-full max-w-md',    // 448px
+    lg: 'w-full max-w-lg',    // 512px
+    xl: 'w-full max-w-xl',    // 576px
+    full: 'w-full'            // 100%
 };
 
 const getId = () => `mermaid-${Math.random().toString(36).substr(2, 9)}`;
@@ -50,7 +50,9 @@ export default function MermaidDiagram({
                 htmlLabels: true,
                 fontSize: 16,
                 themeVariables: {
-                    fontSize: '16px'
+                    fontSize: '16px',
+                    fontFamily: '"Fira Code", monospace',
+                    diagramPadding: 16
                 },
                 flowchart: {
                     useMaxWidth: true,
@@ -67,8 +69,21 @@ export default function MermaidDiagram({
                 // Find the SVG element and ensure it's responsive
                 const svgElement = elementRef.current.querySelector('svg');
                 if (svgElement) {
+                    // Remove inline width/height from SVG
+                    svgElement.removeAttribute('width');
+                    svgElement.removeAttribute('height');
+                    // Add viewBox if it doesn't exist
+                    if (!svgElement.getAttribute('viewBox')) {
+                        const box = svgElement.getBBox();
+                        svgElement.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
+                    }
+                    // Apply responsive styling
                     svgElement.style.width = '100%';
-                    svgElement.style.height = 'auto';
+                    svgElement.style.height = '100%';
+                    svgElement.style.display = 'block';
+                    svgElement.style.margin = '0 auto';
+                    svgElement.style.maxHeight = '85vh';
+                    svgElement.style.padding = '1rem';
                 }
             }
         } catch (error) {
@@ -97,9 +112,11 @@ export default function MermaidDiagram({
 
     return (
         <div className={`mermaid-wrapper text-${align} ${className}`}>
-            {title && <h4 className={`diagram-title text-${align} mb-4`}>{title}</h4>}
-            <div className={`mermaid-container mx-auto ${sizeMap[size]}`}>
-                <div ref={elementRef} className="mermaid" />
+            {title && <h4 className={`diagram-title text-${align} mb-8`}>{title}</h4>}
+            <div className={`mermaid-container mx-auto mt-8 mb-12 ${sizeMap[size]}`}>
+                <div className="diagram-aspect-wrapper relative w-full" style={{ minHeight: "300px" }}>
+                    <div ref={elementRef} className="mermaid w-full h-full" />
+                </div>
             </div>
         </div>
     );
