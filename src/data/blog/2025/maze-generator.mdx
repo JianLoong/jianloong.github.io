@@ -1,0 +1,26 @@
+---
+title: "Interactive Maze Generator (DFS, Prim's, Circular)"
+author: Jian Liew
+pubDatetime: 2025-06-02T00:00:00Z
+slug: interactive-maze-generator
+description: "Try out an interactive maze generator with multiple algorithms and maze types, inspired by razimantv's C++ project. Generate and explore mazes right in your browser!"
+summary: "Generate and explore mazes interactively using a React-based maze generator supporting DFS, Prim's, and circular mazes."
+featured: false
+draft: false
+readingTime: 6
+tags:
+  - computer-science
+---
+
+Maze generation is a fascinating application of graph theory and algorithms. This interactive demo lets you generate mazes using different algorithms and types, inspired by the open-source [Maze Generator by razimantv](https://github.com/razimantv/mazegenerator).
+
+## How to use
+- Choose the maze type (Rectangular or Circular).
+- Choose the algorithm (DFS or Prim's; circular mazes use DFS).
+- Set the width and height of the maze.
+- Click **Generate** to create a new maze.
+- Explore the SVG maze below!
+
+import MazeGeneratorIsland from "@/components/react/MazeGeneratorIsland"
+
+<MazeGeneratorIsland client:load /> 
