@@ -3,24 +3,12 @@
 import React from "react";
 import mermaid from "mermaid";
 
-type DiagramSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
-
 interface MermaidDiagramProps {
     chart: string;
     title?: string;
     className?: string;
     align?: 'left' | 'center' | 'right';
-    size?: DiagramSize;
 }
-
-const sizeMap: Record<DiagramSize, string> = {
-    xs: 'w-full max-w-xs',    // 320px
-    sm: 'w-full max-w-sm',    // 384px
-    md: 'w-full max-w-md',    // 448px
-    lg: 'w-full max-w-lg',    // 512px
-    xl: 'w-full max-w-xl',    // 576px
-    full: 'w-full'            // 100%
-};
 
 const getId = () => `mermaid-${Math.random().toString(36).substr(2, 9)}`;
 
@@ -28,8 +16,7 @@ export default function MermaidDiagram({
     chart,
     title,
     className = '',
-    align = 'center',
-    size = 'lg'
+    align = 'center'
 }: MermaidDiagramProps) {
     const elementRef = React.useRef<HTMLDivElement>(null);
     const [id] = React.useState(getId);
@@ -113,7 +100,7 @@ export default function MermaidDiagram({
     return (
         <div className={`mermaid-wrapper text-${align} ${className}`}>
             {title && <h4 className={`diagram-title text-${align} mb-8`}>{title}</h4>}
-            <div className={`mermaid-container mx-auto mt-8 mb-12 ${sizeMap[size]}`}>
+            <div className="mermaid-container mx-auto mt-8 mb-12 w-full max-w-3xl">
                 <div className="diagram-aspect-wrapper relative w-full" style={{ minHeight: "300px" }}>
                     <div ref={elementRef} className="mermaid w-full h-full" />
                 </div>
