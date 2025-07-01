@@ -13,8 +13,10 @@ tags:
   - java
   - programming
 description: "A practical implementation of Singleton and Observer design patterns using a real-world arcade Lucky Dip Machine example in Java."
-
 ---
+
+import MermaidDiagram from '../../../components/MermaidDiagram';
+import { luckyDipOverview } from '../../../data/diagrams/lucky-dip';
 
 This blog post demonstrates a practical use case where the **Singleton** and **Observer** design patterns become important in real-world applications.
 
@@ -28,28 +30,12 @@ Imagine you're in an arcade with a Lucky Dip Machine. This machine has a limited
 
 ## Design Overview
 
-```
-┌────────────────────────────────────────────────────────┐
-│              LUCKY DIP MACHINE SYSTEM                  │
-├────────────────────────────────────────────────────────┤
-│                                                        │
-│  ┌─────────────┐    ┌─────────────────────────────┐    │
-│  │   User      │──> │    LuckyDipMachine          │    │
-│  │   (Client)  │    │    (Singleton)              │    │
-│  └─────────────┘    │  • Private constructor      │    │
-│                     │  • Static instance          │    │
-│                     │  • Inventory management     │    │
-│                     └─────────────────────────────┘    │
-│                              │                         │
-│                              ▼                         │
-│                     ┌─────────────┐                    │
-│                     │  Observers  │                    │
-│                     │  • Track    │                    │
-│                     │  • Notify   │                    │
-│                     └─────────────┘                    │
-│                                                        │
-└────────────────────────────────────────────────────────┘
-```
+<MermaidDiagram client:load
+  chart={luckyDipOverview}
+  title="Lucky Dip Machine System Overview"
+  align="center"
+  size="lg"
+/>
 
 ## Implementation
 

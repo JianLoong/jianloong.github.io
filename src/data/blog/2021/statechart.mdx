@@ -11,8 +11,18 @@ tags:
   - diagrams
   - statecharts
 description: "Learn how to create and interpret statechart diagrams to model complex system behavior and state transitions in software engineering."
-
 ---
+
+import MermaidDiagram from '../../../components/MermaidDiagram';
+import {
+  basicStates,
+  transitions,
+  refinedModel,
+  noPlacedState,
+  businessRules,
+  reverseTransitions,
+  cancelledState
+} from '../../../data/diagrams/statechart';
 
 UML diagrams are essential tools in software engineering, and statecharts are among the most powerful for modeling system behavior. This post demonstrates my thought process while creating a statechart and explains why this modeling technique is invaluable.
 
@@ -35,12 +45,12 @@ We begin by asking fundamental questions about the system:
 
 These basic questions give us our initial states:
 
-<div class="mermaid" align="center" id="mermaid">
-stateDiagram-v2
-    [*] --> Placed
-    Placed --> Pending
-    Pending --> [*]
-</div>
+<MermaidDiagram client:load
+  chart={basicStates}
+  title="Basic States"
+  align="center"
+  size="md"
+/>
 
 ## Understanding Transitions
 
@@ -52,12 +62,12 @@ Now we focus on **how** the object moves between states. We continue asking the 
 
 These questions help us understand the requirements better:
 
-<div class="mermaid" align="center" id="mermaid">
-stateDiagram-v2
-    [*] --> Placed
-    Placed --> Pending: Payment is made
-    Pending --> [*]
-</div>
+<MermaidDiagram client:load
+  chart={transitions}
+  title="Transitions"
+  align="center"
+  size="md"
+/>
 
 ## Refining the Model
 
@@ -71,12 +81,12 @@ But wait—we're not done yet. We need to consider edge cases and business rules
 
 Based on these considerations, we refine our model:
 
-<div class="mermaid" align="center" id="mermaid">
-stateDiagram-v2
-    [*] --> Placed: Customer places an order, the item must be in stock, item not deducted in inventory yet, no of items must not exceed inventory.
-    Placed --> Pending
-    Pending --> [*]
-</div>
+<MermaidDiagram client:load
+  chart={refinedModel}
+  title="Refined Model"
+  align="center"
+  size="md"
+/>
 
 ## Questioning Assumptions
 
@@ -84,16 +94,12 @@ At this stage, we should question our initial assumptions. Why do we need a `Pla
 
 Let's eliminate the unnecessary `Placed` state:
 
-<div class="mermaid" align="center" id="mermaid">
-stateDiagram-v2
-    [*] --> Pending: Customer places an order
-        note left of Pending
-            - Item must be in stock
-            - Item purchased must not exceed inventory
-            - Item purchased must NOT be deducted yet
-        end note
-    Pending --> [*]
-</div>
+<MermaidDiagram client:load
+  chart={noPlacedState}
+  title="No Placed State"
+  align="center"
+  size="md"
+/>
 
 ## Adding Business Rules
 
@@ -102,23 +108,12 @@ We continue refining by adding more business requirements:
 - Should there be purchase limits?
 - What happens after `Pending`? Do we call it `Paid`?
 
-<div class="mermaid" align="center" id="mermaid">
-stateDiagram-v2
-    [*] --> Pending: Customer places an order
-        note left of Pending
-            - Items must be in stock
-            - Items purchased must not exceed inventory
-            - Items purchased must not be deducted yet
-            - Items purchased must not be above the limit set
-        end note
-    Pending-->Paid: Customer pays for the order
-            note right of Paid
-            - Payment must be successful
-            - Items must still be in stock
-            - Items are now deducted
-        end note
-    Paid --> [*]
-</div>
+<MermaidDiagram client:load
+  chart={businessRules}
+  title="Business Rules"
+  align="center"
+  size="md"
+/>
 
 ## Considering Reverse Transitions
 
@@ -128,24 +123,12 @@ When we have multiple states, we must consider **what events could cause reverse
 - What if inventory was incorrectly reported?
 - Should we allow transitions from `Paid` back to `Pending`?
 
-<div class="mermaid" align="center" id="mermaid">
-stateDiagram-v2
-    [*] --> Pending: Customer places an order
-        note left of Pending
-            - Items must be in stock
-            - Items purchased must not exceed inventory
-            - Items purchased must not be deducted yet
-            - Items purchased must not be above the limit set
-        end note
-    Pending-->Paid: Customer pays for the order
-            note right of Paid
-            - Payment must be successful
-            - Items must still be in stock
-            - Items are now deducted
-        end note
-    Paid --> Pending: Item no longer in stock, customer preference change.
-    Paid --> [*]
-</div>
+<MermaidDiagram client:load
+  chart={reverseTransitions}
+  title="Reverse Transitions"
+  align="center"
+  size="md"
+/>
 
 ## Key Insights from the Process
 
@@ -170,31 +153,12 @@ We continue asking questions to identify missing states:
 - How long should orders remain pending?
 - What happens if products are discontinued?
 
-<div class="mermaid" align="center" id="mermaid">
-stateDiagram-v2
-    [*] --> Pending : Customer places an order
-    Pending-->Paid: Customer pays for the order
-    Paid --> Cancelled: [Guards] 
-    Pending --> Cancelled: [Guards] 
-    Pending --> [*]
-    Paid --> [*]
-    Cancelled --> [*]
-    note right of Paid
-            - Payment must be successful
-            - Items must still be in stock
-            - Items are now deducted
-    end note
-    note left of Pending
-        - Items must be in stock
-        - Items purchased must not exceed inventory
-        - Items purchased must not be deducted yet
-        - Items purchased must not be above the limit set
-    end note
-    note left of Cancelled
-        - Payment not made within a certain number of days
-        - Cancelled as per customer request
-    end note
-</div>
+<MermaidDiagram client:load
+  chart={cancelledState}
+  title="Cancelled State"
+  align="center"
+  size="full"
+/>
 
 ## System Behavior Explained
 
