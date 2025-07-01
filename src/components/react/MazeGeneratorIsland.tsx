@@ -245,8 +245,11 @@ function generateHexMazeDFS(width: number, height: number): HexCell[][] {
     }
     if (neighbors.length > 0) {
       const [next, dir] = shuffle(neighbors)[0];
+      // Remove wall between current and next
       current.walls[dir] = false;
-      next.walls[(dir + 3) % 6] = false; // opposite wall
+      // Remove the opposite wall in the neighbor
+      const oppositeDir = (dir + 3) % 6;
+      next.walls[oppositeDir] = false;
       next.visited = true;
       stack.push(next);
     } else {
@@ -262,6 +265,8 @@ function generateHexMazePrims(width: number, height: number): HexCell[][] {
   const walls: [number, number, number][] = [];
   const start = grid[0][0];
   start.visited = true;
+  
+  // Add all walls of the starting cell
   for (let dir = 0; dir < 6; dir++) {
     const nq = start.q + hexDirs[dir][0];
     const nr = start.r + hexDirs[dir][1];
@@ -269,6 +274,7 @@ function generateHexMazePrims(width: number, height: number): HexCell[][] {
       walls.push([start.r, start.q, dir]);
     }
   }
+  
   while (walls.length > 0) {
     const idx = Math.floor(Math.random() * walls.length);
     const [r, q, dir] = walls.splice(idx, 1)[0];
@@ -278,9 +284,13 @@ function generateHexMazePrims(width: number, height: number): HexCell[][] {
     if (nr < 0 || nr >= height || nq < 0 || nq >= width) continue;
     const neighbor = grid[nr][nq];
     if (!neighbor.visited) {
+      // Remove wall between cell and neighbor
       cell.walls[dir] = false;
-      neighbor.walls[(dir + 3) % 6] = false;
+      const oppositeDir = (dir + 3) % 6;
+      neighbor.walls[oppositeDir] = false;
       neighbor.visited = true;
+      
+      // Add neighbor's walls to the list
       for (let d = 0; d < 6; d++) {
         const nnq = neighbor.q + hexDirs[d][0];
         const nnr = neighbor.r + hexDirs[d][1];
@@ -343,10 +353,20 @@ function generateTriMazeDFS(width: number, height: number): TriCell[][] {
     }
     if (neighbors.length > 0) {
       const [next, dir] = shuffle(neighbors)[0];
+      // Remove wall between current and next
       current.walls[dir] = false;
-      // Opposite wall for neighbor
-      const opp = up ? [1,2,0] : [2,1,0];
-      next.walls[opp[dir]] = false;
+      // Find the corresponding wall in the neighbor to remove
+      const nextUp = next.up;
+      const nextDirs = nextUp ? triDirsUp : triDirsDown;
+      // Find which direction points back to current
+      for (let nextDir = 0; nextDir < 3; nextDir++) {
+        const ndx = nextDirs[nextDir][0];
+        const ndy = nextDirs[nextDir][1];
+        if (next.x + ndx === x && next.y + ndy === y) {
+          next.walls[nextDir] = false;
+          break;
+        }
+      }
       next.visited = true;
       stack.push(next);
     } else {
@@ -362,6 +382,8 @@ function generateTriMazePrims(width: number, height: number): TriCell[][] {
   const walls: [number, number, number][] = [];
   const start = grid[0][0];
   start.visited = true;
+  
+  // Add all walls of the starting cell
   const dirs = start.up ? triDirsUp : triDirsDown;
   for (let dir = 0; dir < 3; dir++) {
     const nx = start.x + dirs[dir][0];
@@ -370,6 +392,7 @@ function generateTriMazePrims(width: number, height: number): TriCell[][] {
       walls.push([start.y, start.x, dir]);
     }
   }
+  
   while (walls.length > 0) {
     const idx = Math.floor(Math.random() * walls.length);
     const [y, x, dir] = walls.splice(idx, 1)[0];
@@ -380,10 +403,21 @@ function generateTriMazePrims(width: number, height: number): TriCell[][] {
     if (ny < 0 || ny >= height || nx < 0 || nx >= width) continue;
     const neighbor = grid[ny][nx];
     if (!neighbor.visited) {
+      // Remove wall between cell and neighbor
       cell.walls[dir] = false;
-      const opp = cell.up ? [1,2,0] : [2,1,0];
-      neighbor.walls[opp[dir]] = false;
+      // Find the corresponding wall in the neighbor to remove
+      const nextDirs = neighbor.up ? triDirsUp : triDirsDown;
+      for (let nextDir = 0; nextDir < 3; nextDir++) {
+        const ndx = nextDirs[nextDir][0];
+        const ndy = nextDirs[nextDir][1];
+        if (neighbor.x + ndx === x && neighbor.y + ndy === y) {
+          neighbor.walls[nextDir] = false;
+          break;
+        }
+      }
       neighbor.visited = true;
+      
+      // Add neighbor's walls to the list
       const ndirs = neighbor.up ? triDirsUp : triDirsDown;
       for (let d = 0; d < 3; d++) {
         const nnx = neighbor.x + ndirs[d][0];
@@ -425,124 +459,251 @@ const MazeGeneratorIsland: React.FC = () => {
   return (
     <div style={{ textAlign: "center" }}>
       <h3>Maze Generator</h3>
-      <div style={{ marginBottom: 16, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 16 }}>
-        <label style={{ fontWeight: 700, fontSize: 16, color: '#222', display: 'flex', alignItems: 'center', background: '#f3f6fa', borderRadius: 6, padding: '8px 16px' }}>
-          Maze Type:
-          <select
-            value={mazeType}
-            onChange={e => setMazeType(e.target.value as MazeType)}
-            style={{
-              marginLeft: 8,
-              fontSize: 18,
-              padding: '8px 10px',
-              border: '1.5px solid #bbb',
-              borderRadius: 4,
-              outline: 'none',
-              background: '#fff',
-              color: '#222',
-              fontWeight: 'bold',
-              boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
-              transition: 'border 0.2s',
-            }}
-            onFocus={e => e.currentTarget.style.border = '1.5px solid #4CAF50'}
-            onBlur={e => e.currentTarget.style.border = '1.5px solid #bbb'}
-          >
-            <option value="rectangular">Rectangular</option>
-            <option value="circular">Circular</option>
-            <option value="hexagonal">Hexagonal</option>
-            <option value="triangular">Triangular</option>
-          </select>
-        </label>
-        <label style={{ fontWeight: 700, fontSize: 16, color: '#222', display: 'flex', alignItems: 'center', background: '#f3f6fa', borderRadius: 6, padding: '8px 16px' }}>
-          Algorithm:
-          <select
-            value={algorithm}
-            onChange={e => setAlgorithm(e.target.value as Algorithm)}
-            style={{
-              marginLeft: 8,
-              fontSize: 18,
-              padding: '8px 10px',
-              border: '1.5px solid #bbb',
-              borderRadius: 4,
-              outline: 'none',
-              background: '#fff',
-              color: '#222',
-              fontWeight: 'bold',
-              boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
-              transition: 'border 0.2s',
-            }}
-            onFocus={e => e.currentTarget.style.border = '1.5px solid #4CAF50'}
-            onBlur={e => e.currentTarget.style.border = '1.5px solid #bbb'}
-          >
-            <option value="dfs">DFS</option>
-            <option value="prims">Prim's</option>
-          </select>
-        </label>
-        <div style={{ display: 'flex', alignItems: 'center', background: '#f3f6fa', borderRadius: 6, padding: '8px 16px' }}>
-          <label style={{ fontWeight: 700, fontSize: 18, color: '#222', marginRight: 8 }}>
-            Width:
-          </label>
-          <input
-            type="number"
-            min={4}
-            max={32}
-            value={width}
-            onChange={e => setWidth(Number(e.target.value))}
-            style={{ width: 60, padding: '8px 10px', fontSize: 18, border: '1.5px solid #bbb', borderRadius: 4, outline: 'none', background: '#fff', color: '#222', fontWeight: 'bold', boxShadow: '0 1px 2px rgba(0,0,0,0.04)', transition: 'border 0.2s' }}
-            onFocus={e => e.currentTarget.style.border = '1.5px solid #4CAF50'}
-            onBlur={e => e.currentTarget.style.border = '1.5px solid #bbb'}
-          />
+      <div style={{ 
+        marginBottom: 16, 
+        display: 'flex', 
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 12,
+        padding: '0 16px'
+      }}>
+        {/* First row - Maze Type and Algorithm */}
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 12,
+          width: '100%',
+          maxWidth: 600
+        }}>
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 12,
+            width: '100%'
+          }}>
+            <label style={{ 
+              fontWeight: 700, 
+              fontSize: 16, 
+              color: '#222', 
+              display: 'flex', 
+              flexDirection: 'column',
+              alignItems: 'center',
+              background: '#f3f6fa', 
+              borderRadius: 6, 
+              padding: '8px 16px',
+              width: '100%',
+              maxWidth: 300
+            }}>
+              Maze Type:
+              <select
+                value={mazeType}
+                onChange={e => setMazeType(e.target.value as MazeType)}
+                style={{
+                  marginTop: 8,
+                  fontSize: 18,
+                  padding: '8px 10px',
+                  border: '1.5px solid #bbb',
+                  borderRadius: 4,
+                  outline: 'none',
+                  background: '#fff',
+                  color: '#222',
+                  fontWeight: 'bold',
+                  boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
+                  transition: 'border 0.2s',
+                  width: '100%'
+                }}
+                onFocus={e => e.currentTarget.style.border = '1.5px solid #4CAF50'}
+                onBlur={e => e.currentTarget.style.border = '1.5px solid #bbb'}
+              >
+                <option value="rectangular">Rectangular</option>
+                <option value="circular">Circular</option>
+              </select>
+            </label>
+            <label style={{ 
+              fontWeight: 700, 
+              fontSize: 16, 
+              color: '#222', 
+              display: 'flex', 
+              flexDirection: 'column',
+              alignItems: 'center',
+              background: '#f3f6fa', 
+              borderRadius: 6, 
+              padding: '8px 16px',
+              width: '100%',
+              maxWidth: 300
+            }}>
+              Algorithm:
+              <select
+                value={algorithm}
+                onChange={e => setAlgorithm(e.target.value as Algorithm)}
+                style={{
+                  marginTop: 8,
+                  fontSize: 18,
+                  padding: '8px 10px',
+                  border: '1.5px solid #bbb',
+                  borderRadius: 4,
+                  outline: 'none',
+                  background: '#fff',
+                  color: '#222',
+                  fontWeight: 'bold',
+                  boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
+                  transition: 'border 0.2s',
+                  width: '100%'
+                }}
+                onFocus={e => e.currentTarget.style.border = '1.5px solid #4CAF50'}
+                onBlur={e => e.currentTarget.style.border = '1.5px solid #bbb'}
+              >
+                <option value="dfs">DFS</option>
+                <option value="prims">Prim's</option>
+              </select>
+            </label>
+          </div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', background: '#f3f6fa', borderRadius: 6, padding: '8px 16px' }}>
-          <label style={{ fontWeight: 700, fontSize: 18, color: '#222', marginRight: 8 }}>
-            Height:
-          </label>
-          <input
-            type="number"
-            min={4}
-            max={24}
-            value={height}
-            onChange={e => setHeight(Number(e.target.value))}
-            style={{ width: 60, padding: '8px 10px', fontSize: 18, border: '1.5px solid #bbb', borderRadius: 4, outline: 'none', background: '#fff', color: '#222', fontWeight: 'bold', boxShadow: '0 1px 2px rgba(0,0,0,0.04)', transition: 'border 0.2s' }}
-            onFocus={e => e.currentTarget.style.border = '1.5px solid #4CAF50'}
-            onBlur={e => e.currentTarget.style.border = '1.5px solid #bbb'}
-          />
+        
+        {/* Second row - Width, Height, and Generate button */}
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 12,
+          width: '100%',
+          maxWidth: 600
+        }}>
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 12,
+            width: '100%'
+          }}>
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column',
+              alignItems: 'center',
+              background: '#f3f6fa', 
+              borderRadius: 6, 
+              padding: '8px 16px',
+              width: '100%',
+              maxWidth: 300
+            }}>
+              <label style={{ fontWeight: 700, fontSize: 18, color: '#222', marginBottom: 8 }}>
+                Width:
+              </label>
+              <input
+                type="number"
+                min={4}
+                max={32}
+                value={width}
+                onChange={e => setWidth(Number(e.target.value))}
+                style={{ 
+                  width: '100%', 
+                  padding: '8px 10px', 
+                  fontSize: 18, 
+                  border: '1.5px solid #bbb', 
+                  borderRadius: 4, 
+                  outline: 'none', 
+                  background: '#fff', 
+                  color: '#222', 
+                  fontWeight: 'bold', 
+                  boxShadow: '0 1px 2px rgba(0,0,0,0.04)', 
+                  transition: 'border 0.2s' 
+                }}
+                onFocus={e => e.currentTarget.style.border = '1.5px solid #4CAF50'}
+                onBlur={e => e.currentTarget.style.border = '1.5px solid #bbb'}
+              />
+            </div>
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column',
+              alignItems: 'center',
+              background: '#f3f6fa', 
+              borderRadius: 6, 
+              padding: '8px 16px',
+              width: '100%',
+              maxWidth: 300
+            }}>
+              <label style={{ fontWeight: 700, fontSize: 18, color: '#222', marginBottom: 8 }}>
+                Height:
+              </label>
+              <input
+                type="number"
+                min={4}
+                max={24}
+                value={height}
+                onChange={e => setHeight(Number(e.target.value))}
+                style={{ 
+                  width: '100%', 
+                  padding: '8px 10px', 
+                  fontSize: 18, 
+                  border: '1.5px solid #bbb', 
+                  borderRadius: 4, 
+                  outline: 'none', 
+                  background: '#fff', 
+                  color: '#222', 
+                  fontWeight: 'bold', 
+                  boxShadow: '0 1px 2px rgba(0,0,0,0.04)', 
+                  transition: 'border 0.2s' 
+                }}
+                onFocus={e => e.currentTarget.style.border = '1.5px solid #4CAF50'}
+                onBlur={e => e.currentTarget.style.border = '1.5px solid #bbb'}
+              />
+            </div>
+            <button
+              onClick={handleGenerate}
+              style={{ 
+                width: '100%',
+                maxWidth: 300,
+                padding: '12px 28px', 
+                fontSize: 18, 
+                fontWeight: 'bold', 
+                background: '#4CAF50', 
+                color: '#fff', 
+                border: 'none', 
+                borderRadius: 6, 
+                boxShadow: '0 2px 8px rgba(76,175,80,0.12)', 
+                cursor: 'pointer', 
+                transition: 'background 0.2s, box-shadow 0.2s', 
+                outline: 'none' 
+              }}
+              onMouseOver={e => (e.currentTarget.style.background = '#45a049')}
+              onMouseOut={e => (e.currentTarget.style.background = '#4CAF50')}
+              onFocus={e => (e.currentTarget.style.boxShadow = '0 0 0 3px #A5D6A7')}
+              onBlur={e => (e.currentTarget.style.boxShadow = '0 2px 8px rgba(76,175,80,0.12)')}
+            >
+              Generate
+            </button>
+          </div>
         </div>
-        <button
-          onClick={handleGenerate}
-          style={{ marginLeft: 10, padding: '10px 28px', fontSize: 18, fontWeight: 'bold', background: '#4CAF50', color: '#fff', border: 'none', borderRadius: 6, boxShadow: '0 2px 8px rgba(76,175,80,0.12)', cursor: 'pointer', transition: 'background 0.2s, box-shadow 0.2s', outline: 'none' }}
-          onMouseOver={e => (e.currentTarget.style.background = '#45a049')}
-          onMouseOut={e => (e.currentTarget.style.background = '#4CAF50')}
-          onFocus={e => (e.currentTarget.style.boxShadow = '0 0 0 3px #A5D6A7')}
-          onBlur={e => (e.currentTarget.style.boxShadow = '0 2px 8px rgba(76,175,80,0.12)')}
-        >
-          Generate
-        </button>
       </div>
       {/* Maze rendering */}
       {mazeType === 'rectangular' ? (
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24 }}>
-          <svg
-            width={width * cellSize + 2}
-            height={height * cellSize + 2}
-            style={{ background: "#fff", border: "1px solid #ccc" }}
-          >
-            {maze.map((row, y) =>
-              row.map((cell, x) => {
-                const px = x * cellSize;
-                const py = y * cellSize;
-                const lines = [];
-                if (cell.walls[0]) lines.push(<line key="t" x1={px} y1={py} x2={px + cellSize} y2={py} stroke="#222" strokeWidth={2} />);
-                if (cell.walls[1]) lines.push(<line key="r" x1={px + cellSize} y1={py} x2={px + cellSize} y2={py + cellSize} stroke="#222" strokeWidth={2} />);
-                if (cell.walls[2]) lines.push(<line key="b" x1={px} y1={py + cellSize} x2={px + cellSize} y2={py + cellSize} stroke="#222" strokeWidth={2} />);
-                if (cell.walls[3]) lines.push(<line key="l" x1={px} y1={py} x2={px} y2={py + cellSize} stroke="#222" strokeWidth={2} />);
-                return <g key={x + "," + y}>{lines}</g>;
-              })
-            )}
-          </svg>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24, padding: '0 16px' }}>
+          <div style={{ width: '100%', maxWidth: width * cellSize + 2, overflow: 'auto' }}>
+            <svg
+              width="100%"
+              height={height * cellSize + 2}
+              viewBox={`0 0 ${width * cellSize + 2} ${height * cellSize + 2}`}
+              style={{ background: "#fff", border: "1px solid #ccc", display: 'block' }}
+            >
+              {maze.map((row, y) =>
+                row.map((cell, x) => {
+                  const px = x * cellSize;
+                  const py = y * cellSize;
+                  const lines = [];
+                  if (cell.walls[0]) lines.push(<line key="t" x1={px} y1={py} x2={px + cellSize} y2={py} stroke="#222" strokeWidth={2} />);
+                  if (cell.walls[1]) lines.push(<line key="r" x1={px + cellSize} y1={py} x2={px + cellSize} y2={py + cellSize} stroke="#222" strokeWidth={2} />);
+                  if (cell.walls[2]) lines.push(<line key="b" x1={px} y1={py + cellSize} x2={px + cellSize} y2={py + cellSize} stroke="#222" strokeWidth={2} />);
+                  if (cell.walls[3]) lines.push(<line key="l" x1={px} y1={py} x2={px} y2={py + cellSize} stroke="#222" strokeWidth={2} />);
+                  return <g key={x + "," + y}>{lines}</g>;
+                })
+              )}
+            </svg>
+          </div>
         </div>
       ) : mazeType === 'circular' ? (
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24, overflow: 'auto', maxWidth: '100vw' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24, padding: '0 16px' }}>
           <div style={{ width: '100%', maxWidth: 600 }}>
             <svg
               key={circularKey}
@@ -637,7 +798,7 @@ const MazeGeneratorIsland: React.FC = () => {
           </div>
         </div>
       ) : mazeType === 'hexagonal' ? (
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24, overflow: 'auto', maxWidth: '100vw' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24, padding: '0 16px' }}>
           {(() => {
             const hexW = cellSize * Math.sqrt(3);
             const svgWidth = hexW * width + hexW / 2;
@@ -658,6 +819,8 @@ const MazeGeneratorIsland: React.FC = () => {
                     const elements = [];
                     const cx = hexW / 2;
                     const cy = cellSize;
+                    const drawnWalls = new Set<string>();
+                    
                     for (let r = 0; r < height; r++) {
                       for (let q = 0; q < width; q++) {
                         const cell = grid[r][q];
@@ -668,22 +831,39 @@ const MazeGeneratorIsland: React.FC = () => {
                           const angle = Math.PI / 3 * i;
                           return [x + cx + cellSize * Math.cos(angle), y + cy + cellSize * Math.sin(angle)];
                         });
-                        // Draw walls
+                        // Draw walls only if not already drawn
                         for (let i = 0; i < 6; i++) {
                           if (cell.walls[i]) {
-                            const [x1, y1] = corners[i];
-                            const [x2, y2] = corners[(i + 1) % 6];
-                            elements.push(
-                              <line
-                                key={`wall-${r},${q},${i}`}
-                                x1={x1}
-                                y1={y1}
-                                x2={x2}
-                                y2={y2}
-                                stroke="#222"
-                                strokeWidth={2}
-                              />
-                            );
+                            // Create wall key based on cell position and wall direction
+                            const wallKey = `${r},${q},${i}`;
+                            // Check if this wall should be drawn (only draw from one cell)
+                            let shouldDraw = true;
+                            const dq = hexDirs[i][0];
+                            const dr = hexDirs[i][1];
+                            const nq = q + dq;
+                            const nr = r + dr;
+                            // If neighbor exists and has lower coordinates, let neighbor draw the wall
+                            if (nr >= 0 && nr < height && nq >= 0 && nq < width) {
+                              if (nr < r || (nr === r && nq < q)) {
+                                shouldDraw = false;
+                              }
+                            }
+                            if (shouldDraw && !drawnWalls.has(wallKey)) {
+                              drawnWalls.add(wallKey);
+                              const [x1, y1] = corners[i];
+                              const [x2, y2] = corners[(i + 1) % 6];
+                              elements.push(
+                                <line
+                                  key={`wall-${r},${q},${i}`}
+                                  x1={x1}
+                                  y1={y1}
+                                  x2={x2}
+                                  y2={y2}
+                                  stroke="#222"
+                                  strokeWidth={2}
+                                />
+                              );
+                            }
                           }
                         }
                       }
@@ -696,7 +876,7 @@ const MazeGeneratorIsland: React.FC = () => {
           })()}
         </div>
       ) : (
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24, overflow: 'auto', maxWidth: '100vw' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24, padding: '0 16px' }}>
           {(() => {
             const triW = cellSize;
             const triH = cellSize * Math.sqrt(3) / 2;
@@ -716,6 +896,8 @@ const MazeGeneratorIsland: React.FC = () => {
                       ? generateTriMazeDFS(width, height)
                       : generateTriMazePrims(width, height);
                     const elements = [];
+                    const drawnWalls = new Set<string>();
+                    
                     for (let y = 0; y < height; y++) {
                       for (let x = 0; x < width; x++) {
                         const cell = grid[y][x];
@@ -735,22 +917,40 @@ const MazeGeneratorIsland: React.FC = () => {
                             [cx + triW / 2, cy - triW / 2],
                           ];
                         }
-                        // Draw walls
+                        // Draw walls only if not already drawn
                         for (let i = 0; i < 3; i++) {
                           if (cell.walls[i]) {
-                            const [x1, y1] = points[i];
-                            const [x2, y2] = points[(i + 1) % 3];
-                            elements.push(
-                              <line
-                                key={`wall-${y},${x},${i}`}
-                                x1={x1}
-                                y1={y1}
-                                x2={x2}
-                                y2={y2}
-                                stroke="#222"
-                                strokeWidth={2}
-                              />
-                            );
+                            // Create wall key based on cell position and wall direction
+                            const wallKey = `${y},${x},${i}`;
+                            // Check if this wall should be drawn (only draw from one cell)
+                            let shouldDraw = true;
+                            const dirs = cell.up ? triDirsUp : triDirsDown;
+                            const dx = dirs[i][0];
+                            const dy = dirs[i][1];
+                            const nx = x + dx;
+                            const ny = y + dy;
+                            // If neighbor exists and has lower coordinates, let neighbor draw the wall
+                            if (ny >= 0 && ny < height && nx >= 0 && nx < width) {
+                              if (ny < y || (ny === y && nx < x)) {
+                                shouldDraw = false;
+                              }
+                            }
+                            if (shouldDraw && !drawnWalls.has(wallKey)) {
+                              drawnWalls.add(wallKey);
+                              const [x1, y1] = points[i];
+                              const [x2, y2] = points[(i + 1) % 3];
+                              elements.push(
+                                <line
+                                  key={`wall-${y},${x},${i}`}
+                                  x1={x1}
+                                  y1={y1}
+                                  x2={x2}
+                                  y2={y2}
+                                  stroke="#222"
+                                  strokeWidth={2}
+                                />
+                              );
+                            }
                           }
                         }
                       }

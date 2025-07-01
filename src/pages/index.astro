@@ -24,37 +24,38 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
   <Header />
   <main id="main-content" data-layout="index">
     <section id="hero" class="pt-8 pb-6">
-      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-        Blog
-      </h1>
-      <a
-        target="_blank"
-        href="/rss.xml"
-        class="inline-block"
-        aria-label="rss feed"
-        title="RSS Feed"
-      >
-        <IconRss
-          width={20}
-          height={20}
-          class="scale-125 stroke-accent stroke-3 rtl:-rotate-90"
-        />
-        <span class="sr-only">RSS Feed</span>
-      </a>
-
-      <p>
-        Welcome to my corner of the web! 👋 I'm Jian, a software engineer who loves exploring technology, sharing insights, and documenting my journey through code. Here you'll find thoughts on software engineering, data analysis, AI, and the occasional deep dive into interesting technical challenges. Feel free to explore and let me know what you think!
-      </p>
-
-      {
-        // only display if at least one social link is enabled
-        SOCIALS.length > 0 && (
-          <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
-            <Socials />
-          </div>
-        )
-      }
+      <div style="display: flex; align-items: flex-start; gap: 2rem;">
+        <div style="flex: 1;">
+          <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
+            Blog
+          </h1>
+          <a
+            target="_blank"
+            href="/rss.xml"
+            class="inline-block"
+            aria-label="rss feed"
+            title="RSS Feed"
+          >
+            <IconRss
+              width={20}
+              height={20}
+              class="scale-125 stroke-accent stroke-3 rtl:-rotate-90"
+            />
+            <span class="sr-only">RSS Feed</span>
+          </a>
+          <p>
+            Welcome to my corner of the web! 👋 I'm Jian, a software engineer who loves exploring technology, sharing insights, and documenting my journey through code. Here you'll find thoughts on software engineering, data analysis, AI, and the occasional deep dive into interesting technical challenges. Feel free to explore and let me know what you think!
+          </p>
+          {
+            SOCIALS.length > 0 && (
+              <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
+                <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
+                <Socials />
+              </div>
+            )
+          }
+        </div>
+      </div>
     </section>
 
     <Hr />

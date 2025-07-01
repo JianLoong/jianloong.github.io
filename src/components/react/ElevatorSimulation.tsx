@@ -92,11 +92,11 @@ const RequestIndicator: React.FC<RequestIndicatorProps> = ({ count, type }) => {
 
 const FloorIndicators: React.FC<FloorIndicatorsProps> = ({ requests }) => (
     <>
-        <div className="absolute right-2 flex items-center gap-1" style={{ top: '10px' }}>
+        <div className="absolute left-2 flex items-center gap-1" style={{ top: '10px' }}>
             <RequestIndicator count={requests.up.length} type="up" />
             <RequestIndicator count={requests.down.length} type="down" />
         </div>
-        <div className="absolute left-2" style={{ top: '10px' }}>
+        <div className="absolute right-2" style={{ top: '10px' }}>
             <RequestIndicator count={requests.total} type="total" />
         </div>
     </>
@@ -292,8 +292,8 @@ const ElevatorSimulation: React.FC = () => {
             key={elevator.id}
             className="relative border border-gray-300 dark:border-gray-600 rounded-md bg-gray-100 dark:bg-gray-800"
             style={{
-                width: '120px',
-                height: `${NUM_FLOORS * 50}px`,
+                width: '140px',
+                height: `${NUM_FLOORS * 60}px`,
                 marginRight: '2rem'
             }}
         >
@@ -303,37 +303,37 @@ const ElevatorSimulation: React.FC = () => {
                     position: 'absolute',
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    bottom: `${elevator.currentFloor * 50 + 44}px`, // 4px above the car
+                    bottom: `${(elevator.currentFloor + 1) * 60}px`, // Position above the car (next floor level)
                     zIndex: 3,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     width: 40,
-                    height: 18
+                    height: 20
                 }}
             >
                 {elevator.direction === 'up' && (
                     <div style={{
                         width: 0,
                         height: 0,
-                        borderLeft: '10px solid transparent',
-                        borderRight: '10px solid transparent',
-                        borderBottom: '16px solid #2196F3',
+                        borderLeft: '8px solid transparent',
+                        borderRight: '8px solid transparent',
+                        borderBottom: '12px solid #2196F3',
                     }} title="Up" />
                 )}
                 {elevator.direction === 'down' && (
                     <div style={{
                         width: 0,
                         height: 0,
-                        borderLeft: '10px solid transparent',
-                        borderRight: '10px solid transparent',
-                        borderTop: '16px solid #2196F3',
+                        borderLeft: '8px solid transparent',
+                        borderRight: '8px solid transparent',
+                        borderTop: '12px solid #2196F3',
                     }} title="Down" />
                 )}
                 {elevator.direction === 'idle' && (
                     <div style={{
-                        width: 18,
-                        height: 5,
+                        width: 12,
+                        height: 3,
                         background: '#bbb',
                         borderRadius: 2,
                     }} title="Idle" />
@@ -346,11 +346,11 @@ const ElevatorSimulation: React.FC = () => {
                     <div
                         key={i}
                         className="absolute w-full"
-                        style={{ bottom: `${i * 50}px`, height: '50px' }}
+                        style={{ bottom: `${i * 60}px`, height: '60px' }}
                     >
                         {/* Floor number */}
                         <div className="absolute text-sm text-gray-600 dark:text-gray-400"
-                            style={{ right: '-25px', top: '15px' }}>
+                            style={{ right: '-25px', top: '20px' }}>
                             {i}
                         </div>
 
@@ -370,10 +370,10 @@ const ElevatorSimulation: React.FC = () => {
                     : 'bg-white dark:bg-gray-700'
                     }`}
                 style={{
-                    left: '40px',
-                    bottom: `${elevator.currentFloor * 50}px`,
-                    width: '40px',
-                    height: '40px',
+                    left: '70px',
+                    bottom: `${elevator.currentFloor * 60}px`,
+                    width: '32px',
+                    height: '32px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -390,12 +390,12 @@ const ElevatorSimulation: React.FC = () => {
                 <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">
                     Simulation Controls
                 </h3>
-                <div className="mb-4 flex items-center gap-4">
+                <div className="mb-4 flex flex-col sm:flex-row items-stretch gap-4">
                     <button
                         className={`px-4 py-2 rounded-md font-medium transition-colors ${system.isRunning
                             ? 'bg-red-500 hover:bg-red-600'
                             : 'bg-green-500 hover:bg-green-600'
-                            } text-white w-24`}
+                            } text-white w-full sm:w-24`}
                         onClick={() => setSystem(prev => ({ ...prev, isRunning: !prev.isRunning }))}
                     >
                         {system.isRunning ? 'Stop' : 'Start'}
@@ -421,25 +421,27 @@ const ElevatorSimulation: React.FC = () => {
                         <option value="120">120 requests/min</option>
                     </select>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
                     <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Algorithm:</span>
-                    {(['fcfs', 'scan', 'look'] as Algorithm[]).map(alg => (
-                        <button
-                            key={alg}
-                            className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${system.algorithm === alg
-                                ? 'bg-blue-500 text-white'
-                                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'
-                                }`}
-                            onClick={() => setSystem(prev => ({ ...prev, algorithm: alg }))}
-                        >
-                            {alg.toUpperCase()}
-                        </button>
-                    ))}
+                    <div className="flex flex-row flex-wrap gap-2">
+                        {(['fcfs', 'scan', 'look'] as Algorithm[]).map(alg => (
+                            <button
+                                key={alg}
+                                className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${system.algorithm === alg
+                                    ? 'bg-blue-500 text-white'
+                                    : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'
+                                    }`}
+                                onClick={() => setSystem(prev => ({ ...prev, algorithm: alg }))}
+                            >
+                                {alg.toUpperCase()}
+                            </button>
+                        ))}
+                    </div>
                 </div>
             </div>
 
-            <div className="p-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm flex gap-8">
-                <div className="flex">
+            <div className="p-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm flex flex-col lg:flex-row gap-8">
+                <div className="flex justify-center lg:justify-start">
                     {system.elevators.map(renderElevatorShaft)}
                 </div>
 
