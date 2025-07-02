@@ -781,7 +781,7 @@ function generateCircularMazeSidewinder(rings: number, sectors: number): PolarCe
 // --- SVG Components ---
 const cellSize = 24;
 
-function RectangularMazeSVG({ maze, width, height, solution }: { maze: Cell[][], width: number, height: number, solution: [number, number][] }) {
+function RectangularMazeSVG({ maze, width, height, solution, isAnimating, animationProgress }: { maze: Cell[][], width: number, height: number, solution: [number, number][], isAnimating?: boolean, animationProgress?: number }) {
   if (!maze || !maze.length) return null;
   console.log('RectangularMazeSVG maze:', maze);
   const elements = [];
@@ -823,21 +823,30 @@ function RectangularMazeSVG({ maze, width, height, solution }: { maze: Cell[][],
       strokeWidth={3}
     />
   );
-  // Draw solution path
+  // Draw solution path with animation
   if (solution.length > 1) {
     const pathPoints = solution.map(([x, y]) => [x * cellSize + cellSize / 2, y * cellSize + cellSize / 2]);
-    elements.push(
-      <polyline
-        key="solution-path"
-        points={pathPoints.map(p => p.join(",")).join(" ")}
-        fill="none"
-        stroke="#f43f5e"
-        strokeWidth={4}
-        strokeLinejoin="round"
-        strokeLinecap="round"
-        opacity={0.7}
-      />
-    );
+    const pathLength = pathPoints.length;
+    const animatedLength = isAnimating && animationProgress !== undefined 
+      ? Math.floor(pathLength * animationProgress) 
+      : pathLength;
+    
+    const animatedPath = pathPoints.slice(0, animatedLength);
+    
+    if (animatedPath.length > 1) {
+      elements.push(
+        <polyline
+          key="solution-path"
+          points={animatedPath.map(p => p.join(",")).join(" ")}
+          fill="none"
+          stroke="#f43f5e"
+          strokeWidth={4}
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          opacity={0.7}
+        />
+      );
+    }
   }
   return (
     <svg
@@ -958,7 +967,7 @@ function findCircularMazeSolution(maze: PolarCell[][], rings: number, sectors: n
   return path;
 }
 
-function CircularMazeSVG({ maze, width, height, svgSize, responsive, solution }: { maze: PolarCell[][], width: number, height: number, svgSize: number, responsive?: boolean, solution: [number, number][] }) {
+function CircularMazeSVG({ maze, width, height, svgSize, responsive, solution, isAnimating, animationProgress }: { maze: PolarCell[][], width: number, height: number, svgSize: number, responsive?: boolean, solution: [number, number][], isAnimating?: boolean, animationProgress?: number }) {
   if (!maze || !maze.length || !maze[0] || !maze[0].length) {
     return (
       <svg width="100%" height="100">
@@ -980,18 +989,27 @@ function CircularMazeSVG({ maze, width, height, svgSize, responsive, solution }:
       const aa = (s + 0.5) * aStep;
       return [cx + rr * Math.cos(aa), cy + rr * Math.sin(aa)];
     });
-    elements.push(
-      <polyline
-        key="solution-path"
-        points={pathPoints.map(p => p.join(",")).join(" ")}
-        fill="none"
-        stroke="#f43f5e"
-        strokeWidth={4}
-        strokeLinejoin="round"
-        strokeLinecap="round"
-        opacity={0.7}
-      />
-    );
+    const pathLength = pathPoints.length;
+    const animatedLength = isAnimating && animationProgress !== undefined 
+      ? Math.floor(pathLength * animationProgress) 
+      : pathLength;
+    
+    const animatedPath = pathPoints.slice(0, animatedLength);
+    
+    if (animatedPath.length > 1) {
+      elements.push(
+        <polyline
+          key="solution-path"
+          points={animatedPath.map(p => p.join(",")).join(" ")}
+          fill="none"
+          stroke="#f43f5e"
+          strokeWidth={4}
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          opacity={0.7}
+        />
+      );
+    }
   }
   for (let r = 0; r < rings; r++) {
     if (!maze[r]) continue;
@@ -1130,7 +1148,7 @@ function CircularMazeSVG({ maze, width, height, svgSize, responsive, solution }:
 }
 
 // Add RectangularMazePolarWarpSVG component
-function RectangularMazePolarWarpSVG({ maze, width, height, solution }: { maze: Cell[][], width: number, height: number, solution: [number, number][] }) {
+function RectangularMazePolarWarpSVG({ maze, width, height, solution, isAnimating, animationProgress }: { maze: Cell[][], width: number, height: number, solution: [number, number][], isAnimating?: boolean, animationProgress?: number }) {
   if (!maze || !maze.length) return null;
   const cellCount = Math.max(width, height);
   const svgSize = cellCount * cellSize + 32;
@@ -1191,25 +1209,34 @@ function RectangularMazePolarWarpSVG({ maze, width, height, solution }: { maze: 
       }
     }
   }
-  // Solution path (use prop)
+  // Solution path with animation
   if (solution && solution.length > 1) {
     const pathPoints = solution.map(([x, y]) => {
       const r = rMin + (rMax - rMin) * (y / height) + (rMax - rMin) / (2 * height);
       const a = (2 * Math.PI) * (x / width) + Math.PI / width;
       return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
     });
-    elements.push(
-      <polyline
-        key="solution-path"
-        points={pathPoints.map(p => p.join(",")).join(" ")}
-        fill="none"
-        stroke="#f43f5e"
-        strokeWidth={4}
-        strokeLinejoin="round"
-        strokeLinecap="round"
-        opacity={0.7}
-      />
-    );
+    const pathLength = pathPoints.length;
+    const animatedLength = isAnimating && animationProgress !== undefined 
+      ? Math.floor(pathLength * animationProgress) 
+      : pathLength;
+    
+    const animatedPath = pathPoints.slice(0, animatedLength);
+    
+    if (animatedPath.length > 1) {
+      elements.push(
+        <polyline
+          key="solution-path"
+          points={animatedPath.map(p => p.join(",")).join(" ")}
+          fill="none"
+          stroke="#f43f5e"
+          strokeWidth={4}
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          opacity={0.7}
+        />
+      );
+    }
   }
   // Entrance marker (start cell [0,0])
   const rStart = rMin + (rMax - rMin) * (0 / height) + (rMax - rMin) / (2 * height);
@@ -1289,6 +1316,10 @@ const MazeGeneratorIsland: React.FC = () => {
   const [circularSolution, setCircularSolution] = useState<[number, number][]>([]);
   const [polarwarpSolution, setPolarwarpSolution] = useState<[number, number][]>([]);
 
+  // Animation state
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [animationProgress, setAnimationProgress] = useState(0);
+
   useEffect(() => {
     let timeout: NodeJS.Timeout | null = null;
     if (mazeType === 'rectangular' && maze && maze.length && maze[0] && maze[0].length) {
@@ -1296,8 +1327,31 @@ const MazeGeneratorIsland: React.FC = () => {
         default:
           if (1000 > 0) {
             setRectangularSolution([]);
+            setIsAnimating(false);
+            setAnimationProgress(0);
             timeout = setTimeout(() => {
-              setRectangularSolution(findRectangularMazeSolution(maze, width, height));
+              const solution = findRectangularMazeSolution(maze, width, height);
+              setRectangularSolution(solution);
+              if (solution.length > 1) {
+                setIsAnimating(true);
+                setAnimationProgress(0);
+                // Animate over 2 seconds
+                const animate = () => {
+                  setAnimationProgress(prev => {
+                    if (prev >= 1) {
+                      setIsAnimating(false);
+                      return 1;
+                    }
+                    return prev + 0.02; // 50 steps over 1 second
+                  });
+                };
+                const interval = setInterval(animate, 40); // 25 FPS
+                setTimeout(() => {
+                  clearInterval(interval);
+                  setIsAnimating(false);
+                  setAnimationProgress(1);
+                }, 2000);
+              }
             }, 1000);
           } else {
             setRectangularSolution(findRectangularMazeSolution(maze, width, height));
@@ -1305,6 +1359,8 @@ const MazeGeneratorIsland: React.FC = () => {
       }
     } else {
       setRectangularSolution([]);
+      setIsAnimating(false);
+      setAnimationProgress(0);
     }
     return () => { if (timeout) clearTimeout(timeout); };
   }, [maze, mazeType, width, height, algorithm]);
@@ -1316,8 +1372,31 @@ const MazeGeneratorIsland: React.FC = () => {
         default:
           if (1000 > 0) {
             setCircularSolution([]);
+            setIsAnimating(false);
+            setAnimationProgress(0);
             timeout = setTimeout(() => {
-              setCircularSolution(findCircularMazeSolution(circularMaze, safeWidth, safeHeight * 3));
+              const solution = findCircularMazeSolution(circularMaze, safeWidth, safeHeight * 3);
+              setCircularSolution(solution);
+              if (solution.length > 1) {
+                setIsAnimating(true);
+                setAnimationProgress(0);
+                // Animate over 2 seconds
+                const animate = () => {
+                  setAnimationProgress(prev => {
+                    if (prev >= 1) {
+                      setIsAnimating(false);
+                      return 1;
+                    }
+                    return prev + 0.02; // 50 steps over 1 second
+                  });
+                };
+                const interval = setInterval(animate, 40); // 25 FPS
+                setTimeout(() => {
+                  clearInterval(interval);
+                  setIsAnimating(false);
+                  setAnimationProgress(1);
+                }, 2000);
+              }
             }, 1000);
           } else {
             setCircularSolution(findCircularMazeSolution(circularMaze, safeWidth, safeHeight * 3));
@@ -1325,6 +1404,8 @@ const MazeGeneratorIsland: React.FC = () => {
       }
     } else {
       setCircularSolution([]);
+      setIsAnimating(false);
+      setAnimationProgress(0);
     }
     return () => { if (timeout) clearTimeout(timeout); };
   }, [circularMaze, mazeType, safeWidth, safeHeight, algorithm]);
@@ -1336,8 +1417,31 @@ const MazeGeneratorIsland: React.FC = () => {
         default:
           if (1000 > 0) {
             setPolarwarpSolution([]);
+            setIsAnimating(false);
+            setAnimationProgress(0);
             timeout = setTimeout(() => {
-              setPolarwarpSolution(findRectangularMazeSolution(maze, width, height));
+              const solution = findRectangularMazeSolution(maze, width, height);
+              setPolarwarpSolution(solution);
+              if (solution.length > 1) {
+                setIsAnimating(true);
+                setAnimationProgress(0);
+                // Animate over 2 seconds
+                const animate = () => {
+                  setAnimationProgress(prev => {
+                    if (prev >= 1) {
+                      setIsAnimating(false);
+                      return 1;
+                    }
+                    return prev + 0.02; // 50 steps over 1 second
+                  });
+                };
+                const interval = setInterval(animate, 40); // 25 FPS
+                setTimeout(() => {
+                  clearInterval(interval);
+                  setIsAnimating(false);
+                  setAnimationProgress(1);
+                }, 2000);
+              }
             }, 1000);
           } else {
             setPolarwarpSolution(findRectangularMazeSolution(maze, width, height));
@@ -1345,6 +1449,8 @@ const MazeGeneratorIsland: React.FC = () => {
       }
     } else {
       setPolarwarpSolution([]);
+      setIsAnimating(false);
+      setAnimationProgress(0);
     }
     return () => { if (timeout) clearTimeout(timeout); };
   }, [maze, mazeType, width, height, algorithm]);
@@ -1557,7 +1663,7 @@ const MazeGeneratorIsland: React.FC = () => {
         maze && maze.length && maze[0] && maze[0].length ? (
           <div className="flex justify-center mt-8 px-4">
             <div className="w-full max-w-full overflow-auto" style={{ maxWidth: width * cellSize + 2 }}>
-              <RectangularMazeSVG maze={maze} width={width} height={height} solution={rectangularSolution} />
+              <RectangularMazeSVG maze={maze} width={width} height={height} solution={rectangularSolution} isAnimating={isAnimating} animationProgress={animationProgress} />
             </div>
           </div>
         ) : (
@@ -1568,7 +1674,7 @@ const MazeGeneratorIsland: React.FC = () => {
           </div>
         )
       ) : mazeType === 'polarwarp' ? (
-        <RectangularMazePolarWarpSVG maze={maze} width={width} height={height} solution={polarwarpSolution} />
+        <RectangularMazePolarWarpSVG maze={maze} width={width} height={height} solution={polarwarpSolution} isAnimating={isAnimating} animationProgress={animationProgress} />
       ) : mazeType === 'circular' && circularSvgSize ? (
         circularMaze && circularMaze.length && circularMaze[0] && circularMaze[0].length ? (
           <div className="flex justify-center mt-8 px-4">
@@ -1576,7 +1682,7 @@ const MazeGeneratorIsland: React.FC = () => {
               className="overflow-auto"
               style={{ width: '100%', minWidth: 300 }}
             >
-              <CircularMazeSVG maze={circularMaze} width={safeWidth} height={safeHeight} svgSize={circularSvgSize} responsive solution={circularSolution} />
+              <CircularMazeSVG maze={circularMaze} width={safeWidth} height={safeHeight} svgSize={circularSvgSize} responsive solution={circularSolution} isAnimating={isAnimating} animationProgress={animationProgress} />
             </div>
           </div>
         ) : (

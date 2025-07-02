@@ -15,15 +15,34 @@ tags:
 Maze generation is a fascinating application of graph theory and algorithms. This interactive demo lets you generate mazes using a variety of classic algorithms and types, inspired by the open-source [Maze Generator by razimantv](https://github.com/razimantv/mazegenerator).
 
 ## How to use
-- Choose the maze type (**Rectangular** or **Circular**).
+- Choose the maze type (**Rectangular**, **Circular**, or **Polar Warp**).
 - Choose the algorithm (DFS, Prim's, Wilson's, Kruskal's, Eller's, Hunt-and-Kill, Binary Tree, or Sidewinder).
-- Set the width and height (or rings/sectors) of the maze.
-- Click **Generate** to create a new maze.
-- Explore the SVG maze below!
+- Set the maze size (Small, Medium, or Large).
+- Click **Regenerate** to create a new maze.
+- The solution path will appear after 1 second.
 
 import MazeGeneratorIsland from "@/components/react/MazeGeneratorIsland"
+import MermaidDiagram from '../../../components/react/MermaidDiagram';
+import { mazeGenerationLogic } from '../../../data/diagrams/maze-generator';
 
 <MazeGeneratorIsland client:visible />
+
+## Maze Generation Logic
+
+The maze generator ensures that every maze is solvable and the solution respects all walls. Here's how it works:
+
+<MermaidDiagram client:load
+  chart={mazeGenerationLogic}
+  title="Maze Generation and Solution Logic"
+  align="center"
+  size="full"
+/>
+
+**Key Features:**
+- **Guaranteed Solvability:** The generator retries until a solvable maze is found
+- **Wall Respect:** Solution paths never go through walls
+- **Non-Trivial Solutions:** Prevents straight-line solutions that don't follow maze passages
+- **Visual Delay:** 1-second delay before showing the solution for dramatic effect
 
 ## Supported Algorithms
 
