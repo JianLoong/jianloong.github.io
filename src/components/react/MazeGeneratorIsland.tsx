@@ -860,9 +860,13 @@ function findRectangularMazeSolution(maze: Cell[][], width: number, height: numb
   const visited = Array.from({ length: height }, () => Array(width).fill(false));
   const parent = Array.from({ length: height }, () => Array(width).fill(null));
   visited[0][0] = true;
+  let endReached = false;
   while (queue.length > 0) {
     const [x, y] = queue.shift()!;
-    if (x === end[0] && y === end[1]) break;
+    if (x === end[0] && y === end[1]) {
+      endReached = true;
+      break;
+    }
     if (!maze[y] || !maze[y][x] || !maze[y][x].walls) continue;
     const cell = maze[y][x];
     const deltas = [
@@ -873,18 +877,24 @@ function findRectangularMazeSolution(maze: Cell[][], width: number, height: numb
     ];
     for (let i = 0; i < 4; i++) {
       const [dx, dy, wallIdx] = deltas[i];
-      if (!cell.walls[wallIdx]) {
-        const nx = x + dx;
-        const ny = y + dy;
-        if (nx >= 0 && nx < width && ny >= 0 && ny < height && !visited[ny][nx]) {
-          if (!maze[ny] || !maze[ny][nx] || !maze[ny][nx].walls) continue;
-          visited[ny][nx] = true;
-          parent[ny][nx] = [x, y];
-          queue.push([nx, ny]);
-        }
+      const nx = x + dx;
+      const ny = y + dy;
+      const oppositeWallIdx = (wallIdx + 2) % 4;
+      if (
+        nx >= 0 && nx < width && ny >= 0 && ny < height &&
+        !visited[ny][nx] &&
+        maze[ny] && maze[ny][nx] && maze[ny][nx].walls &&
+        !cell.walls[wallIdx] &&
+        !maze[ny][nx].walls[oppositeWallIdx]
+      ) {
+        visited[ny][nx] = true;
+        parent[ny][nx] = [x, y];
+        queue.push([nx, ny]);
       }
     }
   }
+  // Only reconstruct path if end was reached
+  if (!endReached) return [];
   // Reconstruct path
   const path: [number, number][] = [];
   let cur: [number, number] | null = end;
@@ -925,12 +935,14 @@ function findCircularMazeSolution(maze: PolarCell[][], rings: number, sectors: n
       if (nr < 0 || nr >= rings) continue;
       if (!maze[nr] || !maze[nr][ns] || !maze[nr][ns].walls) continue;
       const neighbor = maze[nr][ns];
-      if (!cell.walls[cellWallIdx] && !neighbor.walls[neighborWallIdx]) {
-        if (!visited[nr][ns]) {
-          visited[nr][ns] = true;
-          parent[nr][ns] = [r, s];
-          queue.push([nr, ns]);
-        }
+      if (
+        !cell.walls[cellWallIdx] &&
+        !neighbor.walls[neighborWallIdx] &&
+        !visited[nr][ns]
+      ) {
+        visited[nr][ns] = true;
+        parent[nr][ns] = [r, s];
+        queue.push([nr, ns]);
       }
     }
   }
@@ -1346,65 +1358,127 @@ const MazeGeneratorIsland: React.FC = () => {
   useEffect(() => {
     setLoading(true);
     let mazeData;
-    if (mazeType === 'rectangular' || mazeType === 'polarwarp') {
-      switch (algorithm) {
-        case 'dfs':
-          mazeData = generateMazeDFS(safeWidth, safeHeight);
+    const maxAttempts = 1000;
+    let attempts = 0;
+    let solvable = false;
+    function isRectangularSolvable(maze: Cell[][], width: number, height: number) {
+      const path = findRectangularMazeSolution(maze, width, height);
+      if (path.length <= 1) return false;
+      
+      // Check for trivial Manhattan path (all right then all down, or all down then all right)
+      let isManhattanPath = true;
+      let hasRightMoves = false;
+      let hasDownMoves = false;
+      for (let i = 1; i < path.length; i++) {
+        const [x0, y0] = path[i - 1];
+        const [x1, y1] = path[i];
+        if (x1 === x0 + 1 && y1 === y0) {
+          hasRightMoves = true;
+        } else if (x1 === x0 && y1 === y0 + 1) {
+          hasDownMoves = true;
+        } else {
+          isManhattanPath = false;
           break;
-        case 'wilsons':
-          mazeData = generateMazeWilsons(safeWidth, safeHeight);
-          break;
-        case 'kruskal':
-          mazeData = generateMazeKruskals(safeWidth, safeHeight);
-          break;
-        case 'eller':
-          mazeData = generateMazeEller(safeWidth, safeHeight);
-          break;
-        case 'huntandkill':
-          mazeData = generateMazeHuntAndKill(safeWidth, safeHeight);
-          break;
-        case 'binarytree':
-          mazeData = generateMazeBinaryTree(safeWidth, safeHeight);
-          break;
-        case 'sidewinder':
-          mazeData = generateMazeSidewinder(safeWidth, safeHeight);
-          break;
-        case 'prims':
-          mazeData = generateMazePrims(safeWidth, safeHeight);
-          break;
-        default:
-          mazeData = generateMazeDFS(safeWidth, safeHeight);
+        }
       }
+      if (isManhattanPath && hasRightMoves && hasDownMoves) return false;
+      
+      // Check that the maze has at least one wall between start and end
+      let hasWalls = false;
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          if (maze[y] && maze[y][x] && maze[y][x].walls) {
+            if (maze[y][x].walls.some(wall => wall)) {
+              hasWalls = true;
+              break;
+            }
+          }
+        }
+        if (hasWalls) break;
+      }
+      if (!hasWalls) return false;
+      
+      return true;
+    }
+    function isCircularSolvable(maze: PolarCell[][], rings: number, sectors: number) {
+      const path = findCircularMazeSolution(maze, rings, sectors);
+      return path.length > 1;
+    }
+    if (mazeType === 'rectangular' || mazeType === 'polarwarp') {
+      do {
+        switch (algorithm) {
+          case 'dfs':
+            mazeData = generateMazeDFS(safeWidth, safeHeight);
+            break;
+          case 'wilsons':
+            mazeData = generateMazeWilsons(safeWidth, safeHeight);
+            break;
+          case 'kruskal':
+            mazeData = generateMazeKruskals(safeWidth, safeHeight);
+            break;
+          case 'eller':
+            mazeData = generateMazeEller(safeWidth, safeHeight);
+            break;
+          case 'huntandkill':
+            mazeData = generateMazeHuntAndKill(safeWidth, safeHeight);
+            break;
+          case 'binarytree':
+            mazeData = generateMazeBinaryTree(safeWidth, safeHeight);
+            break;
+          case 'sidewinder':
+            mazeData = generateMazeSidewinder(safeWidth, safeHeight);
+            break;
+          case 'prims':
+            mazeData = generateMazePrims(safeWidth, safeHeight);
+            break;
+          default:
+            mazeData = generateMazeDFS(safeWidth, safeHeight);
+        }
+        solvable = isRectangularSolvable(mazeData, safeWidth, safeHeight);
+        attempts++;
+        if (attempts >= maxAttempts && !solvable) {
+          alert('Warning: Could not generate a solvable maze after ' + maxAttempts + ' attempts. Using the last generated maze.');
+          break;
+        }
+      } while (!solvable);
       setMaze(mazeData);
     } else if (mazeType === 'circular') {
-      switch (algorithm) {
-        case 'dfs':
-          mazeData = generateCircularMazeDFS(safeWidth, safeHeight * 3);
+      do {
+        switch (algorithm) {
+          case 'dfs':
+            mazeData = generateCircularMazeDFS(safeWidth, safeHeight * 3);
+            break;
+          case 'wilsons':
+            mazeData = generateCircularMazeWilsons(safeWidth, safeHeight * 3);
+            break;
+          case 'kruskal':
+            mazeData = generateCircularMazeKruskals(safeWidth, safeHeight * 3);
+            break;
+          case 'eller':
+            mazeData = generateCircularMazeEller(safeWidth, safeHeight * 3);
+            break;
+          case 'huntandkill':
+            mazeData = generateCircularMazeHuntAndKill(safeWidth, safeHeight * 3);
+            break;
+          case 'binarytree':
+            mazeData = generateCircularMazeBinaryTree(safeWidth, safeHeight * 3);
+            break;
+          case 'sidewinder':
+            mazeData = generateCircularMazeSidewinder(safeWidth, safeHeight * 3);
+            break;
+          case 'prims':
+            mazeData = generateCircularMazePrims(safeWidth, safeHeight * 3);
+            break;
+          default:
+            mazeData = generateCircularMazeDFS(safeWidth, safeHeight * 3);
+        }
+        solvable = isCircularSolvable(mazeData, safeWidth, safeHeight * 3);
+        attempts++;
+        if (attempts >= maxAttempts && !solvable) {
+          alert('Warning: Could not generate a solvable maze after ' + maxAttempts + ' attempts. Using the last generated maze.');
           break;
-        case 'wilsons':
-          mazeData = generateCircularMazeWilsons(safeWidth, safeHeight * 3);
-          break;
-        case 'kruskal':
-          mazeData = generateCircularMazeKruskals(safeWidth, safeHeight * 3);
-          break;
-        case 'eller':
-          mazeData = generateCircularMazeEller(safeWidth, safeHeight * 3);
-          break;
-        case 'huntandkill':
-          mazeData = generateCircularMazeHuntAndKill(safeWidth, safeHeight * 3);
-          break;
-        case 'binarytree':
-          mazeData = generateCircularMazeBinaryTree(safeWidth, safeHeight * 3);
-          break;
-        case 'sidewinder':
-          mazeData = generateCircularMazeSidewinder(safeWidth, safeHeight * 3);
-          break;
-        case 'prims':
-          mazeData = generateCircularMazePrims(safeWidth, safeHeight * 3);
-          break;
-        default:
-          mazeData = generateCircularMazeDFS(safeWidth, safeHeight * 3);
-      }
+        }
+      } while (!solvable);
       setCircularMaze(mazeData);
     }
     setLoading(false);
