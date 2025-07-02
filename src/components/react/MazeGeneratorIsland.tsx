@@ -1,8 +1,7 @@
 import * as React from "react";
 import { useState, useEffect, useRef } from "react";
-// Import the worker
-// @ts-ignore
-import MazeWorker from './mazeWorker.ts?worker';
+// Remove the static import of MazeWorker
+// import MazeWorker from './mazeWorker.ts?worker&v=2';
 
 // --- Types ---
 interface Cell {
@@ -12,8 +11,16 @@ interface Cell {
   visited: boolean;
 }
 
-type MazeType = 'rectangular';
+type MazeType = 'rectangular' | 'circular';
 type Algorithm = 'dfs' | 'prims';
+
+// 2. Add state for circular maze
+type PolarCell = {
+  ring: number;
+  sector: number;
+  visited: boolean;
+  walls: [boolean, boolean, boolean];
+};
 
 // --- Maze Generation Functions ---
 function createGrid(width: number, height: number): Cell[][] {
@@ -99,6 +106,96 @@ function generateMazePrims(width: number, height: number): Cell[][] {
   // Add entrance and exit
   grid[0][0].walls[3] = false; // Entrance: remove left wall of top-left
   grid[height - 1][width - 1].walls[1] = false; // Exit: remove right wall of bottom-right
+  return grid;
+}
+
+// --- Circular Maze Generation Functions ---
+function createPolarGrid(rings: number, sectors: number): PolarCell[][] {
+  return Array.from({ length: rings }, (_, r) =>
+    Array.from({ length: sectors }, (_, s) => ({
+      ring: r,
+      sector: s,
+      visited: false,
+      walls: [true, true, true], // [radialIn, clockwise, counterclockwise]
+    }))
+  );
+}
+
+function generateCircularMazeDFS(rings: number, sectors: number): PolarCell[][] {
+  const grid = createPolarGrid(rings, sectors);
+  const stack: PolarCell[] = [];
+  const start = grid[rings - 1][0];
+  start.visited = true;
+  stack.push(start);
+
+  while (stack.length > 0) {
+    const current = stack[stack.length - 1];
+    const { ring, sector } = current;
+    const neighbors: [PolarCell, number, number][] = [];
+    // Precompute sector indices for wrapping
+    const sectorPlus = (sector + 1) % sectors;
+    const sectorMinus = (sector - 1 + sectors) % sectors;
+    if (ring > 0 && !grid[ring - 1][sector].visited) neighbors.push([grid[ring - 1][sector], 0, 0]);
+    if (ring < rings - 1 && !grid[ring + 1][sector].visited) neighbors.push([grid[ring + 1][sector], 0, 0]);
+    if (!grid[ring][sectorPlus].visited) neighbors.push([grid[ring][sectorPlus], 1, 2]);
+    if (!grid[ring][sectorMinus].visited) neighbors.push([grid[ring][sectorMinus], 2, 1]);
+    if (neighbors.length > 0) {
+      // Pick a random neighbor without shuffling the whole array
+      const idx = (neighbors.length > 1) ? Math.floor(Math.random() * neighbors.length) : 0;
+      const [next, wallIdx, neighborWallIdx] = neighbors[idx];
+      current.walls[wallIdx] = false;
+      next.walls[neighborWallIdx] = false;
+      next.visited = true;
+      stack.push(next);
+    } else {
+      stack.pop();
+    }
+  }
+  grid[rings - 1][0].walls[0] = false;
+  grid[0][0].walls[0] = false;
+  return grid;
+}
+
+function generateCircularMazePrims(rings: number, sectors: number): PolarCell[][] {
+  const grid = createPolarGrid(rings, sectors);
+  const walls: [number, number, number, number][] = [];
+  const start = grid[rings - 1][0];
+  start.visited = true;
+  if (rings > 1) walls.push([rings - 1, 0, 0, 0]);
+  walls.push([rings - 1, 0, 1, 2]);
+  walls.push([rings - 1, 0, 2, 1]);
+  function addWalls(cell: PolarCell) {
+    const { ring, sector } = cell;
+    const sectorPlus = (sector + 1) % sectors;
+    const sectorMinus = (sector - 1 + sectors) % sectors;
+    if (ring > 0 && !grid[ring - 1][sector].visited) walls.push([ring, sector, 0, 0]);
+    if (ring < rings - 1 && !grid[ring + 1][sector].visited) walls.push([ring, sector, 0, 0]);
+    if (!grid[ring][sectorPlus].visited) walls.push([ring, sector, 1, 2]);
+    if (!grid[ring][sectorMinus].visited) walls.push([ring, sector, 2, 1]);
+  }
+  while (walls.length > 0) {
+    const idx = (walls.length > 1) ? Math.floor(Math.random() * walls.length) : 0;
+    const [r, s, wallIdx, neighborWallIdx] = walls.splice(idx, 1)[0];
+    const cell = grid[r][s];
+    let nr = r, ns = s;
+    if (wallIdx === 0) {
+      if (r > 0 && !grid[r - 1][s].visited) nr = r - 1;
+      else if (r < rings - 1 && !grid[r + 1][s].visited) nr = r + 1;
+    } else if (wallIdx === 1) {
+      ns = (s + 1) % sectors;
+    } else if (wallIdx === 2) {
+      ns = (s - 1 + sectors) % sectors;
+    }
+    const neighbor = grid[nr][ns];
+    if (!neighbor.visited) {
+      cell.walls[wallIdx] = false;
+      neighbor.walls[neighborWallIdx] = false;
+      neighbor.visited = true;
+      addWalls(neighbor);
+    }
+  }
+  grid[rings - 1][0].walls[0] = false;
+  grid[0][0].walls[0] = false;
   return grid;
 }
 
@@ -223,6 +320,227 @@ function findRectangularMazeSolution(maze: Cell[][], width: number, height: numb
   return path;
 }
 
+// Helper to find solution path in circular maze using BFS
+function findCircularMazeSolution(maze: PolarCell[][], rings: number, sectors: number): [number, number][] {
+  if (!maze || !maze.length) return [];
+  const start: [number, number] = [rings - 1, 0];
+  const end: [number, number] = [0, 0];
+  const queue: [number, number][] = [start];
+  const visited = Array.from({ length: rings }, () => Array(sectors).fill(false));
+  const parent = Array.from({ length: rings }, () => Array(sectors).fill(null));
+  visited[start[0]][start[1]] = true;
+  while (queue.length > 0) {
+    const [r, s] = queue.shift()!;
+    if (r === end[0] && s === end[1]) break;
+    if (!maze[r] || !maze[r][s] || !maze[r][s].walls) continue;
+    const cell = maze[r][s];
+    // [dr, ds, cellWallIdx, neighborWallIdx]
+    const deltas = [
+      [-1, 0, 0, 0], // inwards (radial)
+      [1, 0, 0, 0], // outwards (radial)
+      [0, 1, 1, 2], // clockwise (angular)
+      [0, -1, 2, 1], // counterclockwise (angular)
+    ];
+    for (let i = 0; i < 4; i++) {
+      const [dr, ds, cellWallIdx, neighborWallIdx] = deltas[i];
+      let nr = r + dr;
+      let ns = (s + ds + sectors) % sectors;
+      if (nr < 0 || nr >= rings) continue;
+      if (!maze[nr] || !maze[nr][ns] || !maze[nr][ns].walls) continue;
+      const neighbor = maze[nr][ns];
+      if (!cell.walls[cellWallIdx] && !neighbor.walls[neighborWallIdx]) {
+        if (!visited[nr][ns]) {
+          visited[nr][ns] = true;
+          parent[nr][ns] = [r, s];
+          queue.push([nr, ns]);
+        }
+      }
+    }
+  }
+  // Reconstruct path
+  const path: [number, number][] = [];
+  let cur: [number, number] | null = end;
+  while (cur && !(cur[0] === start[0] && cur[1] === start[1])) {
+    path.push(cur);
+    cur = parent[cur[0]][cur[1]];
+  }
+  path.push(start);
+  path.reverse();
+  return path;
+}
+
+function CircularMazeSVG({ maze, width, height }: { maze: PolarCell[][], width: number, height: number }) {
+  if (!maze || !maze.length || !maze[0] || !maze[0].length) {
+    return (
+      <svg width="100%" height="100">
+        <text x={10} y={20} fill="red">Maze data is invalid</text>
+      </svg>
+    );
+  }
+  const rings = width;
+  const sectors = height * 3;
+  const padding = 32;
+  const svgSize = width * cellSize * 2 + padding * 2;
+  const cx = (width * cellSize) + padding;
+  const cy = (width * cellSize) + padding;
+  const rStep = (width * cellSize) / rings;
+  const aStep = (2 * Math.PI) / sectors;
+  const elements = [];
+  // Solution path
+  const solution = findCircularMazeSolution(maze, rings, sectors);
+  if (solution.length > 1) {
+    const pathPoints = solution.map(([r, s]) => {
+      const rr = (r + 0.5) * rStep;
+      const aa = (s + 0.5) * aStep;
+      return [cx + rr * Math.cos(aa), cy + rr * Math.sin(aa)];
+    });
+    elements.push(
+      <polyline
+        key="solution-path"
+        points={pathPoints.map(p => p.join(",")).join(" ")}
+        fill="none"
+        stroke="#f43f5e"
+        strokeWidth={4}
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        opacity={0.7}
+      />
+    );
+  }
+  for (let r = 0; r < rings; r++) {
+    if (!maze[r]) continue;
+    for (let s = 0; s < sectors; s++) {
+      if (!maze[r][s]) continue;
+      const cell = maze[r][s];
+      const r1 = r * rStep;
+      const r2 = (r + 1) * rStep;
+      const a1 = s * aStep;
+      const a2 = (s + 1) * aStep;
+      // Radial wall (between rings)
+      if (cell.walls[0] && r > 0) {
+        const x1 = cx + r1 * Math.cos(a1);
+        const y1 = cy + r1 * Math.sin(a1);
+        const x2 = cx + r1 * Math.cos(a2);
+        const y2 = cy + r1 * Math.sin(a2);
+        elements.push(
+          <line
+            key={`radial-${r},${s}`}
+            x1={x1}
+            y1={y1}
+            x2={x2}
+            y2={y2}
+            stroke="var(--color-accent)"
+            strokeWidth={2}
+          />
+        );
+      }
+      // Clockwise wall (between sectors)
+      if (cell.walls[1]) {
+        const x1 = cx + r1 * Math.cos(a2);
+        const y1 = cy + r1 * Math.sin(a2);
+        const x2 = cx + r2 * Math.cos(a2);
+        const y2 = cy + r2 * Math.sin(a2);
+        elements.push(
+          <line
+            key={`cw-${r},${s}`}
+            x1={x1}
+            y1={y1}
+            x2={x2}
+            y2={y2}
+            stroke="var(--color-accent)"
+            strokeWidth={2}
+          />
+        );
+      }
+      // Counterclockwise wall (between sectors)
+      if (cell.walls[2]) {
+        const x1 = cx + r1 * Math.cos(a1);
+        const y1 = cy + r1 * Math.sin(a1);
+        const x2 = cx + r2 * Math.cos(a1);
+        const y2 = cy + r2 * Math.sin(a1);
+        elements.push(
+          <line
+            key={`ccw-${r},${s}`}
+            x1={x1}
+            y1={y1}
+            x2={x2}
+            y2={y2}
+            stroke="var(--color-accent)"
+            strokeWidth={2}
+          />
+        );
+      }
+    }
+  }
+  // Draw outer circle in segments, skipping the exit at sector 0 if its wall is removed
+  const outerRing = maze[rings - 1];
+  if (!outerRing || !outerRing[0]) {
+    return (
+      <svg width="100%" height="100">
+        <text x={10} y={20} fill="red">Maze data is invalid</text>
+      </svg>
+    );
+  }
+  for (let s = 0; s < sectors; s++) {
+    if (s === 0 && !outerRing[0].walls[0]) continue;
+    const rOuter = rings * rStep;
+    const a1 = s * aStep;
+    const a2 = (s + 1) * aStep;
+    const x1 = cx + rOuter * Math.cos(a1);
+    const y1 = cy + rOuter * Math.sin(a1);
+    const x2 = cx + rOuter * Math.cos(a2);
+    const y2 = cy + rOuter * Math.sin(a2);
+    elements.push(
+      <path
+        key={`outer-arc-${s}`}
+        d={`M ${x1} ${y1} A ${rOuter} ${rOuter} 0 0 1 ${x2} ${y2}`}
+        stroke="var(--color-accent)"
+        strokeWidth={2}
+        fill="none"
+      />
+    );
+  }
+  // Entrance marker (outermost ring, sector 0)
+  if (!outerRing[0].walls[0]) {
+    const rOuter = rings * rStep;
+    const a0 = 0;
+    const xExit = cx + rOuter * Math.cos(a0);
+    const yExit = cy + rOuter * Math.sin(a0);
+    elements.push(
+      <circle
+        key="exit-marker"
+        cx={xExit}
+        cy={yExit}
+        r={rStep / 3}
+        fill="var(--color-accent)"
+        stroke="var(--color-foreground)"
+        strokeWidth={3}
+      />
+    );
+  }
+  // Center marker (exit)
+  elements.push(
+    <circle
+      key="center"
+      cx={cx}
+      cy={cy}
+      r={rStep / 3}
+      fill="var(--color-accent)"
+      stroke="var(--color-foreground)"
+      strokeWidth={1}
+    />
+  );
+  return (
+    <svg
+      width="100%"
+      viewBox={`0 0 ${width * cellSize * 2} ${width * cellSize * 2}`}
+      className="bg-[var(--color-background)] border border-[var(--color-border)] block mx-auto"
+    >
+      {elements}
+    </svg>
+  );
+}
+
 // --- Main Maze Generator Component ---
 const MazeGeneratorIsland: React.FC = () => {
   const sizePresets = [
@@ -236,30 +554,37 @@ const MazeGeneratorIsland: React.FC = () => {
   const [mazeType, setMazeType] = useState<MazeType>('rectangular');
   const [algorithm, setAlgorithm] = useState<Algorithm>('dfs');
   const [maze, setMaze] = useState<Cell[][]>([]);
+  const [circularMaze, setCircularMaze] = useState<PolarCell[][]>([]);
   const [loading, setLoading] = useState(false);
-  const workerRef = useRef<any>();
+
+  const maxRectangularSize = 32;
+  const maxCircularSize = 32;
+
+  const safeWidth =
+    mazeType === 'rectangular'
+      ? Math.min(width, maxRectangularSize)
+      : Math.min(width, maxCircularSize);
+
+  const safeHeight =
+    mazeType === 'rectangular'
+      ? Math.min(height, maxRectangularSize)
+      : Math.min(height, maxCircularSize);
 
   useEffect(() => {
-    if (!workerRef.current) {
-      workerRef.current = new MazeWorker();
+    setLoading(true);
+    let mazeData;
+    if (mazeType === 'rectangular') {
+      mazeData = algorithm === 'dfs'
+        ? generateMazeDFS(safeWidth, safeHeight)
+        : generateMazePrims(safeWidth, safeHeight);
+      setMaze(mazeData);
+    } else if (mazeType === 'circular') {
+      mazeData = algorithm === 'dfs'
+        ? generateCircularMazeDFS(safeWidth, safeHeight * 3)
+        : generateCircularMazePrims(safeWidth, safeHeight * 3);
+      setCircularMaze(mazeData);
     }
-    const worker = workerRef.current;
-    function handleMessage(e: MessageEvent) {
-      const { maze } = e.data;
-      console.log('Maze received from worker:', maze);
-      if (mazeType === 'rectangular') setMaze(maze);
-      setLoading(false);
-    }
-    worker.addEventListener('message', handleMessage);
-    return () => worker.removeEventListener('message', handleMessage);
-  }, []);
-
-  useEffect(() => {
-    if (width > 0 && height > 0) {
-      setLoading(true);
-      const worker = workerRef.current;
-      worker.postMessage({ mazeType, algorithm, width, height });
-    }
+    setLoading(false);
   }, [mazeType, algorithm, width, height]);
 
   return (
@@ -276,6 +601,7 @@ const MazeGeneratorIsland: React.FC = () => {
               className="mt-1 text-lg px-3 py-2 border-2 border-[var(--color-border)] rounded-md outline-none bg-[var(--color-background)] text-[var(--color-foreground)] font-semibold shadow-sm focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[color:var(--color-accent)] w-full transition"
             >
               <option value="rectangular">Rectangular</option>
+              <option value="circular">Circular</option>
             </select>
           </label>
           <label className="font-semibold text-base flex flex-col items-start bg-[var(--color-muted)] rounded-lg px-4 py-3 w-full" style={{ color: 'var(--color-foreground)' }}>
@@ -323,7 +649,33 @@ const MazeGeneratorIsland: React.FC = () => {
             maze[0]?.length: {maze && maze[0] ? maze[0].length : 'undefined'}
           </div>
         )
+      ) : mazeType === 'circular' ? (
+        circularMaze && circularMaze.length && circularMaze[0] && circularMaze[0].length ? (
+          <div className="flex justify-center mt-8 px-4">
+            <div className="w-full max-w-full overflow-auto" style={{ maxWidth: width * cellSize + 2 }}>
+              <CircularMazeSVG maze={circularMaze} width={width} height={height} />
+            </div>
+          </div>
+        ) : (
+          <div className="text-center text-red-500 font-semibold mt-8">
+            Circular maze data is empty or invalid.<br/>
+            circularMaze.length: {circularMaze ? circularMaze.length : 'undefined'}<br/>
+            circularMaze[0]?.length: {circularMaze && circularMaze[0] ? circularMaze[0].length : 'undefined'}
+          </div>
+        )
       ) : null}
+      {mazeType === 'rectangular' && (width > maxRectangularSize || height > maxRectangularSize) && (
+        <div className="text-center text-yellow-600 font-semibold mt-4">
+          For rectangular mazes, the maximum supported size is {maxRectangularSize}.<br/>
+          The maze will be generated at the maximum allowed size.
+        </div>
+      )}
+      {mazeType === 'circular' && (width > maxCircularSize || height > maxCircularSize) && (
+        <div className="text-center text-yellow-600 font-semibold mt-4">
+          For circular mazes, the maximum supported size is {maxCircularSize}.<br/>
+          The maze will be generated at the maximum allowed size.
+        </div>
+      )}
     </div>
   );
 };
