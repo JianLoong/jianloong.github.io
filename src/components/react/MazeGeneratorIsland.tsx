@@ -11,7 +11,7 @@ interface Cell {
   visited: boolean;
 }
 
-type MazeType = 'rectangular' | 'circular';
+type MazeType = 'rectangular' | 'circular' | 'polarwarp';
 type Algorithm =
   | 'dfs'
   | 'prims'
@@ -1089,6 +1089,128 @@ function CircularMazeSVG({ maze, width, height, svgSize, responsive }: { maze: P
   );
 }
 
+// Add RectangularMazePolarWarpSVG component
+function RectangularMazePolarWarpSVG({ maze, width, height }: { maze: Cell[][], width: number, height: number }) {
+  if (!maze || !maze.length) return null;
+  const cellCount = Math.max(width, height);
+  const svgSize = cellCount * cellSize + 32;
+  const cx = svgSize / 2;
+  const cy = svgSize / 2;
+  const rMin = 16;
+  const rMax = svgSize / 2 - 8;
+  // Map y to radius, x to angle
+  const elements = [];
+  for (let y = 0; y < height; y++) {
+    if (!maze[y]) continue;
+    const r1 = rMin + (rMax - rMin) * (y / height);
+    const r2 = rMin + (rMax - rMin) * ((y + 1) / height);
+    for (let x = 0; x < width; x++) {
+      if (!maze[y][x] || !maze[y][x].walls) continue;
+      const a1 = (2 * Math.PI) * (x / width);
+      const a2 = (2 * Math.PI) * ((x + 1) / width);
+      // Walls: [top, right, bottom, left]
+      // Top (inner arc)
+      if (maze[y][x].walls[0]) {
+        const x1 = cx + r1 * Math.cos(a1);
+        const y1 = cy + r1 * Math.sin(a1);
+        const x2 = cx + r1 * Math.cos(a2);
+        const y2 = cy + r1 * Math.sin(a2);
+        elements.push(
+          <path key={`t-${x},${y}`} d={`M ${x1} ${y1} A ${r1} ${r1} 0 0 1 ${x2} ${y2}`} stroke="var(--color-accent)" strokeWidth={2} fill="none" />
+        );
+      }
+      // Right (radial line)
+      if (maze[y][x].walls[1]) {
+        const x1 = cx + r1 * Math.cos(a2);
+        const y1 = cy + r1 * Math.sin(a2);
+        const x2 = cx + r2 * Math.cos(a2);
+        const y2 = cy + r2 * Math.sin(a2);
+        elements.push(
+          <line key={`r-${x},${y}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="var(--color-accent)" strokeWidth={2} />
+        );
+      }
+      // Bottom (outer arc)
+      if (maze[y][x].walls[2]) {
+        const x1 = cx + r2 * Math.cos(a1);
+        const y1 = cy + r2 * Math.sin(a1);
+        const x2 = cx + r2 * Math.cos(a2);
+        const y2 = cy + r2 * Math.sin(a2);
+        elements.push(
+          <path key={`b-${x},${y}`} d={`M ${x1} ${y1} A ${r2} ${r2} 0 0 1 ${x2} ${y2}`} stroke="var(--color-accent)" strokeWidth={2} fill="none" />
+        );
+      }
+      // Left (radial line)
+      if (maze[y][x].walls[3]) {
+        const x1 = cx + r1 * Math.cos(a1);
+        const y1 = cy + r1 * Math.sin(a1);
+        const x2 = cx + r2 * Math.cos(a1);
+        const y2 = cy + r2 * Math.sin(a1);
+        elements.push(
+          <line key={`l-${x},${y}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="var(--color-accent)" strokeWidth={2} />
+        );
+      }
+    }
+  }
+  // Solution path
+  const solution = findRectangularMazeSolution(maze, width, height);
+  if (solution.length > 1) {
+    const pathPoints = solution.map(([x, y]) => {
+      const r = rMin + (rMax - rMin) * (y / height) + (rMax - rMin) / (2 * height);
+      const a = (2 * Math.PI) * (x / width) + Math.PI / width;
+      return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+    });
+    elements.push(
+      <polyline
+        key="solution-path"
+        points={pathPoints.map(p => p.join(",")).join(" ")}
+        fill="none"
+        stroke="#f43f5e"
+        strokeWidth={4}
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        opacity={0.7}
+      />
+    );
+  }
+  // Entrance marker (start cell [0,0])
+  const rStart = rMin + (rMax - rMin) * (0 / height) + (rMax - rMin) / (2 * height);
+  const aStart = (2 * Math.PI) * (0 / width) + Math.PI / width;
+  const xStart = cx + rStart * Math.cos(aStart);
+  const yStart = cy + rStart * Math.sin(aStart);
+  elements.push(
+    <circle
+      key="entrance-marker"
+      cx={xStart}
+      cy={yStart}
+      r={cellSize / 4}
+      fill="var(--color-accent)"
+      stroke="var(--color-foreground)"
+      strokeWidth={3}
+    />
+  );
+  // Exit marker (end cell [width-1, height-1])
+  const rEnd = rMin + (rMax - rMin) * ((height - 1) / height) + (rMax - rMin) / (2 * height);
+  const aEnd = (2 * Math.PI) * ((width - 1) / width) + Math.PI / width;
+  const xEnd = cx + rEnd * Math.cos(aEnd);
+  const yEnd = cy + rEnd * Math.sin(aEnd);
+  elements.push(
+    <circle
+      key="exit-marker"
+      cx={xEnd}
+      cy={yEnd}
+      r={cellSize / 4}
+      fill="var(--color-accent)"
+      stroke="var(--color-foreground)"
+      strokeWidth={3}
+    />
+  );
+  return (
+    <svg width="100%" height={svgSize} viewBox={`0 0 ${svgSize} ${svgSize}`} className="bg-[var(--color-background)] border border-[var(--color-border)] block">
+      {elements}
+    </svg>
+  );
+}
+
 // --- Main Maze Generator Component ---
 const MazeGeneratorIsland: React.FC = () => {
   const sizePresets = [
@@ -1121,7 +1243,7 @@ const MazeGeneratorIsland: React.FC = () => {
   useEffect(() => {
     setLoading(true);
     let mazeData;
-    if (mazeType === 'rectangular') {
+    if (mazeType === 'rectangular' || mazeType === 'polarwarp') {
       mazeData = algorithm === 'dfs'
         ? generateMazeDFS(safeWidth, safeHeight)
         : algorithm === 'wilsons'
@@ -1176,6 +1298,7 @@ const MazeGeneratorIsland: React.FC = () => {
             >
               <option value="rectangular">Rectangular</option>
               <option value="circular">Circular</option>
+              <option value="polarwarp">Polar Warp</option>
             </select>
           </label>
           <label className="font-semibold text-base flex flex-col items-start bg-[var(--color-muted)] rounded-lg px-4 py-3 w-full" style={{ color: 'var(--color-foreground)' }}>
@@ -1229,6 +1352,8 @@ const MazeGeneratorIsland: React.FC = () => {
             maze[0]?.length: {maze && maze[0] ? maze[0].length : 'undefined'}
           </div>
         )
+      ) : mazeType === 'polarwarp' ? (
+        <RectangularMazePolarWarpSVG maze={maze} width={width} height={height} />
       ) : mazeType === 'circular' && circularSvgSize ? (
         circularMaze && circularMaze.length && circularMaze[0] && circularMaze[0].length ? (
           <div className="flex justify-center mt-8 px-4">
