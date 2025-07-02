@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 // Remove the static import of MazeWorker
 // import MazeWorker from './mazeWorker.ts?worker&v=2';
 
@@ -77,6 +77,8 @@ function generateMazeDFS(width: number, height: number): Cell[][] {
   // Add entrance and exit
   grid[0][0].walls[3] = false; // Entrance: remove left wall of top-left
   grid[height - 1][width - 1].walls[1] = false; // Exit: remove right wall of bottom-right
+  // Reset visited flags before returning (for safety)
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) grid[y][x].visited = false;
   return grid;
 }
 
@@ -114,6 +116,8 @@ function generateMazePrims(width: number, height: number): Cell[][] {
   // Add entrance and exit
   grid[0][0].walls[3] = false; // Entrance: remove left wall of top-left
   grid[height - 1][width - 1].walls[1] = false; // Exit: remove right wall of bottom-right
+  // Reset visited flags before returning (for safety)
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) grid[y][x].visited = false;
   return grid;
 }
 
@@ -179,6 +183,8 @@ function generateMazeWilsons(width: number, height: number): Cell[][] {
   }
   grid[0][0].walls[3] = false;
   grid[height - 1][width - 1].walls[1] = false;
+  // Reset visited flags before returning (for safety)
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) grid[y][x].visited = false;
   return grid;
 }
 
@@ -227,6 +233,8 @@ function generateMazeKruskals(width: number, height: number): Cell[][] {
   }
   grid[0][0].walls[3] = false;
   grid[height - 1][width - 1].walls[1] = false;
+  // Reset visited flags before returning (for safety)
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) grid[y][x].visited = false;
   return grid;
 }
 
@@ -270,6 +278,8 @@ function generateMazeEller(width: number, height: number): Cell[][] {
   }
   grid[0][0].walls[3] = false;
   grid[height - 1][width - 1].walls[1] = false;
+  // Reset visited flags before returning (for safety)
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) grid[y][x].visited = false;
   return grid;
 }
 
@@ -324,6 +334,8 @@ function generateMazeHuntAndKill(width: number, height: number): Cell[][] {
   }
   grid[0][0].walls[3] = false;
   grid[height - 1][width - 1].walls[1] = false;
+  // Reset visited flags before returning (for safety)
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) grid[y][x].visited = false;
   return grid;
 }
 
@@ -344,6 +356,8 @@ function generateMazeBinaryTree(width: number, height: number): Cell[][] {
   }
   grid[0][0].walls[3] = false;
   grid[height - 1][width - 1].walls[1] = false;
+  // Reset visited flags before returning (for safety)
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) grid[y][x].visited = false;
   return grid;
 }
 
@@ -372,6 +386,8 @@ function generateMazeSidewinder(width: number, height: number): Cell[][] {
   }
   grid[0][0].walls[3] = false;
   grid[height - 1][width - 1].walls[1] = false;
+  // Reset visited flags before returning (for safety)
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) grid[y][x].visited = false;
   return grid;
 }
 
@@ -419,6 +435,8 @@ function generateCircularMazeDFS(rings: number, sectors: number): PolarCell[][] 
   }
   grid[rings - 1][0].walls[0] = false;
   grid[0][0].walls[0] = false;
+  // Reset visited flags before returning (for safety)
+  for (let r = 0; r < rings; r++) for (let s = 0; s < sectors; s++) grid[r][s].visited = false;
   return grid;
 }
 
@@ -462,6 +480,8 @@ function generateCircularMazePrims(rings: number, sectors: number): PolarCell[][
   }
   grid[rings - 1][0].walls[0] = false;
   grid[0][0].walls[0] = false;
+  // Reset visited flags before returning (for safety)
+  for (let r = 0; r < rings; r++) for (let s = 0; s < sectors; s++) grid[r][s].visited = false;
   return grid;
 }
 
@@ -527,6 +547,8 @@ function generateCircularMazeWilsons(rings: number, sectors: number): PolarCell[
   }
   grid[rings - 1][0].walls[0] = false;
   grid[0][0].walls[0] = false;
+  // Reset visited flags before returning (for safety)
+  for (let r = 0; r < rings; r++) for (let s = 0; s < sectors; s++) grid[r][s].visited = false;
   return grid;
 }
 
@@ -576,6 +598,8 @@ function generateCircularMazeKruskals(rings: number, sectors: number): PolarCell
   }
   grid[rings - 1][0].walls[0] = false;
   grid[0][0].walls[0] = false;
+  // Reset visited flags before returning (for safety)
+  for (let r = 0; r < rings; r++) for (let s = 0; s < sectors; s++) grid[r][s].visited = false;
   return grid;
 }
 
@@ -620,6 +644,8 @@ function generateCircularMazeEller(rings: number, sectors: number): PolarCell[][
   }
   grid[rings - 1][0].walls[0] = false;
   grid[0][0].walls[0] = false;
+  // Reset visited flags before returning (for safety)
+  for (let r = 0; r < rings; r++) for (let s = 0; s < sectors; s++) grid[r][s].visited = false;
   return grid;
 }
 
@@ -690,6 +716,8 @@ function generateCircularMazeHuntAndKill(rings: number, sectors: number): PolarC
   }
   grid[rings - 1][0].walls[0] = false;
   grid[0][0].walls[0] = false;
+  // Reset visited flags before returning (for safety)
+  for (let r = 0; r < rings; r++) for (let s = 0; s < sectors; s++) grid[r][s].visited = false;
   return grid;
 }
 
@@ -715,6 +743,8 @@ function generateCircularMazeBinaryTree(rings: number, sectors: number): PolarCe
   }
   grid[rings - 1][0].walls[0] = false;
   grid[0][0].walls[0] = false;
+  // Reset visited flags before returning (for safety)
+  for (let r = 0; r < rings; r++) for (let s = 0; s < sectors; s++) grid[r][s].visited = false;
   return grid;
 }
 
@@ -743,17 +773,17 @@ function generateCircularMazeSidewinder(rings: number, sectors: number): PolarCe
   }
   grid[rings - 1][0].walls[0] = false;
   grid[0][0].walls[0] = false;
+  // Reset visited flags before returning (for safety)
+  for (let r = 0; r < rings; r++) for (let s = 0; s < sectors; s++) grid[r][s].visited = false;
   return grid;
 }
 
 // --- SVG Components ---
 const cellSize = 24;
 
-function RectangularMazeSVG({ maze, width, height }: { maze: Cell[][], width: number, height: number }) {
+function RectangularMazeSVG({ maze, width, height, solution }: { maze: Cell[][], width: number, height: number, solution: [number, number][] }) {
   if (!maze || !maze.length) return null;
   console.log('RectangularMazeSVG maze:', maze);
-  // Solution path
-  const solution = findRectangularMazeSolution(maze, width, height);
   const elements = [];
   for (let y = 0; y < height; y++) {
     if (!maze[y]) continue;
@@ -916,7 +946,7 @@ function findCircularMazeSolution(maze: PolarCell[][], rings: number, sectors: n
   return path;
 }
 
-function CircularMazeSVG({ maze, width, height, svgSize, responsive }: { maze: PolarCell[][], width: number, height: number, svgSize: number, responsive?: boolean }) {
+function CircularMazeSVG({ maze, width, height, svgSize, responsive, solution }: { maze: PolarCell[][], width: number, height: number, svgSize: number, responsive?: boolean, solution: [number, number][] }) {
   if (!maze || !maze.length || !maze[0] || !maze[0].length) {
     return (
       <svg width="100%" height="100">
@@ -932,8 +962,6 @@ function CircularMazeSVG({ maze, width, height, svgSize, responsive }: { maze: P
   const rStep = (width * cellSize) / rings;
   const aStep = (2 * Math.PI) / sectors;
   const elements = [];
-  // Solution path
-  const solution = findCircularMazeSolution(maze, rings, sectors);
   if (solution.length > 1) {
     const pathPoints = solution.map(([r, s]) => {
       const rr = (r + 0.5) * rStep;
@@ -1090,7 +1118,7 @@ function CircularMazeSVG({ maze, width, height, svgSize, responsive }: { maze: P
 }
 
 // Add RectangularMazePolarWarpSVG component
-function RectangularMazePolarWarpSVG({ maze, width, height }: { maze: Cell[][], width: number, height: number }) {
+function RectangularMazePolarWarpSVG({ maze, width, height, solution }: { maze: Cell[][], width: number, height: number, solution: [number, number][] }) {
   if (!maze || !maze.length) return null;
   const cellCount = Math.max(width, height);
   const svgSize = cellCount * cellSize + 32;
@@ -1151,9 +1179,8 @@ function RectangularMazePolarWarpSVG({ maze, width, height }: { maze: Cell[][], 
       }
     }
   }
-  // Solution path
-  const solution = findRectangularMazeSolution(maze, width, height);
-  if (solution.length > 1) {
+  // Solution path (use prop)
+  if (solution && solution.length > 1) {
     const pathPoints = solution.map(([x, y]) => {
       const r = rMin + (rMax - rMin) * (y / height) + (rMax - rMin) / (2 * height);
       const a = (2 * Math.PI) * (x / width) + Math.PI / width;
@@ -1218,11 +1245,16 @@ const MazeGeneratorIsland: React.FC = () => {
     { label: 'Medium (16x16)', value: 16 },
     { label: 'Large (32x32)', value: 32 },
   ];
-  const [size, setSize] = useState(16);
-  const width = size;
-  const height = size;
+  const [pendingMazeType, setPendingMazeType] = useState<MazeType>('rectangular');
+  const [pendingAlgorithm, setPendingAlgorithm] = useState<Algorithm>('dfs');
+  const [pendingSize, setPendingSize] = useState(16);
+
   const [mazeType, setMazeType] = useState<MazeType>('rectangular');
   const [algorithm, setAlgorithm] = useState<Algorithm>('dfs');
+  const [size, setSize] = useState(16);
+
+  const width = size;
+  const height = size;
   const [maze, setMaze] = useState<Cell[][]>([]);
   const [circularMaze, setCircularMaze] = useState<PolarCell[][]>([]);
   const [loading, setLoading] = useState(false);
@@ -1240,48 +1272,150 @@ const MazeGeneratorIsland: React.FC = () => {
       ? Math.min(height, maxRectangularSize)
       : Math.min(height, maxCircularSize);
 
+  // Memoize solution calculation
+  const [rectangularSolution, setRectangularSolution] = useState<[number, number][]>([]);
+  const [circularSolution, setCircularSolution] = useState<[number, number][]>([]);
+  const [polarwarpSolution, setPolarwarpSolution] = useState<[number, number][]>([]);
+
   useEffect(() => {
-    setLoading(true);
-    let mazeData;
-    if (mazeType === 'rectangular' || mazeType === 'polarwarp') {
-      mazeData = algorithm === 'dfs'
-        ? generateMazeDFS(safeWidth, safeHeight)
-        : algorithm === 'wilsons'
-        ? generateMazeWilsons(safeWidth, safeHeight)
-        : algorithm === 'kruskal'
-        ? generateMazeKruskals(safeWidth, safeHeight)
-        : algorithm === 'eller'
-        ? generateMazeEller(safeWidth, safeHeight)
-        : algorithm === 'huntandkill'
-        ? generateMazeHuntAndKill(safeWidth, safeHeight)
-        : algorithm === 'binarytree'
-        ? generateMazeBinaryTree(safeWidth, safeHeight)
-        : generateMazeSidewinder(safeWidth, safeHeight);
-      setMaze(mazeData);
-    } else if (mazeType === 'circular') {
-      mazeData = algorithm === 'dfs'
-        ? generateCircularMazeDFS(safeWidth, safeHeight * 3)
-        : algorithm === 'wilsons'
-        ? generateCircularMazeWilsons(safeWidth, safeHeight * 3)
-        : algorithm === 'kruskal'
-        ? generateCircularMazeKruskals(safeWidth, safeHeight * 3)
-        : algorithm === 'eller'
-        ? generateCircularMazeEller(safeWidth, safeHeight * 3)
-        : algorithm === 'huntandkill'
-        ? generateCircularMazeHuntAndKill(safeWidth, safeHeight * 3)
-        : algorithm === 'binarytree'
-        ? generateCircularMazeBinaryTree(safeWidth, safeHeight * 3)
-        : generateCircularMazeSidewinder(safeWidth, safeHeight * 3);
-      setCircularMaze(mazeData);
+    let timeout: NodeJS.Timeout | null = null;
+    if (mazeType === 'rectangular' && maze && maze.length && maze[0] && maze[0].length) {
+      switch (algorithm) {
+        default:
+          if (1000 > 0) {
+            setRectangularSolution([]);
+            timeout = setTimeout(() => {
+              setRectangularSolution(findRectangularMazeSolution(maze, width, height));
+            }, 1000);
+          } else {
+            setRectangularSolution(findRectangularMazeSolution(maze, width, height));
+          }
+      }
+    } else {
+      setRectangularSolution([]);
     }
-    setLoading(false);
-  }, [mazeType, algorithm, width, height]);
+    return () => { if (timeout) clearTimeout(timeout); };
+  }, [maze, mazeType, width, height, algorithm]);
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout | null = null;
+    if (mazeType === 'circular' && circularMaze && circularMaze.length && circularMaze[0] && circularMaze[0].length) {
+      switch (algorithm) {
+        default:
+          if (1000 > 0) {
+            setCircularSolution([]);
+            timeout = setTimeout(() => {
+              setCircularSolution(findCircularMazeSolution(circularMaze, safeWidth, safeHeight * 3));
+            }, 1000);
+          } else {
+            setCircularSolution(findCircularMazeSolution(circularMaze, safeWidth, safeHeight * 3));
+          }
+      }
+    } else {
+      setCircularSolution([]);
+    }
+    return () => { if (timeout) clearTimeout(timeout); };
+  }, [circularMaze, mazeType, safeWidth, safeHeight, algorithm]);
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout | null = null;
+    if (mazeType === 'polarwarp' && maze && maze.length && maze[0] && maze[0].length) {
+      switch (algorithm) {
+        default:
+          if (1000 > 0) {
+            setPolarwarpSolution([]);
+            timeout = setTimeout(() => {
+              setPolarwarpSolution(findRectangularMazeSolution(maze, width, height));
+            }, 1000);
+          } else {
+            setPolarwarpSolution(findRectangularMazeSolution(maze, width, height));
+          }
+      }
+    } else {
+      setPolarwarpSolution([]);
+    }
+    return () => { if (timeout) clearTimeout(timeout); };
+  }, [maze, mazeType, width, height, algorithm]);
 
   let circularSvgSize = undefined;
   if (mazeType === 'circular') {
     const padding = 64;
     circularSvgSize = safeWidth * cellSize * 2 + padding * 2;
   }
+
+  useEffect(() => {
+    setLoading(true);
+    let mazeData;
+    if (mazeType === 'rectangular' || mazeType === 'polarwarp') {
+      switch (algorithm) {
+        case 'dfs':
+          mazeData = generateMazeDFS(safeWidth, safeHeight);
+          break;
+        case 'wilsons':
+          mazeData = generateMazeWilsons(safeWidth, safeHeight);
+          break;
+        case 'kruskal':
+          mazeData = generateMazeKruskals(safeWidth, safeHeight);
+          break;
+        case 'eller':
+          mazeData = generateMazeEller(safeWidth, safeHeight);
+          break;
+        case 'huntandkill':
+          mazeData = generateMazeHuntAndKill(safeWidth, safeHeight);
+          break;
+        case 'binarytree':
+          mazeData = generateMazeBinaryTree(safeWidth, safeHeight);
+          break;
+        case 'sidewinder':
+          mazeData = generateMazeSidewinder(safeWidth, safeHeight);
+          break;
+        case 'prims':
+          mazeData = generateMazePrims(safeWidth, safeHeight);
+          break;
+        default:
+          mazeData = generateMazeDFS(safeWidth, safeHeight);
+      }
+      setMaze(mazeData);
+    } else if (mazeType === 'circular') {
+      switch (algorithm) {
+        case 'dfs':
+          mazeData = generateCircularMazeDFS(safeWidth, safeHeight * 3);
+          break;
+        case 'wilsons':
+          mazeData = generateCircularMazeWilsons(safeWidth, safeHeight * 3);
+          break;
+        case 'kruskal':
+          mazeData = generateCircularMazeKruskals(safeWidth, safeHeight * 3);
+          break;
+        case 'eller':
+          mazeData = generateCircularMazeEller(safeWidth, safeHeight * 3);
+          break;
+        case 'huntandkill':
+          mazeData = generateCircularMazeHuntAndKill(safeWidth, safeHeight * 3);
+          break;
+        case 'binarytree':
+          mazeData = generateCircularMazeBinaryTree(safeWidth, safeHeight * 3);
+          break;
+        case 'sidewinder':
+          mazeData = generateCircularMazeSidewinder(safeWidth, safeHeight * 3);
+          break;
+        case 'prims':
+          mazeData = generateCircularMazePrims(safeWidth, safeHeight * 3);
+          break;
+        default:
+          mazeData = generateCircularMazeDFS(safeWidth, safeHeight * 3);
+      }
+      setCircularMaze(mazeData);
+    }
+    setLoading(false);
+  }, [mazeType, algorithm, width, height]);
+
+  // Regenerate handler
+  const handleRegenerate = () => {
+    setMazeType(pendingMazeType);
+    setAlgorithm(pendingAlgorithm);
+    setSize(pendingSize);
+  };
 
   return (
     <div className="interactive-demo-island max-w-2xl mx-auto">
@@ -1292,8 +1426,8 @@ const MazeGeneratorIsland: React.FC = () => {
           <label className="font-semibold text-base flex flex-col items-start bg-[var(--color-muted)] rounded-lg px-4 py-3 w-full" style={{ color: 'var(--color-foreground)' }}>
             <span className="mb-1">Maze Type:</span>
             <select
-              value={mazeType}
-              onChange={e => setMazeType(e.target.value as MazeType)}
+              value={pendingMazeType}
+              onChange={e => setPendingMazeType(e.target.value as MazeType)}
               className="mt-1 text-lg px-3 py-2 border-2 border-[var(--color-border)] rounded-md outline-none bg-[var(--color-background)] text-[var(--color-foreground)] font-semibold shadow-sm focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[color:var(--color-accent)] w-full transition"
             >
               <option value="rectangular">Rectangular</option>
@@ -1304,8 +1438,8 @@ const MazeGeneratorIsland: React.FC = () => {
           <label className="font-semibold text-base flex flex-col items-start bg-[var(--color-muted)] rounded-lg px-4 py-3 w-full" style={{ color: 'var(--color-foreground)' }}>
             <span className="mb-1">Algorithm:</span>
             <select
-              value={algorithm}
-              onChange={e => setAlgorithm(e.target.value as Algorithm)}
+              value={pendingAlgorithm}
+              onChange={e => setPendingAlgorithm(e.target.value as Algorithm)}
               className="mt-1 text-lg px-3 py-2 border-2 border-[var(--color-border)] rounded-md outline-none bg-[var(--color-background)] text-[var(--color-foreground)] font-semibold shadow-sm focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[color:var(--color-accent)] w-full transition"
             >
               <option value="dfs">DFS</option>
@@ -1324,8 +1458,8 @@ const MazeGeneratorIsland: React.FC = () => {
           <label className="font-semibold text-base flex flex-col items-start bg-[var(--color-muted)] rounded-lg px-4 py-3 w-full" style={{ color: 'var(--color-foreground)' }}>
             <span className="mb-1">Maze Size:</span>
             <select
-              value={size}
-              onChange={e => setSize(Number(e.target.value))}
+              value={pendingSize}
+              onChange={e => setPendingSize(Number(e.target.value))}
               className="mt-1 text-lg px-3 py-2 border-2 border-[var(--color-border)] rounded-md outline-none bg-[var(--color-background)] text-[var(--color-foreground)] font-semibold shadow-sm focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[color:var(--color-accent)] w-full transition"
             >
               {sizePresets.map(preset => (
@@ -1334,6 +1468,13 @@ const MazeGeneratorIsland: React.FC = () => {
             </select>
           </label>
         </div>
+        {/* Regenerate Button */}
+        <button
+          onClick={handleRegenerate}
+          className="px-6 py-2 rounded-lg bg-[var(--color-accent)] text-white font-bold shadow hover:bg-pink-600 transition border-2 border-[var(--color-accent)]"
+        >
+          Regenerate
+        </button>
       </div>
       {/* Maze rendering */}
       {loading ? (
@@ -1342,7 +1483,7 @@ const MazeGeneratorIsland: React.FC = () => {
         maze && maze.length && maze[0] && maze[0].length ? (
           <div className="flex justify-center mt-8 px-4">
             <div className="w-full max-w-full overflow-auto" style={{ maxWidth: width * cellSize + 2 }}>
-              <RectangularMazeSVG maze={maze} width={width} height={height} />
+              <RectangularMazeSVG maze={maze} width={width} height={height} solution={rectangularSolution} />
             </div>
           </div>
         ) : (
@@ -1353,7 +1494,7 @@ const MazeGeneratorIsland: React.FC = () => {
           </div>
         )
       ) : mazeType === 'polarwarp' ? (
-        <RectangularMazePolarWarpSVG maze={maze} width={width} height={height} />
+        <RectangularMazePolarWarpSVG maze={maze} width={width} height={height} solution={polarwarpSolution} />
       ) : mazeType === 'circular' && circularSvgSize ? (
         circularMaze && circularMaze.length && circularMaze[0] && circularMaze[0].length ? (
           <div className="flex justify-center mt-8 px-4">
@@ -1361,7 +1502,7 @@ const MazeGeneratorIsland: React.FC = () => {
               className="overflow-auto"
               style={{ width: '100%', minWidth: 300 }}
             >
-              <CircularMazeSVG maze={circularMaze} width={safeWidth} height={safeHeight} svgSize={circularSvgSize} responsive />
+              <CircularMazeSVG maze={circularMaze} width={safeWidth} height={safeHeight} svgSize={circularSvgSize} responsive solution={circularSolution} />
             </div>
           </div>
         ) : (
