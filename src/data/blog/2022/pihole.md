@@ -3,7 +3,7 @@ title: "Setting Up Pi-hole: Network-Level Ad Blocking with Raspberry Pi"
 author: Jian Liew
 pubDatetime: 2022-10-20T21:30:56+11:00
 slug: setting-up-pihole-ad-blocking
-featured: true
+featured: false
 draft: false
 readingTime: 5
 tags:
