@@ -1319,6 +1319,9 @@ const MazeGeneratorIsland: React.FC = () => {
   // Animation state
   const [isAnimating, setIsAnimating] = useState(false);
   const [animationProgress, setAnimationProgress] = useState(0);
+  
+  // Store animation intervals for cleanup
+  const animationIntervalsRef = useRef<NodeJS.Timeout[]>([]);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout | null = null;
@@ -1461,6 +1464,14 @@ const MazeGeneratorIsland: React.FC = () => {
     circularSvgSize = safeWidth * cellSize * 2 + padding * 2;
   }
 
+  // Cleanup animation intervals on unmount
+  useEffect(() => {
+    return () => {
+      animationIntervalsRef.current.forEach(interval => clearInterval(interval));
+      animationIntervalsRef.current = [];
+    };
+  }, []);
+
   useEffect(() => {
     setLoading(true);
     let mazeData;
@@ -1592,6 +1603,20 @@ const MazeGeneratorIsland: React.FC = () => {
 
   // Regenerate handler
   const handleRegenerate = () => {
+    // Stop any ongoing animation immediately
+    setIsAnimating(false);
+    setAnimationProgress(0);
+    
+    // Clear all animation intervals
+    animationIntervalsRef.current.forEach(interval => clearInterval(interval));
+    animationIntervalsRef.current = [];
+    
+    // Clear current solutions
+    setRectangularSolution([]);
+    setCircularSolution([]);
+    setPolarwarpSolution([]);
+    
+    // Update the committed state to trigger immediate regeneration
     setMazeType(pendingMazeType);
     setAlgorithm(pendingAlgorithm);
     setSize(pendingSize);
@@ -1651,9 +1676,14 @@ const MazeGeneratorIsland: React.FC = () => {
         {/* Regenerate Button */}
         <button
           onClick={handleRegenerate}
-          className="px-6 py-2 rounded-lg bg-[var(--color-accent)] text-white font-bold shadow hover:bg-pink-600 transition border-2 border-[var(--color-accent)]"
+          disabled={loading}
+          className={`px-6 py-2 rounded-lg font-bold shadow transition border-2 ${
+            loading 
+              ? 'bg-gray-400 text-gray-200 border-gray-400 cursor-not-allowed' 
+              : 'bg-[var(--color-accent)] text-white border-[var(--color-accent)] hover:bg-pink-600'
+          }`}
         >
-          Regenerate
+          {loading ? 'Generating...' : 'Regenerate'}
         </button>
       </div>
       {/* Maze rendering */}
