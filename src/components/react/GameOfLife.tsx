@@ -321,7 +321,6 @@ const GameOfLife: React.FC = () => {
             >
               <option value="15x20">15x20 (Default)</option>
               <option value="20x30">20x30 (Large)</option>
-              <option value="25x40">25x40 (Extra Large)</option>
             </select>
           </label>
         </div>
