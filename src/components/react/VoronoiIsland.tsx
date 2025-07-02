@@ -65,57 +65,49 @@ export default function VoronoiIsland({
         .attr('height', h)
         .style('display', 'block');
 
-      // Theme-aware colors
-      const isDark = document.body.className.includes('dark');
-      const strokeColor = isDark ? '#444' : '#ccc';
-      const pointColor = isDark ? '#fff' : '#000';
-      // const backgroundColor = isDark ? '#1a1a1a' : '#fff';
+      // Theme-aware colors using Tailwind classes
+      const strokeClass = 'stroke-gray-300 dark:stroke-gray-700';
+      const pointClass = 'fill-black dark:fill-white';
+      const highlightClass = 'fill-red-600 dark:fill-red-500';
+      const neighborClass = 'fill-blue-600 dark:fill-blue-400';
 
       svg.append('path')
-        .attr('fill', 'none')
-        .attr('stroke', strokeColor)
+        .attr('class', `fill-none ${strokeClass}`)
         .attr('stroke-width', 5)
         .attr('d', voronoi.render());
 
       svg.append('path')
-        .attr('fill', 'none')
-        .attr('stroke', strokeColor)
+        .attr('class', `fill-none ${strokeClass}`)
         .attr('stroke-width', 5)
         .attr('d', voronoi.renderBounds());
 
       svg.append('path')
-        .attr('fill', pointColor)
-        .attr('stroke', strokeColor)
+        .attr('class', `${pointClass} ${strokeClass}`)
         .attr('stroke-width', 2)
         .attr('d', delaunay.renderPoints());
 
       // Interactivity
       if (interactive) {
-        svg.on('click', function(this: any) {
+        svg.on('click', function (this: any) {
           const coords = d3.mouse(this);
           // Remove all cell highlights
           svg.selectAll("[class^='cell-']").remove();
           const ans = delaunay.find(coords[0], coords[1]);
           // Highlight selected cell
           svg.append('path')
-            .attr('class', `cell-${ans}`)
-            .attr('fill', isDark ? '#f56565' : '#e53e3e')
-            .attr('stroke', strokeColor)
+            .attr('class', `cell-${ans} ${highlightClass} ${strokeClass}`)
             .attr('stroke-width', 1)
             .attr('d', voronoi.renderCell(ans));
           // Redraw points on top
           svg.append('path')
-            .attr('fill', pointColor)
-            .attr('stroke', strokeColor)
+            .attr('class', `${pointClass} ${strokeClass}`)
             .attr('stroke-width', 2)
             .attr('d', delaunay.renderPoints());
           // Highlight neighbors
           const neighbours = delaunay.neighbors(ans);
           for (const iterator of neighbours) {
             svg.append('path')
-              .attr('class', `cell-${iterator}`)
-              .attr('fill', isDark ? '#4299e1' : '#3182ce')
-              .attr('stroke', strokeColor)
+              .attr('class', `cell-${iterator} ${neighborClass} ${strokeClass}`)
               .attr('stroke-width', 1)
               .attr('d', voronoi.renderCell(iterator));
           }
@@ -135,12 +127,8 @@ export default function VoronoiIsland({
 
   return (
     <div
-      className="voronoi-container"
+      className="flex items-center justify-center w-full"
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
         height: height,
         minHeight: height,
       }}
