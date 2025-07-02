@@ -12,7 +12,15 @@ interface Cell {
 }
 
 type MazeType = 'rectangular' | 'circular';
-type Algorithm = 'dfs' | 'prims';
+type Algorithm =
+  | 'dfs'
+  | 'prims'
+  | 'wilsons'
+  | 'kruskal'
+  | 'eller'
+  | 'huntandkill'
+  | 'binarytree'
+  | 'sidewinder';
 
 // 2. Add state for circular maze
 type PolarCell = {
@@ -109,6 +117,264 @@ function generateMazePrims(width: number, height: number): Cell[][] {
   return grid;
 }
 
+function generateMazeWilsons(width: number, height: number): Cell[][] {
+  const grid = createGrid(width, height);
+  function getNeighbors([x, y]: [number, number]) {
+    const nbs: [number, number][] = [];
+    if (y > 0) nbs.push([x, y - 1]);
+    if (x < width - 1) nbs.push([x + 1, y]);
+    if (y < height - 1) nbs.push([x, y + 1]);
+    if (x > 0) nbs.push([x - 1, y]);
+    return nbs;
+  }
+  function loopErasedRandomWalk(start: [number, number], inMaze: Set<string>) {
+    let path: [number, number][] = [start];
+    let visited = new Map<string, number>();
+    visited.set(start.toString(), 0);
+    let current = start;
+    while (!inMaze.has(current.toString())) {
+      const nbs = getNeighbors(current);
+      const next = nbs[Math.floor(Math.random() * nbs.length)];
+      const key = next.toString();
+      if (visited.has(key)) {
+        const loopStart = visited.get(key)!;
+        path = path.slice(0, loopStart + 1);
+        visited = new Map(path.map((cell, i) => [cell.toString(), i]));
+      } else {
+        path.push(next);
+        visited.set(key, path.length - 1);
+      }
+      current = next;
+    }
+    return path;
+  }
+  const inMaze = new Set<string>();
+  const start = [Math.floor(Math.random() * width), Math.floor(Math.random() * height)];
+  inMaze.add(start.toString());
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const key = [x, y].toString();
+      if (inMaze.has(key)) continue;
+      const path = loopErasedRandomWalk([x, y], inMaze);
+      for (let i = 0; i < path.length - 1; i++) {
+        const [x1, y1] = path[i];
+        const [x2, y2] = path[i + 1];
+        if (x2 === x1 && y2 === y1 - 1) { // up
+          grid[y1][x1].walls[0] = false;
+          grid[y2][x2].walls[2] = false;
+        } else if (x2 === x1 + 1 && y2 === y1) { // right
+          grid[y1][x1].walls[1] = false;
+          grid[y2][x2].walls[3] = false;
+        } else if (x2 === x1 && y2 === y1 + 1) { // down
+          grid[y1][x1].walls[2] = false;
+          grid[y2][x2].walls[0] = false;
+        } else if (x2 === x1 - 1 && y2 === y1) { // left
+          grid[y1][x1].walls[3] = false;
+          grid[y2][x2].walls[1] = false;
+        }
+        inMaze.add([x1, y1].toString());
+      }
+      inMaze.add(path[path.length - 1].toString());
+    }
+  }
+  grid[0][0].walls[3] = false;
+  grid[height - 1][width - 1].walls[1] = false;
+  return grid;
+}
+
+function generateMazeKruskals(width: number, height: number): Cell[][] {
+  // Kruskal's algorithm for rectangular mazes
+  const grid = createGrid(width, height);
+  const sets: number[] = [];
+  let setId = 0;
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      sets[y * width + x] = setId++;
+    }
+  }
+  const walls: [number, number, number][] = [];
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      if (x < width - 1) walls.push([x, y, 1]); // right wall
+      if (y < height - 1) walls.push([x, y, 2]); // bottom wall
+    }
+  }
+  function find(i: number) {
+    while (sets[i] !== i) i = sets[i];
+    return i;
+  }
+  function union(i: number, j: number) {
+    const ri = find(i);
+    const rj = find(j);
+    sets[ri] = rj;
+  }
+  shuffle(walls);
+  for (const [x, y, dir] of walls) {
+    const i = y * width + x;
+    let j;
+    if (dir === 1) j = y * width + (x + 1);
+    else j = (y + 1) * width + x;
+    if (find(i) !== find(j)) {
+      union(i, j);
+      if (dir === 1) {
+        grid[y][x].walls[1] = false;
+        grid[y][x + 1].walls[3] = false;
+      } else {
+        grid[y][x].walls[2] = false;
+        grid[y + 1][x].walls[0] = false;
+      }
+    }
+  }
+  grid[0][0].walls[3] = false;
+  grid[height - 1][width - 1].walls[1] = false;
+  return grid;
+}
+
+function generateMazeEller(width: number, height: number): Cell[][] {
+  // Eller's algorithm for rectangular mazes
+  const grid = createGrid(width, height);
+  let sets = Array(width).fill(0).map((_, i) => i);
+  let nextSet = width;
+  for (let y = 0; y < height; y++) {
+    // Join right
+    for (let x = 0; x < width - 1; x++) {
+      if (Math.random() < 0.5 || sets[x] === sets[x + 1]) continue;
+      grid[y][x].walls[1] = false;
+      grid[y][x + 1].walls[3] = false;
+      const oldSet = sets[x + 1];
+      for (let i = 0; i < width; i++) if (sets[i] === oldSet) sets[i] = sets[x];
+    }
+    // Join down
+    const setCells: { [key: number]: number[] } = {};
+    for (let x = 0; x < width; x++) {
+      if (!setCells[sets[x]]) setCells[sets[x]] = [];
+      setCells[sets[x]].push(x);
+    }
+    const newSets = Array(width).fill(-1);
+    for (const set in setCells) {
+      const cells = setCells[set];
+      let numDown = 0;
+      for (const x of cells) {
+        if (y < height - 1 && (Math.random() < 0.5 || numDown === 0)) {
+          grid[y][x].walls[2] = false;
+          grid[y + 1][x].walls[0] = false;
+          newSets[x] = nextSet++;
+          numDown++;
+        }
+      }
+    }
+    for (let x = 0; x < width; x++) {
+      if (newSets[x] === -1) newSets[x] = nextSet++;
+    }
+    sets = newSets;
+  }
+  grid[0][0].walls[3] = false;
+  grid[height - 1][width - 1].walls[1] = false;
+  return grid;
+}
+
+function generateMazeHuntAndKill(width: number, height: number): Cell[][] {
+  // Hunt-and-Kill algorithm for rectangular mazes
+  const grid = createGrid(width, height);
+  const visited = Array.from({ length: height }, () => Array(width).fill(false));
+  let x = Math.floor(Math.random() * width);
+  let y = Math.floor(Math.random() * height);
+  visited[y][x] = true;
+  function getUnvisitedNeighbors(x: number, y: number) {
+    const nbs: [number, number, number][] = [];
+    if (y > 0 && !visited[y - 1][x]) nbs.push([x, y - 1, 0]);
+    if (x < width - 1 && !visited[y][x + 1]) nbs.push([x + 1, y, 1]);
+    if (y < height - 1 && !visited[y + 1][x]) nbs.push([x, y + 1, 2]);
+    if (x > 0 && !visited[y][x - 1]) nbs.push([x - 1, y, 3]);
+    return nbs;
+  }
+  while (true) {
+    const nbs = getUnvisitedNeighbors(x, y);
+    if (nbs.length > 0) {
+      const [nx, ny, dir] = nbs[Math.floor(Math.random() * nbs.length)];
+      visited[ny][nx] = true;
+      grid[y][x].walls[dir] = false;
+      grid[ny][nx].walls[(dir + 2) % 4] = false;
+      x = nx;
+      y = ny;
+    } else {
+      let found = false;
+      for (let yy = 0; yy < height && !found; yy++) {
+        for (let xx = 0; xx < width && !found; xx++) {
+          if (!visited[yy][xx]) {
+            const nbs2 = [];
+            if (yy > 0 && visited[yy - 1][xx]) nbs2.push([xx, yy - 1, 0]);
+            if (xx < width - 1 && visited[yy][xx + 1]) nbs2.push([xx + 1, yy, 1]);
+            if (yy < height - 1 && visited[yy + 1][xx]) nbs2.push([xx, yy + 1, 2]);
+            if (xx > 0 && visited[yy][xx - 1]) nbs2.push([xx - 1, yy, 3]);
+            if (nbs2.length > 0) {
+              const [nx, ny, dir] = nbs2[Math.floor(Math.random() * nbs2.length)];
+              grid[yy][xx].walls[dir] = false;
+              grid[ny][nx].walls[(dir + 2) % 4] = false;
+              x = xx;
+              y = yy;
+              visited[y][x] = true;
+              found = true;
+            }
+          }
+        }
+      }
+      if (!found) break;
+    }
+  }
+  grid[0][0].walls[3] = false;
+  grid[height - 1][width - 1].walls[1] = false;
+  return grid;
+}
+
+function generateMazeBinaryTree(width: number, height: number): Cell[][] {
+  // Binary Tree algorithm for rectangular mazes (north/east bias)
+  const grid = createGrid(width, height);
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const neighbors: [number, number, number][] = [];
+      if (y > 0) neighbors.push([x, y - 1, 0]); // north
+      if (x < width - 1) neighbors.push([x + 1, y, 1]); // east
+      if (neighbors.length > 0) {
+        const [nx, ny, dir] = neighbors[Math.floor(Math.random() * neighbors.length)];
+        grid[y][x].walls[dir] = false;
+        grid[ny][nx].walls[(dir + 2) % 4] = false;
+      }
+    }
+  }
+  grid[0][0].walls[3] = false;
+  grid[height - 1][width - 1].walls[1] = false;
+  return grid;
+}
+
+function generateMazeSidewinder(width: number, height: number): Cell[][] {
+  // Sidewinder algorithm for rectangular mazes (east/north bias)
+  const grid = createGrid(width, height);
+  for (let y = 0; y < height; y++) {
+    let run: number[] = [];
+    for (let x = 0; x < width; x++) {
+      run.push(x);
+      const atEasternBoundary = x === width - 1;
+      const atNorthernBoundary = y === 0;
+      const shouldCloseOut = atEasternBoundary || (!atNorthernBoundary && Math.random() < 0.5);
+      if (shouldCloseOut) {
+        const member = run[Math.floor(Math.random() * run.length)];
+        if (!atNorthernBoundary) {
+          grid[y][member].walls[0] = false;
+          grid[y - 1][member].walls[2] = false;
+        }
+        run = [];
+      } else {
+        grid[y][x].walls[1] = false;
+        grid[y][x + 1].walls[3] = false;
+      }
+    }
+  }
+  grid[0][0].walls[3] = false;
+  grid[height - 1][width - 1].walls[1] = false;
+  return grid;
+}
+
 // --- Circular Maze Generation Functions ---
 function createPolarGrid(rings: number, sectors: number): PolarCell[][] {
   return Array.from({ length: rings }, (_, r) =>
@@ -192,6 +458,287 @@ function generateCircularMazePrims(rings: number, sectors: number): PolarCell[][
       neighbor.walls[neighborWallIdx] = false;
       neighbor.visited = true;
       addWalls(neighbor);
+    }
+  }
+  grid[rings - 1][0].walls[0] = false;
+  grid[0][0].walls[0] = false;
+  return grid;
+}
+
+function generateCircularMazeWilsons(rings: number, sectors: number): PolarCell[][] {
+  const grid = createPolarGrid(rings, sectors);
+  function getNeighbors([r, s]: [number, number]) {
+    const nbs: [number, number][] = [];
+    if (r > 0) nbs.push([r - 1, s]);
+    if (r < rings - 1) nbs.push([r + 1, s]);
+    nbs.push([r, (s + 1) % sectors]);
+    nbs.push([r, (s - 1 + sectors) % sectors]);
+    return nbs;
+  }
+  function loopErasedRandomWalk(start: [number, number], inMaze: Set<string>) {
+    let path: [number, number][] = [start];
+    let visited = new Map<string, number>();
+    visited.set(start.toString(), 0);
+    let current = start;
+    while (!inMaze.has(current.toString())) {
+      const nbs = getNeighbors(current);
+      const next = nbs[Math.floor(Math.random() * nbs.length)];
+      const key = next.toString();
+      if (visited.has(key)) {
+        const loopStart = visited.get(key)!;
+        path = path.slice(0, loopStart + 1);
+        visited = new Map(path.map((cell, i) => [cell.toString(), i]));
+      } else {
+        path.push(next);
+        visited.set(key, path.length - 1);
+      }
+      current = next;
+    }
+    return path;
+  }
+  const inMaze = new Set<string>();
+  const start: [number, number] = [rings - 1, 0];
+  inMaze.add(start.toString());
+  for (let r = 0; r < rings; r++) {
+    for (let s = 0; s < sectors; s++) {
+      const key = [r, s].toString();
+      if (inMaze.has(key)) continue;
+      const path = loopErasedRandomWalk([r, s], inMaze);
+      for (let i = 0; i < path.length - 1; i++) {
+        const [r1, s1] = path[i];
+        const [r2, s2] = path[i + 1];
+        if (r2 === r1 - 1 && s2 === s1) { // inwards
+          grid[r1][s1].walls[0] = false;
+          grid[r2][s2].walls[0] = false;
+        } else if (r2 === r1 + 1 && s2 === s1) { // outwards
+          grid[r1][s1].walls[0] = false;
+          grid[r2][s2].walls[0] = false;
+        } else if (r2 === r1 && s2 === (s1 + 1) % sectors) { // clockwise
+          grid[r1][s1].walls[1] = false;
+          grid[r2][s2].walls[2] = false;
+        } else if (r2 === r1 && s2 === (s1 - 1 + sectors) % sectors) { // counterclockwise
+          grid[r1][s1].walls[2] = false;
+          grid[r2][s2].walls[1] = false;
+        }
+        inMaze.add([r1, s1].toString());
+      }
+      inMaze.add(path[path.length - 1].toString());
+    }
+  }
+  grid[rings - 1][0].walls[0] = false;
+  grid[0][0].walls[0] = false;
+  return grid;
+}
+
+function generateCircularMazeKruskals(rings: number, sectors: number): PolarCell[][] {
+  // Kruskal's algorithm for circular mazes (polar grid)
+  const grid = createPolarGrid(rings, sectors);
+  const total = rings * sectors;
+  const sets: number[] = [];
+  let setId = 0;
+  for (let r = 0; r < rings; r++) {
+    for (let s = 0; s < sectors; s++) {
+      sets[r * sectors + s] = setId++;
+    }
+  }
+  const walls: [number, number, number][] = [];
+  for (let r = 0; r < rings; r++) {
+    for (let s = 0; s < sectors; s++) {
+      if (r < rings - 1) walls.push([r, s, 0]); // radial (inward/outward)
+      walls.push([r, s, 1]); // clockwise
+    }
+  }
+  function find(i: number) {
+    while (sets[i] !== i) i = sets[i];
+    return i;
+  }
+  function union(i: number, j: number) {
+    const ri = find(i);
+    const rj = find(j);
+    sets[ri] = rj;
+  }
+  shuffle(walls);
+  for (const [r, s, dir] of walls) {
+    const i = r * sectors + s;
+    let j;
+    if (dir === 0) j = (r + 1) * sectors + s; // outward
+    else j = r * sectors + ((s + 1) % sectors); // clockwise
+    if (find(i) !== find(j)) {
+      union(i, j);
+      if (dir === 0) {
+        grid[r][s].walls[0] = false;
+        grid[r + 1][s].walls[0] = false;
+      } else {
+        grid[r][s].walls[1] = false;
+        grid[r][(s + 1) % sectors].walls[2] = false;
+      }
+    }
+  }
+  grid[rings - 1][0].walls[0] = false;
+  grid[0][0].walls[0] = false;
+  return grid;
+}
+
+function generateCircularMazeEller(rings: number, sectors: number): PolarCell[][] {
+  // Eller's algorithm for circular mazes (approximate: process ring by ring)
+  const grid = createPolarGrid(rings, sectors);
+  let sets = Array(sectors).fill(0).map((_, i) => i);
+  let nextSet = sectors;
+  for (let r = 0; r < rings; r++) {
+    // Join clockwise
+    for (let s = 0; s < sectors; s++) {
+      const nextS = (s + 1) % sectors;
+      if (Math.random() < 0.5 || sets[s] === sets[nextS]) continue;
+      grid[r][s].walls[1] = false;
+      grid[r][nextS].walls[2] = false;
+      const oldSet = sets[nextS];
+      for (let i = 0; i < sectors; i++) if (sets[i] === oldSet) sets[i] = sets[s];
+    }
+    // Join outward
+    const setCells: { [key: number]: number[] } = {};
+    for (let s = 0; s < sectors; s++) {
+      if (!setCells[sets[s]]) setCells[sets[s]] = [];
+      setCells[sets[s]].push(s);
+    }
+    const newSets = Array(sectors).fill(-1);
+    for (const set in setCells) {
+      const cells = setCells[set];
+      let numOut = 0;
+      for (const s of cells) {
+        if (r < rings - 1 && (Math.random() < 0.5 || numOut === 0)) {
+          grid[r][s].walls[0] = false;
+          grid[r + 1][s].walls[0] = false;
+          newSets[s] = nextSet++;
+          numOut++;
+        }
+      }
+    }
+    for (let s = 0; s < sectors; s++) {
+      if (newSets[s] === -1) newSets[s] = nextSet++;
+    }
+    sets = newSets;
+  }
+  grid[rings - 1][0].walls[0] = false;
+  grid[0][0].walls[0] = false;
+  return grid;
+}
+
+function generateCircularMazeHuntAndKill(rings: number, sectors: number): PolarCell[][] {
+  // Hunt-and-Kill for circular mazes
+  const grid = createPolarGrid(rings, sectors);
+  const visited = Array.from({ length: rings }, () => Array(sectors).fill(false));
+  let r = Math.floor(Math.random() * rings);
+  let s = Math.floor(Math.random() * sectors);
+  visited[r][s] = true;
+  function getUnvisitedNeighbors(r: number, s: number) {
+    const nbs: [number, number, number][] = [];
+    if (r > 0 && !visited[r - 1][s]) nbs.push([r - 1, s, 0]);
+    if (r < rings - 1 && !visited[r + 1][s]) nbs.push([r + 1, s, 0]);
+    if (!visited[r][(s + 1) % sectors]) nbs.push([r, (s + 1) % sectors, 1]);
+    if (!visited[r][(s - 1 + sectors) % sectors]) nbs.push([r, (s - 1 + sectors) % sectors, 2]);
+    return nbs;
+  }
+  while (true) {
+    const nbs = getUnvisitedNeighbors(r, s);
+    if (nbs.length > 0) {
+      const [nr, ns, dir] = nbs[Math.floor(Math.random() * nbs.length)];
+      visited[nr][ns] = true;
+      if (dir === 0) {
+        grid[r][s].walls[0] = false;
+        grid[nr][ns].walls[0] = false;
+      } else if (dir === 1) {
+        grid[r][s].walls[1] = false;
+        grid[nr][ns].walls[2] = false;
+      } else if (dir === 2) {
+        grid[r][s].walls[2] = false;
+        grid[nr][ns].walls[1] = false;
+      }
+      r = nr;
+      s = ns;
+    } else {
+      let found = false;
+      for (let rr = 0; rr < rings && !found; rr++) {
+        for (let ss = 0; ss < sectors && !found; ss++) {
+          if (!visited[rr][ss]) {
+            const nbs2 = [];
+            if (rr > 0 && visited[rr - 1][ss]) nbs2.push([rr - 1, ss, 0]);
+            if (rr < rings - 1 && visited[rr + 1][ss]) nbs2.push([rr + 1, ss, 0]);
+            if (visited[rr][(ss + 1) % sectors]) nbs2.push([rr, (ss + 1) % sectors, 1]);
+            if (visited[rr][(ss - 1 + sectors) % sectors]) nbs2.push([rr, (ss - 1 + sectors) % sectors, 2]);
+            if (nbs2.length > 0) {
+              const [nr, ns, dir] = nbs2[Math.floor(Math.random() * nbs2.length)];
+              if (dir === 0) {
+                grid[rr][ss].walls[0] = false;
+                grid[nr][ns].walls[0] = false;
+              } else if (dir === 1) {
+                grid[rr][ss].walls[1] = false;
+                grid[nr][ns].walls[2] = false;
+              } else if (dir === 2) {
+                grid[rr][ss].walls[2] = false;
+                grid[nr][ns].walls[1] = false;
+              }
+              r = rr;
+              s = ss;
+              visited[r][s] = true;
+              found = true;
+            }
+          }
+        }
+      }
+      if (!found) break;
+    }
+  }
+  grid[rings - 1][0].walls[0] = false;
+  grid[0][0].walls[0] = false;
+  return grid;
+}
+
+function generateCircularMazeBinaryTree(rings: number, sectors: number): PolarCell[][] {
+  // Binary Tree for circular mazes (outward/clockwise bias)
+  const grid = createPolarGrid(rings, sectors);
+  for (let r = 0; r < rings; r++) {
+    for (let s = 0; s < sectors; s++) {
+      const neighbors: [number, number, number][] = [];
+      if (r < rings - 1) neighbors.push([r + 1, s, 0]); // outward
+      neighbors.push([r, (s + 1) % sectors, 1]); // clockwise
+      if (neighbors.length > 0) {
+        const [nr, ns, dir] = neighbors[Math.floor(Math.random() * neighbors.length)];
+        if (dir === 0) {
+          grid[r][s].walls[0] = false;
+          grid[nr][ns].walls[0] = false;
+        } else if (dir === 1) {
+          grid[r][s].walls[1] = false;
+          grid[nr][ns].walls[2] = false;
+        }
+      }
+    }
+  }
+  grid[rings - 1][0].walls[0] = false;
+  grid[0][0].walls[0] = false;
+  return grid;
+}
+
+function generateCircularMazeSidewinder(rings: number, sectors: number): PolarCell[][] {
+  // Sidewinder for circular mazes (clockwise/outward bias)
+  const grid = createPolarGrid(rings, sectors);
+  for (let r = 0; r < rings; r++) {
+    let run: number[] = [];
+    for (let s = 0; s < sectors; s++) {
+      run.push(s);
+      const atClockwiseBoundary = s === sectors - 1;
+      const atOutwardBoundary = r === rings - 1;
+      const shouldCloseOut = atClockwiseBoundary || (!atOutwardBoundary && Math.random() < 0.5);
+      if (shouldCloseOut) {
+        const member = run[Math.floor(Math.random() * run.length)];
+        if (!atOutwardBoundary) {
+          grid[r][member].walls[0] = false;
+          grid[r + 1][member].walls[0] = false;
+        }
+        run = [];
+      } else {
+        grid[r][s].walls[1] = false;
+        grid[r][(s + 1) % sectors].walls[2] = false;
+      }
     }
   }
   grid[rings - 1][0].walls[0] = false;
@@ -577,12 +1124,32 @@ const MazeGeneratorIsland: React.FC = () => {
     if (mazeType === 'rectangular') {
       mazeData = algorithm === 'dfs'
         ? generateMazeDFS(safeWidth, safeHeight)
-        : generateMazePrims(safeWidth, safeHeight);
+        : algorithm === 'wilsons'
+        ? generateMazeWilsons(safeWidth, safeHeight)
+        : algorithm === 'kruskal'
+        ? generateMazeKruskals(safeWidth, safeHeight)
+        : algorithm === 'eller'
+        ? generateMazeEller(safeWidth, safeHeight)
+        : algorithm === 'huntandkill'
+        ? generateMazeHuntAndKill(safeWidth, safeHeight)
+        : algorithm === 'binarytree'
+        ? generateMazeBinaryTree(safeWidth, safeHeight)
+        : generateMazeSidewinder(safeWidth, safeHeight);
       setMaze(mazeData);
     } else if (mazeType === 'circular') {
       mazeData = algorithm === 'dfs'
         ? generateCircularMazeDFS(safeWidth, safeHeight * 3)
-        : generateCircularMazePrims(safeWidth, safeHeight * 3);
+        : algorithm === 'wilsons'
+        ? generateCircularMazeWilsons(safeWidth, safeHeight * 3)
+        : algorithm === 'kruskal'
+        ? generateCircularMazeKruskals(safeWidth, safeHeight * 3)
+        : algorithm === 'eller'
+        ? generateCircularMazeEller(safeWidth, safeHeight * 3)
+        : algorithm === 'huntandkill'
+        ? generateCircularMazeHuntAndKill(safeWidth, safeHeight * 3)
+        : algorithm === 'binarytree'
+        ? generateCircularMazeBinaryTree(safeWidth, safeHeight * 3)
+        : generateCircularMazeSidewinder(safeWidth, safeHeight * 3);
       setCircularMaze(mazeData);
     }
     setLoading(false);
@@ -620,6 +1187,12 @@ const MazeGeneratorIsland: React.FC = () => {
             >
               <option value="dfs">DFS</option>
               <option value="prims">Prim's</option>
+              <option value="wilsons">Wilsons</option>
+              <option value="kruskal">Kruskal's</option>
+              <option value="eller">Eller's</option>
+              <option value="huntandkill">Hunt-and-Kill</option>
+              <option value="binarytree">Binary Tree</option>
+              <option value="sidewinder">Sidewinder</option>
             </select>
           </label>
         </div>

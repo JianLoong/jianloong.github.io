@@ -1,10 +1,10 @@
 ---
-title: "Interactive Maze Generator (DFS, Prim's, Circular)"
+title: "Interactive Maze Generator (Rectangular & Circular, Multiple Algorithms)"
 author: Jian Liew
 pubDatetime: 2025-06-02T00:00:00Z
 slug: interactive-maze-generator
-description: "Try out an interactive maze generator with multiple algorithms and maze types, inspired by razimantv's C++ project. Generate and explore mazes right in your browser!"
-summary: "Generate and explore mazes interactively using a React-based maze generator supporting DFS, Prim's, and circular mazes."
+description: "Try out an interactive maze generator with a wide range of algorithms and maze types, inspired by razimantv's C++ project. Generate and explore mazes right in your browser!"
+summary: "Generate and explore mazes interactively using a React-based maze generator supporting DFS, Prim's, Wilson's, Kruskal's, Eller's, Hunt-and-Kill, Binary Tree, Sidewinder, and circular mazes."
 featured: false
 draft: false
 readingTime: 6
@@ -12,15 +12,28 @@ tags:
   - computer-science
 ---
 
-Maze generation is a fascinating application of graph theory and algorithms. This interactive demo lets you generate mazes using different algorithms and types, inspired by the open-source [Maze Generator by razimantv](https://github.com/razimantv/mazegenerator).
+Maze generation is a fascinating application of graph theory and algorithms. This interactive demo lets you generate mazes using a variety of classic algorithms and types, inspired by the open-source [Maze Generator by razimantv](https://github.com/razimantv/mazegenerator).
 
 ## How to use
-- Choose the maze type (Rectangular or Circular).
-- Choose the algorithm (DFS or Prim's; circular mazes use DFS).
-- Set the width and height of the maze.
+- Choose the maze type (**Rectangular** or **Circular**).
+- Choose the algorithm (DFS, Prim's, Wilson's, Kruskal's, Eller's, Hunt-and-Kill, Binary Tree, or Sidewinder).
+- Set the width and height (or rings/sectors) of the maze.
 - Click **Generate** to create a new maze.
 - Explore the SVG maze below!
 
 import MazeGeneratorIsland from "@/components/react/MazeGeneratorIsland"
 
-<MazeGeneratorIsland client:visible /> 
+<MazeGeneratorIsland client:visible />
+
+## Supported Algorithms
+
+- **DFS (Depth-First Search / Recursive Backtracker):** Long, winding passages with few dead ends. Feels organic and twisty.
+- **Prim's Algorithm:** Dense, bushy mazes with many short dead ends. Complex and tangled.
+- **Wilson's Algorithm:** Uniform spanning tree using loop-erased random walks. Bushy and mathematically uniform.
+- **Kruskal's Algorithm:** Randomly merges sets by removing walls. Balanced, classic maze appearance.
+- **Eller's Algorithm:** Processes the maze ring-by-ring (or row-by-row), creating bands and clusters. In circular mazes, this can look especially unique or "strange".
+- **Hunt-and-Kill:** Random walk with periodic "hunting" for new start points. Organic, with a mix of long and short passages.
+- **Binary Tree:** Simple, directional bias (north/east or outward/clockwise). Fast, but produces mazes with a clear directional pattern.
+- **Sidewinder:** Processes each row (or ring), creating runs and occasionally connecting outward. Directional, with horizontal or circular bias.
+
+Each algorithm produces a visually distinct maze. Try them all for both rectangular and circular mazes to see the differences! 
