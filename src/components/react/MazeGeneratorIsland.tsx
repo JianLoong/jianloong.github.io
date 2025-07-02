@@ -369,7 +369,7 @@ function findCircularMazeSolution(maze: PolarCell[][], rings: number, sectors: n
   return path;
 }
 
-function CircularMazeSVG({ maze, width, height }: { maze: PolarCell[][], width: number, height: number }) {
+function CircularMazeSVG({ maze, width, height, svgSize, responsive }: { maze: PolarCell[][], width: number, height: number, svgSize: number, responsive?: boolean }) {
   if (!maze || !maze.length || !maze[0] || !maze[0].length) {
     return (
       <svg width="100%" height="100">
@@ -379,8 +379,7 @@ function CircularMazeSVG({ maze, width, height }: { maze: PolarCell[][], width: 
   }
   const rings = width;
   const sectors = height * 3;
-  const padding = 32;
-  const svgSize = width * cellSize * 2 + padding * 2;
+  const padding = 64;
   const cx = (width * cellSize) + padding;
   const cy = (width * cellSize) + padding;
   const rStep = (width * cellSize) / rings;
@@ -532,8 +531,10 @@ function CircularMazeSVG({ maze, width, height }: { maze: PolarCell[][], width: 
   );
   return (
     <svg
-      width="100%"
-      viewBox={`0 0 ${width * cellSize * 2} ${width * cellSize * 2}`}
+      width={responsive ? '100%' : svgSize}
+      height={responsive ? 'auto' : svgSize}
+      viewBox={`0 0 ${svgSize} ${svgSize}`}
+      style={responsive ? { display: 'block' } : undefined}
       className="bg-[var(--color-background)] border border-[var(--color-border)] block mx-auto"
     >
       {elements}
@@ -586,6 +587,12 @@ const MazeGeneratorIsland: React.FC = () => {
     }
     setLoading(false);
   }, [mazeType, algorithm, width, height]);
+
+  let circularSvgSize = undefined;
+  if (mazeType === 'circular') {
+    const padding = 64;
+    circularSvgSize = safeWidth * cellSize * 2 + padding * 2;
+  }
 
   return (
     <div className="interactive-demo-island max-w-2xl mx-auto">
@@ -649,11 +656,14 @@ const MazeGeneratorIsland: React.FC = () => {
             maze[0]?.length: {maze && maze[0] ? maze[0].length : 'undefined'}
           </div>
         )
-      ) : mazeType === 'circular' ? (
+      ) : mazeType === 'circular' && circularSvgSize ? (
         circularMaze && circularMaze.length && circularMaze[0] && circularMaze[0].length ? (
           <div className="flex justify-center mt-8 px-4">
-            <div className="w-full max-w-full overflow-auto" style={{ maxWidth: width * cellSize + 2 }}>
-              <CircularMazeSVG maze={circularMaze} width={width} height={height} />
+            <div
+              className="overflow-auto"
+              style={{ width: '100%', minWidth: 300 }}
+            >
+              <CircularMazeSVG maze={circularMaze} width={safeWidth} height={safeHeight} svgSize={circularSvgSize} responsive />
             </div>
           </div>
         ) : (
