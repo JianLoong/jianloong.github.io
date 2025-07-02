@@ -1322,6 +1322,9 @@ const MazeGeneratorIsland: React.FC = () => {
   
   // Store animation intervals for cleanup
   const animationIntervalsRef = useRef<NodeJS.Timeout[]>([]);
+  
+  // Regeneration counter to ensure different mazes
+  const [regenerationCount, setRegenerationCount] = useState(0);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout | null = null;
@@ -1599,7 +1602,7 @@ const MazeGeneratorIsland: React.FC = () => {
       setCircularMaze(mazeData);
     }
     setLoading(false);
-  }, [mazeType, algorithm, width, height]);
+  }, [mazeType, algorithm, width, height, regenerationCount]);
 
   // Regenerate handler
   const handleRegenerate = () => {
@@ -1615,6 +1618,9 @@ const MazeGeneratorIsland: React.FC = () => {
     setRectangularSolution([]);
     setCircularSolution([]);
     setPolarwarpSolution([]);
+    
+    // Increment regeneration counter to ensure different maze
+    setRegenerationCount(prev => prev + 1);
     
     // Update the committed state to trigger immediate regeneration
     setMazeType(pendingMazeType);
