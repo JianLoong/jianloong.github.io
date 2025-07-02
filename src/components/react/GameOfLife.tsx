@@ -1,4 +1,5 @@
-import React, { useState, useRef, useCallback, useMemo } from "react";
+import * as React from "react";
+import { useState, useRef, useCallback, useMemo } from "react";
 
 type CellColor = {
   alive: string;
@@ -35,13 +36,13 @@ const buttonStyle = {
 const cellSize = 20;
 
 const GameOfLife: React.FC = () => {
-  const [dimensions, setDimensions] = useState<Dimensions>({ rows: 25, cols: 40 });
+  const [dimensions, setDimensions] = useState<Dimensions>({ rows: 15, cols: 20 });
   const [running, setRunning] = useState(false);
   const [speed, setSpeed] = useState(200);
   const [generations, setGenerations] = useState(0);
   const [cellColors, setCellColors] = useState<CellColor>({
-    alive: "#222",
-    dead: "#fff"
+    alive: 'var(--color-accent)',
+    dead: 'var(--color-background)'
   });
 
   const generateEmptyGrid = useCallback(() => {
@@ -191,40 +192,6 @@ const GameOfLife: React.FC = () => {
     <div style={{ textAlign: "center" }}>
       <h3>Conway's Game of Life</h3>
       <div style={{ marginBottom: 16 }}>
-        <div style={{ marginBottom: 12 }}>
-          <button
-            onClick={() => setGrid(patterns.glider())}
-            style={{ ...buttonStyle, backgroundColor: "#4CAF50" }}
-            onMouseOver={e => e.currentTarget.style.backgroundColor = "#45a049"}
-            onMouseOut={e => e.currentTarget.style.backgroundColor = "#4CAF50"}
-          >
-            Add Glider
-          </button>
-          <button
-            onClick={() => setGrid(patterns.blinker())}
-            style={{ ...buttonStyle, backgroundColor: "#2196F3" }}
-            onMouseOver={e => e.currentTarget.style.backgroundColor = "#1976D2"}
-            onMouseOut={e => e.currentTarget.style.backgroundColor = "#2196F3"}
-          >
-            Add Blinker
-          </button>
-          <button
-            onClick={() => setGrid(patterns.block())}
-            style={{ ...buttonStyle, backgroundColor: "#9C27B0" }}
-            onMouseOver={e => e.currentTarget.style.backgroundColor = "#7B1FA2"}
-            onMouseOut={e => e.currentTarget.style.backgroundColor = "#9C27B0"}
-          >
-            Add Block
-          </button>
-          <button
-            onClick={() => setGrid(patterns.pulsar())}
-            style={{ ...buttonStyle, backgroundColor: "#E91E63" }}
-            onMouseOver={e => e.currentTarget.style.backgroundColor = "#C2185B"}
-            onMouseOut={e => e.currentTarget.style.backgroundColor = "#E91E63"}
-          >
-            Add Pulsar
-          </button>
-        </div>
         <div>
           <button
             onClick={() => {
@@ -238,27 +205,27 @@ const GameOfLife: React.FC = () => {
             }}
             style={{
               ...buttonStyle,
-              backgroundColor: running ? "#f44336" : "#4CAF50",
+              backgroundColor: running ? "#f44336" : "var(--color-accent)",
               width: "100px"
             }}
-            onMouseOver={e => e.currentTarget.style.backgroundColor = running ? "#d32f2f" : "#45a049"}
-            onMouseOut={e => e.currentTarget.style.backgroundColor = running ? "#f44336" : "#4CAF50"}
+            onMouseOver={e => e.currentTarget.style.backgroundColor = running ? "#d32f2f" : "var(--color-accent)"}
+            onMouseOut={e => e.currentTarget.style.backgroundColor = running ? "#f44336" : "var(--color-accent)"}
           >
             {running ? "Stop" : "Start"}
           </button>
           <button
             onClick={handleClearGrid}
-            style={{ ...buttonStyle, backgroundColor: "#607D8B", width: "100px" }}
-            onMouseOver={e => e.currentTarget.style.backgroundColor = "#455A64"}
-            onMouseOut={e => e.currentTarget.style.backgroundColor = "#607D8B"}
+            style={{ ...buttonStyle, backgroundColor: "var(--color-muted)", width: "100px", color: "var(--color-foreground)" }}
+            onMouseOver={e => e.currentTarget.style.backgroundColor = "#bfc3d9"}
+            onMouseOut={e => e.currentTarget.style.backgroundColor = "var(--color-muted)"}
           >
             Clear
           </button>
           <button
             onClick={() => setGrid(randomGrid())}
-            style={{ ...buttonStyle, backgroundColor: "#FF9800", width: "100px" }}
-            onMouseOver={e => e.currentTarget.style.backgroundColor = "#F57C00"}
-            onMouseOut={e => e.currentTarget.style.backgroundColor = "#FF9800"}
+            style={{ ...buttonStyle, backgroundColor: "var(--color-border)", width: "100px", color: "var(--color-foreground)" }}
+            onMouseOver={e => e.currentTarget.style.backgroundColor = "#e0e0e0"}
+            onMouseOut={e => e.currentTarget.style.backgroundColor = "var(--color-border)"}
           >
             Randomize
           </button>
@@ -267,7 +234,7 @@ const GameOfLife: React.FC = () => {
       <div style={{
         marginBottom: 16,
         padding: "12px",
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "var(--color-muted)",
         borderRadius: "4px",
         boxShadow: "0 1px 3px rgba(0,0,0,0.12)"
       }}>
@@ -279,7 +246,7 @@ const GameOfLife: React.FC = () => {
             <span style={{
               marginRight: 8,
               fontWeight: "bold",
-              color: "#333"
+              color: "var(--color-foreground)"
             }}>
               Speed:
             </span>
@@ -287,7 +254,8 @@ const GameOfLife: React.FC = () => {
               onClick={() => setSpeed(300)}
               style={{
                 ...buttonStyle,
-                backgroundColor: speed === 300 ? "#1976D2" : "#90CAF9",
+                backgroundColor: speed === 300 ? "#bfc3d9" : "var(--color-muted)",
+                color: "var(--color-foreground)",
                 padding: "4px 8px"
               }}
             >
@@ -297,7 +265,8 @@ const GameOfLife: React.FC = () => {
               onClick={() => setSpeed(200)}
               style={{
                 ...buttonStyle,
-                backgroundColor: speed === 200 ? "#388E3C" : "#A5D6A7",
+                backgroundColor: speed === 200 ? "var(--color-accent)" : "var(--color-muted)",
+                color: "var(--color-foreground)",
                 padding: "4px 8px"
               }}
             >
@@ -307,7 +276,8 @@ const GameOfLife: React.FC = () => {
               onClick={() => setSpeed(100)}
               style={{
                 ...buttonStyle,
-                backgroundColor: speed === 100 ? "#D32F2F" : "#EF9A9A",
+                backgroundColor: speed === 100 ? "#617bff" : "var(--color-muted)",
+                color: "var(--color-foreground)",
                 padding: "4px 8px"
               }}
             >
@@ -318,9 +288,9 @@ const GameOfLife: React.FC = () => {
             marginLeft: 8,
             fontSize: "1.1em",
             fontWeight: "bold",
-            color: "#333",
+            color: "var(--color-foreground)",
             padding: "4px 12px",
-            backgroundColor: "#e0e0e0",
+            backgroundColor: "var(--color-muted)",
             borderRadius: "4px",
             boxShadow: "0 1px 2px rgba(0,0,0,0.1)"
           }}>
@@ -331,7 +301,7 @@ const GameOfLife: React.FC = () => {
           <label style={{
             marginRight: 16,
             fontWeight: "bold",
-            color: "#333"
+            color: "var(--color-foreground)"
           }}>
             Grid Size:
             <select
@@ -345,36 +315,13 @@ const GameOfLife: React.FC = () => {
                 padding: "4px 8px",
                 borderRadius: "4px",
                 border: "1px solid #999",
-                backgroundColor: "#fff"
+                backgroundColor: "var(--color-background)",
+                color: "var(--color-foreground)"
               }}
             >
-              <option value="25x40">25x40 (Default)</option>
-              <option value="30x50">30x50 (Large)</option>
-              <option value="40x60">40x60 (Extra Large)</option>
-            </select>
-          </label>
-          <label style={{
-            marginLeft: 16,
-            fontWeight: "bold",
-            color: "#333"
-          }}>
-            Cell Color:
-            <select
-              value={cellColors.alive}
-              onChange={e => setCellColors(colors => ({ ...colors, alive: e.target.value }))}
-              style={{
-                marginLeft: 8,
-                padding: "4px 8px",
-                borderRadius: "4px",
-                border: "1px solid #999",
-                backgroundColor: "#fff"
-              }}
-            >
-              <option value="#222">Black</option>
-              <option value="#1976D2">Blue</option>
-              <option value="#388E3C">Green</option>
-              <option value="#D32F2F">Red</option>
-              <option value="#7B1FA2">Purple</option>
+              <option value="15x20">15x20 (Default)</option>
+              <option value="20x30">20x30 (Large)</option>
+              <option value="25x40">25x40 (Extra Large)</option>
             </select>
           </label>
         </div>
@@ -402,7 +349,7 @@ const GameOfLife: React.FC = () => {
                 width: cellSize,
                 height: cellSize,
                 backgroundColor: grid[i][j] ? cellColors.alive : cellColors.dead,
-                border: "solid 1px #ddd",
+                border: "solid 1px var(--color-border)",
                 cursor: "pointer",
               }}
             />
