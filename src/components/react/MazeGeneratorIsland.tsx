@@ -1323,8 +1323,8 @@ const MazeGeneratorIsland: React.FC = () => {
   // Store animation intervals for cleanup
   const animationIntervalsRef = useRef<NodeJS.Timeout[]>([]);
   
-  // Regeneration counter to ensure different mazes
-  const [regenerationCount, setRegenerationCount] = useState(0);
+  // Regeneration timestamp to ensure different mazes (unlimited)
+  const [regenerationTimestamp, setRegenerationTimestamp] = useState(Date.now());
 
   useEffect(() => {
     let timeout: NodeJS.Timeout | null = null;
@@ -1478,7 +1478,6 @@ const MazeGeneratorIsland: React.FC = () => {
   useEffect(() => {
     setLoading(true);
     let mazeData;
-    const maxAttempts = 1000;
     let attempts = 0;
     let solvable = false;
     function isRectangularSolvable(maze: Cell[][], width: number, height: number) {
@@ -1556,10 +1555,7 @@ const MazeGeneratorIsland: React.FC = () => {
         }
         solvable = isRectangularSolvable(mazeData, safeWidth, safeHeight);
         attempts++;
-        if (attempts >= maxAttempts && !solvable) {
-          alert('Warning: Could not generate a solvable maze after ' + maxAttempts + ' attempts. Using the last generated maze.');
-          break;
-        }
+        // Continue trying until a solvable maze is found (unlimited attempts)
       } while (!solvable);
       setMaze(mazeData);
     } else if (mazeType === 'circular') {
@@ -1594,15 +1590,12 @@ const MazeGeneratorIsland: React.FC = () => {
         }
         solvable = isCircularSolvable(mazeData, safeWidth, safeHeight * 3);
         attempts++;
-        if (attempts >= maxAttempts && !solvable) {
-          alert('Warning: Could not generate a solvable maze after ' + maxAttempts + ' attempts. Using the last generated maze.');
-          break;
-        }
+        // Continue trying until a solvable maze is found (unlimited attempts)
       } while (!solvable);
       setCircularMaze(mazeData);
     }
     setLoading(false);
-  }, [mazeType, algorithm, width, height, regenerationCount]);
+  }, [mazeType, algorithm, width, height, regenerationTimestamp]);
 
   // Regenerate handler
   const handleRegenerate = () => {
@@ -1619,8 +1612,8 @@ const MazeGeneratorIsland: React.FC = () => {
     setCircularSolution([]);
     setPolarwarpSolution([]);
     
-    // Increment regeneration counter to ensure different maze
-    setRegenerationCount(prev => prev + 1);
+    // Update regeneration timestamp to ensure different maze
+    setRegenerationTimestamp(Date.now());
     
     // Update the committed state to trigger immediate regeneration
     setMazeType(pendingMazeType);
