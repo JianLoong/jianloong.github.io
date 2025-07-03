@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./typography.css";
+@import url('//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack-subset.css');
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
@@ -45,7 +46,8 @@ html[data-theme="dark"] {
     @apply overflow-y-scroll scroll-smooth;
   }
   body {
-    @apply flex min-h-svh flex-col bg-background font-mono text-foreground selection:bg-accent/75 selection:text-background;
+    @apply flex min-h-svh flex-col bg-background text-foreground selection:bg-accent/75 selection:text-background;
+    font-family: 'Hack', ui-monospace, monospace;
   }
   a,
   button {
