@@ -366,6 +366,15 @@ function generateMazeBinaryTree(width: number, height: number): Cell[][] {
       }
     }
   }
+  // Guarantee a path from (0,0) to (width-1,height-1) by opening a path along the bottom row and rightmost column
+  for (let x = 0; x < width - 1; x++) {
+    grid[height - 1][x].walls[1] = false; // open right wall
+    grid[height - 1][x + 1].walls[3] = false; // open left wall of next cell
+  }
+  for (let y = 0; y < height - 1; y++) {
+    grid[y][width - 1].walls[2] = false; // open bottom wall
+    grid[y + 1][width - 1].walls[0] = false; // open top wall of cell below
+  }
   grid[0][0].walls[3] = false;
   grid[height - 1][width - 1].walls[1] = false;
   // Reset visited flags before returning (for safety)
