@@ -22,17 +22,6 @@ const operations = [
   [-1, 0],
 ];
 
-const buttonStyle = {
-  padding: "8px 16px",
-  color: "white",
-  border: "none",
-  borderRadius: "4px",
-  cursor: "pointer",
-  fontWeight: "bold",
-  transition: "background-color 0.2s",
-  marginRight: 8
-};
-
 const cellSize = 20;
 
 const GameOfLife: React.FC = () => {
@@ -44,6 +33,7 @@ const GameOfLife: React.FC = () => {
     alive: 'var(--color-accent)',
     dead: 'var(--color-background)'
   });
+  const [hasRandomized, setHasRandomized] = useState(false);
 
   const generateEmptyGrid = useCallback(() => {
     return Array.from({ length: dimensions.rows }, () =>
@@ -189,10 +179,11 @@ const GameOfLife: React.FC = () => {
   };
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <h3>Conway's Game of Life</h3>
-      <div style={{ marginBottom: 16 }}>
-        <div>
+    <div className="flex flex-col items-center justify-center w-full max-w-3xl mx-auto p-4 bg-background rounded-lg shadow-lg">
+      <h3 className="text-2xl font-bold mb-4 text-accent">Conway's Game of Life</h3>
+      {/* Controls */}
+      <div className="flex flex-col items-center gap-4 w-full mb-6">
+        <div className="flex flex-wrap justify-center gap-4 w-full">
           <button
             onClick={() => {
               setRunning((r) => {
@@ -203,133 +194,76 @@ const GameOfLife: React.FC = () => {
                 return !r;
               });
             }}
-            style={{
-              ...buttonStyle,
-              backgroundColor: running ? "#f44336" : "var(--color-accent)",
-              width: "100px"
-            }}
-            onMouseOver={e => e.currentTarget.style.backgroundColor = running ? "#d32f2f" : "var(--color-accent)"}
-            onMouseOut={e => e.currentTarget.style.backgroundColor = running ? "#f44336" : "var(--color-accent)"}
+            disabled={!hasRandomized}
+            className={`w-28 px-4 py-2 rounded-md font-bold transition-colors text-white shadow ${running ? 'bg-red-500 hover:bg-red-700' : 'bg-accent hover:bg-accent/80'} ${!hasRandomized ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             {running ? "Stop" : "Start"}
           </button>
           <button
-            onClick={handleClearGrid}
-            style={{ ...buttonStyle, backgroundColor: "var(--color-muted)", width: "100px", color: "var(--color-foreground)" }}
-            onMouseOver={e => e.currentTarget.style.backgroundColor = "#bfc3d9"}
-            onMouseOut={e => e.currentTarget.style.backgroundColor = "var(--color-muted)"}
+            onClick={() => {
+              handleClearGrid();
+              setHasRandomized(false);
+            }}
+            className="w-28 px-4 py-2 rounded-md font-bold transition-colors bg-muted text-foreground hover:bg-muted/80 shadow"
           >
             Clear
           </button>
           <button
-            onClick={() => setGrid(randomGrid())}
-            style={{ ...buttonStyle, backgroundColor: "var(--color-border)", width: "100px", color: "var(--color-foreground)" }}
-            onMouseOver={e => e.currentTarget.style.backgroundColor = "#e0e0e0"}
-            onMouseOut={e => e.currentTarget.style.backgroundColor = "var(--color-border)"}
+            onClick={() => {
+              setGrid(randomGrid());
+              setHasRandomized(true);
+            }}
+            className="w-28 px-4 py-2 rounded-md font-bold transition-colors border border-gray-300 bg-gray-50 text-gray-800 hover:bg-gray-100 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-500 dark:hover:bg-gray-600 shadow"
           >
             Randomize
           </button>
         </div>
-      </div>
-      <div style={{
-        marginBottom: 16,
-        padding: "12px",
-        backgroundColor: "var(--color-muted)",
-        borderRadius: "4px",
-        boxShadow: "0 1px 3px rgba(0,0,0,0.12)"
-      }}>
-        <div style={{ marginBottom: 12 }}>
-          <div style={{
-            marginRight: 16,
-            display: "inline-block"
-          }}>
-            <span style={{
-              marginRight: 8,
-              fontWeight: "bold",
-              color: "var(--color-foreground)"
-            }}>
-              Speed:
-            </span>
+        <div className="flex flex-wrap justify-center gap-4 w-full">
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-foreground">Speed:</span>
             <button
               onClick={() => setSpeed(300)}
-              style={{
-                ...buttonStyle,
-                backgroundColor: speed === 300 ? "#bfc3d9" : "var(--color-muted)",
-                color: "var(--color-foreground)",
-                padding: "4px 8px"
-              }}
+              className={`px-3 py-1 rounded font-bold transition-colors text-foreground w-20 ${speed === 300 ? 'bg-muted/80' : 'bg-muted hover:bg-muted/60'}`}
             >
               Slow
             </button>
             <button
               onClick={() => setSpeed(200)}
-              style={{
-                ...buttonStyle,
-                backgroundColor: speed === 200 ? "var(--color-accent)" : "var(--color-muted)",
-                color: "var(--color-foreground)",
-                padding: "4px 8px"
-              }}
+              className={`px-3 py-1 rounded font-bold transition-colors text-foreground w-20 ${speed === 200 ? 'bg-accent' : 'bg-muted hover:bg-muted/60'}`}
             >
               Medium
             </button>
             <button
               onClick={() => setSpeed(100)}
-              style={{
-                ...buttonStyle,
-                backgroundColor: speed === 100 ? "#617bff" : "var(--color-muted)",
-                color: "var(--color-foreground)",
-                padding: "4px 8px"
-              }}
+              className={`px-3 py-1 rounded font-bold transition-colors text-foreground w-20 ${speed === 100 ? 'bg-blue-600' : 'bg-muted hover:bg-muted/60'}`}
             >
               Fast
             </button>
           </div>
-          <span style={{
-            marginLeft: 8,
-            fontSize: "1.1em",
-            fontWeight: "bold",
-            color: "var(--color-foreground)",
-            padding: "4px 12px",
-            backgroundColor: "var(--color-muted)",
-            borderRadius: "4px",
-            boxShadow: "0 1px 2px rgba(0,0,0,0.1)"
-          }}>
-            Generation: {generations}
-          </span>
-        </div>
-        <div style={{ marginBottom: 12 }}>
-          <label style={{
-            marginRight: 16,
-            fontWeight: "bold",
-            color: "var(--color-foreground)"
-          }}>
-            Grid Size:
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-foreground">Grid Size:</span>
             <select
               value={`${dimensions.rows}x${dimensions.cols}`}
               onChange={e => {
                 const [rows, cols] = e.target.value.split('x').map(Number);
                 handleGridSizeChange(rows, cols);
               }}
-              style={{
-                marginLeft: 8,
-                padding: "4px 8px",
-                borderRadius: "4px",
-                border: "1px solid #999",
-                backgroundColor: "var(--color-background)",
-                color: "var(--color-foreground)"
-              }}
+              className="px-2 py-1 rounded border border-gray-400 bg-background text-foreground"
             >
               <option value="15x20">15x20 (Default)</option>
               <option value="20x30">20x30 (Large)</option>
             </select>
-          </label>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-lg font-bold text-foreground px-3 py-1 bg-muted rounded shadow">Generation: {generations}</span>
+          </div>
         </div>
       </div>
+      {/* Game Grid */}
       <div
+        className="grid border border-border rounded bg-background"
         style={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${dimensions.cols}, ${cellSize}px)`,
-          justifyContent: "center",
+          gridTemplateColumns: `repeat(${dimensions.cols}, ${cellSize}px)`
         }}
       >
         {grid.map((row, i) =>
@@ -344,12 +278,11 @@ const GameOfLife: React.FC = () => {
                 );
                 setGrid(newGrid);
               }}
+              className="transition-colors cursor-pointer border border-border"
               style={{
                 width: cellSize,
                 height: cellSize,
                 backgroundColor: grid[i][j] ? cellColors.alive : cellColors.dead,
-                border: "solid 1px var(--color-border)",
-                cursor: "pointer",
               }}
             />
           ))

@@ -5,58 +5,28 @@ pubDatetime: 2025-07-01T00:00:00+10:00
 slug: elevator-algorithms
 featured: false
 draft: false
-readingTime: 8
+readingTime: 3
 tags:
   - software-engineering
-description: "Explore common elevator scheduling algorithms through an interactive visualization. Learn how different strategies affect waiting times and efficiency."
-summary: "Interactive demonstration of elevator scheduling algorithms and their optimization strategies."
+description: "Explore elevator scheduling algorithms with an interactive visualization."
+summary: "Interactive demo of elevator scheduling strategies."
 ---
 
 import ElevatorSimulation from '@/components/react/ElevatorSimulation'
 
-# Understanding Elevator Algorithms
+# Elevator Algorithms, Briefly
 
-Elevator algorithms are fascinating examples of everyday optimization problems. They need to balance multiple competing factors:
-- Minimize average waiting time
-- Minimize total travel distance
-- Provide fair service to all floors
-- Handle peak usage patterns efficiently
+Elevator scheduling is a classic optimization problem: how do you move people efficiently between floors? Try the interactive demo below to see how different algorithms perform!
 
-## Common Algorithms
+## Main Algorithms
+- **FCFS**: Serve requests in order of arrival (simple, but inefficient)
+- **SCAN**: Move in one direction, then reverse (reduces wait times)
+- **LOOK**: Like SCAN, but only goes as far as the last request (more efficient)
 
-### 1. FCFS (First Come, First Served)
-- Simplest approach: serve requests in order of arrival
-- Can lead to inefficient "ping-pong" patterns
-- Poor performance under heavy load
-
-### 2. SCAN (Elevator Algorithm)
-- Move in one direction until no more requests in that direction
-- Then reverse direction and repeat
-- Better handling of multiple requests
-- Can lead to some requests waiting longer
-
-### 3. LOOK
-- Similar to SCAN but only goes as far as the last request
-- More efficient than SCAN for most scenarios
-- Default choice for many real implementations
-
-## Interactive Simulation
-
-This simulation features an automated request generation system that simulates real-world elevator traffic patterns:
-
-### Traffic Patterns
-- **Morning Rush**: Heavy upward flow from ground floor
-- **Lunch Time**: Mixed traffic between all floors
-- **Evening Rush**: Heavy downward flow to ground floor
-- **Random**: Uniformly distributed requests
-
-### Simulation Controls
-- Start/Stop the simulation
-- Select traffic pattern
-- Adjust request rate (15-120 requests/minute)
-- Choose scheduling algorithm
-- **Max Capacity**: Elevators have a maximum capacity of 8 passengers.
-- **Floor Pause**: A brief pause at each floor to simulate door opening and closing.
+## Try the Simulation
+- Pick a traffic pattern (rush hour, random, etc.)
+- Start/Stop, adjust request rate, and switch algorithms
+- Watch how elevator behavior changes in real time
 
 <ElevatorSimulation client:visible />
 

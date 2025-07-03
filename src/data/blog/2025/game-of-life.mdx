@@ -5,100 +5,25 @@ pubDatetime: 2025-06-01T00:00:00Z
 slug: interactive-game-of-life
 featured: false
 draft: false
-readingTime: 5
+readingTime: 2
 tags:
   - computer-science
-description: "An interactive React implementation of Conway's Game of Life. Experiment with patterns and see how they evolve!"
-summary: "Explore Conway's Game of Life with an interactive React demo."
+description: "A quick, interactive React demo of Conway's Game of Life. Try it out!"
+summary: "Explore Conway's Game of Life with a simple interactive demo."
 ---
 
-Conway's Game of Life is a cellular automaton devised by mathematician John Conway. It consists of a grid of cells that evolve through generations according to a set of simple rules. This interactive demo lets you experiment with the Game of Life directly in your browser!
+Conway's Game of Life is a classic cellular automaton where simple rules create fascinating patterns. Try the interactive demo below to see how patterns evolve!
 
-## How to use
-- Click cells to toggle them alive or dead.
-- Press **Start** to run the simulation.
-- Press **Stop** to pause.
-- Use **Clear** to reset the grid.
-- Use **Randomize** to fill the grid with a random pattern.
+## How to Use
+- Click cells to toggle them alive or dead
+- Press **Randomize** to fill the grid
+- Press **Start** to run, **Stop** to pause, **Clear** to reset
+- Adjust speed and grid size as you like
 
 import GameOfLife from "@/components/react/GameOfLife"
 
 <GameOfLife client:visible />
 
-## Features
+---
 
-### Pattern Library
-Explore classic Game of Life patterns that demonstrate different behaviors:
-
-**Spaceships (Moving Patterns)**
-- **Glider** - The simplest pattern that moves diagonally across the grid indefinitely
-- It was one of the first patterns discovered and is often used to create more complex patterns
-
-**Oscillators (Repeating Patterns)**
-- **Blinker** - The smallest oscillator, alternating between horizontal and vertical states
-- **Pulsar** - A large, symmetrical pattern that cycles through three states
-- Watch how these patterns create mesmerizing rhythmic displays
-
-**Still Lifes (Stable Patterns)**
-- **Block** - A 2x2 square that remains unchanged
-- These patterns are stable and commonly emerge during evolution
-
-### Interactive Controls
-
-**Basic Controls**
-- Click individual cells to toggle them alive/dead
-- Start/Stop the simulation at any time
-- Clear the grid to start fresh
-- Randomize cells to discover new patterns
-
-**Advanced Features**
-- Adjust simulation speed with the slider
-- Track generation count as patterns evolve
-- Choose from multiple grid sizes:
-  - 15x20 (Default) - Smaller, easier to observe
-  - 20x30 (Large)
-
-**Customization**
-- Personalize your simulation:
-  - **Speed Control**: Choose from three preset speeds
-    - Slow: For careful observation of patterns
-    - Medium: Balanced evolution rate
-    - Fast: Rapid pattern development
-  - **Grid Sizes**: Choose your simulation space
-    - 15x20 (Default)
-    - 20x30 (Large)
-- Press **Start** to run the simulation
-- Press **Stop** to pause
-- Use **Clear** to reset the grid
-- Use **Randomize** to fill the grid with a random pattern
-
-## Rules and Emergence
-
-Conway's Game of Life operates on four elegant rules that lead to complex emergent behavior:
-
-1. **Underpopulation**: A live cell with fewer than two live neighbors dies from isolation
-2. **Survival**: A live cell with two or three live neighbors continues living
-3. **Overpopulation**: A live cell with more than three live neighbors dies from overcrowding
-4. **Reproduction**: A dead cell with exactly three live neighbors springs to life
-
-These simple rules create fascinating emergent behaviors:
-- Stable patterns that maintain their shape
-- Oscillating patterns that cycle through states
-- Moving patterns that traverse the grid
-- Complex interactions when patterns collide
-- Evolutionary processes from random initial states
-
-## Experiment and Discover
-
-## Experiments to Try
-
-1. Start with a random grid and observe how patterns emerge naturally
-2. Use slow speed to study complex pattern interactions
-3. Place multiple gliders and watch their collisions at medium speed
-4. Switch to fast speed to quickly see how random patterns evolve
-5. Try different grid sizes to explore pattern behavior in various spaces
-6. Create symmetrical patterns and observe their evolution
-7. Combine different preset patterns to create new behaviors
-8. Experiment with your own pattern designs
-
-Each run of the simulation can produce unique and surprising results. The Game of Life demonstrates how complex systems can arise from simple rules - a principle found throughout nature and computation.
+**Tip:** Try randomizing and watch how simple rules lead to surprising complexity. Can you create a glider or a stable block?
