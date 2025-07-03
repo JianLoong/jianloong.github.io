@@ -280,6 +280,14 @@ function generateMazeEller(width: number, height: number): Cell[][] {
   grid[height - 1][width - 1].walls[1] = false;
   // Reset visited flags before returning (for safety)
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) grid[y][x].visited = false;
+  // --- PATCH: Ensure every row has width cells and every cell has 4 walls ---
+  for (let y = 0; y < height; y++) {
+    if (!grid[y]) grid[y] = [];
+    for (let x = 0; x < width; x++) {
+      if (!grid[y][x]) grid[y][x] = { x, y, walls: [true, true, true, true], visited: false };
+      if (!Array.isArray(grid[y][x].walls) || grid[y][x].walls.length !== 4) grid[y][x].walls = [true, true, true, true];
+    }
+  }
   return grid;
 }
 
@@ -358,6 +366,14 @@ function generateMazeBinaryTree(width: number, height: number): Cell[][] {
   grid[height - 1][width - 1].walls[1] = false;
   // Reset visited flags before returning (for safety)
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) grid[y][x].visited = false;
+  // --- PATCH: Ensure every row has width cells and every cell has 4 walls ---
+  for (let y = 0; y < height; y++) {
+    if (!grid[y]) grid[y] = [];
+    for (let x = 0; x < width; x++) {
+      if (!grid[y][x]) grid[y][x] = { x, y, walls: [true, true, true, true], visited: false };
+      if (!Array.isArray(grid[y][x].walls) || grid[y][x].walls.length !== 4) grid[y][x].walls = [true, true, true, true];
+    }
+  }
   return grid;
 }
 
@@ -1159,16 +1175,17 @@ function RectangularMazePolarWarpSVG({ maze, width, height, solution, isAnimatin
   // Map y to radius, x to angle
   const elements = [];
   for (let y = 0; y < height; y++) {
-    if (!maze[y]) continue;
+    if (!maze[y] || !Array.isArray(maze[y])) continue;
     const r1 = rMin + (rMax - rMin) * (y / height);
     const r2 = rMin + (rMax - rMin) * ((y + 1) / height);
     for (let x = 0; x < width; x++) {
-      if (!maze[y][x] || !maze[y][x].walls) continue;
+      const cell = maze[y][x];
+      if (!cell || !Array.isArray(cell.walls) || cell.walls.length !== 4) continue;
       const a1 = (2 * Math.PI) * (x / width);
       const a2 = (2 * Math.PI) * ((x + 1) / width);
       // Walls: [top, right, bottom, left]
       // Top (inner arc)
-      if (maze[y][x].walls[0]) {
+      if (cell.walls[0]) {
         const x1 = cx + r1 * Math.cos(a1);
         const y1 = cy + r1 * Math.sin(a1);
         const x2 = cx + r1 * Math.cos(a2);
@@ -1178,7 +1195,7 @@ function RectangularMazePolarWarpSVG({ maze, width, height, solution, isAnimatin
         );
       }
       // Right (radial line)
-      if (maze[y][x].walls[1]) {
+      if (cell.walls[1]) {
         const x1 = cx + r1 * Math.cos(a2);
         const y1 = cy + r1 * Math.sin(a2);
         const x2 = cx + r2 * Math.cos(a2);
@@ -1188,7 +1205,7 @@ function RectangularMazePolarWarpSVG({ maze, width, height, solution, isAnimatin
         );
       }
       // Bottom (outer arc)
-      if (maze[y][x].walls[2]) {
+      if (cell.walls[2]) {
         const x1 = cx + r2 * Math.cos(a1);
         const y1 = cy + r2 * Math.sin(a1);
         const x2 = cx + r2 * Math.cos(a2);
@@ -1198,7 +1215,7 @@ function RectangularMazePolarWarpSVG({ maze, width, height, solution, isAnimatin
         );
       }
       // Left (radial line)
-      if (maze[y][x].walls[3]) {
+      if (cell.walls[3]) {
         const x1 = cx + r1 * Math.cos(a1);
         const y1 = cy + r1 * Math.sin(a1);
         const x2 = cx + r2 * Math.cos(a1);
