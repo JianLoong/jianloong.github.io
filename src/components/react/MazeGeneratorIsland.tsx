@@ -238,6 +238,18 @@ function generateMazeKruskals(width: number, height: number): Cell[][] {
   return grid;
 }
 
+// --- Utility: Sanitize grid ---
+function sanitizeGrid(grid: Cell[][], width: number, height: number): Cell[][] {
+  for (let y = 0; y < height; y++) {
+    if (!grid[y]) grid[y] = [];
+    for (let x = 0; x < width; x++) {
+      if (!grid[y][x]) grid[y][x] = { x, y, walls: [true, true, true, true], visited: false };
+      if (!Array.isArray(grid[y][x].walls) || grid[y][x].walls.length !== 4) grid[y][x].walls = [true, true, true, true];
+    }
+  }
+  return grid;
+}
+
 function generateMazeEller(width: number, height: number): Cell[][] {
   // Eller's algorithm for rectangular mazes
   const grid = createGrid(width, height);
@@ -280,15 +292,7 @@ function generateMazeEller(width: number, height: number): Cell[][] {
   grid[height - 1][width - 1].walls[1] = false;
   // Reset visited flags before returning (for safety)
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) grid[y][x].visited = false;
-  // --- PATCH: Ensure every row has width cells and every cell has 4 walls ---
-  for (let y = 0; y < height; y++) {
-    if (!grid[y]) grid[y] = [];
-    for (let x = 0; x < width; x++) {
-      if (!grid[y][x]) grid[y][x] = { x, y, walls: [true, true, true, true], visited: false };
-      if (!Array.isArray(grid[y][x].walls) || grid[y][x].walls.length !== 4) grid[y][x].walls = [true, true, true, true];
-    }
-  }
-  return grid;
+  return sanitizeGrid(grid, width, height);
 }
 
 function generateMazeHuntAndKill(width: number, height: number): Cell[][] {
@@ -366,15 +370,7 @@ function generateMazeBinaryTree(width: number, height: number): Cell[][] {
   grid[height - 1][width - 1].walls[1] = false;
   // Reset visited flags before returning (for safety)
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) grid[y][x].visited = false;
-  // --- PATCH: Ensure every row has width cells and every cell has 4 walls ---
-  for (let y = 0; y < height; y++) {
-    if (!grid[y]) grid[y] = [];
-    for (let x = 0; x < width; x++) {
-      if (!grid[y][x]) grid[y][x] = { x, y, walls: [true, true, true, true], visited: false };
-      if (!Array.isArray(grid[y][x].walls) || grid[y][x].walls.length !== 4) grid[y][x].walls = [true, true, true, true];
-    }
-  }
-  return grid;
+  return sanitizeGrid(grid, width, height);
 }
 
 function generateMazeSidewinder(width: number, height: number): Cell[][] {
