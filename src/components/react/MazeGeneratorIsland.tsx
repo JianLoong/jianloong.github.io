@@ -238,18 +238,6 @@ function generateMazeKruskals(width: number, height: number): Cell[][] {
   return grid;
 }
 
-// --- Utility: Sanitize grid ---
-function sanitizeGrid(grid: Cell[][], width: number, height: number): Cell[][] {
-  for (let y = 0; y < height; y++) {
-    if (!grid[y]) grid[y] = [];
-    for (let x = 0; x < width; x++) {
-      if (!grid[y][x]) grid[y][x] = { x, y, walls: [true, true, true, true], visited: false };
-      if (!Array.isArray(grid[y][x].walls) || grid[y][x].walls.length !== 4) grid[y][x].walls = [true, true, true, true];
-    }
-  }
-  return grid;
-}
-
 function generateMazeEller(width: number, height: number): Cell[][] {
   // Eller's algorithm for rectangular mazes
   const grid = createGrid(width, height);
@@ -292,7 +280,7 @@ function generateMazeEller(width: number, height: number): Cell[][] {
   grid[height - 1][width - 1].walls[1] = false;
   // Reset visited flags before returning (for safety)
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) grid[y][x].visited = false;
-  return sanitizeGrid(grid, width, height);
+  return grid;
 }
 
 function generateMazeHuntAndKill(width: number, height: number): Cell[][] {
@@ -366,20 +354,11 @@ function generateMazeBinaryTree(width: number, height: number): Cell[][] {
       }
     }
   }
-  // Guarantee a path from (0,0) to (width-1,height-1) by opening a path along the bottom row and rightmost column
-  for (let x = 0; x < width - 1; x++) {
-    grid[height - 1][x].walls[1] = false; // open right wall
-    grid[height - 1][x + 1].walls[3] = false; // open left wall of next cell
-  }
-  for (let y = 0; y < height - 1; y++) {
-    grid[y][width - 1].walls[2] = false; // open bottom wall
-    grid[y + 1][width - 1].walls[0] = false; // open top wall of cell below
-  }
   grid[0][0].walls[3] = false;
   grid[height - 1][width - 1].walls[1] = false;
   // Reset visited flags before returning (for safety)
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) grid[y][x].visited = false;
-  return sanitizeGrid(grid, width, height);
+  return grid;
 }
 
 function generateMazeSidewinder(width: number, height: number): Cell[][] {
@@ -1180,17 +1159,16 @@ function RectangularMazePolarWarpSVG({ maze, width, height, solution, isAnimatin
   // Map y to radius, x to angle
   const elements = [];
   for (let y = 0; y < height; y++) {
-    if (!maze[y] || !Array.isArray(maze[y])) continue;
+    if (!maze[y]) continue;
     const r1 = rMin + (rMax - rMin) * (y / height);
     const r2 = rMin + (rMax - rMin) * ((y + 1) / height);
     for (let x = 0; x < width; x++) {
-      const cell = maze[y][x];
-      if (!cell || !Array.isArray(cell.walls) || cell.walls.length !== 4) continue;
+      if (!maze[y][x] || !maze[y][x].walls) continue;
       const a1 = (2 * Math.PI) * (x / width);
       const a2 = (2 * Math.PI) * ((x + 1) / width);
       // Walls: [top, right, bottom, left]
       // Top (inner arc)
-      if (cell.walls[0]) {
+      if (maze[y][x].walls[0]) {
         const x1 = cx + r1 * Math.cos(a1);
         const y1 = cy + r1 * Math.sin(a1);
         const x2 = cx + r1 * Math.cos(a2);
@@ -1200,7 +1178,7 @@ function RectangularMazePolarWarpSVG({ maze, width, height, solution, isAnimatin
         );
       }
       // Right (radial line)
-      if (cell.walls[1]) {
+      if (maze[y][x].walls[1]) {
         const x1 = cx + r1 * Math.cos(a2);
         const y1 = cy + r1 * Math.sin(a2);
         const x2 = cx + r2 * Math.cos(a2);
@@ -1210,7 +1188,7 @@ function RectangularMazePolarWarpSVG({ maze, width, height, solution, isAnimatin
         );
       }
       // Bottom (outer arc)
-      if (cell.walls[2]) {
+      if (maze[y][x].walls[2]) {
         const x1 = cx + r2 * Math.cos(a1);
         const y1 = cy + r2 * Math.sin(a1);
         const x2 = cx + r2 * Math.cos(a2);
@@ -1220,7 +1198,7 @@ function RectangularMazePolarWarpSVG({ maze, width, height, solution, isAnimatin
         );
       }
       // Left (radial line)
-      if (cell.walls[3]) {
+      if (maze[y][x].walls[3]) {
         const x1 = cx + r1 * Math.cos(a1);
         const y1 = cy + r1 * Math.sin(a1);
         const x2 = cx + r2 * Math.cos(a1);
@@ -1348,6 +1326,18 @@ const MazeGeneratorIsland: React.FC = () => {
   // Regeneration timestamp to ensure different mazes (unlimited)
   const [regenerationTimestamp, setRegenerationTimestamp] = useState(Date.now());
 
+  // Inside the MazeGeneratorIsland component, after state declarations:
+  const allowedAlgorithms: Record<MazeType, Algorithm[]> = {
+    rectangular: ['dfs', 'prims', 'wilsons', 'kruskal', 'eller', 'huntandkill', 'binarytree', 'sidewinder'],
+    circular:    ['dfs', 'prims', 'wilsons', 'kruskal', 'eller', 'huntandkill', 'binarytree', 'sidewinder'],
+    polarwarp:   ['dfs', 'prims', 'wilsons', 'kruskal', 'huntandkill', 'sidewinder'], // binarytree and eller removed
+  };
+  useEffect(() => {
+    if (!allowedAlgorithms[pendingMazeType].includes(pendingAlgorithm)) {
+      setPendingAlgorithm(allowedAlgorithms[pendingMazeType][0]);
+    }
+  }, [pendingMazeType, pendingAlgorithm]);
+
   useEffect(() => {
     let timeout: NodeJS.Timeout | null = null;
     if (mazeType === 'rectangular' && maze && maze.length && maze[0] && maze[0].length) {
@@ -1365,19 +1355,13 @@ const MazeGeneratorIsland: React.FC = () => {
                 setAnimationProgress(0);
                 // Animate over 2 seconds
                 const animate = () => {
-                  setAnimationProgress(prev => {
-                    if (prev >= 1) {
-                      setIsAnimating(false);
-                      return 1;
-                    }
-                    return prev + 0.02; // 50 steps over 1 second
-                  });
+                  setAnimationProgress(prev => Math.min(prev + 0.02, 1));
                 };
-                const interval = setInterval(animate, 40); // 25 FPS
+                const interval = setInterval(animate, 40);
                 setTimeout(() => {
                   clearInterval(interval);
-                  setIsAnimating(false);
                   setAnimationProgress(1);
+                  setIsAnimating(false);
                 }, 2000);
               }
             }, 1000);
@@ -1410,19 +1394,13 @@ const MazeGeneratorIsland: React.FC = () => {
                 setAnimationProgress(0);
                 // Animate over 2 seconds
                 const animate = () => {
-                  setAnimationProgress(prev => {
-                    if (prev >= 1) {
-                      setIsAnimating(false);
-                      return 1;
-                    }
-                    return prev + 0.02; // 50 steps over 1 second
-                  });
+                  setAnimationProgress(prev => Math.min(prev + 0.02, 1));
                 };
-                const interval = setInterval(animate, 40); // 25 FPS
+                const interval = setInterval(animate, 40);
                 setTimeout(() => {
                   clearInterval(interval);
-                  setIsAnimating(false);
                   setAnimationProgress(1);
+                  setIsAnimating(false);
                 }, 2000);
               }
             }, 1000);
@@ -1455,19 +1433,13 @@ const MazeGeneratorIsland: React.FC = () => {
                 setAnimationProgress(0);
                 // Animate over 2 seconds
                 const animate = () => {
-                  setAnimationProgress(prev => {
-                    if (prev >= 1) {
-                      setIsAnimating(false);
-                      return 1;
-                    }
-                    return prev + 0.02; // 50 steps over 1 second
-                  });
+                  setAnimationProgress(prev => Math.min(prev + 0.02, 1));
                 };
-                const interval = setInterval(animate, 40); // 25 FPS
+                const interval = setInterval(animate, 40);
                 setTimeout(() => {
                   clearInterval(interval);
-                  setIsAnimating(false);
                   setAnimationProgress(1);
+                  setIsAnimating(false);
                 }, 2000);
               }
             }, 1000);
@@ -1499,128 +1471,45 @@ const MazeGeneratorIsland: React.FC = () => {
 
   useEffect(() => {
     setLoading(true);
-    let mazeData;
-    let attempts = 0;
-    let solvable = false;
-    function isRectangularSolvable(maze: Cell[][], width: number, height: number) {
-      const path = findRectangularMazeSolution(maze, width, height);
-      if (path.length <= 1) return false;
-      
-      // Check for trivial Manhattan path (all right then all down, or all down then all right)
-      let isManhattanPath = true;
-      let hasRightMoves = false;
-      let hasDownMoves = false;
-      for (let i = 1; i < path.length; i++) {
-        const [x0, y0] = path[i - 1];
-        const [x1, y1] = path[i];
-        if (x1 === x0 + 1 && y1 === y0) {
-          hasRightMoves = true;
-        } else if (x1 === x0 && y1 === y0 + 1) {
-          hasDownMoves = true;
-        } else {
-          isManhattanPath = false;
-          break;
-        }
+    let cancelled = false;
+    let worker: Worker | null = null;
+
+    function handleMazeResult(maze: any[][]) {
+      if (cancelled) return;
+      if (mazeType === 'rectangular' || mazeType === 'polarwarp') {
+        setMaze(maze);
+      } else if (mazeType === 'circular') {
+        setCircularMaze(maze);
       }
-      if (isManhattanPath && hasRightMoves && hasDownMoves) return false;
-      
-      // Check that the maze has at least one wall between start and end
-      let hasWalls = false;
-      for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-          if (maze[y] && maze[y][x] && maze[y][x].walls) {
-            if (maze[y][x].walls.some(wall => wall)) {
-              hasWalls = true;
-              break;
-            }
-          }
-        }
-        if (hasWalls) break;
-      }
-      if (!hasWalls) return false;
-      
-      return true;
+      setLoading(false);
     }
-    function isCircularSolvable(maze: PolarCell[][], rings: number, sectors: number) {
-      const path = findCircularMazeSolution(maze, rings, sectors);
-      return path.length > 1;
-    }
-    if (mazeType === 'rectangular' || mazeType === 'polarwarp') {
-      do {
-        switch (algorithm) {
-          case 'dfs':
-            mazeData = generateMazeDFS(safeWidth, safeHeight);
-            break;
-          case 'wilsons':
-            mazeData = generateMazeWilsons(safeWidth, safeHeight);
-            break;
-          case 'kruskal':
-            mazeData = generateMazeKruskals(safeWidth, safeHeight);
-            break;
-          case 'eller':
-            mazeData = generateMazeEller(safeWidth, safeHeight);
-            break;
-          case 'huntandkill':
-            mazeData = generateMazeHuntAndKill(safeWidth, safeHeight);
-            break;
-          case 'binarytree':
-            mazeData = generateMazeBinaryTree(safeWidth, safeHeight);
-            break;
-          case 'sidewinder':
-            mazeData = generateMazeSidewinder(safeWidth, safeHeight);
-            break;
-          case 'prims':
-            mazeData = generateMazePrims(safeWidth, safeHeight);
-            break;
-          default:
-            mazeData = generateMazeDFS(safeWidth, safeHeight);
-        }
-        solvable = isRectangularSolvable(mazeData, safeWidth, safeHeight);
-        attempts++;
-        // Continue trying until a solvable maze is found (unlimited attempts)
-      } while (!solvable);
-      setMaze(mazeData);
-    } else if (mazeType === 'circular') {
-      do {
-        switch (algorithm) {
-          case 'dfs':
-            mazeData = generateCircularMazeDFS(safeWidth, safeHeight * 3);
-            break;
-          case 'wilsons':
-            mazeData = generateCircularMazeWilsons(safeWidth, safeHeight * 3);
-            break;
-          case 'kruskal':
-            mazeData = generateCircularMazeKruskals(safeWidth, safeHeight * 3);
-            break;
-          case 'eller':
-            mazeData = generateCircularMazeEller(safeWidth, safeHeight * 3);
-            break;
-          case 'huntandkill':
-            mazeData = generateCircularMazeHuntAndKill(safeWidth, safeHeight * 3);
-            break;
-          case 'binarytree':
-            mazeData = generateCircularMazeBinaryTree(safeWidth, safeHeight * 3);
-            break;
-          case 'sidewinder':
-            mazeData = generateCircularMazeSidewinder(safeWidth, safeHeight * 3);
-            break;
-          case 'prims':
-            mazeData = generateCircularMazePrims(safeWidth, safeHeight * 3);
-            break;
-          default:
-            mazeData = generateCircularMazeDFS(safeWidth, safeHeight * 3);
-        }
-        solvable = isCircularSolvable(mazeData, safeWidth, safeHeight * 3);
-        attempts++;
-        // Continue trying until a solvable maze is found (unlimited attempts)
-      } while (!solvable);
-      setCircularMaze(mazeData);
-    }
-    setLoading(false);
+
+    // Always create a new worker (no caching)
+    worker = new Worker(new URL('./mazeWorker.ts', import.meta.url), { type: 'module' });
+    worker.onmessage = (e) => {
+      handleMazeResult(e.data.maze);
+      worker?.terminate();
+    };
+    worker.onerror = (e) => {
+      setLoading(false);
+      worker?.terminate();
+    };
+    worker.postMessage({
+      mazeType,
+      algorithm,
+      width: safeWidth,
+      height: mazeType === 'circular' ? safeHeight * 3 : safeHeight,
+    });
+
+    return () => {
+      cancelled = true;
+      if (worker) worker.terminate();
+    };
   }, [mazeType, algorithm, width, height, regenerationTimestamp]);
 
   // Regenerate handler
   const handleRegenerate = () => {
+    setLoading(true); // Instantly disable the button
     // Stop any ongoing animation immediately
     setIsAnimating(false);
     setAnimationProgress(0);
@@ -1664,18 +1553,23 @@ const MazeGeneratorIsland: React.FC = () => {
           <label className="font-semibold text-base flex flex-col items-start bg-[var(--color-muted)] rounded-lg px-4 py-3 w-full" style={{ color: 'var(--color-foreground)' }}>
             <span className="mb-1">Algorithm:</span>
             <select
-              value={pendingAlgorithm}
+              value={allowedAlgorithms[pendingMazeType].includes(pendingAlgorithm) ? pendingAlgorithm : allowedAlgorithms[pendingMazeType][0]}
               onChange={e => setPendingAlgorithm(e.target.value as Algorithm)}
               className="mt-1 text-lg px-3 py-2 border-2 border-[var(--color-border)] rounded-md outline-none bg-[var(--color-background)] text-[var(--color-foreground)] font-semibold shadow-sm focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[color:var(--color-accent)] w-full transition"
             >
-              <option value="dfs">DFS</option>
-              <option value="prims">Prim's</option>
-              <option value="wilsons">Wilsons</option>
-              <option value="kruskal">Kruskal's</option>
-              <option value="eller">Eller's</option>
-              <option value="huntandkill">Hunt-and-Kill</option>
-              <option value="binarytree">Binary Tree</option>
-              <option value="sidewinder">Sidewinder</option>
+              {allowedAlgorithms[pendingMazeType].map(algo => (
+                <option key={algo} value={algo}>
+                  {algo === 'dfs' ? 'DFS'
+                    : algo === 'prims' ? "Prim's"
+                    : algo === 'wilsons' ? 'Wilsons'
+                    : algo === 'kruskal' ? "Kruskal's"
+                    : algo === 'eller' ? "Eller's"
+                    : algo === 'huntandkill' ? 'Hunt-and-Kill'
+                    : algo === 'binarytree' ? 'Binary Tree'
+                    : algo === 'sidewinder' ? 'Sidewinder'
+                    : algo}
+                </option>
+              ))}
             </select>
           </label>
         </div>
@@ -1698,13 +1592,13 @@ const MazeGeneratorIsland: React.FC = () => {
         <button
           onClick={handleRegenerate}
           disabled={loading}
-          className={`px-6 py-2 rounded-lg font-bold shadow transition border-2 ${
-            loading 
-              ? 'bg-gray-400 text-gray-200 border-gray-400 cursor-not-allowed' 
+          className={`px-6 py-2 rounded-lg font-bold shadow transition border-2 w-40 text-center ${
+            loading
+              ? 'bg-gray-400 text-gray-200 border-gray-400 cursor-not-allowed'
               : 'bg-[var(--color-accent)] text-white border-[var(--color-accent)] hover:bg-pink-600'
           }`}
         >
-          {loading ? 'Generating...' : 'Regenerate'}
+          Regenerate
         </button>
       </div>
       {/* Maze rendering */}

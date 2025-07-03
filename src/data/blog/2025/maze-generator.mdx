@@ -21,6 +21,8 @@ Maze generation is a fascinating application of graph theory and algorithms. Thi
 - Click **Regenerate** to create a new maze.
 - The solution path will appear after 1 second.
 
+> **Note:** Some algorithm and maze type combinations are intentionally disabled. For example, Polar Warp mazes do not support Binary Tree or Eller's algorithms, as these combinations are not valid or may cause errors. The UI will automatically prevent you from selecting invalid combinations.
+
 import MazeGeneratorIsland from "@/components/react/MazeGeneratorIsland"
 import MermaidDiagram from '../../../components/react/MermaidDiagram';
 import { mazeGenerationLogic } from '../../../data/diagrams/maze-generator';
