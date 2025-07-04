@@ -98,8 +98,8 @@ const CKADQuiz: React.FC = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+    <div className="max-w-6xl mx-auto p-2 sm:p-4 md:p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-2 sm:p-4 md:p-8 overflow-x-auto">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">
           CKAD Practice Quiz
         </h2>
@@ -181,7 +181,7 @@ const CKADQuiz: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-2 sm:p-4 md:p-6 overflow-x-auto">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
                 {currentQuestion.question}
               </h3>
@@ -204,20 +204,20 @@ const CKADQuiz: React.FC = () => {
             {/* Solution */}
             {showSolution && (
               <div className="space-y-4">
-                <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-6">
+                <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-2 sm:p-4 md:p-6 overflow-x-auto">
                   <h4 className="text-lg font-semibold text-green-800 dark:text-green-200 mb-3">
                     Solution:
                   </h4>
-                  <div className="bg-gray-900 text-green-400 p-4 rounded-md font-mono text-sm overflow-x-auto">
+                  <div className="bg-gray-900 text-green-400 p-2 sm:p-4 rounded-md font-mono text-sm overflow-x-auto break-words whitespace-pre-wrap max-w-full">
                     <code>{currentQuestion.solution}</code>
                   </div>
                 </div>
                 
-                <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+                <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-2 sm:p-4 md:p-6 overflow-x-auto">
                   <h4 className="text-lg font-semibold text-blue-800 dark:text-blue-200 mb-3">
                     Explanation:
                   </h4>
-                  <p className="text-blue-700 dark:text-blue-300">
+                  <p className="text-blue-700 dark:text-blue-300 break-words whitespace-pre-wrap max-w-full">
                     {currentQuestion.explanation}
                   </p>
                 </div>
