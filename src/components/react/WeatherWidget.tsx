@@ -72,22 +72,49 @@ const WeatherWidget: React.FC = () => {
     return weatherCodes[code] || 'unknown';
   };
 
-  if (loading) {
-    return (
-      <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
-        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-accent"></div>
-        Loading weather...
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="text-sm text-muted-foreground">
-        Weather data unavailable
-      </div>
-    );
-  }
+  // Map weather codes to SVG icons
+  const getWeatherIcon = (code: number, isDay: number): React.ReactElement => {
+    // Simple SVGs for main weather types
+    // You can further customize or add more icons as needed
+    switch (code) {
+      case 0: // Clear
+        return (
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-label="Clear sky" className="inline align-middle"><circle cx="10" cy="10" r="6" fill="#FFD600" /></svg>
+        );
+      case 1: // Mainly clear
+      case 2: // Partly cloudy
+        return (
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-label="Partly cloudy" className="inline align-middle"><circle cx="8" cy="10" r="5" fill="#FFD600" /><ellipse cx="13" cy="13" rx="5" ry="3" fill="#B0BEC5" /></svg>
+        );
+      case 3: // Overcast
+        return (
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-label="Overcast" className="inline align-middle"><ellipse cx="10" cy="13" rx="7" ry="4" fill="#B0BEC5" /></svg>
+        );
+      case 45: // Fog
+      case 48:
+        return (
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-label="Fog" className="inline align-middle"><ellipse cx="10" cy="14" rx="7" ry="3" fill="#CFD8DC" /><rect x="4" y="10" width="12" height="2" fill="#B0BEC5" /></svg>
+        );
+      case 51: case 53: case 55: // Drizzle
+      case 61: case 63: case 65: // Rain
+      case 80: case 81: case 82: // Showers
+        return (
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-label="Rain" className="inline align-middle"><ellipse cx="10" cy="10" rx="6" ry="3" fill="#B0BEC5" /><line x1="7" y1="14" x2="7" y2="18" stroke="#2196F3" strokeWidth="2" /><line x1="13" y1="14" x2="13" y2="18" stroke="#2196F3" strokeWidth="2" /></svg>
+        );
+      case 71: case 73: case 75: case 77: case 85: case 86: // Snow
+        return (
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-label="Snow" className="inline align-middle"><ellipse cx="10" cy="10" rx="6" ry="3" fill="#B0BEC5" /><circle cx="7" cy="15" r="1" fill="#90CAF9" /><circle cx="13" cy="15" r="1" fill="#90CAF9" /></svg>
+        );
+      case 95: case 96: case 99: // Thunderstorm
+        return (
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-label="Thunderstorm" className="inline align-middle"><ellipse cx="10" cy="10" rx="6" ry="3" fill="#B0BEC5" /><polygon points="9,13 11,13 10,16" fill="#FFD600" /><polyline points="10,13 12,11 11,13" fill="none" stroke="#FFD600" strokeWidth="1.5" /></svg>
+        );
+      default:
+        return (
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-label="Unknown weather" className="inline align-middle"><circle cx="10" cy="10" r="6" fill="#B0BEC5" /></svg>
+        );
+    }
+  };
 
   if (!weather) {
     return null;
@@ -95,12 +122,12 @@ const WeatherWidget: React.FC = () => {
 
   const weatherCondition = getWeatherDescription(weather.current.weather_code);
   const temperature = Math.round(weather.current.temperature_2m);
-  
-  // Determine if it's raining based on weather code
   const isRaining = weather.current.weather_code >= 51 && weather.current.weather_code <= 82;
+  const icon = getWeatherIcon(weather.current.weather_code, weather.current.is_day);
 
   return (
     <div className="inline-flex items-center gap-2 text-sm">
+      {icon}
       <span className="text-muted-foreground">
         It is currently {isRaining ? 'raining' : weatherCondition} in Melbourne right now
       </span>
