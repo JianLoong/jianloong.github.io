@@ -11,7 +11,7 @@ const stateDurations = [3000, 1000, 3000, 1000];
 const CAR_LENGTH = 24;
 const ROAD_LENGTH = 300;
 const INTERSECTION_SIZE = 80;
-const CAR_SPEED = 5.0;
+const CAR_SPEED = 8.0;
 const SPAWN_INTERVAL = 800;
 const STOP_LINE_OFFSET = 24;
 const SVG_SIZE = 600;
@@ -114,6 +114,21 @@ function canMove(car: Car, idx: number, carsInDir: Car[], state: number): boolea
   return true;
 }
 
+// Helper: Should clamp at stop line?
+function shouldClampAtStopLine(car: Car, carFront: number, stopLine: number, intersectionStart: number, state: number): boolean {
+  let light = car.dir === 'ns' ? lightStates[state].ns : lightStates[state].ew;
+  return (
+    carFront < stopLine &&
+    carFront + CAR_SPEED >= stopLine &&
+    !(light === 'green' || (light === 'yellow' && carFront - intersectionStart < CAR_LENGTH + 4))
+  );
+}
+
+// Helper: Get clamped position at stop line
+function getClampedStopLinePos(stopLine: number): number {
+  return stopLine - CAR_LENGTH;
+}
+
 function moveCars(carsInDir: Car[], state: number): Car[] {
   return carsInDir.map((car: Car, idx: number) => {
     // Predict next position
@@ -121,16 +136,11 @@ function moveCars(carsInDir: Car[], state: number): Car[] {
     const intersectionStart = 0;
     const stopLine = intersectionStart - STOP_LINE_OFFSET;
     const carFront = car.pos + CAR_LENGTH;
-    let light = car.dir === 'ns' ? lightStates[state].ns : lightStates[state].ew;
     // Clamp at stop line if about to cross on red/yellow
-    if (
-      carFront < stopLine &&
-      carFront + CAR_SPEED >= stopLine &&
-      !(light === 'green' || (light === 'yellow' && carFront - intersectionStart < CAR_LENGTH + 4))
-    ) {
-      // Clamp so the car's front is exactly at the stop line
-      return { ...car, pos: stopLine - CAR_LENGTH };
+    if (shouldClampAtStopLine(car, carFront, stopLine, intersectionStart, state)) {
+      return { ...car, pos: getClampedStopLinePos(stopLine) };
     }
+    // Normal movement
     if (canMove(car, idx, carsInDir, state)) {
       return { ...car, pos: car.pos + CAR_SPEED };
     } else {
