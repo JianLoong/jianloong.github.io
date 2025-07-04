@@ -1,0 +1,866 @@
+[
+  {
+    "question": "What is the primary purpose of Kubernetes?",
+    "options": [
+      "Container orchestration",
+      "Continuous integration",
+      "Source code management",
+      "Monitoring logs"
+    ],
+    "answer": 0,
+    "explanation": "Kubernetes is primarily used for container orchestration—automating deployment, scaling, and management of containerized applications.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which object is used to manage a group of pods in Kubernetes?",
+    "options": [
+      "Service",
+      "Deployment",
+      "ConfigMap",
+      "Secret"
+    ],
+    "answer": 1,
+    "explanation": "A Deployment manages a group of pods and ensures the desired number are running.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What command is used to view all pods in the default namespace?",
+    "options": [
+      "kubectl get services",
+      "kubectl get deployments",
+      "kubectl get pods",
+      "kubectl get nodes"
+    ],
+    "answer": 2,
+    "explanation": "'kubectl get pods' lists all pods in the current (default) namespace.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which file format is commonly used for Kubernetes manifests?",
+    "options": [
+      "JSON",
+      "YAML",
+      "XML",
+      "INI"
+    ],
+    "answer": 1,
+    "explanation": "YAML is the most common format for Kubernetes manifests, though JSON is also supported.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is a node in Kubernetes?",
+    "options": [
+      "A container image",
+      "A physical or virtual machine",
+      "A YAML file",
+      "A network policy"
+    ],
+    "answer": 1,
+    "explanation": "A node is a physical or virtual machine that runs pods in a Kubernetes cluster.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which Kubernetes object exposes a set of pods as a network service?",
+    "options": [
+      "Deployment",
+      "Service",
+      "ReplicaSet",
+      "ConfigMap"
+    ],
+    "answer": 1,
+    "explanation": "A Service exposes a set of pods as a network service, enabling communication.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the default namespace in Kubernetes?",
+    "options": [
+      "kube-system",
+      "default",
+      "kube-public",
+      "prod"
+    ],
+    "answer": 1,
+    "explanation": "The 'default' namespace is used when no other namespace is specified.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which command creates a new deployment from an image?",
+    "options": [
+      "kubectl run",
+      "kubectl expose",
+      "kubectl apply",
+      "kubectl create service"
+    ],
+    "answer": 0,
+    "explanation": "'kubectl run' creates a new deployment from a container image.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is a ConfigMap used for?",
+    "options": [
+      "Store sensitive data",
+      "Store configuration data",
+      "Manage pods",
+      "Monitor cluster health"
+    ],
+    "answer": 1,
+    "explanation": "A ConfigMap is used to store non-sensitive configuration data as key-value pairs.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which component is the Kubernetes master node responsible for?",
+    "options": [
+      "Running user containers",
+      "Scheduling pods",
+      "Storing container images",
+      "Providing persistent storage"
+    ],
+    "answer": 1,
+    "explanation": "The master node schedules pods and manages the cluster state.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the purpose of a ReplicaSet?",
+    "options": [
+      "Expose pods to the internet",
+      "Ensure a specified number of pod replicas are running",
+      "Store environment variables",
+      "Manage cluster nodes"
+    ],
+    "answer": 1,
+    "explanation": "A ReplicaSet ensures that a specified number of pod replicas are running at all times.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is a StatefulSet used for in Kubernetes?",
+    "options": [
+      "Managing stateless pods",
+      "Managing stateful applications with stable identities",
+      "Exposing services",
+      "Storing secrets"
+    ],
+    "answer": 1,
+    "explanation": "A StatefulSet manages stateful applications, giving each pod a stable identity and persistent storage.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which resource limits the CPU and memory usage of a pod?",
+    "options": [
+      "ResourceQuota",
+      "LimitRange",
+      "PodDisruptionBudget",
+      "HorizontalPodAutoscaler"
+    ],
+    "answer": 1,
+    "explanation": "A LimitRange sets default CPU and memory limits for pods and containers in a namespace.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What does 'kubectl describe pod <pod-name>' do?",
+    "options": [
+      "Deletes the pod",
+      "Shows detailed information about the pod",
+      "Restarts the pod",
+      "Scales the pod"
+    ],
+    "answer": 1,
+    "explanation": "'kubectl describe pod <pod-name>' shows detailed information about the specified pod, including events and status.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which controller automatically replaces failed pods?",
+    "options": [
+      "ReplicaSet",
+      "Service",
+      "ConfigMap",
+      "Ingress"
+    ],
+    "answer": 0,
+    "explanation": "A ReplicaSet ensures that a specified number of pod replicas are running, replacing any that fail.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the purpose of a Kubernetes Ingress?",
+    "options": [
+      "Store secrets",
+      "Provide internal DNS",
+      "Manage external access to services",
+      "Schedule pods"
+    ],
+    "answer": 2,
+    "explanation": "An Ingress manages external HTTP/HTTPS access to services in a cluster, often providing routing and TLS termination.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the main function of a Kubernetes Admission Controller?",
+    "options": [
+      "Schedule pods on nodes",
+      "Modify or validate objects during creation/update",
+      "Monitor cluster health",
+      "Expose services externally"
+    ],
+    "answer": 1,
+    "explanation": "Admission Controllers intercept requests to the Kubernetes API server and can modify or validate objects before they are persisted.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which Kubernetes resource is used to define network policies?",
+    "options": [
+      "NetworkPolicy",
+      "Ingress",
+      "Service",
+      "PodSecurityPolicy"
+    ],
+    "answer": 0,
+    "explanation": "NetworkPolicy resources define how groups of pods are allowed to communicate with each other and with other network endpoints.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the purpose of a DaemonSet?",
+    "options": [
+      "Run a pod on every node",
+      "Scale pods horizontally",
+      "Provide persistent storage",
+      "Manage secrets"
+    ],
+    "answer": 0,
+    "explanation": "A DaemonSet ensures that a copy of a pod runs on all (or some) nodes in the cluster.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which component is responsible for maintaining node status and running pods?",
+    "options": [
+      "kube-apiserver",
+      "kubelet",
+      "kube-proxy",
+      "etcd"
+    ],
+    "answer": 1,
+    "explanation": "The kubelet runs on each node and is responsible for maintaining node status and running the containers.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the function of etcd in a Kubernetes cluster?",
+    "options": [
+      "Container runtime",
+      "Cluster networking",
+      "Distributed key-value store for cluster state",
+      "Pod scheduling"
+    ],
+    "answer": 2,
+    "explanation": "etcd is a distributed key-value store used by Kubernetes to store all cluster data and state.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the function of a Kubernetes HorizontalPodAutoscaler (HPA)?",
+    "options": [
+      "Automatically scale pods based on CPU/memory usage",
+      "Schedule pods on specific nodes",
+      "Provide persistent storage",
+      "Manage network policies"
+    ],
+    "answer": 0,
+    "explanation": "The HPA automatically scales the number of pods in a deployment or replica set based on observed CPU/memory usage or custom metrics.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which Kubernetes object is used to inject environment variables into pods?",
+    "options": [
+      "ConfigMap",
+      "Secret",
+      "Both ConfigMap and Secret",
+      "ServiceAccount"
+    ],
+    "answer": 2,
+    "explanation": "Both ConfigMaps and Secrets can be used to inject environment variables into pods, with Secrets intended for sensitive data.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the purpose of a Kubernetes ServiceAccount?",
+    "options": [
+      "Provide network access",
+      "Assign permissions to pods",
+      "Store configuration data",
+      "Monitor pod health"
+    ],
+    "answer": 1,
+    "explanation": "A ServiceAccount provides an identity for processes running in a pod and is used to assign permissions.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the main purpose of a Kubernetes EndpointSlice?",
+    "options": [
+      "To provide persistent storage for pods",
+      "To improve scalability and performance of service endpoints",
+      "To manage pod security policies",
+      "To automate deployments"
+    ],
+    "answer": 1,
+    "explanation": "EndpointSlices provide a scalable and extensible way to track network endpoints in Kubernetes, improving performance for large clusters.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which tool is commonly used for Kubernetes cluster monitoring and alerting?",
+    "options": [
+      "Prometheus",
+      "Helm",
+      "Kubeadm",
+      "Kustomize"
+    ],
+    "answer": 0,
+    "explanation": "Prometheus is a widely used open-source monitoring and alerting toolkit for Kubernetes.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the function of a Kubernetes PodSecurityPolicy (PSP)?",
+    "options": [
+      "To manage persistent volumes",
+      "To control security-sensitive aspects of pod specification",
+      "To provide network policies",
+      "To automate deployments"
+    ],
+    "answer": 1,
+    "explanation": "PodSecurityPolicy is a cluster-level resource that controls security-sensitive aspects of the pod specification.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which Kubernetes resource is used to run a one-off task to completion?",
+    "options": [
+      "Job",
+      "DaemonSet",
+      "StatefulSet",
+      "ReplicaSet"
+    ],
+    "answer": 0,
+    "explanation": "A Job creates one or more pods and ensures that a specified number of them successfully terminate (complete).",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the main function of a Kubernetes HorizontalPodAutoscaler (HPA)?",
+    "options": [
+      "To scale pods based on observed CPU/memory usage",
+      "To provide persistent storage",
+      "To manage network policies",
+      "To automate deployments"
+    ],
+    "answer": 0,
+    "explanation": "The HPA automatically scales the number of pods in a deployment or replica set based on observed CPU/memory usage or custom metrics.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the main purpose of a Kubernetes ValidatingAdmissionWebhook?",
+    "options": [
+      "To mutate objects during admission",
+      "To validate objects before they are persisted",
+      "To monitor pod health",
+      "To manage persistent volumes"
+    ],
+    "answer": 1,
+    "explanation": "A ValidatingAdmissionWebhook validates objects before they are persisted in the cluster, allowing for custom policy enforcement.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Which CNCF project provides distributed tracing for microservices in Kubernetes?",
+    "options": [
+      "Jaeger",
+      "Prometheus",
+      "Fluentd",
+      "Harbor"
+    ],
+    "answer": 0,
+    "explanation": "Jaeger is a popular CNCF project for distributed tracing and monitoring of microservices.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the main benefit of using Kubernetes Federation (KubeFed)?",
+    "options": [
+      "To provide persistent storage",
+      "To manage multiple clusters from a single control plane",
+      "To automate deployments",
+      "To provide network policies"
+    ],
+    "answer": 1,
+    "explanation": "KubeFed enables you to coordinate the configuration of multiple Kubernetes clusters from a single set of APIs in a hosting cluster.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Which resource is used to define custom controllers in Kubernetes?",
+    "options": [
+      "CustomResourceDefinition (CRD)",
+      "PodDisruptionBudget",
+      "LimitRange",
+      "StatefulSet"
+    ],
+    "answer": 0,
+    "explanation": "CustomResourceDefinitions (CRDs) allow you to define custom resources and build custom controllers (operators) for them.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the main function of a Kubernetes MutatingAdmissionWebhook?",
+    "options": [
+      "To mutate objects as they are admitted to the cluster",
+      "To validate objects before they are persisted",
+      "To monitor pod health",
+      "To manage persistent volumes"
+    ],
+    "answer": 0,
+    "explanation": "A MutatingAdmissionWebhook can modify (mutate) objects as they are admitted to the cluster.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the main purpose of a Kubernetes Service of type 'NodePort'?",
+    "options": [
+      "Expose a service on a static port on each node's IP",
+      "Expose a service only within the cluster",
+      "Provide persistent storage",
+      "Manage pod security policies"
+    ],
+    "answer": 0,
+    "explanation": "A NodePort service exposes the service on a static port on each node's IP, making it accessible from outside the cluster.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which field in a pod spec allows you to influence pod scheduling with a preference rather than a hard rule?",
+    "options": [
+      "nodeSelector",
+      "affinity",
+      "tolerations",
+      "preferredDuringSchedulingIgnoredDuringExecution"
+    ],
+    "answer": 3,
+    "explanation": "'preferredDuringSchedulingIgnoredDuringExecution' is a soft scheduling preference, unlike nodeSelector or required affinity.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the function of a Kubernetes Ingress controller?",
+    "options": [
+      "Manage persistent storage",
+      "Route external HTTP/HTTPS traffic to services",
+      "Schedule pods on nodes",
+      "Monitor cluster health"
+    ],
+    "answer": 1,
+    "explanation": "An Ingress controller manages external HTTP/HTTPS access to services in a cluster, providing routing and TLS termination.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which resource is used to define how storage is dynamically provisioned in Kubernetes?",
+    "options": [
+      "PersistentVolumeClaim",
+      "StorageClass",
+      "VolumeMount",
+      "StatefulSet"
+    ],
+    "answer": 1,
+    "explanation": "A StorageClass defines how storage is dynamically provisioned in Kubernetes clusters.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the main difference between a ConfigMap and a Secret?",
+    "options": [
+      "Secrets are encrypted at rest, ConfigMaps are not",
+      "ConfigMaps are only for environment variables",
+      "Secrets can only be used by the API server",
+      "ConfigMaps are immutable"
+    ],
+    "answer": 0,
+    "explanation": "Secrets are intended for sensitive data and are stored encrypted at rest (if encryption is enabled), while ConfigMaps are not.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the main purpose of the Kubernetes API Aggregation Layer?",
+    "options": [
+      "To aggregate logs from all pods",
+      "To allow extension of the Kubernetes API with additional APIs",
+      "To aggregate metrics from nodes",
+      "To combine multiple kube-apiserver instances"
+    ],
+    "answer": 1,
+    "explanation": "The API Aggregation Layer allows you to extend the Kubernetes API by adding additional APIs served by your own API servers.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What happens when a high-priority pod is scheduled but there are insufficient resources?",
+    "options": [
+      "The pod is queued until resources are available",
+      "The scheduler ignores the pod",
+      "Lower-priority pods may be preempted (evicted)",
+      "The pod is deleted"
+    ],
+    "answer": 2,
+    "explanation": "Kubernetes can preempt (evict) lower-priority pods to make room for higher-priority pods if resources are insufficient.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Which controller pattern is used by most Kubernetes controllers (e.g., Deployment, ReplicaSet)?",
+    "options": [
+      "Operator pattern",
+      "Reconciler pattern",
+      "Observer pattern",
+      "Singleton pattern"
+    ],
+    "answer": 1,
+    "explanation": "Most Kubernetes controllers use the reconciler pattern: they observe the current state and take action to reach the desired state.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Which authentication method is NOT natively supported by the Kubernetes API server?",
+    "options": [
+      "Client certificates",
+      "Bearer tokens",
+      "LDAP",
+      "ServiceAccount tokens"
+    ],
+    "answer": 2,
+    "explanation": "LDAP is not natively supported by the Kubernetes API server; it requires an external authentication proxy.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the main benefit of using PodSecurityStandards (PSS) in Kubernetes?",
+    "options": [
+      "To provide a standard for pod networking",
+      "To enforce security best practices for pods",
+      "To manage persistent storage",
+      "To automate deployments"
+    ],
+    "answer": 1,
+    "explanation": "PodSecurityStandards (PSS) provide a set of policies to enforce security best practices for pods in Kubernetes.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Which Kubernetes resource is used to limit the number of pods that can be unavailable during a voluntary disruption?",
+    "options": [
+      "PodDisruptionBudget",
+      "LimitRange",
+      "ResourceQuota",
+      "PodSecurityPolicy"
+    ],
+    "answer": 0,
+    "explanation": "A PodDisruptionBudget (PDB) limits the number of pods that can be unavailable during voluntary disruptions.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the main function of a Kubernetes NetworkPolicy?",
+    "options": [
+      "To manage persistent storage",
+      "To control network access to and from pods",
+      "To automate deployments",
+      "To provide DNS for services"
+    ],
+    "answer": 1,
+    "explanation": "A NetworkPolicy defines how groups of pods are allowed to communicate with each other and with other network endpoints.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which CNCF tool is commonly used for log aggregation in Kubernetes?",
+    "options": [
+      "Fluentd",
+      "Prometheus",
+      "Helm",
+      "Kubeadm"
+    ],
+    "answer": 0,
+    "explanation": "Fluentd is a popular open-source data collector for unified logging, often used for log aggregation in Kubernetes.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the main purpose of a Kubernetes StatefulSet?",
+    "options": [
+      "To manage stateless pods",
+      "To manage stateful applications with stable identities",
+      "To expose services",
+      "To store secrets"
+    ],
+    "answer": 1,
+    "explanation": "A StatefulSet manages stateful applications, giving each pod a stable identity and persistent storage.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which Kubernetes resource is used to inject environment variables into pods?",
+    "options": [
+      "ConfigMap",
+      "Secret",
+      "Both ConfigMap and Secret",
+      "ServiceAccount"
+    ],
+    "answer": 2,
+    "explanation": "Both ConfigMaps and Secrets can be used to inject environment variables into pods, with Secrets intended for sensitive data.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the main function of a Kubernetes DaemonSet?",
+    "options": [
+      "To run a pod on every node",
+      "To scale pods horizontally",
+      "To provide persistent storage",
+      "To manage secrets"
+    ],
+    "answer": 0,
+    "explanation": "A DaemonSet ensures that a copy of a pod runs on all (or some) nodes in the cluster.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which Kubernetes resource is used to define custom objects and APIs?",
+    "options": [
+      "CustomResourceDefinition (CRD)",
+      "Admission Controller",
+      "PodPreset",
+      "LimitRange"
+    ],
+    "answer": 0,
+    "explanation": "A CustomResourceDefinition (CRD) allows you to define your own custom resources and APIs in Kubernetes.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the main function of a Kubernetes Job?",
+    "options": [
+      "To run a pod on every node",
+      "To run a task to completion",
+      "To expose a service externally",
+      "To scale pods automatically"
+    ],
+    "answer": 1,
+    "explanation": "A Job creates one or more pods and ensures that a specified number of them successfully terminate (complete).",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which Kubernetes feature allows you to run a pod on a specific node based on labels?",
+    "options": [
+      "Node Affinity",
+      "Pod Disruption Budget",
+      "Taints and Tolerations",
+      "HorizontalPodAutoscaler"
+    ],
+    "answer": 0,
+    "explanation": "Node Affinity allows you to constrain which nodes your pod is eligible to be scheduled on, based on node labels.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the main difference between a ClusterIP and a NodePort service?",
+    "options": [
+      "ClusterIP exposes the service internally, NodePort exposes it externally on each node's IP",
+      "NodePort is only for stateful applications",
+      "ClusterIP is deprecated",
+      "NodePort is used for persistent storage"
+    ],
+    "answer": 0,
+    "explanation": "ClusterIP exposes the service on a cluster-internal IP, while NodePort exposes it externally on each node's IP.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which Kubernetes resource is used to enforce resource usage limits on a namespace?",
+    "options": [
+      "ResourceQuota",
+      "LimitRange",
+      "PodDisruptionBudget",
+      "HorizontalPodAutoscaler"
+    ],
+    "answer": 0,
+    "explanation": "A ResourceQuota enforces resource usage limits (CPU, memory, object count, etc.) on a namespace.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the main function of a Kubernetes ReplicaSet?",
+    "options": [
+      "To expose pods to the internet",
+      "To ensure a specified number of pod replicas are running",
+      "To store environment variables",
+      "To manage cluster nodes"
+    ],
+    "answer": 1,
+    "explanation": "A ReplicaSet ensures that a specified number of pod replicas are running at all times.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which Kubernetes resource is used to provide a stable network identity for pods?",
+    "options": [
+      "StatefulSet",
+      "ReplicaSet",
+      "Deployment",
+      "Job"
+    ],
+    "answer": 0,
+    "explanation": "A StatefulSet provides a stable network identity and persistent storage for each pod.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the main function of a Kubernetes Admission Controller?",
+    "options": [
+      "To schedule pods on nodes",
+      "To modify or validate objects during creation/update",
+      "To monitor cluster health",
+      "To expose services externally"
+    ],
+    "answer": 1,
+    "explanation": "Admission Controllers intercept requests to the Kubernetes API server and can modify or validate objects before they are persisted.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which CNCF tool is used for distributed tracing in microservices architectures?",
+    "options": [
+      "Jaeger",
+      "Harbor",
+      "KEDA",
+      "Flannel"
+    ],
+    "answer": 0,
+    "explanation": "Jaeger is a popular open-source tool for distributed tracing and monitoring of microservices.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the main function of a Kubernetes HorizontalPodAutoscaler (HPA)?",
+    "options": [
+      "To scale pods based on observed CPU/memory usage",
+      "To provide persistent storage",
+      "To manage network policies",
+      "To automate deployments"
+    ],
+    "answer": 0,
+    "explanation": "The HPA automatically scales the number of pods in a deployment or replica set based on observed CPU/memory usage or custom metrics.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which Kubernetes resource is used to provide persistent storage to pods?",
+    "options": [
+      "PersistentVolumeClaim",
+      "ConfigMap",
+      "Secret",
+      "ServiceAccount"
+    ],
+    "answer": 0,
+    "explanation": "A PersistentVolumeClaim (PVC) is used to request and provide persistent storage to pods.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the main purpose of a Kubernetes RoleBinding?",
+    "options": [
+      "To grant permissions to users or ServiceAccounts within a namespace",
+      "To provide persistent storage",
+      "To manage network policies",
+      "To automate deployments"
+    ],
+    "answer": 0,
+    "explanation": "A RoleBinding grants permissions defined in a Role to users or ServiceAccounts within a specific namespace.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the main function of a Kubernetes MutatingAdmissionWebhook?",
+    "options": [
+      "To mutate objects as they are admitted to the cluster",
+      "To validate objects before they are persisted",
+      "To monitor pod health",
+      "To manage persistent volumes"
+    ],
+    "answer": 0,
+    "explanation": "A MutatingAdmissionWebhook can modify (mutate) objects as they are admitted to the cluster.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Which Kubernetes resource is used to validate custom resource fields?",
+    "options": [
+      "OpenAPI v3 schema validation",
+      "Admission Webhooks",
+      "RBAC",
+      "PodSecurityPolicy"
+    ],
+    "answer": 0,
+    "explanation": "OpenAPI v3 schema validation in CRDs allows you to validate the structure and values of custom resource fields.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the main function of the kube-apiserver?",
+    "options": [
+      "Serve the Kubernetes API and validate requests",
+      "Run containers on nodes",
+      "Maintain cluster state via controllers",
+      "Schedule pods"
+    ],
+    "answer": 0,
+    "explanation": "The kube-apiserver serves the Kubernetes API and validates and configures data for the API objects.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Which CNCF tool is used for backup and restore of Kubernetes resources and persistent volumes?",
+    "options": [
+      "Velero",
+      "Prometheus",
+      "Kubeadm",
+      "Linkerd"
+    ],
+    "answer": 0,
+    "explanation": "Velero is a tool for backup, restore, and disaster recovery of Kubernetes clusters and persistent volumes.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the main function of a Kubernetes DaemonSet?",
+    "options": [
+      "To run a pod on every node",
+      "To scale pods horizontally",
+      "To provide persistent storage",
+      "To manage secrets"
+    ],
+    "answer": 0,
+    "explanation": "A DaemonSet ensures that a copy of a pod runs on all (or some) nodes in the cluster.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Which Kubernetes resource is used to define custom controllers in Kubernetes?",
+    "options": [
+      "CustomResourceDefinition (CRD)",
+      "PodDisruptionBudget",
+      "LimitRange",
+      "StatefulSet"
+    ],
+    "answer": 0,
+    "explanation": "CustomResourceDefinitions (CRDs) allow you to define custom resources and build custom controllers (operators) for them.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the main function of a Kubernetes Job?",
+    "options": [
+      "To run a pod on every node",
+      "To run a task to completion",
+      "To expose a service externally",
+      "To scale pods automatically"
+    ],
+    "answer": 1,
+    "explanation": "A Job creates one or more pods and ensures that a specified number of them successfully terminate (complete).",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Which Kubernetes resource is used to provide persistent storage to pods?",
+    "options": [
+      "PersistentVolumeClaim",
+      "ConfigMap",
+      "Secret",
+      "ServiceAccount"
+    ],
+    "answer": 0,
+    "explanation": "A PersistentVolumeClaim (PVC) is used to request and provide persistent storage to pods.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the main function of a Kubernetes NetworkPolicy?",
+    "options": [
+      "To manage persistent storage",
+      "To control network access to and from pods",
+      "To automate deployments",
+      "To provide DNS for services"
+    ],
+    "answer": 1,
+    "explanation": "A NetworkPolicy defines how groups of pods are allowed to communicate with each other and with other network endpoints.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Which Kubernetes resource is used to enforce resource usage limits on a namespace?",
+    "options": [
+      "ResourceQuota",
+      "LimitRange",
+      "PodDisruptionBudget",
+      "HorizontalPodAutoscaler"
+    ],
+    "answer": 0,
+    "explanation": "A ResourceQuota enforces resource usage limits (CPU, memory, object count, etc.) on a namespace.",
+    "difficulty": "hard"
+  }
+] 
