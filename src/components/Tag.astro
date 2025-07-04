@@ -1,5 +1,20 @@
 ---
 import IconHash from "@/assets/icons/IconHash.svg";
+import IconGitHub from "@/assets/icons/IconGitHub.svg";
+import IconCalendar from "@/assets/icons/IconCalendar.svg";
+import IconMail from "@/assets/icons/IconMail.svg";
+import IconSun from "@/assets/icons/IconSun.svg";
+import IconMoon from "@/assets/icons/IconMoon.svg";
+import IconRss from "@/assets/icons/IconRss.svg";
+import IconTelegram from "@/assets/icons/IconTelegram.svg";
+import IconWhatsapp from "@/assets/icons/IconWhatsapp.svg";
+import IconFacebook from "@/assets/icons/IconFacebook.svg";
+import IconLinkedin from "@/assets/icons/IconLinkedin.svg";
+import IconPinterest from "@/assets/icons/IconPinterest.svg";
+import IconBrandX from "@/assets/icons/IconBrandX.svg";
+import IconSearch from "@/assets/icons/IconSearch.svg";
+import IconArchive from "@/assets/icons/IconArchive.svg";
+import { slugifyStr } from "@/utils/slugify";
 
 export interface Props {
   tag: string;
@@ -9,6 +24,49 @@ export interface Props {
 }
 
 const { tag, tagName, size = "sm", as = "span" } = Astro.props;
+
+const tagIconMap: Record<string, any> = {
+  github: IconGitHub,
+  calendar: IconCalendar,
+  date: IconCalendar,
+  mail: IconMail,
+  contact: IconMail,
+  sun: IconSun,
+  light: IconSun,
+  moon: IconMoon,
+  dark: IconMoon,
+  rss: IconRss,
+  telegram: IconTelegram,
+  whatsapp: IconWhatsapp,
+  facebook: IconFacebook,
+  linkedin: IconLinkedin,
+  pinterest: IconPinterest,
+  x: IconBrandX,
+  twitter: IconBrandX,
+  search: IconSearch,
+  "data-visualization": "📊",
+  archive: "🗄️",
+  tools: "🛠️",
+  ai: "🤖",
+  tutorial: "📖",
+  network: "🌐",
+  security: "🔒",
+  news: "📰",
+  chat: "💬",
+  work: "💼",
+  pin: "📌",
+  bird: "��",
+  "software-engineering": "🧑‍💻",
+  kubernetes: "☸️",
+  "computer-science": "💻",
+  education: "🎓",
+  opinion: "💬",
+  programming: "👨‍💻",
+  project: "📁",
+};
+
+const slug = slugifyStr(tag);
+const icon = tagIconMap[slug] ?? IconHash;
 ---
 
 {as === "li" ? (
@@ -17,7 +75,11 @@ const { tag, tagName, size = "sm", as = "span" } = Astro.props;
       href={`/tags/${tag}/`}
       class="inline-block rounded bg-gray-200 dark:bg-gray-700 px-2 py-1 text-xs font-semibold text-gray-700 dark:text-gray-200 flex items-center gap-1"
     >
-      <IconHash width={12} height={12} class="inline align-middle opacity-70" />
+      {typeof icon === "string" ? (
+        <span class="inline align-middle opacity-70" style="font-size: 1em; line-height: 1;">{icon}</span>
+      ) : (
+        <icon width={12} height={12} class="inline align-middle opacity-70" />
+      )}
       {tagName}
     </a>
   </li>
@@ -27,7 +89,11 @@ const { tag, tagName, size = "sm", as = "span" } = Astro.props;
       href={`/tags/${tag}/`}
       class="inline-block rounded bg-gray-200 dark:bg-gray-700 px-2 py-1 text-xs font-semibold text-gray-700 dark:text-gray-200 flex items-center gap-1"
     >
-      <IconHash width={12} height={12} class="inline align-middle opacity-70" />
+      {typeof icon === "string" ? (
+        <span class="inline align-middle opacity-70" style="font-size: 1em; line-height: 1;">{icon}</span>
+      ) : (
+        <icon width={12} height={12} class="inline align-middle opacity-70" />
+      )}
       {tagName}
     </a>
   </span>
@@ -36,7 +102,11 @@ const { tag, tagName, size = "sm", as = "span" } = Astro.props;
     href={`/tags/${tag}/`}
     class="inline-block rounded bg-gray-200 dark:bg-gray-700 px-2 py-1 text-xs font-semibold text-gray-700 dark:text-gray-200 flex items-center gap-1"
   >
-    <IconHash width={12} height={12} class="inline align-middle opacity-70" />
+    {typeof icon === "string" ? (
+      <span class="inline align-middle opacity-70" style="font-size: 1em; line-height: 1;">{icon}</span>
+    ) : (
+      <icon width={12} height={12} class="inline align-middle opacity-70" />
+    )}
     {tagName}
   </a>
 )}
