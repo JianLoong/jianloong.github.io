@@ -105,8 +105,8 @@ const CKADQuiz: React.FC = () => {
         </h2>
         
         {/* Filters */}
-        <div className="mb-8 space-y-4">
-          <div className="flex flex-wrap gap-4">
+        <div className="mb-8">
+          <div className="flex flex-col sm:flex-row gap-4">
             <div className="w-full sm:w-auto min-w-[180px] flex-1">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Difficulty:
@@ -148,8 +148,7 @@ const CKADQuiz: React.FC = () => {
               </div>
             </div>
           </div>
-          
-          <div className="text-sm text-gray-600 dark:text-gray-400">
+          <div className="text-sm text-gray-600 dark:text-gray-400 mt-4">
             Showing {totalQuestions} of {ckadQuestions.length} questions
           </div>
         </div>
