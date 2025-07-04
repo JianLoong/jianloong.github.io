@@ -8,6 +8,7 @@ import { getCollection } from "astro:content";
 import getProjectPosts from "@/utils/getProjectPosts";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
+import Tag from "@/components/Tag.astro";
 
 // Get all blog posts and filter for projects
 const posts = await getCollection("blog");
@@ -74,9 +75,7 @@ posts.forEach(post => {
                     {post.data.tags
                       .filter(tag => tag !== "project")
                       .map(tag => (
-                        <span class="px-2 py-1 bg-accent/10 text-accent text-sm rounded">
-                          {tag}
-                        </span>
+                        <Tag tag={tag} tagName={tag} size="sm" as="span" />
                       ))}
                   </div>
                 </div>
