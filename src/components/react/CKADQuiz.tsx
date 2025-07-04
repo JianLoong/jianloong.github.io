@@ -155,7 +155,7 @@ const CKADQuiz: React.FC = () => {
 
         {/* Question Navigation */}
         <div className="mb-6">
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap w-full justify-center gap-2 mb-4">
             {filteredQuestions.map((_, index) => (
               <button
                 key={index}
