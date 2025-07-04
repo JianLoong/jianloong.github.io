@@ -12,6 +12,7 @@ import IconRss from "@/assets/icons/IconRss.svg";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import { SITE } from "@/config";
 import { SOCIALS } from "@/constants";
+import { WeatherWidget } from "@/components/react";
 
 const posts = await getCollection("blog");
 
@@ -46,6 +47,9 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
           <p>
             Welcome to my corner of the web! 👋 I'm Jian, a software engineer who loves exploring technology, sharing insights, and documenting my journey through code. Here you'll find thoughts on software engineering, data analysis, AI, and the occasional deep dive into interesting technical challenges. Feel free to explore and let me know what you think!
           </p>
+          <div class="mt-4">
+            <WeatherWidget client:load />
+          </div>
           {
             SOCIALS.length > 0 && (
               <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
