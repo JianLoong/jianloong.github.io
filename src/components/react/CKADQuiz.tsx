@@ -175,18 +175,16 @@ const CKADQuiz: React.FC = () => {
         {/* Current Question */}
         {currentQuestion && (
           <div className="space-y-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-4">
-                <span className="text-sm text-gray-500 dark:text-gray-400">
-                  Question {currentQuestionIndex + 1} of {totalQuestions}
-                </span>
-                <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(currentQuestion.difficulty)}`}>
-                  {currentQuestion.difficulty}
-                </span>
-                <span className={`px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(currentQuestion.category)}`}>
-                  {currentQuestion.category}
-                </span>
-              </div>
+            <div className="flex flex-col xs:flex-row xs:items-center gap-2 xs:gap-4">
+              <span className="text-sm text-gray-500 dark:text-gray-400">
+                Question {currentQuestionIndex + 1} of {totalQuestions}
+              </span>
+              <span className={`px-2 py-1 rounded-full text-xs font-medium break-words max-w-[70vw] xs:max-w-none ${getDifficultyColor(currentQuestion.difficulty)}`}>
+                {currentQuestion.difficulty}
+              </span>
+              <span className={`px-2 py-1 rounded-full text-xs font-medium break-words max-w-[70vw] xs:max-w-none ${getCategoryColor(currentQuestion.category)}`}>
+                {currentQuestion.category}
+              </span>
             </div>
 
             <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-2 sm:p-4 md:p-6 overflow-x-auto">
