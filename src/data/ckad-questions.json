@@ -1,0 +1,452 @@
+[
+  {
+    "id": 1,
+    "question": "Create a Pod named 'nginx-pod' that runs the nginx:1.19 image and expose port 80.",
+    "type": "practical",
+    "difficulty": "easy",
+    "category": "Application Design and Build",
+    "solution": "kubectl run nginx-pod --image=nginx:1.19 --port=80",
+    "explanation": "This creates a Pod with the specified image and port configuration using kubectl run command."
+  },
+  {
+    "id": 2,
+    "question": "Create a ConfigMap named 'app-config' with key-value pairs: database_url=mongodb://localhost:27017 and api_version=v1.",
+    "type": "practical",
+    "difficulty": "easy",
+    "category": "Environment, Configuration and Security",
+    "solution": "kubectl create configmap app-config --from-literal=database_url=mongodb://localhost:27017 --from-literal=api_version=v1",
+    "explanation": "ConfigMaps store configuration data as key-value pairs that can be consumed by Pods."
+  },
+  {
+    "id": 3,
+    "question": "Create a Secret named 'db-secret' with username=admin and password=secret123.",
+    "type": "practical",
+    "difficulty": "easy",
+    "category": "Environment, Configuration and Security",
+    "solution": "kubectl create secret generic db-secret --from-literal=username=admin --from-literal=password=secret123",
+    "explanation": "Secrets store sensitive data like passwords and tokens in base64 encoded format."
+  },
+  {
+    "id": 4,
+    "question": "Create a Deployment named 'web-app' with 3 replicas running nginx:1.19 image.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Application Deployment",
+    "solution": "kubectl create deployment web-app --image=nginx:1.19 --replicas=3",
+    "explanation": "Deployments manage the desired state for Pods and ReplicaSets, providing declarative updates."
+  },
+  {
+    "id": 5,
+    "question": "Scale the 'web-app' deployment to 5 replicas.",
+    "type": "practical",
+    "difficulty": "easy",
+    "category": "Application Deployment",
+    "solution": "kubectl scale deployment web-app --replicas=5",
+    "explanation": "The scale command allows you to change the number of replicas in a deployment."
+  },
+  {
+    "id": 6,
+    "question": "Create a Service named 'web-service' of type ClusterIP that exposes port 80 and targets port 80 for pods with label app=web-app.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Services and Networking",
+    "solution": "kubectl expose deployment web-app --name=web-service --port=80 --target-port=80 --type=ClusterIP",
+    "explanation": "Services provide stable endpoints for Pods and enable load balancing across multiple Pods."
+  },
+  {
+    "id": 7,
+    "question": "Create a Service named 'web-service-nodeport' of type NodePort that exposes port 30000 and targets port 80 for pods with label app=web-app.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Services and Networking",
+    "solution": "kubectl expose deployment web-app --name=web-service-nodeport --port=80 --target-port=80 --type=NodePort --node-port=30000",
+    "explanation": "NodePort services expose the service on each Node's IP at a static port."
+  },
+  {
+    "id": 8,
+    "question": "Create an Ingress resource named 'web-ingress' that routes traffic from /app to the web-service on port 80.",
+    "type": "practical",
+    "difficulty": "hard",
+    "category": "Services and Networking",
+    "solution": "kubectl create ingress web-ingress --rule='/app=web-service:80'",
+    "explanation": "Ingress manages external access to services in a cluster, typically HTTP/HTTPS."
+  },
+  {
+    "id": 9,
+    "question": "Create a PersistentVolumeClaim named 'data-pvc' requesting 1Gi of storage with ReadWriteOnce access mode.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Application Design and Build",
+    "solution": "kubectl create pvc data-pvc --storage-class=standard --access-mode=ReadWriteOnce --storage=1Gi",
+    "explanation": "PVCs request storage resources and can be mounted by Pods for persistent data storage."
+  },
+  {
+    "id": 10,
+    "question": "Create a Pod named 'volume-pod' that mounts the 'data-pvc' PVC to /data directory.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Application Design and Build",
+    "solution": "kubectl run volume-pod --image=nginx:1.19 --overrides='{\"spec\":{\"volumes\":[{\"name\":\"data-volume\",\"persistentVolumeClaim\":{\"claimName\":\"data-pvc\"}}],\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\",\"volumeMounts\":[{\"name\":\"data-volume\",\"mountPath\":\"/data\"}]}]}}'",
+    "explanation": "Pods can mount PVCs as volumes to access persistent storage."
+  },
+  {
+    "id": 11,
+    "question": "Create a Job named 'batch-job' that runs a busybox container with command 'echo Hello World'.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Application Deployment",
+    "solution": "kubectl create job batch-job --image=busybox -- echo Hello World",
+    "explanation": "Jobs create one or more Pods and ensure that a specified number of them successfully terminate."
+  },
+  {
+    "id": 12,
+    "question": "Create a CronJob named 'backup-job' that runs every day at 2 AM using a busybox image with command 'echo Backup completed'.",
+    "type": "practical",
+    "difficulty": "hard",
+    "category": "Application Deployment",
+    "solution": "kubectl create cronjob backup-job --image=busybox --schedule=\"0 2 * * *\" -- echo Backup completed",
+    "explanation": "CronJobs create Jobs on a time-based schedule, similar to cron in Unix systems."
+  },
+  {
+    "id": 13,
+    "question": "Create a Pod named 'multi-container-pod' with two containers: nginx (port 80) and redis (port 6379).",
+    "type": "practical",
+    "difficulty": "hard",
+    "category": "Application Design and Build",
+    "solution": "kubectl run multi-container-pod --image=nginx:1.19 --overrides='{\"spec\":{\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\",\"ports\":[{\"containerPort\":80}]},{\"name\":\"redis\",\"image\":\"redis:6\",\"ports\":[{\"containerPort\":6379}]}]}}'",
+    "explanation": "Multi-container Pods allow related containers to share the same network namespace and storage volumes."
+  },
+  {
+    "id": 14,
+    "question": "Create a Pod named 'init-pod' with an init container that runs 'echo Init complete' before the main nginx container starts.",
+    "type": "practical",
+    "difficulty": "hard",
+    "category": "Application Design and Build",
+    "solution": "kubectl run init-pod --image=nginx:1.19 --overrides='{\"spec\":{\"initContainers\":[{\"name\":\"init\",\"image\":\"busybox\",\"command\":[\"sh\",\"-c\",\"echo Init complete\"]}],\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\"}]}}'",
+    "explanation": "Init containers run before the main containers and are used for setup tasks."
+  },
+  {
+    "id": 15,
+    "question": "Create a Pod named 'resource-pod' with resource limits: CPU 500m, Memory 512Mi and requests: CPU 250m, Memory 256Mi.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Application Design and Build",
+    "solution": "kubectl run resource-pod --image=nginx:1.19 --overrides='{\"spec\":{\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\",\"resources\":{\"limits\":{\"cpu\":\"500m\",\"memory\":\"512Mi\"},\"requests\":{\"cpu\":\"250m\",\"memory\":\"256Mi\"}}}]}}'",
+    "explanation": "Resource limits and requests help Kubernetes schedule Pods and manage cluster resources efficiently."
+  },
+  {
+    "id": 16,
+    "question": "Create a Pod named 'probe-pod' with liveness and readiness probes for the nginx container.",
+    "type": "practical",
+    "difficulty": "hard",
+    "category": "Observability and Maintenance",
+    "solution": "kubectl run probe-pod --image=nginx:1.19 --overrides='{\"spec\":{\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\",\"livenessProbe\":{\"httpGet\":{\"path\":\"/\",\"port\":80},\"initialDelaySeconds\":30,\"periodSeconds\":10},\"readinessProbe\":{\"httpGet\":{\"path\":\"/\",\"port\":80},\"initialDelaySeconds\":5,\"periodSeconds\":5}}]}}'",
+    "explanation": "Probes help Kubernetes determine if a container is alive and ready to serve traffic."
+  },
+  {
+    "id": 17,
+    "question": "Create a NetworkPolicy named 'deny-all' that denies all ingress and egress traffic for pods with label app=web-app.",
+    "type": "practical",
+    "difficulty": "hard",
+    "category": "Environment, Configuration and Security",
+    "solution": "kubectl create networkpolicy deny-all --pod-selector=app=web-app --policy-types=Ingress,Egress",
+    "explanation": "NetworkPolicies control traffic flow between Pods and can be used to implement security policies."
+  },
+  {
+    "id": 18,
+    "question": "Create a Pod named 'security-pod' that runs as non-root user (UID 1000) and has read-only root filesystem.",
+    "type": "practical",
+    "difficulty": "hard",
+    "category": "Environment, Configuration and Security",
+    "solution": "kubectl run security-pod --image=nginx:1.19 --overrides='{\"spec\":{\"securityContext\":{\"runAsNonRoot\":true,\"runAsUser\":1000},\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\",\"securityContext\":{\"readOnlyRootFilesystem\":true}}]}}'",
+    "explanation": "Security contexts help enforce security policies at the Pod and container level."
+  },
+  {
+    "id": 19,
+    "question": "Create a Pod named 'sidecar-pod' with a main nginx container and a sidecar container that logs nginx access logs.",
+    "type": "practical",
+    "difficulty": "hard",
+    "category": "Application Design and Build",
+    "solution": "kubectl run sidecar-pod --image=nginx:1.19 --overrides='{\"spec\":{\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\"},{\"name\":\"sidecar\",\"image\":\"busybox\",\"command\":[\"sh\",\"-c\",\"tail -f /var/log/nginx/access.log\"],\"volumeMounts\":[{\"name\":\"logs\",\"mountPath\":\"/var/log/nginx\"}]}],\"volumes\":[{\"name\":\"logs\",\"emptyDir\":{}}]}}'",
+    "explanation": "Sidecar containers extend the functionality of the main container without modifying it."
+  },
+  {
+    "id": 20,
+    "question": "Create a HorizontalPodAutoscaler named 'web-hpa' that scales the web-app deployment between 1 and 10 replicas based on CPU usage (target 70%).",
+    "type": "practical",
+    "difficulty": "hard",
+    "category": "Application Deployment",
+    "solution": "kubectl autoscale deployment web-app --name=web-hpa --min=1 --max=10 --cpu-percent=70",
+    "explanation": "HPAs automatically scale the number of Pods based on observed CPU utilization or other custom metrics."
+  },
+  {
+    "id": 21,
+    "question": "Create a Pod named 'env-pod' that uses environment variables from a ConfigMap and Secret.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Environment, Configuration and Security",
+    "solution": "kubectl run env-pod --image=nginx:1.19 --overrides='{\"spec\":{\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\",\"env\":[{\"name\":\"DB_URL\",\"valueFrom\":{\"configMapKeyRef\":{\"name\":\"app-config\",\"key\":\"database_url\"}}},{\"name\":\"DB_PASSWORD\",\"valueFrom\":{\"secretKeyRef\":{\"name\":\"db-secret\",\"key\":\"password\"}}}]}]}}'",
+    "explanation": "Pods can consume environment variables from ConfigMaps and Secrets for configuration and sensitive data."
+  },
+  {
+    "id": 22,
+    "question": "Create a Pod named 'volume-mount-pod' that mounts a ConfigMap as a volume at /config directory.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Environment, Configuration and Security",
+    "solution": "kubectl run volume-mount-pod --image=nginx:1.19 --overrides='{\"spec\":{\"volumes\":[{\"name\":\"config-volume\",\"configMap\":{\"name\":\"app-config\"}}],\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\",\"volumeMounts\":[{\"name\":\"config-volume\",\"mountPath\":\"/config\"}]}]}}'",
+    "explanation": "ConfigMaps can be mounted as volumes, making configuration files available to containers."
+  },
+  {
+    "id": 23,
+    "question": "Create a Pod named 'affinity-pod' with node affinity that prefers nodes with label 'disk=ssd'.",
+    "type": "practical",
+    "difficulty": "hard",
+    "category": "Application Deployment",
+    "solution": "kubectl run affinity-pod --image=nginx:1.19 --overrides='{\"spec\":{\"affinity\":{\"nodeAffinity\":{\"preferredDuringSchedulingIgnoredDuringExecution\":[{\"weight\":1,\"preference\":{\"matchExpressions\":[{\"key\":\"disk\",\"operator\":\"In\",\"values\":[\"ssd\"]}]}}]}},\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\"}]}}'",
+    "explanation": "Node affinity allows you to constrain which nodes your Pod can be scheduled on based on node labels."
+  },
+  {
+    "id": 24,
+    "question": "Create a Pod named 'toleration-pod' with tolerations for nodes with taint 'key=value:NoSchedule'.",
+    "type": "practical",
+    "difficulty": "hard",
+    "category": "Application Deployment",
+    "solution": "kubectl run toleration-pod --image=nginx:1.19 --overrides='{\"spec\":{\"tolerations\":[{\"key\":\"key\",\"operator\":\"Equal\",\"value\":\"value\",\"effect\":\"NoSchedule\"}],\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\"}]}}'",
+    "explanation": "Tolerations allow Pods to be scheduled on nodes with matching taints."
+  },
+  {
+    "id": 25,
+    "question": "Create a Pod named 'lifecycle-pod' with preStop and postStart lifecycle hooks.",
+    "type": "practical",
+    "difficulty": "hard",
+    "category": "Application Design and Build",
+    "solution": "kubectl run lifecycle-pod --image=nginx:1.19 --overrides='{\"spec\":{\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\",\"lifecycle\":{\"postStart\":{\"exec\":{\"command\":[\"echo\",\"Container started\"]}},\"preStop\":{\"exec\":{\"command\":[\"echo\",\"Container stopping\"]}}}]}}'",
+    "explanation": "Lifecycle hooks allow you to run commands before or after container events."
+  },
+  {
+    "id": 26,
+    "question": "Create a Pod named 'downward-api-pod' that uses the Downward API to expose Pod metadata as environment variables.",
+    "type": "practical",
+    "difficulty": "hard",
+    "category": "Environment, Configuration and Security",
+    "solution": "kubectl run downward-api-pod --image=nginx:1.19 --overrides='{\"spec\":{\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\",\"env\":[{\"name\":\"POD_NAME\",\"valueFrom\":{\"fieldRef\":{\"fieldPath\":\"metadata.name\"}}},{\"name\":\"POD_NAMESPACE\",\"valueFrom\":{\"fieldRef\":{\"fieldPath\":\"metadata.namespace\"}}}]}]}}'",
+    "explanation": "The Downward API allows containers to consume information about themselves or the cluster."
+  },
+  {
+    "id": 27,
+    "question": "Create a Pod named 'hostpath-pod' that mounts the host's /tmp directory to /host-tmp in the container.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Application Design and Build",
+    "solution": "kubectl run hostpath-pod --image=nginx:1.19 --overrides='{\"spec\":{\"volumes\":[{\"name\":\"host-volume\",\"hostPath\":{\"path\":\"/tmp\"}}],\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\",\"volumeMounts\":[{\"name\":\"host-volume\",\"mountPath\":\"/host-tmp\"}]}]}}'",
+    "explanation": "HostPath volumes mount a file or directory from the host node's filesystem into the Pod."
+  },
+  {
+    "id": 28,
+    "question": "Create a Pod named 'empty-dir-pod' with an emptyDir volume that persists data only for the lifetime of the Pod.",
+    "type": "practical",
+    "difficulty": "easy",
+    "category": "Application Design and Build",
+    "solution": "kubectl run empty-dir-pod --image=nginx:1.19 --overrides='{\"spec\":{\"volumes\":[{\"name\":\"temp-volume\",\"emptyDir\":{}}],\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\",\"volumeMounts\":[{\"name\":\"temp-volume\",\"mountPath\":\"/temp\"}]}]}}'",
+    "explanation": "EmptyDir volumes are created when a Pod is assigned to a node and exist as long as the Pod exists on that node."
+  },
+  {
+    "id": 29,
+    "question": "Create a Pod named 'service-account-pod' that uses a specific ServiceAccount named 'custom-sa'.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Environment, Configuration and Security",
+    "solution": "kubectl run service-account-pod --image=nginx:1.19 --overrides='{\"spec\":{\"serviceAccountName\":\"custom-sa\",\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\"}]}}'",
+    "explanation": "ServiceAccounts provide an identity for processes that run in a Pod."
+  },
+  {
+    "id": 30,
+    "question": "Create a Pod named 'dns-pod' that uses custom DNS settings with DNS servers 8.8.8.8 and 8.8.4.4.",
+    "type": "practical",
+    "difficulty": "hard",
+    "category": "Services and Networking",
+    "solution": "kubectl run dns-pod --image=nginx:1.19 --overrides='{\"spec\":{\"dnsPolicy\":\"None\",\"dnsConfig\":{\"nameservers\":[\"8.8.8.8\",\"8.8.4.4\"]},\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\"}]}}'",
+    "explanation": "Custom DNS settings allow Pods to use specific DNS servers instead of the cluster's default DNS."
+  },
+  {
+    "id": 31,
+    "question": "Create a Pod named 'host-network-pod' that uses the host's network namespace.",
+    "type": "practical",
+    "difficulty": "hard",
+    "category": "Services and Networking",
+    "solution": "kubectl run host-network-pod --image=nginx:1.19 --overrides='{\"spec\":{\"hostNetwork\":true,\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\"}]}}'",
+    "explanation": "HostNetwork allows the Pod to use the host's network namespace, bypassing the Pod's network isolation."
+  },
+  {
+    "id": 32,
+    "question": "Create a Pod named 'host-pid-pod' that uses the host's PID namespace.",
+    "type": "practical",
+    "difficulty": "hard",
+    "category": "Environment, Configuration and Security",
+    "solution": "kubectl run host-pid-pod --image=nginx:1.19 --overrides='{\"spec\":{\"hostPID\":true,\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\"}]}}'",
+    "explanation": "HostPID allows the Pod to see all processes on the host, which can be useful for debugging but has security implications."
+  },
+  {
+    "id": 33,
+    "question": "Create a Pod named 'termination-pod' with a graceful termination period of 60 seconds.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Observability and Maintenance",
+    "solution": "kubectl run termination-pod --image=nginx:1.19 --overrides='{\"spec\":{\"terminationGracePeriodSeconds\":60,\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\"}]}}'",
+    "explanation": "TerminationGracePeriodSeconds specifies the duration in seconds the Pod needs to terminate gracefully."
+  },
+  {
+    "id": 34,
+    "question": "Create a Pod named 'restart-pod' with a restart policy of 'OnFailure'.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Application Deployment",
+    "solution": "kubectl run restart-pod --image=nginx:1.19 --overrides='{\"spec\":{\"restartPolicy\":\"OnFailure\",\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\"}]}}'",
+    "explanation": "RestartPolicy determines how the Pod should be restarted when it exits."
+  },
+  {
+    "id": 35,
+    "question": "Create a Pod named 'image-pull-pod' that uses imagePullPolicy 'Always'.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Application Design and Build",
+    "solution": "kubectl run image-pull-pod --image=nginx:1.19 --overrides='{\"spec\":{\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\",\"imagePullPolicy\":\"Always\"}]}}'",
+    "explanation": "ImagePullPolicy controls when the kubelet attempts to pull the specified image."
+  },
+  {
+    "id": 36,
+    "question": "Create a Pod named 'command-pod' that overrides the default command and args of the nginx container.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Application Design and Build",
+    "solution": "kubectl run command-pod --image=nginx:1.19 --overrides='{\"spec\":{\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\",\"command\":[\"nginx\"],\"args\":[\"-g\",\"daemon off;\"]}]}}'",
+    "explanation": "Command and args allow you to override the default entrypoint and command of a container."
+  },
+  {
+    "id": 37,
+    "question": "Create a Pod named 'working-dir-pod' that sets the working directory to /app in the container.",
+    "type": "practical",
+    "difficulty": "easy",
+    "category": "Application Design and Build",
+    "solution": "kubectl run working-dir-pod --image=nginx:1.19 --overrides='{\"spec\":{\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\",\"workingDir\":\"/app\"}]}}'",
+    "explanation": "WorkingDir sets the working directory for any RUN, CMD, ENTRYPOINT, COPY, and ADD instructions."
+  },
+  {
+    "id": 38,
+    "question": "Create a Pod named 'stdin-pod' that enables interactive mode with stdin and tty allocation.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Application Design and Build",
+    "solution": "kubectl run stdin-pod --image=nginx:1.19 --stdin --tty --overrides='{\"spec\":{\"containers\":[{\"name\":\"nginx\",\"image\":\"nginx:1.19\",\"stdin\":true,\"tty\":true}]}}'",
+    "explanation": "Stdin and TTY allow interactive access to containers for debugging purposes."
+  },
+  {
+    "id": 39,
+    "question": "Create a Pod named 'port-forward-pod' and set up port forwarding from local port 8080 to container port 80.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Services and Networking",
+    "solution": "kubectl run port-forward-pod --image=nginx:1.19 --port=80 && kubectl port-forward port-forward-pod 8080:80",
+    "explanation": "Port forwarding allows you to access a Pod's port directly from your local machine."
+  },
+  {
+    "id": 40,
+    "question": "Create a Pod named 'exec-pod' and execute a command inside the running container.",
+    "type": "practical",
+    "difficulty": "easy",
+    "category": "Observability and Maintenance",
+    "solution": "kubectl run exec-pod --image=nginx:1.19 && kubectl exec exec-pod -- ls /",
+    "explanation": "The exec command allows you to run commands inside a running container for debugging or maintenance."
+  },
+  {
+    "id": 41,
+    "question": "Create a Pod named 'logs-pod' and view the container logs.",
+    "type": "practical",
+    "difficulty": "easy",
+    "category": "Observability and Maintenance",
+    "solution": "kubectl run logs-pod --image=nginx:1.19 && kubectl logs logs-pod",
+    "explanation": "The logs command retrieves logs from a container in a Pod for debugging and monitoring."
+  },
+  {
+    "id": 42,
+    "question": "Create a Pod named 'describe-pod' and get detailed information about it.",
+    "type": "practical",
+    "difficulty": "easy",
+    "category": "Observability and Maintenance",
+    "solution": "kubectl run describe-pod --image=nginx:1.19 && kubectl describe pod describe-pod",
+    "explanation": "The describe command provides detailed information about a specific resource including events and status."
+  },
+  {
+    "id": 43,
+    "question": "Create a Pod named 'edit-pod' and edit its configuration in real-time.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Observability and Maintenance",
+    "solution": "kubectl run edit-pod --image=nginx:1.19 && kubectl edit pod edit-pod",
+    "explanation": "The edit command opens the resource configuration in your default editor for real-time modifications."
+  },
+  {
+    "id": 44,
+    "question": "Create a Pod named 'patch-pod' and patch it to add a label 'environment=production'.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Observability and Maintenance",
+    "solution": "kubectl run patch-pod --image=nginx:1.19 && kubectl patch pod patch-pod -p '{\"metadata\":{\"labels\":{\"environment\":\"production\"}}}'",
+    "explanation": "The patch command allows you to apply partial updates to resources using JSON patch format."
+  },
+  {
+    "id": 45,
+    "question": "Create a Pod named 'label-pod' and add multiple labels to it.",
+    "type": "practical",
+    "difficulty": "easy",
+    "category": "Observability and Maintenance",
+    "solution": "kubectl run label-pod --image=nginx:1.19 && kubectl label pod label-pod app=web tier=frontend version=v1",
+    "explanation": "Labels are key-value pairs that can be attached to objects for organization and selection."
+  },
+  {
+    "id": 46,
+    "question": "Create a Pod named 'annotate-pod' and add annotations to it.",
+    "type": "practical",
+    "difficulty": "easy",
+    "category": "Observability and Maintenance",
+    "solution": "kubectl run annotate-pod --image=nginx:1.19 && kubectl annotate pod annotate-pod description='Production web server' owner='team-a'",
+    "explanation": "Annotations are key-value pairs that can store arbitrary non-identifying metadata."
+  },
+  {
+    "id": 47,
+    "question": "Create a Pod named 'top-pod' and monitor its resource usage.",
+    "type": "practical",
+    "difficulty": "medium",
+    "category": "Observability and Maintenance",
+    "solution": "kubectl run top-pod --image=nginx:1.19 && kubectl top pod top-pod",
+    "explanation": "The top command shows resource usage (CPU and memory) for Pods and nodes."
+  },
+  {
+    "id": 48,
+    "question": "Create a Pod named 'events-pod' and view events related to it.",
+    "type": "practical",
+    "difficulty": "easy",
+    "category": "Observability and Maintenance",
+    "solution": "kubectl run events-pod --image=nginx:1.19 && kubectl get events --field-selector involvedObject.name=events-pod",
+    "explanation": "Events provide information about what happened to a resource, useful for debugging and monitoring."
+  },
+  {
+    "id": 49,
+    "question": "Create a Pod named 'yaml-pod' and export its YAML configuration.",
+    "type": "practical",
+    "difficulty": "easy",
+    "category": "Observability and Maintenance",
+    "solution": "kubectl run yaml-pod --image=nginx:1.19 && kubectl get pod yaml-pod -o yaml",
+    "explanation": "The -o yaml flag outputs the resource configuration in YAML format for inspection or backup."
+  },
+  {
+    "id": 50,
+    "question": "Create a Pod named 'json-pod' and export its JSON configuration.",
+    "type": "practical",
+    "difficulty": "easy",
+    "category": "Observability and Maintenance",
+    "solution": "kubectl run json-pod --image=nginx:1.19 && kubectl get pod json-pod -o json",
+    "explanation": "The -o json flag outputs the resource configuration in JSON format for programmatic access."
+  }
+]
