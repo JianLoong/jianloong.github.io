@@ -111,6 +111,11 @@ const nextPost =
       <span aria-hidden="true" class="max-sm:hidden">|</span>
       <EditPost {hideEditPost} {post} class="max-sm:hidden" />
     </div>
+    {tags.length > 0 && (
+      <ul class="mt-2 mb-4 flex flex-wrap gap-2">
+        {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
+      </ul>
+    )}
     <article
       id="article"
       class="app-prose mx-auto mt-8 max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"
@@ -121,10 +126,6 @@ const nextPost =
     <hr class="my-8 border-dashed" />
 
     <EditPost class="sm:hidden" {hideEditPost} {post} />
-
-    <ul class="mt-4 mb-8 sm:my-8">
-      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
-    </ul>
 
     <BackToTopButton />
 
