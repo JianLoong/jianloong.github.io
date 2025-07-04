@@ -1,0 +1,47 @@
+---
+title: "Traffic Intersection Simulator"
+author: Jian Liew
+pubDatetime: 2025-01-15T00:00:00Z
+slug: traffic-intersection-simulator
+featured: false
+draft: false
+readingTime: 2
+tags:
+  - software-engineering
+  - tutorial
+  - react
+  - astro
+  - simulator
+  - traffic-light
+  - intersection
+description: "An interactive traffic intersection simulator built with React and Astro Islands."
+summary: "Try this interactive traffic intersection simulator built with React and Astro Islands. Simulates two-way traffic lights at a cross intersection."
+---
+
+import TrafficIntersectionSimulator from "@/components/react/TrafficLightSimulator"
+
+# Traffic Intersection Simulator 🚦
+
+This post demonstrates a realistic, interactive traffic intersection simulator using React and Astro Islands. Start the simulation to see how the lights change for each direction at a two-way intersection, and how cars behave in response!
+
+<TrafficIntersectionSimulator client:visible />
+
+## Features & Improvements
+
+- **Accurate car logic:**
+  - Cars stop at the stop line and never enter the intersection on red.
+  - Cars maintain a minimum gap and never overlap.
+  - Only one car per direction is allowed in the intersection at a time.
+  - Cars in the intersection finish crossing even if the light changes.
+  - Cars despawn only after leaving the visible area.
+  - Maximum of 6 cars per direction to prevent overcrowding.
+  - Cars spawn at a realistic rate and queue up closely before the stop line.
+  - North-South and East-West cars have distinct colors for clarity.
+
+## How it works
+
+The simulator models a basic two-way intersection with North-South and East-West traffic lights. Only one direction is green at a time, with yellow and red phases for safe transitions. Cars obey the lights, stop at the correct place, and queue up realistically. The SVG rendering provides a clear, visually appealing view of the intersection and traffic flow.
+
+---
+
+**Try adjusting the simulation, or use this as a base for more advanced traffic or urban planning demos!** 
