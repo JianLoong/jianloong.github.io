@@ -1,47 +1,69 @@
 ---
 title: "Traffic Intersection Simulator"
 author: Jian Liew
-pubDatetime: 2025-01-15T00:00:00Z
+pubDatetime: 2025-07-04T00:00:00Z
 slug: traffic-intersection-simulator
 featured: false
 draft: false
-readingTime: 2
+readingTime: 3
 tags:
-  - software-engineering
-  - tutorial
-  - react
-  - astro
+  - computer-science
   - simulator
-  - traffic-light
-  - intersection
-description: "An interactive traffic intersection simulator built with React and Astro Islands."
-summary: "Try this interactive traffic intersection simulator built with React and Astro Islands. Simulates two-way traffic lights at a cross intersection."
+  - tutorial
+description: "An interactive traffic intersection simulator built with React and Astro Islands. Includes a comparison of two approaches: a classic logic-based simulation and a 2D grid-based simulation."
+summary: "Compare two interactive traffic intersection simulators built with React and Astro Islands: a classic logic-based approach and a 2D grid-based approach."
 ---
 
 import TrafficIntersectionSimulator from "@/components/react/TrafficLightSimulator"
+import TrafficGridSimulator from "@/components/react/TrafficGridSimulator"
 
 # Traffic Intersection Simulator 🚦
 
-This post demonstrates a realistic, interactive traffic intersection simulator using React and Astro Islands. Start the simulation to see how the lights change for each direction at a two-way intersection, and how cars behave in response!
+This post demonstrates and compares two different approaches to simulating a traffic intersection in React:
 
-<TrafficIntersectionSimulator client:visible />
-
-## Features & Improvements
-
-- **Accurate car logic:**
-  - Cars stop at the stop line and never enter the intersection on red.
-  - Cars maintain a minimum gap and never overlap.
-  - Only one car per direction is allowed in the intersection at a time.
-  - Cars in the intersection finish crossing even if the light changes.
-  - Cars despawn only after leaving the visible area.
-  - Maximum of 6 cars per direction to prevent overcrowding.
-  - Cars spawn at a realistic rate and queue up closely before the stop line.
-  - North-South and East-West cars have distinct colors for clarity.
-
-## How it works
-
-The simulator models a basic two-way intersection with North-South and East-West traffic lights. Only one direction is green at a time, with yellow and red phases for safe transitions. Cars obey the lights, stop at the correct place, and queue up realistically. The SVG rendering provides a clear, visually appealing view of the intersection and traffic flow.
+- **Classic logic-based simulation** (continuous positions, explicit car states)
+- **2D grid-based simulation** (discrete cell movement, grid logic)
 
 ---
 
-**Try adjusting the simulation, or use this as a base for more advanced traffic or urban planning demos!** 
+## Classic Logic-Based Simulator
+
+This approach models each car as an object with a continuous position and explicit state (approaching, waiting, crossing, etc.). Cars move smoothly along the road, obey traffic lights, and maintain realistic gaps. The logic is more complex but allows for fine-grained control and smooth animation.
+
+<TrafficIntersectionSimulator client:visible />
+
+---
+
+## 2D Grid-Based Simulator
+
+This approach represents the intersection as a 2D grid. Cars occupy discrete cells and move from cell to cell, with traffic lights controlling entry into the intersection. The logic is simpler and more extensible for grid-based or cellular automata simulations. Animation is handled by interpolating car positions between cells.
+
+<TrafficGridSimulator client:visible />
+
+---
+
+## Comparison
+
+| Feature                | Classic Logic-Based         | 2D Grid-Based              |
+|------------------------|----------------------------|----------------------------|
+| **Car Movement**       | Smooth, continuous         | Discrete, cell-to-cell     |
+| **Car State**          | Explicit (waiting, crossing, etc.) | Implicit (by cell position) |
+| **Visuals**            | Realistic, SVG roads/cars  | Stylized, grid overlay     |
+| **Logic Complexity**   | Higher (more conditions)   | Lower (simple grid rules)  |
+| **Extensibility**      | Good for realism           | Good for grid/CA research  |
+| **Animation**          | CSS/SVG, per-pixel         | Interpolated per cell      |
+| **Best For**           | Realistic traffic, demos   | Grid/cellular automata, teaching |
+
+### When to Use Each
+- Use the **classic logic-based** approach for realistic traffic, fine control, or when you want to model real-world rules and behaviors.
+- Use the **2D grid-based** approach for grid/cellular automata research, teaching, or when you want to easily extend to more complex intersections or rules.
+
+---
+
+**Try both simulators above and see which approach fits your needs!**
+
+---
+
+## Author's Note
+
+I have to admit, I really struggled to "vibe code" the first (classic logic-based) approach. Getting all the car states, edge cases, and smooth movement to work together was a lot trickier than I expected. It felt like every time I fixed one bug, another would pop up! In contrast, the grid-based approach just clicked for me—breaking the world into cells made the logic so much more manageable and fun to experiment with. If you ever feel stuck, try changing your model or abstraction—it might just unlock your creativity! 

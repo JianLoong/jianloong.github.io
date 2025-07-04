@@ -21,10 +21,12 @@ const INTERSECTION = 120;
 const MAX_CARS_PER_DIRECTION = 6;
 const MIN_GAP = 12;
 
+type CarState = 'approaching' | 'waiting' | 'crossing' | 'queued' | 'exiting';
 type Car = {
   id: number;
   dir: 'ns' | 'ew';
   pos: number;
+  state: CarState;
 };
 
 // --- Utility Functions ---
@@ -129,6 +131,17 @@ function getClampedStopLinePos(stopLine: number): number {
   return stopLine - CAR_LENGTH;
 }
 
+function getCarColor(state: CarState, dir: 'ns' | 'ew'): string {
+  switch (state) {
+    case 'waiting': return '#888'; // gray
+    case 'queued': return '#ffd600'; // yellow
+    case 'crossing': return '#43a047'; // green
+    case 'exiting': return dir === 'ns' ? '#8e24aa' : '#fb8c00'; // original color
+    case 'approaching':
+    default: return dir === 'ns' ? '#8e24aa' : '#fb8c00'; // original color
+  }
+}
+
 function moveCars(carsInDir: Car[], state: number): Car[] {
   return carsInDir.map((car: Car, idx: number) => {
     // Predict next position
@@ -136,15 +149,37 @@ function moveCars(carsInDir: Car[], state: number): Car[] {
     const intersectionStart = 0;
     const stopLine = intersectionStart - STOP_LINE_OFFSET;
     const carFront = car.pos + CAR_LENGTH;
-    // Clamp at stop line if about to cross on red/yellow
-    if (shouldClampAtStopLine(car, carFront, stopLine, intersectionStart, state)) {
-      return { ...car, pos: getClampedStopLinePos(stopLine) };
+    let light = car.dir === 'ns' ? lightStates[state].ns : lightStates[state].ew;
+    let newState: CarState = car.state;
+
+    // Determine car state (but do not use for movement)
+    if (carFront < stopLine) {
+      newState = 'approaching';
+    } else if (
+      carFront >= stopLine &&
+      carFront < intersectionStart &&
+      !(light === 'green' || (light === 'yellow' && carFront - intersectionStart < CAR_LENGTH + 4))
+    ) {
+      newState = 'waiting';
+    } else if (carFront >= intersectionStart && carFront < INTERSECTION_SIZE) {
+      newState = 'crossing';
+    } else if (carFront >= INTERSECTION_SIZE) {
+      newState = 'exiting';
     }
-    // Normal movement
+    if (idx > 0) {
+      const carAhead = carsInDir[idx - 1];
+      if (carAhead.pos - car.pos < CAR_LENGTH + MIN_GAP && newState !== 'crossing') {
+        newState = 'queued';
+      }
+    }
+
+    if (shouldClampAtStopLine(car, carFront, stopLine, intersectionStart, state)) {
+      return { ...car, pos: getClampedStopLinePos(stopLine), state: 'waiting' };
+    }
     if (canMove(car, idx, carsInDir, state)) {
-      return { ...car, pos: car.pos + CAR_SPEED };
+      return { ...car, pos: car.pos + CAR_SPEED, state: newState };
     } else {
-      return car;
+      return { ...car, state: newState };
     }
   });
 }
@@ -279,14 +314,14 @@ export default function TrafficIntersectionSimulator() {
           (nsCars.length === 0 || nsCars[0].pos > CAR_LENGTH + MIN_GAP) &&
           nsCars.length < MAX_CARS_PER_DIRECTION
         ) {
-          prevCars.push({ id: Date.now() + Math.random(), dir: 'ns', pos: -ROAD_LENGTH / 2 - INTERSECTION_SIZE / 2 });
+          prevCars.push({ id: Date.now() + Math.random(), dir: 'ns', pos: -ROAD_LENGTH / 2 - INTERSECTION_SIZE / 2, state: 'approaching' });
         }
         const ewCars = prevCars.filter((c) => c.dir === 'ew').sort((a, b) => a.pos - b.pos);
         if (
           (ewCars.length === 0 || ewCars[0].pos > CAR_LENGTH + MIN_GAP) &&
           ewCars.length < MAX_CARS_PER_DIRECTION
         ) {
-          prevCars.push({ id: Date.now() + Math.random(), dir: 'ew', pos: -ROAD_LENGTH / 2 - INTERSECTION_SIZE / 2 });
+          prevCars.push({ id: Date.now() + Math.random(), dir: 'ew', pos: -ROAD_LENGTH / 2 - INTERSECTION_SIZE / 2, state: 'approaching' });
         }
         return [...prevCars];
       });
