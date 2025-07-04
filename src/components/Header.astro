@@ -80,6 +80,11 @@ const isActive = (path: string) => {
             </a>
           </li>
           <li class="col-span-2">
+            <a href="/api" class:list={{ "active-nav": isActive("/api") }}>
+              API
+            </a>
+          </li>
+          <li class="col-span-2">
             <a href="/tags" class:list={{ "active-nav": isActive("/tags") }}>
               Tags
             </a>

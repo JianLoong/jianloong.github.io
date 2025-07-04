@@ -1,0 +1,23 @@
+---
+import Main from '../layouts/Main.astro';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ApiHealthCheck from '../components/ApiHealthCheck.astro';
+
+const apiEndpoints = [
+  { name: 'Malaysia API', url: 'https://jian.sh/malaysia-api/' },
+  { name: 'AITA API', url: 'https://api.jian.sh/aita/api/v2/ping' },
+  { name: 'Sentiment Analysis Site', url: 'https://jian.sh/sentimentanalysis/' },
+];
+---
+
+<Layout title="API Health Check">
+  <Header />
+  <Main pageTitle="API Health Check" pageDesc="Check the health status of various APIs.">
+    <section class="w-full max-w-app mx-auto px-4 py-8">
+      <ApiHealthCheck apiEndpoints={apiEndpoints} />
+    </section>
+  </Main>
+  <Footer />
+</Layout>
