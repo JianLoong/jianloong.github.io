@@ -5,12 +5,33 @@ export interface Props {
   tag: string;
   tagName: string;
   size?: "sm" | "lg";
+  as?: "li" | "span" | "none";
 }
 
-const { tag, tagName, size = "sm" } = Astro.props;
+const { tag, tagName, size = "sm", as = "span" } = Astro.props;
 ---
 
-<li class="inline-block">
+{as === "li" ? (
+  <li class="inline-block">
+    <a
+      href={`/tags/${tag}/`}
+      class="inline-block rounded bg-gray-200 dark:bg-gray-700 px-2 py-1 text-xs font-semibold text-gray-700 dark:text-gray-200 flex items-center gap-1"
+    >
+      <IconHash width={12} height={12} class="inline align-middle opacity-70" />
+      {tagName}
+    </a>
+  </li>
+) : as === "span" ? (
+  <span class="inline-block">
+    <a
+      href={`/tags/${tag}/`}
+      class="inline-block rounded bg-gray-200 dark:bg-gray-700 px-2 py-1 text-xs font-semibold text-gray-700 dark:text-gray-200 flex items-center gap-1"
+    >
+      <IconHash width={12} height={12} class="inline align-middle opacity-70" />
+      {tagName}
+    </a>
+  </span>
+) : (
   <a
     href={`/tags/${tag}/`}
     class="inline-block rounded bg-gray-200 dark:bg-gray-700 px-2 py-1 text-xs font-semibold text-gray-700 dark:text-gray-200 flex items-center gap-1"
@@ -18,4 +39,4 @@ const { tag, tagName, size = "sm" } = Astro.props;
     <IconHash width={12} height={12} class="inline align-middle opacity-70" />
     {tagName}
   </a>
-</li>
+)}

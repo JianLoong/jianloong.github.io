@@ -113,7 +113,7 @@ const nextPost =
     </div>
     {tags.length > 0 && (
       <ul class="mt-2 mb-4 flex flex-wrap gap-2">
-        {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
+        {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} as="li" />)}
       </ul>
     )}
     <article

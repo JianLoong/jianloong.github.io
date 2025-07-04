@@ -5,6 +5,7 @@ import { getPath } from "@/utils/getPath";
 import Datetime from "./Datetime.astro";
 import ReadingTime from "./ReadingTime.astro";
 import IconHash from "@/assets/icons/IconHash.svg";
+import Tag from "./Tag.astro";
 
 export interface Props extends CollectionEntry<"blog"> {
   variant?: "h2" | "h3";
@@ -47,10 +48,7 @@ const headerProps = {
   {Array.isArray(data.tags) && data.tags.length > 0 && (
     <div class="mt-2 flex flex-wrap gap-2">
       {data.tags.map(tag => (
-        <span class="inline-block rounded bg-gray-200 dark:bg-gray-700 px-2 py-1 text-xs font-semibold text-gray-700 dark:text-gray-200 flex items-center gap-1">
-          <IconHash width={12} height={12} class="inline align-middle opacity-70" />
-          {tag}
-        </span>
+        <Tag tag={slugifyStr(tag)} tagName={tag} as="span" />
       ))}
     </div>
   )}
