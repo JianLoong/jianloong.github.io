@@ -1,0 +1,76 @@
+---
+title: "The Enterprise Silo"
+author: Jian Liew
+pubDatetime: 2025-07-15T00:00:00+10:00
+slug: the-enterprise-silo
+featured: false
+draft: false
+readingTime: 7
+tags:
+  - software-engineering
+description: "A practical, honest look at the realities of working in enterprise environments: silos, slow processes, searching for information, and how to survive and thrive in the black box."
+---
+
+import MermaidDiagram from '../../../components/react/MermaidDiagram';
+
+<img src="/assets/images/modern-office.jpg" alt="Modern enterprise office workspace with desks and chairs" style="height: 300px; width: auto; display: block; margin: 0 auto;" />
+
+Working in a large enterprise can be overwhelming. Beyond technical skills, there are organizational concepts and practices that are crucial for success but rarely taught in school or training. Enterprises are often slow-moving, with more processes and bureaucracy than smaller organizations—so patience and persistence are important. **It can also feel like working in a black box, where you don’t always see the bigger picture or understand how all the pieces fit together.** Here are some key things everyone should know about enterprise environments:
+
+### 🔐 Understanding LDAP and RBAC
+
+<MermaidDiagram client:load
+  chart={`flowchart TD\n  U[👤 User] -->|Login| L[(LDAP Directory)]\n  L -->|Role Lookup| R[(RBAC System)]\n  R -->|Access| S[🔒 Secured Resource]`}
+  title="LDAP and RBAC"
+  align="center"
+/>
+
+**LDAP** is a system for managing user accounts and access across an organization. **RBAC** means you get permissions based on your job role, not as an individual. **In reality, there are often too many systems, and not all of them are synced to LDAP or RBAC—so you might find yourself with inconsistent access or having to request permissions in multiple places.**
+
+*Why it matters:* You’ll often need to request access or understand why you can or can’t see certain resources. **In enterprises, getting access can be surprisingly slow—expect to wait, follow up, and be persistent.** Knowing these basics helps you get what you need faster.
+
+### 💾 Operational vs. Data Warehousing
+
+<MermaidDiagram client:load
+  chart={`flowchart LR\n  subgraph \'Operational Systems\'\n    App1[App 1]\n    App2[App 2]\n    ODB[(Operational DB)]\n    App1 --> ODB\n    App2 --> ODB\n  end\n  ODB -- ETL --> DW[(Data Warehouse)]\n  DW --> Report[📊 Reports & Analytics]`}
+  title="Operational vs Data Warehousing"
+  align="center"
+/>
+
+**Operational databases** are used for day-to-day business transactions—think sales, inventory, or customer records. They’re optimized for fast reads and writes and support the core business processes in real time. **They are not designed for complex analytics or large-scale reporting—many queries simply aren’t possible or allowed on these systems.**
+
+**Data warehouses** are designed for analytics and reporting. They store historical data, often aggregated from multiple operational systems, and are optimized for complex queries and data analysis. Data is typically loaded into warehouses through ETL (Extract, Transform, Load) processes.
+
+*Why it matters:* Don’t run heavy reports on production (operational) databases! **In fact, many types of queries and analytics simply can’t be done on operational systems—they’re either blocked, too slow, or would disrupt business operations.** Use the data warehouse for analytics to avoid impacting business operations. **But be aware: getting access to the right data, waiting for ETL jobs, or getting reports approved can take much longer than you expect. Plan for delays and be patient.**
+
+### 🏢 How Teams Are Siloed
+
+<MermaidDiagram client:load
+  chart={`flowchart LR\n  subgraph DevTeam["Dev Team"]\n    D1[Dev 1]\n    D2[Dev 2]\n  end\n  subgraph QATeam["QA Team"]\n    Q1[QA 1]\n    Q2[QA 2]\n  end\n  subgraph OpsTeam["Ops Team"]\n    O1[Ops 1]\n    O2[Ops 2]\n  end\n  D1 -.-> Q1\n  Q2 -.-> O1\n  classDef dev fill:#1e90ff,color:#fff,stroke:#222,stroke-width:2px;\n  classDef qa fill:#f39c12,color:#fff,stroke:#222,stroke-width:2px;\n  classDef ops fill:#27ae60,color:#fff,stroke:#222,stroke-width:2px;\n  class D1,D2 dev;\n  class Q1,Q2 qa;\n  class O1,O2 ops;`}
+  title="Team Silos"
+  align="center"
+/>
+
+In large organizations, teams are often organized by function—development, QA, operations, security, etc. These silos can lead to communication barriers and different priorities or processes between teams. Sometimes, even tools and documentation are isolated within silos.
+
+*Why it matters:* You’ll need to learn how to navigate organizational boundaries, find the right contacts, and understand different team priorities. **Getting answers, approvals, or help across silos can be slow and frustrating—expect to wait, and don’t be afraid to politely chase things up.** Building relationships across silos is key to getting things done.
+
+### 🔍 Searching for Information and Getting Things Done
+
+<MermaidDiagram client:load
+  chart={`flowchart TD\n  U[👤 You] --> S[🔍 Search Docs]\n  S -->|Can't find| A[🙋 Ask Colleague]\n  A --> T[📨 Ticket/Request]\n  T --> D[✅ Done!]\n  D -- Repeat --> S`}
+  title="Getting Things Done"
+  align="center"
+/>
+
+**Finding information** can be a challenge. Documentation may be scattered across internal wikis, SharePoint, Confluence, or ticketing systems—and it’s not always up to date. **Confluence in particular can be a maze of outdated, duplicated, or poorly organized pages, making it hard to find what you need. There’s even a saying: “Confluence is where things go to die.”** Before asking for help, try searching these resources, but don’t hesitate to reach out if you’re stuck.
+
+**Getting things done** in an enterprise often involves following processes—submitting tickets, waiting for approvals, and sometimes dealing with bureaucracy. **Things can move at a glacial pace, so patience and persistence aren’t just helpful—they’re essential for survival.** Learn how to write clear, effective requests and follow up professionally. Building a network of helpful contacts will make your life much easier.
+
+*Why it matters:* Your ability to find answers and navigate processes will directly impact your productivity and success.
+
+---
+
+**Conclusion**
+
+Enterprise environments can be challenging—things move slowly, information is scattered, and it’s easy to feel like you’re working in a black box surrounded by silos. But with patience, persistence, and a willingness to ask questions and build relationships, you can navigate the bureaucracy and get things done. Remember: everyone else is dealing with the same challenges, and your ability to adapt, communicate, and keep moving forward is what will set you apart. Good luck thriving in the enterprise silo! 
