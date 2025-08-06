@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "./typography.css";
-@import url('//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack-subset.css');
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
@@ -42,21 +41,25 @@ html[data-theme="dark"] {
     scrollbar-width: auto;
     scrollbar-color: var(--color-muted) transparent;
   }
+
   html {
     @apply overflow-y-scroll scroll-smooth;
   }
+
   body {
-    @apply flex min-h-svh flex-col bg-background text-foreground selection:bg-accent/75 selection:text-background;
-    font-family: 'Hack', ui-monospace, monospace;
+    @apply flex min-h-svh flex-col bg-background font-mono text-foreground selection:bg-accent/75 selection:text-background;
   }
+
   a,
   button {
     @apply outline-offset-1 outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
   }
+
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
+
   section,
   footer {
     @apply mx-auto max-w-app px-4;
@@ -324,19 +327,20 @@ html[data-theme="dark"] {
 /* Responsive design for islands */
 @media (max-width: 768px) {
   .vader-sentiment-island .input-textarea {
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px;
+    /* Prevents zoom on iOS */
   }
-  
+
   .vader-sentiment-island .analyze-button,
   .interactive-demo-island .demo-button {
     width: 100%;
     padding: 15px 24px;
   }
-  
+
   .vader-sentiment-island .result-table {
     font-size: 12px;
   }
-  
+
   .vader-sentiment-island .result-table th,
   .vader-sentiment-island .result-table td {
     padding: 8px 4px;
