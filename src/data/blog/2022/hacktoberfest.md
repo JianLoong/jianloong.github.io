@@ -93,7 +93,7 @@ This project has been more than just a Hacktoberfest contribution. It's become a
 
 ## Try It Out
 
-You can experience the word cloud generator yourself at [jian.sh/word-cloud-generator](https://jian.sh/word-cloud-generator/).
+You can experience the word cloud generator yourself at [pangrammer.dev/word-cloud-generator](https://pangrammer.dev/word-cloud-generator/).
 
 ## Looking Forward
 

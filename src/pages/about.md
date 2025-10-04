@@ -34,7 +34,7 @@ This blog serves as a platform for me to share my experiences with:
 ## Featured Projects
 
 Some of my recent work includes:
-- **Reddit AITA Visualisation**: [jian.sh/aita](https://jian.sh/aita)
+- **Reddit AITA Visualisation**: [pangrammer.dev/aita](https://pangrammer.dev/aita)
 - **Hacker News Word Cloud**: Interactive visualization using D3.js and the Hacker News API
 
 
@@ -42,7 +42,7 @@ Some of my recent work includes:
 
 I'm always interested in connecting with fellow developers and technology enthusiasts. Feel free to reach out if you'd like to collaborate on projects, discuss technology trends, or share insights about software development.
 
-- **Website**: [jian.sh](https://jian.sh/)
+- **Website**: [pangrammer.dev](https://pangrammer.dev/)
 - **GitHub**: [github.com/jianloong](https://github.com/jianloong)
 - **LinkedIn**: [linkedin.com/in/jianloong-liew](https://linkedin.com/in/jianloong-liew)
 - **Email**: [jianloongliew@gmail.com](mailto:jianloongliew@gmail.com)

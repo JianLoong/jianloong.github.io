@@ -20,7 +20,7 @@ This project creates an interactive data visualization of Reddit's "Am I The Ass
 
 ## Live Demo
 
-Visit the live visualization at: [jian.sh/aita](https://jian.sh/aita)
+Visit the live visualization at: [pangrammer.dev/aita](https://pangrammer.dev/aita)
 
 ## Features
 

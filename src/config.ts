@@ -1,7 +1,7 @@
 export const SITE = {
-  website: "https://jian.sh/", // Your actual domain
+  website: "https://pangrammer.dev/", // Your actual domain
   author: "Jian Loong Liew",
-  profile: "https://jian.sh/",
+  profile: "https://pangrammer.dev/",
   desc: "Personal blog of Jian Loong Liew - Software Engineer and Data Visualization enthusiast.",
   title: "Jian Liew",
   ogImage: "astropaper-og.jpg",

@@ -15,7 +15,7 @@ description: "A real-time data visualization project analyzing community judgmen
 
 ## Introduction
 
-A new and improved version of this can be found at [here](https://jian.sh/aita)
+A new and improved version of this can be found at [here](https://pangrammer.dev/aita)
 
 This project explores the fascinating world of community-driven moral judgments through data visualization. By analyzing posts from the popular r/AmItheAsshole subreddit, we can gain insights into how online communities collectively evaluate interpersonal conflicts and ethical dilemmas.
 
