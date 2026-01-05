@@ -5,37 +5,11 @@ title: "About"
 
 # Jian Loong Liew
 
-Hello! I'm Jian Loong Liew.
+Hello! I'm Jian.
 
 ## About Me
 
 I'm based in Melbourne, Australia, and currently work as a Site Reliability Engineer at ANZ, where I focus on automation and GCP.
-
-
-## Skills & Technologies
-
-- **Frontend Development**: JavaScript, TypeScript, React, HTML5, CSS3
-- **Backend Development**: Node.js, Python, Java, .NET, RESTful APIs, GraphQL
-- **Data Visualization**: D3.js, Chart.js
-- **Databases**: SQL Server, PostgreSQL, MongoDB, Redis
-- **Cloud & DevOps**: Docker, Kubernetes, CI/CD
-- **Tools & Platforms**: Git, VS Code, Jira, Confluence
-- **Methodologies**: Agile, Scrum, Test-Driven Development
-
-## Blog Focus
-
-This blog serves as a platform for me to share my experiences with:
-- Software engineering best practices and patterns
-- Data visualization projects and techniques
-- Web development tutorials and insights
-- Technical explorations and experiments
-- Industry observations and learnings
-
-## Featured Projects
-
-Some of my recent work includes:
-- **Reddit AITA Visualisation**: [pangrammer.dev/aita](https://pangrammer.dev/aita)
-- **Hacker News Word Cloud**: Interactive visualization using D3.js and the Hacker News API
 
 
 ## Get in Touch
