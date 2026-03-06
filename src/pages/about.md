@@ -3,7 +3,6 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-# Jian Loong Liew
 
 Hello! I'm Jian.
 
@@ -24,4 +23,3 @@ I'm always interested in connecting with fellow developers and technology enthus
 ---
 
 *This blog is built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/), featuring a clean, minimal design that focuses on content and readability.*
-
