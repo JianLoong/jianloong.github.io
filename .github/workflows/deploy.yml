@@ -38,7 +38,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 18
+          node-version: 22
       
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -59,7 +59,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
       
       - name: Build the project
         run: pnpm run build:with-search
