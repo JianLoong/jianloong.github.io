@@ -2,17 +2,17 @@
 name: Jian
 description: An atlas of reliability, data, and small tools.
 colors:
-  plate: "#e9e7de"
-  plate-raised: "#f4f2ea"
+  plate: "#e2e5e8"
+  plate-raised: "#eef1f3"
   ink: "#14161f"
   ink-soft: "#3a3d4a"
-  ink-muted: "#62667a"
-  hairline: "#c6c5bb"
-  grid: "#d8d6cb"
+  ink-muted: "#5c6070"
+  hairline: "#c3c7cb"
+  grid: "#d4d8db"
   star-hot: "#8a4f11"
   star-cool: "#2f6a80"
   star-faint: "#6b4a86"
-  mark: "#dcdad0"
+  mark: "#d8dbdf"
   syntax-comment: "#6b6f80"
   syntax-keyword: "#8a4f11"
   syntax-string: "#2f6a45"
@@ -140,7 +140,9 @@ Two grounds, because the world has two states: the sky it plots at night, and th
 - **Sky Hairline** (`#232a42`) / **Sky Grid** (`#1b2138`): every rule, and the coordinate plate itself.
 
 ### The Plate (light, the printed state)
-- **Plate** (`#e9e7de`), **Plate Raised** (`#f4f2ea`), **Ink** (`#14161f`), **Soft Ink** (`#3a3d4a`), **Muted Ink** (`#62667a`), **Hairline** (`#c6c5bb`), **Grid** (`#d8d6cb`).
+- **Plate** (`#e2e5e8`), **Plate Raised** (`#eef1f3`), **Ink** (`#14161f`), **Soft Ink** (`#3a3d4a`), **Muted Ink** (`#5c6070`), **Hairline** (`#c3c7cb`), **Grid** (`#d4d8db`).
+
+The plate is the sky inverted, not a sheet of paper: it keeps the sky's cool cast at high lightness. An earlier revision made it a warm bone (`#e9e7de`), which read as cream paper and put the light theme straight back into the pairing this world exists to refuse — warm ground plus serif. The reference it is printing on is a cool chart, not a book.
 
 ### The Magnitude Scale
 Three tints, and the only colour the system has. They are a scale, not a palette: the same three run hot → cool → faint in both grounds.
@@ -149,7 +151,7 @@ Three tints, and the only colour the system has. They are a scale, not a palette
 - **Star Faint** (`#b892c9` / `#6b4a86`): the faintest, for the shortest or least weighty thing in view.
 
 ### Syntax
-Six tokens colour fenced code, mapped per theme so a block stays legible on whatever ground it sits. In light mode they resolve against **Mark** (`#dcdad0`); every pair clears 4.5:1 there, which is why the string green is `#2f6a45` and the comment grey `#6b6f80`.
+Six tokens colour fenced code, mapped per theme so a block stays legible on whatever ground it sits. In light mode they resolve against **Mark** (`#d8dbdf`); every pair clears 4.5:1 there, which is why the string green is `#2f6a45` and the comment grey `#6b6f80`.
 
 ## Typography
 

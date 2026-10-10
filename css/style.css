@@ -6,18 +6,18 @@
    signal colour over a neutral ground. */
 :root {
   color-scheme: light;
-  --bg: #e9e7de;
-  --bg-elevated: #f4f2ea;
+  --bg: #e2e5e8;
+  --bg-elevated: #eef1f3;
   --ink: #14161f;
   --ink-soft: #3a3d4a;
-  --muted: #62667a;
-  --rule: #c6c5bb;
-  --grid: #d8d6cb;
+  --muted: #5c6070;
+  --rule: #c3c7cb;
+  --grid: #d4d8db;
   --accent: #8a4f11;
   --accent-hover: #6d3d0c;
   --star-cool: #2f6a80;
   --star-faint: #6b4a86;
-  --mark: #dcdad0;
+  --mark: #d8dbdf;
   --serif-display: "Spectral", Georgia, "Times New Roman", serif;
   --serif: "Spectral", Georgia, "Times New Roman", serif;
   --mono: "Azeret Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -450,14 +450,14 @@ a:hover {
 }
 
 .article code {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--mono);
   font-size: 0.88em;
   background: var(--mark);
   padding: 0.08em 0.32em;
 }
 
 .article pre {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--mono);
   font-size: 0.9rem;
   line-height: 1.6;
   background: var(--mark);
@@ -703,7 +703,7 @@ body {
   gap: 0.35rem 1.1rem;
   margin: 0 0 1.5rem;
   font-family: var(--mono);
-  font-size: 0.78rem;
+  font-size: 0.86rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
@@ -715,8 +715,11 @@ body {
 }
 
 /* The magnitude mark: a plotted dot whose size is the entry's real heft, read
-   straight from the content (reading minutes). Tint is the magnitude class. */
-.post-meta::before {
+   straight from the content. Tint is the magnitude class. Sits at the head of
+   a catalogue entry's annotation column, and at the head of an article's own
+   meta line, so a piece you are reading is plotted like everything else. */
+.post-meta::before,
+.article-meta::before {
   content: "";
   display: inline-block;
   vertical-align: 0.05em;

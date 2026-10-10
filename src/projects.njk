@@ -9,9 +9,15 @@ permalink: /projects/
   <p class="lede">Small, self-contained tools I maintain. Most of them exist because I wanted the thing to exist.</p>
 </section>
 
+<p class="atlas-legend">
+  <span><b>{{ projects | length }}</b> objects</span>
+  <span>magnitude = stars</span>
+</p>
+
 <section class="project-grid">
   {% for project in projects %}
-  <a class="project" href="{{ project.url }}">
+  {% set stars = project.meta.split('★')[0] | int %}
+  <a class="project" href="{{ project.url }}" style="--mag: {{ stars }}; --mag-tint: {% if stars >= 30 %}var(--accent){% elif stars >= 10 %}var(--star-cool){% else %}var(--star-faint){% endif %}">
     <h2>{{ project.title }}</h2>
     <p>{{ project.blurb }}</p>
     <span class="post-meta">{{ project.meta }}</span>

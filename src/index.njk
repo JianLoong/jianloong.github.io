@@ -4,11 +4,6 @@ title: Jian
 permalink: /
 ---
 <section class="hero">
-  <p class="atlas-legend">
-    <span><b>{{ collections.posts | length }}</b> entries</span>
-    <span><b>{{ projects | length }}</b> objects</span>
-    <span>magnitude = reading time</span>
-  </p>
   <h1>Notes on reliability, data, and making things that last.</h1>
   <p class="lede">I am Jian, a Site Reliability Engineer based in Melbourne. My work at ANZ centres on automation and Google Cloud. This site is where I write about reliability, engineering practice, and the open-source software I maintain.</p>
   <div class="hero-links">
@@ -22,6 +17,10 @@ permalink: /
   <h2>Latest writing</h2>
   <a href="/writing/">All posts</a>
 </div>
+<p class="atlas-legend">
+  <span><b>{{ collections.posts | length }}</b> entries</span>
+  <span>magnitude = reading time</span>
+</p>
 
 <section class="post-list">
   {% for post in collections.posts | limit(3) %}
@@ -39,10 +38,15 @@ permalink: /
   <h2>Selected work</h2>
   <a href="/projects/">All projects</a>
 </div>
+<p class="atlas-legend">
+  <span><b>{{ projects | length }}</b> objects</span>
+  <span>magnitude = stars</span>
+</p>
 
 <section class="project-grid">
   {% for project in projects | limit(2) %}
-  <a class="project" href="{{ project.url }}">
+  {% set stars = project.meta.split('★')[0] | int %}
+  <a class="project" href="{{ project.url }}" style="--mag: {{ stars }}; --mag-tint: {% if stars >= 30 %}var(--accent){% elif stars >= 10 %}var(--star-cool){% else %}var(--star-faint){% endif %}">
     <h3>{{ project.title }}</h3>
     <p>{{ project.blurb }}</p>
     <span class="post-meta">{{ project.meta }}</span>
