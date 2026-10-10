@@ -1,79 +1,81 @@
 /*! giscus theme — dark.
  * GitHub Primer variable names and MIT-licensed structure from
  * https://github.com/primer/primitives (see LICENSE), recoloured to this
- * site's dark palette (see the [data-theme="dark"] block in css/style.css).
+ * site's dark palette — the cool field-grey ground and warmed oxblood accent
+ * defined in css/style.css. giscus is a cross-origin iframe, so it cannot
+ * inherit the page's custom properties; these values are a deliberate copy.
  */
 main {
-  --color-prettylights-syntax-comment: #9c8f7e;
+  --color-prettylights-syntax-comment: #949b90;
   --color-prettylights-syntax-constant: #e0a06a;
   --color-prettylights-syntax-entity: #b3b3e6;
-  --color-prettylights-syntax-storage-modifier-import: #d5cdc1;
+  --color-prettylights-syntax-storage-modifier-import: #cbd0c8;
   --color-prettylights-syntax-entity-tag: #9ec48a;
   --color-prettylights-syntax-keyword: #e39a80;
   --color-prettylights-syntax-string: #9ec48a;
   --color-prettylights-syntax-variable: #e0a06a;
   --color-prettylights-syntax-brackethighlighter-unmatched: #e08a7a;
-  --color-prettylights-syntax-invalid-illegal-text: #efe8dc;
+  --color-prettylights-syntax-invalid-illegal-text: #e6eae3;
   --color-prettylights-syntax-invalid-illegal-bg: #7a2b1d;
-  --color-prettylights-syntax-carriage-return-text: #efe8dc;
+  --color-prettylights-syntax-carriage-return-text: #e6eae3;
   --color-prettylights-syntax-carriage-return-bg: #a33a2a;
   --color-prettylights-syntax-string-regexp: #9ec48a;
-  --color-prettylights-syntax-markup-list: #c9bda9;
+  --color-prettylights-syntax-markup-list: #b0b7ac;
   --color-prettylights-syntax-markup-heading: #d08064;
-  --color-prettylights-syntax-markup-italic: #efe8dc;
-  --color-prettylights-syntax-markup-bold: #efe8dc;
+  --color-prettylights-syntax-markup-italic: #e6eae3;
+  --color-prettylights-syntax-markup-bold: #e6eae3;
   --color-prettylights-syntax-markup-deleted-text: #f0b8ab;
   --color-prettylights-syntax-markup-deleted-bg: #3a1c16;
   --color-prettylights-syntax-markup-inserted-text: #b7d6a4;
   --color-prettylights-syntax-markup-inserted-bg: #1d2a1a;
   --color-prettylights-syntax-markup-changed-text: #edc59a;
   --color-prettylights-syntax-markup-changed-bg: #3a2b16;
-  --color-prettylights-syntax-markup-ignored-text: #161311;
+  --color-prettylights-syntax-markup-ignored-text: #131614;
   --color-prettylights-syntax-markup-ignored-bg: #d08064;
   --color-prettylights-syntax-meta-diff-range: #b3b3e6;
-  --color-prettylights-syntax-brackethighlighter-angle: #a39788;
-  --color-prettylights-syntax-sublimelinter-gutter-mark: #6f675d;
+  --color-prettylights-syntax-brackethighlighter-angle: #969d93;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #666c63;
   --color-prettylights-syntax-constant-other-reference-link: #9ec48a;
-  --color-btn-text: #efe8dc;
-  --color-btn-bg: #1e1a17;
-  --color-btn-border: #efe8dc1a;
+  --color-btn-text: #e6eae3;
+  --color-btn-bg: #1a1e1b;
+  --color-btn-border: #e6eae31a;
   --color-btn-shadow: 0 0 #0000;
   --color-btn-inset-shadow: 0 0 #0000;
-  --color-btn-hover-bg: #2a251f;
-  --color-btn-hover-border: #4a4239;
-  --color-btn-active-bg: #332d26;
-  --color-btn-active-border: #5c5248;
-  --color-btn-selected-bg: #241f1b;
-  --color-btn-primary-text: #161311;
+  --color-btn-hover-bg: #222723;
+  --color-btn-hover-border: #464d48;
+  --color-btn-active-bg: #2a302b;
+  --color-btn-active-border: #58605a;
+  --color-btn-selected-bg: #1e221f;
+  --color-btn-primary-text: #131614;
   --color-btn-primary-bg: #d08064;
-  --color-btn-primary-border: #efe8dc1a;
+  --color-btn-primary-border: #e6eae31a;
   --color-btn-primary-shadow: 0 0 #0000;
   --color-btn-primary-inset-shadow: 0 0 #0000;
   --color-btn-primary-hover-bg: #e39a80;
-  --color-btn-primary-hover-border: #efe8dc1a;
+  --color-btn-primary-hover-border: #e6eae31a;
   --color-btn-primary-selected-bg: #d08064;
   --color-btn-primary-selected-shadow: 0 0 #0000;
-  --color-btn-primary-disabled-text: #16131180;
+  --color-btn-primary-disabled-text: #13161480;
   --color-btn-primary-disabled-bg: #6b453699;
-  --color-btn-primary-disabled-border: #efe8dc1a;
-  --color-action-list-item-default-hover-bg: #efe8dc1f;
-  --color-segmented-control-bg: #a397881a;
-  --color-segmented-control-button-bg: #161311;
-  --color-segmented-control-button-selected-border: #a39788;
-  --color-fg-default: #efe8dc;
-  --color-fg-muted: #a39788;
-  --color-fg-subtle: #8a7f71;
-  --color-canvas-default: #161311;
-  --color-canvas-overlay: #1e1a17;
-  --color-canvas-inset: #0f0d0b;
-  --color-canvas-subtle: #1e1a17;
-  --color-border-default: #3a342e;
-  --color-border-muted: #2a251f;
-  --color-neutral-muted: #a3978866;
+  --color-btn-primary-disabled-border: #e6eae31a;
+  --color-action-list-item-default-hover-bg: #e6eae31f;
+  --color-segmented-control-bg: #969d931a;
+  --color-segmented-control-button-bg: #131614;
+  --color-segmented-control-button-selected-border: #969d93;
+  --color-fg-default: #e6eae3;
+  --color-fg-muted: #969d93;
+  --color-fg-subtle: #828980;
+  --color-canvas-default: #131614;
+  --color-canvas-overlay: #1a1e1b;
+  --color-canvas-inset: #0d100e;
+  --color-canvas-subtle: #1a1e1b;
+  --color-border-default: #323833;
+  --color-border-muted: #222723;
+  --color-neutral-muted: #969d9366;
   --color-accent-fg: #d08064;
   --color-accent-emphasis: #d08064;
   --color-accent-muted: #d0806466;
-  --color-accent-subtle: #3a2b221a;
+  --color-accent-subtle: #29302a1a;
   --color-success-fg: #9ec48a;
   --color-attention-fg: #e0a06a;
   --color-attention-muted: #e0a06a66;
@@ -84,8 +86,8 @@ main {
   --color-primer-shadow-inset: 0 0 #0000;
 
   /*! Extensions from @primer/css/alerts/flash.scss */
-  --color-scale-gray-7: #241f1b;
-  --color-scale-blue-8: #3a2b22;
+  --color-scale-gray-7: #1e221f;
+  --color-scale-blue-8: #29302a;
   --color-social-reaction-bg-hover: var(--color-scale-gray-7);
   --color-social-reaction-bg-reacted-hover: var(--color-scale-blue-8);
 }
