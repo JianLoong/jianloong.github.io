@@ -6,7 +6,7 @@
   function applyTheme(theme) {
     root.setAttribute("data-theme", theme);
     if (meta) {
-      meta.setAttribute("content", theme === "dark" ? "#0e1112" : "#dfe4e3");
+      meta.setAttribute("content", theme === "dark" ? "#0a0d18" : "#e2e5e8");
     }
     themeListeners.forEach(function (fn) {
       fn(theme);

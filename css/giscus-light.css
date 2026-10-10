@@ -1,94 +1,99 @@
-/*! giscus theme — light.
+/*! giscus theme — the atlas plate (light).
  * GitHub Primer variable names and MIT-licensed structure from
  * https://github.com/primer/primitives (see LICENSE), recoloured to this
- * site's light palette — the cool neutral paper and oxblood accent defined in
- * css/style.css. giscus is a cross-origin iframe, so it cannot inherit the
- * page's custom properties; these values are a deliberate copy of the tokens
- * in css/style.css and must be updated together with them.
+ * site's light ground — the cool plate, bone-set ink and the three-step
+ * magnitude scale defined in css/style.css.
+ *
+ * giscus is a cross-origin iframe and cannot inherit the page's custom
+ * properties, so this is a deliberate copy of those tokens and has to be
+ * updated with them. It has already drifted once: the world changed to the
+ * atlas and only the typography below was carried over, leaving every comment
+ * thread in the previous world's palette. If the palette moves again, this
+ * block moves in the same commit.
  */
 main {
-  --color-prettylights-syntax-comment: #58605c;
-  --color-prettylights-syntax-constant: #a3542c;
-  --color-prettylights-syntax-entity: #4a4a8c;
-  --color-prettylights-syntax-storage-modifier-import: #323839;
-  --color-prettylights-syntax-entity-tag: #3f6b4f;
-  --color-prettylights-syntax-keyword: #8c3b28;
-  --color-prettylights-syntax-string: #3b6449;
-  --color-prettylights-syntax-variable: #a3542c;
+  --color-prettylights-syntax-comment: #6b6f80;
+  --color-prettylights-syntax-constant: #2f6a80;
+  --color-prettylights-syntax-entity: #6b4a86;
+  --color-prettylights-syntax-storage-modifier-import: #3a3d4a;
+  --color-prettylights-syntax-entity-tag: #2f6a45;
+  --color-prettylights-syntax-keyword: #8a4f11;
+  --color-prettylights-syntax-string: #2f6a45;
+  --color-prettylights-syntax-variable: #2f6a80;
   --color-prettylights-syntax-brackethighlighter-unmatched: #a33a2a;
-  --color-prettylights-syntax-invalid-illegal-text: #ecf0ef;
+  --color-prettylights-syntax-invalid-illegal-text: #eef1f3;
   --color-prettylights-syntax-invalid-illegal-bg: #a33a2a;
-  --color-prettylights-syntax-carriage-return-text: #ecf0ef;
-  --color-prettylights-syntax-carriage-return-bg: #8c3b28;
-  --color-prettylights-syntax-string-regexp: #3b6449;
-  --color-prettylights-syntax-markup-list: #323839;
-  --color-prettylights-syntax-markup-heading: #8c3b28;
-  --color-prettylights-syntax-markup-italic: #14181a;
-  --color-prettylights-syntax-markup-bold: #14181a;
+  --color-prettylights-syntax-carriage-return-text: #eef1f3;
+  --color-prettylights-syntax-carriage-return-bg: #8a4f11;
+  --color-prettylights-syntax-string-regexp: #2f6a45;
+  --color-prettylights-syntax-markup-list: #3a3d4a;
+  --color-prettylights-syntax-markup-heading: #8a4f11;
+  --color-prettylights-syntax-markup-italic: #14161f;
+  --color-prettylights-syntax-markup-bold: #14161f;
   --color-prettylights-syntax-markup-deleted-text: #7a2b1d;
   --color-prettylights-syntax-markup-deleted-bg: #f3ded6;
-  --color-prettylights-syntax-markup-inserted-text: #2f5a3d;
+  --color-prettylights-syntax-markup-inserted-text: #245038;
   --color-prettylights-syntax-markup-inserted-bg: #dcecdf;
-  --color-prettylights-syntax-markup-changed-text: #8a4a24;
+  --color-prettylights-syntax-markup-changed-text: #7a4610;
   --color-prettylights-syntax-markup-changed-bg: #f4e2cf;
-  --color-prettylights-syntax-markup-ignored-text: #dfe4e3;
-  --color-prettylights-syntax-markup-ignored-bg: #8c3b28;
-  --color-prettylights-syntax-meta-diff-range: #4a4a8c;
-  --color-prettylights-syntax-brackethighlighter-angle: #5e6468;
-  --color-prettylights-syntax-sublimelinter-gutter-mark: #5e6468;
-  --color-prettylights-syntax-constant-other-reference-link: #3b6449;
-  --color-btn-text: #14181a;
-  --color-btn-bg: #ecf0ef;
-  --color-btn-border: #bfc6c6;
-  --color-btn-shadow: 0 1px 0 #14181a0a;
+  --color-prettylights-syntax-markup-ignored-text: #e2e5e8;
+  --color-prettylights-syntax-markup-ignored-bg: #8a4f11;
+  --color-prettylights-syntax-meta-diff-range: #6b4a86;
+  --color-prettylights-syntax-brackethighlighter-angle: #5c6070;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #5c6070;
+  --color-prettylights-syntax-constant-other-reference-link: #2f6a45;
+  --color-btn-text: #14161f;
+  --color-btn-bg: #eef1f3;
+  --color-btn-border: #c3c7cb;
+  --color-btn-shadow: 0 1px 0 #14161f0a;
   --color-btn-inset-shadow: inset 0 1px 0 #ffffff40;
-  --color-btn-hover-bg: #dee3e2;
-  --color-btn-hover-border: #aeb6b6;
-  --color-btn-active-bg: #d7dddc;
-  --color-btn-active-border: #aeb6b6;
-  --color-btn-selected-bg: #d7dddc;
-  --color-btn-primary-text: #ecf0ef;
-  --color-btn-primary-bg: #8c3b28;
-  --color-btn-primary-border: #8c3b28;
-  --color-btn-primary-shadow: 0 1px 0 #14181a1a;
+  --color-btn-hover-bg: #e4e8ec;
+  --color-btn-hover-border: #aeb4bc;
+  --color-btn-active-bg: #dce1e6;
+  --color-btn-active-border: #aeb4bc;
+  --color-btn-selected-bg: #dce1e6;
+  --color-btn-primary-text: #eef1f3;
+  --color-btn-primary-bg: #8a4f11;
+  --color-btn-primary-border: #8a4f11;
+  --color-btn-primary-shadow: 0 1px 0 #14161f1a;
   --color-btn-primary-inset-shadow: inset 0 1px 0 #ffffff08;
-  --color-btn-primary-hover-bg: #6e2d1e;
-  --color-btn-primary-hover-border: #6e2d1e;
-  --color-btn-primary-selected-bg: #5c2517;
-  --color-btn-primary-selected-shadow: inset 0 1px 0 #3d180e33;
-  --color-btn-primary-disabled-text: #ecf0ef99;
-  --color-btn-primary-disabled-bg: #c99f92;
-  --color-btn-primary-disabled-border: #bfc6c6;
-  --color-action-list-item-default-hover-bg: #bfc6c652;
-  --color-segmented-control-bg: #d5dbda;
-  --color-segmented-control-button-bg: #ecf0ef;
-  --color-segmented-control-button-selected-border: #9ba3a4;
-  --color-fg-default: #14181a;
-  --color-fg-muted: #5e6468;
-  --color-fg-subtle: #5e6468;
-  --color-canvas-default: #dfe4e3;
-  --color-canvas-overlay: #ecf0ef;
-  --color-canvas-inset: #d5dbda;
-  --color-canvas-subtle: #ecf0ef;
-  --color-border-default: #bfc6c6;
-  --color-border-muted: #d6dbdb;
-  --color-neutral-muted: #bfc6c655;
-  --color-accent-fg: #8c3b28;
-  --color-accent-emphasis: #8c3b28;
-  --color-accent-muted: #8c3b2866;
-  --color-accent-subtle: #efe0d9;
-  --color-success-fg: #3f6b4f;
-  --color-attention-fg: #8a4a24;
-  --color-attention-muted: #a3542c66;
+  --color-btn-primary-hover-bg: #6d3d0c;
+  --color-btn-primary-hover-border: #6d3d0c;
+  --color-btn-primary-selected-bg: #5a3209;
+  --color-btn-primary-selected-shadow: inset 0 1px 0 #3d220633;
+  --color-btn-primary-disabled-text: #eef1f399;
+  --color-btn-primary-disabled-bg: #c9a882;
+  --color-btn-primary-disabled-border: #c3c7cb;
+  --color-action-list-item-default-hover-bg: #c3c7cb52;
+  --color-segmented-control-bg: #d4d8db;
+  --color-segmented-control-button-bg: #eef1f3;
+  --color-segmented-control-button-selected-border: #9aa2ac;
+  --color-fg-default: #14161f;
+  --color-fg-muted: #5c6070;
+  --color-fg-subtle: #5c6070;
+  --color-canvas-default: #e2e5e8;
+  --color-canvas-overlay: #eef1f3;
+  --color-canvas-inset: #d4d8db;
+  --color-canvas-subtle: #eef1f3;
+  --color-border-default: #c3c7cb;
+  --color-border-muted: #d6dade;
+  --color-neutral-muted: #c3c7cb55;
+  --color-accent-fg: #8a4f11;
+  --color-accent-emphasis: #8a4f11;
+  --color-accent-muted: #8a4f1166;
+  --color-accent-subtle: #f0e4d4;
+  --color-success-fg: #2f6a45;
+  --color-attention-fg: #7a4610;
+  --color-attention-muted: #8a4f1166;
   --color-attention-subtle: #f4e2cf;
   --color-danger-fg: #a33a2a;
   --color-danger-muted: #a33a2a66;
   --color-danger-subtle: #f3ded6;
-  --color-primer-shadow-inset: inset 0 1px 0 #bfc6c633;
+  --color-primer-shadow-inset: inset 0 1px 0 #c3c7cb33;
 
   /*! Extensions from @primer/css/alerts/flash.scss */
-  --color-scale-gray-1: #d5dbda;
-  --color-scale-blue-1: #efe0d9;
+  --color-scale-gray-1: #d4d8db;
+  --color-scale-blue-1: #f0e4d4;
   --color-social-reaction-bg-hover: var(--color-scale-gray-1);
   --color-social-reaction-bg-reacted-hover: var(--color-scale-blue-1);
 }
@@ -107,8 +112,7 @@ main .gsc-loading-image {
  * giscus.app; these URLs are absolute. GitHub Pages serves them with
  * `Access-Control-Allow-Origin: *`, so the cross-origin fetch is allowed.
  * Declared inside each theme because giscus accepts a single theme URL, so the
- * two themes cannot share a file. Declare only the weights comments actually
- * use — heavier weights are synthesised. Keep in sync with css/fonts.css.
+ * two themes cannot share a file. Keep in sync with css/fonts.css.
  */
 @font-face {
   font-family: "Spectral";

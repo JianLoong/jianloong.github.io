@@ -57,7 +57,7 @@ npm run build    # one-off build → _site/
 │   └── robots.njk         # robots.txt
 ├── css/                   # copied verbatim (style.css, fonts.css, giscus themes)
 ├── js/main.js             # copied verbatim to _site/
-├── assets/                # copied verbatim (fonts/, favicon.svg, og-image.svg)
+├── assets/                # copied verbatim (fonts/, favicon.svg)
 └── _site/                 # build output (gitignored)
 ```
 

@@ -159,7 +159,7 @@ Six tokens colour fenced code, mapped per theme so a block stays legible on what
 
 Both were chosen off the training-data default list (Fraunces, Newsreader, Playfair, Lora, Outfit, IBM Plex and friends), which is the point: the previous world ran two of those faces and read as a template because of it.
 
-**The One Serif Rule.** Spectral is the only reading family, at 400 for prose and 500 for headings. Nothing else sets a sentence. **Azeret Mono never sets running prose or a heading** — it is the instrument's voice, reserved for labels, meta, annotations, and code. A page whose body text is mono is a terminal costume, not an atlas.
+**The One Serif Rule.** Spectral is the only reading family, at 400 for prose and 500 for headings. Nothing else sets a sentence. **Azeret Mono never sets running prose, and never sets a heading inside the reading column** — it is the instrument's voice, reserved for labels, meta, annotations, and code. One carve-out is real, and it is named here rather than left implied: mono sets the *structural region labels* — the `LATEST WRITING` / `SELECTED WORK` heads that open a catalogue on a page — even though those elements are `h2`. They name a region of the page, never the document, and they are how the frame does its wayfinding. Note the boundary: the `Comments` head is *not* one of these, because it sits inside the article and so correctly renders in Spectral. A title, or any heading inside the reading column, is Spectral. A page whose body text is mono is a terminal costume, not an atlas.
 
 **The Measured Voice Rule.** Mono is always uppercase and tracked (`0.08em`–`0.14em`) when it labels, and sentence case when it annotates a value. Uppercase mono is a label; lowercase mono is a reading.
 

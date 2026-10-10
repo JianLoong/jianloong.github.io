@@ -1,85 +1,90 @@
-/*! giscus theme — dark.
+/*! giscus theme — the atlas sky (dark).
  * GitHub Primer variable names and MIT-licensed structure from
  * https://github.com/primer/primitives (see LICENSE), recoloured to this
- * site's dark palette — the deep cool ground and warmed oxblood accent defined
- * in css/style.css. giscus is a cross-origin iframe, so it cannot inherit the
- * page's custom properties; these values are a deliberate copy of the tokens
- * in css/style.css and must be updated together with them.
+ * site's dark ground — the indigo sky, bone-set ink and the three-step
+ * magnitude scale defined in css/style.css.
+ *
+ * giscus is a cross-origin iframe and cannot inherit the page's custom
+ * properties, so this is a deliberate copy of those tokens and has to be
+ * updated with them. It has already drifted once: the world changed to the
+ * atlas and only the typography below was carried over, leaving every comment
+ * thread in the previous world's palette. If the palette moves again, this
+ * block moves in the same commit.
  */
 main {
-  --color-prettylights-syntax-comment: #949b9d;
-  --color-prettylights-syntax-constant: #e0a06a;
-  --color-prettylights-syntax-entity: #b3b3e6;
-  --color-prettylights-syntax-storage-modifier-import: #c7cecd;
-  --color-prettylights-syntax-entity-tag: #9ec48a;
-  --color-prettylights-syntax-keyword: #e39a80;
-  --color-prettylights-syntax-string: #9ec48a;
-  --color-prettylights-syntax-variable: #e0a06a;
+  --color-prettylights-syntax-comment: #8b8e9c;
+  --color-prettylights-syntax-constant: #8fb8c9;
+  --color-prettylights-syntax-entity: #b892c9;
+  --color-prettylights-syntax-storage-modifier-import: #c3c1b5;
+  --color-prettylights-syntax-entity-tag: #9ecf9a;
+  --color-prettylights-syntax-keyword: #f0c674;
+  --color-prettylights-syntax-string: #9ecf9a;
+  --color-prettylights-syntax-variable: #8fb8c9;
   --color-prettylights-syntax-brackethighlighter-unmatched: #e08a7a;
-  --color-prettylights-syntax-invalid-illegal-text: #e3e8e7;
+  --color-prettylights-syntax-invalid-illegal-text: #e9e7db;
   --color-prettylights-syntax-invalid-illegal-bg: #7a2b1d;
-  --color-prettylights-syntax-carriage-return-text: #e3e8e7;
+  --color-prettylights-syntax-carriage-return-text: #e9e7db;
   --color-prettylights-syntax-carriage-return-bg: #a33a2a;
-  --color-prettylights-syntax-string-regexp: #9ec48a;
-  --color-prettylights-syntax-markup-list: #adb5b4;
-  --color-prettylights-syntax-markup-heading: #d08064;
-  --color-prettylights-syntax-markup-italic: #e3e8e7;
-  --color-prettylights-syntax-markup-bold: #e3e8e7;
+  --color-prettylights-syntax-string-regexp: #9ecf9a;
+  --color-prettylights-syntax-markup-list: #c3c1b5;
+  --color-prettylights-syntax-markup-heading: #f0c674;
+  --color-prettylights-syntax-markup-italic: #e9e7db;
+  --color-prettylights-syntax-markup-bold: #e9e7db;
   --color-prettylights-syntax-markup-deleted-text: #f0b8ab;
   --color-prettylights-syntax-markup-deleted-bg: #3a1c16;
   --color-prettylights-syntax-markup-inserted-text: #b7d6a4;
   --color-prettylights-syntax-markup-inserted-bg: #1d2a1a;
   --color-prettylights-syntax-markup-changed-text: #edc59a;
   --color-prettylights-syntax-markup-changed-bg: #3a2b16;
-  --color-prettylights-syntax-markup-ignored-text: #0e1112;
-  --color-prettylights-syntax-markup-ignored-bg: #d08064;
-  --color-prettylights-syntax-meta-diff-range: #b3b3e6;
-  --color-prettylights-syntax-brackethighlighter-angle: #919a9b;
-  --color-prettylights-syntax-sublimelinter-gutter-mark: #5e6468;
-  --color-prettylights-syntax-constant-other-reference-link: #9ec48a;
-  --color-btn-text: #e3e8e7;
-  --color-btn-bg: #151a1b;
-  --color-btn-border: #e3e8e71a;
+  --color-prettylights-syntax-markup-ignored-text: #0a0d18;
+  --color-prettylights-syntax-markup-ignored-bg: #f0c674;
+  --color-prettylights-syntax-meta-diff-range: #b892c9;
+  --color-prettylights-syntax-brackethighlighter-angle: #8b8e9c;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #5c6070;
+  --color-prettylights-syntax-constant-other-reference-link: #9ecf9a;
+  --color-btn-text: #e9e7db;
+  --color-btn-bg: #121728;
+  --color-btn-border: #e9e7db1a;
   --color-btn-shadow: 0 0 #0000;
   --color-btn-inset-shadow: 0 0 #0000;
-  --color-btn-hover-bg: #1b2123;
-  --color-btn-hover-border: #3d4446;
-  --color-btn-active-bg: #222829;
-  --color-btn-active-border: #4d5456;
-  --color-btn-selected-bg: #171c1d;
-  --color-btn-primary-text: #0e1112;
-  --color-btn-primary-bg: #d08064;
-  --color-btn-primary-border: #e3e8e71a;
+  --color-btn-hover-bg: #1a2033;
+  --color-btn-hover-border: #3d4459;
+  --color-btn-active-bg: #222a40;
+  --color-btn-active-border: #4d5470;
+  --color-btn-selected-bg: #151b2c;
+  --color-btn-primary-text: #0a0d18;
+  --color-btn-primary-bg: #f0c674;
+  --color-btn-primary-border: #e9e7db1a;
   --color-btn-primary-shadow: 0 0 #0000;
   --color-btn-primary-inset-shadow: 0 0 #0000;
-  --color-btn-primary-hover-bg: #e39a80;
-  --color-btn-primary-hover-border: #e3e8e71a;
-  --color-btn-primary-selected-bg: #d08064;
+  --color-btn-primary-hover-bg: #f7d894;
+  --color-btn-primary-hover-border: #e9e7db1a;
+  --color-btn-primary-selected-bg: #f0c674;
   --color-btn-primary-selected-shadow: 0 0 #0000;
-  --color-btn-primary-disabled-text: #0e111280;
-  --color-btn-primary-disabled-bg: #6b453699;
-  --color-btn-primary-disabled-border: #e3e8e71a;
-  --color-action-list-item-default-hover-bg: #e3e8e71f;
-  --color-segmented-control-bg: #919a9b1a;
-  --color-segmented-control-button-bg: #0e1112;
-  --color-segmented-control-button-selected-border: #919a9b;
-  --color-fg-default: #e3e8e7;
-  --color-fg-muted: #919a9b;
-  --color-fg-subtle: #7c8587;
-  --color-canvas-default: #0e1112;
-  --color-canvas-overlay: #151a1b;
-  --color-canvas-inset: #090c0d;
-  --color-canvas-subtle: #151a1b;
-  --color-border-default: #2c3233;
-  --color-border-muted: #1b2123;
-  --color-neutral-muted: #919a9b66;
-  --color-accent-fg: #d08064;
-  --color-accent-emphasis: #d08064;
-  --color-accent-muted: #d0806466;
-  --color-accent-subtle: #232a2c1a;
-  --color-success-fg: #9ec48a;
-  --color-attention-fg: #e0a06a;
-  --color-attention-muted: #e0a06a66;
+  --color-btn-primary-disabled-text: #0a0d1880;
+  --color-btn-primary-disabled-bg: #6b5a3599;
+  --color-btn-primary-disabled-border: #e9e7db1a;
+  --color-action-list-item-default-hover-bg: #e9e7db1f;
+  --color-segmented-control-bg: #8b8e9c1a;
+  --color-segmented-control-button-bg: #0a0d18;
+  --color-segmented-control-button-selected-border: #8b8e9c;
+  --color-fg-default: #e9e7db;
+  --color-fg-muted: #8b8e9c;
+  --color-fg-subtle: #737688;
+  --color-canvas-default: #0a0d18;
+  --color-canvas-overlay: #121728;
+  --color-canvas-inset: #06080f;
+  --color-canvas-subtle: #121728;
+  --color-border-default: #232a42;
+  --color-border-muted: #1b2138;
+  --color-neutral-muted: #8b8e9c66;
+  --color-accent-fg: #f0c674;
+  --color-accent-emphasis: #f0c674;
+  --color-accent-muted: #f0c67466;
+  --color-accent-subtle: #f0c6741a;
+  --color-success-fg: #9ecf9a;
+  --color-attention-fg: #f0c674;
+  --color-attention-muted: #f0c67466;
   --color-attention-subtle: #3a2b1626;
   --color-danger-fg: #e08a7a;
   --color-danger-muted: #e08a7a66;
@@ -87,8 +92,8 @@ main {
   --color-primer-shadow-inset: 0 0 #0000;
 
   /*! Extensions from @primer/css/alerts/flash.scss */
-  --color-scale-gray-7: #171c1d;
-  --color-scale-blue-8: #232a2c;
+  --color-scale-gray-7: #151b2c;
+  --color-scale-blue-8: #1a2033;
   --color-social-reaction-bg-hover: var(--color-scale-gray-7);
   --color-social-reaction-bg-reacted-hover: var(--color-scale-blue-8);
 }
@@ -107,8 +112,7 @@ main .gsc-loading-image {
  * giscus.app; these URLs are absolute. GitHub Pages serves them with
  * `Access-Control-Allow-Origin: *`, so the cross-origin fetch is allowed.
  * Declared inside each theme because giscus accepts a single theme URL, so the
- * two themes cannot share a file. Declare only the weights comments actually
- * use — heavier weights are synthesised. Keep in sync with css/fonts.css.
+ * two themes cannot share a file. Keep in sync with css/fonts.css.
  */
 @font-face {
   font-family: "Spectral";
