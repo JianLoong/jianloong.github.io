@@ -419,24 +419,6 @@ a:hover {
   font-size: inherit;
 }
 
-/* Mermaid diagrams: rendered in the browser, so drop the code-block chrome.
-   Raw source stays hidden until Mermaid has processed the node. */
-.article pre.mermaid {
-  background: none;
-  padding: 0;
-  text-align: center;
-  font-family: inherit;
-}
-
-.article pre.mermaid:not([data-processed]) {
-  visibility: hidden;
-}
-
-.article pre.mermaid svg {
-  max-width: 100%;
-  height: auto;
-}
-
 /* Figures: diagrams and illustrations get a caption and room to breathe. */
 .article figure {
   margin: 2.4rem 0;

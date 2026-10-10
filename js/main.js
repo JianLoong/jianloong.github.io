@@ -38,30 +38,6 @@
     onScroll();
   }
 
-  // Mermaid is self-hosted and only fetched on pages that actually have a diagram.
-  var diagrams = document.querySelectorAll(".mermaid");
-  if (diagrams.length) {
-    var sources = Array.prototype.map.call(diagrams, function (el) {
-      return el.textContent;
-    });
-    var renderDiagrams = function () {
-      var theme = root.getAttribute("data-theme") === "dark" ? "dark" : "neutral";
-      diagrams.forEach(function (el, i) {
-        el.removeAttribute("data-processed");
-        el.textContent = sources[i];
-      });
-      window.mermaid.initialize({ startOnLoad: false, theme: theme });
-      window.mermaid.run({ nodes: diagrams });
-    };
-    var mermaidScript = document.createElement("script");
-    mermaidScript.src = "/js/vendor/mermaid.min.js";
-    mermaidScript.onload = function () {
-      renderDiagrams();
-      themeListeners.push(renderDiagrams);
-    };
-    document.head.appendChild(mermaidScript);
-  }
-
   // giscus comments (GitHub Discussions). The embed is built here rather than
   // written into the markup so it can start in the theme the visitor actually
   // has, and follow the toggle afterwards. Configuration lives in
