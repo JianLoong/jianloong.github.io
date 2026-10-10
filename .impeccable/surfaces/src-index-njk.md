@@ -57,13 +57,17 @@ read-mode rules translate to chrome, labels and code — never the running text.
 finish review, the verdict, DESIGN.md, and every shipping raster carrying its
 provenance
 
-**FINISH status: UNDISCHARGED.** Recorded honestly at the time of back-fill.
-The finish review has not run, so no render has been audited against this
-contract. DESIGN.md and the sidecar are written and current. One shipped asset
-does not carry provenance: `assets/og-image.svg` still names the retired
-Newsreader and Outfit faces. It is inert — nothing loads it, and `base.njk`
-emits no `og:image` — so it is dead weight rather than a live defect, and it
-needs either deleting or repointing at Spectral and Azeret Mono.
+**FINISH status: DISCHARGED.** The review has now run, in two rounds, and its verdict is recorded here.
+
+Round one returned `fix` with four material fixes, all of which the build had shipped: theme-color carrying the retired world's ground in `base.njk` and `js/main.js` on every page; `assets/og-image.svg` naming faces deleted in the world swap; a dead `--accent-hover` token; and a third-person `site.json` description against PRODUCT.md's first-person commitment. It also named the mono rule as contradicted by the section heads, which are `h2` in mono.
+
+The batch answered all of it, and round two returned `ship` — scoped to the scored fixes, not to whole-surface approval. That pass also caught the parent over-claiming the carve-out: it had named the `Comments` head as mono-set when the head nests inside the article and correctly renders in Spectral. Corrected in DESIGN.md and the sidecar.
+
+Two things remain unscored for want of an image-capable reader, and are recorded rather than glossed: the recoloured giscus iframe as rendered, and the exact rendered shape of the `Comments` head.
+
+Provenance: `assets/og-image.svg` was the only shipping raster and has been deleted, so no shipping raster remains to carry a prompt. `base.njk` emits no `og:image`; a real social card is authoring work, not a fix, and is not done.
+
+The review itself was substituted and that is disclosed rather than hidden: the shipped `impeccable-finish-reviewer` cannot be spawned in this harness and cannot ingest images, so two fresh read-only readers ran the file-based checks and the parent ran the visual ones. Evidence: eight full-page captures at `.impeccable/review/`.
 
 ## Scope
 
