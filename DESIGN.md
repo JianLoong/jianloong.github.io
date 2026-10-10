@@ -44,11 +44,23 @@ typography:
     fontWeight: 500
     lineHeight: 1.25
     letterSpacing: "-0.02em"
+  subhead:
+    fontFamily: "Newsreader, 'Iowan Old Style', Georgia, serif"
+    fontSize: "1.28rem"
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: "normal"
   body:
     fontFamily: "Newsreader, 'Iowan Old Style', Georgia, serif"
     fontSize: "1.125rem"
     fontWeight: 400
     lineHeight: 1.7
+    letterSpacing: "normal"
+  body-tight:
+    fontFamily: "Newsreader, 'Iowan Old Style', Georgia, serif"
+    fontSize: "1.02rem"
+    fontWeight: 400
+    lineHeight: 1.5
     letterSpacing: "normal"
   label:
     fontFamily: "Outfit, 'Helvetica Neue', sans-serif"
@@ -157,11 +169,16 @@ Six tokens colour code inside fenced blocks, mapped separately per theme so a bl
 **Character:** One serif doing two jobs, separated by weight and size rather than by a second family — Newsreader at 500 for anything structural, Newsreader at 400 for prose that has to be read at length. Outfit handles all interface and meta text in uppercase, and IBM Plex Mono is confined to code. The palette of faces is deliberately narrow: no second display face, no italic variants beyond what prose needs.
 
 ### Hierarchy
-- **Display** (500, `clamp(2.2rem, 4.5vw, 3.8rem)`, 1.08, −0.035em): the page `h1` and the homepage hero. Tight tracking is what makes it read as a masthead rather than a heading.
-- **Headline** (500, 1.55rem, 1.2, −0.02em): article `h2` and post-card `h3`.
-- **Title** (500, 1.35rem, 1.25): project-card `h3`.
-- **Body** (400, 1.125rem, 1.7): all prose. Held to `--measure` (42rem) for 65–75 characters.
-- **Label** (400, 0.72–0.86rem, `letter-spacing` 0.04–0.22em, uppercase): meta lines, nav, kickers, footer. Uppercase and tracked is the system's only decorative move.
+Eight roles, each with a job no other role can do.
+
+- **Display** (500, `clamp(2.2rem, 4.5vw, 3.8rem)`, 1.08, −0.035em): every `h1` — index pages, articles, the About page, the homepage hero. One clamp site-wide; the tight tracking is what makes it read as a masthead rather than a heading.
+- **Headline** (500, 1.55rem, 1.2, −0.02em): article `h2` and post-card titles.
+- **Title** (500, 1.35rem, 1.25, −0.02em): project-card titles.
+- **Subhead** (400, 1.28rem, 1.5): the homepage lede and the article deck. Larger than prose, lighter than a heading — it introduces without competing.
+- **Body** (400, 1.125rem, 1.7): all article prose, held to `--measure` (42rem) for 65–75 characters.
+- **Body Tight** (400, 1.02rem, 1.5): card descriptions, where scanning beats reading and the column is narrower.
+- **Label** (400, 0.86rem, `letter-spacing` 0.04–0.22em, uppercase): nav, metadata lines, section heads, footer. Size stays one step and tracking carries all the variation — uppercase and tracked is the system's only decorative move.
+- **Code** (400, 0.9rem, 1.6): fenced code. Inline code is deliberately relative (`0.88em`) so it tracks the prose it sits in.
 
 **The One Serif Rule.** Newsreader carries the whole page. Weight and size do the separating — 500 for structural headings, 400 for prose. Reaching for a second serif to manufacture that contrast is the failure this rule exists to prevent.
 

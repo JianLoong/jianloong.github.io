@@ -98,7 +98,7 @@ a:hover {
   color: var(--bg);
   padding: 0.6rem 1rem;
   font-family: var(--sans);
-  font-size: 0.85rem;
+  font-size: 0.86rem;
   letter-spacing: 0.04em;
 }
 
@@ -230,7 +230,7 @@ a:hover {
 
 .section-head h2 {
   font-family: var(--sans);
-  font-size: 0.78rem;
+  font-size: 0.86rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   font-weight: 500;
@@ -240,7 +240,7 @@ a:hover {
 
 .section-head a {
   font-family: var(--sans);
-  font-size: 0.82rem;
+  font-size: 0.86rem;
   color: var(--accent);
   text-decoration: none;
 }
@@ -286,7 +286,7 @@ a:hover {
 
 .post-meta {
   font-family: var(--sans);
-  font-size: 0.8rem;
+  font-size: 0.86rem;
   color: var(--muted);
   letter-spacing: 0.04em;
 }
@@ -315,7 +315,7 @@ a:hover {
 
 .article-meta {
   font-family: var(--sans);
-  font-size: 0.82rem;
+  font-size: 0.86rem;
   color: var(--muted);
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -324,7 +324,7 @@ a:hover {
 
 .article h1 {
   font-family: var(--serif-display);
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
   line-height: 1.12;
   letter-spacing: -0.035em;
   font-weight: 500;
@@ -332,7 +332,7 @@ a:hover {
 }
 
 .article .deck {
-  font-size: 1.22rem;
+  font-size: 1.28rem;
   color: var(--ink-soft);
   margin: 0 0 2.2rem;
 }
@@ -381,7 +381,7 @@ a:hover {
 
 .about-copy h1 {
   font-family: var(--serif-display);
-  font-size: clamp(2.3rem, 4vw, 3.4rem);
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
   font-weight: 500;
   letter-spacing: -0.03em;
   margin: 0 0 1rem;
@@ -389,7 +389,7 @@ a:hover {
 
 .about-copy .about-role {
   font-family: var(--sans);
-  font-size: 0.95rem;
+  font-size: 0.86rem;
   letter-spacing: 0.02em;
   color: var(--muted);
   margin: 0 0 1.6rem;
@@ -422,7 +422,7 @@ a:hover {
   justify-content: space-between;
   gap: 1rem;
   font-family: var(--sans);
-  font-size: 0.82rem;
+  font-size: 0.86rem;
   color: var(--muted);
 }
 
@@ -474,7 +474,7 @@ a:hover {
 
 .article figcaption {
   font-family: var(--sans);
-  font-size: 0.82rem;
+  font-size: 0.86rem;
   line-height: 1.5;
   color: var(--muted);
   text-align: center;
@@ -487,7 +487,7 @@ a:hover {
   padding-top: 1.1rem;
   border-top: 1px solid var(--rule);
   font-family: var(--sans);
-  font-size: 0.82rem;
+  font-size: 0.86rem;
   line-height: 1.6;
   color: var(--muted);
 }
@@ -566,7 +566,7 @@ a:hover {
   flex-wrap: wrap;
   gap: 1rem 1.4rem;
   font-family: var(--sans);
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   margin: 1.6rem 0 0;
 }
 
@@ -606,7 +606,7 @@ a:hover {
 .project p {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.98rem;
+  font-size: 1.02rem;
   flex: 1;
 }
 
