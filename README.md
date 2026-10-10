@@ -1,6 +1,6 @@
-# Jian Liew — personal blog
+# Jian — personal blog
 
-Personal blog of Jian Loong Liew — writing on reliability, data, and the small
+Personal blog of Jian — writing on reliability, data, and the small
 open-source tools I keep building. Static site generated with
 [Eleventy](https://www.11ty.dev/) and published to GitHub Pages.
 
