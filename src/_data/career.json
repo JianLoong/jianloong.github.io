@@ -1,0 +1,36 @@
+{
+  "note": "Employment and study history, supplied by the author from his LinkedIn profile. Dates are as given, never inferred. 'years' is the inclusive span used to plot on the shared axis; axisEnd is the current year, which is what 'Present' resolves to.",
+  "source": "LinkedIn profile pasted by the author, 2026-10-11",
+  "axisStart": 2010,
+  "axisEnd": 2026,
+  "work": [
+    {
+      "title": "Site Reliability Engineer",
+      "org": "ANZ",
+      "dates": "Nov 2023 – Present",
+      "years": [2023, 2026],
+      "current": true
+    },
+    {
+      "title": "Sessional Lecturer & Teaching Associate",
+      "org": "Monash University",
+      "dates": "Aug 2015 – Dec 2019",
+      "years": [2015, 2019],
+      "current": false
+    }
+  ],
+  "study": [
+    {
+      "title": "Master of Information Technology (Research)",
+      "org": "Monash University",
+      "dates": "2013 – 2015",
+      "years": [2013, 2015]
+    },
+    {
+      "title": "Software Engineering and Computer Science",
+      "org": "Swinburne University of Technology",
+      "dates": "2010 – 2012",
+      "years": [2010, 2012]
+    }
+  ]
+}

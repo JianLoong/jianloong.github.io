@@ -8,7 +8,7 @@ permalink: /about/
   <div class="about-copy">
     <h1>Jian</h1>
     <p class="about-role">Site Reliability Engineer · Melbourne, Australia</p>
-    <p>I am a Site Reliability Engineer based in Melbourne, currently at ANZ, where my work centres on automation and Google Cloud. I previously taught software engineering at Monash University.</p>
+    <p>I am a Site Reliability Engineer based in Melbourne, at ANZ since 2023, where my work centres on automation and Google Cloud. Before that I taught software engineering at Monash University, from 2015 to 2019.</p>
     <p>Beyond my day-to-day work I am drawn to data visualisation, small public APIs, and software that stays simple by design. A few specifics:</p>
     <ul class="about-points">
       <li><strong>29 original repositories</strong> on GitHub since 2011 — Malaysia API, a browser sentiment analyser, a D3 word cloud generator, and a Reddit r/AmItheAsshole crawler on a Raspberry Pi.</li>
@@ -20,20 +20,52 @@ permalink: /about/
 
     <figure class="atlas-plot">
       <p class="atlas-legend">
-        <span><b>{{ repos.originals }}</b> objects</span>
-        <span>{{ repos.byYear[0].year }}–{{ repos.byYear[repos.byYear.length - 1].year }}</span>
-        <span>original repositories, by year</span>
+        <span><b>{{ repos.originals }}</b> repositories</span>
+        <span>{{ career.axisStart }}–{{ career.axisEnd }}</span>
+        <span>output, work and study on one axis</span>
       </p>
-      <div class="plot-track" role="img" aria-label="Original repositories created per year: {% for row in repos.byYear %}{{ row.year }}, {{ row.count }}{% if not loop.last %}; {% endif %}{% endfor %}">
+      <div class="plot-track" style="grid-template-columns: repeat({{ career.axisEnd - career.axisStart + 1 }}, minmax(2rem, 1fr))" role="img" aria-label="Plotted on one axis, {{ career.axisStart }} to {{ career.axisEnd }}. Original repositories created per year: {% for row in repos.byYear %}{{ row.year }}, {{ row.count }}{% if not loop.last %}; {% endif %}{% endfor %}. Employment spans {% for role in career.work %}{{ role.years[0] }} to {{ role.years[1] }}{% if not loop.last %} and {% endif %}{% endfor %}. Study spans {% for ed in career.study %}{{ ed.years[0] }} to {{ ed.years[1] }}{% if not loop.last %} and {% endif %}{% endfor %}.">
         {% for row in repos.byYear %}
-        <div class="plot-col" style="--mag: {{ row.count }}; --mag-tint: {% if row.count >= 5 %}var(--accent){% elif row.count >= 3 %}var(--star-cool){% else %}var(--star-faint){% endif %}">
-          <span class="plot-bar"></span>
-          <span class="plot-year">{{ row.year }}</span>
-        </div>
+        <span class="plot-bar" style="grid-column: {{ row.year - career.axisStart + 1 }}; --mag: {{ row.count }}; --mag-tint: {% if row.count >= 5 %}var(--accent){% elif row.count >= 3 %}var(--star-cool){% else %}var(--star-faint){% endif %}"></span>
+        {% endfor %}
+        {% for role in career.work %}
+        <span class="plot-span plot-span--work" style="grid-column: {{ role.years[0] - career.axisStart + 1 }} / span {{ role.years[1] - role.years[0] + 1 }}"></span>
+        {% endfor %}
+        {% for ed in career.study %}
+        <span class="plot-span plot-span--study" style="grid-column: {{ ed.years[0] - career.axisStart + 1 }} / span {{ ed.years[1] - ed.years[0] + 1 }}"></span>
+        {% endfor %}
+        {% for y in range(career.axisStart, career.axisEnd + 1) %}
+        <span class="plot-year" style="grid-column: {{ y - career.axisStart + 1 }}">{{ y }}</span>
         {% endfor %}
       </div>
-      <figcaption class="plot-note">Public GitHub repositories that are not forks, by creation year. Account opened {{ repos.accountCreated | dateFormat }}.</figcaption>
+      <figcaption class="plot-note">Original repositories by creation year, tinted by count. Employment solid, study soft. Repositories from the GitHub API; work and study from LinkedIn.</figcaption>
     </figure>
+
+    <h2 class="about-section">Experience</h2>
+    <ul class="about-history">
+      {% for role in career.work %}
+      <li class="hist-row">
+        <span class="hist-dates">{{ role.dates }}</span>
+        <span class="hist-body">
+          <strong class="hist-title">{{ role.title }}</strong>
+          <span class="hist-org">{{ role.org }}</span>
+        </span>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <h2 class="about-section">Education</h2>
+    <ul class="about-history">
+      {% for ed in career.study %}
+      <li class="hist-row">
+        <span class="hist-dates">{{ ed.dates }}</span>
+        <span class="hist-body">
+          <strong class="hist-title">{{ ed.title }}</strong>
+          <span class="hist-org">{{ ed.org }}</span>
+        </span>
+      </li>
+      {% endfor %}
+    </ul>
 
     <div class="socials">
       <a href="mailto:{{ site.email }}">{{ site.email }}</a>
