@@ -17,10 +17,10 @@
   </defs>
 
   <!-- palette lifted from css/style.css (:root) -->
-  <rect width="1200" height="630" fill="#eaede7"/>
+  <rect width="1200" height="630" fill="#dfe4e3"/>
 
   <!-- faint tool-chips motif, top right -->
-  <g fill="#191c18" opacity="0.09">
+  <g fill="#14181a" opacity="0.09">
     <rect x="940" y="96" width="44" height="44" rx="10"/>
     <rect x="996" y="96" width="44" height="44" rx="10"/>
     <rect x="1052" y="96" width="44" height="44" rx="10"/>
@@ -35,11 +35,11 @@
     <rect x="1108" y="208" width="44" height="44" rx="10"/>
   </g>
 
-  <text x="90" y="112" font-family="'Outfit', 'Helvetica Neue', Arial, sans-serif" font-size="26" letter-spacing="6" fill="#666c63">JIAN</text>
+  <text x="90" y="112" font-family="'Outfit', 'Helvetica Neue', Arial, sans-serif" font-size="26" letter-spacing="6" fill="#5e6468">JIAN</text>
   <rect x="90" y="144" width="110" height="5" fill="#8c3b28"/>
 
-  <text x="90" y="292" font-family="'Newsreader', Georgia, serif" font-size="58" font-weight="500" fill="#191c18">Using a coding agent</text>
-  <text x="90" y="364" font-family="'Newsreader', Georgia, serif" font-size="58" font-weight="500" fill="#191c18">as an observability agent</text>
+  <text x="90" y="292" font-family="'Newsreader', Georgia, serif" font-size="58" font-weight="500" fill="#14181a">Using a coding agent</text>
+  <text x="90" y="364" font-family="'Newsreader', Georgia, serif" font-size="58" font-weight="500" fill="#14181a">as an observability agent</text>
 
-  <text x="90" y="540" font-family="'Outfit', 'Helvetica Neue', Arial, sans-serif" font-size="26" fill="#666c63">Tools · 8 min read</text>
+  <text x="90" y="540" font-family="'Outfit', 'Helvetica Neue', Arial, sans-serif" font-size="26" fill="#5e6468">Tools · 8 min read</text>
 </svg>

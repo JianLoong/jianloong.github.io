@@ -1,44 +1,44 @@
 :root {
   color-scheme: light;
-  --bg: #eaede7;
-  --bg-elevated: #f4f6f1;
-  --ink: #191c18;
-  --ink-soft: #3a3e39;
-  --muted: #666c63;
-  --rule: #ccd1c8;
+  --bg: #dfe4e3;
+  --bg-elevated: #ecf0ef;
+  --ink: #14181a;
+  --ink-soft: #323839;
+  --muted: #5e6468;
+  --rule: #bfc6c6;
   --accent: #8c3b28;
   --accent-hover: #6e2d1e;
-  --mark: #dbe0d4;
+  --mark: #d8dedd;
   --serif-display: "Newsreader", "Iowan Old Style", Georgia, serif;
   --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
   --sans: "Outfit", "Helvetica Neue", sans-serif;
   --measure: 42rem;
   --page: 72rem;
-  --code-comment: #635c50;
+  --code-comment: #58605c;
   --code-keyword: #8c3b28;
   --code-string: #3b6449;
   --code-function: #4a4a8c;
   --code-number: #a3542c;
-  --code-punct: #666c63;
+  --code-punct: #5e6468;
 }
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg: #131614;
-  --bg-elevated: #1a1e1b;
-  --ink: #e6eae3;
-  --ink-soft: #cbd0c8;
-  --muted: #969d93;
-  --rule: #323833;
+  --bg: #0e1112;
+  --bg-elevated: #151a1b;
+  --ink: #e3e8e7;
+  --ink-soft: #c7cecd;
+  --muted: #919a9b;
+  --rule: #2c3233;
   --accent: #d08064;
   --accent-hover: #e39a80;
-  --mark: #29302a;
-  --code-comment: #949b90;
+  --mark: #232a2c;
+  --code-comment: #949b9d;
   --code-keyword: #e39a80;
   --code-string: #9ec48a;
   --code-function: #b3b3e6;
   --code-number: #e0a06a;
-  --code-punct: #b0b7ac;
+  --code-punct: #adb5b4;
 }
 
 *,

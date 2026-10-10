@@ -2,29 +2,29 @@
 name: Jian
 description: A field manual for reliability, data, and small tools.
 colors:
-  paper: "#eaede7"
-  paper-raised: "#f4f6f1"
-  ink: "#191c18"
-  ink-soft: "#3a3e39"
-  ink-muted: "#666c63"
-  hairline: "#ccd1c8"
+  paper: "#dfe4e3"
+  paper-raised: "#ecf0ef"
+  ink: "#14181a"
+  ink-soft: "#323839"
+  ink-muted: "#5e6468"
+  hairline: "#bfc6c6"
   oxblood: "#8c3b28"
   oxblood-deep: "#6e2d1e"
-  mark: "#dbe0d4"
-  syntax-comment: "#635c50"
+  mark: "#d8dedd"
+  syntax-comment: "#58605c"
   syntax-keyword: "#8c3b28"
   syntax-string: "#3b6449"
   syntax-function: "#4a4a8c"
   syntax-number: "#a3542c"
-  syntax-punctuation: "#666c63"
-  night-ground: "#131614"
-  night-raised: "#1a1e1b"
-  night-ink: "#e6eae3"
-  night-ink-soft: "#cbd0c8"
-  night-ink-muted: "#969d93"
-  night-hairline: "#323833"
+  syntax-punctuation: "#5e6468"
+  night-ground: "#0e1112"
+  night-raised: "#151a1b"
+  night-ink: "#e3e8e7"
+  night-ink-soft: "#c7cecd"
+  night-ink-muted: "#919a9b"
+  night-hairline: "#2c3233"
   night-oxblood: "#d08064"
-  night-mark: "#29302a"
+  night-mark: "#232a2c"
 typography:
   display:
     fontFamily: "Newsreader, 'Iowan Old Style', Georgia, serif"
@@ -115,14 +115,14 @@ components:
 
 **Creative North Star: "The Field Manual"**
 
-A field manual is written to be used, not admired. It is plain, it is durable, and it assumes you will come back to it holding a problem. This system is built the same way: a cool field-grey ground, a single oxblood ink for anything that matters, hairline rules doing the structural work that other systems delegate to shadows and cards.
+A field manual is written to be used, not admired. It is plain, it is durable, and it assumes you will come back to it holding a problem. This system is built the same way: a cool neutral ground, a single oxblood ink for anything that matters, hairline rules doing the structural work that other systems delegate to shadows and cards.
 
 The layout is deliberately narrow and columnar. Body text is set at `--measure` (42rem, roughly 65–75 characters) and the page never exceeds `--page` (72rem), so the reading experience stays the same whether you arrive on a laptop or a phone. Density is honest: no card corners, no elevation, no ornament that would have to be maintained.
 
 The voice is utilitarian and terse. Headings state what they are, meta lines are uppercase labels rather than prose, and decoration is absent by policy. All the warmth is spent deliberately, in two places only — the oxblood ink and the serif — against a ground that stays cool.
 
 **Key Characteristics:**
-- A cool field-grey ground with a single oxblood accent; no secondary or tertiary hues
+- A cool neutral ground with a single oxblood accent; no secondary or tertiary hues
 - Square corners everywhere, with exactly one pill (the theme toggle)
 - Structure carried by 1px hairlines, never by shadow
 - A serif/sans/mono split with one job per face, and one serif doing both display and prose at different weights
@@ -137,27 +137,27 @@ Two inks and a paper. Almost nothing else.
 - **Oxblood Deep** (`#6e2d1e`): the pressed state for oxblood. Used for accent hover only.
 
 ### Neutral
-- **Field Paper** (`#eaede7`): the page ground, and the text colour on any oxblood surface. A cool green-grey, chosen deliberately against the warm off-white that "tasteful" sites reach for by reflex.
-- **Raised Paper** (`#f4f6f1`): surfaces that sit *on* the page — the theme toggle, the project cards. The only tonal step in the system.
-- **Ink** (`#191c18`): primary text. Never pure black.
-- **Soft Ink** (`#3a3e39`): body prose at rest — descriptions, list items, the article deck.
-- **Muted Ink** (`#666c63`): labels, meta lines, timestamps, footer. Explicitly secondary.
-- **Hairline** (`#ccd1c8`): every border, rule, and divider in the system.
-- **Mark** (`#dbe0d4`): the ground behind inline code and code blocks.
+- **Field Paper** (`#dfe4e3`): the page ground, and the text colour on any oxblood surface. A cool neutral paper set about 12% deeper than the warm off-white it replaced — deep enough that the shift is visible on sight rather than only measurable.
+- **Raised Paper** (`#ecf0ef`): surfaces that sit *on* the page — the theme toggle, the project cards. The only tonal step in the system.
+- **Ink** (`#14181a`): primary text. Never pure black.
+- **Soft Ink** (`#323839`): body prose at rest — descriptions, list items, the article deck.
+- **Muted Ink** (`#5e6468`): labels, meta lines, timestamps, footer. Explicitly secondary, and deliberately deeper than it looks like it needs to be: at 4.7:1 it is the tightest pair in the system, and it only clears AA because the ground is no longer bright.
+- **Hairline** (`#bfc6c6`): every border, rule, and divider in the system.
+- **Mark** (`#d8dedd`): the ground behind inline code and code blocks.
 
 ### Syntax
-Six tokens colour code inside fenced blocks, mapped separately per theme so a block stays legible on whatever ground it sits. In light mode they resolve against **Mark** (`#dbe0d4`), and every pair has to clear 4.5:1 — which is why the string green is `#3b6449` and the comment grey `#635c50`, rather than the lighter values they began as.
+Six tokens colour code inside fenced blocks, mapped separately per theme so a block stays legible on whatever ground it sits. In light mode they resolve against **Mark** (`#d8dedd`), and every pair has to clear 4.5:1 — which is why the string green is `#3b6449` and the comment grey `#58605c`.
 
-- **Syntax Comment** (`#635c50`), italic: comments, prolog, doctype.
+- **Syntax Comment** (`#58605c`), italic: comments, prolog, doctype.
 - **Syntax Keyword** (`#8c3b28`): keywords, booleans, tags, selectors, properties. Deliberately the same oxblood as the accent, so code agrees with the page around it.
 - **Syntax String** (`#3b6449`): strings, chars, attribute values.
 - **Syntax Function** (`#4a4a8c`): function, class and builtin names.
 - **Syntax Number** (`#a3542c`): numbers, constants, symbols.
-- **Syntax Punctuation** (`#666c63`): punctuation and operators.
+- **Syntax Punctuation** (`#5e6468`): punctuation and operators.
 
 **The One Ink Rule.** There is exactly one accent hue. Oxblood appears on well under 10% of any screen; its scarcity is what makes it read as emphasis. A second accent hue is a redesign, not an addition.
 
-**The Tinted Ink Rule.** Text is never pure black or pure grey. Every ink is tinted toward the ground it sits on — cooled here, because the ground is cool (`#191c18`, not `#000`) — so type sits *on* the page rather than being cut out of it.
+**The Tinted Ink Rule.** Text is never pure black or pure grey. Every ink is tinted toward the ground it sits on — cooled here, because the ground is cool (`#14181a`, not `#000`) — so type sits *on* the page rather than being cut out of it.
 
 ## Typography
 

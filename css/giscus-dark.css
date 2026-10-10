@@ -1,81 +1,82 @@
 /*! giscus theme — dark.
  * GitHub Primer variable names and MIT-licensed structure from
  * https://github.com/primer/primitives (see LICENSE), recoloured to this
- * site's dark palette — the cool field-grey ground and warmed oxblood accent
- * defined in css/style.css. giscus is a cross-origin iframe, so it cannot
- * inherit the page's custom properties; these values are a deliberate copy.
+ * site's dark palette — the deep cool ground and warmed oxblood accent defined
+ * in css/style.css. giscus is a cross-origin iframe, so it cannot inherit the
+ * page's custom properties; these values are a deliberate copy of the tokens
+ * in css/style.css and must be updated together with them.
  */
 main {
-  --color-prettylights-syntax-comment: #949b90;
+  --color-prettylights-syntax-comment: #949b9d;
   --color-prettylights-syntax-constant: #e0a06a;
   --color-prettylights-syntax-entity: #b3b3e6;
-  --color-prettylights-syntax-storage-modifier-import: #cbd0c8;
+  --color-prettylights-syntax-storage-modifier-import: #c7cecd;
   --color-prettylights-syntax-entity-tag: #9ec48a;
   --color-prettylights-syntax-keyword: #e39a80;
   --color-prettylights-syntax-string: #9ec48a;
   --color-prettylights-syntax-variable: #e0a06a;
   --color-prettylights-syntax-brackethighlighter-unmatched: #e08a7a;
-  --color-prettylights-syntax-invalid-illegal-text: #e6eae3;
+  --color-prettylights-syntax-invalid-illegal-text: #e3e8e7;
   --color-prettylights-syntax-invalid-illegal-bg: #7a2b1d;
-  --color-prettylights-syntax-carriage-return-text: #e6eae3;
+  --color-prettylights-syntax-carriage-return-text: #e3e8e7;
   --color-prettylights-syntax-carriage-return-bg: #a33a2a;
   --color-prettylights-syntax-string-regexp: #9ec48a;
-  --color-prettylights-syntax-markup-list: #b0b7ac;
+  --color-prettylights-syntax-markup-list: #adb5b4;
   --color-prettylights-syntax-markup-heading: #d08064;
-  --color-prettylights-syntax-markup-italic: #e6eae3;
-  --color-prettylights-syntax-markup-bold: #e6eae3;
+  --color-prettylights-syntax-markup-italic: #e3e8e7;
+  --color-prettylights-syntax-markup-bold: #e3e8e7;
   --color-prettylights-syntax-markup-deleted-text: #f0b8ab;
   --color-prettylights-syntax-markup-deleted-bg: #3a1c16;
   --color-prettylights-syntax-markup-inserted-text: #b7d6a4;
   --color-prettylights-syntax-markup-inserted-bg: #1d2a1a;
   --color-prettylights-syntax-markup-changed-text: #edc59a;
   --color-prettylights-syntax-markup-changed-bg: #3a2b16;
-  --color-prettylights-syntax-markup-ignored-text: #131614;
+  --color-prettylights-syntax-markup-ignored-text: #0e1112;
   --color-prettylights-syntax-markup-ignored-bg: #d08064;
   --color-prettylights-syntax-meta-diff-range: #b3b3e6;
-  --color-prettylights-syntax-brackethighlighter-angle: #969d93;
-  --color-prettylights-syntax-sublimelinter-gutter-mark: #666c63;
+  --color-prettylights-syntax-brackethighlighter-angle: #919a9b;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #5e6468;
   --color-prettylights-syntax-constant-other-reference-link: #9ec48a;
-  --color-btn-text: #e6eae3;
-  --color-btn-bg: #1a1e1b;
-  --color-btn-border: #e6eae31a;
+  --color-btn-text: #e3e8e7;
+  --color-btn-bg: #151a1b;
+  --color-btn-border: #e3e8e71a;
   --color-btn-shadow: 0 0 #0000;
   --color-btn-inset-shadow: 0 0 #0000;
-  --color-btn-hover-bg: #222723;
-  --color-btn-hover-border: #464d48;
-  --color-btn-active-bg: #2a302b;
-  --color-btn-active-border: #58605a;
-  --color-btn-selected-bg: #1e221f;
-  --color-btn-primary-text: #131614;
+  --color-btn-hover-bg: #1b2123;
+  --color-btn-hover-border: #3d4446;
+  --color-btn-active-bg: #222829;
+  --color-btn-active-border: #4d5456;
+  --color-btn-selected-bg: #171c1d;
+  --color-btn-primary-text: #0e1112;
   --color-btn-primary-bg: #d08064;
-  --color-btn-primary-border: #e6eae31a;
+  --color-btn-primary-border: #e3e8e71a;
   --color-btn-primary-shadow: 0 0 #0000;
   --color-btn-primary-inset-shadow: 0 0 #0000;
   --color-btn-primary-hover-bg: #e39a80;
-  --color-btn-primary-hover-border: #e6eae31a;
+  --color-btn-primary-hover-border: #e3e8e71a;
   --color-btn-primary-selected-bg: #d08064;
   --color-btn-primary-selected-shadow: 0 0 #0000;
-  --color-btn-primary-disabled-text: #13161480;
+  --color-btn-primary-disabled-text: #0e111280;
   --color-btn-primary-disabled-bg: #6b453699;
-  --color-btn-primary-disabled-border: #e6eae31a;
-  --color-action-list-item-default-hover-bg: #e6eae31f;
-  --color-segmented-control-bg: #969d931a;
-  --color-segmented-control-button-bg: #131614;
-  --color-segmented-control-button-selected-border: #969d93;
-  --color-fg-default: #e6eae3;
-  --color-fg-muted: #969d93;
-  --color-fg-subtle: #828980;
-  --color-canvas-default: #131614;
-  --color-canvas-overlay: #1a1e1b;
-  --color-canvas-inset: #0d100e;
-  --color-canvas-subtle: #1a1e1b;
-  --color-border-default: #323833;
-  --color-border-muted: #222723;
-  --color-neutral-muted: #969d9366;
+  --color-btn-primary-disabled-border: #e3e8e71a;
+  --color-action-list-item-default-hover-bg: #e3e8e71f;
+  --color-segmented-control-bg: #919a9b1a;
+  --color-segmented-control-button-bg: #0e1112;
+  --color-segmented-control-button-selected-border: #919a9b;
+  --color-fg-default: #e3e8e7;
+  --color-fg-muted: #919a9b;
+  --color-fg-subtle: #7c8587;
+  --color-canvas-default: #0e1112;
+  --color-canvas-overlay: #151a1b;
+  --color-canvas-inset: #090c0d;
+  --color-canvas-subtle: #151a1b;
+  --color-border-default: #2c3233;
+  --color-border-muted: #1b2123;
+  --color-neutral-muted: #919a9b66;
   --color-accent-fg: #d08064;
   --color-accent-emphasis: #d08064;
   --color-accent-muted: #d0806466;
-  --color-accent-subtle: #29302a1a;
+  --color-accent-subtle: #232a2c1a;
   --color-success-fg: #9ec48a;
   --color-attention-fg: #e0a06a;
   --color-attention-muted: #e0a06a66;
@@ -86,8 +87,8 @@ main {
   --color-primer-shadow-inset: 0 0 #0000;
 
   /*! Extensions from @primer/css/alerts/flash.scss */
-  --color-scale-gray-7: #1e221f;
-  --color-scale-blue-8: #29302a;
+  --color-scale-gray-7: #171c1d;
+  --color-scale-blue-8: #232a2c;
   --color-social-reaction-bg-hover: var(--color-scale-gray-7);
   --color-social-reaction-bg-reacted-hover: var(--color-scale-blue-8);
 }
