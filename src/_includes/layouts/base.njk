@@ -1,22 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if title and title != site.title %}{{ title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{{ description or site.description }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Newsreader:ital,opsz,wght@0,8..72,400;0,8..72,500;1,8..72,400&family=Outfit:wght@400;500&display=swap" rel="stylesheet">
+  <meta name="author" content="{{ site.author }}">
+
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="/feed.xml">
+
+  <meta name="theme-color" content="#f4efe6">
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem("theme") ||
+          (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute("content", theme === "dark" ? "#161311" : "#f4efe6");
+      } catch (e) {}
+    })();
+  </script>
+
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:type" content="{{ ogType or 'website' }}">
+  <meta property="og:title" content="{{ title or site.title }}">
+  <meta property="og:description" content="{{ description or site.description }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ title or site.title }}">
+  <meta name="twitter:description" content="{{ description or site.description }}">
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": {{ site.title | json | safe }},
+      "url": {{ site.url | json | safe }},
+      "description": {{ (description or site.description) | json | safe }},
+      "author": {
+        "@type": "Person",
+        "name": {{ site.author | json | safe }},
+        "url": {{ site.url | json | safe }},
+        "sameAs": [{{ site.github | json | safe }}, {{ site.linkedin | json | safe }}, {{ site.kaggle | json | safe }}]
+      }
+    }
+  </script>
+  {% if ogType == "article" %}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": {{ title | json | safe }},
+      "description": {{ description | json | safe }},
+      "datePublished": {{ date | isoDate | json | safe }},
+      "url": {{ (site.url + page.url) | json | safe }},
+      "mainEntityOfPage": {{ (site.url + page.url) | json | safe }},
+      "author": {
+        "@type": "Person",
+        "name": {{ site.author | json | safe }},
+        "url": {{ site.url | json | safe }}
+      }
+    }
+  </script>
+  {% endif %}
+
+  <link rel="stylesheet" href="/css/fonts.css">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   {% if showProgress %}
   <div class="progress" data-progress></div>
   {% endif %}
   <div class="wrap">
     {% include "partials/header.njk" %}
-    {{ content | safe }}
+    <main id="main">
+      {{ content | safe }}
+    </main>
     {% include "partials/footer.njk" %}
   </div>
   <script src="/js/main.js"></script>

@@ -1,4 +1,8 @@
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+
 module.exports = function (eleventyConfig) {
+  eleventyConfig.addPlugin(syntaxHighlight);
+
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy("js");
   eleventyConfig.addPassthroughCopy("assets");
@@ -21,6 +25,12 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("limit", (arr, count) => {
     return (arr || []).slice(0, count);
   });
+
+  eleventyConfig.addFilter("rfc822", (value) => new Date(value).toUTCString());
+
+  eleventyConfig.addFilter("isoDate", (value) => new Date(value).toISOString());
+
+  eleventyConfig.addFilter("json", (value) => JSON.stringify(value));
 
   eleventyConfig.setServerOptions({
     port: 8000,
