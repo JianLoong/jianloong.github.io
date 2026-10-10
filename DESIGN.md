@@ -1,75 +1,80 @@
 ---
 name: Jian
-description: A field manual for reliability, data, and small tools.
+description: An atlas of reliability, data, and small tools.
 colors:
-  paper: "#dfe4e3"
-  paper-raised: "#ecf0ef"
-  ink: "#14181a"
-  ink-soft: "#323839"
-  ink-muted: "#5e6468"
-  hairline: "#bfc6c6"
-  oxblood: "#8c3b28"
-  oxblood-deep: "#6e2d1e"
-  mark: "#d8dedd"
-  syntax-comment: "#58605c"
-  syntax-keyword: "#8c3b28"
-  syntax-string: "#3b6449"
-  syntax-function: "#4a4a8c"
-  syntax-number: "#a3542c"
-  syntax-punctuation: "#5e6468"
-  night-ground: "#0e1112"
-  night-raised: "#151a1b"
-  night-ink: "#e3e8e7"
-  night-ink-soft: "#c7cecd"
-  night-ink-muted: "#919a9b"
-  night-hairline: "#2c3233"
-  night-oxblood: "#d08064"
-  night-mark: "#232a2c"
+  plate: "#e9e7de"
+  plate-raised: "#f4f2ea"
+  ink: "#14161f"
+  ink-soft: "#3a3d4a"
+  ink-muted: "#62667a"
+  hairline: "#c6c5bb"
+  grid: "#d8d6cb"
+  star-hot: "#8a4f11"
+  star-cool: "#2f6a80"
+  star-faint: "#6b4a86"
+  mark: "#dcdad0"
+  syntax-comment: "#6b6f80"
+  syntax-keyword: "#8a4f11"
+  syntax-string: "#2f6a45"
+  syntax-function: "#6b4a86"
+  syntax-number: "#2f6a80"
+  syntax-punctuation: "#62667a"
+  sky: "#0a0d18"
+  sky-raised: "#121728"
+  sky-ink: "#e9e7db"
+  sky-ink-soft: "#c3c1b5"
+  sky-ink-muted: "#8b8e9c"
+  sky-hairline: "#232a42"
+  sky-grid: "#1b2138"
+  sky-star-hot: "#f0c674"
+  sky-star-cool: "#8fb8c9"
+  sky-star-faint: "#b892c9"
+  sky-mark: "#1a2135"
 typography:
   display:
-    fontFamily: "Newsreader, 'Iowan Old Style', Georgia, serif"
+    fontFamily: "Spectral, Georgia, 'Times New Roman', serif"
     fontSize: "clamp(2.2rem, 4.5vw, 3.8rem)"
     fontWeight: 500
     lineHeight: 1.08
-    letterSpacing: "-0.035em"
+    letterSpacing: "-0.02em"
   headline:
-    fontFamily: "Newsreader, 'Iowan Old Style', Georgia, serif"
+    fontFamily: "Spectral, Georgia, 'Times New Roman', serif"
     fontSize: "1.55rem"
     fontWeight: 500
     lineHeight: 1.2
-    letterSpacing: "-0.02em"
+    letterSpacing: "-0.01em"
   title:
-    fontFamily: "Newsreader, 'Iowan Old Style', Georgia, serif"
+    fontFamily: "Spectral, Georgia, 'Times New Roman', serif"
     fontSize: "1.35rem"
     fontWeight: 500
     lineHeight: 1.25
-    letterSpacing: "-0.02em"
+    letterSpacing: "-0.01em"
   subhead:
-    fontFamily: "Newsreader, 'Iowan Old Style', Georgia, serif"
+    fontFamily: "Spectral, Georgia, 'Times New Roman', serif"
     fontSize: "1.28rem"
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: "normal"
   body:
-    fontFamily: "Newsreader, 'Iowan Old Style', Georgia, serif"
+    fontFamily: "Spectral, Georgia, 'Times New Roman', serif"
     fontSize: "1.125rem"
     fontWeight: 400
     lineHeight: 1.7
     letterSpacing: "normal"
   body-tight:
-    fontFamily: "Newsreader, 'Iowan Old Style', Georgia, serif"
+    fontFamily: "Spectral, Georgia, 'Times New Roman', serif"
     fontSize: "1.02rem"
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: "normal"
   label:
-    fontFamily: "Outfit, 'Helvetica Neue', sans-serif"
+    fontFamily: "'Azeret Mono', ui-monospace, Menlo, monospace"
     fontSize: "0.86rem"
     fontWeight: 400
     lineHeight: 1.4
     letterSpacing: "0.08em"
   code:
-    fontFamily: "'IBM Plex Mono', ui-monospace, monospace"
+    fontFamily: "'Azeret Mono', ui-monospace, Menlo, monospace"
     fontSize: "0.9rem"
     fontWeight: 400
     lineHeight: 1.6
@@ -77,27 +82,27 @@ rounded:
   pill: "999px"
 components:
   theme-toggle:
-    backgroundColor: "{colors.paper-raised}"
+    backgroundColor: "{colors.plate-raised}"
     textColor: "{colors.ink}"
     rounded: "{rounded.pill}"
-    size: "2.1rem"
+    size: "2.75rem"
   project-card:
-    backgroundColor: "{colors.paper-raised}"
+    backgroundColor: "{colors.plate-raised}"
     textColor: "{colors.ink-soft}"
     rounded: "0"
     padding: "1.4rem 1.35rem 1.2rem"
   post-card:
-    backgroundColor: "{colors.paper}"
+    backgroundColor: "{colors.plate}"
     textColor: "{colors.ink-soft}"
     rounded: "0"
     padding: "1.7rem 0"
   skip-link:
-    backgroundColor: "{colors.oxblood}"
-    textColor: "{colors.paper}"
+    backgroundColor: "{colors.star-hot}"
+    textColor: "{colors.plate}"
     rounded: "0"
     padding: "0.6rem 1rem"
   blockquote:
-    backgroundColor: "{colors.paper}"
+    backgroundColor: "{colors.plate}"
     textColor: "{colors.ink-soft}"
     rounded: "0"
     padding: "0 0 0 1.2rem"
@@ -113,145 +118,81 @@ components:
 
 ## Overview
 
-**Creative North Star: "The Field Manual"**
+**The Atlas.** The site is a plotted field: a ruled coordinate plate, mono annotations that measure it, and a catalogue whose marks are sized by a real quantity rather than decorated.
 
-A field manual is written to be used, not admired. It is plain, it is durable, and it assumes you will come back to it holding a problem. This system is built the same way: a cool neutral ground, a single oxblood ink for anything that matters, hairline rules doing the structural work that other systems delegate to shadows and cards.
+It replaced a "field manual" world — warm paper, an oxblood accent, and two serifs. That world was competent and generic: cream ground plus high-contrast serif is the single most predictable pairing an interface can reach for. The atlas is the opposite bet: a cool, dark, instrument-like field where the type is a working text face, the chrome is mono, and **colour is data**.
 
-The layout is deliberately narrow and columnar. Body text is set at `--measure` (42rem, roughly 65–75 characters) and the page never exceeds `--page` (72rem), so the reading experience stays the same whether you arrive on a laptop or a phone. Density is honest: no card corners, no elevation, no ornament that would have to be maintained.
+Two rules make the world legible rather than merely dark:
 
-The voice is utilitarian and terse. Headings state what they are, meta lines are uppercase labels rather than prose, and decoration is absent by policy. All the warmth is spent deliberately, in two places only — the oxblood ink and the serif — against a ground that stays cool.
-
-**Key Characteristics:**
-- A cool neutral ground with a single oxblood accent; no secondary or tertiary hues
-- Square corners everywhere, with exactly one pill (the theme toggle)
-- Structure carried by 1px hairlines, never by shadow
-- A serif/sans/mono split with one job per face, and one serif doing both display and prose at different weights
-- Restrained but warm: the material does the personality work, the shapes stay plain
+- **The world owns the frame; the column stays calm.** Grid, mono, and plotted marks live in the masthead, the navigation, the legend, and the catalogue. The running prose is a plain column at a plain measure in a reading face. A star atlas that plots behind its own text is a poster, not an atlas.
+- **Colour is measurement, not decoration.** There is no accent colour. There is a magnitude scale.
 
 ## Colors
 
-Two inks and a paper. Almost nothing else.
+Two grounds, because the world has two states: the sky it plots at night, and the plate it prints by day. Neither is a "theme" of the other — both are complete.
 
-### Primary
-- **Oxblood** (`#8c3b28`): the single accent. Links, the reading-progress bar, list markers, blockquote rules, the "Skip to content" ground, and the `h3` of any card under hover. If something must draw the eye, it is this colour or it is nothing.
-- **Oxblood Deep** (`#6e2d1e`): the pressed state for oxblood. Used for accent hover only.
+### The Sky (dark, the world's native state)
+- **Sky** (`#0a0d18`): the ground. A blue-black, not a neutral black — the ink is tinted toward it.
+- **Sky Raised** (`#121728`): surfaces that sit on the field — the theme toggle, project cards.
+- **Sky Ink** (`#e9e7db`): primary text. A bone white with a faint warm cast, the colour of plotted data rather than of paper.
+- **Sky Ink Soft** (`#c3c1b5`): body prose at rest.
+- **Sky Ink Muted** (`#8b8e9c`): labels, meta, annotations. Cooler than the ink, because annotations belong to the instrument, not the text.
+- **Sky Hairline** (`#232a42`) / **Sky Grid** (`#1b2138`): every rule, and the coordinate plate itself.
 
-### Neutral
-- **Field Paper** (`#dfe4e3`): the page ground, and the text colour on any oxblood surface. A cool neutral paper set about 12% deeper than the warm off-white it replaced — deep enough that the shift is visible on sight rather than only measurable.
-- **Raised Paper** (`#ecf0ef`): surfaces that sit *on* the page — the theme toggle, the project cards. The only tonal step in the system.
-- **Ink** (`#14181a`): primary text. Never pure black.
-- **Soft Ink** (`#323839`): body prose at rest — descriptions, list items, the article deck.
-- **Muted Ink** (`#5e6468`): labels, meta lines, timestamps, footer. Explicitly secondary, and deliberately deeper than it looks like it needs to be: at 4.7:1 it is the tightest pair in the system, and it only clears AA because the ground is no longer bright.
-- **Hairline** (`#bfc6c6`): every border, rule, and divider in the system.
-- **Mark** (`#d8dedd`): the ground behind inline code and code blocks.
+### The Plate (light, the printed state)
+- **Plate** (`#e9e7de`), **Plate Raised** (`#f4f2ea`), **Ink** (`#14161f`), **Soft Ink** (`#3a3d4a`), **Muted Ink** (`#62667a`), **Hairline** (`#c6c5bb`), **Grid** (`#d8d6cb`).
+
+### The Magnitude Scale
+Three tints, and the only colour the system has. They are a scale, not a palette: the same three run hot → cool → faint in both grounds.
+- **Star Hot** (`#f0c674` sky / `#8a4f11` plate): the brightest magnitude, and nothing else — the highest-value action on a screen, or a long entry in the catalogue.
+- **Star Cool** (`#8fb8c9` / `#2f6a80`): mid magnitude, the default link tint.
+- **Star Faint** (`#b892c9` / `#6b4a86`): the faintest, for the shortest or least weighty thing in view.
 
 ### Syntax
-Six tokens colour code inside fenced blocks, mapped separately per theme so a block stays legible on whatever ground it sits. In light mode they resolve against **Mark** (`#d8dedd`), and every pair has to clear 4.5:1 — which is why the string green is `#3b6449` and the comment grey `#58605c`.
-
-- **Syntax Comment** (`#58605c`), italic: comments, prolog, doctype.
-- **Syntax Keyword** (`#8c3b28`): keywords, booleans, tags, selectors, properties. Deliberately the same oxblood as the accent, so code agrees with the page around it.
-- **Syntax String** (`#3b6449`): strings, chars, attribute values.
-- **Syntax Function** (`#4a4a8c`): function, class and builtin names.
-- **Syntax Number** (`#a3542c`): numbers, constants, symbols.
-- **Syntax Punctuation** (`#5e6468`): punctuation and operators.
-
-**The One Ink Rule.** There is exactly one accent hue. Oxblood appears on well under 10% of any screen; its scarcity is what makes it read as emphasis. A second accent hue is a redesign, not an addition.
-
-**The Tinted Ink Rule.** Text is never pure black or pure grey. Every ink is tinted toward the ground it sits on — cooled here, because the ground is cool (`#14181a`, not `#000`) — so type sits *on* the page rather than being cut out of it.
+Six tokens colour fenced code, mapped per theme so a block stays legible on whatever ground it sits. In light mode they resolve against **Mark** (`#dcdad0`); every pair clears 4.5:1 there, which is why the string green is `#2f6a45` and the comment grey `#6b6f80`.
 
 ## Typography
 
-**Display Font:** Newsreader at 500 (with Iowan Old Style, Georgia)
-**Body Font:** Newsreader at 400 (with Iowan Old Style, Georgia)
-**Label Font:** Outfit (with Helvetica Neue)
-**Mono Font:** IBM Plex Mono
+**Spectral** carries the whole page — display and prose at different weights. **Azeret Mono** carries everything the world measures with: navigation, labels, metadata, coordinate annotations, and code.
 
-**Character:** One serif doing two jobs, separated by weight and size rather than by a second family — Newsreader at 500 for anything structural, Newsreader at 400 for prose that has to be read at length. Outfit handles all interface and meta text in uppercase, and IBM Plex Mono is confined to code. The palette of faces is deliberately narrow: no second display face, no italic variants beyond what prose needs.
+Both were chosen off the training-data default list (Fraunces, Newsreader, Playfair, Lora, Outfit, IBM Plex and friends), which is the point: the previous world ran two of those faces and read as a template because of it.
 
-### Hierarchy
-Eight roles, each with a job no other role can do.
+**The One Serif Rule.** Spectral is the only reading family, at 400 for prose and 500 for headings. Nothing else sets a sentence. **Azeret Mono never sets running prose or a heading** — it is the instrument's voice, reserved for labels, meta, annotations, and code. A page whose body text is mono is a terminal costume, not an atlas.
 
-- **Display** (500, `clamp(2.2rem, 4.5vw, 3.8rem)`, 1.08, −0.035em): every `h1` — index pages, articles, the About page, the homepage hero. One clamp site-wide; the tight tracking is what makes it read as a masthead rather than a heading.
-- **Headline** (500, 1.55rem, 1.2, −0.02em): article `h2` and post-card titles.
-- **Title** (500, 1.35rem, 1.25, −0.02em): project-card titles.
-- **Subhead** (400, 1.28rem, 1.5): the homepage lede and the article deck. Larger than prose, lighter than a heading — it introduces without competing.
-- **Body** (400, 1.125rem, 1.7): all article prose, held to `--measure` (42rem) for 65–75 characters.
-- **Body Tight** (400, 1.02rem, 1.5): card descriptions, where scanning beats reading and the column is narrower.
-- **Label** (400, 0.86rem, `letter-spacing` 0.04–0.22em, uppercase): nav, metadata lines, section heads, footer. Size stays one step and tracking carries all the variation — uppercase and tracked is the system's only decorative move.
-- **Code** (400, 0.9rem, 1.6): fenced code. Inline code is deliberately relative (`0.88em`) so it tracks the prose it sits in.
-
-**The One Serif Rule.** Newsreader carries the whole page. Weight and size do the separating — 500 for structural headings, 400 for prose. Reaching for a second serif to manufacture that contrast is the failure this rule exists to prevent.
-
-**The Uppercase Means Label Rule.** Uppercase plus letter-spacing marks something as metadata, never as content. If a line is meant to be read as a sentence, it does not get tracked caps.
+**The Measured Voice Rule.** Mono is always uppercase and tracked (`0.08em`–`0.14em`) when it labels, and sentence case when it annotates a value. Uppercase mono is a label; lowercase mono is a reading.
 
 ## Layout
 
-A single column at `--measure` (42rem), inside a container at `--page` (72rem), centred, with 2.5rem gutters narrowing to 1.5rem below 560px. The homepage and index pages use a full-width hero above the column.
+One measure, `42rem`, and one page width, `72rem`. The reading column never changes width to fit the frame — extra width goes to the gutters, where the grid and the legend live.
 
-Spacing is generous and vertical: sections are separated by 3.5–5rem, blocks within a section by 1.2–1.7rem. Grids collapse at **820px** (`post-card` and `project-grid` both go single-column) and the container tightens at **560px**.
-
-The `post-card` is a 8.5rem / 1fr grid — a fixed meta column beside a fluid body — which is the system's only asymmetric layout.
+- **The Ruled Plate Rule.** The ground is ruled at a `6rem` module in **Grid**: one hairline off the ground, never an overlay. It reads as plate stock at reading distance and disappears behind the prose.
 
 ## Elevation & Depth
 
-**This system is flat. There are no shadows, and that is the design, not an omission.** Depth is expressed entirely through 1px `--hairline` rules and exactly one tonal step (`--paper-raised` against `--paper`). A shadow token was once defined in both themes and is now unused; it was removed from this document rather than recorded, because nothing in the interface consumes it.
-
-**The Hairline Rule.** Separation is drawn, never cast. If two things need to be told apart, they get a 1px border or a background step — not a shadow, not a glow, not a gradient.
+The system has **no shadows at all**. Depth is carried entirely by hairlines, the one raised tonal step, and the grid. A shadow in this world would be a foreign object.
 
 ## Shapes
 
-Square. Every container, card, code block, input and image is `border-radius: 0`. The single exception is the theme-toggle button at `999px`, which reads as a control rather than a surface.
-
-Borders are always 1px and always `--hairline`, except the blockquote which carries a 2px `--oxblood` left edge, and the reading-progress bar at 3px. Form language is rectilinear and orthogonal: no clipping, no rotation, no overlapping surfaces.
+Square throughout, with exactly one exception: the magnitude mark is a circle, and the theme toggle is a pill. Both are instruments — a plotted dot and a control — so both are round. Everything structural is square.
 
 ## Components
 
-### Theme toggle
-- **Shape:** pill (`999px`) — the one rounded thing in the system, because it is a control
-- **Colour:** `--paper-raised` ground, `--ink` icon, `--hairline` border
-- **Size:** 2.1rem square, centred glyph
-- **State:** no hover treatment; it is a switch, not a link
-
-### Post card
-- **Shape:** square, no border on the sides — top and bottom rules only
-- **Layout:** 8.5rem meta column, 1fr body
-- **Colour:** `--ink-soft` body, `--ink-muted` meta
-- **Hover:** the `h3` turns `--oxblood`; nothing else moves. No lift, no underline, no background.
-
-### Project card
-- **Shape:** 1px `--hairline` border, square corners, `min-height: 11rem`
-- **Colour:** `--paper-raised` ground, `--ink-soft` body, `--ink-muted` meta
-- **Padding:** 1.4rem / 1.35rem / 1.2rem
-- **Hover:** the `h3` turns `--oxblood`, matching post cards
-
-### Navigation
-- **Style:** uppercase Outfit, 0.86rem, `letter-spacing: 0.08em`, `--ink-muted` at rest
-- **Active / hover:** `--ink`, not `--oxblood` — nav is chrome and stays out of the accent's way
-
-### Skip link
-- **Style:** oxblood ground with paper text, parked off-canvas until focused
-- **Note:** this is the only solid oxblood surface in the interface
-
-### Code
-- **Inline:** IBM Plex Mono at 0.88em on `--mark`, near-square padding
-- **Block:** IBM Plex Mono at 0.9rem on `--mark`, 1.1rem/1.3rem padding, horizontal scroll rather than wrapping
-- **Syntax:** six `--code-*` tokens, mapped per theme. Comments are italic.
+- **Magnitude mark** — the signature. A plotted dot at the head of a catalogue entry whose diameter derives from a **real** quantity (reading minutes), tinted by magnitude class. It is a measurement, not an ornament: it carries `--mag` and `--mag-tint` and nothing else.
+- **Atlas legend** — mono, tracked, uppercase, stating real counts of what is in the field. A star atlas always ships one, and it is not decoration: it tells the reader the scale of what they are looking at.
+- **Post card / project card** — square, hairline-separated or raised. Card titles are underlined at rest so the affordance survives without hover.
+- **Code block** — Mark ground, mono type, square. The setting an atlas gives its figures.
 
 ## Do's and Don'ts
 
-### Do:
-- **Do** hold prose to `--measure` (42rem) — the reading column is the product.
-- **Do** reach for a 1px `--hairline` when two things need separating.
-- **Do** keep oxblood scarce; it is the only emphasis the system has.
-- **Do** set interface and meta text in uppercase Outfit with letter-spacing.
-- **Do** keep corners square. The theme toggle is the single sanctioned exception.
-- **Do** check both themes — every token has a night counterpart, and the accent warms from `#8c3b28` to `#d08064`.
+**Do**
+- Keep the prose column plain. The world is the frame.
+- Let colour mean something: hot, cool, and faint are a scale, and a fourth tint would break it.
+- Set annotations in uppercase tracked mono, and values in sentence-case mono.
+- Size the magnitude mark from real content.
 
-### Don't:
-- **Don't** add a second accent hue, a gradient, or a glow.
-- **Don't** introduce shadows or elevation. Separation is drawn, never cast.
-- **Don't** use pure black or pure grey; every ink is warmed toward the paper.
-- **Don't** put text on a coloured ground unless it is `--paper` on `--oxblood` (the skip link is the only precedent, and it measures 7:1).
-- **Don't** set content in tracked uppercase — that treatment means "this is a label".
-- **Don't** set body prose above weight 400; weight is how display is separated from reading.
-- **Don't** introduce a second serif to create display contrast.
+**Don't**
+- Don't put mono in the running text or a heading, at any size.
+- Don't add a shadow, a gradient, or a glow.
+- Don't use the three tints decoratively — a tint that does not encode magnitude is noise.
+- Don't let the grid compete with the text: if it is visible *while* reading, it is too strong.
+- Don't reintroduce a second serif, or a "display face" of any kind. Spectral at 500 is the display voice.
