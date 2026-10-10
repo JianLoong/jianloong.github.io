@@ -1,16 +1,21 @@
 (function () {
   var root = document.documentElement;
-  var stored = localStorage.getItem("theme");
-  var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  var theme = stored || (prefersDark ? "dark" : "light");
+  var meta = document.querySelector('meta[name="theme-color"]');
 
-  root.setAttribute("data-theme", theme);
+  function applyTheme(theme) {
+    root.setAttribute("data-theme", theme);
+    if (meta) {
+      meta.setAttribute("content", theme === "dark" ? "#161311" : "#f4efe6");
+    }
+  }
 
+  // The theme itself is applied by an inline <head> script to avoid a flash;
+  // here we only wire up the toggle.
   var toggle = document.querySelector("[data-theme-toggle]");
   if (toggle) {
     toggle.addEventListener("click", function () {
-      theme = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      root.setAttribute("data-theme", theme);
+      var theme = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      applyTheme(theme);
       localStorage.setItem("theme", theme);
     });
   }

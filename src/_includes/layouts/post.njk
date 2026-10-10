@@ -1,6 +1,7 @@
 ---
 layout: layouts/base.njk
 showProgress: true
+ogType: article
 ---
 <article class="article">
   <p class="article-meta">{{ category }} · {{ date | dateFormat }}{% if readingTime %} · {{ readingTime }} min{% endif %}</p>
@@ -9,14 +10,4 @@ showProgress: true
   <p class="deck">{{ description }}</p>
   {% endif %}
   {{ content | safe }}
-  {% if related.length %}
-  <div class="related">
-    <h2>Continue reading</h2>
-    <ul>
-      {% for item in related %}
-      <li><a href="{{ item.url }}">{{ item.title }}</a></li>
-      {% endfor %}
-    </ul>
-  </div>
-  {% endif %}
 </article>

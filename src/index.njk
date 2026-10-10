@@ -33,11 +33,10 @@ permalink: /
 
 <div class="section-head">
   <h2>Selected work</h2>
-  <a href="{{ site.github }}">GitHub</a>
 </div>
 
 <section class="project-grid">
-  {% for project in projects %}
+  {% for project in projects | limit(2) %}
   <a class="project" href="{{ project.url }}">
     <h3>{{ project.title }}</h3>
     <p>{{ project.blurb }}</p>
