@@ -17,6 +17,14 @@
   // here we only wire up the toggle.
   var toggle = document.querySelector("[data-theme-toggle]");
   if (toggle) {
+    // The button now carries its own state: `aria-pressed` mirrors the active
+    // theme, and CSS swaps the sun/moon glyph off the same data-theme attribute.
+    var syncToggle = function (theme) {
+      toggle.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+    };
+    syncToggle(root.getAttribute("data-theme"));
+    themeListeners.push(syncToggle);
+
     toggle.addEventListener("click", function () {
       var theme = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
       applyTheme(theme);

@@ -10,14 +10,14 @@
   --accent-hover: #6e2d1e;
   --mark: #ead9c4;
   --shadow: 0 18px 40px rgba(40, 28, 16, 0.06);
-  --serif-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --serif-display: "Newsreader", "Iowan Old Style", Georgia, serif;
   --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
   --sans: "Outfit", "Helvetica Neue", sans-serif;
   --measure: 42rem;
   --page: 72rem;
   --code-comment: #7a7264;
   --code-keyword: #8c3b28;
-  --code-string: #3f6b4f;
+  --code-string: #3b6449;
   --code-function: #4a4a8c;
   --code-number: #a3542c;
   --code-punct: #6f675d;
@@ -83,6 +83,12 @@ a:hover {
   outline-offset: 2px;
 }
 
+/* Browser surfaces ship defaults belonging to no design system. */
+::selection {
+  background: var(--mark);
+  color: var(--ink);
+}
+
 .skip-link {
   position: absolute;
   left: -9999px;
@@ -98,6 +104,13 @@ a:hover {
 
 .skip-link:focus {
   left: 0;
+}
+
+/* The global `a:hover` rule is specificity (0,1,1) and would otherwise beat
+   this element's own colour (0,1,0), repainting the skip link accent-on-accent:
+   1.0:1, invisible, on the one control the users who need it reach first. */
+.skip-link:hover {
+  color: var(--bg);
 }
 
 .wrap {
@@ -132,16 +145,19 @@ a:hover {
 .nav {
   display: flex;
   align-items: center;
-  gap: 1.35rem;
+  gap: 0.65rem;
   font-family: var(--sans);
   font-size: 0.86rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
+/* Vertical padding gives each destination a ~44px hit area without changing
+   the visual rhythm; the reduced gap absorbs the horizontal padding. */
 .nav a {
   text-decoration: none;
   color: var(--muted);
+  padding: 0.8rem 0.35rem;
 }
 
 .nav a:hover,
@@ -150,8 +166,8 @@ a:hover {
 }
 
 .theme-toggle {
-  width: 2.1rem;
-  height: 2.1rem;
+  width: 2.75rem;
+  height: 2.75rem;
   border: 1px solid var(--rule);
   background: var(--bg-elevated);
   color: var(--ink);
@@ -163,22 +179,27 @@ a:hover {
 }
 
 .theme-toggle svg {
-  width: 1rem;
-  height: 1rem;
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* The control now reports its own state: the glyph matches the active theme,
+   and `aria-pressed` carries the same fact to screen readers. */
+.theme-toggle [data-icon="moon"] {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle [data-icon="sun"] {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle [data-icon="moon"] {
+  display: block;
 }
 
 .hero {
   padding: 4.5rem 0 2.8rem;
   max-width: var(--measure);
-}
-
-.kicker {
-  font-family: var(--sans);
-  font-size: 0.75rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin: 0 0 0.9rem;
 }
 
 .hero h1,
@@ -240,8 +261,25 @@ a:hover {
   text-decoration: none;
 }
 
-.post-card:hover h3 {
+/* Cards revealed nothing until hover, and touch has no hover. A rest-state
+   underline gives the affordance before any interaction; the accent moves it
+   to the hover colour. */
+.post-card h2,
+.post-card h3,
+.project h2,
+.project h3 {
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.post-card:hover h2,
+.post-card:hover h3,
+.project:hover h2,
+.project:hover h3 {
   color: var(--accent);
+  text-decoration-color: var(--accent);
 }
 
 .post-meta {
@@ -251,6 +289,7 @@ a:hover {
   letter-spacing: 0.04em;
 }
 
+.post-card h2,
 .post-card h3 {
   font-family: var(--serif-display);
   font-size: 1.55rem;
@@ -532,6 +571,7 @@ a:hover {
 .socials a {
   color: var(--accent);
   text-decoration: none;
+  padding: 0.4rem 0;
 }
 
 .project-grid {
@@ -552,10 +592,7 @@ a:hover {
   min-height: 11rem;
 }
 
-.project:hover h3 {
-  color: var(--accent);
-}
-
+.project h2,
 .project h3 {
   font-family: var(--serif-display);
   font-size: 1.35rem;
@@ -588,6 +625,7 @@ a:hover {
   color: var(--accent);
   text-decoration: none;
   letter-spacing: 0.04em;
+  padding: 0.4rem 0;
 }
 
 /* Comments: a giscus embed, themed to match via css/giscus-light.css and

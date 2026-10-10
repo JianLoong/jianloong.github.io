@@ -5,7 +5,6 @@ description: Writing by Jian on software engineering, reliability, and data.
 permalink: /writing/
 ---
 <section class="hero">
-  <p class="kicker">Index</p>
   <h1 class="page-title">Writing</h1>
   <p class="lede">Engineering notes, a little teaching, and the occasional experiment. Newest first.</p>
 </section>
@@ -15,7 +14,7 @@ permalink: /writing/
   <a class="post-card" href="{{ post.url }}">
     <span class="post-meta">{{ post.date | dateFormat }}{% if post.data.category %}<br>{{ post.data.category }}{% endif %}</span>
     <div>
-      <h3>{{ post.data.title }}</h3>
+    <h2>{{ post.data.title }}</h2>
       <p>{{ post.data.description }}</p>
     </div>
   </a>

@@ -4,9 +4,9 @@
     <style>
       /* Same self-hosted faces the site uses; paths are relative to this file. */
       @font-face {
-        font-family: 'Fraunces';
+        font-family: 'Newsreader';
         font-weight: 500;
-        src: url('fonts/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxC9TeA.woff2') format('woff2');
+        src: url('fonts/cY9AfjOCX1hbuyalUrK4397yjA.woff2') format('woff2');
       }
       @font-face {
         font-family: 'Outfit';
@@ -38,8 +38,8 @@
   <text x="90" y="112" font-family="'Outfit', 'Helvetica Neue', Arial, sans-serif" font-size="26" letter-spacing="6" fill="#6f675d">JIAN</text>
   <rect x="90" y="144" width="110" height="5" fill="#8c3b28"/>
 
-  <text x="90" y="292" font-family="'Fraunces', Georgia, serif" font-size="58" font-weight="500" fill="#1c1915">Using a coding agent</text>
-  <text x="90" y="364" font-family="'Fraunces', Georgia, serif" font-size="58" font-weight="500" fill="#1c1915">as an observability agent</text>
+  <text x="90" y="292" font-family="'Newsreader', Georgia, serif" font-size="58" font-weight="500" fill="#1c1915">Using a coding agent</text>
+  <text x="90" y="364" font-family="'Newsreader', Georgia, serif" font-size="58" font-weight="500" fill="#1c1915">as an observability agent</text>
 
   <text x="90" y="540" font-family="'Outfit', 'Helvetica Neue', Arial, sans-serif" font-size="26" fill="#6f675d">Tools · 8 min read</text>
 </svg>
