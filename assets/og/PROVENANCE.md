@@ -33,10 +33,17 @@ depends on the renderer being present.
 ## Provenance
 
 The generation record for each raster is embedded in the PNG itself, and its
-text lives at `tools/og-card.prompt.txt`. After re-rendering a card, re-embed
-it so the raster is not orphaned:
+text lives at `tools/og-card.prompt.txt`. **`npm run og` writes it in the same
+pass as the render**, so a re-render cannot leave a card without it. That used
+to be a separate manual step, and skipping it stranded the provenance on all
+three rasters — the reason the renderer now owns it.
+
+Verify at any time:
 
 ```bash
-impeccable embed-prompt assets/og/<card>.png --prompt-file tools/og-card.prompt.txt
-impeccable embed-prompt --scan assets/og     # should report 0 missing
+impeccable embed-prompt --scan assets/og     # expect: 3 rasters, 0 missing
 ```
+
+The renderer is **not byte-reproducible**: Chrome's PNG compression varies by a
+few bytes between runs, so `npm run og` shows a small diff even when no card
+changed. Run it when a card actually changes, not on a whim.

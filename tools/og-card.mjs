@@ -11,11 +11,13 @@
  * Chrome is only needed to render. The committed PNGs ship whether or not it is
  * present, so a deploy never depends on this script.
  *
- * After changing a card, re-run the finish review's evidence rule: every
- * shipping raster carries its provenance, so update assets/og/PROVENANCE.md.
+ * Each card's provenance is embedded into the PNG by this script, in the same
+ * tEXt chunk impeccable's embed-prompt writes, so a re-render cannot strand a
+ * raster without it. See assets/og/PROVENANCE.md.
  */
 import { spawnSync } from 'node:child_process';
-import { mkdirSync, writeFileSync, rmSync, readdirSync } from 'node:fs';
+import { mkdirSync, writeFileSync, rmSync, readdirSync, readFileSync } from 'node:fs';
+import { crc32 } from 'node:zlib';
 import { join } from 'node:path';
 
 const ROOT = process.cwd();
@@ -129,6 +131,31 @@ if (!chrome) {
 mkdirSync(OUT_DIR, { recursive: true });
 mkdirSync(TMP_DIR, { recursive: true });
 
+// Provenance lives in the raster itself, so it travels with the file.
+//
+// Written here rather than by shelling out to impeccable's embed-prompt: a
+// re-render used to silently strip the provenance off a card, and this script
+// is the only thing that knows a fresh render needs it back. The chunk is the
+// same one that tool writes -- a tEXt chunk keyed `impeccable:prompt` -- so
+// `impeccable embed-prompt --scan assets/og` still reports it as present.
+function embedProvenance(pngPath, prompt) {
+  const png = readFileSync(pngPath);
+  const iendAt = png.length - 12; // length(0) + "IEND" + crc(4)
+  const data = Buffer.concat([
+    Buffer.from('impeccable:prompt\0', 'latin1'),
+    Buffer.from(prompt, 'latin1'),
+  ]);
+  const chunk = Buffer.alloc(12 + data.length);
+  chunk.writeUInt32BE(data.length, 0);
+  chunk.write('tEXt', 4, 'latin1');
+  data.copy(chunk, 8);
+  chunk.writeUInt32BE(crc32(Buffer.concat([Buffer.from('tEXt', 'latin1'), data])) >>> 0, 8 + data.length);
+  // tEXt must precede IEND.
+  writeFileSync(pngPath, Buffer.concat([png.subarray(0, iendAt), chunk, png.subarray(iendAt)]));
+}
+
+const PROMPT = readFileSync(join(ROOT, 'tools', 'og-card.prompt.txt'), 'utf8');
+
 const written = [];
 for (const card of CARDS) {
   const src = join(TMP_DIR, card.out.replace(/\.png$/, '.html'));
@@ -146,7 +173,9 @@ for (const card of CARDS) {
     `--screenshot=${out.replace(/\\/g, '/')}`,
     `file:///${src.replace(/\\/g, '/')}`,
   ], { stdio: 'ignore' });
-  written.push({ card: card.out, ok: res.status === 0 });
+  const ok = res.status === 0;
+  if (ok) embedProvenance(out, PROMPT);
+  written.push({ card: card.out, ok, provenance: ok });
 }
 
 for (const f of readdirSync(TMP_DIR)) rmSync(join(TMP_DIR, f), { force: true });
