@@ -1,6 +1,3 @@
 node_modules
-.astro
-resources
-dist
 _site
 .cache
