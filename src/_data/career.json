@@ -1,5 +1,5 @@
 {
-  "note": "Employment and study history, supplied by the author from his LinkedIn profile. Dates are as given, never inferred. 'years' is the inclusive span used to plot on the shared axis; axisEnd is the current year, which is what 'Present' resolves to.",
+  "note": "Employment and study history, supplied by the author from his LinkedIn profile. Dates and facts are as given, never inferred. Longer entries carry 'note' (a summary line) and 'points' (achievements), lightly copy-edited for the web but with no fact changed or added.",
   "source": "LinkedIn profile pasted by the author, 2026-10-11",
   "axisStart": 2010,
   "axisEnd": 2026,
@@ -16,7 +16,17 @@
       "org": "Monash University",
       "dates": "Aug 2015 – Dec 2019",
       "years": [2015, 2019],
-      "current": false
+      "current": false,
+      "note": "Subjects: Software Engineering (UML) · Enterprise Applications Development (JavaEE) · Internet Applications Development (ASP.NET MVC5) · Computer Architecture and Operating Systems (Ubuntu and shell scripting) · Programming Foundations in Java. Lecturer for Programming Foundations in Java, Semester 2 2018.",
+      "points": [
+        "Restructured and modernised Internet Applications Development for Semester 2 2018, moving the unit from ASP.NET Web Forms to MVC5.",
+        "Introduced code-similarity detection using ANTLR within JPlag, comparing up to 600 student submissions at a time. Unlike Stanford's MOSS it needs no upload of student work to a third-party server.",
+        "Wrote Python scripts to automate collecting peer-assessment feedback for Software Engineering, which sped up returning feedback to students.",
+        "Wrote shell scripts to automate anonymising student information for reporting.",
+        "Studio mentor for the Industry Experience Project, leading four teams to completion alongside mentors from MYOB — two PHP projects, an iOS project and a JavaEE project.",
+        "Nominated for the Teaching Excellence Award across several units, including Programming Foundations in Java, Computer Architecture and Operating Systems, and Internet Applications Development.",
+        "Held an average SETU (student evaluation of teaching) of 4 or above for every unit taught."
+      ]
     }
   ],
   "study": [
@@ -24,13 +34,28 @@
       "title": "Master of Information Technology (Research)",
       "org": "Monash University",
       "dates": "2013 – 2015",
-      "years": [2013, 2015]
+      "years": [2013, 2015],
+      "points": [
+        "Faculty of Information Technology Merit Scholarship.",
+        "Thesis: “Category R-tree”, supervised by Associate Professor David Taniar — an R-tree is a data structure for location-based queries.",
+        "The thesis option is open only to students averaging 75 or above.",
+        "High Distinction in every programming unit, including Internet Applications Development, Mobile and Distributed System, and Distributed Databases & Big Data.",
+        "Weekly participant in the Spatial Query Reading Group, reading papers on optimising location-based queries."
+      ]
     },
     {
       "title": "Software Engineering and Computer Science",
       "org": "Swinburne University of Technology",
       "dates": "2010 – 2012",
-      "years": [2010, 2012]
+      "years": [2010, 2012],
+      "note": "Activities: Golden Key International Honour Society · ICT Club · Japanese Language Club · MakeWeekend participant · student volunteer.",
+      "points": [
+        "Graduated with first-class honours — an average of 83 (High Distinction average) and a cGPA of 3.91.",
+        "Corporate and Industry award for the highest cGPA in the graduating cohort.",
+        "Swinburne University of Technology Merit Scholarship.",
+        "Capstone: a Student Attendance System using face detection and recognition. The web system ran on a custom PHP framework; the recognition module used JavaCV, a wrapper for OpenCV. A year-long project.",
+        "Booking System: a side project built with the Swinburne Library as a proof of concept."
+      ]
     }
   ]
 }

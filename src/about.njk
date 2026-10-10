@@ -49,6 +49,12 @@ permalink: /about/
         <span class="hist-body">
           <strong class="hist-title">{{ role.title }}</strong>
           <span class="hist-org">{{ role.org }}</span>
+          {% if role.note %}<p class="hist-note">{{ role.note }}</p>{% endif %}
+          {% if role.points %}
+          <ul class="hist-points">
+            {% for p in role.points %}<li>{{ p }}</li>{% endfor %}
+          </ul>
+          {% endif %}
         </span>
       </li>
       {% endfor %}
@@ -62,6 +68,12 @@ permalink: /about/
         <span class="hist-body">
           <strong class="hist-title">{{ ed.title }}</strong>
           <span class="hist-org">{{ ed.org }}</span>
+          {% if ed.note %}<p class="hist-note">{{ ed.note }}</p>{% endif %}
+          {% if ed.points %}
+          <ul class="hist-points">
+            {% for p in ed.points %}<li>{{ p }}</li>{% endfor %}
+          </ul>
+          {% endif %}
         </span>
       </li>
       {% endfor %}
