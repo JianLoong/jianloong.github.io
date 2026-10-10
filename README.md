@@ -35,10 +35,13 @@ npm run build    # one-off build → _site/
 .
 ├── eleventy.config.js     # dirs, passthrough copies, collections, filters
 ├── package.json
+├── PRODUCT.md             # product record: audience, purpose, constraints
+├── DESIGN.md              # design system: tokens and the eight type roles
+├── .impeccable/           # design tooling state (see .gitignore for what is ephemeral)
 ├── src/                   # Eleventy input directory
 │   ├── _data/             # global data
-│   │   ├── site.json      # site title, author, links, location
-│   │   ├── projects.json  # project cards shown on the homepage
+│   │   ├── site.json      # site title, author, social links
+│   │   ├── projects.json  # project cards, shown on the homepage and /projects/
 │   │   └── giscus.js      # comment settings (repo/category IDs, theme)
 │   ├── _includes/
 │   │   ├── layouts/       # base.njk, page.njk, post.njk
@@ -46,6 +49,7 @@ npm run build    # one-off build → _site/
 │   ├── posts/             # blog posts (Markdown) + posts.json
 │   ├── index.njk          # home page
 │   ├── writing.njk        # all posts
+│   ├── projects.njk       # all projects
 │   ├── about.njk          # about page
 │   ├── 404.njk            # not-found page → /404.html
 │   ├── feed.njk           # RSS feed → /feed.xml
@@ -53,7 +57,7 @@ npm run build    # one-off build → _site/
 │   └── robots.njk         # robots.txt
 ├── css/                   # copied verbatim (style.css, fonts.css, giscus themes)
 ├── js/main.js             # copied verbatim to _site/
-├── assets/                # copied verbatim (fonts/, favicon.svg)
+├── assets/                # copied verbatim (fonts/, favicon.svg, og-image.svg)
 └── _site/                 # build output (gitignored)
 ```
 

@@ -9,7 +9,6 @@
   --accent: #8c3b28;
   --accent-hover: #6e2d1e;
   --mark: #ead9c4;
-  --shadow: 0 18px 40px rgba(40, 28, 16, 0.06);
   --serif-display: "Newsreader", "Iowan Old Style", Georgia, serif;
   --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
   --sans: "Outfit", "Helvetica Neue", sans-serif;
@@ -34,7 +33,6 @@
   --accent: #d08064;
   --accent-hover: #e39a80;
   --mark: #3a2b22;
-  --shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
   --code-comment: #9c8f7e;
   --code-keyword: #e39a80;
   --code-string: #9ec48a;
