@@ -714,20 +714,44 @@ body {
   font-weight: 500;
 }
 
-/* The magnitude mark: a plotted dot whose size is the entry's real heft, read
-   straight from the content. Tint is the magnitude class. Sits at the head of
-   a catalogue entry's annotation column, and at the head of an article's own
-   meta line, so a piece you are reading is plotted like everything else. */
+/* The magnitude mark: a fixed-size dot whose tint is the entry's magnitude
+   band. Size was dropped on purpose -- one linear formula was being applied to
+   two quantities with very different ranges (reading minutes span 6-8, stars
+   span 0-37), so the same mark read as a subtle step on a post and a 3rem blob
+   on a project, and a zero-star entry had no mark at all. Keeping both size and
+   tint also double-encoded one value. A fixed dot plus the three-step tint
+   scale states the band and stops there. */
 .post-meta::before,
 .article-meta::before {
   content: "";
   display: inline-block;
   vertical-align: 0.05em;
   margin-right: 0.45rem;
-  width: calc(0.32rem + var(--mag, 5) * 0.075rem);
-  height: calc(0.32rem + var(--mag, 5) * 0.075rem);
+  width: 0.5rem;
+  height: 0.5rem;
   border-radius: 999px;
-  background: var(--mag-tint, var(--accent));
+  background: var(--mag-tint, var(--muted));
+}
+
+/* Colour now carries the band alone, so the legend has to key it. */
+.legend-key {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.9rem;
+}
+
+.legend-key span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.legend-key i {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--muted);
 }
 
 

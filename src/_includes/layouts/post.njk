@@ -4,7 +4,7 @@ showProgress: true
 ogType: article
 ---
 <article class="article">
-  <p class="article-meta" style="--mag: {{ readingTime or 5 }}; --mag-tint: {% if readingTime >= 8 %}var(--accent){% elif readingTime >= 6 %}var(--star-cool){% else %}var(--star-faint){% endif %}">{{ category }} · {{ date | dateFormat }}{% if readingTime %} · {{ readingTime }} min{% endif %}</p>
+  <p class="article-meta" style="--mag-tint: {% if readingTime >= 8 %}var(--accent){% elif readingTime >= 6 %}var(--star-cool){% else %}var(--star-faint){% endif %}">{{ category }} · {{ date | dateFormat }}{% if readingTime %} · {{ readingTime }} min{% endif %}</p>
   <h1>{{ title }}</h1>
   {% if description %}
   <p class="deck">{{ description }}</p>

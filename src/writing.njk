@@ -4,6 +4,7 @@ title: Writing
 description: Writing by Jian on software engineering, reliability, and data.
 permalink: /writing/
 ---
+{% set rtHot = 8 %}{% set rtCool = 6 %}
 <section class="hero">
   <h1 class="page-title">Writing</h1>
   <p class="lede">Engineering notes, a little teaching, and the occasional experiment. Newest first.</p>
@@ -13,11 +14,16 @@ permalink: /writing/
   <span><b>{{ collections.posts | length }}</b> entries</span>
   <span>newest first</span>
   <span>magnitude = reading time</span>
+  <span class="legend-key">
+    <span><i style="background: var(--accent)"></i>{{ rtHot }}+ min</span>
+    <span><i style="background: var(--star-cool)"></i>{{ rtCool }}–{{ rtHot - 1 }} min</span>
+    <span><i style="background: var(--star-faint)"></i>under {{ rtCool }} min</span>
+  </span>
 </p>
 
 <section class="post-list">
   {% for post in collections.posts %}
-  <a class="post-card" href="{{ post.url }}" style="--mag: {{ post.data.readingTime or 5 }}; --mag-tint: {% if post.data.readingTime >= 8 %}var(--accent){% elif post.data.readingTime >= 6 %}var(--star-cool){% else %}var(--star-faint){% endif %}">
+  <a class="post-card" href="{{ post.url }}" style="--mag-tint: {% if post.data.readingTime >= rtHot %}var(--accent){% elif post.data.readingTime >= rtCool %}var(--star-cool){% else %}var(--star-faint){% endif %}">
     <span class="post-meta">{{ post.date | dateFormat }}{% if post.data.readingTime %}<br>{{ post.data.readingTime }} min{% endif %}</span>
     <div>
     <h2>{{ post.data.title }}</h2>

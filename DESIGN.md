@@ -118,13 +118,13 @@ components:
 
 ## Overview
 
-**The Atlas.** The site is a plotted field: a ruled coordinate plate, mono annotations that measure it, and a catalogue whose marks are sized by a real quantity rather than decorated.
+**The Atlas.** The site is a plotted field: a ruled coordinate plate, mono annotations that measure it, and a catalogue whose marks are banded by a real quantity rather than decorated.
 
 It replaced a "field manual" world — warm paper, an oxblood accent, and two serifs. That world was competent and generic: cream ground plus high-contrast serif is the single most predictable pairing an interface can reach for. The atlas is the opposite bet: a cool, dark, instrument-like field where the type is a working text face, the chrome is mono, and **colour is data**.
 
 Two rules make the world legible rather than merely dark:
 
-- **The world owns the frame; the column stays calm.** Grid, mono, and plotted marks live in the masthead, the navigation, the legend, and the catalogue. The running prose is a plain column at a plain measure in a reading face. A star atlas that plots behind its own text is a poster, not an atlas.
+- **The world owns the frame; the column stays calm.** Grid, mono, and magnitude marks live in the masthead, the navigation, the legend, and the catalogue. The running prose is a plain column at a plain measure in a reading face. A star atlas that plots behind its own text is a poster, not an atlas.
 - **Colour is measurement, not decoration.** There is no accent colour. There is a magnitude scale.
 
 ## Colors
@@ -175,11 +175,13 @@ The system has **no shadows at all**. Depth is carried entirely by hairlines, th
 
 ## Shapes
 
-Square throughout, with exactly one exception: the magnitude mark is a circle, and the theme toggle is a pill. Both are instruments — a plotted dot and a control — so both are round. Everything structural is square.
+Square throughout, with exactly one exception: the magnitude mark is a circle, and the theme toggle is a pill. Both are instruments — a mark and a control — so both are round. Everything structural is square.
 
 ## Components
 
-- **Magnitude mark** — the signature. A plotted dot at the head of a catalogue entry whose diameter derives from a **real** quantity (reading minutes), tinted by magnitude class. It is a measurement, not an ornament: it carries `--mag` and `--mag-tint` and nothing else.
+- **Magnitude mark** — the signature. A **fixed-size** dot at the head of a catalogue entry's annotation column, tinted by magnitude band. It states which band an entry falls in and nothing more: it carries `--mag-tint` and no size variable.
+
+  Size was removed deliberately. A single linear size formula was being applied to two quantities with very different ranges — reading minutes span 6–8, stars span 0–37 — so the same mark read as a barely-visible step on a post and a 3rem blob on a project, and an entry with no stars had no mark at all. Size and tint were also encoding the *same* value twice, which made the size differences inside a single band pure noise. One visual variable, one job.
 - **Atlas legend** — mono, tracked, uppercase, stating real counts of what is in the field. A star atlas always ships one, and it is not decoration: it tells the reader the scale of what they are looking at.
 - **Post card / project card** — square, hairline-separated or raised. Card titles are underlined at rest so the affordance survives without hover.
 - **Code block** — Mark ground, mono type, square. The setting an atlas gives its figures.
@@ -190,7 +192,7 @@ Square throughout, with exactly one exception: the magnitude mark is a circle, a
 - Keep the prose column plain. The world is the frame.
 - Let colour mean something: hot, cool, and faint are a scale, and a fourth tint would break it.
 - Set annotations in uppercase tracked mono, and values in sentence-case mono.
-- Size the magnitude mark from real content.
+- Do key the magnitude bands in the legend, since colour alone carries the band now.
 
 **Don't**
 - Don't put mono in the running text or a heading, at any size.
@@ -198,3 +200,4 @@ Square throughout, with exactly one exception: the magnitude mark is a circle, a
 - Don't use the three tints decoratively — a tint that does not encode magnitude is noise.
 - Don't let the grid compete with the text: if it is visible *while* reading, it is too strong.
 - Don't reintroduce a second serif, or a "display face" of any kind. Spectral at 500 is the display voice.
+- Don't encode one value twice. Size *and* tint for the same quantity is noise wearing rigour's clothes.

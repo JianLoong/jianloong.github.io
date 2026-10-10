@@ -39,7 +39,7 @@ leave through `/writing/`, `/projects/`, or the hero's three links.
 toggle. The hero states the site in one sentence at display size, framed by a
 lede and three mono links. Then two catalogues, each opening with a legend that
 declares its own scale — `2 entries · magnitude = reading time`, then
-`6 objects · magnitude = stars` — and each entry carrying a plotted mark in its
+`6 objects · magnitude = stars` — and each entry carrying a magnitude mark in its
 annotation column. Primary action: open an entry.
 
 **FORM.** The star atlas, from the bolder re-roll. Seed key `989d981c`, scope

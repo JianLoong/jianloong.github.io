@@ -3,6 +3,7 @@ layout: layouts/page.njk
 title: Jian
 permalink: /
 ---
+{% set rtHot = 8 %}{% set rtCool = 6 %}{% set stHot = 30 %}{% set stCool = 10 %}
 <section class="hero">
   <h1>Notes on reliability, data, and making things that last.</h1>
   <p class="lede">I am Jian, a Site Reliability Engineer based in Melbourne. My work at ANZ centres on automation and Google Cloud. This site is where I write about reliability, engineering practice, and the open-source software I maintain.</p>
@@ -20,11 +21,16 @@ permalink: /
 <p class="atlas-legend">
   <span><b>{{ collections.posts | length }}</b> entries</span>
   <span>magnitude = reading time</span>
+  <span class="legend-key">
+    <span><i style="background: var(--accent)"></i>{{ rtHot }}+ min</span>
+    <span><i style="background: var(--star-cool)"></i>{{ rtCool }}–{{ rtHot - 1 }} min</span>
+    <span><i style="background: var(--star-faint)"></i>under {{ rtCool }} min</span>
+  </span>
 </p>
 
 <section class="post-list">
   {% for post in collections.posts | limit(3) %}
-  <a class="post-card" href="{{ post.url }}" style="--mag: {{ post.data.readingTime or 5 }}; --mag-tint: {% if post.data.readingTime >= 8 %}var(--accent){% elif post.data.readingTime >= 6 %}var(--star-cool){% else %}var(--star-faint){% endif %}">
+  <a class="post-card" href="{{ post.url }}" style="--mag-tint: {% if post.data.readingTime >= rtHot %}var(--accent){% elif post.data.readingTime >= rtCool %}var(--star-cool){% else %}var(--star-faint){% endif %}">
     <span class="post-meta">{{ post.date | dateFormat }}{% if post.data.readingTime %}<br>{{ post.data.readingTime }} min{% endif %}</span>
     <div>
       <h3>{{ post.data.title }}</h3>
@@ -41,12 +47,17 @@ permalink: /
 <p class="atlas-legend">
   <span><b>{{ projects | length }}</b> objects</span>
   <span>magnitude = stars</span>
+  <span class="legend-key">
+    <span><i style="background: var(--accent)"></i>{{ stHot }}+</span>
+    <span><i style="background: var(--star-cool)"></i>{{ stCool }}–{{ stHot - 1 }}</span>
+    <span><i style="background: var(--star-faint)"></i>under {{ stCool }}</span>
+  </span>
 </p>
 
 <section class="project-grid">
   {% for project in projects | limit(2) %}
   {% set stars = project.meta.split('★')[0] | int %}
-  <a class="project" href="{{ project.url }}" style="--mag: {{ stars }}; --mag-tint: {% if stars >= 30 %}var(--accent){% elif stars >= 10 %}var(--star-cool){% else %}var(--star-faint){% endif %}">
+  <a class="project" href="{{ project.url }}" style="--mag-tint: {% if stars >= stHot %}var(--accent){% elif stars >= stCool %}var(--star-cool){% else %}var(--star-faint){% endif %}">
     <h3>{{ project.title }}</h3>
     <p>{{ project.blurb }}</p>
     <span class="post-meta">{{ project.meta }}</span>

@@ -4,6 +4,7 @@ title: Projects
 description: Open-source tools by Jian — static APIs, data visualisation, and test automation.
 permalink: /projects/
 ---
+{% set stHot = 30 %}{% set stCool = 10 %}
 <section class="hero">
   <h1 class="page-title">Projects</h1>
   <p class="lede">Small, self-contained tools I maintain. Most of them exist because I wanted the thing to exist.</p>
@@ -12,12 +13,17 @@ permalink: /projects/
 <p class="atlas-legend">
   <span><b>{{ projects | length }}</b> objects</span>
   <span>magnitude = stars</span>
+  <span class="legend-key">
+    <span><i style="background: var(--accent)"></i>{{ stHot }}+</span>
+    <span><i style="background: var(--star-cool)"></i>{{ stCool }}–{{ stHot - 1 }}</span>
+    <span><i style="background: var(--star-faint)"></i>under {{ stCool }}</span>
+  </span>
 </p>
 
 <section class="project-grid">
   {% for project in projects %}
   {% set stars = project.meta.split('★')[0] | int %}
-  <a class="project" href="{{ project.url }}" style="--mag: {{ stars }}; --mag-tint: {% if stars >= 30 %}var(--accent){% elif stars >= 10 %}var(--star-cool){% else %}var(--star-faint){% endif %}">
+  <a class="project" href="{{ project.url }}" style="--mag-tint: {% if stars >= stHot %}var(--accent){% elif stars >= stCool %}var(--star-cool){% else %}var(--star-faint){% endif %}">
     <h2>{{ project.title }}</h2>
     <p>{{ project.blurb }}</p>
     <span class="post-meta">{{ project.meta }}</span>

@@ -73,16 +73,16 @@
       "name": "Magnitude Mark",
       "kind": "custom",
       "refersTo": "magnitude-mark",
-      "description": "The signature. A plotted dot at the head of a catalogue entry whose diameter derives from a real quantity — reading time — and whose tint is its magnitude class. It is a measurement, not an ornament: a mark that does not encode magnitude is noise.",
-      "html": "<span class=\"ds-post-meta\" style=\"--mag: 8; --mag-tint: var(--accent)\">10 Oct 2026<br>8 min</span>",
-      "css": ".ds-post-meta::before { content: \"\"; display: inline-block; vertical-align: 0.05em; margin-right: 0.45rem; width: calc(0.32rem + var(--mag, 5) * 0.075rem); height: calc(0.32rem + var(--mag, 5) * 0.075rem); border-radius: 999px; background: var(--mag-tint, var(--accent)); }"
+      "description": "The signature. A fixed-size dot at the head of a catalogue entry's annotation column, tinted by magnitude band. Size was removed deliberately: one linear formula applied to two quantities with very different ranges (reading minutes span 6-8, stars span 0-37) made the same mark a subtle step on a post and a 3rem blob on a project, left a zero-star entry with no mark, and double-encoded one value alongside the tint. It carries --mag-tint and no size variable.",
+      "html": "<span class=\"ds-post-meta\" style=\"--mag-tint: var(--accent)\">10 Oct 2026<br>8 min</span>",
+      "css": ".ds-post-meta::before { content: \"\"; display: inline-block; vertical-align: 0.05em; margin-right: 0.45rem; width: 0.5rem; height: 0.5rem; border-radius: 999px; background: var(--mag-tint, var(--muted)); }"
     },
     {
       "name": "Post Card",
       "kind": "card",
       "refersTo": "post-card",
       "description": "An asymmetric 8.5rem annotation column beside a fluid body, separated by hairlines top and bottom. The meta column carries the magnitude mark. Hover moves the h3 colour and nothing else.",
-      "html": "<a class=\"ds-post-card\" href=\"#\"><span class=\"ds-post-meta\" style=\"--mag: 6; --mag-tint: var(--star-cool)\">29 JUNE 2025<br>6 min</span><span><h3>Vibe coding an old blog</h3><p>Three days with Cursor, a janky Hugo site, and the guidance an AI still needs.</p></span></a>",
+      "html": "<a class=\"ds-post-card\" href=\"#\"><span class=\"ds-post-meta\" style=\"--mag-tint: var(--star-cool)\">29 JUNE 2025<br>6 min</span><span><h3>Vibe coding an old blog</h3><p>Three days with Cursor, a janky Hugo site, and the guidance an AI still needs.</p></span></a>",
       "css": ".ds-post-card { display: grid; grid-template-columns: 8.5rem 1fr; gap: 1.6rem; padding: 1.7rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; } .ds-post-meta { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); letter-spacing: 0.04em; } .ds-post-card h3 { font-family: var(--serif-display); font-size: 1.55rem; font-weight: 500; letter-spacing: -0.01em; line-height: 1.2; margin: 0 0 0.45rem; color: var(--ink); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 0.18em; } .ds-post-card p { margin: 0; color: var(--ink-soft); font-size: 1.02rem; } .ds-post-card:hover h3 { color: var(--accent); text-decoration-color: var(--accent); }"
     },
     {
@@ -90,7 +90,7 @@
       "kind": "card",
       "refersTo": "project-card",
       "description": "A bordered, raised plate — the only tonal step in the system. Square corners, no shadow, mono meta.",
-      "html": "<a class=\"ds-project\" href=\"#\"><h3>Malaysia API</h3><p>A static REST API of Malaysian states and federal territories. JSON files, no database, on purpose.</p><span class=\"ds-post-meta\" style=\"--mag: 0; --mag-tint: transparent\">37★ · 26 forks · JavaScript</span></a>",
+      "html": "<a class=\"ds-project\" href=\"#\"><h3>Malaysia API</h3><p>A static REST API of Malaysian states and federal territories. JSON files, no database, on purpose.</p><span class=\"ds-post-meta\" style=\"--mag-tint: var(--accent)\">37★ · 26 forks · JavaScript</span></a>",
       "css": ".ds-project { border: 1px solid var(--rule); background: var(--bg-elevated); padding: 1.4rem 1.35rem 1.2rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.45rem; min-height: 11rem; } .ds-project h3 { font-family: var(--serif-display); font-size: 1.35rem; font-weight: 500; letter-spacing: -0.01em; margin: 0; color: var(--ink); } .ds-project p { margin: 0; color: var(--ink-soft); font-size: 0.98rem; flex: 1; } .ds-project .ds-post-meta { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); letter-spacing: 0.04em; margin-top: 0.4rem; } .ds-project:hover h3 { color: var(--accent); }"
     },
     {
@@ -120,16 +120,16 @@
   ],
   "narrative": {
     "northStar": "The Atlas",
-    "overview": "An atlas is not a picture of the sky. It is a plotted field with a scale, a grid you can read a position off, and annotations that tell you what you are looking at. The marks are measurements, and a mark that measures nothing is not in the book.\n\nThis system is built the same way. The ground is a ruled coordinate plate at a 6rem module, the chrome is mono because the chrome is instrumentation, and the catalogue plots each entry at a size derived from its real heft rather than decorating it. Colour is a magnitude scale with three steps — hot, cool, faint — and no fourth tint exists, because a scale that keeps growing stops being one.\n\nIt replaced a field-manual world of warm paper and a single oxblood accent. That world was competent and generic: cream ground plus high-contrast serif is the most predictable pairing an interface can reach for, and running two faces that sit on every model's default list is why it read as a template. The atlas is the opposite bet — a cool dark field, a working text face, and meaning carried by measurement.\n\nThe world owns the frame and the column stays calm. Grid, mono and plotted marks live in the masthead, the navigation, the legend and the catalogue; the running prose is a plain column at a plain measure in a reading face. An atlas that plots behind its own text is a poster.",
+    "overview": "An atlas is not a picture of the sky. It is a plotted field with a scale, a grid you can read a position off, and annotations that tell you what you are looking at. The marks are measurements, and a mark that measures nothing is not in the book.\n\nThis system is built the same way. The ground is a ruled coordinate plate at a 6rem module, the chrome is mono because the chrome is instrumentation, and the catalogue bands each entry by a real quantity rather than decorating it. Colour is a magnitude scale with three steps — hot, cool, faint — and no fourth tint exists, because a scale that keeps growing stops being one.\n\nIt replaced a field-manual world of warm paper and a single oxblood accent. That world was competent and generic: cream ground plus high-contrast serif is the most predictable pairing an interface can reach for, and running two faces that sit on every model's default list is why it read as a template. The atlas is the opposite bet — a cool dark field, a working text face, and meaning carried by measurement.\n\nThe world owns the frame and the column stays calm. Grid, mono and magnitude marks live in the masthead, the navigation, the legend and the catalogue; the running prose is a plain column at a plain measure in a reading face. An atlas that plots behind its own text is a poster.",
     "keyCharacteristics": [
       "A ruled coordinate plate as the ground, ruled at a 6rem module and never an overlay on prose",
       "A three-step magnitude scale — hot, cool, faint — as the only colour, with no accent hue and no fourth tint",
       "A mono/serif split with one job per voice: Azeret Mono measures, Spectral reads",
-      "Square everywhere, with two round exceptions, both instruments: the plotted mark and the theme toggle",
+      "Square everywhere, with two round exceptions, both instruments: the magnitude mark and the theme toggle",
       "Structure carried by 1px hairlines and the grid, never by shadow — the system has no shadows at all"
     ],
     "rules": [
-      { "name": "The Frame Owns The World Rule", "body": "Grid, mono and plotted marks belong to the masthead, the navigation, the legend and the catalogue. The running column stays plain, at a plain measure, in a reading face. The moment the world reaches into the prose it stops being an atlas and becomes a poster.", "section": "layout" },
+      { "name": "The Frame Owns The World Rule", "body": "Grid, mono and magnitude marks belong to the masthead, the navigation, the legend and the catalogue. The running column stays plain, at a plain measure, in a reading face. The moment the world reaches into the prose it stops being an atlas and becomes a poster.", "section": "layout" },
       { "name": "The Magnitude Rule", "body": "Colour is measurement, not decoration. Three tints in one scale: hot is the brightest magnitude and nothing else, cool is mid and the default link tint, faint is the least weighty thing in view. A tint that does not encode magnitude is noise, and a fourth tint ends the scale.", "section": "colors" },
       { "name": "The One Serif Rule", "body": "Spectral carries the whole page. Weight and size do the separating — 500 for structural headings, 400 for prose. There is no display face; asking a text face for a masthead is how the previous world acquired a second serif it did not need.", "section": "typography" },
       { "name": "The Mono Measures Rule", "body": "Azeret Mono never sets running prose or a heading, at any size. It is the instrument's voice: labels, meta, annotations and code. A page whose body text is mono is a terminal costume, not an atlas. Uppercase and tracked when it names a thing; sentence case when it annotates a value.", "section": "typography" },
@@ -138,10 +138,10 @@
     ],
     "dos": [
       "Do hold prose to --measure (42rem) — the reading column is the product, and the world never touches it.",
-      "Do size the magnitude mark from real content; it is a measurement, not an ornament.",
+      "Do key the magnitude bands in the legend; colour alone carries the band now.",
       "Do keep mono out of the prose and out of headings, at every size.",
       "Do declare the field before plotting it: a legend stating real counts opens the catalogue.",
-      "Do keep corners square. The plotted mark and the theme toggle are the sanctioned exceptions, and both are instruments.",
+      "Do keep corners square. The magnitude mark and the theme toggle are the sanctioned exceptions, and both are instruments.",
       "Do check both grounds — every token has a sky counterpart, and the star tints invert from deep (#8a4f11) to luminous (#f0c674).",
       "Do set uppercase tracked mono when a line names a thing, and sentence-case mono when it annotates a value."
     ],
