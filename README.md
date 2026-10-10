@@ -28,6 +28,7 @@ npm run build    # one-off build → _site/
 | --- | --- |
 | `npm start` / `npm run dev` | Eleventy dev server on port 8000 with live reload |
 | `npm run build` | Build the static site into `_site/` |
+| `npm run og` | Re-render the `og:image` cards into `assets/og/` (needs Chrome) |
 
 ## Project structure
 
@@ -57,7 +58,8 @@ npm run build    # one-off build → _site/
 │   └── robots.njk         # robots.txt
 ├── css/                   # copied verbatim (style.css, fonts.css, giscus themes)
 ├── js/main.js             # copied verbatim to _site/
-├── assets/                # copied verbatim (fonts/, favicon.svg)
+├── assets/                # copied verbatim (fonts/, favicon.svg, og/ social cards)
+├── tools/og-card.mjs      # renders the social cards; see assets/og/PROVENANCE.md
 └── _site/                 # build output (gitignored)
 ```
 

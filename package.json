@@ -4,6 +4,7 @@
   "private": true,
   "description": "Personal blog of Jian",
   "scripts": {
+    "og": "node tools/og-card.mjs",
     "start": "eleventy --serve --port=8000",
     "dev": "eleventy --serve --port=8000",
     "build": "eleventy"

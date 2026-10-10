@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 module.exports = function (eleventyConfig) {
@@ -7,6 +9,18 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("js");
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy({ "src/.nojekyll": ".nojekyll" });
+
+  // Social cards live in assets/og/ named by URL slug, so a page finds its own
+  // card through page.fileSlug and anything else gets the default. Cards are
+  // rendered by `npm run og` from tools/og-card.mjs; they are committed, so a
+  // deploy never depends on that renderer.
+  const OG_DIR = path.join(__dirname, "assets", "og");
+  eleventyConfig.addFilter("ogCard", (fileSlug) => {
+    if (fileSlug && fs.existsSync(path.join(OG_DIR, `${fileSlug}.png`))) {
+      return `/assets/og/${fileSlug}.png`;
+    }
+    return "/assets/og/default.png";
+  });
 
   eleventyConfig.addCollection("posts", (collectionApi) => {
     return collectionApi.getFilteredByTag("post").sort((a, b) => b.date - a.date);
