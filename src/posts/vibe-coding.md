@@ -4,11 +4,6 @@ description: Three days with Cursor, a janky Hugo site, and the surprising amoun
 date: 2025-06-29
 category: Tools
 readingTime: 6
-related:
-  - title: The enterprise silo
-    url: /posts/the-enterprise-silo/
-  - title: The outpost pattern
-    url: /posts/outpost-pattern/
 ---
 
 This post could be potentially vibe coded. The title almost certainly was.
