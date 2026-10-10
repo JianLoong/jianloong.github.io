@@ -10,4 +10,5 @@ ogType: article
   <p class="deck">{{ description }}</p>
   {% endif %}
   {{ content | safe }}
+  {% include "partials/comments.njk" %}
 </article>

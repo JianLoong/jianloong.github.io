@@ -1,0 +1,48 @@
+{% if giscus.enabled and giscus.repoId and giscus.categoryId %}
+<section class="comments" id="comments" aria-labelledby="comments-title">
+  <div class="section-head">
+    <h2 id="comments-title">Comments</h2>
+  </div>
+  <p class="comments-note">
+    Discussion lives on
+    <a href="https://github.com/{{ giscus.repo }}/discussions" rel="nofollow">GitHub</a>
+    — you'll need a GitHub account to post.
+  </p>
+  <div
+    class="comments-embed"
+    data-giscus
+    data-repo="{{ giscus.repo }}"
+    data-repo-id="{{ giscus.repoId }}"
+    data-category="{{ giscus.category }}"
+    data-category-id="{{ giscus.categoryId }}"
+    data-mapping="{{ giscus.mapping }}"
+    data-strict="{{ giscus.strict }}"
+    data-reactions-enabled="{{ giscus.reactionsEnabled }}"
+    data-emit-metadata="{{ giscus.emitMetadata }}"
+    data-input-position="{{ giscus.inputPosition }}"
+    data-lang="{{ giscus.lang }}"
+    data-theme-light="{{ site.url }}{{ giscus.themes.light }}"
+    data-theme-dark="{{ site.url }}{{ giscus.themes.dark }}"
+  ></div>
+  <noscript>
+    <p class="comments-note">
+      The comment thread needs JavaScript.
+      <a href="https://github.com/{{ giscus.repo }}/discussions" rel="nofollow">Read and reply on GitHub</a> instead.
+    </p>
+  </noscript>
+</section>
+{% elif eleventy.env.runMode == "serve" %}
+{# Unconfigured build served locally (`npm start`). Say so, rather than leaving
+   the author staring at a page with no comments and no explanation. This branch
+   never renders in a real build, so it cannot reach the published site. #}
+<section class="comments" id="comments">
+  <div class="section-head">
+    <h2>Comments</h2>
+  </div>
+  <p class="comments-note">
+    <strong>Not configured.</strong> Set <code>categoryId</code> in
+    <code>src/_data/giscus.js</code> to switch the thread on — see the README.
+    This note only appears under <code>npm start</code>.
+  </p>
+</section>
+{% endif %}

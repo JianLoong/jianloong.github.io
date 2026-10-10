@@ -616,6 +616,35 @@ a:hover {
   letter-spacing: 0.04em;
 }
 
+/* Comments: a giscus embed, themed to match via css/giscus-light.css and
+   css/giscus-dark.css. It sits inside the article measure, below the prose. */
+.comments {
+  margin-top: 3.5rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--rule);
+}
+
+.comments .section-head {
+  margin-bottom: 0.5rem;
+}
+
+.comments-note {
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0 0 1.6rem;
+}
+
+.comments-note a {
+  color: var(--accent);
+}
+
+.comments-embed {
+  /* Hold a little space so the embed does not shove the page around on load. */
+  min-height: 4rem;
+}
+
 @media (max-width: 820px) {
   .post-card,
   .project-grid {

@@ -38,10 +38,11 @@ npm run build    # one-off build → _site/
 ├── src/                   # Eleventy input directory
 │   ├── _data/             # global data
 │   │   ├── site.json      # site title, author, links, location
-│   │   └── projects.json  # project cards shown on the homepage
+│   │   ├── projects.json  # project cards shown on the homepage
+│   │   └── giscus.js      # comment settings (repo/category IDs, theme)
 │   ├── _includes/
 │   │   ├── layouts/       # base.njk, page.njk, post.njk
-│   │   └── partials/      # header.njk, footer.njk
+│   │   └── partials/      # header.njk, footer.njk, comments.njk
 │   ├── posts/             # blog posts (Markdown) + posts.json
 │   ├── index.njk          # home page
 │   ├── writing.njk        # all posts
@@ -50,7 +51,7 @@ npm run build    # one-off build → _site/
 │   ├── feed.njk           # RSS feed → /feed.xml
 │   ├── sitemap.njk        # XML sitemap → /sitemap.xml
 │   └── robots.njk         # robots.txt
-├── css/                   # copied verbatim (style.css, fonts.css)
+├── css/                   # copied verbatim (style.css, fonts.css, giscus themes)
 ├── js/main.js             # copied verbatim to _site/
 ├── assets/                # copied verbatim (fonts/, favicon.svg)
 └── _site/                 # build output (gitignored)
@@ -84,6 +85,32 @@ those per post.
 - **`src/_data/site.json`** — site title/author/description and the social links
   used in the header, footer and About page.
 - **`src/_data/projects.json`** — the project cards rendered on the homepage.
+
+## Comments
+
+Post pages carry a [giscus](https://giscus.app) comment thread, backed by GitHub
+Discussions on this repository — there is no database and no third-party comment
+host. Commenting requires a GitHub account.
+
+The embed is configured in **`src/_data/giscus.js`** and is already set up for
+this repository: the giscus app is installed, and threads go to the
+**Announcements** category (`DIC_kwDOAc-pH84CsTjN`). It only renders once both
+`repoId` and `categoryId` are set, so an unconfigured clone still builds and
+renders cleanly — and in that state `npm start` shows a reminder in place of the
+thread.
+
+To re-derive the IDs (e.g. after moving to a new repository):
+
+1. Enable Discussions (Settings → General → Features → Discussions).
+2. Install the [giscus app](https://github.com/apps/giscus) on the repository.
+3. `repoId` is the repository's `node_id` from
+   `https://api.github.com/repos/OWNER/REPO`. The category IDs come from
+   `https://api.github.com/repos/OWNER/REPO/discussions`, where each discussion
+   carries its `category.node_id` (or use <https://giscus.app>).
+
+`js/main.js` builds the embed lazily (`data-loading="lazy"`) and keeps it in step
+with the light/dark toggle, using the palette-matched themes in
+`css/giscus-light.css` and `css/giscus-dark.css`.
 
 ## Deployment
 

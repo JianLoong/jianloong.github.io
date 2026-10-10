@@ -1,0 +1,176 @@
+/*! giscus theme — light.
+ * GitHub Primer variable names and MIT-licensed structure from
+ * https://github.com/primer/primitives (see LICENSE), recoloured to this
+ * site's light palette (see the :root block in css/style.css).
+ */
+main {
+  --color-prettylights-syntax-comment: #7a7264;
+  --color-prettylights-syntax-constant: #a3542c;
+  --color-prettylights-syntax-entity: #4a4a8c;
+  --color-prettylights-syntax-storage-modifier-import: #3f3a34;
+  --color-prettylights-syntax-entity-tag: #3f6b4f;
+  --color-prettylights-syntax-keyword: #8c3b28;
+  --color-prettylights-syntax-string: #3f6b4f;
+  --color-prettylights-syntax-variable: #a3542c;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #a33a2a;
+  --color-prettylights-syntax-invalid-illegal-text: #fbf8f2;
+  --color-prettylights-syntax-invalid-illegal-bg: #a33a2a;
+  --color-prettylights-syntax-carriage-return-text: #fbf8f2;
+  --color-prettylights-syntax-carriage-return-bg: #8c3b28;
+  --color-prettylights-syntax-string-regexp: #3f6b4f;
+  --color-prettylights-syntax-markup-list: #3f3a34;
+  --color-prettylights-syntax-markup-heading: #8c3b28;
+  --color-prettylights-syntax-markup-italic: #1c1915;
+  --color-prettylights-syntax-markup-bold: #1c1915;
+  --color-prettylights-syntax-markup-deleted-text: #7a2b1d;
+  --color-prettylights-syntax-markup-deleted-bg: #f3ded6;
+  --color-prettylights-syntax-markup-inserted-text: #2f5a3d;
+  --color-prettylights-syntax-markup-inserted-bg: #dcecdf;
+  --color-prettylights-syntax-markup-changed-text: #8a4a24;
+  --color-prettylights-syntax-markup-changed-bg: #f4e2cf;
+  --color-prettylights-syntax-markup-ignored-text: #efe8dc;
+  --color-prettylights-syntax-markup-ignored-bg: #8c3b28;
+  --color-prettylights-syntax-meta-diff-range: #4a4a8c;
+  --color-prettylights-syntax-brackethighlighter-angle: #6f675d;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #6f675d;
+  --color-prettylights-syntax-constant-other-reference-link: #3f6b4f;
+  --color-btn-text: #1c1915;
+  --color-btn-bg: #fbf8f2;
+  --color-btn-border: #d8cfc2;
+  --color-btn-shadow: 0 1px 0 #1c19150a;
+  --color-btn-inset-shadow: inset 0 1px 0 #ffffff40;
+  --color-btn-hover-bg: #efe7d9;
+  --color-btn-hover-border: #cbbfae;
+  --color-btn-active-bg: #e7ddcc;
+  --color-btn-active-border: #cbbfae;
+  --color-btn-selected-bg: #e7ddcc;
+  --color-btn-primary-text: #fbf8f2;
+  --color-btn-primary-bg: #8c3b28;
+  --color-btn-primary-border: #8c3b28;
+  --color-btn-primary-shadow: 0 1px 0 #1c19151a;
+  --color-btn-primary-inset-shadow: inset 0 1px 0 #ffffff08;
+  --color-btn-primary-hover-bg: #6e2d1e;
+  --color-btn-primary-hover-border: #6e2d1e;
+  --color-btn-primary-selected-bg: #5c2517;
+  --color-btn-primary-selected-shadow: inset 0 1px 0 #3d180e33;
+  --color-btn-primary-disabled-text: #fbf8f299;
+  --color-btn-primary-disabled-bg: #c99f92;
+  --color-btn-primary-disabled-border: #d8cfc2;
+  --color-action-list-item-default-hover-bg: #d8cfc252;
+  --color-segmented-control-bg: #ece4d8;
+  --color-segmented-control-button-bg: #fbf8f2;
+  --color-segmented-control-button-selected-border: #b3a894;
+  --color-fg-default: #1c1915;
+  --color-fg-muted: #6f675d;
+  --color-fg-subtle: #6f675d;
+  --color-canvas-default: #f4efe6;
+  --color-canvas-overlay: #fbf8f2;
+  --color-canvas-inset: #ece4d8;
+  --color-canvas-subtle: #fbf8f2;
+  --color-border-default: #d8cfc2;
+  --color-border-muted: #e2dacd;
+  --color-neutral-muted: #d8cfc255;
+  --color-accent-fg: #8c3b28;
+  --color-accent-emphasis: #8c3b28;
+  --color-accent-muted: #8c3b2866;
+  --color-accent-subtle: #efe0d9;
+  --color-success-fg: #3f6b4f;
+  --color-attention-fg: #8a4a24;
+  --color-attention-muted: #a3542c66;
+  --color-attention-subtle: #f4e2cf;
+  --color-danger-fg: #a33a2a;
+  --color-danger-muted: #a33a2a66;
+  --color-danger-subtle: #f3ded6;
+  --color-primer-shadow-inset: inset 0 1px 0 #d8cfc233;
+
+  /*! Extensions from @primer/css/alerts/flash.scss */
+  --color-scale-gray-1: #ece4d8;
+  --color-scale-blue-1: #efe0d9;
+  --color-social-reaction-bg-hover: var(--color-scale-gray-1);
+  --color-social-reaction-bg-reacted-hover: var(--color-scale-blue-1);
+}
+
+main .pagination-loader-container {
+  background-image: url(https://github.com/images/modules/pulls/progressive-disclosure-line.svg);
+}
+
+main .gsc-loading-image {
+  background-image: url(https://github.githubassets.com/images/mona-loading-default.gif);
+}
+
+/*! Typography — the site's own faces, so comments read as part of the article
+ * rather than as GitHub. The giscus iframe is a separate document, so the
+ * root-relative `/assets/fonts/…` used in css/fonts.css would resolve against
+ * giscus.app; these URLs are absolute. GitHub Pages serves them with
+ * `Access-Control-Allow-Origin: *`, so the cross-origin fetch is allowed.
+ * Declared inside each theme because giscus accepts a single theme URL, so the
+ * two themes cannot share a file. Declare only the weights comments actually
+ * use — heavier weights are synthesised. Keep in sync with css/fonts.css.
+ */
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://jianloong.github.io/assets/fonts/QGYvz_MVcBeNP4NJuktqQ4E.woff2) format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://jianloong.github.io/assets/fonts/QGYvz_MVcBeNP4NJtEtq.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Newsreader";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://jianloong.github.io/assets/fonts/cY9AfjOCX1hbuyalUrK439DyjJBG.woff2) format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Newsreader";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://jianloong.github.io/assets/fonts/cY9AfjOCX1hbuyalUrK4397yjA.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Newsreader";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://jianloong.github.io/assets/fonts/cY9XfjOCX1hbuyalUrK439vogqCz_goCYw7oRd6JFYgzbBZD.woff2) format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Newsreader";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://jianloong.github.io/assets/fonts/cY9XfjOCX1hbuyalUrK439vogqCz_goCYw7oRd6JFYYzbA.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Chrome and form controls read as interface, as they do across the site. */
+main {
+  font-family: "Outfit", "Helvetica Neue", sans-serif;
+}
+
+/* Comment bodies are prose, so they take the serif the articles use. giscus
+   renders them into `.markdown` and never sets a font-family itself. */
+main .markdown {
+  font-family: "Newsreader", "Iowan Old Style", Georgia, serif;
+}
+
+/* Form controls do not inherit font-family from their ancestors. */
+main button,
+main input,
+main select,
+main textarea {
+  font-family: inherit;
+}
