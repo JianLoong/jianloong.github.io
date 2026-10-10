@@ -129,14 +129,6 @@ a:hover {
   line-height: 1;
 }
 
-.brand-tag {
-  font-family: var(--sans);
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
 .nav {
   display: flex;
   align-items: center;
