@@ -57,5 +57,19 @@
         "Booking System: a side project built with the Swinburne Library as a proof of concept."
       ]
     }
+  ],
+  "certifications": [
+    {
+      "title": "Cisco Certified Network Associate",
+      "org": "Cisco",
+      "dates": "Issued Oct 2011",
+      "note": "Expired Oct 2016."
+    },
+    {
+      "title": "ACS Certified Technologist",
+      "org": "ACS (Australian Computer Society)",
+      "dates": "Issued Aug 2013",
+      "note": "Credential ID 3208481."
+    }
   ]
 }

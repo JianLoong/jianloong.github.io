@@ -79,6 +79,20 @@ permalink: /about/
       {% endfor %}
     </ul>
 
+    <h2 class="about-section">Certifications</h2>
+    <ul class="about-history">
+      {% for cert in career.certifications %}
+      <li class="hist-row">
+        <span class="hist-dates">{{ cert.dates }}</span>
+        <span class="hist-body">
+          <strong class="hist-title">{{ cert.title }}</strong>
+          <span class="hist-org">{{ cert.org }}</span>
+          {% if cert.note %}<p class="hist-note">{{ cert.note }}</p>{% endif %}
+        </span>
+      </li>
+      {% endfor %}
+    </ul>
+
     <div class="socials">
       <a href="mailto:{{ site.email }}">{{ site.email }}</a>
       <a href="{{ site.github }}">GitHub</a>
