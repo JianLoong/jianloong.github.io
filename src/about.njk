@@ -17,6 +17,24 @@ permalink: /about/
       <li>Not yet a Rust or Go specialist — though Robogo is making steady progress on the latter.</li>
       <li>Open to enquiries about reliability engineering, teaching, and data visualisation.</li>
     </ul>
+
+    <figure class="atlas-plot">
+      <p class="atlas-legend">
+        <span><b>{{ repos.originals }}</b> objects</span>
+        <span>{{ repos.byYear[0].year }}–{{ repos.byYear[repos.byYear.length - 1].year }}</span>
+        <span>original repositories, by year</span>
+      </p>
+      <div class="plot-track" role="img" aria-label="Original repositories created per year: {% for row in repos.byYear %}{{ row.year }}, {{ row.count }}{% if not loop.last %}; {% endif %}{% endfor %}">
+        {% for row in repos.byYear %}
+        <div class="plot-col" style="--mag: {{ row.count }}; --mag-tint: {% if row.count >= 5 %}var(--accent){% elif row.count >= 3 %}var(--star-cool){% else %}var(--star-faint){% endif %}">
+          <span class="plot-bar"></span>
+          <span class="plot-year">{{ row.year }}</span>
+        </div>
+        {% endfor %}
+      </div>
+      <figcaption class="plot-note">Public GitHub repositories that are not forks, by creation year. Account opened {{ repos.accountCreated | dateFormat }}.</figcaption>
+    </figure>
+
     <div class="socials">
       <a href="mailto:{{ site.email }}">{{ site.email }}</a>
       <a href="{{ site.github }}">GitHub</a>

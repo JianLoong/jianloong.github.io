@@ -1,0 +1,27 @@
+{
+  "note": "Public GitHub data for JianLoong, read from the GitHub REST API. Frozen here rather than fetched at build time so the build stays hermetic and a rate limit or an offline CI runner cannot break a deploy.",
+  "refresh": "curl -s 'https://api.github.com/users/JianLoong/repos?per_page=100&sort=created&direction=asc' — keep only entries where fork is false, then tally created_at by year.",
+  "sources": {
+    "repos": "https://api.github.com/users/JianLoong/repos?per_page=100&sort=created&direction=asc",
+    "account": "https://api.github.com/users/JianLoong"
+  },
+  "fetched": "2026-10-11",
+  "accountCreated": "2011-07-23",
+  "originals": 29,
+  "forks": 24,
+  "byYear": [
+    { "year": 2014, "count": 1 },
+    { "year": 2015, "count": 1 },
+    { "year": 2016, "count": 3 },
+    { "year": 2017, "count": 3 },
+    { "year": 2018, "count": 4 },
+    { "year": 2019, "count": 1 },
+    { "year": 2020, "count": 1 },
+    { "year": 2021, "count": 1 },
+    { "year": 2022, "count": 5 },
+    { "year": 2023, "count": 4 },
+    { "year": 2024, "count": 2 },
+    { "year": 2025, "count": 2 },
+    { "year": 2026, "count": 1 }
+  ]
+}
