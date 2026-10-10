@@ -110,14 +110,6 @@
       "css": ".ds-code { font-family: var(--mono); font-size: 0.9rem; line-height: 1.6; background: var(--mark); color: var(--ink); padding: 1.1rem 1.3rem; overflow-x: auto; margin: 0 0 1.4rem; border-radius: 0; } .ds-code code { background: none; padding: 0; font-size: inherit; }"
     },
     {
-      "name": "Plotted Field",
-      "kind": "custom",
-      "refersTo": "atlas-plot",
-      "description": "A histogram in the atlas grammar: one column per interval, height the count, tint the magnitude class, hairline baseline, mono axis labels, provenance caption. Used only where a real series exists (src/_data/repos.json holds the About page's, frozen from the GitHub API so the build stays hermetic).",
-      "html": "<figure class=\"ds-plot\"><p class=\"ds-legend\"><span><b>29</b> objects</span><span>2014–2026</span><span>original repositories, by year</span></p><div class=\"ds-plot-track\"><span class=\"ds-plot-col\" style=\"--mag: 1; --mag-tint: var(--star-faint)\"><i></i><em>2020</em></span><span class=\"ds-plot-col\" style=\"--mag: 5; --mag-tint: var(--accent)\"><i></i><em>2022</em></span></div></figure>",
-      "css": ".ds-plot-track { display: grid; grid-auto-flow: column; gap: 0.5rem; align-items: end; border-bottom: 1px solid var(--rule); padding-bottom: 0.55rem; } .ds-plot-col { display: grid; gap: 0.4rem; justify-items: center; min-width: 2.2rem; } .ds-plot-col i { display: block; width: 100%; height: calc(var(--mag, 1) * 0.5rem + 0.2rem); background: var(--mag-tint, var(--accent)); } .ds-plot-col em { font-family: var(--mono); font-size: 0.86rem; font-style: normal; color: var(--muted); }"
-    },
-    {
       "name": "Blockquote",
       "kind": "custom",
       "refersTo": "blockquote",

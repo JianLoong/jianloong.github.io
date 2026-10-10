@@ -18,29 +18,6 @@ permalink: /about/
       <li>Open to enquiries about reliability engineering, teaching, and data visualisation.</li>
     </ul>
 
-    <figure class="atlas-plot">
-      <p class="atlas-legend">
-        <span><b>{{ repos.originals }}</b> repositories</span>
-        <span>{{ career.axisStart }}–{{ career.axisEnd }}</span>
-        <span>output, work and study on one axis</span>
-      </p>
-      <div class="plot-track" style="grid-template-columns: repeat({{ career.axisEnd - career.axisStart + 1 }}, minmax(2rem, 1fr))" role="img" aria-label="Plotted on one axis, {{ career.axisStart }} to {{ career.axisEnd }}. Original repositories created per year: {% for row in repos.byYear %}{{ row.year }}, {{ row.count }}{% if not loop.last %}; {% endif %}{% endfor %}. Employment spans {% for role in career.work %}{{ role.years[0] }} to {{ role.years[1] }}{% if not loop.last %} and {% endif %}{% endfor %}. Study spans {% for ed in career.study %}{{ ed.years[0] }} to {{ ed.years[1] }}{% if not loop.last %} and {% endif %}{% endfor %}.">
-        {% for row in repos.byYear %}
-        <span class="plot-bar" style="grid-column: {{ row.year - career.axisStart + 1 }}; --mag: {{ row.count }}; --mag-tint: {% if row.count >= 5 %}var(--accent){% elif row.count >= 3 %}var(--star-cool){% else %}var(--star-faint){% endif %}"></span>
-        {% endfor %}
-        {% for role in career.work %}
-        <span class="plot-span plot-span--work" style="grid-column: {{ role.years[0] - career.axisStart + 1 }} / span {{ role.years[1] - role.years[0] + 1 }}"></span>
-        {% endfor %}
-        {% for ed in career.study %}
-        <span class="plot-span plot-span--study" style="grid-column: {{ ed.years[0] - career.axisStart + 1 }} / span {{ ed.years[1] - ed.years[0] + 1 }}"></span>
-        {% endfor %}
-        {% for y in range(career.axisStart, career.axisEnd + 1) %}
-        <span class="plot-year" style="grid-column: {{ y - career.axisStart + 1 }}">{{ y }}</span>
-        {% endfor %}
-      </div>
-      <figcaption class="plot-note">Original repositories by creation year, tinted by count. Employment solid, study soft. Repositories from the GitHub API; work and study from LinkedIn.</figcaption>
-    </figure>
-
     <h2 class="about-section">Experience</h2>
     <ul class="about-history">
       {% for role in career.work %}

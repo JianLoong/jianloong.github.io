@@ -112,12 +112,6 @@ components:
     typography: "{typography.code}"
     rounded: "0"
     padding: "1.1rem 1.3rem"
-  atlas-plot:
-    backgroundColor: "{colors.plate}"
-    textColor: "{colors.ink-muted}"
-    typography: "{typography.label}"
-    rounded: "0"
-    padding: "2.2rem 0 0"
 ---
 
 # Design System: Jian
@@ -188,7 +182,6 @@ Square throughout, with exactly one exception: the magnitude mark is a circle, a
 - **Magnitude mark** — the signature. A plotted dot at the head of a catalogue entry whose diameter derives from a **real** quantity (reading minutes), tinted by magnitude class. It is a measurement, not an ornament: it carries `--mag` and `--mag-tint` and nothing else.
 - **Atlas legend** — mono, tracked, uppercase, stating real counts of what is in the field. A star atlas always ships one, and it is not decoration: it tells the reader the scale of what they are looking at.
 - **Post card / project card** — square, hairline-separated or raised. Card titles are underlined at rest so the affordance survives without hover.
-- **Plotted field** — one column per interval, height the count, tint the magnitude class, on a hairline baseline with mono axis labels and a caption carrying the provenance. A histogram drawn in the world's own grammar, used only where a real series exists. That test is the point: `/about/` carries one because its repository history is real and dated, not because a prose page ought to look busier.
 - **Code block** — Mark ground, mono type, square. The setting an atlas gives its figures.
 
 ## Do's and Don'ts
