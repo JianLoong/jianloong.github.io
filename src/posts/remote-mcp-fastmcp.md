@@ -239,20 +239,20 @@ The caching and the invention are newer than the rest. The others are what happe
 Every tool result goes into the model's context — the text it can read when it answers — and nothing prunes it. A tool that fetches a day of metrics for every pod is not giving a bigger answer. It is handing over thousands of rows and calling that an answer.
 
 <figure>
-<svg class="figure-art" width="700" height="293" viewBox="0 -4 700 293" role="img" aria-label="Two outlines standing for the model's context. The left is packed with dense rows; the right holds the question and one short summary.">
+<svg class="figure-art" width="620" height="293" viewBox="0 -4 620 293" role="img" aria-label="Two outlines standing for the model's context. The left is packed with dense rows; the right holds the question and one short summary.">
 <defs>
-<pattern id="rows" width="260" height="11" patternUnits="userSpaceOnUse">
-<rect width="260" height="6" rx="3" fill="currentColor"/>
+<pattern id="rows" width="238" height="11" patternUnits="userSpaceOnUse">
+<rect width="238" height="6" rx="3" fill="currentColor"/>
 </pattern>
 </defs>
 <text x="0" y="16" font-size="15" fill="currentColor" opacity="0.9">Ask for everything</text>
-<rect x="0" y="30" width="300" height="250" rx="12" fill="none" stroke="currentColor" stroke-opacity="0.3"/>
-<rect x="20" y="50" width="180" height="12" rx="6" fill="currentColor" opacity="0.9"/>
-<rect x="20" y="78" width="260" height="182" fill="url(#rows)" opacity="0.28"/>
-<text x="400" y="16" font-size="15" fill="currentColor" opacity="0.9">Ask for the summary</text>
-<rect x="400" y="30" width="300" height="250" rx="12" fill="none" stroke="currentColor" stroke-opacity="0.3"/>
-<rect x="420" y="50" width="180" height="12" rx="6" fill="currentColor" opacity="0.9"/>
-<rect x="420" y="78" width="230" height="12" rx="6" fill="currentColor" opacity="0.9"/>
+<rect x="0" y="30" width="275" height="250" rx="12" fill="none" stroke="currentColor" stroke-opacity="0.3"/>
+<rect x="18" y="50" width="165" height="12" rx="6" fill="currentColor" opacity="0.9"/>
+<rect x="18" y="78" width="238" height="182" fill="url(#rows)" opacity="0.28"/>
+<text x="345" y="16" font-size="15" fill="currentColor" opacity="0.9">Ask for the summary</text>
+<rect x="345" y="30" width="275" height="250" rx="12" fill="none" stroke="currentColor" stroke-opacity="0.3"/>
+<rect x="363" y="50" width="165" height="12" rx="6" fill="currentColor" opacity="0.9"/>
+<rect x="363" y="78" width="211" height="12" rx="6" fill="currentColor" opacity="0.9"/>
 </svg>
 <figcaption>Everything a tool returns lands in the model's context. On the left, the question at the top is a rounding error against the rows below it. On the right there is room to think.</figcaption>
 </figure>
