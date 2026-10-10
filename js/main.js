@@ -1,12 +1,14 @@
 (function () {
   var root = document.documentElement;
   var meta = document.querySelector('meta[name="theme-color"]');
+  var onThemeChange = null;
 
   function applyTheme(theme) {
     root.setAttribute("data-theme", theme);
     if (meta) {
       meta.setAttribute("content", theme === "dark" ? "#161311" : "#f4efe6");
     }
+    if (onThemeChange) onThemeChange();
   }
 
   // The theme itself is applied by an inline <head> script to avoid a flash;
@@ -32,5 +34,29 @@
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+  }
+
+  // Mermaid is self-hosted and only fetched on pages that actually have a diagram.
+  var diagrams = document.querySelectorAll(".mermaid");
+  if (diagrams.length) {
+    var sources = Array.prototype.map.call(diagrams, function (el) {
+      return el.textContent;
+    });
+    var renderDiagrams = function () {
+      var theme = root.getAttribute("data-theme") === "dark" ? "dark" : "neutral";
+      diagrams.forEach(function (el, i) {
+        el.removeAttribute("data-processed");
+        el.textContent = sources[i];
+      });
+      window.mermaid.initialize({ startOnLoad: false, theme: theme });
+      window.mermaid.run({ nodes: diagrams });
+    };
+    var mermaidScript = document.createElement("script");
+    mermaidScript.src = "/js/vendor/mermaid.min.js";
+    mermaidScript.onload = function () {
+      renderDiagrams();
+      onThemeChange = renderDiagrams;
+    };
+    document.head.appendChild(mermaidScript);
   }
 })();

@@ -8,6 +8,11 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy({ "src/.nojekyll": ".nojekyll" });
 
+  // Mermaid is self-hosted and only fetched by pages that contain a diagram — see js/main.js.
+  eleventyConfig.addPassthroughCopy({
+    "node_modules/mermaid/dist/mermaid.min.js": "js/vendor/mermaid.min.js",
+  });
+
   eleventyConfig.addCollection("posts", (collectionApi) => {
     return collectionApi.getFilteredByTag("post").sort((a, b) => b.date - a.date);
   });

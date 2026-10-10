@@ -427,6 +427,78 @@ a:hover {
   font-size: inherit;
 }
 
+/* Mermaid diagrams: rendered in the browser, so drop the code-block chrome.
+   Raw source stays hidden until Mermaid has processed the node. */
+.article pre.mermaid {
+  background: none;
+  padding: 0;
+  text-align: center;
+  font-family: inherit;
+}
+
+.article pre.mermaid:not([data-processed]) {
+  visibility: hidden;
+}
+
+.article pre.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Figures: diagrams and illustrations get a caption and room to breathe. */
+.article figure {
+  margin: 2.4rem 0;
+}
+
+.article figure svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.article figcaption {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 0.9rem;
+}
+
+/* Writer's note at the foot of a post — disclosure and provenance, not prose. */
+.article .colophon {
+  margin-top: 3.2rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* Inline illustrations scale with the column, so their labels are sized from a
+   variable that grows on narrow screens — otherwise a wide SVG's text becomes
+   unreadable once it shrinks to a phone width. */
+.article figure svg.figure-art {
+  --fig-fs: 15px;
+}
+
+.article figure svg.figure-art text {
+  font-size: var(--fig-fs);
+}
+
+/* Secondary labels — panel headings, edge labels, sub-captions. */
+.article figure svg.figure-art text.sm {
+  font-size: calc(var(--fig-fs) * 0.8);
+}
+
+@media (max-width: 44rem) {
+  .article figure svg.figure-art {
+    --fig-fs: 24px;
+  }
+}
+
 .article pre code .token.comment,
 .article pre code .token.prolog,
 .article pre code .token.doctype,
