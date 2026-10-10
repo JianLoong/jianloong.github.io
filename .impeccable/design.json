@@ -1,34 +1,39 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-11T00:55:00Z",
+  "generatedAt": "2026-10-11T09:12:00Z",
   "title": "Design System: Jian",
   "extensions": {
     "colorMeta": {
-      "paper": { "role": "neutral", "displayName": "Field Paper", "canonical": "#dfe4e3", "tonalRamp": ["oklch(16% 0.006 195)", "oklch(28% 0.008 195)", "oklch(40% 0.009 195)", "oklch(52% 0.010 195)", "oklch(64% 0.011 195)", "oklch(76% 0.011 195)", "oklch(86% 0.011 195)", "oklch(95% 0.011 195)"] },
-      "paper-raised": { "role": "neutral", "displayName": "Raised Paper", "canonical": "#ecf0ef", "tonalRamp": ["oklch(17% 0.006 195)", "oklch(29% 0.008 195)", "oklch(41% 0.009 195)", "oklch(53% 0.010 195)", "oklch(65% 0.010 195)", "oklch(78% 0.010 195)", "oklch(88% 0.010 195)", "oklch(97% 0.010 195)"] },
-      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#14181a", "tonalRamp": ["oklch(11% 0.005 195)", "oklch(22% 0.006 195)", "oklch(33% 0.007 195)", "oklch(44% 0.007 195)", "oklch(56% 0.007 195)", "oklch(68% 0.007 195)", "oklch(80% 0.007 195)", "oklch(92% 0.007 195)"] },
-      "ink-soft": { "role": "neutral", "displayName": "Soft Ink", "canonical": "#323839", "tonalRamp": ["oklch(14% 0.005 195)", "oklch(25% 0.006 195)", "oklch(36% 0.007 195)", "oklch(47% 0.008 195)", "oklch(58% 0.008 195)", "oklch(70% 0.008 195)", "oklch(82% 0.008 195)", "oklch(94% 0.008 195)"] },
-      "ink-muted": { "role": "neutral", "displayName": "Muted Ink", "canonical": "#5e6468", "tonalRamp": ["oklch(17% 0.008 200)", "oklch(28% 0.010 200)", "oklch(39% 0.012 200)", "oklch(50% 0.014 200)", "oklch(61% 0.014 200)", "oklch(72% 0.014 200)", "oklch(83% 0.014 200)", "oklch(94% 0.014 200)"] },
-      "hairline": { "role": "neutral", "displayName": "Hairline", "canonical": "#bfc6c6", "tonalRamp": ["oklch(20% 0.008 195)", "oklch(31% 0.010 195)", "oklch(42% 0.012 195)", "oklch(53% 0.014 195)", "oklch(64% 0.014 195)", "oklch(74% 0.014 195)", "oklch(84% 0.014 195)", "oklch(93% 0.014 195)"] },
-      "oxblood": { "role": "primary", "displayName": "Oxblood", "canonical": "#8c3b28", "tonalRamp": ["oklch(15% 0.050 35)", "oklch(25% 0.080 35)", "oklch(35% 0.105 35)", "oklch(47% 0.120 35)", "oklch(58% 0.115 35)", "oklch(70% 0.090 35)", "oklch(82% 0.055 35)", "oklch(94% 0.018 35)"] },
-      "oxblood-deep": { "role": "primary", "displayName": "Oxblood Deep", "canonical": "#6e2d1e", "tonalRamp": ["oklch(13% 0.045 33)", "oklch(23% 0.070 33)", "oklch(33% 0.095 33)", "oklch(43% 0.115 33)", "oklch(55% 0.115 33)", "oklch(67% 0.090 33)", "oklch(80% 0.055 33)", "oklch(93% 0.018 33)"] },
-      "mark": { "role": "neutral", "displayName": "Mark", "canonical": "#d8dedd", "tonalRamp": ["oklch(19% 0.010 190)", "oklch(30% 0.015 190)", "oklch(41% 0.020 190)", "oklch(52% 0.024 190)", "oklch(63% 0.024 190)", "oklch(74% 0.024 190)", "oklch(84% 0.024 190)", "oklch(93% 0.024 190)"] },
-      "night-ground": { "role": "neutral", "displayName": "Night Ground", "canonical": "#0e1112", "tonalRamp": ["oklch(10% 0.004 200)", "oklch(20% 0.005 200)", "oklch(31% 0.006 200)", "oklch(42% 0.006 200)", "oklch(54% 0.007 200)", "oklch(66% 0.007 200)", "oklch(78% 0.007 200)", "oklch(91% 0.007 200)"] },
-      "night-raised": { "role": "neutral", "displayName": "Night Raised", "canonical": "#151a1b", "tonalRamp": ["oklch(12% 0.005 200)", "oklch(22% 0.005 200)", "oklch(33% 0.006 200)", "oklch(44% 0.007 200)", "oklch(56% 0.008 200)", "oklch(68% 0.008 200)", "oklch(80% 0.008 200)", "oklch(92% 0.008 200)"] },
-      "night-ink": { "role": "neutral", "displayName": "Night Ink", "canonical": "#e3e8e7", "tonalRamp": ["oklch(16% 0.006 195)", "oklch(27% 0.008 195)", "oklch(38% 0.010 195)", "oklch(50% 0.012 195)", "oklch(62% 0.013 195)", "oklch(74% 0.013 195)", "oklch(85% 0.013 195)", "oklch(95% 0.013 195)"] },
-      "night-ink-soft": { "role": "neutral", "displayName": "Night Soft Ink", "canonical": "#c7cecd", "tonalRamp": ["oklch(18% 0.007 195)", "oklch(29% 0.009 195)", "oklch(40% 0.011 195)", "oklch(51% 0.013 195)", "oklch(62% 0.014 195)", "oklch(73% 0.014 195)", "oklch(84% 0.014 195)", "oklch(94% 0.014 195)"] },
-      "night-ink-muted": { "role": "neutral", "displayName": "Night Muted Ink", "canonical": "#919a9b", "tonalRamp": ["oklch(22% 0.009 195)", "oklch(33% 0.012 195)", "oklch(44% 0.014 195)", "oklch(55% 0.016 195)", "oklch(65% 0.016 195)", "oklch(75% 0.016 195)", "oklch(85% 0.016 195)", "oklch(94% 0.016 195)"] },
-      "night-hairline": { "role": "neutral", "displayName": "Night Hairline", "canonical": "#2c3233", "tonalRamp": ["oklch(15% 0.005 200)", "oklch(26% 0.007 200)", "oklch(37% 0.008 200)", "oklch(48% 0.009 200)", "oklch(59% 0.010 200)", "oklch(70% 0.010 200)", "oklch(82% 0.010 200)", "oklch(94% 0.010 200)"] },
-      "night-oxblood": { "role": "primary", "displayName": "Night Oxblood", "canonical": "#d08064", "tonalRamp": ["oklch(18% 0.045 38)", "oklch(28% 0.070 38)", "oklch(38% 0.095 38)", "oklch(49% 0.110 38)", "oklch(60% 0.115 38)", "oklch(70% 0.110 38)", "oklch(82% 0.070 38)", "oklch(93% 0.030 38)"] },
-      "night-mark": { "role": "neutral", "displayName": "Night Mark", "canonical": "#232a2c", "tonalRamp": ["oklch(15% 0.008 200)", "oklch(26% 0.013 200)", "oklch(37% 0.018 200)", "oklch(48% 0.022 200)", "oklch(59% 0.024 200)", "oklch(70% 0.024 200)", "oklch(82% 0.024 200)", "oklch(93% 0.024 200)"] }
+      "plate": { "role": "neutral", "displayName": "Plate", "canonical": "#e9e7de", "tonalRamp": ["oklch(16% 0.006 95)", "oklch(28% 0.008 95)", "oklch(40% 0.010 95)", "oklch(52% 0.011 95)", "oklch(64% 0.012 95)", "oklch(76% 0.013 95)", "oklch(86% 0.013 95)", "oklch(95% 0.013 95)"] },
+      "plate-raised": { "role": "neutral", "displayName": "Raised Plate", "canonical": "#f4f2ea", "tonalRamp": ["oklch(17% 0.006 95)", "oklch(29% 0.008 95)", "oklch(41% 0.010 95)", "oklch(53% 0.011 95)", "oklch(65% 0.012 95)", "oklch(78% 0.012 95)", "oklch(88% 0.012 95)", "oklch(97% 0.012 95)"] },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#14161f", "tonalRamp": ["oklch(11% 0.010 275)", "oklch(22% 0.014 275)", "oklch(33% 0.016 275)", "oklch(44% 0.016 275)", "oklch(56% 0.016 275)", "oklch(68% 0.016 275)", "oklch(80% 0.016 275)", "oklch(92% 0.016 275)"] },
+      "ink-soft": { "role": "neutral", "displayName": "Soft Ink", "canonical": "#3a3d4a", "tonalRamp": ["oklch(14% 0.012 275)", "oklch(25% 0.015 275)", "oklch(36% 0.017 275)", "oklch(47% 0.018 275)", "oklch(58% 0.018 275)", "oklch(70% 0.018 275)", "oklch(82% 0.018 275)", "oklch(94% 0.018 275)"] },
+      "ink-muted": { "role": "neutral", "displayName": "Muted Ink", "canonical": "#62667a", "tonalRamp": ["oklch(17% 0.014 275)", "oklch(28% 0.018 275)", "oklch(39% 0.021 275)", "oklch(50% 0.023 275)", "oklch(61% 0.023 275)", "oklch(72% 0.023 275)", "oklch(83% 0.023 275)", "oklch(94% 0.023 275)"] },
+      "hairline": { "role": "neutral", "displayName": "Hairline", "canonical": "#c6c5bb", "tonalRamp": ["oklch(20% 0.010 95)", "oklch(31% 0.012 95)", "oklch(42% 0.014 95)", "oklch(53% 0.015 95)", "oklch(64% 0.015 95)", "oklch(74% 0.015 95)", "oklch(84% 0.015 95)", "oklch(93% 0.015 95)"] },
+      "grid": { "role": "neutral", "displayName": "Grid", "canonical": "#d8d6cb", "tonalRamp": ["oklch(18% 0.010 95)", "oklch(29% 0.012 95)", "oklch(40% 0.013 95)", "oklch(51% 0.014 95)", "oklch(62% 0.014 95)", "oklch(73% 0.014 95)", "oklch(84% 0.014 95)", "oklch(94% 0.014 95)"] },
+      "star-hot": { "role": "primary", "displayName": "Star Hot (Plate)", "canonical": "#8a4f11", "tonalRamp": ["oklch(15% 0.045 72)", "oklch(25% 0.072 72)", "oklch(35% 0.095 72)", "oklch(45% 0.112 72)", "oklch(57% 0.118 72)", "oklch(69% 0.110 72)", "oklch(81% 0.070 72)", "oklch(93% 0.028 72)"] },
+      "star-cool": { "role": "secondary", "displayName": "Star Cool (Plate)", "canonical": "#2f6a80", "tonalRamp": ["oklch(15% 0.030 230)", "oklch(25% 0.048 230)", "oklch(35% 0.062 230)", "oklch(45% 0.072 230)", "oklch(57% 0.075 230)", "oklch(69% 0.065 230)", "oklch(81% 0.042 230)", "oklch(93% 0.016 230)"] },
+      "star-faint": { "role": "tertiary", "displayName": "Star Faint (Plate)", "canonical": "#6b4a86", "tonalRamp": ["oklch(15% 0.035 305)", "oklch(25% 0.055 305)", "oklch(35% 0.072 305)", "oklch(45% 0.085 305)", "oklch(57% 0.088 305)", "oklch(69% 0.075 305)", "oklch(81% 0.048 305)", "oklch(93% 0.018 305)"] },
+      "mark": { "role": "neutral", "displayName": "Mark", "canonical": "#dcdad0", "tonalRamp": ["oklch(19% 0.010 95)", "oklch(30% 0.015 95)", "oklch(41% 0.020 95)", "oklch(52% 0.024 95)", "oklch(63% 0.024 95)", "oklch(74% 0.024 95)", "oklch(84% 0.024 95)", "oklch(93% 0.024 95)"] },
+      "sky": { "role": "neutral", "displayName": "Sky", "canonical": "#0a0d18", "tonalRamp": ["oklch(9% 0.018 265)", "oklch(19% 0.026 265)", "oklch(30% 0.030 265)", "oklch(41% 0.032 265)", "oklch(53% 0.034 265)", "oklch(65% 0.034 265)", "oklch(77% 0.034 265)", "oklch(91% 0.034 265)"] },
+      "sky-raised": { "role": "neutral", "displayName": "Sky Raised", "canonical": "#121728", "tonalRamp": ["oklch(11% 0.020 265)", "oklch(21% 0.028 265)", "oklch(32% 0.032 265)", "oklch(43% 0.034 265)", "oklch(55% 0.036 265)", "oklch(67% 0.036 265)", "oklch(79% 0.036 265)", "oklch(92% 0.036 265)"] },
+      "sky-ink": { "role": "neutral", "displayName": "Sky Ink", "canonical": "#e9e7db", "tonalRamp": ["oklch(16% 0.008 90)", "oklch(27% 0.010 90)", "oklch(38% 0.012 90)", "oklch(50% 0.014 90)", "oklch(62% 0.015 90)", "oklch(74% 0.015 90)", "oklch(85% 0.015 90)", "oklch(95% 0.015 90)"] },
+      "sky-ink-soft": { "role": "neutral", "displayName": "Sky Soft Ink", "canonical": "#c3c1b5", "tonalRamp": ["oklch(18% 0.008 90)", "oklch(29% 0.011 90)", "oklch(40% 0.013 90)", "oklch(51% 0.015 90)", "oklch(62% 0.016 90)", "oklch(73% 0.016 90)", "oklch(84% 0.016 90)", "oklch(94% 0.016 90)"] },
+      "sky-ink-muted": { "role": "neutral", "displayName": "Sky Muted Ink", "canonical": "#8b8e9c", "tonalRamp": ["oklch(22% 0.012 270)", "oklch(33% 0.016 270)", "oklch(44% 0.019 270)", "oklch(55% 0.022 270)", "oklch(65% 0.022 270)", "oklch(75% 0.022 270)", "oklch(85% 0.022 270)", "oklch(94% 0.022 270)"] },
+      "sky-hairline": { "role": "neutral", "displayName": "Sky Hairline", "canonical": "#232a42", "tonalRamp": ["oklch(15% 0.022 265)", "oklch(26% 0.028 265)", "oklch(37% 0.032 265)", "oklch(48% 0.034 265)", "oklch(59% 0.036 265)", "oklch(70% 0.036 265)", "oklch(82% 0.036 265)", "oklch(94% 0.036 265)"] },
+      "sky-grid": { "role": "neutral", "displayName": "Sky Grid", "canonical": "#1b2138", "tonalRamp": ["oklch(13% 0.020 265)", "oklch(24% 0.026 265)", "oklch(35% 0.030 265)", "oklch(46% 0.032 265)", "oklch(57% 0.034 265)", "oklch(68% 0.034 265)", "oklch(80% 0.034 265)", "oklch(93% 0.034 265)"] },
+      "sky-star-hot": { "role": "primary", "displayName": "Star Hot (Sky)", "canonical": "#f0c674", "tonalRamp": ["oklch(20% 0.048 80)", "oklch(31% 0.078 80)", "oklch(42% 0.108 80)", "oklch(53% 0.130 80)", "oklch(64% 0.140 80)", "oklch(75% 0.135 80)", "oklch(86% 0.095 80)", "oklch(95% 0.040 80)"] },
+      "sky-star-cool": { "role": "secondary", "displayName": "Star Cool (Sky)", "canonical": "#8fb8c9", "tonalRamp": ["oklch(20% 0.030 230)", "oklch(31% 0.046 230)", "oklch(42% 0.060 230)", "oklch(53% 0.072 230)", "oklch(64% 0.080 230)", "oklch(75% 0.075 230)", "oklch(86% 0.050 230)", "oklch(95% 0.020 230)"] },
+      "sky-star-faint": { "role": "tertiary", "displayName": "Star Faint (Sky)", "canonical": "#b892c9", "tonalRamp": ["oklch(20% 0.036 305)", "oklch(31% 0.055 305)", "oklch(42% 0.072 305)", "oklch(53% 0.088 305)", "oklch(64% 0.095 305)", "oklch(75% 0.085 305)", "oklch(86% 0.055 305)", "oklch(95% 0.022 305)"] },
+      "sky-mark": { "role": "neutral", "displayName": "Sky Mark", "canonical": "#1a2135", "tonalRamp": ["oklch(14% 0.018 265)", "oklch(25% 0.024 265)", "oklch(36% 0.028 265)", "oklch(47% 0.030 265)", "oklch(58% 0.032 265)", "oklch(69% 0.032 265)", "oklch(81% 0.032 265)", "oklch(94% 0.032 265)"] }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Page h1 and homepage hero only. Tight tracking makes it read as a masthead." },
+      "display": { "displayName": "Display", "purpose": "Page h1 and the homepage hero only. Spectral at 500 with relaxed tracking — a text face asked to carry a heading by weight, not by being a display face. The system has no display face." },
       "headline": { "displayName": "Headline", "purpose": "Article h2 and post-card h3." },
       "title": { "displayName": "Title", "purpose": "Project-card h3." },
-      "body": { "displayName": "Body", "purpose": "All prose, held to --measure (42rem) for 65–75 characters." },
-      "label": { "displayName": "Label", "purpose": "Meta lines, nav, kickers, footer. Uppercase and tracked is the system's only decorative move." },
-      "code": { "displayName": "Code", "purpose": "Inline code and code blocks, usually on --mark." }
+      "body": { "displayName": "Body", "purpose": "All prose, held to --measure (42rem) for 65–75 characters. Never mono." },
+      "label": { "displayName": "Label", "purpose": "Meta lines, nav, legend, footer, annotations. Azeret Mono, uppercase and tracked when it names a thing; sentence case when it annotates a value." },
+      "code": { "displayName": "Code", "purpose": "Inline code and code blocks, usually on --mark. Same mono face as the labels — the instrument's one voice." }
     },
     "breakpoints": [
       { "name": "grid-collapse", "value": "820px", "purpose": "post-card and project-grid both go single-column." },
@@ -36,7 +41,7 @@
       { "name": "figure-scale", "value": "704px", "purpose": "44rem. Inline SVG figures step their label size from 15px to 24px." }
     ],
     "motion": [
-      { "name": "scroll-smooth", "value": "scroll-behavior: smooth on html", "purpose": "The only motion declared. Everything else is a state change with no transition, and prefers-reduced-motion forces it off." }
+      { "name": "scroll-smooth", "value": "scroll-behavior: smooth on html", "purpose": "The only motion declared. Everything else is a state change with no transition, and prefers-reduced-motion forces it off. The world is a plate, not an instrument panel — nothing here plots in real time." }
     ]
   },
   "components": [
@@ -44,92 +49,110 @@
       "name": "Theme Toggle",
       "kind": "button",
       "refersTo": "theme-toggle",
-      "description": "The one pill in the system and the only control on every page. Switches light/dark and persists the choice.",
-      "html": "<button class=\"ds-theme-toggle\" type=\"button\" aria-label=\"Toggle color theme\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" width=\"16\" height=\"16\"><circle cx=\"12\" cy=\"12\" r=\"4\"></circle><path d=\"M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4\"></path></svg></button>",
-      "css": ".ds-theme-toggle { width: 2.1rem; height: 2.1rem; border: 1px solid var(--rule); background: var(--bg-elevated); color: var(--ink); border-radius: 999px; cursor: pointer; display: grid; place-items: center; padding: 0; } .ds-theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }"
+      "description": "The one pill in the system and the only control on every page. Switches sky/plate and persists the choice. Raised-sky ground, so it reads as a surface sitting on the field.",
+      "html": "<button class=\"ds-theme-toggle\" type=\"button\" aria-label=\"Dark theme\" aria-pressed=\"true\"><svg data-icon=\"sun\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" width=\"17\" height=\"17\"><circle cx=\"12\" cy=\"12\" r=\"4\"></circle><path d=\"M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4\"></path></svg></button>",
+      "css": ".ds-theme-toggle { width: 2.75rem; height: 2.75rem; border: 1px solid var(--rule); background: var(--bg-elevated); color: var(--ink); border-radius: 999px; cursor: pointer; display: grid; place-items: center; padding: 0; } .ds-theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }"
     },
     {
       "name": "Navigation Link",
       "kind": "nav",
       "refersTo": "nav",
-      "description": "Uppercase Outfit chrome. Active and hover go to ink, never to oxblood — nav stays out of the accent's way.",
-      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"is-active\">Home</a><a href=\"#\">Writing</a><a href=\"#\">About</a></nav>",
-      "css": ".ds-nav { display: flex; align-items: center; gap: 1.35rem; font-family: var(--sans); font-size: 0.86rem; letter-spacing: 0.08em; text-transform: uppercase; } .ds-nav a { text-decoration: none; color: var(--muted); } .ds-nav a:hover, .ds-nav a.is-active { color: var(--ink); } .ds-nav a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }"
+      "description": "Uppercase mono chrome. Active and hover go to ink, never to a star tint — the frame stays out of the magnitude scale's way.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"is-active\">Home</a><a href=\"#\">Writing</a><a href=\"#\">Projects</a><a href=\"#\">About</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 0.65rem; font-family: var(--mono); font-size: 0.86rem; letter-spacing: 0.08em; text-transform: uppercase; } .ds-nav a { padding: 0.8rem 0.35rem; text-decoration: none; color: var(--muted); } .ds-nav a:hover, .ds-nav a.is-active { color: var(--ink); }"
+    },
+    {
+      "name": "Atlas Legend",
+      "kind": "custom",
+      "refersTo": "atlas-legend",
+      "description": "The world's own voice at the top of the field: uppercase mono stating real counts of what is plotted. A star atlas always ships one, and it is not decoration — it declares the scale of what you are looking at.",
+      "html": "<p class=\"ds-legend\"><span><b>2</b> entries</span><span><b>6</b> objects</span><span>magnitude = reading time</span></p>",
+      "css": ".ds-legend { display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); } .ds-legend b { color: var(--accent); font-weight: 500; }"
+    },
+    {
+      "name": "Magnitude Mark",
+      "kind": "custom",
+      "refersTo": "magnitude-mark",
+      "description": "The signature. A plotted dot at the head of a catalogue entry whose diameter derives from a real quantity — reading time — and whose tint is its magnitude class. It is a measurement, not an ornament: a mark that does not encode magnitude is noise.",
+      "html": "<span class=\"ds-post-meta\" style=\"--mag: 8; --mag-tint: var(--accent)\">10 Oct 2026<br>8 min</span>",
+      "css": ".ds-post-meta::before { content: \"\"; display: inline-block; vertical-align: 0.05em; margin-right: 0.45rem; width: calc(0.32rem + var(--mag, 5) * 0.075rem); height: calc(0.32rem + var(--mag, 5) * 0.075rem); border-radius: 999px; background: var(--mag-tint, var(--accent)); }"
     },
     {
       "name": "Post Card",
       "kind": "card",
       "refersTo": "post-card",
-      "description": "An asymmetric 8.5rem meta column beside a fluid body, separated by hairlines top and bottom. Hover moves the h3 colour and nothing else.",
-      "html": "<a class=\"ds-post-card\" href=\"#\"><span class=\"ds-post-meta\">29 JUNE 2025<br>6 min</span><span><h3>Vibe coding an old blog</h3><p>Three days with Cursor, a janky Hugo site, and the guidance an AI still needs.</p></span></a>",
-      "css": ".ds-post-card { display: grid; grid-template-columns: 8.5rem 1fr; gap: 1.6rem; padding: 1.7rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; } .ds-post-meta { font-family: var(--sans); font-size: 0.8rem; color: var(--muted); letter-spacing: 0.04em; } .ds-post-card h3 { font-family: var(--serif-display); font-size: 1.55rem; font-weight: 500; letter-spacing: -0.03em; line-height: 1.2; margin: 0 0 0.45rem; color: var(--ink); } .ds-post-card p { margin: 0; color: var(--ink-soft); font-size: 1.02rem; } .ds-post-card:hover h3 { color: var(--accent); }"
+      "description": "An asymmetric 8.5rem annotation column beside a fluid body, separated by hairlines top and bottom. The meta column carries the magnitude mark. Hover moves the h3 colour and nothing else.",
+      "html": "<a class=\"ds-post-card\" href=\"#\"><span class=\"ds-post-meta\" style=\"--mag: 6; --mag-tint: var(--star-cool)\">29 JUNE 2025<br>6 min</span><span><h3>Vibe coding an old blog</h3><p>Three days with Cursor, a janky Hugo site, and the guidance an AI still needs.</p></span></a>",
+      "css": ".ds-post-card { display: grid; grid-template-columns: 8.5rem 1fr; gap: 1.6rem; padding: 1.7rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; } .ds-post-meta { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); letter-spacing: 0.04em; } .ds-post-card h3 { font-family: var(--serif-display); font-size: 1.55rem; font-weight: 500; letter-spacing: -0.01em; line-height: 1.2; margin: 0 0 0.45rem; color: var(--ink); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 0.18em; } .ds-post-card p { margin: 0; color: var(--ink-soft); font-size: 1.02rem; } .ds-post-card:hover h3 { color: var(--accent); text-decoration-color: var(--accent); }"
     },
     {
       "name": "Project Card",
       "kind": "card",
       "refersTo": "project-card",
-      "description": "A bordered, raised-paper surface — the only tonal step in the system. Square corners, no shadow.",
-      "html": "<a class=\"ds-project\" href=\"#\"><h3>Malaysia API</h3><p>A static REST API of Malaysian states and federal territories. JSON files, no database, on purpose.</p><span class=\"ds-post-meta\">37★ · 26 forks · JavaScript</span></a>",
-      "css": ".ds-project { border: 1px solid var(--rule); background: var(--bg-elevated); padding: 1.4rem 1.35rem 1.2rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.45rem; min-height: 11rem; } .ds-project h3 { font-family: var(--serif-display); font-size: 1.35rem; font-weight: 500; letter-spacing: -0.02em; margin: 0; color: var(--ink); } .ds-project p { margin: 0; color: var(--ink-soft); font-size: 0.98rem; flex: 1; } .ds-project .ds-post-meta { font-family: var(--sans); font-size: 0.8rem; color: var(--muted); letter-spacing: 0.04em; margin-top: 0.4rem; } .ds-project:hover h3 { color: var(--accent); }"
+      "description": "A bordered, raised plate — the only tonal step in the system. Square corners, no shadow, mono meta.",
+      "html": "<a class=\"ds-project\" href=\"#\"><h3>Malaysia API</h3><p>A static REST API of Malaysian states and federal territories. JSON files, no database, on purpose.</p><span class=\"ds-post-meta\" style=\"--mag: 0; --mag-tint: transparent\">37★ · 26 forks · JavaScript</span></a>",
+      "css": ".ds-project { border: 1px solid var(--rule); background: var(--bg-elevated); padding: 1.4rem 1.35rem 1.2rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.45rem; min-height: 11rem; } .ds-project h3 { font-family: var(--serif-display); font-size: 1.35rem; font-weight: 500; letter-spacing: -0.01em; margin: 0; color: var(--ink); } .ds-project p { margin: 0; color: var(--ink-soft); font-size: 0.98rem; flex: 1; } .ds-project .ds-post-meta { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); letter-spacing: 0.04em; margin-top: 0.4rem; } .ds-project:hover h3 { color: var(--accent); }"
     },
     {
       "name": "Skip Link",
       "kind": "custom",
       "refersTo": "skip-link",
-      "description": "The only solid oxblood surface in the interface. Parked off-canvas until focused, then it slides in.",
+      "description": "The only solid star-hot surface in the interface. Parked off-canvas until focused, then it slides in. Its hover is pinned to the ground colour — the global a:hover would otherwise repaint it accent-on-accent.",
       "html": "<a class=\"ds-skip\" href=\"#main\">Skip to content</a>",
-      "css": ".ds-skip { position: absolute; left: -9999px; top: 0; z-index: 50; background: var(--accent); color: var(--bg); padding: 0.6rem 1rem; font-family: var(--sans); font-size: 0.85rem; letter-spacing: 0.04em; text-decoration: none; } .ds-skip:focus { left: 0; }"
+      "css": ".ds-skip { position: absolute; left: -9999px; top: 0; z-index: 50; background: var(--accent); color: var(--bg); padding: 0.6rem 1rem; font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.04em; text-decoration: none; } .ds-skip:focus { left: 0; } .ds-skip:hover { color: var(--bg); }"
     },
     {
       "name": "Code Block",
       "kind": "custom",
       "refersTo": "code-block",
-      "description": "IBM Plex Mono on the mark ground, square and full-bleed within the measure. Scrolls horizontally rather than wrapping.",
+      "description": "Azeret Mono on the mark ground, square and full-bleed within the measure. Scrolls horizontally rather than wrapping.",
       "html": "<pre class=\"ds-code\"><code>npm run build</code></pre>",
-      "css": ".ds-code { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.9rem; line-height: 1.6; background: var(--mark); color: var(--ink); padding: 1.1rem 1.3rem; overflow-x: auto; margin: 0 0 1.4rem; border-radius: 0; } .ds-code code { background: none; padding: 0; font-size: inherit; }"
+      "css": ".ds-code { font-family: var(--mono); font-size: 0.9rem; line-height: 1.6; background: var(--mark); color: var(--ink); padding: 1.1rem 1.3rem; overflow-x: auto; margin: 0 0 1.4rem; border-radius: 0; } .ds-code code { background: none; padding: 0; font-size: inherit; }"
     },
     {
       "name": "Blockquote",
       "kind": "custom",
       "refersTo": "blockquote",
-      "description": "A 2px oxblood left rule and italic soft ink. The only place a border is thicker than 1px other than the progress bar.",
+      "description": "A 2px star-hot left rule and italic soft ink. The only place a border is thicker than 1px.",
       "html": "<blockquote class=\"ds-quote\"><p>If you want an elegant solution, perhaps you need to hold its hand.</p></blockquote>",
       "css": ".ds-quote { margin: 1.8rem 0; padding: 0 0 0 1.2rem; border-left: 2px solid var(--accent); color: var(--ink-soft); font-style: italic; } .ds-quote p { margin: 0; }"
     }
   ],
   "narrative": {
-    "northStar": "The Field Manual",
-    "overview": "A field manual is written to be used, not admired. It is plain, it is durable, and it assumes you will come back to it holding a problem. This system is built the same way: a warm paper ground, a single oxblood ink for anything that matters, hairline rules doing the structural work that other systems delegate to shadows and cards.\n\nThe layout is deliberately narrow and columnar. Body text is set at --measure (42rem, roughly 65–75 characters) and the page never exceeds --page (72rem), so the reading experience stays the same whether you arrive on a laptop or a phone. Density is honest: no card corners, no elevation, no ornament that would have to be maintained.\n\nThe voice is utilitarian and terse. Headings state what they are, meta lines are uppercase labels rather than prose, and decoration is absent by policy. Warmth comes from exactly two places — the paper tone and the serif — and nowhere else.",
+    "northStar": "The Atlas",
+    "overview": "An atlas is not a picture of the sky. It is a plotted field with a scale, a grid you can read a position off, and annotations that tell you what you are looking at. The marks are measurements, and a mark that measures nothing is not in the book.\n\nThis system is built the same way. The ground is a ruled coordinate plate at a 6rem module, the chrome is mono because the chrome is instrumentation, and the catalogue plots each entry at a size derived from its real heft rather than decorating it. Colour is a magnitude scale with three steps — hot, cool, faint — and no fourth tint exists, because a scale that keeps growing stops being one.\n\nIt replaced a field-manual world of warm paper and a single oxblood accent. That world was competent and generic: cream ground plus high-contrast serif is the most predictable pairing an interface can reach for, and running two faces that sit on every model's default list is why it read as a template. The atlas is the opposite bet — a cool dark field, a working text face, and meaning carried by measurement.\n\nThe world owns the frame and the column stays calm. Grid, mono and plotted marks live in the masthead, the navigation, the legend and the catalogue; the running prose is a plain column at a plain measure in a reading face. An atlas that plots behind its own text is a poster.",
     "keyCharacteristics": [
-      "Warm paper ground with a single oxblood accent; no secondary or tertiary hues",
-      "Square corners everywhere, with exactly one pill (the theme toggle)",
-      "Structure carried by 1px hairlines, never by shadow",
-      "A serif/sans/mono split with one job per face, and one serif doing both display and prose at different weights",
-      "Restrained but warm: the material does the personality work, the shapes stay plain"
+      "A ruled coordinate plate as the ground, ruled at a 6rem module and never an overlay on prose",
+      "A three-step magnitude scale — hot, cool, faint — as the only colour, with no accent hue and no fourth tint",
+      "A mono/serif split with one job per voice: Azeret Mono measures, Spectral reads",
+      "Square everywhere, with two round exceptions, both instruments: the plotted mark and the theme toggle",
+      "Structure carried by 1px hairlines and the grid, never by shadow — the system has no shadows at all"
     ],
     "rules": [
-      { "name": "The One Ink Rule", "body": "There is exactly one accent hue. Oxblood appears on well under 10% of any screen; its scarcity is what makes it read as emphasis. A second accent hue is a redesign, not an addition.", "section": "colors" },
-      { "name": "The Tinted Ink Rule", "body": "Text is never pure black or pure grey. Every ink is tinted toward the ground it sits on — cooled here, because the ground is cool (#14181a, not #000) — so type sits on the page rather than being cut out of it.", "section": "colors" },
-      { "name": "The One Serif Rule", "body": "Newsreader carries the whole page. Weight and size do the separating — 500 for structural headings, 400 for prose. Reaching for a second serif to manufacture that contrast is the failure this rule exists to prevent.", "section": "typography" },
-      { "name": "The Uppercase Means Label Rule", "body": "Uppercase plus letter-spacing marks something as metadata, never as content. If a line is meant to be read as a sentence, it does not get tracked caps.", "section": "typography" },
-      { "name": "The Hairline Rule", "body": "Separation is drawn, never cast. If two things need to be told apart, they get a 1px border or a background step — not a shadow, not a glow, not a gradient.", "section": "elevation" }
+      { "name": "The Frame Owns The World Rule", "body": "Grid, mono and plotted marks belong to the masthead, the navigation, the legend and the catalogue. The running column stays plain, at a plain measure, in a reading face. The moment the world reaches into the prose it stops being an atlas and becomes a poster.", "section": "layout" },
+      { "name": "The Magnitude Rule", "body": "Colour is measurement, not decoration. Three tints in one scale: hot is the brightest magnitude and nothing else, cool is mid and the default link tint, faint is the least weighty thing in view. A tint that does not encode magnitude is noise, and a fourth tint ends the scale.", "section": "colors" },
+      { "name": "The One Serif Rule", "body": "Spectral carries the whole page. Weight and size do the separating — 500 for structural headings, 400 for prose. There is no display face; asking a text face for a masthead is how the previous world acquired a second serif it did not need.", "section": "typography" },
+      { "name": "The Mono Measures Rule", "body": "Azeret Mono never sets running prose or a heading, at any size. It is the instrument's voice: labels, meta, annotations and code. A page whose body text is mono is a terminal costume, not an atlas. Uppercase and tracked when it names a thing; sentence case when it annotates a value.", "section": "typography" },
+      { "name": "The Tinted Ink Rule", "body": "Text is never pure black or pure grey. Every ink is tinted toward the ground it sits on — cooled toward the sky in dark (#e9e7db, not #fff), violet-cast on the plate (#14161f, not #000) — so type sits on the field rather than being cut out of it.", "section": "colors" },
+      { "name": "The Hairline Rule", "body": "Separation is drawn, never cast. Two things that need telling apart get a 1px border, the grid, or a tonal step — not a shadow, not a glow, not a gradient. The system has no shadows at all, so one would be a foreign object.", "section": "elevation" }
     ],
     "dos": [
-      "Do hold prose to --measure (42rem) — the reading column is the product.",
-      "Do reach for a 1px --hairline when two things need separating.",
-      "Do keep oxblood scarce; it is the only emphasis the system has.",
-      "Do set interface and meta text in uppercase Outfit with letter-spacing.",
-      "Do keep corners square. The theme toggle is the single sanctioned exception.",
-      "Do check both themes — every token has a night counterpart, and the accent warms from #8c3b28 to #d08064."
+      "Do hold prose to --measure (42rem) — the reading column is the product, and the world never touches it.",
+      "Do size the magnitude mark from real content; it is a measurement, not an ornament.",
+      "Do keep mono out of the prose and out of headings, at every size.",
+      "Do declare the field before plotting it: a legend stating real counts opens the catalogue.",
+      "Do keep corners square. The plotted mark and the theme toggle are the sanctioned exceptions, and both are instruments.",
+      "Do check both grounds — every token has a sky counterpart, and the star tints invert from deep (#8a4f11) to luminous (#f0c674).",
+      "Do set uppercase tracked mono when a line names a thing, and sentence-case mono when it annotates a value."
     ],
     "donts": [
-      "Don't add a second accent hue, a gradient, or a glow.",
+      "Don't add a fourth tint, a gradient, or a glow — the scale has three steps and that is the system.",
       "Don't introduce shadows or elevation. Separation is drawn, never cast.",
-      "Don't use pure black or pure grey; every ink is warmed toward the paper.",
-      "Don't put text on a coloured ground unless it is --paper on --oxblood (the skip link is the only precedent, and it measures 7:1).",
-      "Don't set content in tracked uppercase — that treatment means \"this is a label\".",
-      "Don't set body prose above weight 400; weight is how display is separated from reading.",
-      "Don't introduce a second serif to create display contrast."
+      "Don't use pure black or pure grey; every ink is tinted toward its ground.",
+      "Don't set body prose or headings in mono — that is the terminal costume the mode rules refuse on a reading surface.",
+      "Don't let the grid compete with the text: if it is visible while reading, it is too strong. --grid sits one hairline off --ground by design.",
+      "Don't use a star tint decoratively; a tint that does not encode magnitude is noise.",
+      "Don't reintroduce a second serif or a display face. Spectral at 500 is the display voice."
     ]
   }
 }
