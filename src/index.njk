@@ -1,0 +1,47 @@
+---
+layout: layouts/page.njk
+title: Jian Liew
+permalink: /
+---
+<section class="hero">
+  <p class="kicker">Software engineer</p>
+  <h1>Notes on reliability, data, and making things that last.</h1>
+  <p class="lede">I am Jian Loong Liew. I work as a Site Reliability Engineer at ANZ in Melbourne, mostly on automation and GCP. This is where I write about engineering, teaching, and the small tools I keep building on the side.</p>
+  <div class="hero-links">
+    <a href="{{ site.github }}">GitHub</a>
+    <a href="{{ site.linkedin }}">LinkedIn</a>
+    <a href="mailto:{{ site.email }}">Email</a>
+  </div>
+</section>
+
+<div class="section-head">
+  <h2>Latest writing</h2>
+  <a href="/writing/">All posts</a>
+</div>
+
+<section class="post-list">
+  {% for post in collections.posts | limit(3) %}
+  <a class="post-card" href="{{ post.url }}">
+    <span class="post-meta">{{ post.date | dateFormat }}{% if post.data.readingTime %}<br>{{ post.data.readingTime }} min{% endif %}</span>
+    <div>
+      <h3>{{ post.data.title }}</h3>
+      <p>{{ post.data.description }}</p>
+    </div>
+  </a>
+  {% endfor %}
+</section>
+
+<div class="section-head">
+  <h2>Selected work</h2>
+  <a href="{{ site.github }}">GitHub</a>
+</div>
+
+<section class="project-grid">
+  {% for project in projects %}
+  <a class="project" href="{{ project.url }}">
+    <h3>{{ project.title }}</h3>
+    <p>{{ project.blurb }}</p>
+    <span class="post-meta">{{ project.meta }}</span>
+  </a>
+  {% endfor %}
+</section>

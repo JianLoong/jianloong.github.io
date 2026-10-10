@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Malaysia API",
+    "url": "https://github.com/JianLoong/malaysia-api",
+    "blurb": "A static REST API of Malaysian states and federal territories. JSON files, no database, on purpose.",
+    "meta": "37 stars · JavaScript"
+  },
+  {
+    "title": "Robogo",
+    "url": "https://github.com/JianLoong/robogo",
+    "blurb": "A YAML test automation tool in Go for HTTP, databases, Kafka, and SWIFT. KISS, no loops, no secret store.",
+    "meta": "Go · banking workflows"
+  },
+  {
+    "title": "AITA store",
+    "url": "https://github.com/JianLoong/reddit-store",
+    "blurb": "A Reddit crawler, SQLite store, and dashboard for r/AmItheAsshole. Sentiment, word clouds, later FastAPI.",
+    "meta": "Python · data viz"
+  },
+  {
+    "title": "Sentiment analysis",
+    "url": "https://github.com/JianLoong/sentimentanalysis",
+    "blurb": "Browser-only sentiment with AFINN, VADER, NRC, Bing, and Loughran-McDonald. No node_modules.",
+    "meta": "JavaScript · lexicons"
+  }
+]
