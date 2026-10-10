@@ -269,7 +269,9 @@ a:hover {
 .project h2,
 .project h3 {
   text-decoration: underline;
-  text-decoration-color: var(--rule);
+  /* --rule would be ~1.1:1 here, well under the 3:1 floor for a UI affordance;
+     --muted lands at roughly 4:1 light and 6:1 dark. */
+  text-decoration-color: var(--muted);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
 }
