@@ -2,7 +2,7 @@
   "name": "jian-liew-blog",
   "version": "1.0.0",
   "private": true,
-  "description": "Personal blog of Jian Loong Liew",
+  "description": "Personal blog of Jian",
   "scripts": {
     "start": "eleventy --serve --port=8000",
     "dev": "eleventy --serve --port=8000",
@@ -12,5 +12,8 @@
     "@11ty/eleventy": "^3.1.2",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
     "mermaid": "^11.17.2"
+  },
+  "overrides": {
+    "katex": "^0.18.2"
   }
 }
