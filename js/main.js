@@ -80,13 +80,39 @@
     });
     giscus.appendChild(giscusScript);
 
-    themeListeners.push(function () {
+    var postGiscusTheme = function () {
       var frame = document.querySelector("iframe.giscus-frame");
-      if (!frame) return;
+      if (!frame || !frame.contentWindow) return;
       frame.contentWindow.postMessage(
         { giscus: { setConfig: { theme: giscusTheme() } } },
         "https://giscus.app"
       );
+    };
+
+    // The embed is lazy, so giscus creates its frame early but does not load the
+    // widget until the thread is near the viewport. A toggle in the meantime
+    // finds that frame and posts to it, and the message is silently dropped —
+    // the frame is still about:blank, so the target origin cannot match — which
+    // leaves the thread booting later with the theme the page had at load. So
+    // re-assert the theme whenever a giscus frame finishes loading, and watch
+    // for frames that do not exist yet.
+    var watchGiscusFrame = function (frame) {
+      if (frame.dataset.themeWatch === "1") return;
+      frame.dataset.themeWatch = "1";
+      frame.addEventListener("load", postGiscusTheme);
+    };
+    var scanForGiscusFrames = function () {
+      var frames = giscus.querySelectorAll("iframe.giscus-frame");
+      for (var i = 0; i < frames.length; i += 1) {
+        watchGiscusFrame(frames[i]);
+      }
+    };
+    scanForGiscusFrames();
+    new MutationObserver(scanForGiscusFrames).observe(giscus, {
+      childList: true,
+      subtree: true,
     });
+
+    themeListeners.push(postGiscusTheme);
   }
 })();
