@@ -229,6 +229,23 @@ a:hover {
   margin: 0;
 }
 
+/* The landing plate. The one raster on the home page: the same illustration the
+   posts carry, at the full page measure, sitting between the writing and the
+   work as the page's mid-point. It is a raster, so it cannot follow the theme —
+   one image serves both. Its ground is the same value as the site's sky, so in
+   dark mode it is a window rather than a picture; the hairline is what frames
+   it in either theme. */
+.home-plate {
+  margin: 3.2rem 0 2.6rem;
+}
+
+.home-plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+}
+
 .section-head {
   display: flex;
   align-items: baseline;
