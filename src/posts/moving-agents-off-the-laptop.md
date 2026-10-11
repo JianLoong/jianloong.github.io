@@ -4,7 +4,6 @@ description: An agent needs a terminal, an install and a config file. Reaching p
 date: 2026-10-11
 category: Tools
 readingTime: 6
-draft: true
 hero: /assets/hero/agents-off-the-laptop.jpg
 heroAlt: A dark star-chart field with a laptop drawn as a thin white outline, an amber point leaving it along a dotted arc toward a small cluster of pale blue points.
 ---
