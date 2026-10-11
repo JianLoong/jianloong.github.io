@@ -212,6 +212,49 @@ a:hover {
   max-width: var(--measure);
 }
 
+/* The hero illustration. Beside the copy on a wide screen — so it opens the
+   page rather than interrupting it — and stacked under the copy on a phone,
+   where the portrait generation loads instead of the wide one. Two files
+   because the wide composition puts the figure at about a tenth of the frame,
+   which is a speck at phone widths. */
+@media (min-width: 62rem) {
+  .hero {
+    max-width: none;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    gap: 2.6rem;
+    align-items: end;
+  }
+}
+
+.hero-plate {
+  display: block;
+  margin: 2.2rem 0 0;
+}
+
+.hero-plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (min-width: 46rem) {
+  .hero-plate {
+    margin: 0;
+  }
+
+  /* A square window that keeps the figure and the near half of the field; the
+     field runs off the right edge, which is the whole idea. */
+  .hero-plate img {
+    aspect-ratio: 1 / 1;
+    object-position: left center;
+  }
+}
+
 .hero h1,
 .page-title {
   font-family: var(--serif-display);
@@ -227,23 +270,6 @@ a:hover {
   color: var(--ink-soft);
   max-width: 38rem;
   margin: 0;
-}
-
-/* The landing plate. The one raster on the home page: the same illustration the
-   posts carry, at the full page measure, sitting between the writing and the
-   work as the page's mid-point. It is a raster, so it cannot follow the theme —
-   one image serves both. Its ground is the same value as the site's sky, so in
-   dark mode it is a window rather than a picture; the hairline is what frames
-   it in either theme. */
-.home-plate {
-  margin: 3.2rem 0 2.6rem;
-}
-
-.home-plate img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--rule);
 }
 
 .section-head {

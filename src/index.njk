@@ -5,13 +5,19 @@ permalink: /
 ---
 {% set rtHot = 8 %}{% set rtCool = 6 %}{% set stHot = 30 %}{% set stCool = 10 %}
 <section class="hero">
-  <h1>Notes on reliability, data, and making things that last.</h1>
-  <p class="lede">Site Reliability Engineer at ANZ in Melbourne. My work centres on automation and Google Cloud; I write here about reliability, engineering practice, and the open-source tools I maintain.</p>
-  <div class="hero-links">
-    <a href="{{ site.github }}">GitHub</a>
-    <a href="{{ site.linkedin }}">LinkedIn</a>
-    <a href="mailto:{{ site.email }}">Email</a>
+  <div class="hero-copy">
+    <h1>Notes on reliability, data, and making things that last.</h1>
+    <p class="lede">Site Reliability Engineer at ANZ in Melbourne. My work centres on automation and Google Cloud; I write here about reliability, engineering practice, and the open-source tools I maintain.</p>
+    <div class="hero-links">
+      <a href="{{ site.github }}">GitHub</a>
+      <a href="{{ site.linkedin }}">LinkedIn</a>
+      <a href="mailto:{{ site.email }}">Email</a>
+    </div>
   </div>
+  <picture class="hero-plate">
+    <source media="(max-width: 46rem)" srcset="/assets/hero/home-mobile.jpg">
+    <img src="/assets/hero/home.jpg" alt="A small figure in a hooded top drawn in loose bone-white ink on a near-black ground: the hood is up and the face is an empty shadow with no features, and no hands are visible. It looks toward a wide field of faint dots joined into a loose network by thin lines, two of them filled — one warm amber, one pale blue." width="1376" height="768" fetchpriority="high" decoding="async">
+  </picture>
 </section>
 
 <div class="section-head">
@@ -39,10 +45,6 @@ permalink: /
   </a>
   {% endfor %}
 </section>
-
-<figure class="home-plate">
-  <img src="/assets/hero/home.jpg" alt="A small figure in a hooded top drawn in loose bone-white ink on a near-black ground: the hood is up and the face is an empty shadow with no features, and no hands are visible. It stands at the left, looking toward a wide field of faint dots joined into a loose network by thin lines. Two of the dots are filled — one warm amber, one pale blue." width="1376" height="768" loading="lazy" decoding="async">
-</figure>
 
 <div class="section-head">
   <h2>Selected work</h2>
