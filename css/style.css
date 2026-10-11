@@ -376,6 +376,19 @@ a:hover {
   border: 1px solid var(--rule);
 }
 
+/* Generated illustrations are drawn on the sky, so in light mode they would be
+   dark windows on a printed plate. Inverted — hue-preserving, so a dot stays a
+   dot — the same drawing reads as ink on paper, which is what light mode is:
+   the plate as printed. Scoped to /assets/hero/, which is where generated
+   illustrations live, because the ported figures are photographs and
+   screenshots of documents and inverting those would be nonsense. The post hero
+   is written by the layout rather than by a post, so it is named here. */
+[data-theme="light"] .article .post-hero,
+[data-theme="light"] .article figure img[src^="/assets/hero/"],
+[data-theme="light"] .hero-plate img {
+  filter: invert(1) hue-rotate(180deg);
+}
+
 .article-meta {
   font-family: var(--sans);
   font-size: 0.86rem;
