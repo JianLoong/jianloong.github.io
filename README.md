@@ -47,7 +47,7 @@ npm run build    # one-off build → _site/
 │   ├── _includes/
 │   │   ├── layouts/       # base.njk, page.njk, post.njk
 │   │   └── partials/      # header.njk, footer.njk, comments.njk
-│   ├── posts/             # blog posts (Markdown) + posts.json
+│   ├── posts/             # blog posts (Markdown) + posts.11tydata.js
 │   ├── index.njk          # home page
 │   ├── writing.njk        # all posts
 │   ├── projects.njk       # all projects
@@ -79,9 +79,34 @@ readingTime: 5
 Body in Markdown…
 ```
 
-`src/posts/posts.json` is a directory data file that automatically applies the
-post layout, the `post` tag, and a `/posts/<slug>/` permalink — you don't set
+`src/posts/posts.11tydata.js` is a directory data file that automatically applies
+the post layout, the `post` tag, and a `/posts/<slug>/` permalink — you don't set
 those per post.
+
+### Drafts
+
+A post is published unless it says otherwise. To hold one back, add
+`draft: true` to its frontmatter:
+
+```md
+---
+title: My post title
+draft: true
+---
+```
+
+A draft is neither written nor collected, so it drops out of `/writing/`, the
+home page, the feed and the sitemap in one move — there is no second switch to
+remember. Delete the line, or set it to `false`, to publish.
+
+To read a draft locally without un-drafting it:
+
+```bash
+SHOW_DRAFTS=1 npm start
+```
+
+The deployed site is built by a plain `npm run build`, which never sets
+`SHOW_DRAFTS`, so a draft cannot reach it by accident.
 
 ## Configuration
 

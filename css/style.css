@@ -323,6 +323,16 @@ a:hover {
   padding: 3.4rem 0 5rem;
 }
 
+/* Post hero. A raster, so unlike the inline SVG figures it cannot follow the
+   theme — one image has to serve both light and dark. */
+.article .post-hero {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 0 2rem;
+  border: 1px solid var(--rule);
+}
+
 .article-meta {
   font-family: var(--sans);
   font-size: 0.86rem;
@@ -480,6 +490,15 @@ a:hover {
   max-width: 100%;
   height: auto;
   margin: 0 auto;
+}
+
+/* A generated illustration inside a figure. Same treatment as the hero: a
+   raster cannot follow the theme, so it gets the hairline to sit in the page. */
+.article figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
 }
 
 .article figcaption {

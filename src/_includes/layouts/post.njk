@@ -4,6 +4,9 @@ showProgress: true
 ogType: article
 ---
 <article class="article">
+  {% if hero %}
+  <img class="post-hero" src="{{ hero }}" alt="{{ heroAlt }}" width="1376" height="768" fetchpriority="high" decoding="async">
+  {% endif %}
   <p class="article-meta" style="--mag-tint: {% if readingTime >= 8 %}var(--accent){% elif readingTime >= 6 %}var(--star-cool){% else %}var(--star-faint){% endif %}">{{ category }} · {{ date | dateFormat }}{% if readingTime %} · {{ readingTime }} min{% endif %}</p>
   <h1>{{ title }}</h1>
   {% if description %}

@@ -2,6 +2,14 @@ node_modules
 _site
 .cache
 
+# Local secrets — never commit. tools/hero-image.mjs reads GEMINI_API_KEY from here.
+.env
+.env.*
+!.env.example
+
+# Reasonix session state, task logs and local skills — tool state, not site content.
+.reasonix/
+
 # impeccable-ignore-start
 # Ephemeral output, runtime state, and per-dev overrides.
 # The **/ prefix covers .impeccable at the repo root or in a nested workspace.

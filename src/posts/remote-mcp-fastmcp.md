@@ -347,4 +347,4 @@ Thanks to [FastMCP](https://github.com/PrefectHQ/fastmcp), which carries most of
 
 ## Bye.
 
-<p class="colophon">Written with the help of an AI assistant, based on experience rather than research. The tokens cost $1.40.</p>
+<p class="colophon">Written with the help of an AI assistant, based on experience and research. The tokens cost $1.40.</p>
