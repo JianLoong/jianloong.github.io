@@ -15,3 +15,6 @@ ogType: article
   {{ content | safe }}
   {% include "partials/comments.njk" %}
 </article>
+{% for script in scripts %}
+<script src="{{ script }}" defer></script>
+{% endfor %}

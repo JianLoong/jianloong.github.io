@@ -510,6 +510,222 @@ a:hover {
   margin-top: 0.9rem;
 }
 
+/* Live demos carried over from the old site. A demo is one framed object
+   holding its own controls and drawing. Every mark takes its colour from a
+   class on the SVG rather than from the script, so the drawing follows the
+   theme toggle with no re-render — and no theme listener in main.js. */
+.demo {
+  margin: 2.4rem 0;
+  padding: 1.1rem 1.2rem 1.3rem;
+  border: 1px solid var(--rule);
+  background: var(--bg-elevated);
+}
+
+.demo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.9rem 1.4rem;
+  margin-bottom: 1.1rem;
+}
+
+.demo-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.demo select,
+.demo input[type="text"],
+.demo textarea {
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  padding: 0.45rem 0.6rem;
+}
+
+/* A text field or a textarea in a demo can be wide; it owns its own line. */
+.demo input[type="text"],
+.demo textarea {
+  width: 100%;
+}
+
+.demo textarea {
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+/* The phrase log: one improvement per row, oldest first. */
+.demo table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+}
+
+.demo th,
+.demo td {
+  text-align: left;
+  padding: 0.3rem 0.6rem 0.3rem 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.demo th {
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.demo td.phrase {
+  word-break: break-word;
+}
+
+.demo .demo-log {
+  max-height: 15rem;
+  overflow-y: auto;
+  margin-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+
+.demo button {
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.demo button:hover {
+  background: var(--mark);
+}
+
+.demo button[disabled] {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.demo svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* A diagram that answers a click. */
+.demo svg.demo-click {
+  cursor: crosshair;
+}
+
+.demo-readout {
+  font-family: var(--mono);
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  margin: 0 0 0.7rem;
+  min-height: 1.3em;
+}
+
+.demo-note {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0.8rem 0 0;
+}
+
+/* The demos' marks. The old site used d3's tableau10 and the Chartist
+   defaults, which belong to neither this plate nor its sky; these are the
+   site's own three tints over the hairline grid. */
+.demo .d-frame { fill: var(--bg); stroke: var(--rule); stroke-width: 1; }
+.demo .d-mesh { fill: none; stroke: var(--rule); stroke-width: 1; }
+.demo .d-idle { fill: var(--mark); stroke: var(--bg-elevated); stroke-width: 1; }
+.demo .d-neighbour { fill: var(--star-cool); stroke: var(--bg-elevated); stroke-width: 1; }
+.demo .d-nearest { fill: var(--accent); stroke: var(--bg-elevated); stroke-width: 1; }
+.demo .d-point { fill: var(--ink); }
+.demo .d-route { fill: none; stroke: var(--accent); stroke-width: 1.6; }
+.demo .d-label {
+  fill: var(--muted);
+  font-family: var(--sans);
+  font-size: 9px;
+}
+
+/* City names sit on top of shaded cells, and the plate has no second text
+   colour light enough to survive both the accent and the cool tint — so each
+   label carries the panel colour as a halo instead. */
+.demo .d-city {
+  fill: var(--ink);
+  font-family: var(--sans);
+  font-size: 9px;
+  paint-order: stroke;
+  stroke: var(--bg-elevated);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+.demo .d-avg { fill: none; stroke: var(--star-cool); stroke-width: 1.3; }
+.demo .d-best { fill: none; stroke: var(--accent); stroke-width: 1.3; }
+.demo .d-baseline { stroke: var(--rule); stroke-width: 1; }
+
+/* A polarity bar: the track, the two directions, and the zero mark. The three
+   classes set `background` as well as `fill`, so the same one colours an SVG
+   segment and a legend swatch. */
+.demo .d-track { fill: var(--mark); }
+.demo .d-positive { fill: var(--accent); background: var(--accent); }
+.demo .d-negative { fill: var(--star-cool); background: var(--star-cool); }
+.demo .d-neutral { fill: var(--rule); background: var(--rule); }
+.demo .d-zero { stroke: var(--rule); stroke-width: 1; }
+
+/* Five categories need five tints and the plate has three named stars, so the
+   two quietest borrow the ink and rule colours. Each class sets both `fill` and
+   `background`, because the same one colours an SVG segment and an HTML swatch. */
+.demo .d-v1 { fill: var(--star-cool); background: var(--star-cool); }
+.demo .d-v2 { fill: var(--accent); background: var(--accent); }
+.demo .d-v3 { fill: var(--star-faint); background: var(--star-faint); }
+.demo .d-v4 { fill: var(--ink-soft); background: var(--ink-soft); }
+.demo .d-v5 { fill: var(--rule); background: var(--rule); }
+
+.demo .swatch {
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 2px;
+}
+
+/* A stack of shares: one bar, segmented, dividing a fixed width between
+   categories rather than measuring absolutes. */
+.demo .d-stack {
+  stroke: var(--bg-elevated);
+  stroke-width: 1;
+}
+
+/* A word cloud: the words are the marks. Size is the count, the band class is
+   the tint, and there is nothing else to style but the face. */
+.demo .d-cloud {
+  font-family: var(--mono);
+  font-weight: 500;
+}
+
+/* The lexicon's own words, shown as chips: what made a score what it is. The
+   text colour is the panel colour, which contrasts against both the accent
+   (dark on gold, light on brown) and the cool tint. */
+.demo .demo-charge {
+  display: inline-block;
+  margin: 0.2rem 0.4rem 0 0;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--bg-elevated);
+}
+
 /* Writer's note at the foot of a post — disclosure and provenance, not prose. */
 .article .colophon {
   margin-top: 3.2rem;
