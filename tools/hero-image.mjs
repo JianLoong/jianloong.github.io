@@ -1,13 +1,19 @@
 /**
- * Generates a hero image for a post, using the Gemini image API.
+ * Generates a post hero or a decorative illustration, using the Gemini image API.
  *
  *   npm run hero                                  # tools/hero-image.prompt.txt -> assets/hero/agents-off-the-laptop.jpg
- *   npm run hero -- --out assets/hero/other.png   # somewhere else
+ *   npm run hero -- --out assets/hero/other.jpg   # somewhere else
  *   npm run hero -- --prompt "a simpler prompt"   # skip the prompt file
+ *   npm run hero -- --reference assets/hero/character-canon.jpg
+ *
+ * --reference feeds an existing image back in beside the prompt. That is how a
+ * recurring character is kept from drifting: the canon illustration goes in with
+ * every later prompt, so the hood, silhouette and stroke weight stay put. It can
+ * be repeated to supply more than one reference.
  *
  * The key comes from GEMINI_API_KEY, read from the environment or from a
- * gitignored .env at the repo root. It is never written to the file system or
- * into the image, and this script never prints it.
+ * gitignored .env at the repo root. It is never written to disk or into the
+ * image, and this script never prints it.
  *
  * Output is a raster, so unlike the SVG figures in posts it does NOT follow the
  * site's light/dark toggle. A hero is one fixed image; check it against the sky
@@ -16,7 +22,7 @@
  * Node builtins only — no SDK, no dependency. Node 18+ for global fetch.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { dirname } from 'node:path';
+import { dirname, extname } from 'node:path';
 
 const ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/interactions';
 const DEFAULT_MODEL = 'gemini-nano-banana-2.1';
@@ -24,6 +30,13 @@ const DEFAULT_PROMPT_FILE = 'tools/hero-image.prompt.txt';
 const DEFAULT_OUT = 'assets/hero/agents-off-the-laptop.jpg';
 const DEFAULT_ASPECT = '16:9';
 const DEFAULT_SIZE = '2K';
+
+const MIME_BY_EXT = {
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.png': 'image/png',
+  '.webp': 'image/webp',
+};
 
 /** Minimal .env reader. Real environment wins, so exports override the file. */
 function loadDotEnv(path = '.env') {
@@ -47,6 +60,7 @@ function parseArgs(argv) {
     out: DEFAULT_OUT,
     promptFile: DEFAULT_PROMPT_FILE,
     prompt: null,
+    reference: [],
     aspect: DEFAULT_ASPECT,
     size: DEFAULT_SIZE,
     model: DEFAULT_MODEL,
@@ -57,11 +71,12 @@ function parseArgs(argv) {
     if (flag === '--out') { args.out = value; i += 1; }
     else if (flag === '--prompt-file') { args.promptFile = value; i += 1; }
     else if (flag === '--prompt') { args.prompt = value; i += 1; }
+    else if (flag === '--reference') { args.reference.push(value); i += 1; }
     else if (flag === '--aspect') { args.aspect = value; i += 1; }
     else if (flag === '--size') { args.size = value; i += 1; }
     else if (flag === '--model') { args.model = value; i += 1; }
     else if (flag === '--help' || flag === '-h') {
-      console.log('usage: node tools/hero-image.mjs [--out PATH] [--prompt TEXT | --prompt-file PATH] [--aspect 16:9] [--size 2K] [--model NAME]');
+      console.log('usage: node tools/hero-image.mjs [--out PATH] [--prompt TEXT | --prompt-file PATH] [--reference PATH]... [--aspect 16:9] [--size 2K] [--model NAME]');
       process.exit(0);
     } else {
       console.error(`Unknown argument: ${flag}`);
@@ -69,6 +84,20 @@ function parseArgs(argv) {
     }
   }
   return args;
+}
+
+/** A reference image has to travel inline as base64, with a declared mime type. */
+function toImageContent(path) {
+  const mime = MIME_BY_EXT[extname(path).toLowerCase()];
+  if (!mime) {
+    console.error(`Unsupported reference image: ${path} — use .jpg, .png or .webp`);
+    process.exit(2);
+  }
+  if (!existsSync(path)) {
+    console.error(`Reference image not found: ${path}`);
+    process.exit(2);
+  }
+  return { type: 'image', mime_type: mime, data: readFileSync(path).toString('base64') };
 }
 
 /**
@@ -114,9 +143,13 @@ async function main() {
     process.exit(1);
   }
 
+  const input = args.reference.length
+    ? [{ type: 'text', text: prompt }, ...args.reference.map(toImageContent)]
+    : prompt;
+
   const body = {
     model: args.model,
-    input: prompt,
+    input,
     response_format: {
       type: 'image',
       // The interactions endpoint accepts image/jpeg only for response_format.
@@ -128,6 +161,9 @@ async function main() {
 
   console.log(`model ${args.model} · aspect ${args.aspect} · size ${args.size}`);
   console.log(`prompt ${prompt.length} chars from ${args.prompt ? '--prompt' : args.promptFile}`);
+  if (args.reference.length) {
+    console.log(`references ${args.reference.join(', ')}`);
+  }
 
   const res = await fetch(ENDPOINT, {
     method: 'POST',

@@ -7,8 +7,10 @@ _site
 .env.*
 !.env.example
 
-# Reasonix session state, task logs and local skills — tool state, not site content.
-.reasonix/
+# Reasonix session state and task logs — tool state, not site content.
+# Skills are tracked, so the repo carries its own conventions.
+.reasonix/*
+!.reasonix/skills/
 
 # impeccable-ignore-start
 # Ephemeral output, runtime state, and per-dev overrides.

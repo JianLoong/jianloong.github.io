@@ -1,11 +1,11 @@
 ---
-title: Moving agents off the laptop
+title: Hosting an agent is the hard part
 description: An agent needs a terminal, an install and a config file. Reaching people who will not do that means it has to run somewhere else.
 date: 2026-10-11
 category: Tools
 readingTime: 6
 hero: /assets/hero/agents-off-the-laptop.jpg
-heroAlt: A dark star-chart field with a laptop drawn as a thin white outline, an amber point leaving it along a dotted arc toward a small cluster of pale blue points.
+heroAlt: A hand-drawn ink illustration on a dark ground. A small hooded figure with an empty face stands between a sketched laptop on the left and a server cabinet on the right, with a dotted arc rising from the laptop over the figure to the rack.
 ---
 
 Ask an engineer to run an agent and you get a short list of commands. Ask anyone else and you get an afternoon of installing things.
