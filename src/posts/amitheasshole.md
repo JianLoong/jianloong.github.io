@@ -5,6 +5,7 @@ date: 2019-10-09
 category: Data
 readingTime: 3
 scripts:
+  - /js/posts/reddit-jsonp.js
   - /js/posts/amitheasshole.js
 ---
 
@@ -24,9 +25,11 @@ The subreddit describes itself as:
 
 ## The counting
 
-The 2019 version of this page fetched each thread's comments straight from reddit.com as JSON, counted how often each verdict appeared, and drew a percentage bar. Reddit's public `.json` endpoints now answer **403 Blocked** with no CORS header at all, so a page on a static host cannot read them — the fetch is gone.
+The 2019 version of this page fetched each thread's comments straight from reddit.com as JSON, counted how often each verdict appeared, and drew a percentage bar. It did not use a CORS-enabled fetch — it called `$.getJSON` with `&jsonp=?`, which is a `<script>` tag, and a `<script>` tag is not subject to CORS. This page asks the subreddit for its recent comments the same way, through `js/posts/reddit-jsonp.js`.
 
-Everything else is the same. Paste a thread's comments below and the page counts them exactly as the 2019 script did: raw occurrences of the five tokens, case sensitively, with no attempt to work out who was replying to whom.
+Reddit does not always answer, and when it refuses — **403 Blocked**, which is what an unauthenticated client tends to get — the script never loads and the page falls back to what you paste, saying so in the readout.
+
+Everything after the text arrives is the same. Paste a thread's comments below and the page counts them exactly as the 2019 script did: raw occurrences of the five tokens, case sensitively, with no attempt to work out who was replying to whom.
 
 <div class="demo" data-aita>
 <label class="demo-field" for="aita-input">Comments to count
@@ -40,7 +43,7 @@ NTA, definitely.</textarea>
 <div class="demo-controls">
 <button type="button" data-aita-run>Count</button>
 </div>
-<p class="demo-readout" data-aita-readout aria-live="polite">Loading the demo…</p>
+<p class="demo-readout" data-aita-readout aria-live="polite">Fetching…</p>
 <svg data-aita-bar viewBox="0 0 600 24" role="img" aria-label="One bar divided into segments proportional to how many times each of the five verdicts appears."></svg>
 <table>
 <thead><tr><th></th><th>Verdict</th><th>Count</th><th>Share</th></tr></thead>
@@ -58,4 +61,4 @@ The interesting thing in both of those is how much of the verdict is in the disa
 
 ## Bye.
 
-<p class="colophon">Written in 2019, ported from the old Hugo site and lightly edited. The demo used to fetch from reddit.com and now takes pasted text, because those endpoints stopped answering; the counting and the chart are unchanged.</p>
+<p class="colophon">Written in 2019, ported from the old Hugo site and lightly edited. The counting and the chart are unchanged. The demo asks reddit.com for the subreddit's recent comments through the same JSONP script tag the 2019 version used; pasted text is the fallback for when Reddit will not answer.</p>

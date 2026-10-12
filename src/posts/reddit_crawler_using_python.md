@@ -152,7 +152,7 @@ The output is a post with its replies attached. Four of the twenty-one that thre
 
 This is the important paragraph, and it was not in the original post.
 
-**Reddit's unauthenticated `.json` endpoints no longer answer.** Nothing above works as written: `https://www.reddit.com/r/programming.json` now returns `403 Blocked`, an HTML block page, and no CORS header at all. That single change is why three demos elsewhere on this site — the [percentage charts](/posts/amitheasshole/), the [r/programming word cloud](/posts/reddit_word_cloud/) and the [AFINN scorer](/posts/hk/) — now take text you paste instead of fetching it themselves.
+**Reddit's unauthenticated `.json` endpoints no longer answer reliably.** Nothing above works as written: `https://www.reddit.com/r/programming.json` returns `403 Blocked` — an HTML block page — to a client without a session, and it sends no CORS header at all, so `fetch()` from another origin is out too. That is why three demos elsewhere on this site — the [percentage charts](/posts/amitheasshole/), the [r/programming word cloud](/posts/reddit_word_cloud/) and the [AFINN scorer](/posts/hk/) — ask the endpoint anyway, through the JSONP `<script>` their 2019 versions used, and fall back to text you paste when Reddit refuses.
 
 What replaced it is the official API with OAuth: register an app, get a client id and secret, and a token buys you 100 queries a minute on the free tier. The shape of the crawler does not change — request, walk `data.children`, follow permalinks, collect — but every request now carries a token, and the token has to be refreshed on a schedule. The spoofed-User-Agent trick is dead; the honest version of this post is "get a client id".
 

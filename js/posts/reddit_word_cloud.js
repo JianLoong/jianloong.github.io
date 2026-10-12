@@ -1,14 +1,13 @@
 /*
  * The r/programming word cloud.
  *
- * 2019's version fetched a thousand titles from reddit.com/r/programming.json
- * and laid them out with d3 v3 and d3.layout.cloud, both from CDNs. Reddit's
- * public .json endpoints now answer 403 with no CORS header, so the fetch is
- * gone and the text comes from the reader. The rest is the same: same stop
- * list, same tokenising, same fifty words, same layout (js/vendor/d3-cloud).
- *
- * The Hacker News cloud on this site is the same machine with a live feed; this
- * one takes what you paste.
+ * 2019's version asked reddit.com for a thousand titles and laid them out with
+ * d3 v3 and d3.layout.cloud, both from CDNs. It did not use a CORS-enabled
+ * fetch: it used $.getJSON with `&jsonp=?`, which is a <script> tag, and a
+ * <script> tag is exempt from CORS. This asks the same endpoint the same way,
+ * through js/posts/reddit-jsonp.js, and falls back to what you paste when
+ * Reddit will not answer. The rest is the same: same stop list, same
+ * tokenising, same fifty words, same layout (js/vendor/d3-cloud).
  */
 (function () {
   var demo = document.querySelector("[data-rwc]");
@@ -24,6 +23,11 @@
   var MIN_SIZE = 16;
   var MAX_SIZE = 76;
   var FONT = "'Azeret Mono', monospace";
+
+  // The endpoint the 2019 page counted, and how long it gets before the page
+  // gives up on it and uses what was pasted.
+  var SOURCE = "https://www.reddit.com/r/programming.json?limit=1000";
+  var LIVE_TIMEOUT = 8000;
 
   // The 2019 post's stop list. The original ended with an empty string, which
   // did nothing; it is left out here.
@@ -92,7 +96,7 @@
       viewBox: "0 0 " + SIZE + " " + SIZE,
       role: "img",
       "aria-label":
-        "A word cloud of the pasted text. The largest words are " +
+        "A word cloud of the counted words. The largest words are " +
         words
           .slice(0, 5)
           .map(function (word) {
@@ -152,9 +156,7 @@
       .start();
   }
 
-  function run() {
-    var text = input.value;
-
+  function render(text, suffix) {
     if (!text.trim()) {
       readout.textContent = "Paste some text to draw.";
       return;
@@ -182,12 +184,58 @@
           .join(" · ") +
         " — " +
         words.length +
-        " words laid out.";
+        " words laid out" +
+        (suffix ? ". " + suffix : ".");
       runButton.disabled = false;
     });
   }
 
+  function run() {
+    render(input.value, null);
+  }
+
+  // The listing the 2019 page counted: the payload's children, title by title.
+  function titles(payload) {
+    var children = (payload && payload.data && payload.data.children) || [];
+
+    return children
+      .map(function (child) {
+        return (child && child.data && child.data.title) || "";
+      })
+      .filter(function (title) {
+        return title.length > 0;
+      })
+      .join("\n");
+  }
+
+  function load() {
+    runButton.disabled = true;
+    readout.textContent = "Fetching titles from r/programming…";
+
+    redditJSONP(SOURCE, LIVE_TIMEOUT)
+      .then(function (payload) {
+        var text = titles(payload);
+        if (!text) throw new Error("no titles came back");
+
+        input.value = text;
+        render(
+          text,
+          text.split("\n").length + " titles fetched live from r/programming."
+        );
+      })
+      .catch(function (error) {
+        render(
+          input.value,
+          "Reddit did not answer the live fetch (" +
+            error.message +
+            "), so this is the pasted sample."
+        );
+      });
+  }
+
   runButton.addEventListener("click", run);
 
-  run();
+  // The 2019 page drew one on load. Same again, with what you paste as the
+  // fallback for when Reddit will not talk to the page.
+  load();
 })();

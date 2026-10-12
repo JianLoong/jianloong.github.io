@@ -6,6 +6,7 @@ category: Data
 readingTime: 4
 scripts:
   - /js/vendor/afinn-111.js
+  - /js/posts/reddit-jsonp.js
   - /js/posts/hk.js
 ---
 
@@ -13,7 +14,9 @@ AFINN is a list of words rated for valence with an integer between -5 and +5. Th
 
 This approach is naive on purpose. It does not build a model to work out what a word is doing in a sentence, so "not good" scores as positive because *good* is positive and *not* is not in the lexicon. A comment full of jargon the lexicon never saw scores zero, and zero is reported as neutral rather than unknown.
 
-The 2019 version of this page ran it over r/HongKong: the front page, then every comment in every thread, classifying each comment by the sign of its total and drawing one percentage bar per thread. Reddit's public `.json` endpoints now answer **403 Blocked** with no CORS header, so the fetch is gone. Paste comments below instead — one per line, each scored on its own.
+The 2019 version of this page ran it over r/HongKong: the front page, then every comment in every thread, classifying each comment by the sign of its total and drawing one percentage bar per thread. It did not use a CORS-enabled fetch — it called `$.getJSON` with `&jsonp=?`, which is a `<script>` tag, and a `<script>` tag is not subject to CORS. This page asks the subreddit for its recent comments the same way, through `js/posts/reddit-jsonp.js`: one comment per line, each scored on its own.
+
+Reddit does not always answer, and when it refuses — **403 Blocked**, which is what an unauthenticated client tends to get — the script never loads and the page falls back to what you paste, saying so in the readout.
 
 <div class="demo" data-hk>
 <label class="demo-field" for="hk-input">Comments, one per line
@@ -51,4 +54,4 @@ The most useful thing I took from this is how much of a sentiment result is the 
 
 ## Bye.
 
-<p class="colophon">Written in 2019, ported from the old Hugo site and lightly edited. The lexicon, the scoring and the three-way classification are unchanged; the demo used to fetch r/HongKong from reddit.com and now takes pasted comments, because those endpoints stopped answering.</p>
+<p class="colophon">Written in 2019, ported from the old Hugo site and lightly edited. The lexicon, the scoring and the three-way classification are unchanged. The demo asks reddit.com for r/HongKong's recent comments through the same JSONP script tag the 2019 version used; pasted comments are the fallback for when Reddit will not answer.</p>

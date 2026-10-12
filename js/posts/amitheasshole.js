@@ -2,9 +2,11 @@
  * The Am I the Asshole demo.
  *
  * The 2019 version fetched every post's comments from reddit.com, counted the
- * five verdict tokens and drew a frappe-charts percentage bar. Reddit's public
- * .json endpoints now answer 403 with no CORS header, so the fetch is gone —
- * the counting and the chart are the same, and the text comes from the reader.
+ * five verdict tokens and drew a frappe-charts percentage bar. It used
+ * $.getJSON with `&jsonp=?` — a <script> tag, so no CORS involved. This asks
+ * for the subreddit's recent comments the same way, through
+ * js/posts/reddit-jsonp.js, and falls back to what the reader pastes when
+ * Reddit will not answer. The counting and the chart are unchanged.
  */
 (function () {
   var demo = document.querySelector("[data-aita]");
@@ -24,6 +26,11 @@
   var NS = "http://www.w3.org/2000/svg";
   var W = 600;
   var BAR_H = 24;
+
+  // r/<sub>/comments.json is the subreddit's recent comments listing: one
+  // request, and every body in it is a comment to count.
+  var SOURCE = "https://www.reddit.com/r/AmItheAsshole/comments.json?limit=500";
+  var LIVE_TIMEOUT = 8000;
 
   bar.setAttribute("viewBox", "0 0 " + W + " " + BAR_H);
 
@@ -96,7 +103,7 @@
     });
   }
 
-  function run() {
+  function run(suffix) {
     var text = input.value;
 
     if (!text.trim()) {
@@ -128,12 +135,40 @@
       VERDICTS[top] +
       " (" +
       counts[top] +
-      ").";
+      ")." +
+      (suffix ? " " + suffix : "");
   }
 
-  runButton.addEventListener("click", run);
+  function load() {
+    readout.textContent = "Fetching comments from r/AmItheAsshole…";
+
+    redditJSONP(SOURCE, LIVE_TIMEOUT)
+      .then(function (payload) {
+        var text = redditComments(payload);
+        if (!text) throw new Error("no comments came back");
+
+        input.value = text;
+        run(
+          text.split("\n").length + " comments fetched live from r/AmItheAsshole."
+        );
+      })
+      .catch(function (error) {
+        run(
+          "Reddit did not answer the live fetch (" +
+            error.message +
+            "), so this is the pasted sample."
+        );
+      });
+  }
+
+  runButton.addEventListener("click", function () {
+    run("");
+  });
 
   drawStack([0, 0, 0, 0, 0]);
   drawLegend([0, 0, 0, 0, 0]);
-  readout.textContent = "Paste a thread's comments and count the verdicts.";
+
+  // The 2019 page counted on load. Same again, with what you paste as the
+  // fallback for when Reddit will not talk to the page.
+  load();
 })();

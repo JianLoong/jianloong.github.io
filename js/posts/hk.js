@@ -3,10 +3,12 @@
  *
  * The 2019 version fetched r/hongkong's front page and every thread's comments
  * from reddit.com, scored each comment with AFINN, classified it by the sign of
- * the total, and drew a frappe-charts percentage bar per thread. Reddit's public
- * .json endpoints now answer 403 with no CORS header, so the fetch is gone and
- * the comments are whatever you paste — one per line. The scoring, the
- * classification and the chart are the same, and the lexicon is the same file.
+ * the total, and drew a frappe-charts percentage bar per thread. It used
+ * $.getJSON with `&jsonp=?` — a <script> tag, so no CORS involved. This asks
+ * for the subreddit's recent comments the same way, through
+ * js/posts/reddit-jsonp.js, and falls back to what the reader pastes when
+ * Reddit will not answer. The scoring, the classification and the chart are the
+ * same, and the lexicon is the same file.
  */
 (function () {
   var demo = document.querySelector("[data-hk]");
@@ -30,6 +32,11 @@
   var NS = "http://www.w3.org/2000/svg";
   var W = 600;
   var BAR_H = 24;
+
+  // r/<sub>/comments.json is the subreddit's recent comments listing: one
+  // request, and every body in it is a comment to score.
+  var SOURCE = "https://www.reddit.com/r/HongKong/comments.json?limit=500";
+  var LIVE_TIMEOUT = 8000;
 
   bar.setAttribute("viewBox", "0 0 " + W + " " + BAR_H);
 
@@ -136,7 +143,7 @@
     });
   }
 
-  function run() {
+  function run(suffix) {
     var lines = input.value.split("\n").filter(function (line) {
       return line.trim().length;
     });
@@ -177,10 +184,37 @@
       (total / lines.length).toFixed(2) +
       ", from " +
       found.length +
-      " lexicon hits.";
+      " lexicon hits." +
+      (suffix ? " " + suffix : "");
   }
 
-  runButton.addEventListener("click", run);
+  function load() {
+    readout.textContent = "Fetching comments from r/HongKong…";
 
-  run();
+    redditJSONP(SOURCE, LIVE_TIMEOUT)
+      .then(function (payload) {
+        var text = redditComments(payload);
+        if (!text) throw new Error("no comments came back");
+
+        input.value = text;
+        run(
+          text.split("\n").length + " comments fetched live from r/HongKong."
+        );
+      })
+      .catch(function (error) {
+        run(
+          "Reddit did not answer the live fetch (" +
+            error.message +
+            "), so this is the pasted sample."
+        );
+      });
+  }
+
+  runButton.addEventListener("click", function () {
+    run("");
+  });
+
+  // The 2019 page scored on load. Same again, with what you paste as the
+  // fallback for when Reddit will not talk to the page.
+  load();
 })();
