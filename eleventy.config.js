@@ -26,6 +26,31 @@ module.exports = function (eleventyConfig) {
     return collectionApi.getFilteredByTag("post").sort((a, b) => b.date - a.date);
   });
 
+  // The writing index groups its entries by the month they were published in.
+  // The month is read in the site's own timezone, so a post never lands in a
+  // month the date printed on its card contradicts, and the order is the
+  // collection's — already newest first. Adjacent entries share a label, so one
+  // pass is enough; a descending sort cannot repeat a month after leaving it.
+  eleventyConfig.addFilter("byMonth", (posts) => {
+    const monthOf = new Intl.DateTimeFormat("en-AU", {
+      month: "long",
+      year: "numeric",
+      timeZone: "Australia/Melbourne",
+    });
+
+    const groups = [];
+
+    (posts || []).forEach((post) => {
+      const label = monthOf.format(post.date);
+      const current = groups[groups.length - 1];
+
+      if (current && current.label === label) current.posts.push(post);
+      else groups.push({ label, posts: [post] });
+    });
+
+    return groups;
+  });
+
   eleventyConfig.addFilter("dateFormat", (value) => {
     const date = value instanceof Date ? value : new Date(value);
     return new Intl.DateTimeFormat("en-AU", {

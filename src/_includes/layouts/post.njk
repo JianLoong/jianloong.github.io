@@ -7,6 +7,12 @@ ogType: article
   {% if hero %}
   <img class="post-hero" src="{{ hero }}" alt="{{ heroAlt }}" width="1376" height="768" fetchpriority="high" decoding="async">
   {% endif %}
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/writing/">Writing</a></li>
+    </ol>
+  </nav>
   <p class="article-meta" style="--mag-tint: {% if readingTime >= 8 %}var(--accent){% elif readingTime >= 6 %}var(--star-cool){% else %}var(--star-faint){% endif %}">{{ category }} · {{ date | dateFormat }}{% if readingTime %} · {{ readingTime }} min{% endif %}</p>
   <h1>{{ title }}</h1>
   {% if description %}

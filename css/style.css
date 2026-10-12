@@ -305,6 +305,30 @@ a:hover {
   margin-bottom: 5rem;
 }
 
+/* The writing index repeats the head-plus-list pattern once per month. Each
+   month is a section that owns its head and its list, so the list drops the
+   5rem the home page spends after its single one — the group's interval is what
+   separates one month from the next. */
+.archive-group {
+  margin-bottom: 3rem;
+}
+
+.archive-group .post-list {
+  margin-bottom: 0;
+}
+
+/* A month's count. The home page's heads carry a link on the right; this one
+   states a subtotal, so it is muted where that is accent, and takes the head's
+   own tracking rather than the wider label tracking used elsewhere. */
+.section-head .head-count {
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 .post-card {
   display: grid;
   grid-template-columns: 8.5rem 1fr;
@@ -387,6 +411,46 @@ a:hover {
 [data-theme="light"] .article figure img[src^="/assets/hero/"],
 [data-theme="light"] .hero-plate img {
   filter: invert(1) hue-rotate(180deg);
+}
+
+/* The trail out of a post. Wayfinding is the frame's job, so it takes the
+   instrument's voice — mono, uppercase, tracked — and it sits above the meta
+   line rather than inside it: that line's dot and tint are a magnitude band,
+   which is a measurement, and a link is not a measurement. The trail stops at
+   Writing, because the h1 two lines below already says which post this is and a
+   mono caps repeat of it would be a second title. */
+.crumbs {
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.7rem;
+}
+
+.crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The separator hangs off the list item, not the link: inside the anchor it
+   would join the link's accessible name and read out as "slash writing". */
+.crumbs li + li::before {
+  content: "/";
+  margin-right: 0.45rem;
+}
+
+/* Navigation, not prose: the primary nav's treatment, not the body's. */
+.crumbs a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.crumbs a:hover {
+  color: var(--ink);
 }
 
 .article-meta {

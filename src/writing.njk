@@ -7,12 +7,12 @@ permalink: /writing/
 {% set rtHot = 8 %}{% set rtCool = 6 %}
 <section class="hero">
   <h1 class="page-title">Writing</h1>
-  <p class="lede">Engineering notes, a little teaching, and the occasional experiment. Newest first.</p>
+  <p class="lede">Engineering notes, a little teaching, and the occasional experiment. Grouped by month, newest first.</p>
 </section>
 
 <p class="atlas-legend">
   <span><b>{{ collections.posts | length }}</b> entries</span>
-  <span>newest first</span>
+  <span>{{ collections.posts | byMonth | length }} months</span>
   <span>magnitude = reading time</span>
   <span class="legend-key">
     <span><i style="background: var(--accent)"></i>{{ rtHot }}+ min</span>
@@ -21,14 +21,23 @@ permalink: /writing/
   </span>
 </p>
 
-<section class="post-list">
-  {% for post in collections.posts %}
-  <a class="post-card" href="{{ post.url }}" style="--mag-tint: {% if post.data.readingTime >= rtHot %}var(--accent){% elif post.data.readingTime >= rtCool %}var(--star-cool){% else %}var(--star-faint){% endif %}">
-    <span class="post-meta">{{ post.date | dateFormat }}{% if post.data.readingTime %}<br>{{ post.data.readingTime }} min{% endif %}</span>
-    <div>
-    <h2>{{ post.data.title }}</h2>
-      <p>{{ post.data.description }}</p>
-    </div>
-  </a>
-  {% endfor %}
+{% for group in collections.posts | byMonth %}
+{% set count = group.posts | length %}
+<section class="archive-group">
+  <div class="section-head">
+    <h2>{{ group.label }}</h2>
+    <span class="head-count">{{ count }} {% if count == 1 %}entry{% else %}entries{% endif %}</span>
+  </div>
+  <div class="post-list">
+    {% for post in group.posts %}
+    <a class="post-card" href="{{ post.url }}" style="--mag-tint: {% if post.data.readingTime >= rtHot %}var(--accent){% elif post.data.readingTime >= rtCool %}var(--star-cool){% else %}var(--star-faint){% endif %}">
+      <span class="post-meta">{{ post.date | dateFormat }}{% if post.data.readingTime %}<br>{{ post.data.readingTime }} min{% endif %}</span>
+      <div>
+      <h3>{{ post.data.title }}</h3>
+        <p>{{ post.data.description }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
 </section>
+{% endfor %}

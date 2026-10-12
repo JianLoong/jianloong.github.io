@@ -70,6 +70,17 @@
       }
     }
   </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": {{ (site.url + "/") | json | safe }}},
+        {"@type": "ListItem", "position": 2, "name": "Writing", "item": {{ (site.url + "/writing/") | json | safe }}},
+        {"@type": "ListItem", "position": 3, "name": {{ title | json | safe }}, "item": {{ (site.url + page.url) | json | safe }}}
+      ]
+    }
+  </script>
   {% endif %}
 
   <link rel="stylesheet" href="/css/fonts.css">
