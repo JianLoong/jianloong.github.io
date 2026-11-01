@@ -1,6 +1,6 @@
 ---
 title: How a unit's exam papers get marked
-description: Three hundred students, five markers, one question each — and the procedures that exist so the mark a student gets does not depend on who read the paper.
+description: Three hundred students, five markers, one question each, and the procedures that exist so the mark a student gets does not depend on who read the paper.
 date: 2022-10-20
 category: Education
 readingTime: 8
@@ -19,7 +19,7 @@ I worked as a sessional lecturer and teaching associate from 2016, and across un
 
 ## The marking process
 
-Marking starts as soon as the teaching team has the papers — usually a few days to a week before the teaching period ends, not after. If the university has overseas campuses or distance learners, the papers are all marked in **one location** without exception. That is deliberate: it is the only way marking quality can be the same across campuses.
+Marking starts as soon as the teaching team has the papers, usually a few days to a week before the teaching period ends, not after. If the university has overseas campuses or distance learners, the papers are all marked in **one location** without exception. That is deliberate: it is the only way marking quality can be the same across campuses.
 
 Take a unit with 300 students and five teaching associates. The paper has several questions, and the questions are divided among the team:
 
@@ -34,7 +34,7 @@ Every question also has a **marking rubric** setting out what each answer earns.
 
 Which brings us to the sharp edge:
 
-- Each question in the exam goes to a single marker, no matter how many papers there are — even at 500 students.
+- Each question in the exam goes to a single marker, no matter how many papers there are, even at 500 students.
 - The rubric written by the team is what the answers are measured against, and it can be amended when a legitimate answer was not anticipated.
 - If the rubric turns out to be inconsistent or wrong, **every** paper has to be remarked to keep the process fair.
 
@@ -42,7 +42,7 @@ There is also a policy about pen colour: the first marking is done in one colour
 
 ## Is my paper anonymous?
 
-Papers arrive in numbered bundles of ten or twenty, and each bundle has a list of student IDs and names on top. So: anonymous to a certain extent. We know the student ID, and the ID maps to a name if anyone wanted to look. In practice nobody does, because looking a student up is tedious and pointless — knowing the name changes nothing about the mark.
+Papers arrive in numbered bundles of ten or twenty, and each bundle has a list of student IDs and names on top. So: anonymous to a certain extent. We know the student ID, and the ID maps to a name if anyone wanted to look. In practice nobody does, because looking a student up is tedious and pointless: knowing the name changes nothing about the mark.
 
 ## Don't spill coffee on my exam papers
 
@@ -50,14 +50,14 @@ Papers stay at the university. Members of the teaching team and the professor ha
 
 ## Then the marks move
 
-A question is marked at the bottom of the question itself, and then the marks are transferred to the front page of the paper, into the boxes. That transfer is one of the places a mistake can creep in, so it is checked — by somebody else:
+A question is marked at the bottom of the question itself, and then the marks are transferred to the front page of the paper, into the boxes. That transfer is one of the places a mistake can creep in, so it is checked, by somebody else:
 
 - Teaching Associate B checks questions 1 and 2, confirming the marks were added up and transferred to the front page correctly
 - Teaching Associate A checks questions 2 and 3, and so on
 
 A question usually has several sub-questions, so this counter-check exists because arithmetic and transcription errors are common enough to expect rather than exceptional. Marking a whole cohort usually takes under a week, and it is not finished when the last tick is made.
 
-Once the front pages are confirmed, the numbers go into a spreadsheet — Excel or Google Sheets — by bundle number. Then a **different person again** transfers the front-page marks into the sheet, which is the last confirmation before the sheet becomes the student's exam mark.
+Once the front pages are confirmed, the numbers go into a spreadsheet (Excel or Google Sheets) by bundle number. Then a **different person again** transfers the front-page marks into the sheet, which is the last confirmation before the sheet becomes the student's exam mark.
 
 Three separate people have now touched each mark: the marker, the counter-checker, and the person who typed it.
 
@@ -67,7 +67,7 @@ With every question's marks in the sheet, the team looks at how the cohort perfo
 
 Imagine every student scoring zero on one question. That is not a cohort of failures; that is a broken question. When that happens, the team and the chief examiner have three remedies:
 
-- **Remove it and keep the marks awarded.** The paper's total can now be less than 100 — say 90 — while still allowing some students to score above 90 on the remaining questions.
+- **Remove it and keep the marks awarded.** The paper's total can now be less than 100 (say 90) while still allowing some students to score above 90 on the remaining questions.
 - **Make it a bonus question** and give everyone full marks. Unpopular, and reasonably so: the students who spent time on it feel their effort was not recognised.
 - **Leave it and scale the whole paper at the end.**
 
@@ -81,7 +81,7 @@ One quiet benefit of doing this in Sheets or Excel: there is an audit trail of e
 
 Now the tedious part. The sheet shows the failures and the near passes. Depending on the faculty, `P` is a pass at 50 and above, and below that is `NA`.
 
-The borderline papers are re-marked — typically by the lead teaching associate or the person who set the paper — against the **enhanced rubric**, in a different coloured pen so the remark is visible on the page.
+The borderline papers are re-marked, typically by the lead teaching associate or the person who set the paper, against the **enhanced rubric**, in a different coloured pen so the remark is visible on the page.
 
 What surprises people from outside is how often a remark changes nothing. It is very common. The reason is structural: marks are awarded against a rubric, so finding a student one extra mark to get them over the line would mean every answer to that question had been marked unfairly, and every paper would have to be remarked. It cannot just happen for one student.
 
@@ -150,15 +150,15 @@ What surprises people from outside is how often a remark changes nothing. It is 
 <text x="360" y="964">the sheets provided</text>
 </g>
 </svg>
-<figcaption>The process end to end. Every hand-off to a different person is a check on the previous one — which is what makes the last step a submission rather than a guess.</figcaption>
+<figcaption>The process end to end. Every hand-off to a different person is a check on the previous one, which is what makes the last step a submission rather than a guess.</figcaption>
 </figure>
 
 ## Summary
 
-I think the process is fair and consistent, and the reason is structural rather than moral: it is built around one marker per question and a rubric, so the same answer earns the same mark regardless of who reads it. High achievers stand out clearly, because their marks are consistent across every question — several markers independently agreed the answers were good.
+I think the process is fair and consistent, and the reason is structural rather than moral: it is built around one marker per question and a rubric, so the same answer earns the same mark regardless of who reads it. High achievers stand out clearly, because their marks are consistent across every question: several markers independently agreed the answers were good.
 
 The same structure is why a near pass almost never turns into a pass on remark. One mark given outside the rubric would invalidate the marking of everybody else who answered that question, and no teaching team can justify that for one student.
 
 So exam marking is treated seriously, with a lot of process, and whether it is actually fair comes down to whether the team followed the procedure that was laid out. When I have seen it done properly, it was.
 
-And for anyone who was going to ask anyway: **does the good-looking person always perform better?** No. Strictly no — not when the process above is followed.
+And for anyone who was going to ask anyway: **does the good-looking person always perform better?** No. Strictly no, not when the process above is followed.

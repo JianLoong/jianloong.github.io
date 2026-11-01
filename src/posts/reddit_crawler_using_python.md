@@ -1,20 +1,20 @@
 ---
 title: Getting a subreddit's data with Python
-description: The .json trick, a Python crawler, and the async version that pulls whole comment threads — plus the part of it that stopped working.
+description: The .json trick, a Python crawler, and the async version that pulls whole comment threads, plus the part of it that stopped working.
 date: 2022-11-07
 category: Tools
 readingTime: 6
 ---
 
-As of March 2022, Reddit ranked as the ninth-most-visited site in the world. What makes it useful rather than just popular is the structure: subreddits for every interest, and every thread a comment tree you can walk. Here is how I pulled data out of it, and — further down — the part of this that no longer works.
+As of March 2022, Reddit ranked as the ninth-most-visited site in the world. What makes it useful rather than just popular is the structure: subreddits for every interest, and every thread a comment tree you can walk. Here is how I pulled data out of it, and further down, the part of this that no longer works.
 
 ## The basic method
 
-The easiest way in was to ask for the page you were already looking at with `.json` on the end. `https://www.reddit.com/r/programming` returns HTML; `https://www.reddit.com/r/programming.json` returns the same thing as JSON. No API key, no setup, no OAuth dance — with the obvious caveat that there is nothing stopping Reddit rate-limiting you.
+The easiest way in was to ask for the page you were already looking at with `.json` on the end. `https://www.reddit.com/r/programming` returns HTML; `https://www.reddit.com/r/programming.json` returns the same thing as JSON. No API key, no setup, no OAuth dance. The obvious caveat is that there is nothing stopping Reddit rate-limiting you.
 
 <figure>
 <img src="/assets/posts/reddit-json-output.png" alt="A code editor showing the JSON that https://www.reddit.com/r/programming.json returns: a Listing with after, dist, modhash and children, and under children a t3 post whose data carries approved_at_utc, subreddit programming, selftext, author_fullname and saved." width="933" height="453" loading="lazy" decoding="async">
-<figcaption>What comes back: a <code>Listing</code> with a <code>children</code> array, and each child a <code>t3</code> — a post — with its own <code>data</code>.</figcaption>
+<figcaption>What comes back: a <code>Listing</code> with a <code>children</code> array, and each child a <code>t3</code> (a post) with its own <code>data</code>.</figcaption>
 </figure>
 
 With that in hand, the crawler is short. The only subtlety is the header: a made-up browser User-Agent, because the plain `requests` default was refused.
@@ -152,11 +152,11 @@ The output is a post with its replies attached. Four of the twenty-one that thre
 
 This is the important paragraph, and it was not in the original post.
 
-**Reddit's unauthenticated `.json` endpoints no longer answer reliably.** Nothing above works as written: `https://www.reddit.com/r/programming.json` returns `403 Blocked` — an HTML block page — to a client without a session, and it sends no CORS header at all, so `fetch()` from another origin is out too. That is why three demos elsewhere on this site — the [percentage charts](/posts/amitheasshole/), the [r/programming word cloud](/posts/reddit_word_cloud/) and the [AFINN scorer](/posts/hk/) — ask the endpoint anyway, through the JSONP `<script>` their 2019 versions used, and fall back to text you paste when Reddit refuses.
+**Reddit's unauthenticated `.json` endpoints no longer answer reliably.** Nothing above works as written: `https://www.reddit.com/r/programming.json` returns `403 Blocked`, an HTML block page, to a client without a session, and it sends no CORS header at all, so `fetch()` from another origin is out too. That is why three demos elsewhere on this site (the [percentage charts](/posts/amitheasshole/), the [r/programming word cloud](/posts/reddit_word_cloud/) and the [AFINN scorer](/posts/hk/)) ask the endpoint anyway, through the JSONP `<script>` their 2019 versions used, and fall back to text you paste when Reddit refuses.
 
-What replaced it is the official API with OAuth: register an app, get a client id and secret, and a token buys you 100 queries a minute on the free tier. The shape of the crawler does not change — request, walk `data.children`, follow permalinks, collect — but every request now carries a token, and the token has to be refreshed on a schedule. The spoofed-User-Agent trick is dead; the honest version of this post is "get a client id".
+What replaced it is the official API with OAuth: register an app, get a client id and secret, and a token buys you 100 queries a minute on the free tier. The shape of the crawler does not change (request, walk `data.children`, follow permalinks, collect), but every request now carries a token, and the token has to be refreshed on a schedule. The spoofed-User-Agent trick is dead; the honest version of this post is "get a client id".
 
-For scripted crawls it is worth deciding early whether what you want is the *listing* or the *threads*, because the threads are where the request count goes — and where the rate limit bites.
+For scripted crawls it is worth deciding early whether what you want is the *listing* or the *threads*, because the threads are where the request count goes, and where the rate limit bites.
 
 ## Where the data went
 

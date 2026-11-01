@@ -12,7 +12,7 @@ Wikipedia describes it as:
 
 That last part is the reason to bother. An ad blocker in the browser is one thing; a DNS sinkhole in the house blocks the adverts that arrive from a smart TV, a phone app, or anything else you cannot install an extension into.
 
-This is how I set mine up. It took under thirty minutes, most of which was the SD card. The [Raspberry Pi Imager](https://www.raspberrypi.com/news/raspberry-pi-imager-imaging-utility/) is what made that part easy — it configures the card so the Pi comes up on the network ready for SSH.
+This is how I set mine up. It took under thirty minutes, most of which was the SD card. The [Raspberry Pi Imager](https://www.raspberrypi.com/news/raspberry-pi-imager-imaging-utility/) is what made that part easy: it configures the card so the Pi comes up on the network ready for SSH.
 
 <figure>
 <img src="/assets/posts/pihole-kit.png" alt="A photograph on a grey carpet of the parts: a sheet of Core Electronics stickers, a USB cable in a plastic bag, a red Raspberry Pi 4 Model B box, a black Argon NEO case box and a small microSD card adapter." width="816" height="1013" loading="lazy" decoding="async">
@@ -29,8 +29,8 @@ I bought it all from [Core Electronics](https://core-electronics.com.au/), whose
 
 And two things that turned out to be optional:
 
-- Argon NEO Raspberry Pi 4 case — used, and worth it
-- Micro-HDMI to HDMI adapter cable — never taken out of the packet
+- Argon NEO Raspberry Pi 4 case (used, and worth it)
+- Micro-HDMI to HDMI adapter cable (never taken out of the packet)
 
 ## The steps
 
@@ -41,7 +41,7 @@ And two things that turned out to be optional:
 <figcaption>The Imager, with the OS and the card chosen.</figcaption>
 </figure>
 
-Before writing, open the **Advanced options** — the gear icon — and set four things:
+Before writing, open the **Advanced options** (the gear icon) and set four things:
 
 - Enable SSH
 - A username and password
@@ -55,11 +55,11 @@ Enable SSH is the one that matters. It means the Pi comes up on the network read
 <figcaption>Advanced options: SSH on, credentials set, wireless configured before the card is written.</figcaption>
 </figure>
 
-**2. Find it on the network.** Once the Pi boots you need its address, and there are two ways. Ask the network — `arp -a` from a shell, or a phone app that scans the LAN, which is what I used:
+**2. Find it on the network.** Once the Pi boots you need its address, and there are two ways. Ask the network (`arp -a` from a shell, or a phone app that scans the LAN, which is what I used):
 
 <figure>
 <img src="/assets/posts/pihole-netscan.jpg" alt="An Android network scanner app showing a list of devices, with one row highlighted: hostname pihole, address 192.168.0.188, MAC e4:5f:01:ba:3a:b7, vendor Raspberry Pi Trading Ltd, response 17 ms." width="438" height="813" loading="lazy" decoding="async">
-<figcaption>The Network Scanner app, finding the Pi by its vendor name — "Raspberry Pi Trading Ltd" gives it away.</figcaption>
+<figcaption>The Network Scanner app, finding the Pi by its vendor name: "Raspberry Pi Trading Ltd" gives it away.</figcaption>
 </figure>
 
 Or skip the address entirely and use the hostname. The hostname is `raspberrypi.local` by default, and the mDNS resolver will find it.
@@ -87,7 +87,7 @@ Worth noticing, since these two screenshots do not agree: the scanner found the 
 
 **5. Install Pi-hole.** The [one-step automated install](https://github.com/pi-hole/pi-hole/#one-step-automated-install) is genuinely one step. The only thing it asks that needs a decision is the static address.
 
-**6. Give it a static address** if you were asked for one — [this guide covers it](https://www.makeuseof.com/raspberry-pi-set-static-ip/). It matters more than it sounds: a DNS server whose address moves is a DNS server your house stops using.
+**6. Give it a static address** if you were asked for one: [this guide covers it](https://www.makeuseof.com/raspberry-pi-set-static-ip/). It matters more than it sounds: a DNS server whose address moves is a DNS server your house stops using.
 
 **7. Point your devices at it.** Either each device, or the router. I changed my own devices only: setting it on the router would have pushed my network choices onto my housemates, who did not ask for them.
 
@@ -112,6 +112,6 @@ Then go to **Tools → Update Gravity** to pull them in. Adding a list without u
 
 ## Was it worth it
 
-Setting up a Raspberry Pi has become easy, and most of the credit goes to the Imager. The step that used to be the barrier — enabling SSH, configuring wireless, setting a locale — used to need a monitor, a keyboard and a mouse plugged into the Pi for the first boot. Now it is four checkboxes before you write the card.
+Setting up a Raspberry Pi has become easy, and most of the credit goes to the Imager. The step that used to be the barrier (enabling SSH, configuring wireless, setting a locale) used to need a monitor, a keyboard and a mouse plugged into the Pi for the first boot. Now it is four checkboxes before you write the card.
 
-Two honest caveats. Under thirty minutes is the setup, not the maintenance: a Pi that serves DNS for the whole house is a machine that has to keep running. And Pi-hole is not a substitute for the ad blocker in your browser — extension blockers see the page and can act on it; a DNS sinkhole sees only the request. Run both.
+Two honest caveats. Under thirty minutes is the setup, not the maintenance: a Pi that serves DNS for the whole house is a machine that has to keep running. And Pi-hole is not a substitute for the ad blocker in your browser: extension blockers see the page and can act on it; a DNS sinkhole sees only the request. Run both.

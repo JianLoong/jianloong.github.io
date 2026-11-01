@@ -94,9 +94,9 @@ const CARDS = [
   },
   {
     out: 'remote-mcp-fastmcp.png',
-    legend: 'Tools · 8 min',
-    title: 'Using a coding agent as an observability agent',
-    tint: band(8),
+    legend: 'Tools · 9 min',
+    title: 'Using an agent for observability',
+    tint: band(9),
     foot: 'Writing',
   },
   {

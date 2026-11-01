@@ -23,7 +23,7 @@
         "Introduced code-similarity detection using ANTLR within JPlag, comparing up to 600 student submissions at a time. Unlike Stanford's MOSS it needs no upload of student work to a third-party server.",
         "Wrote Python scripts to automate collecting peer-assessment feedback for Software Engineering, which sped up returning feedback to students.",
         "Wrote shell scripts to automate anonymising student information for reporting.",
-        "Studio mentor for the Industry Experience Project, leading four teams to completion alongside mentors from MYOB — two PHP projects, an iOS project and a JavaEE project.",
+        "Studio mentor for the Industry Experience Project, leading four teams to completion alongside mentors from MYOB: two PHP projects, an iOS project and a JavaEE project.",
         "Nominated for the Teaching Excellence Award across several units, including Programming Foundations in Java, Computer Architecture and Operating Systems, and Internet Applications Development.",
         "Held an average SETU (student evaluation of teaching) of 4 or above for every unit taught."
       ]
@@ -37,7 +37,7 @@
       "years": [2013, 2015],
       "points": [
         "Faculty of Information Technology Merit Scholarship.",
-        "Thesis: “Category R-tree”, supervised by Associate Professor David Taniar — an R-tree is a data structure for location-based queries.",
+        "Thesis: “Category R-tree”, supervised by Associate Professor David Taniar. An R-tree is a data structure for location-based queries.",
         "The thesis option is open only to students averaging 75 or above.",
         "High Distinction in every programming unit, including Internet Applications Development, Mobile and Distributed System, and Distributed Databases & Big Data.",
         "Weekly participant in the Spatial Query Reading Group, reading papers on optimising location-based queries."
@@ -50,7 +50,7 @@
       "years": [2010, 2012],
       "note": "Activities: Golden Key International Honour Society · ICT Club · Japanese Language Club · MakeWeekend participant · student volunteer.",
       "points": [
-        "Graduated with first-class honours — an average of 83 (High Distinction average) and a cGPA of 3.91.",
+        "Graduated with first-class honours: an average of 83 (High Distinction average) and a cGPA of 3.91.",
         "Corporate and Industry award for the highest cGPA in the graduating cohort.",
         "Swinburne University of Technology Merit Scholarship.",
         "Capstone: a Student Attendance System using face detection and recognition. The web system ran on a custom PHP framework; the recognition module used JavaCV, a wrapper for OpenCV. A year-long project.",

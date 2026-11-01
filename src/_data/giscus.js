@@ -1,5 +1,5 @@
 // Comments are powered by giscus (https://giscus.app) and stored as GitHub
-// Discussions on this repository — no database and no third party holding the
+// Discussions on this repository: no database and no third party holding the
 // data. The widget is only rendered once the two IDs below are filled in.
 //
 // To finish the setup:

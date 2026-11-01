@@ -1,6 +1,6 @@
 ---
 title: Promise.all, and the same requests one at a time
-description: The Hacker News API hands you IDs, not stories. Promise.all turns three hundred round trips into one wait — and the 2019 version of this page fetched five hundred at once.
+description: The Hacker News API hands you IDs, not stories. Promise.all turns three hundred round trips into one wait, and the 2019 version of this page fetched five hundred at once.
 date: 2019-10-25
 category: Tools
 readingTime: 4
@@ -128,7 +128,7 @@ const topStories = (count) =>
 
 ## The same work, both ways
 
-The 2019 version of this page did not run at all — the script was commented out and the reader was told to paste it into a browser console, which is what the screenshots below show. It runs here instead, and it runs the work both ways so the difference is a number on the page rather than a claim.
+The 2019 version of this page did not run at all: the script was commented out and the reader was told to paste it into a browser console, which is what the screenshots below show. It runs here instead, and it runs the work both ways so the difference is a number on the page rather than a claim.
 
 <div class="demo" data-promiseall>
 <div class="demo-controls">
@@ -159,7 +159,7 @@ The screenshots, in the order the post used them: the console with the code past
 
 <figure>
 <img src="/assets/posts/promiseall-network.png" alt="The DevTools network tab: a burst of requests in the first second, then a dense band of item requests continuing past the thirty-second mark." width="1044" height="313" loading="lazy" decoding="async">
-<figcaption>Five hundred requests, batched. The first burst is the list and the start of the items; the wide band after it is the rest of the items being handed out by the browser's connection limit. Promise.all does not mean unlimited parallelism — it means you are not waiting between requests.</figcaption>
+<figcaption>Five hundred requests, batched. The first burst is the list and the start of the items; the wide band after it is the rest of the items being handed out by the browser's connection limit. Promise.all does not mean unlimited parallelism: it means you are not waiting between requests.</figcaption>
 </figure>
 
 <figure>
@@ -172,14 +172,14 @@ The screenshots, in the order the post used them: the console with the code past
 - **`then` returns a promise too**, which is the whole reason the chaining above works: the second `then` waits on the `Promise.all`, not on the first fetch.
 - **`fetch` is significantly easier than its jQuery counterparts**, with the caveat it always had: it is a modern API, and a static site with no build step is at the mercy of the browsers its readers bring.
 - **CORS is the modern answer and JSONP is the old one.** `mode: "cors"` is a line in a fetch call; JSONP is a script tag, a callback name and a server that has to cooperate. The APIs worth using now send the header.
-- **`Promise.all` fails as one.** One bad request rejects the whole thing, which is what makes the validity check in the diagram matter — there is no partial result to fall back on. `Promise.allSettled` is the version that keeps the successes, and it is the one to reach for when a single failure should not cost you the other nine.
+- **`Promise.all` fails as one.** One bad request rejects the whole thing, which is what makes the validity check in the diagram matter: there is no partial result to fall back on. `Promise.allSettled` is the version that keeps the successes, and it is the one to reach for when a single failure should not cost you the other nine.
 - **Batching does not remove the work.** Five hundred requests are still five hundred requests; they just stop queueing behind each other.
 - **An API with no wrapper gets one eventually.** Plenty of people wrote one for Hacker News, and the one used on this site's word cloud post is a read-only mirror of it.
 
 ## References
 
-1. [Promise.all — MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
-2. [When to use Promise.all](https://stackoverflow.com/questions/38180080/when-to-use-promise-all) — the 2019 reference.
+1. [Promise.all (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
+2. [When to use Promise.all](https://stackoverflow.com/questions/38180080/when-to-use-promise-all), the 2019 reference.
 
 ## Bye.
 

@@ -1,6 +1,6 @@
 ---
 title: Drawing a UML statechart, one question at a time
-description: Seven versions of the same statechart for one Order object, each one a question asked of the client — and why the flawed ones are the point.
+description: Seven versions of the same statechart for one Order object, each one a question asked of the client, and why the flawed ones are the point.
 date: 2021-10-24
 category: Design
 readingTime: 8
@@ -14,8 +14,8 @@ The example is an `Order` object in an e-commerce system, because everyone has m
 
 Asking the client is the part of the process people skip. So we ask:
 
-- When a customer places an order, what happens? — `Placed`
-- What if there is nothing in stock? — `Pending`
+- When a customer places an order, what happens? The answer is `Placed`
+- What if there is nothing in stock? The answer is `Pending`
 
 Two questions, two states. Nothing about *how* the object moves yet.
 
@@ -81,11 +81,11 @@ One of those answers gives us our first transition label.
 <figcaption>Version 2: one transition gets a reason. The rest still have none.</figcaption>
 </figure>
 
-We are not done, because the answers to the *next* questions are not states — they are conditions:
+We are not done, because the answers to the *next* questions are not states but conditions:
 
 - What happens if the payment is never made? Can an order sit in `placed` forever?
 - If there is inventory management, are the products held while the customer decides?
-- When exactly is stock deducted — before payment, or after?
+- When exactly is stock deducted: before payment, or after?
 - What if the payment fails? Can a customer order more than exists?
 
 Every one of those is a condition on the transition from the start, not a state of its own. So the diagram grows a very long label.
@@ -158,7 +158,7 @@ If every one of those conditions has to be true before an order moves on, then `
 With that settled, the next questions are about what comes after `pending`:
 
 - Do you want a cap on how many items one customer can buy?
-- What is the state after `pending` — is it `paid`, or does the business call it something else?
+- What is the state after `pending`? Is it `paid`, or does the business call it something else?
 
 The cap is a fourth condition, and the answer to the second question is a new state with conditions of its own.
 
@@ -209,7 +209,7 @@ Two or more states means the next question is always the same: **what events mov
 
 - What if the customer is unhappy after paying?
 - What if the stock record was wrong and the item is not actually there?
-- Remember that nothing is deducted while an order sits in `pending` — can two customers both think they have the last one?
+- Remember that nothing is deducted while an order sits in `pending`. Can two customers both think they have the last one?
 
 That last one is the bug the diagram was hiding, and it needs a transition the shape does not have yet.
 
@@ -262,7 +262,7 @@ That last one is the bug the diagram was hiding, and it needs a transition the s
 
 The questions keep coming, and they are better questions now:
 
-- When exactly is stock deducted — before payment or after?
+- When exactly is stock deducted: before payment or after?
 - If it is after, then between `pending` and a failed payment the item is not held, so another customer may take it. Is that acceptable?
 - If it is before, how long do you hold it? What if the customer never pays? Is that good business?
 - Does `paid` going back to `pending` make sense at all?
@@ -330,7 +330,7 @@ And one state is still missing. What happens to an order that is never paid, or 
 <text x="60" y="482">- Cancelled as per customer request</text>
 </g>
 </svg>
-<figcaption>Version 7, the first iteration: three states, guards on both routes into <code>Cancelled</code>, and an end marker for each. Not finished — finished is not a thing a statechart gets to be.</figcaption>
+<figcaption>Version 7, the first iteration: three states, guards on both routes into <code>Cancelled</code>, and an end marker for each. Not finished: finished is not a thing a statechart gets to be.</figcaption>
 </figure>
 
 ## What it says
@@ -349,14 +349,14 @@ And more questions, because there always are:
 
 ## What the exercise is for
 
-Going through this in order — including the two versions that were wrong — is the useful part, not the final diagram. The first version had a state that existed for no reason. The third put four conditions on one transition. The fourth deleted a state AND found where the conditions belonged. The sixth admitted that progress can go backwards.
+Going through this in order, including the two versions that were wrong, is the useful part, not the final diagram. The first version had a state that existed for no reason. The third put four conditions on one transition. The fourth deleted a state AND found where the conditions belonged. The sixth admitted that progress can go backwards.
 
 Two things fall out of that:
 
 - **The requirements get understood.** Every question asked of the client is a question that would otherwise have been an assumption somebody made in code. The `pending`-holds-no-stock problem is a real bug in the system above, and it surfaced because a statechart made the awkward question obvious rather than because anyone thought of it.
 - **The enums write themselves.** Once the states and transitions are explicit, an `OrderStatus` enum is not a guess: it is the list of states, and the transitions are the only places status can change. That is what I mean when I say the making of the diagram is doing the engineering.
 
-Statecharts model one object, and requirements are about many. It is never complete either — requirements change, so the diagram changes, which is why this one is a first iteration rather than an answer.
+Statecharts model one object, and requirements are about many. It is never complete either: requirements change, so the diagram changes, which is why this one is a first iteration rather than an answer.
 
 ## Bye.
 

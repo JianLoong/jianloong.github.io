@@ -21,7 +21,7 @@ Take the fire station. You have one to place, and you want it to serve as many a
 <p class="demo-note">Thirty random points, their regions, and the triangulation they came from. The 2019 version asked you to reload the page for a new diagram; a button is cheaper.</p>
 </div>
 
-The whole first diagram is four lines once the points exist. The geometry comes from d3-delaunay, which is the one part of the old d3 stack still carried here — everything else about the old post was drawing.
+The whole first diagram is four lines once the points exist. The geometry comes from d3-delaunay, which is the one part of the old d3 stack still carried here. Everything else about the old post was drawing.
 
 ```javascript
 var delaunay = d3.Delaunay.from(vertices);
@@ -55,12 +55,12 @@ The eight cities below are the ones from the travelling salesperson post, so the
 <div class="demo" data-voronoi-query-demo>
 <p class="demo-readout" data-voronoi-readout aria-live="polite">Loading…</p>
 <svg class="demo-click" data-voronoi-query viewBox="0 0 500 500" role="img" aria-label="A Voronoi diagram of eight US cities. Clicking anywhere shades the region of the nearest city and the regions that share an edge with it."></svg>
-<p class="demo-note">Click anywhere. The accent region belongs to the city nearest to that point; the cooler regions share a Delaunay edge with it. That shared edge is the whole trick — cities whose regions touch are exactly the pairs that are adjacent on the map.</p>
+<p class="demo-note">Click anywhere. The accent region belongs to the city nearest to that point; the cooler regions share a Delaunay edge with it. That shared edge is the whole trick: cities whose regions touch are exactly the pairs that are adjacent on the map.</p>
 </div>
 
 <figure>
 <img src="/assets/posts/voronoi-nearest-neighbour.png" alt="A Voronoi diagram of a cluster of points: one region shaded blue in the middle, the regions touching it shaded teal, and every other region left white." width="608" height="589" loading="lazy" decoding="async">
-<figcaption>The 2019 version of the same query, captured then. The blue region is the nearest one and the teal ones are its neighbours — the two tints the current demo still uses, in the site's own palette.</figcaption>
+<figcaption>The 2019 version of the same query, captured then. The blue region is the nearest one and the teal ones are its neighbours: the two tints the current demo still uses, in the site's own palette.</figcaption>
 </figure>
 
 ## What it taught me
@@ -68,7 +68,7 @@ The eight cities below are the ones from the travelling salesperson post, so the
 - **The learning curve on d3 is genuinely steep**, and most of it is spent on the drawing rather than the data structure underneath.
 - **Voronoi is not the hard part.** Once the triangulation exists, the regions and the neighbour lists fall out of it.
 - **`neighbours` in a triangulation means adjacent, not k-nearest.** They are different queries, and conflating them is easy until a reader tries to search for "the three nearest" and gets two cities on the other side of the country.
-- **Iterate the edges explicitly** rather than the region list — `for...of` over what the triangulation hands back is enough. [MDN on iterators and generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators).
+- **Iterate the edges explicitly** rather than the region list: `for...of` over what the triangulation hands back is enough. [MDN on iterators and generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators).
 - **Make the SVG responsive once, with a `viewBox`**, instead of per-diagram sizes. [A short write-up on that](https://medium.com/@louisemoxy/a-simple-way-to-make-d3-js-charts-svgs-responsive-7afb04bc2e4b).
 - **Queries are cheap; changes are not.** Building the triangulation once and asking it thousands of questions is the deal. Move the points and the structure has to be rebuilt, so a map where things move is a data structure problem, not a drawing one.
 

@@ -1,6 +1,6 @@
 ---
 title: Measuring code similarity for Intro to Programming
-description: Mixed zip, rar and 7z submissions, renamed archives, unicode and __MACOSX — the shell work that made JPlag usable over 481 submissions a semester.
+description: "Mixed zip, rar and 7z submissions, renamed archives, unicode and __MACOSX: the shell work that made JPlag usable over 481 submissions a semester."
 date: 2022-11-05
 category: Tools
 readingTime: 5
@@ -13,7 +13,7 @@ Marking a unit that size means reading several hundred submissions that are most
 The assignment help industry had noticed the same thing:
 
 <figure>
-<img src="/assets/posts/jplag-advert.png" alt="A photograph of two Chinese-language advertisements taped side by side to a toilet-stall wall. Both list Monash unit codes — FIT9131, FIT9132, FIT9133, ETC2410, BFF1001 among them — with a price of $18.80 an hour, plus WeChat contact codes and a phone number." width="1263" height="756" loading="lazy" decoding="async">
+<img src="/assets/posts/jplag-advert.png" alt="A photograph of two Chinese-language advertisements taped side by side to a toilet-stall wall. Both list Monash unit codes (FIT9131, FIT9132, FIT9133, ETC2410, BFF1001 among them) with a price of $18.80 an hour, plus WeChat contact codes and a phone number." width="1263" height="756" loading="lazy" decoding="async">
 <figcaption>An advertisement I photographed in a campus toilet block. Someone is selling "whole semester" packages, by unit code, at $18.80 an hour.</figcaption>
 </figure>
 
@@ -22,7 +22,7 @@ The assignment help industry had noticed the same thing:
 The teaching team used [JPlag](https://github.com/jplag/JPlag), and for four reasons:
 
 - It was faster and more accurate for our case than the alternatives we tried.
-- It is open source, so student work never leaves the university — unlike MOSS, which requires uploading submissions to a third-party server.
+- It is open source, so student work never leaves the university, unlike MOSS, which requires uploading submissions to a third-party server.
 - It produced results in time to act on them, for over 450 students at once, as HTML reports.
 - It is still maintained.
 
@@ -140,12 +140,12 @@ java -jar ../jplag.jar -l java17 -vl -r results -s -m 50 zipped
 
 <figure>
 <img src="/assets/posts/jplag-report.png" alt="A JPlag report summary: 481 submissions with 2 that could not be parsed, Java 7 parser, 50 matches displayed at a 57.3% average similarity threshold and 50% maximum, dated 2018-09-09, above a similarity histogram peaking in the 10-20% band and ranked match bars from 85.0% down to 64.9%." width="1879" height="889" loading="lazy" decoding="async">
-<figcaption>The top of a report: 481 submissions, two of which JPlag could not parse at all, and the distribution underneath — most pairs are unlike each other, which is what a healthy cohort looks like.</figcaption>
+<figcaption>The top of a report: 481 submissions, two of which JPlag could not parse at all, and the distribution underneath: most pairs are unlike each other, which is what a healthy cohort looks like.</figcaption>
 </figure>
 
 ## Reading the results
 
-The report sorts matches by average similarity, and reading it is not hard. What matters is what it is not: it is a guide to where to look, not a finding. A high similarity score means two students should be interviewed — there are innocent explanations, and there is a real one, and a number cannot tell them apart. The distribution above is more useful than any single pair, because it shows the shape of the cohort rather than one line in it.
+The report sorts matches by average similarity, and reading it is not hard. What matters is what it is not: it is a guide to where to look, not a finding. A high similarity score means two students should be interviewed: there are innocent explanations, and there is a real one, and a number cannot tell them apart. The distribution above is more useful than any single pair, because it shows the shape of the cohort rather than one line in it.
 
 ## Final words
 

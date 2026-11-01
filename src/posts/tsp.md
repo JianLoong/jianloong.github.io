@@ -12,7 +12,7 @@ Given a list of cities and the distances between each pair of them, what is the 
 
 The constraints here: thirteen cities, no city visited twice, and the route has to close. New York is the starting point, which makes no difference to the answer but makes the picture easier to read.
 
-The distances come from the [Google OR-Tools TSP example](https://developers.google.com/optimization/routing/tsp) — Euclidean distance, not road distance, so the geography is honest about direction and optimistic about driving.
+The distances come from the [Google OR-Tools TSP example](https://developers.google.com/optimization/routing/tsp) (Euclidean distance, not road distance), so the geography is honest about direction and optimistic about driving.
 
 | City           | Coordinates | Letter |
 | -------------- | ----------- | ------ |
@@ -53,10 +53,10 @@ In 2019 the tool I reached for was a genetic algorithm, running in a web worker.
 <p class="demo-readout" data-tsp-readout aria-live="polite">Loading the demo…</p>
 <svg data-tsp-tour viewBox="0 0 600 250" role="img" aria-label="The thirteen cities plotted on a map of the United States, with the tour drawn as a line through them."></svg>
 <svg data-tsp-fitness viewBox="0 0 600 150" role="img" aria-label="Average and best fitness plotted against generation number."></svg>
-<p class="demo-note">Population 20, mutation rate 0.2. The GA stops when it stops improving, so a run is usually about twenty generations — and a different twenty each time. Best tour is the accent line, average the cool one.</p>
+<p class="demo-note">Population 20, mutation rate 0.2. The GA stops when it stops improving, so a run is usually about twenty generations, and a different twenty each time. Best tour is the accent line, average the cool one.</p>
 </div>
 
-The proven optimum for this matrix is **7,293 miles**: New York → Boston → Chicago → Minneapolis → Denver → Salt Lake City → Seattle → San Francisco → Los Angeles → Phoenix → Houston → Dallas → St. Louis → New York. The genetic algorithm does not find it. It finds something a few hundred miles worse, quickly and every time — which is the honest trade for a problem where the exact answer costs factorial time.
+The proven optimum for this matrix is **7,293 miles**: New York → Boston → Chicago → Minneapolis → Denver → Salt Lake City → Seattle → San Francisco → Los Angeles → Phoenix → Houston → Dallas → St. Louis → New York. The genetic algorithm does not find it. It finds something a few hundred miles worse, quickly and every time, which is the honest trade for a problem where the exact answer costs factorial time.
 
 Watch the random selection option in particular. It degrades towards a random search, because selecting parents without regard to fitness throws away the pressure that makes the search work at all.
 
@@ -67,7 +67,7 @@ Watch the random selection option in particular. It degrades towards a random se
 
 ## What it taught me
 
-- **The earth is not flat, and charts are worse than they look.** Plotting longitude against latitude means swapping them and remembering the y-axis points down. Most chart APIs also refuse to let you set both axes at once — which is exactly what a map needs.
+- **The earth is not flat, and charts are worse than they look.** Plotting longitude against latitude means swapping them and remembering the y-axis points down. Most chart APIs also refuse to let you set both axes at once, which is exactly what a map needs.
 - **SVG is the right output for this**, and getting an API to emit it is usually worth more than the API's presets.
 - **Benchmark data sets exist for this problem**, so an implementation can be measured instead of admired.
 - **A mutation rate that is too high turns a GA into a random search.** It is the first knob to turn, and the wrong direction to turn it.

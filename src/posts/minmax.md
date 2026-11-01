@@ -1,6 +1,6 @@
 ---
 title: Five ways to get the min and max of an array in Java
-description: A loop, a sort, two streams and a collections call — and the one I would actually use, plus the snippet from 2019 that throws.
+description: A loop, a sort, two streams and a collections call, and the one I would actually use, plus the snippet from 2019 that throws.
 date: 2019-11-06
 category: Java
 readingTime: 4
@@ -8,7 +8,7 @@ readingTime: 4
 
 There are many ways to get the smallest and largest value out of an `int[]` in Java. This is a post about which ones exist, what each costs, and which one I would write.
 
-## Method 1 — the manual loop
+## Method 1: the manual loop
 
 The obvious one. Walk the array once, keep the best so far, and guard the empty case.
 
@@ -31,9 +31,9 @@ public void usingManual(int[] numbers){
 }
 ```
 
-Two notes on this. The inner `Math.max` is redundant — the `if` already established that `value` is larger — but it does no harm and reads as a guard. And the seeds matter: starting from `Integer.MAX_VALUE` and `Integer.MIN_VALUE` works for any array, including one holding only negative numbers, whereas seeding from `numbers[0]` needs a loop that starts at index 1. Get that wrong and every value in a negative array looks like a maximum.
+Two notes on this. The inner `Math.max` is redundant (the `if` already established that `value` is larger) but it does no harm and reads as a guard. And the seeds matter: starting from `Integer.MAX_VALUE` and `Integer.MIN_VALUE` works for any array, including one holding only negative numbers, whereas seeding from `numbers[0]` needs a loop that starts at index 1. Get that wrong and every value in a negative array looks like a maximum.
 
-## Method 2 — sort a copy
+## Method 2: sort a copy
 
 Sort it, and the ends are the answer. The catch is that `Arrays.sort` sorts **in place**, and a method called `getMinAndMax` has no business reordering the array its caller passed in.
 
@@ -50,7 +50,7 @@ public void usingSort(int[] numbers){
 
 The clone fixes the surprise but not the cost: sorting is O(n log n) for a question that needs one pass, and for primitive arrays the implementation is a dual-pivot quicksort. A method should do one thing, and "find the min and max" is not "sort this array".
 
-## Method 3 — streams
+## Method 3: streams
 
 Java 8 added `IntStream`, which makes the one-pass version a single expression.
 
@@ -75,7 +75,7 @@ System.out.println("Max is " + Arrays.stream(numbers).max().orElseThrow());
 
 Streams also have a decision inside them that a loop does not: whether to go parallel. For an array this is a question about the size of the data, not about style, and most arrays are too small for it to be worth asking.
 
-## Method 4 — summary statistics
+## Method 4: summary statistics
 
 `IntSummaryStatistics` is a state object that collects count, sum, min, max and average in one pass.
 
@@ -89,9 +89,9 @@ public void usingSummaryStats(int[] numbers){
 }
 ```
 
-This is the one I would write. It answers the question in one pass, returns real numbers rather than optionals, and the same object carries the other four statistics — so the next question about the same array costs nothing. The empty-array problem also disappears: an empty stream gives a summary with a count of zero rather than an exception or a sentinel value, so the guard is about saying what you want rather than about protecting the arithmetic.
+This is the one I would write. It answers the question in one pass, returns real numbers rather than optionals, and the same object carries the other four statistics, so the next question about the same array costs nothing. The empty-array problem also disappears: an empty stream gives a summary with a count of zero rather than an exception or a sentinel value, so the guard is about saying what you want rather than about protecting the arithmetic.
 
-## Method 5 — Collections
+## Method 5: Collections
 
 You can box the array into a `List<Integer>` and hand it to `Collections.min` and `Collections.max`.
 
@@ -106,9 +106,9 @@ public void usingCollections(int[] numbers){
 }
 ```
 
-It works, and it iterates the whole collection twice to do it. Both calls are O(n), and both walk a list of boxed integers — an allocation per element that the primitives did not need. If the array is already a collection, this is reasonable; converting an `int[]` to get here is not.
+It works, and it iterates the whole collection twice to do it. Both calls are O(n), and both walk a list of boxed integers: an allocation per element that the primitives did not need. If the array is already a collection, this is reasonable; converting an `int[]` to get here is not.
 
-[Guava](https://github.com/google/guava) has the same idea without the boxing, in `Ints.min` and `Ints.max`, which take the primitive array directly — worth knowing if Guava is already on the classpath, and not worth a dependency for this alone.
+[Guava](https://github.com/google/guava) has the same idea without the boxing, in `Ints.min` and `Ints.max`, which take the primitive array directly, worth knowing if Guava is already on the classpath, and not worth a dependency for this alone.
 
 ## What I would write
 

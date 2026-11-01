@@ -10,7 +10,7 @@
  *
  * This is JS rather than posts.json because `permalink` has to be the boolean
  * false to stop Eleventy writing the page, and a template string can only render
- * the string "false" — which is truthy, and would write a file called "false".
+ * the string "false", which is truthy, and would write a file called "false".
  */
 const showDrafts = process.env.SHOW_DRAFTS === "1";
 

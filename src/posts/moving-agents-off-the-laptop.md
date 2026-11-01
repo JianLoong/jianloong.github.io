@@ -1,6 +1,6 @@
 ---
 title: Hosting an agent is the hard part
-description: An agent needs a machine it can act on freely — a sandbox or a VM. A terminal is only how you aim it, and reaching everyone means moving the machine.
+description: "An agent needs a machine it can act on freely: a sandbox or a VM. A terminal is only how you aim it, and reaching everyone means moving the machine."
 date: 2026-10-11
 category: Tools
 readingTime: 6
@@ -14,7 +14,7 @@ Ask an engineer to run an agent and you get a short list of commands. Ask anyone
 
 Almost nobody would have installed it.
 
-So the question is this: **how do we make an agent reachable by someone who will never install a command-line tool?** A binary they download is one answer, and it is a nicer install — the agent still ends up on their machine. A website is the other, and it means the agent runs on a machine you keep alive, not one they do. The rest of this post is about that one.
+So the question is this: **how do we make an agent reachable by someone who will never install a command-line tool?** A binary they download is one answer, and it is a nicer install, though the agent still ends up on their machine. A website is the other, and it means the agent runs on a machine you keep alive, not one they do. The rest of this post is about that one.
 
 That is the platform: a place the agent runs that the person using it never has to install, own or maintain.
 
@@ -76,7 +76,7 @@ That is the platform: a place the agent runs that the person using it never has 
 
 ## What changes for the person
 
-Hosting an agent is usually described from the inside — a machine, an image, a policy, a bill. What the person using it notices is smaller than that: two things people do on a laptop without thinking, and what each becomes when the agent is somewhere else.
+Hosting an agent is usually described from the inside: a machine, an image, a policy, a bill. What the person using it notices is smaller than that: two things people do on a laptop without thinking, and what each becomes when the agent is somewhere else.
 
 **Getting in.** On a laptop this is an install: a CLI, a runtime, a version to keep current. Hosted, it is an account and a link, and nothing on their machine to maintain. That account is doing more work than the install ever did: it is how they are known, and how everything the agent does is attributed back to them.
 
@@ -85,11 +85,11 @@ Hosting an agent is usually described from the inside — a machine, an image, a
 <figcaption>One is a thing they install and then keep current. The other is a URL.</figcaption>
 </figure>
 
-**Handing it the work.** A laptop agent is useful because the machine is theirs. It reads the directory they are standing in and acts as them, with their keys. Its skills come off their own disk, its tools are whatever their `$PATH` holds, and the MCP servers it talks to are the ones their config file names — over their network, with their credentials. None of that belongs to the agent; all of it belongs to the machine.
+**Handing it the work.** A laptop agent is useful because the machine is theirs. It reads the directory they are standing in and acts as them, with their keys. Its skills come off their own disk, its tools are whatever their `$PATH` holds, and the MCP servers it talks to are the ones their config file names, over their network, with their credentials. None of that belongs to the agent; all of it belongs to the machine.
 
 Host it, and all of it goes at once. They choose what it may read, they authorise what it may do, and a skill or an MCP server stops being something on their disk and becomes something the platform has to host and let them add.
 
-And the agent stops being them. On a laptop it holds their keys, so it can already do everything they can, and none of that is separately revocable. Hosted, it needs an identity of its own, scoped and expiring — the first time anyone asks what it may do, and the first time any of it can be taken back. That question does not go away once answered: which services it may reach, how much of each, and which actions wait for them. Reading a file and sending a message are not the same permission.
+And the agent stops being them. On a laptop it holds their keys, so it can already do everything they can, and none of that is separately revocable. Hosted, it needs an identity of its own, scoped and expiring: the first time anyone asks what it may do, and the first time any of it can be taken back. That question does not go away once answered: which services it may reach, how much of each, and which actions wait for them. Reading a file and sending a message are not the same permission.
 
 <figure>
 <svg class="figure-art" width="700" height="256" viewBox="0 0 700 256" role="img" aria-label="On the left, three inherited things inside a dashed boundary, all bracketed into the agent. On the right, the agent inside a solid boundary beside a single mounted folder, with a skill arriving from outside.">
@@ -123,7 +123,7 @@ And the agent stops being them. On a laptop it holds their keys, so it can alrea
 <figcaption>On their machine the agent reads what they read, and a skill or an MCP server is something they point it at. In an image there is one mounted folder, and anything else has to be put in from outside.</figcaption>
 </figure>
 
-Neither is a hard job on its own. Together they are what *hosted* means from the outside — and they are only the visible half.
+Neither is a hard job on its own. Together they are what *hosted* means from the outside, and they are only the visible half.
 
 ## The trade
 
@@ -131,7 +131,7 @@ A web service does what you wrote; an agent writes the program and then runs it.
 
 So it is worth asking: do agents need hosting at all? Anyone with a terminal is better served locally, for the price of a directory and a config file.
 
-What hosting buys is usability for everyone who would never get past the setup. Nobody learns a tool they cannot install — worth an audience you do not otherwise have, and a poor trade for the one you already do.
+What hosting buys is usability for everyone who would never get past the setup. Nobody learns a tool they cannot install: worth an audience you do not otherwise have, and a poor trade for the one you already do.
 
 <figure>
 <img src="/assets/hero/arrival.jpg" alt="" width="1376" height="768" loading="lazy" decoding="async">

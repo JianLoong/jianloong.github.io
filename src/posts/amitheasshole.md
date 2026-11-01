@@ -9,7 +9,7 @@ scripts:
   - /js/posts/amitheasshole.js
 ---
 
-[r/AmItheAsshole](https://www.reddit.com/r/AmItheAsshole/) is where people post an argument and ask a jury of strangers to rule on it. Every thread resolves into one of five verdicts, and the votes are written in the replies as four-letter codes — which makes the whole subreddit unusually easy to count.
+[r/AmItheAsshole](https://www.reddit.com/r/AmItheAsshole/) is where people post an argument and ask a jury of strangers to rule on it. Every thread resolves into one of five verdicts, and the votes are written in the replies as four-letter codes, which makes the whole subreddit unusually easy to count.
 
 The subreddit describes itself as:
 
@@ -25,19 +25,19 @@ The subreddit describes itself as:
 
 ## The counting
 
-The 2019 version of this page fetched each thread's comments straight from reddit.com as JSON, counted how often each verdict appeared, and drew a percentage bar. It did not use a CORS-enabled fetch — it called `$.getJSON` with `&jsonp=?`, which is a `<script>` tag, and a `<script>` tag is not subject to CORS. This page asks the subreddit for its recent comments the same way, through `js/posts/reddit-jsonp.js`.
+The 2019 version of this page fetched each thread's comments straight from reddit.com as JSON, counted how often each verdict appeared, and drew a percentage bar. It did not use a CORS-enabled fetch: it called `$.getJSON` with `&jsonp=?`, which is a `<script>` tag, and a `<script>` tag is not subject to CORS. This page asks the subreddit for its recent comments the same way, through `js/posts/reddit-jsonp.js`.
 
-Reddit does not always answer, and when it refuses — **403 Blocked**, which is what an unauthenticated client tends to get — the script never loads and the page falls back to what you paste, saying so in the readout.
+Reddit does not always answer, and when it refuses (**403 Blocked**, which is what an unauthenticated client tends to get) the script never loads and the page falls back to what you paste, saying so in the readout.
 
 Everything after the text arrives is the same. Paste a thread's comments below and the page counts them exactly as the 2019 script did: raw occurrences of the five tokens, case sensitively, with no attempt to work out who was replying to whom.
 
 <div class="demo" data-aita>
 <label class="demo-field" for="aita-input">Comments to count
 <textarea id="aita-input" data-aita-input rows="6">NTA. Your neighbours are the ones in the wrong here.
-YTA for how you handled it afterwards, though — you should have called the council.
+YTA for how you handled it afterwards, though: you should have called the council.
 NTA, and documenting it was the right call.
 ESH. You both escalated something small.
-INFO — how long has this been going on?
+INFO: how long has this been going on?
 NTA, definitely.</textarea>
 </label>
 <div class="demo-controls">
@@ -49,7 +49,7 @@ NTA, definitely.</textarea>
 <thead><tr><th></th><th>Verdict</th><th>Count</th><th>Share</th></tr></thead>
 <tbody data-aita-legend></tbody>
 </table>
-<p class="demo-note">Token counting is a crude proxy for a verdict. "NTA" appearing in a reply that says "not NTA" still counts, and someone writing the same verdict three times counts three times — which is why the shares below are indicative rather than a poll.</p>
+<p class="demo-note">Token counting is a crude proxy for a verdict. "NTA" appearing in a reply that says "not NTA" still counts, and someone writing the same verdict three times counts three times, which is why the shares below are indicative rather than a poll.</p>
 </div>
 
 <figure>
@@ -57,7 +57,7 @@ NTA, definitely.</textarea>
 <figcaption>What the 2019 version produced: one bar per thread, segmented by verdict, with the counts underneath. "AITA for reporting my neighbours for repeatedly offleashing their dog" came back 14 NTA against 3 ESH; the baby-name thread, 20 NTA, 1 YTA and 4 NAH.</figcaption>
 </figure>
 
-The interesting thing in both of those is how much of the verdict is in the disagreement. The dog thread had three people saying everyone sucked, and the baby thread had four saying nobody did — the subreddit is less decisive than its name suggests.
+The interesting thing in both of those is how much of the verdict is in the disagreement. The dog thread had three people saying everyone sucked, and the baby thread had four saying nobody did; the subreddit is less decisive than its name suggests.
 
 ## Bye.
 

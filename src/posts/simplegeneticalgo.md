@@ -1,6 +1,6 @@
 ---
 title: Evolving a phrase out of random letters
-description: A genetic algorithm that starts from noise and converges on whatever string you give it — running in a worker, with every improvement plotted as it arrives.
+description: A genetic algorithm that starts from noise and converges on whatever string you give it, running in a worker, with every improvement plotted as it arrives.
 date: 2019-10-19
 category: Data
 readingTime: 3
@@ -12,7 +12,7 @@ Start with a string of random characters. Score each candidate by how far it is 
 
 That is a genetic algorithm in its simplest honest form. This one was inspired by [genetic-js](https://github.com/subprotocol/genetic-js), though the implementation is different: classes rather than closures, and a web worker so the search does not freeze the page.
 
-The same worker solves the [travelling salesperson problem](/posts/tsp/) — only the fitness function changes. Watching a phrase come out of noise is the easier way to see what the algorithm is doing.
+The same worker solves the [travelling salesperson problem](/posts/tsp/): only the fitness function changes. Watching a phrase come out of noise is the easier way to see what the algorithm is doing.
 
 <div class="demo" data-ga>
 <div class="demo-controls">
@@ -50,13 +50,13 @@ The same worker solves the [travelling salesperson problem](/posts/tsp/) — onl
 
 ## What to watch
 
-- **Set selection to random and run it.** It often stops without reaching the target — a generation picked without regard to fitness has no pressure pushing it uphill, so the population wanders. That is the whole mechanism, removed.
+- **Set selection to random and run it.** It often stops without reaching the target: a generation picked without regard to fitness has no pressure pushing it uphill, so the population wanders. That is the whole mechanism, removed.
 - **Type a short target.** A four-letter word is solved almost immediately; the difficulty is exponential in length, and watching that happen is more instructive than any description of why.
 - **Watch the log rather than the chart.** The chart shows the shape of convergence; the log shows that most of the climb happens in the first few dozen improvements, and the last characters take the longest.
 
 ## What it taught me
 
-- **A web worker is cached hard in production.** If a worker changes, users should not need a hard refresh to get it — either load it early or put a version in its name. This is a deploy problem masquerading as a caching one.
+- **A web worker is cached hard in production.** If a worker changes, users should not need a hard refresh to get it. Either load it early or put a version in its name. This is a deploy problem masquerading as a caching one.
 - **The worker misbehaved with `while` loops.** A `for` loop with a bound was fine where a `while` loop was not, and the bound also makes the generation cap explicit.
 - **Cross-over has to be chosen with complexity in mind.** Ordered cross-over for permutations, uniform for independent genes: the wrong pairing produces invalid children, or none at all.
 - **Do not reach for jQuery to show and hide a table.** The post's original lesson was that `hide()` and `show()` misbehave on mobile; the fix was to stop loading jQuery entirely, which is what this version does.
@@ -64,7 +64,7 @@ The same worker solves the [travelling salesperson problem](/posts/tsp/) — onl
 
 ## References
 
-1. [Python Easy GA](https://pypi.org/project/pyeasyga/) — a similar approach in Python.
+1. [Python Easy GA](https://pypi.org/project/pyeasyga/): a similar approach in Python.
 
 ## Bye.
 

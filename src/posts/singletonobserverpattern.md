@@ -8,7 +8,7 @@ readingTime: 5
 
 There is one Lucky Dip Machine in the arcade. It has a limited inventory, and everyone in the arcade can watch it being used. That is a small enough problem to state in a sentence, and it needs two design patterns to say properly in code.
 
-The assignment — it was one of the feature assignments in the programming foundation units at Monash, and it is often made fun of — usually gets solved as a single class with a `main` method. It can be engineered better than that, and the two patterns are the reason why.
+The assignment (it was one of the feature assignments in the programming foundation units at Monash, and it is often made fun of) usually gets solved as a single class with a `main` method. It can be engineered better than that, and the two patterns are the reason why.
 
 - **Only one machine exists.** A **singleton** holds the inventory, so every use of the machine deducts from the same pile. No second instance, no second inventory to keep in step.
 - **Everyone in the arcade can observe it.** Whenever a prize is won, the observers are told which prize left the machine. That is the **observer** pattern: the machine does not know who is watching, only that somebody is.
@@ -265,7 +265,7 @@ The line worth staring at is the second `getInstance()`. It returns the same obj
 ## What it taught me
 
 - **Override both `equals` and `hashCode` when the objects are map keys.** One without the other is a bug that waits until the key is not the same object it was when it went in.
-- **There are many ways to write a singleton, and this is the simplest one.** It is not the safe one — the eager static instance is fine here, but it has real problems with construction order and testing, and lazy holds are worth reading up on.
+- **There are many ways to write a singleton, and this is the simplest one.** It is not the safe one. The eager static instance is fine here, but it has real problems with construction order and testing, and lazy holds are worth reading up on.
 - **Design is subjective.** Putting a `quantity` field on `Prize` instead of keeping counts in the machine's map is a defensible choice, and so is the reverse.
 - **Map lookup cost depends on the implementation.** `HashMap` is not the only answer, and the choice is observable once the inventory grows.
 - **`PropertyChangeSupport` is far easier than the `Observable` interface**, which was deprecated in Java 9 for good reasons.

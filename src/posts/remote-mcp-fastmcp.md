@@ -1,14 +1,18 @@
 ---
-title: Using a coding agent as an observability agent
-description: A coding agent can be an observability agent, given one remote MCP server and a config change.
+title: Using an agent for observability
+description: Give an agent one remote MCP server and a config change, and it can answer observability questions. The server is the hard part.
 date: 2026-10-10
 category: Tools
-readingTime: 8
+readingTime: 9
 ---
 
-If you have not met MCP before: it is how you give a coding assistant extra abilities. You run a server that exposes tools — functions the model can call — and any client that speaks MCP can use them: Gemini CLI, Claude, whatever is already on the machine. The idea here is to point one of those at your systems instead of at your code, so that the coding agent becomes an observability agent — you ask in words, follow up without re-navigating a screen, and let the model join the answers together. The server exposes tools over an observability stack, with two jobs: make a health check fast, and make a historical query something an engineer would actually attempt. Both used to mean opening four dashboards and clicking through a time picker.
+The question an engineer actually has is small: *is payments healthy right now?* With the observability MCP server we built, they type it into the agent already open in another window and get an answer in the same thread, with the time window it covers. No dashboard, no time picker, no fourth tab.
 
-Timing matters here: MCP arrived before agent skills did — skills being folders of instructions and scripts an assistant can read and run. That is why the advice at the end does not come down to "build more tools".
+That was the pitch: point the agent at your systems instead of your code. One line of config, and the same agent becomes an observability agent.
+
+The server had two jobs: make a health check fast, and make a historical query something an engineer would actually attempt. Both used to mean opening four dashboards and clicking through a time picker.
+
+None of that was because the dashboards were badly made. Some were very good. The problem was that there was never one dashboard. New Relic had a view of a service, Dynatrace another, and MongoDB's Ops Manager a third. Each was accurate about its own slice, each had its own time picker, and none of them agreed on what to call the same service. You did the joining in your head, across every tab. That is the overload: not one crowded screen, but several partial ones.
 
 <figure>
 <svg class="figure-art" width="700" height="210" viewBox="0 0 700 210" role="img" aria-label="Four faint dashboard panels on the left, then an arrow pointing to a single bright panel on the right.">
@@ -41,7 +45,9 @@ Timing matters here: MCP arrived before agent skills did — skills being folder
 <figcaption>Four dashboards on the left. One prompt on the right.</figcaption>
 </figure>
 
-Tools like this become load-bearing well before anyone agrees they work. Some application teams come to depend on them. Others never care at all — including, often, the teams whose data they read.
+Tools like this become load-bearing well before anyone agrees they work. Some application teams came to depend on ours. Others never cared at all, including, often, the teams whose data it read.
+
+If you have not met MCP before, it is how you give an agent extra abilities. You run a server that exposes tools (functions the model can call), and any client that speaks MCP can use them: Gemini CLI, Claude, whatever is already on the machine.
 
 <figure>
 <svg class="figure-art" width="720" height="585" viewBox="0 0 720 585" role="img" aria-label="Clients and tool authors at the top; the MCP server and the Git tool definitions below them; and beneath those, the identity provider and three vendor APIs.">
@@ -107,9 +113,9 @@ Tools like this become load-bearing well before anyone agrees they work. Some ap
 
 ## The design
 
-The goal was simple: an engineer should be able to use the observability MCP with a config change, not an installation. No local server, no per-backend setup, nothing to keep up to date on their machine. So it is a remote service, hosted and owned by a tooling team, and the people who use it are application teams.
+Our goal was simple: an engineer should be able to use the observability MCP with a config change, not an installation. No local server, no per-backend setup, nothing to keep up to date on their machine. So we made it a remote service, hosted and owned by a tooling team, and used by application teams.
 
-The whole client-side change, for an engineer using Gemini CLI:
+The whole client-side change, for an engineer on Gemini CLI:
 
 ```json
 {
@@ -121,9 +127,11 @@ The whole client-side change, for an engineer using Gemini CLI:
 }
 ```
 
-Its tools live in a Git repo, so any team can add one by pull request, and a merge redeploys the MCP with the tool in place. They are also tagged: the config only exposes a tool to the teams its tags allow, so nobody ever sees another team's tools. The rest is in the diagram: the server is built on FastMCP, a Python library for writing MCP servers, and its auth sits behind Keycloak, which federates to the LDAP directory that already holds everyone's accounts. It wraps three vendor APIs: New Relic and Dynatrace, which monitor applications and infrastructure, and MongoDB's Ops Manager.
+Its tools live in a Git repo, so any team can add one by pull request, and a merge redeploys the MCP with the tool in place. They are also tagged: the config only exposes a tool to the teams its tags allow, so nobody ever sees another team's tools.
 
-Adding one is a single file in that repo. It looks roughly like this:
+The rest is in the diagram. We built the server on FastMCP, a Python library for writing MCP servers, and put its auth behind Keycloak, which federates to the LDAP directory that already holds everyone's accounts. It wraps three vendor APIs: New Relic and Dynatrace, which monitor applications and infrastructure, and MongoDB's Ops Manager.
+
+Adding one is a single file in that repo, and it looks roughly like this:
 
 ```yaml
 name: payments_latency
@@ -150,6 +158,8 @@ The MCP talks to the New Relic API, but New Relic is not the source of the numbe
 
 That makes a single query three steps deep. The MCP asks New Relic; New Relic reports what the agents it installed on each host last sent; those agents report on machines nobody has had reason to touch in months. Only the first step was ever under control. Whether the other two were current is what decided whether the answer was worth anything.
 
+This is the part I underestimated when we started. We were building a window onto a pipeline we did not own.
+
 <figure>
 <svg class="figure-art" width="700" height="132" viewBox="0 0 700 132" role="img" aria-label="Four hops from left to right, labelled MCP, New Relic, agents and hosts, drawn with progressively fainter outlines above a bar that fades the same way.">
 <g fill="none" stroke="currentColor" stroke-width="2">
@@ -174,11 +184,11 @@ That makes a single query three steps deep. The MCP asks New Relic; New Relic re
 
 ## The instructions file
 
-Every team was asked to keep an `instructions.md` alongside their tool: how their health checks are actually performed, and the domain knowledge behind them — the parts of their application you would otherwise have to ask someone to explain.
+We asked every team to keep an `instructions.md` alongside their tool: how their health checks are actually performed, and the domain knowledge behind them (the parts of their application you would otherwise have to ask someone to explain).
 
 The aim was consistency. If every team described its checks the same way, the reports the MCP generated would read the same way too.
 
-Some teams took it seriously. Others copied the template, left the headings, and never filled them in. A copied template is still a file in the right place, so nothing in the process caught it — which is the lesson: an empty file and a filled-in one look identical from the outside.
+Some teams took it seriously. Others copied the template, left the headings, and never filled them in. A copied template is still a file in the right place, so nothing in the process caught it. An empty file and a filled-in one look identical from the outside.
 
 <figure>
 <svg class="figure-art" width="740" height="285" viewBox="0 -4 740 285" role="img" aria-label="Two versions of the same instructions file. On the left the headings are followed by filled-in content. On the right the same headings are there, but the content underneath is empty dashed outlines.">
@@ -208,35 +218,22 @@ Some teams took it seriously. Others copied the template, left the headings, and
 
 ## What went wrong
 
-- **The data was only as good as whoever owned the dashboard.** Observability tooling is not where an application team spends its attention — those dashboards are wrappers over things like the Kubernetes API, and they go stale. The MCP answered from whatever reached New Relic, so lagging data read as an inaccurate tool. That was the feedback, and it was not unreasonable. The numbers were wrong; they just were not the server's to get right.
-- **A wrapper inherited the mess.** The MCP is a wrapper over API calls, so every backend's configuration and quirks leaked straight into it. New Relic, Dynatrace and MongoDB all move, and never in step; when one shifted — usually with nobody hearing about it — a tool would quietly return nothing, and someone would trust the nothing. None of it was fixable from the MCP side.
+The failures were not one thing. There were seven, if you count the empty instructions files, and only some of them were ours to answer.
+
+- **The data was only as good as the dashboard underneath.** Observability tooling is not where an application team spends its attention. Those dashboards are wrappers over things like the Kubernetes API, and they go stale. The MCP answered from whatever reached New Relic, so lagging data read as an inaccurate tool. That was the feedback, and it was not unreasonable. The numbers were wrong; they just were not the server's to get right.
+- **A wrapper inherited the mess.** The MCP is a wrapper over API calls, so every backend's configuration and quirks leaked straight into it. New Relic, Dynatrace and MongoDB all move, and never in step; when one shifted, usually with nobody hearing about it, a tool would quietly return nothing, and someone would trust the nothing. None of it was fixable from the MCP side.
+- **We ended up onboarding tools for everyone else.** Adding a tool meant caring about how the config is structured, and that was never going to be an application team's priority. So the work landed on us, and so did the blame when the result was not what they had in mind.
 - **Asking for too much produced invention instead.** A few tools returned thousands of rows where a summary would have done, and the model filled the gaps.
-- **The tool surface grew without a shape.** Onboarding by pull request meant anyone could add a tool, and everyone did. That becomes a lot of tools, each with its own name, its own arguments, and its own idea of what "a service" is. At some point nobody can list them all from memory.
-- **The tooling team ended up onboarding tools for everyone else.** Adding a tool meant caring about how the config is structured, and that was never going to be an application team's priority. So the work landed on the team that owned the server — and so did the blame when the result was not what they had in mind.
+- **The tool surface grew without a shape.** Onboarding by pull request meant anyone could add a tool, and everyone did. That becomes a lot of tools, each with its own name, its own arguments, and its own idea of what "a service" is.
 - **The client cached, and nothing said so.** Gemini CLI would serve a cached tool result, so a team could be reading an old answer with no way of knowing.
 
-The caching and the invention are newer than the rest. The others are what happens to any shared internal service — particularly one that wraps systems nobody in the room owns.
-
-<figure>
-<svg class="figure-art" width="552" height="266" viewBox="0 0 552 266" role="img" aria-label="A grid of small tiles that is bright at the top and fades progressively toward the bottom.">
-<defs>
-<pattern id="toolgrid" width="46" height="46" patternUnits="userSpaceOnUse">
-<rect width="36" height="36" rx="6" fill="currentColor"/>
-</pattern>
-</defs>
-<rect width="552" height="36" fill="url(#toolgrid)" opacity="0.95"/>
-<rect y="46" width="552" height="36" fill="url(#toolgrid)" opacity="0.72"/>
-<rect y="92" width="552" height="36" fill="url(#toolgrid)" opacity="0.52"/>
-<rect y="138" width="552" height="36" fill="url(#toolgrid)" opacity="0.36"/>
-<rect y="184" width="552" height="36" fill="url(#toolgrid)" opacity="0.24"/>
-<rect y="230" width="552" height="36" fill="url(#toolgrid)" opacity="0.15"/>
-</svg>
-<figcaption>Every tile is a tool that arrived by pull request, oldest at the top. Only the top row stayed familiar.</figcaption>
-</figure>
+Two of these fail silently: a cached answer and an invented one both arrive looking exactly like a real one. The invention, and the sprawl that made the list unusable, get the next two sections. The rest (stale data, drifting backends, onboarding work that lands on whoever owns the server) is what happens to any shared internal service, particularly one that wraps systems nobody in the room owns.
 
 ## When a tool returns too much
 
-Every tool result goes into the model's context — the text it can read when it answers — and nothing prunes it. A tool that fetches a day of metrics for every pod is not giving a bigger answer. It is handing over thousands of rows and calling that an answer.
+Every tool result goes into the model's context: the text it can read when it answers. Nothing prunes it. A tool that fetches a day of metrics for every pod is not giving a bigger answer. It is handing over thousands of rows and calling that an answer.
+
+We had made the same mistake twice: first with panels, then with rows.
 
 <figure>
 <svg class="figure-art" width="620" height="293" viewBox="0 -4 620 293" role="img" aria-label="Two outlines standing for the model's context. The left is packed with dense rows; the right holds the question and one short summary.">
@@ -259,11 +256,42 @@ Every tool result goes into the model's context — the text it can read when it
 
 Past a certain volume the useful part stops standing out. The model is no longer reading your question and three numbers; it is skimming a wall of JSON, and where it cannot find the number it wants it supplies a plausible one. Nothing errors. The reply arrives as confidently as a correct one, which is what made this the hardest failure on the list to catch.
 
+Here is the shape of it. The numbers are made up; the pattern is not.
+
+```text
+> why is checkout slow? p95 per pod, last day.
+
+1,440 rows returned.
+
+checkout-7f9c is the slowest pod, at 1.8 s p95 over the day.
+```
+
+Nothing in those rows identifies a slowest pod, and the reply names one anyway. The rows were real. The summary was not.
+
 The fix is not to ask the model to be careful. It is to hand it less: move the aggregation into the tool, where you control the shape, and return the p95 and the window you used rather than every sample behind it. A tool result should read like the answer to a question, not the raw material for one. If you would not read the output yourself, neither will the model.
 
 ## One tool to find the others
 
-The fix for the sprawl was to stop exposing everything. The tools stayed; a search tool went in front of them — a single FastMCP tool that lets the model ask what is available for the question it actually has, instead of being handed the full list every time.
+By the end there were enough tools that nobody could list them all from memory.
+
+<figure>
+<svg class="figure-art" width="552" height="266" viewBox="0 0 552 266" role="img" aria-label="A grid of small tiles that is bright at the top and fades progressively toward the bottom.">
+<defs>
+<pattern id="toolgrid" width="46" height="46" patternUnits="userSpaceOnUse">
+<rect width="36" height="36" rx="6" fill="currentColor"/>
+</pattern>
+</defs>
+<rect width="552" height="36" fill="url(#toolgrid)" opacity="0.95"/>
+<rect y="46" width="552" height="36" fill="url(#toolgrid)" opacity="0.72"/>
+<rect y="92" width="552" height="36" fill="url(#toolgrid)" opacity="0.52"/>
+<rect y="138" width="552" height="36" fill="url(#toolgrid)" opacity="0.36"/>
+<rect y="184" width="552" height="36" fill="url(#toolgrid)" opacity="0.24"/>
+<rect y="230" width="552" height="36" fill="url(#toolgrid)" opacity="0.15"/>
+</svg>
+<figcaption>Every tile is a tool that arrived by pull request, oldest at the top. Only the top row stayed familiar.</figcaption>
+</figure>
+
+The fix was not to delete tools. It was to stop exposing everything. The tools stayed. A search tool went in front of them: a single FastMCP tool that lets the model ask what is available for the question it actually has, instead of being handed the full list every time.
 
 Teams still onboard tools by pull request. What changed is what that costs: adding a tool no longer makes every other tool harder to find, and the model spends its attention on the two or three that matter rather than all of them.
 
@@ -310,8 +338,13 @@ Teams still onboard tools by pull request. What changed is what that costs: addi
 
 ## What I would tell you
 
-- **If I were starting today, I would use skills rather than MCP tools.** A skill can read and write files and run commands, so it can shape each API call to the question in front of it instead of going through a tool definition that has to cover every caller. The advice underneath is the same either way: go straight to the vendor API. Anything wrapped around a dashboard inherits that dashboard's state, then adds a layer of its own on top — and going direct removes that layer, not the staleness underneath it.
-- **Assume nobody is maintaining the dashboards underneath.** Application teams rarely see enough value in observability tooling to keep it current. Configuration drifts, hosts get rebuilt and never re-registered, and a check that was right last year is quietly answering about a machine that no longer exists. Historical data gets the least attention of all — plenty of teams have simply never needed it, and in some cases the reason is indifference rather than shortage of time.
+MCP arrived before agent skills did. Skills are folders of instructions and scripts an agent can read and run. That timing is why none of this comes down to "build more tools".
+
+If I were starting today, I would use skills instead of MCP tools. A skill can read and write files and run commands, so it can shape each API call to the question in front of it instead of going through a tool definition that has to cover every caller. The advice underneath is the same either way: go straight to the vendor API. Anything wrapped around a dashboard inherits that dashboard's state, then adds a layer of its own on top, and going direct removes that layer, not the staleness underneath it.
+
+The rest, briefly.
+
+- **Assume nobody is maintaining the dashboards underneath.** Application teams rarely see enough value in observability tooling to keep it current. Configuration drifts, hosts get rebuilt and never re-registered, and a check that was right last year is quietly answering about a machine that no longer exists. Historical data gets the least attention of all: plenty of teams have simply never needed it, and in some cases the reason is indifference rather than shortage of time.
 - **Treat an MCP server as a service the moment more than one person uses it.** Versioning, auth, ownership, monitoring. A deploy pipeline gives you none of those on its own.
 - **If you let anyone onboard a tool, someone has to review the tools.** Self-service configuration is still a design decision you own. A generous one gets exactly the sprawl it invites.
 - **Make the surface findable, not just small.** The count never came down, but the whole list did not have to be handed to the model at once. If you cannot control the count, control what gets loaded.
@@ -333,17 +366,17 @@ Teams still onboard tools by pull request. What changed is what that costs: addi
 
 ## Using an MCP server means maintaining one
 
-The pitch for a pattern like this is that the client-side change is one line of JSON. That part is true, and it is also where the trouble hides: the work that makes that line possible does not stop when the line is written.
+The pitch for a pattern like this is that the client-side change is one entry in a config file. That part is true, and it is also where the trouble hides: the work that makes that entry possible does not stop when the file is saved.
 
 A server that wraps other people's APIs is not a tool anyone installs once. It is a small platform that happens to be queried through a chat window. It has dependencies that move on their own schedule, credentials that expire, and a surface that grows every time someone finds it useful. None of that is a design flaw. It is what it means to put a service in front of systems you do not control.
 
 The questions it answered were ones nobody would have opened a dashboard for, and some teams came to depend on the answers. That part was worth having.
 
-The trade is worth taking deliberately or not at all. If the value is a fast health check, the price is a standing backlog of small breakages — and the question worth answering before the first pull request is merged is who is on the hook for them, not what the server can do.
+I would make the same trade again. I would just say out loud, before the first pull request, that we were signing up to maintain a service rather than ship a feature. If the value is a fast health check, the price is a standing backlog of small breakages, and the question worth answering is who is on the hook for them, not what the server can do.
 
 MCP does not remove work. It moves it into a layer of your own.
 
-Thanks to [FastMCP](https://github.com/PrefectHQ/fastmcp), which carries most of this. The tool definitions, the transport and the auth are all theirs; choosing the tools — and eventually choosing to stop handing all of them over at once — is what is left to whoever runs the server.
+Thanks to [FastMCP](https://github.com/PrefectHQ/fastmcp), which carries most of this. The tool definitions, the transport and the auth are all theirs; choosing the tools, and eventually choosing to stop handing all of them over at once, is what is left to whoever runs the server.
 
 ## Bye.
 

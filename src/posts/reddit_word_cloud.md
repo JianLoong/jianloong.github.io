@@ -10,15 +10,15 @@ scripts:
   - /js/posts/reddit_word_cloud.js
 ---
 
-r/programming is a list of titles, and titles are repetitive. Pull a thousand of them together and the day's obsessions show up as the biggest words on the page — the language a community uses about itself, counted without asking anyone.
+r/programming is a list of titles, and titles are repetitive. Pull a thousand of them together and the day's obsessions show up as the biggest words on the page: the language a community uses about itself, counted without asking anyone.
 
 A word cloud is not a good representation of occurrence: no axis, areas that are not proportional to anything, and a "biggest word" claim the picture cannot support. It does look nice, and it does show the shape of a day at a glance, which is what it is for. The Hacker News cloud on this site is [the same machine with a live feed](/posts/hackernews_word_cloud/); this one asks Reddit for the same kind of feed, and falls back to what you paste when Reddit will not answer.
 
 ## Where the titles come from
 
-The 2019 version asked reddit.com for a thousand titles and counted them. It never used a CORS-enabled fetch: it called `$.getJSON` on `https://reddit.com/r/programming.json?limit=1000&jsonp=?`, which loads a `<script>` tag, and a `<script>` tag is not subject to CORS. This page does the same thing first — `js/posts/reddit-jsonp.js` is that trick in about thirty lines of plain JavaScript, with no jQuery.
+The 2019 version asked reddit.com for a thousand titles and counted them. It never used a CORS-enabled fetch: it called `$.getJSON` on `https://reddit.com/r/programming.json?limit=1000&jsonp=?`, which loads a `<script>` tag, and a `<script>` tag is not subject to CORS. This page does the same thing first: `js/posts/reddit-jsonp.js` is that trick in about thirty lines of plain JavaScript, with no jQuery.
 
-What it cannot count on is Reddit answering. The endpoint sends no CORS header at all, so a `fetch()` from another origin is out to begin with, and Reddit's edge answers **403 Blocked** to a request from a client it does not like — one with no session, or one it takes for a robot. When that happens the script never loads, the callback never fires, and the page falls back to what you paste, saying so when it does. Both paths end in the same code: same stop list, same tokenising, same fifty words.
+What it cannot count on is Reddit answering. The endpoint sends no CORS header at all, so a `fetch()` from another origin is out to begin with, and Reddit's edge answers **403 Blocked** to a request from a client it does not like: one with no session, or one it takes for a robot. When that happens the script never loads, the callback never fires, and the page falls back to what you paste, saying so when it does. Both paths end in the same code: same stop list, same tokenising, same fifty words.
 
 <div class="demo" data-rwc>
 <label class="demo-field" for="rwc-input">Text to cloud
@@ -29,12 +29,12 @@ What it cannot count on is Reddit answering. The endpoint sends no CORS header a
 </div>
 <p class="demo-readout" data-rwc-readout aria-live="polite">Fetching…</p>
 <div data-rwc-cloud></div>
-<p class="demo-note">The page asks r/programming for a thousand titles on load, the way the 2019 version did, and fills the box with them when Reddit answers. When it does not, the box keeps this page's own opening, which is a thin sample — a few hundred titles is where the picture gets interesting. Either way the words are lowercased, punctuation and digits stripped, single characters dropped, the rest filtered against the 2019 stop list. Tint is a band: the ten loudest take the accent, the next fifteen the cool tint, the rest the faint one.</p>
+<p class="demo-note">The page asks r/programming for a thousand titles on load, the way the 2019 version did, and fills the box with them when Reddit answers. When it does not, the box keeps this page's own opening, which is a thin sample: a few hundred titles is where the picture gets interesting. Either way the words are lowercased, punctuation and digits stripped, single characters dropped, the rest filtered against the 2019 stop list. Tint is a band: the ten loudest take the accent, the next fifteen the cool tint, the rest the faint one.</p>
 </div>
 
 ## What the code does
 
-Two steps: count, then lay out. The counting is where the judgement is — what counts as a word, and what is noise.
+Two steps: count, then lay out. The counting is where the judgement is: what counts as a word, and what is noise.
 
 ```javascript
 function tokenise(text) {

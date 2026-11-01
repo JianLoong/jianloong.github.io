@@ -13,7 +13,7 @@ Hacktoberfest is a month-long celebration of open-source projects, their maintai
 <figcaption>Five years of Hacktoberfest shirts.</figcaption>
 </figure>
 
-This year I did something different. After a stretch of not feeling well, and only recently feeling better, I wanted to finish something of my own instead of contributing to someone else's — so I built a [word cloud generator](https://jianloong.github.io/word-cloud-generator/). It looks like a word cloud generator. The interesting parts are underneath it.
+This year I did something different. After a stretch of not feeling well, and only recently feeling better, I wanted to finish something of my own instead of contributing to someone else's. So I built a [word cloud generator](https://jianloong.github.io/word-cloud-generator/). It looks like a word cloud generator. The interesting parts are underneath it.
 
 <figure>
 <img src="/assets/posts/hacktoberfest-wordcloud.png" alt="A word cloud of the Wikipedia article on Australia. AUSTRALIA is by far the largest word, with Australian, area, population, Commonwealth, country, largest and world next." width="936" height="730" loading="lazy" decoding="async">
@@ -32,7 +32,7 @@ This year I did something different. After a stretch of not feeling well, and on
 
 - Bootstrap 5 is still pleasant to use, and dropping jQuery as a dependency made the library much lighter.
 - `d3-cloud` needs a small patch if you want more than one cloud on a page, or it warns. Starting again, I would use the Chart.js word cloud plugin instead.
-- Web Workers are the right tool for anything that would otherwise freeze the page — the work still takes seconds, but the page can say so.
+- Web Workers are the right tool for anything that would otherwise freeze the page: the work still takes seconds, but the page can say so.
 - The HTML `<select>` element cannot hold child nodes, so putting images in a dropdown takes more work than it looks like it should.
 
 Once the base worked, I opened issues and labelled them for contributors. I built it in a hurry and plenty of it could be better, which was deliberate: finish it first, then let other people improve it.
